@@ -133,7 +133,7 @@ public class jif_datos_sucursal extends javax.swing.JInternalFrame {
     }
 
     private void evt_eliminar() {
-        if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR LA SUCURSAL " + lo_bean_sucursal.getNombre() + "?") == 0) {
+        if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR SUCURSAL " + lo_bean_sucursal.getNombre() + "?") == 0) {
             try {
 
                 if (go_dao_sucursal.DLT_sucursal(ls_codigo)) {

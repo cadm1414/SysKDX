@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_opciones_2;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_2;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
+import JAVA.CONFIG.BEAN.BEAN_almacen;
 import JAVA.CONFIG.LOGICA.evt_datos_almacen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,10 +19,11 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
     evt_opciones_2 lo_evt_opciones_2 = new evt_opciones_2();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
     evt_datos_almacen lo_evt_datos_almacen = new evt_datos_almacen();
+    BEAN_almacen lo_bean_almacen = new BEAN_almacen();
     static boolean lb_valor_op[] = new boolean[8];
     ResultSet lq_rs = null;
     int li_tipo_operacion;
-    String ls_codigo;
+    String ls_codigo, ls_codigo_ubigeo;
     String ls_opcion = "M C D";
     String ls_modulo = "CONFIG", ls_capa = "GUI", ls_clase = "jif_datos_sucursal";
 
@@ -50,14 +52,53 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
     }
 
     private void get_sucursal() {
+
         lq_rs = go_dao_sucursal.SLT_cbx_sucursal("1");
         if (lq_rs != null) {
             go_cbx_trato_datos.recupera_valor(2, lq_rs, lo_pnl_datos_almacen.CBX_sucursal);
         }
     }
-    
-    private void get_descripcion_almacen(String codigo){
-        
+
+    private void evt_f5() {
+        go_dlg_busq_ubigeo = new dlg_busq_ubigeo(null, true);
+        go_dlg_busq_ubigeo.setVisible(true);
+        ls_codigo_ubigeo = go_dlg_busq_ubigeo.ls_codigo_ubigeo;
+
+        if (ls_codigo_ubigeo != null) {
+            lo_pnl_datos_almacen.TXT_ubigeo.setText(ls_codigo_ubigeo);
+            get_descripcion_ubigeo();
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_f5", "SELECCIONE UBIGEO");
+            lo_pnl_datos_almacen.TXT_ubigeo.setText("");
+            lo_pnl_datos_almacen.TXT_descripcion.setText("");
+        }
+    }
+
+    private void get_descripcion_ubigeo() {
+        ls_codigo_ubigeo = lo_pnl_datos_almacen.TXT_ubigeo.getText().trim();
+
+        try {
+            lq_rs = go_dao_ubigeo.SLT_descripcion_ubigeo_x_codigo(ls_codigo_ubigeo);
+            if (lq_rs != null) {
+                lo_pnl_datos_almacen.TXT_descripcion.setText(lq_rs.getString(1));
+                getFocusOwner().transferFocus();
+            } else {
+                lo_pnl_datos_almacen.TXT_ubigeo.setText("");
+                lo_pnl_datos_almacen.TXT_descripcion.setText("");
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void get_descripcion_almacen(String codigo) {
+        try {
+            lq_rs = go_dao_almacen.SLT_datos_almacen(codigo);
+            if (lq_rs != null) {
+                lo_evt_datos_almacen.setea_recupera(lo_bean_almacen, lq_rs);
+                lo_evt_datos_almacen.muestra_datos(lo_pnl_datos_almacen, lo_bean_almacen);
+            }
+        } catch (Exception e) {
+        }
     }
 
     private void evt_nuevo() {
@@ -91,6 +132,26 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
 
     }
 
+    private void evt_editar() {
+        li_tipo_operacion = 1;
+        lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
+        lo_evt_datos_almacen.activa_campos(0, lo_pnl_datos_almacen, true);
+    }
+
+    private void evt_eliminar() {
+        if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ALMACEN " + lo_bean_almacen.getNombre() + "?") == 0) {
+            try {
+
+                if (go_dao_almacen.DLT_almacen(ls_codigo)) {
+                    lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                    lo_evt_datos_almacen.activa_campos(0, lo_pnl_datos_almacen, false);
+                    lo_evt_datos_almacen.limpia_datos(lo_pnl_datos_almacen);
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -101,10 +162,10 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
                 evt_buscar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_editar) {
-                //evt_editar();
+                evt_editar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_eliminar) {
-                //evt_eliminar();
+                evt_eliminar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_guardar) {
                 //evt_guardar();
@@ -127,11 +188,22 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
 
         @Override
         public void keyPressed(KeyEvent ke) {
+            if (ke.getKeyCode() == KeyEvent.VK_F5) {
+                if (ke.getSource() == lo_pnl_datos_almacen.TXT_ubigeo) {
+                    evt_f5();
+                }
+            }
             if (ke.getKeyCode() == KeyEvent.VK_F1 && lo_pnl_opciones_2.BTN_nuevo.isEnabled()) {
                 evt_nuevo();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F2 && lo_pnl_opciones_2.BTN_buscar.isEnabled()) {
                 evt_buscar();
+            }
+            if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_2.BTN_editar.isEnabled()) {
+                evt_editar();
+            }
+            if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_2.BTN_eliminar.isEnabled()) {
+                evt_eliminar();
             }
 
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -140,6 +212,12 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_buscar) {
                     evt_buscar();
+                }
+                if (ke.getSource() == lo_pnl_opciones_2.BTN_editar) {
+                    evt_editar();
+                }
+                if (ke.getSource() == lo_pnl_opciones_2.BTN_eliminar) {
+                    evt_eliminar();
                 }
             }
         }

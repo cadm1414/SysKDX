@@ -11,6 +11,7 @@ public class cbx_trato_datos {
     DefaultComboBoxModel lo_model;
     cbx_moneda lo_cbx_moneda;
     cbx_rol lo_cbx_rol;
+    cbx_sucursal lo_cbx_sucursal;
 
     /*VALORES OPERACION
     0 = cbx_moneda
@@ -42,9 +43,9 @@ public class cbx_trato_datos {
             case 2:
                 try {
                     lo_model = new DefaultComboBoxModel();
-                    do{
+                    do {
                         lo_model.addElement(new cbx_sucursal(rs.getString(1), rs.getString(2)));
-                    }while(rs.next());
+                    } while (rs.next());
                     cbx_combo.setModel(lo_model);
                 } catch (Exception e) {
                 }
@@ -58,7 +59,7 @@ public class cbx_trato_datos {
             case 0:
                 for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
                     lo_cbx_moneda = (cbx_moneda) cbx_combo.getItemAt(i);
-                    codigo = lo_cbx_moneda.getID();                   
+                    codigo = lo_cbx_moneda.getID();
                     if (codigo.equalsIgnoreCase(dato)) {
                         cbx_combo.setSelectedIndex(i);
                     }
@@ -66,8 +67,17 @@ public class cbx_trato_datos {
                 break;
             case 1:
                 for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
-                    lo_cbx_rol = (cbx_rol) cbx_combo.getItemAt(i);                    
-                    codigo = lo_cbx_rol.getID()+"";
+                    lo_cbx_rol = (cbx_rol) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_rol.getID() + "";
+                    if (codigo.equalsIgnoreCase(dato)) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_sucursal = (cbx_sucursal) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_sucursal.getID();
                     if (codigo.equalsIgnoreCase(dato)) {
                         cbx_combo.setSelectedIndex(i);
                     }
