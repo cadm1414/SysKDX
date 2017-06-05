@@ -83,11 +83,11 @@ public class frm_principal extends javax.swing.JFrame {
         LBL_rol = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         LBL_periodo = new javax.swing.JLabel();
-        TBP_contenedor = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         LBL_usuario = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         LBL_razon_social = new javax.swing.JLabel();
+        TBP_contenedor = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -187,9 +187,6 @@ public class frm_principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        TBP_contenedor.setForeground(new java.awt.Color(0, 153, 153));
-        TBP_contenedor.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "USUARIO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
 
         LBL_usuario.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -235,11 +232,13 @@ public class frm_principal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        TBP_contenedor.setForeground(new java.awt.Color(0, 153, 153));
+
         JDP_principal.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         JDP_principal.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        JDP_principal.setLayer(TBP_contenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
         JDP_principal.setLayer(jPanel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         JDP_principal.setLayer(jPanel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JDP_principal.setLayer(TBP_contenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout JDP_principalLayout = new javax.swing.GroupLayout(JDP_principal);
         JDP_principal.setLayout(JDP_principalLayout);
@@ -269,8 +268,8 @@ public class frm_principal extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TBP_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(TBP_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
+                .addGap(36, 36, 36))
         );
 
         jSplitPane1.setRightComponent(JDP_principal);
