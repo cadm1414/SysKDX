@@ -1,6 +1,7 @@
 package JAVA.ANCESTRO.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.CONFIG.REPORT.pnl_rpt_lista_almacen;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import java.awt.BorderLayout;
@@ -52,6 +53,33 @@ public class muestra_pestania {
         go_pnl_rpt_lista_sucursal.repaint();
         go_pnl_rpt_lista_sucursal.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_sucursal);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+
+    }
+    
+    
+    public void rpt_lista_almacen(JRViewer jr, String nombre) {
+
+        if (go_pnl_rpt_lista_almacen == null) {
+            genera_lista_almacen(jr, nombre);
+
+        } else if (!go_pnl_rpt_lista_almacen.isShowing()) {
+            go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_lista_almacen);
+            genera_lista_almacen(jr, nombre);
+        }
+    }
+
+    public void genera_lista_almacen(JRViewer jr, String nombre) {
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_lista_almacen = new pnl_rpt_lista_almacen();
+        go_pnl_rpt_lista_almacen.removeAll();
+        go_pnl_rpt_lista_almacen.setLayout(new BorderLayout());
+        go_pnl_rpt_lista_almacen.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_lista_almacen.setVisible(true);
+        go_pnl_rpt_lista_almacen.repaint();
+        go_pnl_rpt_lista_almacen.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_almacen);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
 

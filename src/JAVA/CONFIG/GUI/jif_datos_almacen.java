@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class jif_datos_almacen extends javax.swing.JInternalFrame {
 
@@ -176,10 +178,10 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
                 }
                 break;
             case 1:
-                if (lo_evt_datos_almacen.verifica_cambios(lo_bean_almacen, lo_pnl_datos_almacen,lo_cbx_sucursal)) {
+                if (lo_evt_datos_almacen.verifica_cambios(lo_bean_almacen, lo_pnl_datos_almacen, lo_cbx_sucursal)) {
                     if (lo_evt_datos_almacen.valida_campos(lo_pnl_datos_almacen)) {
                         try {
-                            lo_evt_datos_almacen.setea_campos(lo_bean_almacen, lo_pnl_datos_almacen,lo_cbx_sucursal);
+                            lo_evt_datos_almacen.setea_campos(lo_bean_almacen, lo_pnl_datos_almacen, lo_cbx_sucursal);
                             if (go_dao_almacen.UPD_almacen(lo_bean_almacen)) {
                                 lo_evt_datos_almacen.limpia_datos(lo_pnl_datos_almacen);
                                 lo_evt_datos_almacen.activa_campos(0, lo_pnl_datos_almacen, false);
@@ -208,7 +210,10 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
     }
 
     private void evt_reporte() {
-
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("empresa", go_bean_general.getNombre_reporte());
+        parametros.put("usuario", gs_datos_usuario);
+        go_evt_muestra_reporte.reporte_pestania("rpt_lista_almacen.jasper", parametros, "Almacen", 2);
     }
 
     ActionListener Listener = new ActionListener() {

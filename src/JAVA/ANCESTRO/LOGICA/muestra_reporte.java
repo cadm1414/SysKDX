@@ -42,6 +42,8 @@ public class muestra_reporte {
                 case 1:
                     go_muestra_pestania.rpt_lista_sucursal(jr,nombre);
                     break;
+                case 2:
+                    go_muestra_pestania.rpt_lista_almacen(jr, nombre);
             }
 
         } catch (Exception e) {
