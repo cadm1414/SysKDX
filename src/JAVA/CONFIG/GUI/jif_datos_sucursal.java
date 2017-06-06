@@ -304,7 +304,6 @@ public class jif_datos_sucursal extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_datos_sucursal.TXT_nota) {
                     lo_pnl_opciones_2.BTN_guardar.requestFocus();
                 }
-
             }
         }
 

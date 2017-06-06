@@ -1,6 +1,7 @@
 package JAVA.CONFIG.DAO;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.CONFIG.BEAN.BEAN_almacen;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -78,6 +79,43 @@ public class DAO_almacen {
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_almacen", e.getMessage());
+        }
+        return resp;
+    }
+    public boolean IST_almacen(BEAN_almacen OBJ_bal) throws SQLException {
+        boolean resp = false;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from ist_almacen('" + OBJ_bal.getCodigo_almacen()+ "','" + OBJ_bal.getNombre() + "','" + OBJ_bal.getDireccion() + "','" + OBJ_bal.getUbigeo() + "','" + OBJ_bal.getDescripcion() + "','" + OBJ_bal.getNota() + "','" + OBJ_bal.getStatus() + "','" + OBJ_bal.getTipo_almacen() + "','" + OBJ_bal.getCodigo_sucursal() + "')";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                lq_stm.getConnection().commit();
+                go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_almacen", "SE ACTUALIZO BASE DE DATOS");
+                resp = true;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_almacen", e.getMessage());
+        }
+        return resp;
+    }
+    
+    public boolean UPD_almacen(BEAN_almacen OBJ_bal) throws SQLException {
+        boolean resp = false;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from upd_almacen('" + OBJ_bal.getCodigo_almacen()+ "','" + OBJ_bal.getNombre() + "','" + OBJ_bal.getDireccion() + "','" + OBJ_bal.getUbigeo() + "','" + OBJ_bal.getDescripcion() + "','" + OBJ_bal.getNota() + "','" + OBJ_bal.getStatus() + "','" + OBJ_bal.getTipo_almacen() + "','" + OBJ_bal.getCodigo_sucursal() + "')";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                lq_stm.getConnection().commit();
+                go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_almacen", "SE ACTUALIZO BASE DE DATOS");
+                resp = true;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_almacen", e.getMessage());
         }
         return resp;
     }

@@ -2,6 +2,7 @@ package JAVA.CONFIG.GUI;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_opciones_2;
+import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_2;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import JAVA.CONFIG.BEAN.BEAN_almacen;
@@ -20,6 +21,7 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
     evt_datos_almacen lo_evt_datos_almacen = new evt_datos_almacen();
     BEAN_almacen lo_bean_almacen = new BEAN_almacen();
+    cbx_sucursal lo_cbx_sucursal;
     static boolean lb_valor_op[] = new boolean[8];
     ResultSet lq_rs = null;
     int li_tipo_operacion;
@@ -152,6 +154,63 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
         }
     }
 
+    private void evt_guardar() {
+        lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
+        lo_cbx_sucursal = (cbx_sucursal) lo_pnl_datos_almacen.CBX_sucursal.getSelectedItem();
+        /*
+        NUEVO = 0
+        EDITAR = 1
+         */
+        switch (li_tipo_operacion) {
+            case 0:
+                if (lo_evt_datos_almacen.valida_campos(lo_pnl_datos_almacen)) {
+                    try {
+                        lo_evt_datos_almacen.setea_campos(lo_bean_almacen, lo_pnl_datos_almacen, lo_cbx_sucursal);
+                        if (go_dao_almacen.IST_almacen(lo_bean_almacen)) {
+                            lo_evt_datos_almacen.limpia_datos(lo_pnl_datos_almacen);
+                            lo_evt_datos_almacen.activa_campos(0, lo_pnl_datos_almacen, false);
+                            lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+                break;
+            case 1:
+                if (lo_evt_datos_almacen.verifica_cambios(lo_bean_almacen, lo_pnl_datos_almacen,lo_cbx_sucursal)) {
+                    if (lo_evt_datos_almacen.valida_campos(lo_pnl_datos_almacen)) {
+                        try {
+                            lo_evt_datos_almacen.setea_campos(lo_bean_almacen, lo_pnl_datos_almacen,lo_cbx_sucursal);
+                            if (go_dao_almacen.UPD_almacen(lo_bean_almacen)) {
+                                lo_evt_datos_almacen.limpia_datos(lo_pnl_datos_almacen);
+                                lo_evt_datos_almacen.activa_campos(0, lo_pnl_datos_almacen, false);
+                                lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+
+                } else {
+                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "NO SE A REALIZADO CAMBIOS");
+                }
+                break;
+        }
+    }
+
+    private void evt_cancelar() {
+        lo_evt_datos_almacen.activa_campos(0, lo_pnl_datos_almacen, false);
+        if (ls_codigo != null) {
+            lo_evt_datos_almacen.muestra_datos(lo_pnl_datos_almacen, lo_bean_almacen);
+            lo_evt_opciones_2.activa_btn_opciones(2, lo_pnl_opciones_2, lb_valor_op);
+        } else {
+            lo_evt_datos_almacen.limpia_datos(lo_pnl_datos_almacen);
+            lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+        }
+    }
+
+    private void evt_reporte() {
+
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -168,13 +227,13 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
                 evt_eliminar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_guardar) {
-                //evt_guardar();
+                evt_guardar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_cancelar) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_reporte) {
-                //evt_reporte();
+                evt_reporte();
             }
         }
 
@@ -205,7 +264,12 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
             if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_2.BTN_eliminar.isEnabled()) {
                 evt_eliminar();
             }
-
+            if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_2.BTN_guardar.isEnabled()) {
+                evt_guardar();
+            }
+            if (ke.getKeyCode() == KeyEvent.VK_ESCAPE && lo_pnl_opciones_2.BTN_cancelar.isEnabled()) {
+                evt_cancelar();
+            }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_nuevo) {
                     evt_nuevo();
@@ -218,6 +282,39 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_eliminar) {
                     evt_eliminar();
+                }
+                if (ke.getSource() == lo_pnl_opciones_2.BTN_guardar) {
+                    evt_guardar();
+                }
+                if (ke.getSource() == lo_pnl_opciones_2.BTN_cancelar) {
+                    evt_cancelar();
+                }
+                if (ke.getSource() == lo_pnl_opciones_2.BTN_reporte) {
+                    evt_reporte();
+                }
+                if (ke.getSource() == lo_pnl_datos_almacen.TXT_codigo_almacen && go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_almacen.TXT_codigo_almacen.getText().trim(), 1, 4)) {
+                    lo_pnl_datos_almacen.TXT_nombre_almacen.requestFocus();
+                }
+                if (ke.getSource() == lo_pnl_datos_almacen.TXT_nombre_almacen && go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_almacen.TXT_nombre_almacen.getText().trim(), 1, 4)) {
+                    lo_pnl_datos_almacen.TXT_direccion_almacen.requestFocus();
+                }
+                if (ke.getSource() == lo_pnl_datos_almacen.TXT_direccion_almacen) {
+                    lo_pnl_datos_almacen.CBX_estado.requestFocus();
+                }
+                if (ke.getSource() == lo_pnl_datos_almacen.CBX_estado) {
+                    lo_pnl_datos_almacen.CBX_tipo_almacen.requestFocus();
+                }
+                if (ke.getSource() == lo_pnl_datos_almacen.CBX_tipo_almacen) {
+                    lo_pnl_datos_almacen.CBX_sucursal.requestFocus();
+                }
+                if (ke.getSource() == lo_pnl_datos_almacen.CBX_sucursal) {
+                    lo_pnl_datos_almacen.TXT_ubigeo.requestFocus();
+                }
+                if (ke.getSource() == lo_pnl_datos_almacen.TXT_ubigeo && go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_almacen.TXT_ubigeo)) {
+                    get_descripcion_ubigeo();
+                }
+                if (ke.getSource() == lo_pnl_datos_almacen.TXT_nota) {
+                    lo_pnl_opciones_2.BTN_guardar.requestFocus();
                 }
             }
         }

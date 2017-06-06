@@ -1,4 +1,4 @@
-package JAVA.ANCESTRO.LOGICA;
+package JAVA.CONFIG.LOGICA;
 
 public class cbx_sucursal {
     

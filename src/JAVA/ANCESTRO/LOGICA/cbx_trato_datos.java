@@ -1,5 +1,6 @@
 package JAVA.ANCESTRO.LOGICA;
 
+import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.CONFIG.LOGICA.cbx_rol;
 import java.sql.ResultSet;
