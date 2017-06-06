@@ -89,7 +89,7 @@ public class evt_datos_sucursal {
                 OBJ_pds.TXT_direccion.requestFocus();
             }
         } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE NOMBRE DE LA SUCURSAL");
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE NOMBRE DE SUCURSAL");
             OBJ_pds.TXT_nombre.requestFocus();
         }
         return resp;
