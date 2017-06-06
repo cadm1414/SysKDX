@@ -41,6 +41,10 @@ public class opciones_menu {
                     go_muestra_jif.muestra_jif_almacen();
                     resp = "I";
                 }
+                if(dato.equalsIgnoreCase("PERMISOS")){
+                    go_muestra_jif.muestra_jif_usuario_permisos();
+                    resp = "I";
+                }
                 break;
         }
         return resp;

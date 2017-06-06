@@ -14,6 +14,7 @@ import JAVA.CONFIG.DAO.DAO_rol_menu;
 import JAVA.CONFIG.DAO.DAO_sucursal;
 import JAVA.CONFIG.DAO.DAO_ubigeo;
 import JAVA.CONFIG.DAO.DAO_usuario;
+import JAVA.CONFIG.DAO.DAO_usuario_permisos;
 import JAVA.CONFIG.GUI.dlg_busq_almacen;
 import JAVA.CONFIG.GUI.dlg_busq_rol;
 import JAVA.CONFIG.GUI.dlg_busq_sucursal;
@@ -23,6 +24,7 @@ import JAVA.CONFIG.GUI.frm_datos_general;
 import JAVA.CONFIG.GUI.jif_datos_almacen;
 import JAVA.CONFIG.GUI.jif_datos_sucursal;
 import JAVA.CONFIG.GUI.jif_datos_usuario;
+import JAVA.CONFIG.GUI.jif_datos_usuario_permisos;
 import JAVA.CONFIG.LOGICA.evt_datos_general;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_almacen;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
@@ -68,6 +70,7 @@ public class variables_globales {
     public static DAO_rol go_dao_rol = new DAO_rol();
     public static DAO_sucursal go_dao_sucursal = new DAO_sucursal();
     public static DAO_almacen go_dao_almacen = new DAO_almacen();
+    public static DAO_usuario_permisos go_dao_usuario_permisos = new DAO_usuario_permisos();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -96,6 +99,7 @@ public class variables_globales {
     public static jif_datos_usuario go_jif_datos_usuario;
     public static jif_datos_sucursal go_jif_datos_sucursal;
     public static jif_datos_almacen go_jif_datos_almacen;
+    public static jif_datos_usuario_permisos go_jif_datos_usuario_permisos;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.GUI.jif_datos_almacen;
 import JAVA.CONFIG.GUI.jif_datos_sucursal;
 import JAVA.CONFIG.GUI.jif_datos_usuario;
+import JAVA.CONFIG.GUI.jif_datos_usuario_permisos;
 import java.beans.PropertyVetoException;
 
 public class muestra_jif {
@@ -71,6 +72,28 @@ public class muestra_jif {
             go_jif_datos_almacen = new jif_datos_almacen();
             go_frm_principal.JDP_principal.add(go_jif_datos_almacen);
             go_jif_datos_almacen.show();
+        }
+    }
+    
+    public void muestra_jif_usuario_permisos() throws PropertyVetoException {
+
+        if (go_jif_datos_usuario_permisos != null) {
+            if (go_jif_datos_usuario_permisos.isClosed()) {
+                go_jif_datos_usuario_permisos = new jif_datos_usuario_permisos();
+                go_frm_principal.JDP_principal.add(go_jif_datos_usuario_permisos);
+                go_jif_datos_usuario_permisos.show();
+
+            } else if (go_jif_datos_usuario_permisos.isIcon()) {
+                go_jif_datos_usuario_permisos.setIcon(false);
+            } else if (!go_jif_datos_usuario_permisos.isShowing()) {
+                go_jif_datos_usuario_permisos = new jif_datos_usuario_permisos();
+                go_frm_principal.JDP_principal.add(go_jif_datos_usuario_permisos);
+                go_jif_datos_usuario_permisos.show();
+            }
+        } else {
+            go_jif_datos_usuario_permisos = new jif_datos_usuario_permisos();
+            go_frm_principal.JDP_principal.add(go_jif_datos_usuario_permisos);
+            go_jif_datos_usuario_permisos.show();
         }
     }
 }
