@@ -25,4 +25,20 @@ public class DAO_usuario_permisos {
         }
         return null;
     }
+    
+    public ResultSet SLT_usuari_permisos_x_idusuario(int id_usuario) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_usuari_permisos_x_idusuario("+id_usuario+") "
+                    + "as (id_usuario int,sucursal_almacen character(4),tipo_almacen text)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_usuari_permisos_x_idusuario", e.getMessage());
+        }
+        return null;
+    }
 }

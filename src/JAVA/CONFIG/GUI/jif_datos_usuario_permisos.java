@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_opciones_2;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_2;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
+import JAVA.CONFIG.BEAN.BEAN_usuario_permisos;
 import JAVA.CONFIG.LOGICA.evt_datos_usuario_permisos;
 import JAVA.CONFIG.LOGICA.evt_grid_usuario_permisos;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,7 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
     evt_datos_usuario_permisos lo_evt_datos_usuario_permisos = new evt_datos_usuario_permisos();
     evt_grid_usuario_permisos lo_evt_grid_usuario_permisos = new evt_grid_usuario_permisos();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
+    BEAN_usuario_permisos lo_bean_usuario_permisos = new BEAN_usuario_permisos();
     static boolean lb_valor_op[] = new boolean[8];
     DefaultTableModel lo_modelo;
     ResultSet lq_rs;
@@ -88,17 +90,57 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
         }
     }
 
-    private void evt_buscar() {
+    private void get_detalle_permisos() {
+        lo_evt_grid_usuario_permisos.limpia_tabla(lo_pnl_grid_usuario_permisos);
+        lo_evt_grid_usuario_permisos.datos_tabla(lo_pnl_grid_usuario_permisos, lo_modelo);
 
+        try {
+            lq_rs = go_dao_usuario_permisos.SLT_usuari_permisos_x_idusuario(Integer.parseInt(ls_id_usuario));
+            if (lq_rs != null) {
+                lo_evt_datos_usuario_permisos.setea_recupera(lo_bean_usuario_permisos, lq_rs);
+                lo_evt_grid_usuario_permisos.muestra_datos(lo_pnl_grid_usuario_permisos, lq_rs);
+            }
+        } catch (Exception e) {
+        }
     }
 
     private void evt_nuevo() {
         li_tipo_operacion = 0;
         lo_evt_opciones_2.activa_btn_opciones(1, lo_pnl_opciones_2, lb_valor_op);
-        lo_evt_datos_usuario_permisos.activa_campos(0, lo_pnl_datos_usuario_permisos, lo_pnl_grid_usuario_permisos, true);
+        lo_evt_datos_usuario_permisos.activa_campos(0, lo_pnl_datos_usuario_permisos, true);
         lo_evt_datos_usuario_permisos.limpia_datos(lo_pnl_datos_usuario_permisos);
+        lo_evt_grid_usuario_permisos.activa_campos(0, lo_pnl_grid_usuario_permisos, true);
         lo_evt_grid_usuario_permisos.limpia_tabla(lo_pnl_grid_usuario_permisos);
         lo_evt_grid_usuario_permisos.datos_tabla(lo_pnl_grid_usuario_permisos, lo_modelo);
+    }
+
+    private void evt_editar() {
+        li_tipo_operacion = 1;
+        lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
+        lo_evt_grid_usuario_permisos.activa_campos(0, lo_pnl_grid_usuario_permisos, true);
+    }
+
+    private void evt_buscar() {
+        evt_f5();
+        if (ls_id_usuario != null) {
+            lo_evt_opciones_2.activa_btn_opciones(2, lo_pnl_opciones_2, lb_valor_op);
+            get_detalle_permisos();
+        }
+    }
+
+    private void evt_cancelar() {
+        lo_evt_datos_usuario_permisos.activa_campos(0, lo_pnl_datos_usuario_permisos, false);
+        lo_evt_grid_usuario_permisos.activa_campos(0, lo_pnl_grid_usuario_permisos, false);
+        lo_evt_grid_usuario_permisos.limpia_tabla(lo_pnl_grid_usuario_permisos);        
+
+        if (ls_id_usuario != null) {
+            lo_evt_datos_usuario_permisos.muestra_datos(lo_bean_usuario_permisos, lo_pnl_datos_usuario_permisos);
+            get_detalle_permisos();
+            lo_evt_opciones_2.activa_btn_opciones(2, lo_pnl_opciones_2, lb_valor_op);
+        } else {
+            lo_evt_datos_usuario_permisos.limpia_datos(lo_pnl_datos_usuario_permisos);
+            lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+        }
     }
 
     ActionListener Listener = new ActionListener() {
@@ -111,7 +153,7 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
                 evt_buscar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_editar) {
-                //evt_editar();
+                evt_editar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_eliminar) {
                 //evt_eliminar();
@@ -120,7 +162,7 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
                 //evt_guardar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_cancelar) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_reporte) {
                 //evt_reporte();
@@ -148,7 +190,7 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
                 evt_buscar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_2.BTN_editar.isEnabled()) {
-                //evt_editar();
+                evt_editar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_2.BTN_eliminar.isEnabled()) {
                 //evt_eliminar();
@@ -157,7 +199,7 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
                 //evt_guardar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ESCAPE && lo_pnl_opciones_2.BTN_cancelar.isEnabled()) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_nuevo) {
@@ -167,7 +209,7 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
                     evt_buscar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_editar) {
-                    //evt_editar();
+                    evt_editar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_eliminar) {
                     //evt_eliminar();
@@ -176,7 +218,7 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
                     //evt_guardar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_cancelar) {
-                    //evt_cancelar();
+                    evt_cancelar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_reporte) {
                     //evt_reporte();
