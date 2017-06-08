@@ -224,6 +224,7 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("../IMAGES/ico_login.png")).getImage());
         setResizable(false);
 
         PNL_aceptar_cancelar.setPreferredSize(new java.awt.Dimension(184, 45));
