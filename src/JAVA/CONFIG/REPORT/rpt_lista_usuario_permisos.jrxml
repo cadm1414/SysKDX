@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fc808b06-48e3-4906-9ce5-5aa97efe268c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="usuario" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from rpt_lista_usuario_permisos()
+as (id_usuario integer,nombre_usuario character varying(20),indicador text,tipo_almacen text,sucursal_almacen character(4),nombre_almacen character varying(100))]]>
+	</queryString>
+	<field name="id_usuario" class="java.lang.Integer"/>
+	<field name="nombre_usuario" class="java.lang.String"/>
+	<field name="indicador" class="java.lang.String"/>
+	<field name="tipo_almacen" class="java.lang.String">
+		<fieldDescription><![CDATA[0 = venta
+1 = almacen]]></fieldDescription>
+	</field>
+	<field name="sucursal_almacen" class="java.lang.String"/>
+	<field name="nombre_almacen" class="java.lang.String"/>
+	<group name="usuario">
+		<groupExpression><![CDATA[$F{id_usuario}]]></groupExpression>
+		<groupHeader>
+			<band height="13">
+				<textField>
+					<reportElement x="0" y="0" width="94" height="12" uuid="57f1bd56-0b42-4ad4-9037-1971c656e86a"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre_usuario}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="tipo_almacen">
+		<groupExpression><![CDATA[$F{tipo_almacen}]]></groupExpression>
+		<groupHeader>
+			<band height="13">
+				<textField>
+					<reportElement x="94" y="0" width="94" height="12" uuid="3fff2caa-9e2a-41c3-a5e0-5aeebc0c0d69"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo_almacen}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="204" y="24" width="129" height="12" uuid="8bd77a40-7f1e-4e9c-b4d9-90b8a0d0c71d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO PERMISOS x USUARIO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="461" y="14" width="80" height="12" uuid="c5050a25-c667-4735-9f5f-5a6fd1998dc7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="452" y="2" width="102" height="12" uuid="af417ee5-4311-4260-b3e2-a3595f5a10af"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="227" height="12" uuid="f96a2fbd-bf36-42eb-b418-d7cff422d679"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresa}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="542" y="14" width="12" height="12" uuid="7fcd9289-c0ce-4147-9908-ab792652d0e5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="20" width="554" height="1" uuid="59ffbf27-b6db-44fd-8ae7-c2bf969d9e94"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="6" width="93" height="12" uuid="96ef7f44-3b8a-4b63-ba07-827cef5c2380"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUARIO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="3" width="554" height="1" uuid="3947613a-3f57-44aa-8c04-ab6169f3500b"/>
+			</line>
+			<staticText>
+				<reportElement x="95" y="6" width="93" height="12" uuid="caff2642-8a20-4b4e-a5ee-97f7ae78b791"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO ALMACEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="6" width="93" height="12" uuid="a5cc1801-6e4a-4034-bdc7-628464310d80"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD.  LOCAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="6" width="93" height="12" uuid="ad9d8d8e-6de4-435e-a66f-33240f3bd723"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE LOCAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="188" y="0" width="94" height="12" uuid="7d1d7331-e27f-4709-bdbf-f5dbca73ab6a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sucursal_almacen}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="0" width="193" height="12" uuid="d8135443-3bc2-442c-b45c-61353b366c2f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_almacen}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="417" y="11" width="137" height="12" uuid="ba02ee57-1f8e-430a-a402-83221c323c92"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

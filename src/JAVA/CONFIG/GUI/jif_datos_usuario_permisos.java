@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
 public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
@@ -190,6 +192,13 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
             lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
         }
     }
+    
+    private void evt_reporte() {
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("empresa", go_bean_general.getNombre_reporte());
+        parametros.put("usuario", gs_datos_usuario);
+        go_evt_muestra_reporte.reporte_pestania("rpt_lista_usuario_permisos.jasper", parametros, "Permisos", 3);
+    }
 
     ActionListener Listener = new ActionListener() {
         @Override
@@ -213,7 +222,7 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
                 evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_reporte) {
-                //evt_reporte();
+                evt_reporte();
             }
         }
     };
@@ -269,7 +278,7 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
                     evt_cancelar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_reporte) {
-                    //evt_reporte();
+                    evt_reporte();
                 }
                 if (ke.getSource() == lo_pnl_datos_usuario_permisos.TXT_id_usuario && go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_usuario_permisos.TXT_id_usuario)) {
                     get_descripcion_usuario();

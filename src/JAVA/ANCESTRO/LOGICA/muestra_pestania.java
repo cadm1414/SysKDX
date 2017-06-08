@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_almacen;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
+import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
 import java.awt.BorderLayout;
 import net.sf.jasperreports.view.JRViewer;
 
@@ -56,8 +57,7 @@ public class muestra_pestania {
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
 
-    }
-    
+    }    
     
     public void rpt_lista_almacen(JRViewer jr, String nombre) {
 
@@ -80,6 +80,30 @@ public class muestra_pestania {
         go_pnl_rpt_lista_almacen.repaint();
         go_pnl_rpt_lista_almacen.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_almacen);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+    
+     public void rpt_lista_usuario_permisos(JRViewer jr, String nombre) {
+        if (go_pnl_rpt_lista_usuario_permisos == null) {
+            genera_lista_usuario_permisos(jr, nombre);
+
+        } else if (!go_pnl_rpt_lista_usuario_permisos.isShowing()) {
+            go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_lista_usuario_permisos);
+            genera_lista_usuario_permisos(jr, nombre);
+        }
+    }
+
+    public void genera_lista_usuario_permisos(JRViewer jr, String nombre) {
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_lista_usuario_permisos = new pnl_rpt_lista_usuario_permisos();
+        go_pnl_rpt_lista_usuario_permisos.removeAll();
+        go_pnl_rpt_lista_usuario_permisos.setLayout(new BorderLayout());
+        go_pnl_rpt_lista_usuario_permisos.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_lista_usuario_permisos.setVisible(true);
+        go_pnl_rpt_lista_usuario_permisos.repaint();
+        go_pnl_rpt_lista_usuario_permisos.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_usuario_permisos);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
 

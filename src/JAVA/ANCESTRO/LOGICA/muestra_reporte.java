@@ -44,6 +44,10 @@ public class muestra_reporte {
                     break;
                 case 2:
                     go_muestra_pestania.rpt_lista_almacen(jr, nombre);
+                    break;
+                case 3:
+                    go_muestra_pestania.rpt_lista_usuario_permisos(jr, nombre);
+                    break;
             }
 
         } catch (Exception e) {

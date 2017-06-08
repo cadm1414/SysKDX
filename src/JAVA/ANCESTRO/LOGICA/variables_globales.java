@@ -29,6 +29,7 @@ import JAVA.CONFIG.LOGICA.evt_datos_general;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_almacen;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
+import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
 import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
 
@@ -105,4 +106,5 @@ public class variables_globales {
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;
     public static pnl_rpt_lista_sucursal go_pnl_rpt_lista_sucursal;
     public static pnl_rpt_lista_almacen go_pnl_rpt_lista_almacen;
+    public static pnl_rpt_lista_usuario_permisos go_pnl_rpt_lista_usuario_permisos;
 }
