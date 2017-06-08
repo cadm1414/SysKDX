@@ -26,9 +26,9 @@ public class evt_grid_usuario_permisos {
             try {
                 do {
                     modelo.addRow(new Object[]{false});
-                    for (int x = 1; x < OBJ_pgu.TBL_usuario_permisos.getColumnCount(); x++) {
-                        if (x < 4) {
-                            OBJ_pgu.TBL_usuario_permisos.setValueAt(lq_rs.getString(x), a, x - 1);
+                    for (int x = 0; x < OBJ_pgu.TBL_usuario_permisos.getColumnCount(); x++) {
+                        if (x < 3) {
+                            OBJ_pgu.TBL_usuario_permisos.setValueAt(lq_rs.getString(x+1), a, x );
                         } else {
                             OBJ_pgu.TBL_usuario_permisos.setValueAt(false, a, x);
                         }

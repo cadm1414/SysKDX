@@ -130,7 +130,7 @@ public class jif_datos_usuario extends javax.swing.JInternalFrame {
             case 0:
                 if (lo_evt_datos_usuario.valida_campos(lo_pnl_datos_usuario)) {
                     try {
-                        lo_evt_datos_usuario.seta_campos(lo_bean_usuario, lo_pnl_datos_usuario, lo_cbx_rol);
+                        lo_evt_datos_usuario.setea_campos(lo_bean_usuario, lo_pnl_datos_usuario, lo_cbx_rol);
                         if (go_dao_usuario.IST_usuario(lo_bean_usuario)) {
                             lo_evt_datos_usuario.limpia_datos(lo_pnl_datos_usuario);
                             lo_evt_datos_usuario.activa_campos(0, lo_pnl_datos_usuario, false);
@@ -144,7 +144,7 @@ public class jif_datos_usuario extends javax.swing.JInternalFrame {
                 if (lo_evt_datos_usuario.verifica_cambios(lo_bean_usuario, lo_pnl_datos_usuario, lo_cbx_rol)) {
                     if (lo_evt_datos_usuario.valida_campos(lo_pnl_datos_usuario)) {
                         try {
-                            lo_evt_datos_usuario.seta_campos(lo_bean_usuario, lo_pnl_datos_usuario, lo_cbx_rol);
+                            lo_evt_datos_usuario.setea_campos(lo_bean_usuario, lo_pnl_datos_usuario, lo_cbx_rol);
                             if (go_dao_usuario.UPD_usuario(lo_bean_usuario, Integer.parseInt(ls_id_usuario))) {
                                 lo_evt_datos_usuario.limpia_datos(lo_pnl_datos_usuario);
                                 lo_evt_datos_usuario.activa_campos(0, lo_pnl_datos_usuario, false);

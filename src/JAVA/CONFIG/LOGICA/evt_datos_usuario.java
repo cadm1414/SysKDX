@@ -29,7 +29,7 @@ public class evt_datos_usuario {
         OBJ_pdu.TXT_pass.setText("");
     }
 
-    public void seta_campos(BEAN_usuario OBJ_bus, pnl_datos_usuario OBJ_usu, cbx_rol cbx_rol) {
+    public void setea_campos(BEAN_usuario OBJ_bus, pnl_datos_usuario OBJ_usu, cbx_rol cbx_rol) {
         try {
             OBJ_bus.setDatos_usuario(go_fnc_operaciones_campos.get_campo_str(OBJ_usu.TXT_datos));
             OBJ_bus.setNombre_usuario(go_fnc_operaciones_campos.get_campo_str(OBJ_usu.TXT_usuario));
