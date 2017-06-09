@@ -23,6 +23,7 @@ import JAVA.CONFIG.GUI.dlg_busq_usuario;
 import JAVA.CONFIG.GUI.frm_datos_general;
 import JAVA.CONFIG.GUI.jif_datos_almacen;
 import JAVA.CONFIG.GUI.jif_datos_sucursal;
+import JAVA.CONFIG.GUI.jif_datos_tipo_movimiento;
 import JAVA.CONFIG.GUI.jif_datos_usuario;
 import JAVA.CONFIG.GUI.jif_datos_usuario_permisos;
 import JAVA.CONFIG.LOGICA.evt_datos_general;
@@ -101,6 +102,7 @@ public class variables_globales {
     public static jif_datos_sucursal go_jif_datos_sucursal;
     public static jif_datos_almacen go_jif_datos_almacen;
     public static jif_datos_usuario_permisos go_jif_datos_usuario_permisos;
+    public static jif_datos_tipo_movimiento go_jif_datos_tipo_movimiento;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

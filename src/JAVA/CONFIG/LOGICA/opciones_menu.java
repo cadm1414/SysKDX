@@ -45,6 +45,10 @@ public class opciones_menu {
                     go_muestra_jif.muestra_jif_usuario_permisos();
                     resp = "I";
                 }
+                if(dato.equalsIgnoreCase("TIPO MOVIMIENTO")){
+                    go_muestra_jif.muestra_jif_tipo_movimiento();
+                    resp = "I";
+                }
                 break;
         }
         return resp;
