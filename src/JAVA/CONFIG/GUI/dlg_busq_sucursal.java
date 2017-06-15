@@ -1,7 +1,10 @@
 package JAVA.CONFIG.GUI;
 
+import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -128,6 +131,7 @@ public class dlg_busq_sucursal extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BUSQUEDA SUCURSAL");
+        setIconImage(getIconImage());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
@@ -204,6 +208,11 @@ public class dlg_busq_sucursal extends javax.swing.JDialog {
         });
     }
 
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));       
+        return retValue;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PNL_grid;
     private javax.swing.JTextField TXT_dato;

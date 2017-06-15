@@ -1,9 +1,12 @@
 package JAVA.CONFIG.GUI;
 
+import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -52,12 +55,12 @@ public class dlg_busq_rol extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }
-    
-    public void retorna(){
+
+    public void retorna() {
         ls_codigo_rol = lo_pgr.TBL_rol.getValueAt(lo_pgr.TBL_rol.getSelectedRow(), 0).toString();
         this.dispose();
     }
-    
+
     KeyListener KeyEvnt = new KeyListener() {
         @Override
         public void keyTyped(KeyEvent ke) {
@@ -86,29 +89,29 @@ public class dlg_busq_rol extends javax.swing.JDialog {
             }
         }
     };
-    
+
     MouseListener MouseEvnt = new MouseListener() {
         @Override
-        public void mouseClicked(MouseEvent me) {  
-            if(me.getSource()== lo_pgr.TBL_rol && me.getClickCount()==2){
+        public void mouseClicked(MouseEvent me) {
+            if (me.getSource() == lo_pgr.TBL_rol && me.getClickCount() == 2) {
                 retorna();
             }
         }
 
         @Override
-        public void mousePressed(MouseEvent me) {            
+        public void mousePressed(MouseEvent me) {
         }
 
         @Override
-        public void mouseReleased(MouseEvent me) {            
+        public void mouseReleased(MouseEvent me) {
         }
 
         @Override
-        public void mouseEntered(MouseEvent me) {            
+        public void mouseEntered(MouseEvent me) {
         }
 
         @Override
-        public void mouseExited(MouseEvent me) {            
+        public void mouseExited(MouseEvent me) {
         }
     };
 
@@ -122,6 +125,7 @@ public class dlg_busq_rol extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BUSQUEDA ROL");
+        setIconImage(getIconImage());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
 
@@ -193,6 +197,12 @@ public class dlg_busq_rol extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));
+        return retValue;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
