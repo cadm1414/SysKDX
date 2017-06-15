@@ -36,12 +36,12 @@ public class fnc_operaciones_campos {
         int dato = Integer.parseInt(txt_campo.getText().trim());
         return dato;
     }
-    
-    public void get_focus(JTextField txt_campo){
+
+    public void get_focus(JTextField txt_campo) {
         txt_campo.requestFocus();
     }
-    
-    public void set_campo_vacio(JTextField txt_campo){
+
+    public void set_campo_vacio(JTextField txt_campo) {
         txt_campo.setText("");
     }
 
@@ -76,6 +76,14 @@ public class fnc_operaciones_campos {
         return resp;
     }
 
+    public String completa_digitos(String dato, String valor, int cant) {
+        String resp = dato;
+        for (int i = dato.length(); i < cant; i++) {
+            resp = valor + resp;
+        }
+        return resp;
+    }
+
     public boolean valida_fecha(String dato) {
         boolean resp = false;
         try {
@@ -93,9 +101,9 @@ public class fnc_operaciones_campos {
         String fecha = (dato.substring(8, 10)) + (dato.substring(5, 7)) + (dato.substring(0, 4));
         return fecha;
     }
-    
+
     public String recupera_fecha_formato(String dato) {
-        String fecha = (dato.substring(8, 10)) +"/" +(dato.substring(5, 7)) +"/" +(dato.substring(0, 4));
+        String fecha = (dato.substring(8, 10)) + "/" + (dato.substring(5, 7)) + "/" + (dato.substring(0, 4));
         return fecha;
     }
 

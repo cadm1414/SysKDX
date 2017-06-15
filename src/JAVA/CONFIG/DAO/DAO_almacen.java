@@ -119,4 +119,20 @@ public class DAO_almacen {
         }
         return resp;
     }
+    
+    public ResultSet SLT_cbx_almacen(String status) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_cbx_almacen('" + status + "') "
+                    + "as (codigo_sucursal character(4),nombre_sucursal character varying(100))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cbx_almacen", e.getMessage());
+        }
+        return null;
+    }
 }

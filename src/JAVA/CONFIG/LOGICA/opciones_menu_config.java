@@ -5,7 +5,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.GUI.frm_datos_rol_menu;
 import java.beans.PropertyVetoException;
 
-public class opciones_menu {
+public class opciones_menu_config {
 
     /*RETORNA TIPO DE FORMULARIO
         F = Jframe
@@ -15,9 +15,7 @@ public class opciones_menu {
         String resp = "";
         String codigo_modulo = gs_codigo_modulo[index];
 
-        switch (codigo_modulo) {
-            case "ANCEST":
-                break;
+        switch (codigo_modulo) {            
             case "CONFIG":
                 if (dato.equalsIgnoreCase("EMPRESA")) {
                     go_frm_datos_general = new frm_datos_general();

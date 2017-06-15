@@ -4,7 +4,7 @@ import JAVA.ANCESTRO.IMAGES.IMAGES_ruta;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.LOGICA.jtr_menu_opciones;
 import JAVA.CONFIG.LOGICA.lst_menu_modulo;
-import JAVA.CONFIG.LOGICA.opciones_menu;
+import JAVA.CONFIG.LOGICA.opciones_menu_config;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import javax.swing.Icon;
@@ -16,7 +16,7 @@ public class frm_principal extends javax.swing.JFrame {
     HashMap<String, Icon> ls_elementos = new HashMap<String, Icon>();
     HashMap<String, String> ls_tooltip = new HashMap<String, String>();
     jtr_menu_opciones lo_jtr_menu_opciones = new jtr_menu_opciones();
-    opciones_menu lo_opciones_menu = new opciones_menu();
+    opciones_menu_config lo_opciones_menu = new opciones_menu_config();
     DefaultMutableTreeNode nodoSeleccionado;
     ResultSet lq_rs = null;
     boolean resp;

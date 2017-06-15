@@ -37,7 +37,7 @@ public class pnl_datos_tipo_movimiento extends javax.swing.JPanel {
         CBX_es_transferencia = new javax.swing.JComboBox<>();
         CBX_almacen = new javax.swing.JComboBox<>();
         CBX_tipo_almacen = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CBX_estado = new javax.swing.JComboBox<>();
         CBX_codigo_sunat = new javax.swing.JComboBox<>();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
@@ -117,10 +117,12 @@ public class pnl_datos_tipo_movimiento extends javax.swing.JPanel {
         CBX_tipo_almacen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VENTA", "ALMACEN", "AMBOS" }));
         CBX_tipo_almacen.setEnabled(false);
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BLOQUEADO", "ACTIVO" }));
-        jComboBox1.setEnabled(false);
+        CBX_estado.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BLOQUEADO", "ACTIVO" }));
+        CBX_estado.setSelectedIndex(1);
+        CBX_estado.setEnabled(false);
 
+        CBX_codigo_sunat.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_codigo_sunat.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -178,7 +180,7 @@ public class pnl_datos_tipo_movimiento extends javax.swing.JPanel {
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(CBX_tipo_almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(CBX_almacen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(CBX_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(CBX_codigo_sunat, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(6, 6, 6))))))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -223,7 +225,7 @@ public class pnl_datos_tipo_movimiento extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBX_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
@@ -244,20 +246,20 @@ public class pnl_datos_tipo_movimiento extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 39, Short.MAX_VALUE))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CBX_almacen;
-    private javax.swing.JComboBox<String> CBX_codigo_sunat;
-    private javax.swing.JComboBox<String> CBX_es_transferencia;
-    private javax.swing.JComboBox<String> CBX_tipo_almacen;
-    private javax.swing.JComboBox<String> CBX_tipo_movimiento;
-    private javax.swing.JFormattedTextField TXT_codigo;
-    private javax.swing.JTextField TXT_nombre;
-    private javax.swing.JComboBox<String> jComboBox1;
+    public javax.swing.JComboBox<String> CBX_almacen;
+    public javax.swing.JComboBox<String> CBX_codigo_sunat;
+    public javax.swing.JComboBox<String> CBX_es_transferencia;
+    public javax.swing.JComboBox<String> CBX_estado;
+    public javax.swing.JComboBox<String> CBX_tipo_almacen;
+    public javax.swing.JComboBox<String> CBX_tipo_movimiento;
+    public javax.swing.JFormattedTextField TXT_codigo;
+    public javax.swing.JTextField TXT_nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

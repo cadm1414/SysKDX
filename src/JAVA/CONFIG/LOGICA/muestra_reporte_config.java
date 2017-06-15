@@ -1,4 +1,4 @@
-package JAVA.ANCESTRO.LOGICA;
+package JAVA.CONFIG.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.REPORT.ruta_config_report;
@@ -11,7 +11,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JRViewer;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class muestra_reporte {
+public class muestra_reporte_config {
 
     JasperReport jr = null;
     URL path;
@@ -47,6 +47,9 @@ public class muestra_reporte {
                     break;
                 case 3:
                     go_muestra_pestania.rpt_lista_usuario_permisos(jr, nombre);
+                    break;
+                case 4:
+                    go_muestra_pestania.rpt_lista_tipo_movimiento(jr, nombre);
                     break;
             }
 

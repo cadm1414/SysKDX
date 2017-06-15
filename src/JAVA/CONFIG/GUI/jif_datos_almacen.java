@@ -28,8 +28,8 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
     ResultSet lq_rs = null;
     int li_tipo_operacion;
     String ls_codigo, ls_codigo_ubigeo;
-    String ls_opcion = "M C D";
-    String ls_modulo = "CONFIG", ls_capa = "GUI", ls_clase = "jif_datos_sucursal";
+    String ls_opcion = "M C C";
+    String ls_modulo = "CONFIG", ls_capa = "GUI", ls_clase = "jif_datos_almacen";
 
     public jif_datos_almacen() {
         initComponents();
@@ -56,7 +56,6 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
     }
 
     private void get_sucursal() {
-
         lq_rs = go_dao_sucursal.SLT_cbx_sucursal("1");
         if (lq_rs != null) {
             go_cbx_trato_datos.recupera_valor(2, lq_rs, lo_pnl_datos_almacen.CBX_sucursal);

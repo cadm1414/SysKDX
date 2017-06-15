@@ -1,4 +1,4 @@
-package JAVA.ANCESTRO.LOGICA;
+package JAVA.CONFIG.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.GUI.jif_datos_almacen;
@@ -8,7 +8,7 @@ import JAVA.CONFIG.GUI.jif_datos_usuario;
 import JAVA.CONFIG.GUI.jif_datos_usuario_permisos;
 import java.beans.PropertyVetoException;
 
-public class muestra_jif {
+public class muestra_jif_config {
 
     public void muestra_jif_usuario() throws PropertyVetoException {
 

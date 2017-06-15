@@ -1,14 +1,16 @@
-package JAVA.ANCESTRO.LOGICA;
+package JAVA.CONFIG.LOGICA;
 
+import JAVA.ANCESTRO.LOGICA.jt_panel;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_almacen;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
+import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
 import java.awt.BorderLayout;
 import net.sf.jasperreports.view.JRViewer;
 
-public class muestra_pestania {
+public class muestra_pestania_config {
 
     public void rpt_lista_usuario(JRViewer jr, String nombre) {
         if (go_pnl_rpt_lista_usuario == null) {
@@ -57,8 +59,8 @@ public class muestra_pestania {
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
 
-    }    
-    
+    }
+
     public void rpt_lista_almacen(JRViewer jr, String nombre) {
 
         if (go_pnl_rpt_lista_almacen == null) {
@@ -83,8 +85,8 @@ public class muestra_pestania {
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }
-    
-     public void rpt_lista_usuario_permisos(JRViewer jr, String nombre) {
+
+    public void rpt_lista_usuario_permisos(JRViewer jr, String nombre) {
         if (go_pnl_rpt_lista_usuario_permisos == null) {
             genera_lista_usuario_permisos(jr, nombre);
 
@@ -106,7 +108,30 @@ public class muestra_pestania {
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_usuario_permisos);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
-
     }
 
+    public void rpt_lista_tipo_movimiento(JRViewer jr, String nombre) {
+        if (go_pnl_rpt_lista_tipo_movimiento == null) {
+            genera_lista_tipo_movimiento(jr, nombre);
+
+        } else if (!go_pnl_rpt_lista_tipo_movimiento.isShowing()) {
+            go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_lista_tipo_movimiento);
+            genera_lista_tipo_movimiento(jr, nombre);
+        }
+    }
+
+    public void genera_lista_tipo_movimiento(JRViewer jr, String nombre) {
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_lista_tipo_movimiento = new pnl_rpt_lista_tipo_movimiento();
+        go_pnl_rpt_lista_tipo_movimiento.removeAll();
+        go_pnl_rpt_lista_tipo_movimiento.setLayout(new BorderLayout());
+        go_pnl_rpt_lista_tipo_movimiento.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_lista_tipo_movimiento.setVisible(true);
+        go_pnl_rpt_lista_tipo_movimiento.repaint();
+        go_pnl_rpt_lista_tipo_movimiento.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_tipo_movimiento);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+
+    }
 }
