@@ -1,6 +1,6 @@
 package JAVA.CONFIG.LOGICA;
 
-import JAVA.ANCESTRO.IMAGES.IMAGES_ruta;
+import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -12,7 +12,7 @@ public class lst_menu_modulo extends JLabel implements ListCellRenderer {
     HashMap<String, Icon> ls_elementos;
     HashMap<String, String> ls_toolTip;
 
-    ImageIcon lc_icononulo = new ImageIcon(IMAGES_ruta.class.getResource("error.png"));
+    ImageIcon lc_icononulo = new ImageIcon(IMAGES_ruta_ancestro.class.getResource("error.png"));
 
     public lst_menu_modulo(HashMap<String, Icon> pelementos, HashMap<String, String> tool) {
         this.ls_elementos = pelementos;

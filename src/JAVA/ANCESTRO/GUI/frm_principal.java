@@ -1,6 +1,6 @@
 package JAVA.ANCESTRO.GUI;
 
-import JAVA.ANCESTRO.IMAGES.IMAGES_ruta;
+import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.LOGICA.jtr_menu_opciones;
 import JAVA.CONFIG.LOGICA.lst_menu_modulo;
@@ -45,7 +45,7 @@ public class frm_principal extends javax.swing.JFrame {
             if (resp) {
                 LST_modulo.setListData(gs_modulo);
                 for (int i = 0; i < gs_modulo.length; i++) {
-                    ls_elementos.put(gs_modulo[i].toString(), new ImageIcon(IMAGES_ruta.class.getResource(gs_codigo_modulo[i] + ".png")));
+                    ls_elementos.put(gs_modulo[i].toString(), new ImageIcon(IMAGES_ruta_ancestro.class.getResource(gs_codigo_modulo[i] + ".png")));
                     ls_tooltip.put(gs_modulo[i].toString(), gs_modulo[i]);
                 }
                 lst_menu_modulo render = new lst_menu_modulo(ls_elementos, ls_tooltip);

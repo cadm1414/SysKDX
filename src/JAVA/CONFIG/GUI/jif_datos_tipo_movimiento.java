@@ -304,6 +304,7 @@ public class jif_datos_tipo_movimiento extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Tipo Movimiento");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/CONFIG/IMAGES/movimiento.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

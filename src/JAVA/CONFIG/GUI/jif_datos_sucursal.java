@@ -321,6 +321,7 @@ public class jif_datos_sucursal extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Registro Sucursal");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/CONFIG/IMAGES/sucursal.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

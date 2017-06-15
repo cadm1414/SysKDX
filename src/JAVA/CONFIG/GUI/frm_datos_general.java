@@ -6,8 +6,11 @@ import JAVA.ANCESTRO.GUI.pnl_opciones_1;
 import JAVA.ANCESTRO.GUI.pnl_salir;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_1;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
+import JAVA.CONFIG.IMAGES.IMAGES_ruta_config;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.CONFIG.LOGICA.evt_datos_general;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -45,13 +48,13 @@ public class frm_datos_general extends javax.swing.JFrame {
         PNL_opciones.add(lo_pnl_opciones_1);
         PNL_salir.add(lo_pnl_salir);
         PNL_datos.add(lo_pnl_datos_general);
-        
+
         lo_evt_opciones_1.evento_click(lo_pnl_opciones_1, Listener);
         lo_evt_opciones_1.evento_press(lo_pnl_opciones_1, KeyEvnt);
 
-        go_evt_salir.evento_click(lo_pnl_salir, Listener); 
+        go_evt_salir.evento_click(lo_pnl_salir, Listener);
         go_evt_salir.evento_press(lo_pnl_salir, KeyEvnt);
-        
+
         lo_evt_datos_general.evento_press(lo_pnl_datos_general, KeyEvnt);
 
     }
@@ -132,7 +135,7 @@ public class frm_datos_general extends javax.swing.JFrame {
                 } else {
                     go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "NO SE A REALIZADO CAMBIOS");
                 }
-                
+
                 go_dao_general.SLT_datos();
                 lo_evt_datos_general.muestra_datos(lo_pnl_datos_general);
                 lo_evt_datos_general.activa_bloquea_campos(lo_pnl_datos_general, false);
@@ -213,7 +216,7 @@ public class frm_datos_general extends javax.swing.JFrame {
                 if (ke.getSource() == lo_pnl_salir.BTN_salir) {
                     evt_salir();
                 }
-                if (ke.getSource() == lo_pnl_datos_general.TXT_ruc && go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_general.TXT_ruc.getText().trim(), 3,3)) {
+                if (ke.getSource() == lo_pnl_datos_general.TXT_ruc && go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_general.TXT_ruc.getText().trim(), 3, 3)) {
                     lo_pnl_datos_general.TXT_razon_social.requestFocus();
                 }
                 if (ke.getSource() == lo_pnl_datos_general.TXT_razon_social && go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_general.TXT_razon_social.getText().trim(), 1, 4)) {
@@ -246,6 +249,12 @@ public class frm_datos_general extends javax.swing.JFrame {
         }
     };
 
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(IMAGES_ruta_config.class.getResource("general.png"));
+        return retValue;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -256,6 +265,7 @@ public class frm_datos_general extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("DATOS GENERAL");
+        setIconImage(getIconImage());
         setResizable(false);
 
         javax.swing.GroupLayout PNL_opcionesLayout = new javax.swing.GroupLayout(PNL_opciones);
@@ -322,9 +332,6 @@ public class frm_datos_general extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         new frm_datos_general().setVisible(true);
     }

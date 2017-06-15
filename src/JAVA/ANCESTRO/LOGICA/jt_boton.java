@@ -1,6 +1,6 @@
 package JAVA.ANCESTRO.LOGICA;
 
-import JAVA.ANCESTRO.IMAGES.IMAGES_ruta;
+import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -25,7 +25,7 @@ public class jt_boton extends JButton implements MouseListener {
         addMouseListener(this);
         setRolloverEnabled(true);
         //setText("x");
-        setIcon(new javax.swing.ImageIcon(IMAGES_ruta.class.getResource("close_jt.png")));
+        setIcon(new javax.swing.ImageIcon(IMAGES_ruta_ancestro.class.getResource("close_jt.png")));
 
         addActionListener(new ActionListener() {
             @Override

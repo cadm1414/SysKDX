@@ -337,6 +337,7 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Registro Almacen");
         setToolTipText("");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/CONFIG/IMAGES/almacen.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

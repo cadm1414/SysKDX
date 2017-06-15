@@ -5,8 +5,11 @@ import JAVA.ANCESTRO.GUI.pnl_opciones_2;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_2;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import JAVA.CONFIG.BEAN.BEAN_usuario;
+import JAVA.CONFIG.IMAGES.IMAGES_ruta_config;
 import JAVA.CONFIG.LOGICA.cbx_rol;
 import JAVA.CONFIG.LOGICA.evt_datos_usuario;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -284,6 +287,8 @@ public class jif_datos_usuario extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Registro Usuario");
+        setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/CONFIG/IMAGES/usuario.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

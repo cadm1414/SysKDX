@@ -7,8 +7,11 @@ import JAVA.ANCESTRO.GUI.pnl_salir;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_2;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import JAVA.CONFIG.BEAN.BEAN_rol;
+import JAVA.CONFIG.IMAGES.IMAGES_ruta_config;
 import JAVA.CONFIG.LOGICA.evt_datos_rol_menu;
 import JAVA.CONFIG.LOGICA.evt_grid_rol_menu;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -42,7 +45,7 @@ public class frm_datos_rol_menu extends javax.swing.JFrame {
         formulario();
         activa_botones();
     }
-
+           
     private void formulario() {
         lo_pnl_opciones_2.setBounds(0, 0, 700, 120);
         lo_pnl_datos_rol_menu.setBounds(0, 0, 300, 60);
@@ -291,6 +294,13 @@ public class frm_datos_rol_menu extends javax.swing.JFrame {
         }
     };
 
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(IMAGES_ruta_config.class.getResource("rol.png"));       
+        return retValue;
+    }
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -301,6 +311,7 @@ public class frm_datos_rol_menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("ROL - ACCESO");
+        setIconImage(getIconImage());
 
         javax.swing.GroupLayout PNL_menu_opcionesLayout = new javax.swing.GroupLayout(PNL_menu_opciones);
         PNL_menu_opciones.setLayout(PNL_menu_opcionesLayout);

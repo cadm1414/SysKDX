@@ -1,16 +1,20 @@
 package JAVA.ANCESTRO.GUI;
 
 import JAVA.ANCESTRO.BEAN.BEAN_periodo_empresa;
+import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import JAVA.ANCESTRO.LOGICA.cbx_empresa;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.BEAN.BEAN_usuario;
 import JAVA.CONFIG.GUI.frm_datos_general;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 public class frm_inicia_sesion extends javax.swing.JFrame {
 
@@ -24,7 +28,7 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
     String ls_usuario, ls_clave;
     String ls_modulo = "ANCESTRO", ls_capa = "GUI", ls_clase = "frm_inicia_sesion";
 
-    public frm_inicia_sesion() {
+    public frm_inicia_sesion() {        
         initComponents();
         formulario();
         get_empresa();
@@ -210,6 +214,13 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
         go_fnc_operaciones_campos.set_campo_vacio(lo_pnl_inicia_sesion.TXT_usuario);
         go_fnc_operaciones_campos.get_focus(lo_pnl_inicia_sesion.TXT_usuario);
     }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(IMAGES_ruta_ancestro.class.getResource("login.png"));       
+        return retValue;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -224,7 +235,7 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("../IMAGES/ico_login.png")).getImage());
+        setIconImage(getIconImage());
         setResizable(false);
 
         PNL_aceptar_cancelar.setPreferredSize(new java.awt.Dimension(184, 45));
