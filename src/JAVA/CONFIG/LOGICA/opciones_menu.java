@@ -5,7 +5,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.GUI.frm_datos_rol_menu;
 import java.beans.PropertyVetoException;
 
-public class opciones_menu_config {
+public class opciones_menu {
 
     /*RETORNA TIPO DE FORMULARIO
         F = Jframe
@@ -15,7 +15,7 @@ public class opciones_menu_config {
         String resp = "";
         String codigo_modulo = gs_codigo_modulo[index];
 
-        switch (codigo_modulo) {            
+        switch (codigo_modulo) {
             case "CONFIG":
                 if (dato.equalsIgnoreCase("EMPRESA")) {
                     go_frm_datos_general = new frm_datos_general();
@@ -27,24 +27,34 @@ public class opciones_menu_config {
                     go_frm_datos_rol_menu.setVisible(true);
                     resp = "F";
                 }
-                if (dato.equalsIgnoreCase("USUARIO")) {                    
+                if (dato.equalsIgnoreCase("USUARIO")) {
                     go_muestra_jif.muestra_jif_usuario();
                     resp = "I";
                 }
-                if(dato.equalsIgnoreCase("SUCURSAL")){
+                if (dato.equalsIgnoreCase("SUCURSAL")) {
                     go_muestra_jif.muestra_jif_sucursal();
                     resp = "I";
                 }
-                if(dato.equalsIgnoreCase("ALMACEN")){
+                if (dato.equalsIgnoreCase("ALMACEN")) {
                     go_muestra_jif.muestra_jif_almacen();
                     resp = "I";
                 }
-                if(dato.equalsIgnoreCase("PERMISOS")){
+                if (dato.equalsIgnoreCase("PERMISOS")) {
                     go_muestra_jif.muestra_jif_usuario_permisos();
                     resp = "I";
                 }
-                if(dato.equalsIgnoreCase("TIPO MOVIMIENTO")){
+                if (dato.equalsIgnoreCase("TIPO MOVIMIENTO")) {
                     go_muestra_jif.muestra_jif_tipo_movimiento();
+                    resp = "I";
+                }
+                break;
+            case "INVENT":
+                if (dato.equalsIgnoreCase("MARCA")) {
+                    go_muestra_jif_invent.muestra_jif_marca();
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("PRODUCTO-SERVICIO")) {
+                    go_muestra_jif_invent.muestra_jif_producto();
                     resp = "I";
                 }
                 break;

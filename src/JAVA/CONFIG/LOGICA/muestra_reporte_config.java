@@ -15,7 +15,7 @@ public class muestra_reporte_config {
 
     JasperReport jr = null;
     URL path;
-    String ls_modulo = "CONFIG", ls_capa = "LOGICA", ls_clase = "evt_muestra_reporte";
+    String ls_modulo = "CONFIG", ls_capa = "LOGICA", ls_clase = "muestra_reporte_config";
 
     public void reporte_frame(String reporte, Map<String, Object> parametro) {
         try {

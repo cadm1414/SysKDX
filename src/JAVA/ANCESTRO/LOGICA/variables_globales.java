@@ -38,6 +38,16 @@ import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
+import JAVA.INVENT.DAO.DAO_marca;
+import JAVA.INVENT.DAO.DAO_producto;
+import JAVA.INVENT.GUI.dlg_busq_marca;
+import JAVA.INVENT.GUI.dlg_busq_producto;
+import JAVA.INVENT.GUI.jif_datos_marca;
+import JAVA.INVENT.GUI.jif_datos_producto;
+import JAVA.INVENT.LOGICA.muestra_jif_invent;
+import JAVA.INVENT.LOGICA.muestra_pestania_invent;
+import JAVA.INVENT.LOGICA.muestra_reporte_invent;
+import JAVA.INVENT.REPORT.pnl_rpt_lista_marca;
 import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
 
@@ -82,6 +92,8 @@ public class variables_globales {
     public static DAO_usuario_permisos go_dao_usuario_permisos = new DAO_usuario_permisos();
     public static DAO_taba_sunat go_dao_tabla_sunat = new DAO_taba_sunat();
     public static DAO_tipo_movimiento go_dao_tipo_movimiento = new DAO_tipo_movimiento();
+    public static DAO_marca go_dao_marca = new DAO_marca();
+    public static DAO_producto go_dao_producto = new DAO_producto();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -98,6 +110,9 @@ public class variables_globales {
     public static muestra_reporte_config go_evt_muestra_reporte = new muestra_reporte_config();
     public static muestra_jif_config go_muestra_jif = new muestra_jif_config();
     public static muestra_pestania_config go_muestra_pestania = new muestra_pestania_config();
+    public static muestra_jif_invent go_muestra_jif_invent = new muestra_jif_invent();
+    public static muestra_pestania_invent go_muestra_pestania_invent = new muestra_pestania_invent();
+    public static muestra_reporte_invent go_muestra_reporte_invent = new muestra_reporte_invent();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;
@@ -106,6 +121,8 @@ public class variables_globales {
     public static dlg_busq_sucursal go_dlg_busq_sucursal;
     public static dlg_busq_almacen go_dlg_busq_almacen;
     public static dlg_busq_tipo_movimiento go_dlg_busq_tipo_movimiento;
+    public static dlg_busq_marca go_dlg_busq_marca;
+    public static dlg_busq_producto go_dlg_busq_producto;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -113,6 +130,8 @@ public class variables_globales {
     public static jif_datos_almacen go_jif_datos_almacen;
     public static jif_datos_usuario_permisos go_jif_datos_usuario_permisos;
     public static jif_datos_tipo_movimiento go_jif_datos_tipo_movimiento;
+    public static jif_datos_marca go_jif_datos_marca;
+    public static jif_datos_producto go_jif_datos_producto;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;
@@ -120,4 +139,5 @@ public class variables_globales {
     public static pnl_rpt_lista_almacen go_pnl_rpt_lista_almacen;
     public static pnl_rpt_lista_usuario_permisos go_pnl_rpt_lista_usuario_permisos;
     public static pnl_rpt_lista_tipo_movimiento go_pnl_rpt_lista_tipo_movimiento;
+    public static pnl_rpt_lista_marca go_pnl_rpt_lista_marca;
 }
