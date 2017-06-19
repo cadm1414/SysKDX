@@ -130,7 +130,7 @@ public class dlg_busq_producto extends javax.swing.JDialog {
         PNL_grid = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("BUSQUEDA TIPO MOVIMIENTO");
+        setTitle("BUSQUEDA PRODUCTO");
         setIconImage(getIconImage());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N

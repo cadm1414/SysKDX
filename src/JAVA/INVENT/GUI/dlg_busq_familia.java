@@ -12,14 +12,14 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
-public class dlg_busq_marca extends javax.swing.JDialog {
+public class dlg_busq_familia extends javax.swing.JDialog {
 
-    pnl_grid_busq_marca lo_pnl_grid_busq_marca = new pnl_grid_busq_marca();
+    pnl_grid_busq_familia lo_pnl_grid_busq_familia = new pnl_grid_busq_familia();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
-    public String ls_codigo_marca;
+    public String ls_codigo_familia;
 
-    public dlg_busq_marca(java.awt.Frame parent, boolean modal) {
+    public dlg_busq_familia(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         formulario();
@@ -27,26 +27,26 @@ public class dlg_busq_marca extends javax.swing.JDialog {
     }
 
     private void formulario() {
-        lo_pnl_grid_busq_marca.setBounds(0, 0, 300, 220);
-        PNL_grid.add(lo_pnl_grid_busq_marca);
+        lo_pnl_grid_busq_familia.setBounds(0, 0, 300, 220);
+        PNL_grid.add(lo_pnl_grid_busq_familia);
 
         TXT_dato.setDocument(new fnc_txt_mayuscula());
 
-        lo_pnl_grid_busq_marca.TBL_marca.addMouseListener(MouseEvnt);
-        lo_pnl_grid_busq_marca.TBL_marca.addKeyListener(KeyEvnt);
+        lo_pnl_grid_busq_familia.TBL_familia.addMouseListener(MouseEvnt);
+        lo_pnl_grid_busq_familia.TBL_familia.addKeyListener(KeyEvnt);
         TXT_dato.addKeyListener(KeyEvnt);
     }
 
     private void datos_tabla() {
         int a = 0;
-        lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_marca.TBL_marca.getModel();
+        lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_familia.TBL_familia.getModel();
         try {
-            lq_rs = go_dao_marca.SLT_grid_marca();
+            lq_rs = go_dao_familia.SLT_grid_familia();
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
-                    for (int x = 0; x < 3; x++) {
-                        lo_pnl_grid_busq_marca.TBL_marca.setValueAt(lq_rs.getString(x + 1), a, x);
+                    for (int x = 0; x < 2; x++) {
+                        lo_pnl_grid_busq_familia.TBL_familia.setValueAt(lq_rs.getString(x + 1), a, x);
                     }
                     a++;
                 } while (lq_rs.next());
@@ -56,7 +56,7 @@ public class dlg_busq_marca extends javax.swing.JDialog {
     }
 
     public void retorna() {
-        ls_codigo_marca = lo_pnl_grid_busq_marca.TBL_marca.getValueAt(lo_pnl_grid_busq_marca.TBL_marca.getSelectedRow(), 0).toString();
+        ls_codigo_familia = lo_pnl_grid_busq_familia.TBL_familia.getValueAt(lo_pnl_grid_busq_familia.TBL_familia.getSelectedRow(), 0).toString();
         this.dispose();
     }
 
@@ -70,10 +70,10 @@ public class dlg_busq_marca extends javax.swing.JDialog {
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == TXT_dato) {
-                    lo_pnl_grid_busq_marca.TBL_marca.requestFocus();
-                    lo_pnl_grid_busq_marca.TBL_marca.changeSelection(0, 0, false, false);
+                    lo_pnl_grid_busq_familia.TBL_familia.requestFocus();
+                    lo_pnl_grid_busq_familia.TBL_familia.changeSelection(0, 0, false, false);
                 }
-                if (ke.getSource() == lo_pnl_grid_busq_marca.TBL_marca) {
+                if (ke.getSource() == lo_pnl_grid_busq_familia.TBL_familia) {
                     retorna();
                 }
             }
@@ -85,7 +85,7 @@ public class dlg_busq_marca extends javax.swing.JDialog {
         @Override
         public void keyReleased(KeyEvent ke) {
             if (ke.getSource() == TXT_dato) {
-                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_marca.TBL_marca, TXT_dato.getText(), 1);
+                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_familia.TBL_familia, TXT_dato.getText(), 1);
             }
         }
 
@@ -94,7 +94,7 @@ public class dlg_busq_marca extends javax.swing.JDialog {
     MouseListener MouseEvnt = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent me) {
-            if (me.getSource() == lo_pnl_grid_busq_marca.TBL_marca && me.getClickCount() == 2) {
+            if (me.getSource() == lo_pnl_grid_busq_familia.TBL_familia && me.getClickCount() == 2) {
                 retorna();
             }
         }
@@ -130,7 +130,7 @@ public class dlg_busq_marca extends javax.swing.JDialog {
         PNL_grid = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("BUSQUEDA MARCA");
+        setTitle("BUSQUEDA FAMILIA");
         setIconImage(getIconImage());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
@@ -196,7 +196,7 @@ public class dlg_busq_marca extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                dlg_busq_marca dialog = new dlg_busq_marca(new javax.swing.JFrame(), true);
+                dlg_busq_familia dialog = new dlg_busq_familia(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

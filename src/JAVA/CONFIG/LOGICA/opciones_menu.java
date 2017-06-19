@@ -57,7 +57,15 @@ public class opciones_menu {
                     go_muestra_jif_invent.muestra_jif_producto();
                     resp = "I";
                 }
-                break;
+                if (dato.equalsIgnoreCase("FAMILIA")) {
+                    go_muestra_jif_invent.muestra_jif_familia();
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("SUBFAMILIA")) {
+                    go_muestra_jif_invent.muestra_jif_subfamilia();
+                    resp = "I";
+                }
+                break;                
         }
         return resp;
     }

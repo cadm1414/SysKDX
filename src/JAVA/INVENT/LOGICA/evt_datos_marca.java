@@ -52,11 +52,11 @@ public class evt_datos_marca {
         }
         return resp;
     }
-    
-     public boolean verifica_cambios(BEAN_marca OBJ_bma, pnl_datos_marca OBJ_pdm) {
+
+    public boolean verifica_cambios(BEAN_marca OBJ_bma, pnl_datos_marca OBJ_pdm) {
         boolean resp = false;
         if (OBJ_bma.getNombre_marca().equalsIgnoreCase(OBJ_pdm.TXT_nombre.getText().trim())) {
-            if (OBJ_bma.getStatus().equalsIgnoreCase(OBJ_pdm.CBX_estado.getSelectedIndex()+"")) {                
+            if (OBJ_bma.getStatus().equalsIgnoreCase(OBJ_pdm.CBX_estado.getSelectedIndex() + "")) {
             } else {
                 resp = true;
             }
@@ -65,12 +65,12 @@ public class evt_datos_marca {
         }
         return resp;
     }
-    
+
     public void setea_campos(BEAN_marca OBJ_bma, pnl_datos_marca OBJ_pdm) {
         try {
             OBJ_bma.setCodigo_marca(go_fnc_operaciones_campos.get_campo_str(OBJ_pdm.TXT_codigo));
             OBJ_bma.setNombre_marca(go_fnc_operaciones_campos.get_campo_str(OBJ_pdm.TXT_nombre));
-            OBJ_bma.setStatus(OBJ_pdm.CBX_estado.getSelectedIndex()+"");
+            OBJ_bma.setStatus(OBJ_pdm.CBX_estado.getSelectedIndex() + "");
         } catch (Exception e) {
         }
     }

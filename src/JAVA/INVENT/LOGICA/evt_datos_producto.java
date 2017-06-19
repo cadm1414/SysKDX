@@ -47,14 +47,43 @@ public class evt_datos_producto {
         OBJ_pdp.CBX_percepcion.setSelectedIndex(Integer.parseInt(OBJ_bpr.getAfecto_percepcion()));
         OBJ_pdp.CBX_estado.setSelectedIndex(Integer.parseInt(OBJ_bpr.getStatus()));
     }
-    
+
+    public boolean verifica_cambios(BEAN_producto OBJ_bpr, pnl_datos_producto OBJ_pdp) {
+        boolean resp = false;
+        if (OBJ_bpr.getNombre_producto().equalsIgnoreCase(OBJ_pdp.TXT_nombre.getText().trim())) {
+            if (OBJ_bpr.getClase_producto().equalsIgnoreCase(OBJ_pdp.CBX_clase.getSelectedIndex() + "")) {
+                if (OBJ_bpr.getDias_almacen().equalsIgnoreCase(OBJ_pdp.TXT_dias.getText().trim())) {
+                    if (OBJ_bpr.getStatus().equalsIgnoreCase(OBJ_pdp.CBX_estado.getSelectedIndex() + "")) {
+                        if (OBJ_bpr.getAfecto_detraccion().equalsIgnoreCase(OBJ_pdp.CBX_detraccion.getSelectedIndex() + "")) {
+                            if (OBJ_bpr.getAfecto_percepcion().equalsIgnoreCase(OBJ_pdp.CBX_percepcion.getSelectedIndex() + "")) {
+                            } else {
+                                resp = true;
+                            }
+                        } else {
+                            resp = true;
+                        }
+                    } else {
+                        resp = true;
+                    }
+                } else {
+                    resp = true;
+                }
+            } else {
+                resp = true;
+            }
+        } else {
+            resp = true;
+        }
+        return resp;
+    }
+
     public boolean valida_campos(pnl_datos_producto OBJ_pdp) {
         boolean resp = false;
         if (go_fnc_operaciones_campos.campo_blanco(OBJ_pdp.TXT_nombre) && go_fnc_operaciones_campos.cant_caracter(OBJ_pdp.TXT_nombre.getText().trim(), 1, 3)) {
             resp = true;
-            if(go_fnc_operaciones_campos.campo_blanco(OBJ_pdp.TXT_dias)){
-                OBJ_pdp.TXT_dias.setText("0");                
-            }            
+            if (!go_fnc_operaciones_campos.campo_blanco(OBJ_pdp.TXT_dias)) {
+                OBJ_pdp.TXT_dias.setText("0");
+            }
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE NOMBRE DE PRODUCTO");
             OBJ_pdp.TXT_nombre.requestFocus();
@@ -66,16 +95,16 @@ public class evt_datos_producto {
         try {
             OBJ_bpr.setCodigo_producto(go_fnc_operaciones_campos.get_campo_str(OBJ_pdp.TXT_codigo));
             OBJ_bpr.setNombre_producto(go_fnc_operaciones_campos.get_campo_str(OBJ_pdp.TXT_nombre));
-            OBJ_bpr.setStatus(OBJ_pdp.CBX_clase.getSelectedIndex()+"");
+            OBJ_bpr.setClase_producto(OBJ_pdp.CBX_clase.getSelectedIndex() + "");
             OBJ_bpr.setDias_almacen(go_fnc_operaciones_campos.get_campo_str(OBJ_pdp.TXT_dias));
             //OBJ_bpr.setCodigo_arancel(OBJ_pdp.CBX_arancel.getSelectedIndex()+"");
-            OBJ_bpr.setAfecto_detraccion(OBJ_pdp.CBX_detraccion.getSelectedIndex()+"");
-            OBJ_bpr.setAfecto_percepcion(OBJ_pdp.CBX_percepcion.getSelectedIndex()+"");
-            OBJ_bpr.setStatus(OBJ_pdp.CBX_estado.getSelectedIndex()+"");
+            OBJ_bpr.setAfecto_detraccion(OBJ_pdp.CBX_detraccion.getSelectedIndex() + "");
+            OBJ_bpr.setAfecto_percepcion(OBJ_pdp.CBX_percepcion.getSelectedIndex() + "");
+            OBJ_bpr.setStatus(OBJ_pdp.CBX_estado.getSelectedIndex() + "");
         } catch (Exception e) {
         }
     }
-    
+
     public void setea_recupera(BEAN_producto OBJ_bpr, ResultSet lq_rs) {
         try {
             OBJ_bpr.setCodigo_producto(lq_rs.getString(1));
@@ -89,7 +118,7 @@ public class evt_datos_producto {
         } catch (Exception e) {
         }
     }
-    
+
     public KeyListener evento_press(pnl_datos_producto OBJ_pdp, KeyListener KeyEvnt) {
         OBJ_pdp.TXT_codigo.addKeyListener(KeyEvnt);
         OBJ_pdp.TXT_nombre.addKeyListener(KeyEvnt);

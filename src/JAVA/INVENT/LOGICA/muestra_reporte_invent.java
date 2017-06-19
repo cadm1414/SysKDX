@@ -26,6 +26,15 @@ public class muestra_reporte_invent {
                 case 0:
                     go_muestra_pestania_invent.rpt_lista_marca(jr, nombre);
                     break;
+                case 1:
+                    go_muestra_pestania_invent.rpt_lista_producto(jr, nombre);
+                    break;
+                case 2:
+                    go_muestra_pestania_invent.rpt_lista_familia(jr, nombre);
+                    break;
+                case 3:
+                    go_muestra_pestania_invent.rpt_lista_subfamilia(jr, nombre);
+                    break;
             }
 
         } catch (Exception e) {

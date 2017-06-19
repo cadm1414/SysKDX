@@ -38,16 +38,25 @@ import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
+import JAVA.INVENT.DAO.DAO_familia;
 import JAVA.INVENT.DAO.DAO_marca;
 import JAVA.INVENT.DAO.DAO_producto;
+import JAVA.INVENT.DAO.DAO_subfamilia;
+import JAVA.INVENT.GUI.dlg_busq_familia;
 import JAVA.INVENT.GUI.dlg_busq_marca;
 import JAVA.INVENT.GUI.dlg_busq_producto;
+import JAVA.INVENT.GUI.dlg_busq_subfamilia;
+import JAVA.INVENT.GUI.jif_datos_familia;
 import JAVA.INVENT.GUI.jif_datos_marca;
 import JAVA.INVENT.GUI.jif_datos_producto;
+import JAVA.INVENT.GUI.jif_datos_subfamilia;
 import JAVA.INVENT.LOGICA.muestra_jif_invent;
 import JAVA.INVENT.LOGICA.muestra_pestania_invent;
 import JAVA.INVENT.LOGICA.muestra_reporte_invent;
+import JAVA.INVENT.REPORT.pnl_rpt_lista_familia;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_marca;
+import JAVA.INVENT.REPORT.pnl_rpt_lista_producto;
+import JAVA.INVENT.REPORT.pnl_rpt_lista_subfamilia;
 import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
 
@@ -94,6 +103,8 @@ public class variables_globales {
     public static DAO_tipo_movimiento go_dao_tipo_movimiento = new DAO_tipo_movimiento();
     public static DAO_marca go_dao_marca = new DAO_marca();
     public static DAO_producto go_dao_producto = new DAO_producto();
+    public static DAO_familia go_dao_familia = new DAO_familia();
+    public static DAO_subfamilia go_dao_subfamilia = new DAO_subfamilia();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -123,6 +134,8 @@ public class variables_globales {
     public static dlg_busq_tipo_movimiento go_dlg_busq_tipo_movimiento;
     public static dlg_busq_marca go_dlg_busq_marca;
     public static dlg_busq_producto go_dlg_busq_producto;
+    public static dlg_busq_familia go_dlg_busq_familia;
+    public static dlg_busq_subfamilia go_dlg_busq_subfamilia;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -132,6 +145,8 @@ public class variables_globales {
     public static jif_datos_tipo_movimiento go_jif_datos_tipo_movimiento;
     public static jif_datos_marca go_jif_datos_marca;
     public static jif_datos_producto go_jif_datos_producto;
+    public static jif_datos_familia go_jif_datos_familia;
+    public static jif_datos_subfamilia go_jif_datos_subfamilia;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;
@@ -140,4 +155,7 @@ public class variables_globales {
     public static pnl_rpt_lista_usuario_permisos go_pnl_rpt_lista_usuario_permisos;
     public static pnl_rpt_lista_tipo_movimiento go_pnl_rpt_lista_tipo_movimiento;
     public static pnl_rpt_lista_marca go_pnl_rpt_lista_marca;
+    public static pnl_rpt_lista_producto go_pnl_rpt_lista_producto;
+    public static pnl_rpt_lista_familia go_pnl_rpt_lista_familia;
+    public static pnl_rpt_lista_subfamilia go_pnl_rpt_lista_subfamilia;
 }

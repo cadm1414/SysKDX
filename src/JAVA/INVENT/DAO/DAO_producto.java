@@ -83,6 +83,7 @@ public class DAO_producto {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from ist_producto('" + OBJ_bpr.getCodigo_producto() + "','" + OBJ_bpr.getNombre_producto() + "','" + OBJ_bpr.getClase_producto() + "','" + OBJ_bpr.getDias_almacen() + "','','" + OBJ_bpr.getStatus() + "','" + OBJ_bpr.getAfecto_detraccion() + "','" + OBJ_bpr.getAfecto_percepcion() + "')";
+            System.out.println(SQL);
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();
@@ -93,6 +94,25 @@ public class DAO_producto {
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_producto", e.getMessage());
+        }
+        return resp;
+    }
+
+    public boolean UPD_producto(BEAN_producto OBJ_bpr) throws SQLException {
+        boolean resp = false;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from upd_producto('" + OBJ_bpr.getCodigo_producto() + "','" + OBJ_bpr.getNombre_producto() + "','" + OBJ_bpr.getClase_producto() + "','" + OBJ_bpr.getDias_almacen() + "','','" + OBJ_bpr.getStatus() + "','" + OBJ_bpr.getAfecto_detraccion() + "','" + OBJ_bpr.getAfecto_percepcion() + "')";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                lq_stm.getConnection().commit();
+                go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_producto", "SE ACTUALIZO BASE DE DATOS");
+                resp = true;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_producto", e.getMessage());
         }
         return resp;
     }

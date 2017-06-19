@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b58e5a9c-1e89-4ac6-b7bc-4f60f7d3fa1a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="empresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="usuario" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from rpt_lista_familia() 
+as (codigo_familia character(4),nombre_familia character varying(60),fecha_registro timestamp with time zone)]]>
+	</queryString>
+	<field name="codigo_familia" class="java.lang.String"/>
+	<field name="nombre_familia" class="java.lang.String"/>
+	<field name="fecha_registro" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="452" y="1" width="102" height="12" uuid="d3948143-aac6-4c8f-819b-be3e3fc9d68f"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="25" width="75" height="12" uuid="e700de8c-9ee7-4b11-806c-9a5de39e0ae0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTADO FAMILIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="461" y="13" width="80" height="12" uuid="f83d2d78-afca-43fc-b1ad-65117ba7e5f9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="542" y="13" width="12" height="12" uuid="1cc22f8d-e96d-4200-b237-ead38f0e3710"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="227" height="12" uuid="32989b86-d803-4662-83b2-eacdb04ed0a8"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="2" width="554" height="1" uuid="376cbb6f-c1a7-4d4f-b100-2a911accd2f0"/>
+			</line>
+			<line>
+				<reportElement x="1" y="19" width="554" height="1" uuid="59d49da1-0b8b-41fa-8d60-6d5ddbe9c842"/>
+			</line>
+			<staticText>
+				<reportElement x="70" y="5" width="156" height="12" uuid="04b3d261-4a37-420a-859c-8a64aa9ab391"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="5" width="99" height="12" uuid="071fb2b2-ce0e-49e5-b600-d1460d874323"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA REGISTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="5" width="52" height="12" uuid="90e46994-89ef-4556-84a3-64bbc88eb7dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="52" height="12" uuid="5e8e0319-611d-488e-aa64-2b003929ef14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_familia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="99" height="12" uuid="4b865766-3687-431a-846c-e4b6c965dc28"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_familia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="0" width="99" height="12" uuid="aec8b4fa-c008-454c-a8e7-915dfe049a6d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_registro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="418" y="14" width="137" height="12" uuid="c24161a0-ef8b-4c97-b6ad-8d957fe92177"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
