@@ -18,6 +18,7 @@ import JAVA.CONFIG.DAO.DAO_sucursal;
 import JAVA.CONFIG.DAO.DAO_taba_sunat;
 import JAVA.CONFIG.DAO.DAO_tipo_movimiento;
 import JAVA.CONFIG.DAO.DAO_ubigeo;
+import JAVA.CONFIG.DAO.DAO_unidad_medida;
 import JAVA.CONFIG.DAO.DAO_usuario;
 import JAVA.CONFIG.DAO.DAO_usuario_permisos;
 import JAVA.CONFIG.GUI.dlg_busq_almacen;
@@ -25,17 +26,20 @@ import JAVA.CONFIG.GUI.dlg_busq_rol;
 import JAVA.CONFIG.GUI.dlg_busq_sucursal;
 import JAVA.CONFIG.GUI.dlg_busq_tipo_movimiento;
 import JAVA.CONFIG.GUI.dlg_busq_ubigeo;
+import JAVA.CONFIG.GUI.dlg_busq_unidad_medida;
 import JAVA.CONFIG.GUI.dlg_busq_usuario;
 import JAVA.CONFIG.GUI.frm_datos_general;
 import JAVA.CONFIG.GUI.jif_datos_almacen;
 import JAVA.CONFIG.GUI.jif_datos_sucursal;
 import JAVA.CONFIG.GUI.jif_datos_tipo_movimiento;
+import JAVA.CONFIG.GUI.jif_datos_unidad_medida;
 import JAVA.CONFIG.GUI.jif_datos_usuario;
 import JAVA.CONFIG.GUI.jif_datos_usuario_permisos;
 import JAVA.CONFIG.LOGICA.evt_datos_general;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_almacen;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
+import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
 import JAVA.INVENT.DAO.DAO_familia;
@@ -105,6 +109,7 @@ public class variables_globales {
     public static DAO_producto go_dao_producto = new DAO_producto();
     public static DAO_familia go_dao_familia = new DAO_familia();
     public static DAO_subfamilia go_dao_subfamilia = new DAO_subfamilia();
+    public static DAO_unidad_medida go_dao_unidad_medida = new DAO_unidad_medida();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -136,6 +141,7 @@ public class variables_globales {
     public static dlg_busq_producto go_dlg_busq_producto;
     public static dlg_busq_familia go_dlg_busq_familia;
     public static dlg_busq_subfamilia go_dlg_busq_subfamilia;
+    public static dlg_busq_unidad_medida go_dlg_busq_unidad_medida;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -147,6 +153,7 @@ public class variables_globales {
     public static jif_datos_producto go_jif_datos_producto;
     public static jif_datos_familia go_jif_datos_familia;
     public static jif_datos_subfamilia go_jif_datos_subfamilia;
+    public static jif_datos_unidad_medida go_jif_datos_unidad_medida;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;
@@ -158,4 +165,5 @@ public class variables_globales {
     public static pnl_rpt_lista_producto go_pnl_rpt_lista_producto;
     public static pnl_rpt_lista_familia go_pnl_rpt_lista_familia;
     public static pnl_rpt_lista_subfamilia go_pnl_rpt_lista_subfamilia;
+    public static pnl_rpt_lista_unidad_medida go_pnl_rpt_lista_unidad_medida;
 }

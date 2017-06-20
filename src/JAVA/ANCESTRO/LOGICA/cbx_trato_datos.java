@@ -26,7 +26,7 @@ public class cbx_trato_datos {
     2 = cbx_sucursal
     3 = cx_almacen
     4 = cbx_tabla_sunat
-    5 = cbx_subfamilia
+    5 = cbx_familia
      */
     public void recupera_valor(int op, ResultSet rs, JComboBox cbx_combo) {
         switch (op) {

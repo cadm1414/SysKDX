@@ -47,6 +47,10 @@ public class opciones_menu {
                     go_muestra_jif.muestra_jif_tipo_movimiento();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("UNIDAD DE MEDIDA")) {
+                    go_muestra_jif.muestra_jif_unidad_medida();
+                    resp = "I";
+                }
                 break;
             case "INVENT":
                 if (dato.equalsIgnoreCase("MARCA")) {

@@ -5,6 +5,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_almacen;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
+import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
 import java.awt.BorderLayout;
@@ -130,6 +131,31 @@ public class muestra_pestania_config {
         go_pnl_rpt_lista_tipo_movimiento.repaint();
         go_pnl_rpt_lista_tipo_movimiento.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_tipo_movimiento);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+
+    }
+    
+    public void rpt_lista_unidad_medida(JRViewer jr, String nombre) {
+        if (go_pnl_rpt_lista_unidad_medida == null) {
+            genera_lista_unidad_medida(jr, nombre);
+
+        } else if (!go_pnl_rpt_lista_unidad_medida.isShowing()) {
+            go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_lista_unidad_medida);
+            genera_lista_unidad_medida(jr, nombre);
+        }
+    }
+
+    public void genera_lista_unidad_medida(JRViewer jr, String nombre) {
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_lista_unidad_medida = new pnl_rpt_lista_unidad_medida();
+        go_pnl_rpt_lista_unidad_medida.removeAll();
+        go_pnl_rpt_lista_unidad_medida.setLayout(new BorderLayout());
+        go_pnl_rpt_lista_unidad_medida.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_lista_unidad_medida.setVisible(true);
+        go_pnl_rpt_lista_unidad_medida.repaint();
+        go_pnl_rpt_lista_unidad_medida.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_unidad_medida);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
 

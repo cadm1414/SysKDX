@@ -51,6 +51,9 @@ public class muestra_reporte_config {
                 case 4:
                     go_muestra_pestania.rpt_lista_tipo_movimiento(jr, nombre);
                     break;
+                case 5:
+                    go_muestra_pestania.rpt_lista_unidad_medida(jr, nombre);
+                    break;
             }
 
         } catch (Exception e) {

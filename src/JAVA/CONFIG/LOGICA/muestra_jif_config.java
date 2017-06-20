@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.GUI.jif_datos_almacen;
 import JAVA.CONFIG.GUI.jif_datos_sucursal;
 import JAVA.CONFIG.GUI.jif_datos_tipo_movimiento;
+import JAVA.CONFIG.GUI.jif_datos_unidad_medida;
 import JAVA.CONFIG.GUI.jif_datos_usuario;
 import JAVA.CONFIG.GUI.jif_datos_usuario_permisos;
 import java.beans.PropertyVetoException;
@@ -117,6 +118,28 @@ public class muestra_jif_config {
             go_jif_datos_tipo_movimiento = new jif_datos_tipo_movimiento();
             go_frm_principal.JDP_principal.add(go_jif_datos_tipo_movimiento);
             go_jif_datos_tipo_movimiento.show();
+        }
+    }
+    
+    public void muestra_jif_unidad_medida() throws PropertyVetoException {
+
+        if (go_jif_datos_unidad_medida != null) {
+            if (go_jif_datos_unidad_medida.isClosed()) {
+                go_jif_datos_unidad_medida = new jif_datos_unidad_medida();
+                go_frm_principal.JDP_principal.add(go_jif_datos_unidad_medida);
+                go_jif_datos_unidad_medida.show();
+
+            } else if (go_jif_datos_unidad_medida.isIcon()) {
+                go_jif_datos_unidad_medida.setIcon(false);
+            } else if (!go_jif_datos_unidad_medida.isShowing()) {
+                go_jif_datos_unidad_medida = new jif_datos_unidad_medida();
+                go_frm_principal.JDP_principal.add(go_jif_datos_unidad_medida);
+                go_jif_datos_unidad_medida.show();
+            }
+        } else {
+            go_jif_datos_unidad_medida = new jif_datos_unidad_medida();
+            go_frm_principal.JDP_principal.add(go_jif_datos_unidad_medida);
+            go_jif_datos_unidad_medida.show();
         }
     }
 }
