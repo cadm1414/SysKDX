@@ -275,7 +275,7 @@ public class jif_datos_producto extends javax.swing.JInternalFrame {
         public void keyReleased(KeyEvent ke) {
 
         }
-    };
+    };  
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
