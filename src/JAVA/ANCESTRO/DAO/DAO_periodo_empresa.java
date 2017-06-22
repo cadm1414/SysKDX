@@ -21,7 +21,7 @@ public class DAO_periodo_empresa {
             } else {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "SLT_datos_x_empresa", "TABLA NO CONTIENE DATOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (SQLException e) {
             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "SLT_datos_x_empresa", e.getMessage());
         }

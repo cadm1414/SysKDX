@@ -20,7 +20,7 @@ public class DAO_almacen {
             if (lq_rs != null) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_codigo_almacen", e.getMessage());
         }
@@ -36,7 +36,7 @@ public class DAO_almacen {
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_almacen", e.getMessage());
         }
@@ -52,7 +52,7 @@ public class DAO_almacen {
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_almacen", e.getMessage());
         }
@@ -75,7 +75,7 @@ public class DAO_almacen {
                     go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "DLT_almacen", "ALMACEN VENTA NO PUEDE SER ELIMINADO");
                 }
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_almacen", e.getMessage());
@@ -93,7 +93,7 @@ public class DAO_almacen {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_almacen", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_almacen", e.getMessage());
@@ -112,7 +112,7 @@ public class DAO_almacen {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_almacen", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_almacen", e.getMessage());
@@ -129,7 +129,7 @@ public class DAO_almacen {
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cbx_almacen", e.getMessage());
         }

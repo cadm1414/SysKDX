@@ -1,27 +1,27 @@
-package JAVA.CONFIG.DAO;
+package JAVA.INVENT.DAO;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class DAO_taba_sunat {
+public class DAO_grupo_detraccion {
 
     ResultSet lq_rs;
     Statement lq_stm;
-    String ls_modulo = "CONFIG", ls_capa = "DAO", ls_clase = "DAO_taba_sunat";
+    String ls_modulo = "INVENT", ls_capa = "DAO", ls_clase = "DAO_grupo_detraccion";
 
-    public ResultSet SLT_cbx_tabla_sunat(String categoria) {
+    public ResultSet SLT_cbx_grupo_detraccion(String status) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_cbx_tabla_sunat('" + categoria + "') "
-                    + "as (codigo_sunat character varying(20),descripcion character varying(150))";
+            String SQL = "select * from slt_cbx_grupo_detraccion('" + status + "') "
+                    + "as (codigo_grupo character(3),concepto character varying(60))";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 return lq_rs;
             }
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cbx_tabla_sunat", e.getMessage());
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cbx_grupo_detraccion", e.getMessage());
         }
         return null;
     }

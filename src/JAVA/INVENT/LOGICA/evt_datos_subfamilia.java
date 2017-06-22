@@ -20,6 +20,12 @@ public class evt_datos_subfamilia {
                 break;
         }
     }
+    
+    public void limpia_datos(pnl_datos_subfamilia OBJ_pds) {
+        OBJ_pds.TXT_codigo.setText("");
+        OBJ_pds.TXT_nombre.setText("");
+        OBJ_pds.CBX_familia.setSelectedIndex(0);
+    }
 
     public void muestra_datos(pnl_datos_subfamilia OBJ_pds, BEAN_subfamilia OBJ_bsf) {
         OBJ_pds.TXT_codigo.setText(OBJ_bsf.getCodigo_subfamilia());
@@ -34,13 +40,7 @@ public class evt_datos_subfamilia {
             OBJ_bsf.setCodigo_familia(lq_rs.getString(3));
         } catch (Exception e) {
         }
-    }
-
-    public void limpia_datos(pnl_datos_subfamilia OBJ_pds) {
-        OBJ_pds.TXT_codigo.setText("");
-        OBJ_pds.TXT_nombre.setText("");
-        OBJ_pds.CBX_familia.setSelectedIndex(0);
-    }
+    }   
 
     public boolean valida_campos(pnl_datos_subfamilia OBJ_pds) {
         boolean resp = false;
@@ -66,7 +66,7 @@ public class evt_datos_subfamilia {
         return resp;
     }
 
-    public void setea_campos(BEAN_subfamilia OBJ_bsf, pnl_datos_subfamilia OBJ_pds,cbx_familia cbx_familia) {
+    public void setea_campos(BEAN_subfamilia OBJ_bsf, pnl_datos_subfamilia OBJ_pds, cbx_familia cbx_familia) {
         try {
             OBJ_bsf.setCodigo_subfamilia(go_fnc_operaciones_campos.get_campo_str(OBJ_pds.TXT_codigo));
             OBJ_bsf.setNombre_subfamilia(go_fnc_operaciones_campos.get_campo_str(OBJ_pds.TXT_nombre));

@@ -30,7 +30,7 @@ public class DAO_rol_menu {
             } else {
                 go_fnc_mensaje.GET_mensaje(gi_id_rol, ls_modulo, ls_capa, ls_clase, "SLT_rol_menu_x_idrol", "USUARIO NO CUENTA CON MODULOS ACTIVOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(gi_id_rol, ls_modulo, ls_capa, ls_clase, "SLT_rol_menu_x_idrol", e.getMessage());
         }
@@ -48,7 +48,7 @@ public class DAO_rol_menu {
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_rol_menu_x_idrol_op", "USUARIO NO CUENTA CON OPCIONES ACTIVAS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_rol_menu_x_idrol_op", e.getMessage());
         }
@@ -66,7 +66,7 @@ public class DAO_rol_menu {
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_status_x_rol_menu", "USUARIO " + gs_nombre_rol + " NO CUENTA CON ACCESO AL FORMULARIO");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_status_x_rol_menu", e.getMessage());
         }
@@ -84,7 +84,7 @@ public class DAO_rol_menu {
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_status_op_x_idrol", "NO SE ENCONTRARON DATOS REGISTRADOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_status_op_x_idrol", e.getMessage());
         }

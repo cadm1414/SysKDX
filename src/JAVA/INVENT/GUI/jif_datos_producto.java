@@ -8,6 +8,7 @@ import JAVA.INVENT.BEAN.BEAN_producto;
 import JAVA.INVENT.LOGICA.evt_datos_producto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
@@ -44,13 +45,24 @@ public class jif_datos_producto extends javax.swing.JInternalFrame {
 
         lo_evt_opciones_2.evento_click(lo_pnl_opciones_2, Listener);
         lo_evt_opciones_2.evento_press(lo_pnl_opciones_2, KeyEvnt);
-        
+
         lo_evt_datos_producto.evento_press(lo_pnl_datos_producto, KeyEvnt);
+        lo_pnl_datos_producto.CBX_clase.addItemListener(ItemEvent);
     }
 
     private void activa_botones() {
         lb_valor_op = lo_recupera_valor_op.recupera(ls_modulo, ls_opcion);
         lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+    }
+
+    private void valida_clase() {
+        if (lo_pnl_datos_producto.CBX_clase.getSelectedIndex() == 0) {
+            lo_pnl_datos_producto.CBX_detraccion.setSelectedIndex(0);
+            lo_pnl_datos_producto.CBX_detraccion.setEnabled(true);
+        } else {
+            lo_pnl_datos_producto.CBX_detraccion.setSelectedIndex(1);
+            lo_pnl_datos_producto.CBX_detraccion.setEnabled(false);
+        }
     }
 
     private void get_descripcion_prducto(String codigo) {
@@ -78,6 +90,7 @@ public class jif_datos_producto extends javax.swing.JInternalFrame {
         li_tipo_operacion = 0;
         lo_evt_opciones_2.activa_btn_opciones(1, lo_pnl_opciones_2, lb_valor_op);
         lo_evt_datos_producto.activa_campos(0, lo_pnl_datos_producto, true);
+        valida_clase();
     }
 
     private void evt_buscar() {
@@ -97,7 +110,12 @@ public class jif_datos_producto extends javax.swing.JInternalFrame {
     private void evt_editar() {
         li_tipo_operacion = 1;
         lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
-        lo_evt_datos_producto.activa_campos(0, lo_pnl_datos_producto, true);
+        int cant = go_dao_articulo.SLT_cta_articulo_x_producto(ls_codigo);
+        if (cant == 0) {
+            lo_evt_datos_producto.activa_campos(0, lo_pnl_datos_producto, true);
+        } else {
+            lo_evt_datos_producto.activa_campos(1, lo_pnl_datos_producto, true);
+        }
     }
 
     private void evt_eliminar() {
@@ -164,7 +182,7 @@ public class jif_datos_producto extends javax.swing.JInternalFrame {
             lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
         }
     }
-    
+
     public void evt_reporte() {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("empresa", go_bean_general.getNombre_reporte());
@@ -254,10 +272,18 @@ public class jif_datos_producto extends javax.swing.JInternalFrame {
                     lo_pnl_datos_producto.TXT_dias.requestFocus();
                 }
                 if (ke.getSource() == lo_pnl_datos_producto.TXT_dias) {
-                    if(!go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_producto.TXT_dias)){
+                    if (!go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_producto.TXT_dias)) {
                         lo_pnl_datos_producto.TXT_dias.setText("0");
                     }
-                    lo_pnl_datos_producto.CBX_detraccion.requestFocus();
+                    if (lo_pnl_datos_producto.TXT_nombre.isEnabled()) {
+                        if (lo_pnl_datos_producto.CBX_detraccion.isEnabled()) {
+                            lo_pnl_datos_producto.CBX_detraccion.requestFocus();
+                        } else {
+                            lo_pnl_datos_producto.CBX_percepcion.requestFocus();
+                        }
+                    } else {
+                        lo_pnl_datos_producto.CBX_estado.requestFocus();
+                    }
                 }
                 if (ke.getSource() == lo_pnl_datos_producto.CBX_detraccion) {
                     lo_pnl_datos_producto.CBX_percepcion.requestFocus();
@@ -275,7 +301,16 @@ public class jif_datos_producto extends javax.swing.JInternalFrame {
         public void keyReleased(KeyEvent ke) {
 
         }
-    };  
+    };
+
+    ItemListener ItemEvent = new ItemListener() {
+        @Override
+        public void itemStateChanged(java.awt.event.ItemEvent ie) {
+            if (ie.getSource() == lo_pnl_datos_producto.CBX_clase) {
+                valida_clase();
+            }
+        }
+    };
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

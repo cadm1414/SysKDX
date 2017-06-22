@@ -20,13 +20,13 @@ public class DAO_subfamilia {
             if (lq_rs != null) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_codigo_subfamilia", e.getMessage());
         }
         return null;
     }
-    
+
     public ResultSet SLT_grid_subfamilia() {
         try {
             lq_stm = go_conexion_db.crearStatement();
@@ -36,13 +36,13 @@ public class DAO_subfamilia {
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_subfamilia", e.getMessage());
         }
         return null;
     }
-    
+
     public ResultSet SLT_datos_subfamilia(String codigo_familia) {
         try {
             lq_stm = go_conexion_db.crearStatement();
@@ -52,13 +52,13 @@ public class DAO_subfamilia {
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_subfamilia", e.getMessage());
         }
         return null;
     }
-    
+
     public boolean DLT_subfamilia(String codigo_subfamilia) throws SQLException {
         boolean resp = false;
         try {
@@ -70,49 +70,65 @@ public class DAO_subfamilia {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "DLT_subfamilia", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_subfamilia", e.getMessage());
         }
         return resp;
     }
-    
+
     public boolean IST_subfamilia(BEAN_subfamilia OBJ_bsf) throws SQLException {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from ist_subfamilia('" + OBJ_bsf.getCodigo_subfamilia() + "','" + OBJ_bsf.getNombre_subfamilia() +"','"+OBJ_bsf.getCodigo_familia() +"')";
+            String SQL = "select * from ist_subfamilia('" + OBJ_bsf.getCodigo_subfamilia() + "','" + OBJ_bsf.getNombre_subfamilia() + "','" + OBJ_bsf.getCodigo_familia() + "')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_subfamilia", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_subfamilia", e.getMessage());
         }
         return resp;
     }
-    
+
     public boolean UPD_subfamilia(BEAN_subfamilia OBJ_bsf) throws SQLException {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from upd_subfamilia('" + OBJ_bsf.getCodigo_subfamilia() + "','" + OBJ_bsf.getNombre_subfamilia() +"','"+OBJ_bsf.getCodigo_familia() +"')";
+            String SQL = "select * from upd_subfamilia('" + OBJ_bsf.getCodigo_subfamilia() + "','" + OBJ_bsf.getNombre_subfamilia() + "','" + OBJ_bsf.getCodigo_familia() + "')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_subfamilia", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_subfamilia", e.getMessage());
         }
         return resp;
+    }
+
+    public ResultSet SLT_cbx_subfamilia_x_familia(String codigo) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_cbx_subfamilia_x_familia('" + codigo + "') "
+                    + "as (codigo_subfamilia character(4),nombre_subfamilia character varying(60))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cbx_subfamilia_x_familia", e.getMessage());
+        }
+        return null;
     }
 }

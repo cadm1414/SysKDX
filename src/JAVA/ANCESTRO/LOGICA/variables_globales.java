@@ -42,14 +42,19 @@ import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
+import JAVA.INVENT.DAO.DAO_articulo;
 import JAVA.INVENT.DAO.DAO_familia;
+import JAVA.INVENT.DAO.DAO_grupo_detraccion;
+import JAVA.INVENT.DAO.DAO_grupo_percepcion;
 import JAVA.INVENT.DAO.DAO_marca;
 import JAVA.INVENT.DAO.DAO_producto;
 import JAVA.INVENT.DAO.DAO_subfamilia;
+import JAVA.INVENT.GUI.dlg_busq_articulo;
 import JAVA.INVENT.GUI.dlg_busq_familia;
 import JAVA.INVENT.GUI.dlg_busq_marca;
 import JAVA.INVENT.GUI.dlg_busq_producto;
 import JAVA.INVENT.GUI.dlg_busq_subfamilia;
+import JAVA.INVENT.GUI.jif_datos_articulo;
 import JAVA.INVENT.GUI.jif_datos_familia;
 import JAVA.INVENT.GUI.jif_datos_marca;
 import JAVA.INVENT.GUI.jif_datos_producto;
@@ -110,6 +115,9 @@ public class variables_globales {
     public static DAO_familia go_dao_familia = new DAO_familia();
     public static DAO_subfamilia go_dao_subfamilia = new DAO_subfamilia();
     public static DAO_unidad_medida go_dao_unidad_medida = new DAO_unidad_medida();
+    public static DAO_grupo_detraccion go_dao_grupo_detraccion = new DAO_grupo_detraccion();
+    public static DAO_grupo_percepcion go_dao_grupo_percepcion = new DAO_grupo_percepcion();
+    public static DAO_articulo go_dao_articulo = new DAO_articulo();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -142,6 +150,7 @@ public class variables_globales {
     public static dlg_busq_familia go_dlg_busq_familia;
     public static dlg_busq_subfamilia go_dlg_busq_subfamilia;
     public static dlg_busq_unidad_medida go_dlg_busq_unidad_medida;
+    public static dlg_busq_articulo go_dlg_busq_articulo;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -154,6 +163,7 @@ public class variables_globales {
     public static jif_datos_familia go_jif_datos_familia;
     public static jif_datos_subfamilia go_jif_datos_subfamilia;
     public static jif_datos_unidad_medida go_jif_datos_unidad_medida;
+    public static jif_datos_articulo go_jif_datos_articulo;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

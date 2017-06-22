@@ -18,6 +18,10 @@ public class evt_datos_marca {
                 OBJ_pdm.CBX_estado.setEnabled(valor);
                 OBJ_pdm.TXT_nombre.requestFocus();
                 break;
+            case 1:
+                OBJ_pdm.CBX_estado.setEnabled(valor);
+                OBJ_pdm.CBX_estado.requestFocus();
+                break;
         }
     }
 

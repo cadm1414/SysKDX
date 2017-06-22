@@ -21,7 +21,7 @@ public class DAO_ubigeo {
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_ubigeo", "NO EXISTEN DATOS DE UBIGEO");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_ubigeo", e.getMessage());
         }
@@ -39,7 +39,7 @@ public class DAO_ubigeo {
             }else{
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_descripcion_ubigeo_x_codigo", "NO EXISTE UBIGEO");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_descripcion_ubigeo_x_codigo", e.getMessage());
         }
@@ -57,7 +57,7 @@ public class DAO_ubigeo {
                 cont = lq_rs.getInt(1);
                 return cont;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cta_ubigeo_x_codigo", e.getMessage());
         }

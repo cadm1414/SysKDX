@@ -97,7 +97,12 @@ public class jif_datos_marca extends javax.swing.JInternalFrame {
     private void evt_editar() {
         li_tipo_operacion = 1;
         lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
-        lo_evt_datos_marca.activa_campos(0, lo_pnl_datos_marca, true);
+        int cant = go_dao_articulo.SLT_cta_articulo_x_marca(ls_codigo);
+        if (cant == 0) {
+            lo_evt_datos_marca.activa_campos(0, lo_pnl_datos_marca, true);
+        } else {
+            lo_evt_datos_marca.activa_campos(1, lo_pnl_datos_marca, true);
+        }
     }
 
     private void evt_eliminar() {

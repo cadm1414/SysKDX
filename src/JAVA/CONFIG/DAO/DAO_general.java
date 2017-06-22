@@ -40,7 +40,7 @@ public class DAO_general {
             } else {
                 go_fnc_mensaje.GET_mensaje(gi_id_rol, ls_modulo, ls_capa, ls_clase, "SLT_datos", "TABLA NO CONTIENE DATOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(gi_id_rol, ls_modulo, ls_capa, ls_clase, "SLT_datos", e.getMessage());
         }
@@ -56,7 +56,7 @@ public class DAO_general {
                 resp = lq_rs.getInt(1);
                 return resp;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "SLT_cta_datos_general", e.getMessage());
         }
@@ -77,7 +77,7 @@ public class DAO_general {
                     go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "INS_general", "NO SE ACTUALIZO BASE DE DATOS");
                 }
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "INS_general", e.getMessage());
             lq_stm.getConnection().rollback();
@@ -93,7 +93,7 @@ public class DAO_general {
                 lq_stm.getConnection().commit();
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_general", "SE ACTUALIZO BASE DE DATOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_general", e.getMessage());
             lq_stm.getConnection().rollback();

@@ -23,6 +23,11 @@ public class evt_datos_producto {
                 OBJ_pdp.CBX_estado.setEnabled(valor);
                 OBJ_pdp.TXT_nombre.requestFocus();
                 break;
+            case 1:
+                OBJ_pdp.TXT_dias.setEnabled(valor);
+                OBJ_pdp.CBX_estado.setEnabled(valor);
+                OBJ_pdp.TXT_dias.requestFocus();
+                break;
         }
     }
 

@@ -5,7 +5,13 @@ import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.CONFIG.LOGICA.cbx_rol;
 import JAVA.CONFIG.LOGICA.cbx_tabla_sunat;
+import JAVA.CONFIG.LOGICA.cbx_unidad_medida;
 import JAVA.INVENT.LOGICA.cbx_familia;
+import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
+import JAVA.INVENT.LOGICA.cbx_grupo_percepcion;
+import JAVA.INVENT.LOGICA.cbx_marca;
+import JAVA.INVENT.LOGICA.cbx_producto;
+import JAVA.INVENT.LOGICA.cbx_subfamilia;
 import java.sql.ResultSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -19,6 +25,12 @@ public class cbx_trato_datos {
     cbx_almacen lo_cbx_almacen;
     cbx_tabla_sunat lo_cbx_tabla_sunat;
     cbx_familia lo_cbx_familia;
+    cbx_producto lo_cbx_producto;
+    cbx_marca lo_cbx_marca;
+    cbx_unidad_medida lo_cbx_unidad_medida;
+    cbx_subfamilia lo_cbx_subfamilia;
+    cbx_grupo_detraccion lo_cbx_grupo_detraccion;
+    cbx_grupo_percepcion lo_cbx_grupo_percepcion;
 
     /*VALORES OPERACION
     0 = cbx_moneda
@@ -27,6 +39,12 @@ public class cbx_trato_datos {
     3 = cx_almacen
     4 = cbx_tabla_sunat
     5 = cbx_familia
+    6 = cbx_producto
+    7 = cbx_marca
+    8 = cbx_unidad_medida
+    9 = cbx_subfamilia
+    10 = cbx_grupo_detraccion
+    11 = cbx_grupo_percepcion
      */
     public void recupera_valor(int op, ResultSet rs, JComboBox cbx_combo) {
         switch (op) {
@@ -90,6 +108,66 @@ public class cbx_trato_datos {
                 } catch (Exception e) {
                 }
                 break;
+            case 6:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_producto(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
+            case 7:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_marca(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
+            case 8:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_unidad_medida(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
+            case 9:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_subfamilia(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
+            case 10:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_grupo_detraccion(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
+            case 11:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_grupo_percepcion(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -145,6 +223,60 @@ public class cbx_trato_datos {
                 for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
                     lo_cbx_familia = (cbx_familia) cbx_combo.getItemAt(i);
                     codigo = lo_cbx_familia.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 6:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_producto = (cbx_producto) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_producto.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 7:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_marca = (cbx_marca) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_marca.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 8:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_unidad_medida = (cbx_unidad_medida) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_unidad_medida.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 9:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_subfamilia = (cbx_subfamilia) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_subfamilia.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 10:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_grupo_detraccion = (cbx_grupo_detraccion) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_grupo_detraccion.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 11:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_grupo_percepcion = (cbx_grupo_percepcion) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_grupo_percepcion.getID();
                     if (codigo.equalsIgnoreCase(dato.trim())) {
                         cbx_combo.setSelectedIndex(i);
                     }

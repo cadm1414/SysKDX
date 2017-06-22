@@ -56,6 +56,7 @@ public class evt_opciones_2 {
                 OBJ_pop.BTN_guardar.setEnabled(false);
                 OBJ_pop.BTN_reporte.setEnabled(valor_op[7]);
                 OBJ_pop.BTN_cancelar.setEnabled(false);
+                OBJ_pop.BTN_nuevo.requestFocus();
                 break;
             case 3:
                 OBJ_pop.BTN_nuevo.setEnabled(false);
