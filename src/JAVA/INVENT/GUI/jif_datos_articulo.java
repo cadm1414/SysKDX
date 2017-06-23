@@ -195,7 +195,6 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
         }
-
     }
 
     private void genera_codigo() {
@@ -282,7 +281,7 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
             case 0:
                 if (lo_evt_datos_articulo.valida_campos(lo_pnl_datos_articulo, ls_afecto_detraccion, ls_afecto_percepcion)) {
                     try {
-                        lo_evt_datos_articulo.setea_campos(lo_bean_articulo, lo_pnl_datos_articulo, lo_cbx_familia, lo_cbx_marca, lo_cbx_producto, lo_cbx_unidad, lo_cbx_um_bulto, lo_cbx_existencia,  lo_cbx_grupo_detraccion,  lo_cbx_grupo_percepcion,  lo_cbx_subfamilia);
+                        lo_evt_datos_articulo.setea_campos(lo_bean_articulo, lo_pnl_datos_articulo, lo_cbx_familia, lo_cbx_marca, lo_cbx_producto, lo_cbx_unidad, lo_cbx_um_bulto, lo_cbx_existencia, lo_cbx_grupo_detraccion, lo_cbx_grupo_percepcion, lo_cbx_subfamilia);
                         if (go_dao_articulo.IST_articulo(lo_bean_articulo)) {
                             lo_evt_datos_articulo.limpia_datos(lo_pnl_datos_articulo);
                             lo_evt_datos_articulo.activa_campos(0, lo_pnl_datos_articulo, false);
@@ -290,6 +289,24 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
                         }
                     } catch (Exception e) {
                     }
+                }
+                break;
+            case 1:
+                if (lo_evt_datos_articulo.verifica_cambios(lo_bean_articulo, lo_pnl_datos_articulo, lo_cbx_unidad, lo_cbx_existencia, lo_cbx_grupo_detraccion, lo_cbx_grupo_percepcion, lo_cbx_familia, lo_cbx_subfamilia)) {
+                    if (lo_evt_datos_articulo.valida_campos(lo_pnl_datos_articulo, ls_afecto_detraccion, ls_afecto_percepcion)) {
+                        try {
+                            lo_evt_datos_articulo.setea_campos(lo_bean_articulo, lo_pnl_datos_articulo, lo_cbx_familia, lo_cbx_marca, lo_cbx_producto, lo_cbx_unidad, lo_cbx_um_bulto, lo_cbx_existencia, lo_cbx_grupo_detraccion, lo_cbx_grupo_percepcion, lo_cbx_subfamilia);
+                            if (go_dao_articulo.UPD_articulo(lo_bean_articulo)) {
+                                lo_evt_datos_articulo.limpia_datos(lo_pnl_datos_articulo);
+                                lo_evt_datos_articulo.activa_campos(0, lo_pnl_datos_articulo, false);
+                                lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+
+                } else {
+                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "NO SE A REALIZADO CAMBIOS");
                 }
                 break;
         }

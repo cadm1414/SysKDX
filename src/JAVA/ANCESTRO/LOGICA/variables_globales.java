@@ -55,6 +55,7 @@ import JAVA.INVENT.GUI.dlg_busq_marca;
 import JAVA.INVENT.GUI.dlg_busq_producto;
 import JAVA.INVENT.GUI.dlg_busq_subfamilia;
 import JAVA.INVENT.GUI.jif_datos_articulo;
+import JAVA.INVENT.GUI.jif_datos_articulo_costo;
 import JAVA.INVENT.GUI.jif_datos_familia;
 import JAVA.INVENT.GUI.jif_datos_marca;
 import JAVA.INVENT.GUI.jif_datos_producto;
@@ -164,6 +165,7 @@ public class variables_globales {
     public static jif_datos_subfamilia go_jif_datos_subfamilia;
     public static jif_datos_unidad_medida go_jif_datos_unidad_medida;
     public static jif_datos_articulo go_jif_datos_articulo;
+    public static jif_datos_articulo_costo go_jif_datos_articulo_costo;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

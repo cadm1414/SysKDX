@@ -147,4 +147,23 @@ public class DAO_articulo {
         }
         return resp;
     }
+    
+    public boolean UPD_articulo(BEAN_articulo OBJ_bar) throws SQLException {
+        boolean resp = false;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from upd_articulo('"+OBJ_bar.getCodigo_articulo()+"','"+OBJ_bar.getNombre_articulo()+"','"+OBJ_bar.getCaracteristica()+"',"+OBJ_bar.getTara()+",'"+OBJ_bar.getClase_producto()+"','"+OBJ_bar.getCodigo_barra()+"','"+OBJ_bar.getCodigo_producto()+"','"+OBJ_bar.getCodigo_marca()+"','"+OBJ_bar.getCodigo_familia()+"','"+OBJ_bar.getCodigo_subfamilia()+"','"+OBJ_bar.getCodigo_unidad()+"','"+OBJ_bar.getTipo_operacion()+"','"+OBJ_bar.getStatus()+"','"+OBJ_bar.getObservacion()+"','"+OBJ_bar.getCodigo_percepcion()+"','"+OBJ_bar.getCodigo_detraccion()+"','"+OBJ_bar.getAfecto_igv()+"','"+OBJ_bar.getAfecto_detraccion()+"','"+OBJ_bar.getAfecto_percepcion()+"','"+OBJ_bar.getBulto_um()+"','005','"+OBJ_bar.getCodigo_sunat()+"')";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                lq_stm.getConnection().commit();
+                go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_articulo", "SE ACTUALIZO BASE DE DATOS");
+                resp = true;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_articulo", e.getMessage());
+        }
+        return resp;
+    }
 }

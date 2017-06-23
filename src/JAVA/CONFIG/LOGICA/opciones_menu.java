@@ -68,10 +68,13 @@ public class opciones_menu {
                 if (dato.equalsIgnoreCase("SUBFAMILIA")) {
                     go_muestra_jif_invent.muestra_jif_subfamilia();
                     resp = "I";
-                }
-                
+                }                
                 if (dato.equalsIgnoreCase("ITEM")) {
                     go_muestra_jif_invent.muestra_jif_articulo();
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("ARTICULO")) {
+                    go_muestra_jif_invent.muestra_jif_articulo_costo();
                     resp = "I";
                 }
                 break;                

@@ -209,6 +209,63 @@ public class evt_datos_articulo {
         }
     }
 
+    public boolean verifica_cambios(BEAN_articulo OBJ_bar, pnl_datos_articulo OBJ_pda, cbx_unidad_medida cbx_unidad, cbx_tabla_sunat cbx_existencia, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_grupo_percepcion cbx_grupo_percepcion, cbx_familia cbx_familia, cbx_subfamilia cbx_subfamilia) {
+        boolean resp = false;
+        if (OBJ_bar.getCaracteristica().equalsIgnoreCase(OBJ_pda.TXT_caracteristica.getText().trim())) {
+            if (OBJ_bar.getCodigo_unidad().equalsIgnoreCase(cbx_unidad.getID())) {
+                if (OBJ_bar.getTara() == Double.parseDouble(OBJ_pda.TXT_tara.getText().trim())) {
+                    if (OBJ_bar.getStatus().equalsIgnoreCase(OBJ_pda.CBX_estado.getSelectedIndex() + "")) {
+                        if (OBJ_bar.getAfecto_igv().equalsIgnoreCase(OBJ_pda.CBX_afecto.getSelectedIndex() + "")) {
+                            if (OBJ_bar.getCodigo_sunat().equalsIgnoreCase(cbx_existencia.getID())) {
+                                if (OBJ_bar.getCodigo_detraccion().equalsIgnoreCase(cbx_grupo_detraccion.getID())) {
+                                    if (OBJ_bar.getCodigo_percepcion().equalsIgnoreCase(cbx_grupo_percepcion.getID())) {
+                                        if (OBJ_bar.getTipo_operacion().equalsIgnoreCase(OBJ_pda.CBX_operacion.getSelectedIndex() + "")) {
+                                            if (OBJ_bar.getCodigo_barra().equalsIgnoreCase(OBJ_pda.TXT_codigo_barra.getText().trim())) {
+                                                if (OBJ_bar.getCodigo_familia().equalsIgnoreCase(cbx_familia.getID())) {
+                                                    if (OBJ_bar.getCodigo_subfamilia().equalsIgnoreCase(cbx_subfamilia.getID())) {
+                                                        if (OBJ_bar.getObservacion().equalsIgnoreCase(OBJ_pda.TXT_observacion.getText().trim())) {
+                                                        } else {
+                                                            resp = true;
+                                                        }
+                                                    } else {
+                                                        resp = true;
+                                                    }
+                                                } else {
+                                                    resp = true;
+                                                }
+                                            } else {
+                                                resp = true;
+                                            }
+                                        } else {
+                                            resp = true;
+                                        }
+                                    } else {
+                                        resp = true;
+                                    }
+                                } else {
+                                    resp = true;
+                                }
+                            } else {
+                                resp = true;
+                            }
+                        } else {
+                            resp = true;
+                        }
+                    } else {
+                        resp = true;
+                    }
+                } else {
+                    resp = true;
+                }
+            } else {
+                resp = true;
+            }
+        } else {
+            resp = true;
+        }
+        return resp;
+    }
+
     public KeyListener evento_press(pnl_datos_articulo OBJ_pda, KeyListener KeyEvnt) {
         OBJ_pda.TXT_codigo.addKeyListener(KeyEvnt);
         OBJ_pda.TXT_nombre.addKeyListener(KeyEvnt);
