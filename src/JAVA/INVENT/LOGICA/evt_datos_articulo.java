@@ -61,6 +61,16 @@ public class evt_datos_articulo {
                 OBJ_pda.TXT_observacion.setEnabled(valor);
                 OBJ_pda.TXT_caracteristica.requestFocus();
                 break;
+            case 2:
+                OBJ_pda.CBX_afecto.setEnabled(valor);
+                OBJ_pda.CBX_existencia.setEnabled(valor);
+                OBJ_pda.CBX_operacion.setEnabled(valor);
+                OBJ_pda.TXT_codigo_barra.setEnabled(valor);
+                OBJ_pda.CBX_familia.setEnabled(valor);
+                OBJ_pda.CBX_subfamilia.setEnabled(valor);
+                OBJ_pda.TXT_observacion.setEnabled(valor);
+                OBJ_pda.TXT_caracteristica.requestFocus();
+                OBJ_pda.CBX_afecto.requestFocus();
         }
     }
 

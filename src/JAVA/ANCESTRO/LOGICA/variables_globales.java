@@ -3,24 +3,11 @@ package JAVA.ANCESTRO.LOGICA;
 import JAVA.CONFIG.LOGICA.muestra_reporte_config;
 import JAVA.CONFIG.LOGICA.muestra_pestania_config;
 import JAVA.CONFIG.LOGICA.muestra_jif_config;
-import JAVA.ANCESTRO.DAO.DAO_periodo_empresa;
-import JAVA.ANCESTRO.DAO.DAO_registro_empresa;
+import JAVA.ANCESTRO.DAO.*;
 import JAVA.CONFIG.GUI.frm_datos_rol_menu;
 import JAVA.ANCESTRO.GUI.frm_principal;
 import JAVA.CONFIG.BEAN.BEAN_general;
-import JAVA.CONFIG.DAO.DAO_almacen;
-import JAVA.CONFIG.DAO.DAO_general;
-import JAVA.CONFIG.DAO.DAO_menu;
-import JAVA.CONFIG.DAO.DAO_moneda;
-import JAVA.CONFIG.DAO.DAO_rol;
-import JAVA.CONFIG.DAO.DAO_rol_menu;
-import JAVA.CONFIG.DAO.DAO_sucursal;
-import JAVA.CONFIG.DAO.DAO_taba_sunat;
-import JAVA.CONFIG.DAO.DAO_tipo_movimiento;
-import JAVA.CONFIG.DAO.DAO_ubigeo;
-import JAVA.CONFIG.DAO.DAO_unidad_medida;
-import JAVA.CONFIG.DAO.DAO_usuario;
-import JAVA.CONFIG.DAO.DAO_usuario_permisos;
+import JAVA.CONFIG.DAO.*;
 import JAVA.CONFIG.GUI.dlg_busq_almacen;
 import JAVA.CONFIG.GUI.dlg_busq_rol;
 import JAVA.CONFIG.GUI.dlg_busq_sucursal;
@@ -42,14 +29,9 @@ import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
-import JAVA.INVENT.DAO.DAO_articulo;
-import JAVA.INVENT.DAO.DAO_familia;
-import JAVA.INVENT.DAO.DAO_grupo_detraccion;
-import JAVA.INVENT.DAO.DAO_grupo_percepcion;
-import JAVA.INVENT.DAO.DAO_marca;
-import JAVA.INVENT.DAO.DAO_producto;
-import JAVA.INVENT.DAO.DAO_subfamilia;
+import JAVA.INVENT.DAO.*;
 import JAVA.INVENT.GUI.dlg_busq_articulo;
+import JAVA.INVENT.GUI.dlg_busq_articulo_costo;
 import JAVA.INVENT.GUI.dlg_busq_familia;
 import JAVA.INVENT.GUI.dlg_busq_marca;
 import JAVA.INVENT.GUI.dlg_busq_producto;
@@ -119,6 +101,7 @@ public class variables_globales {
     public static DAO_grupo_detraccion go_dao_grupo_detraccion = new DAO_grupo_detraccion();
     public static DAO_grupo_percepcion go_dao_grupo_percepcion = new DAO_grupo_percepcion();
     public static DAO_articulo go_dao_articulo = new DAO_articulo();
+    public static DAO_articulo_costo go_dao_articulo_costo = new DAO_articulo_costo();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -152,6 +135,7 @@ public class variables_globales {
     public static dlg_busq_subfamilia go_dlg_busq_subfamilia;
     public static dlg_busq_unidad_medida go_dlg_busq_unidad_medida;
     public static dlg_busq_articulo go_dlg_busq_articulo;
+    public static dlg_busq_articulo_costo go_dlg_busq_articulo_costo;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

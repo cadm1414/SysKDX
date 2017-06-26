@@ -137,6 +137,7 @@ public class dlg_busq_familia extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
 
         TXT_dato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_dato.setNextFocusableComponent(TXT_dato);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

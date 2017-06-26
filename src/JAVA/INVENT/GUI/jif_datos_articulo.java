@@ -151,7 +151,6 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
                 lo_evt_datos_articulo.muestra_datos(lo_pnl_datos_articulo, lo_bean_articulo);
             }
         } catch (Exception e) {
-            System.out.println(e);
         }
     }
 
@@ -240,10 +239,15 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
         }
     }
 
-    private void evt_editar() {
+    private void evt_editar() {        
         li_tipo_operacion = 1;
         lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
-        lo_evt_datos_articulo.activa_campos(1, lo_pnl_datos_articulo, true);
+        int cant = go_dao_articulo_costo.SLT_cta_articulo_costo_x_articulo(ls_codigo);
+        if (cant == 0) {
+            lo_evt_datos_articulo.activa_campos(1, lo_pnl_datos_articulo, true);
+        }else{
+            lo_evt_datos_articulo.activa_campos(2, lo_pnl_datos_articulo, true);
+        }        
     }
 
     private void evt_eliminar() {
@@ -261,6 +265,7 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
 
     private void evt_guardar() {
         lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
+        
         lo_cbx_familia = (cbx_familia) lo_pnl_datos_articulo.CBX_familia.getSelectedItem();
         lo_cbx_existencia = (cbx_tabla_sunat) lo_pnl_datos_articulo.CBX_existencia.getSelectedItem();
         lo_cbx_producto = (cbx_producto) lo_pnl_datos_articulo.CBX_producto.getSelectedItem();
