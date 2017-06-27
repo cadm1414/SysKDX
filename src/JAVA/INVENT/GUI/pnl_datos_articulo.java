@@ -1,10 +1,15 @@
 package JAVA.INVENT.GUI;
 
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+import java.text.DecimalFormatSymbols;
 
 public class pnl_datos_articulo extends javax.swing.JPanel {
 
+    public static DecimalFormatSymbols simbolos = new DecimalFormatSymbols(); 
+    
     public pnl_datos_articulo() {
+        simbolos.setDecimalSeparator('.');
+        simbolos.setGroupingSeparator(',');
         initComponents();
         TXT_nombre.setDocument(new fnc_txt_mayuscula());
         TXT_observacion.setDocument(new fnc_txt_mayuscula());
@@ -152,6 +157,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         jLabel16.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jLabel16.setText(":");
 
+        TXT_tara.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.000",simbolos))));
         TXT_tara.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         TXT_tara.setEnabled(false);
         TXT_tara.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);

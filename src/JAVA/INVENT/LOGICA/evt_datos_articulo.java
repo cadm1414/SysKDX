@@ -23,7 +23,7 @@ public class evt_datos_articulo {
                 OBJ_pda.TXT_caracteristica.setEnabled(valor);
                 OBJ_pda.CBX_unidad_medida.setEnabled(valor);
                 OBJ_pda.CBX_um_bulto.setEnabled(valor);
-                //OBJ_pda.TXT_tara.setEnabled(valor);
+                OBJ_pda.TXT_tara.setEnabled(valor);
                 OBJ_pda.CBX_estado.setEnabled(valor);
                 OBJ_pda.CBX_afecto.setEnabled(valor);
                 OBJ_pda.CBX_existencia.setEnabled(valor);

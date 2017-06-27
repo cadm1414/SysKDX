@@ -13,9 +13,11 @@ public class pnl_aceptar_cancelar extends javax.swing.JPanel {
         BTN_aceptar = new javax.swing.JButton();
         BTN_cancelar = new javax.swing.JButton();
 
-        BTN_aceptar.setText("Aceptar");
+        BTN_aceptar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        BTN_aceptar.setText("ACEPTAR");
 
-        BTN_cancelar.setText("Cancelar");
+        BTN_cancelar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        BTN_cancelar.setText("CANCELAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

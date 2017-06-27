@@ -77,6 +77,10 @@ public class opciones_menu {
                     go_muestra_jif_invent.muestra_jif_articulo_costo();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("SALDOS INICIALES")) {
+                    go_muestra_jif_invent.muestra_jif_saldos_iniciales();
+                    resp = "I";
+                }
                 break;                
         }
         return resp;

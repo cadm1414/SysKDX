@@ -163,11 +163,13 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
         if (lo_cbx_um_bulto.getID().equalsIgnoreCase("0007")) {
             ls_letra = "C";
             lo_pnl_datos_articulo.TXT_tara.setEnabled(true);
+            lo_pnl_datos_articulo.TXT_tara.setText("");
         } else {
             ls_letra = "B";
             lo_pnl_datos_articulo.TXT_tara.setEnabled(false);
             if (li_tipo_operacion == 0) {
-                lo_pnl_datos_articulo.TXT_tara.setText("");
+                lo_pnl_datos_articulo.TXT_tara.setEnabled(false);
+                lo_pnl_datos_articulo.TXT_tara.setText("0.000");
             }
         }
     }

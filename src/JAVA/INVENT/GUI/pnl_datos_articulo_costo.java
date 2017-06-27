@@ -2,14 +2,19 @@
 package JAVA.INVENT.GUI;
 
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+import java.text.DecimalFormatSymbols;
 
 public class pnl_datos_articulo_costo extends javax.swing.JPanel {
 
-    public pnl_datos_articulo_costo() {
+    public static DecimalFormatSymbols simbolos = new DecimalFormatSymbols(); 
+    
+    public pnl_datos_articulo_costo() {        
+        simbolos.setDecimalSeparator('.');
+        simbolos.setGroupingSeparator(',');
         initComponents();
         TXT_nombre.setDocument(new fnc_txt_mayuscula());
         TXT_nombre_entidad.setDocument(new fnc_txt_mayuscula());
-        TXT_codigo_entidad.setDocument(new fnc_txt_mayuscula());
+        TXT_codigo_entidad.setDocument(new fnc_txt_mayuscula());        
     }
     
     @SuppressWarnings("unchecked")
@@ -148,6 +153,7 @@ public class pnl_datos_articulo_costo extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel17.setText(":");
 
+        TXT_costo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00000",simbolos))));
         TXT_costo.setEnabled(false);
         TXT_costo.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_costo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N

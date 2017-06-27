@@ -7,6 +7,7 @@ import JAVA.INVENT.GUI.jif_datos_familia;
 import JAVA.INVENT.GUI.jif_datos_marca;
 import JAVA.INVENT.GUI.jif_datos_producto;
 import JAVA.INVENT.GUI.jif_datos_subfamilia;
+import JAVA.INVENT.GUI.jif_saldos_iniciales;
 import java.beans.PropertyVetoException;
 
 public class muestra_jif_invent {
@@ -133,6 +134,27 @@ public class muestra_jif_invent {
             go_jif_datos_articulo_costo = new jif_datos_articulo_costo();
             go_frm_principal.JDP_principal.add(go_jif_datos_articulo_costo);
             go_jif_datos_articulo_costo.show();
+        }
+    }
+    
+    public void muestra_jif_saldos_iniciales() throws PropertyVetoException {
+        if (go_jif_saldos_iniciales != null) {
+            if (go_jif_saldos_iniciales.isClosed()) {
+                go_jif_saldos_iniciales = new jif_saldos_iniciales();
+                go_frm_principal.JDP_principal.add(go_jif_saldos_iniciales);
+                go_jif_saldos_iniciales.show();
+
+            } else if (go_jif_saldos_iniciales.isIcon()) {
+                go_jif_saldos_iniciales.setIcon(false);
+            } else if (!go_jif_saldos_iniciales.isShowing()) {
+                go_jif_saldos_iniciales = new jif_saldos_iniciales();
+                go_frm_principal.JDP_principal.add(go_jif_saldos_iniciales);
+                go_jif_saldos_iniciales.show();
+            }
+        } else {
+            go_jif_saldos_iniciales = new jif_saldos_iniciales();
+            go_frm_principal.JDP_principal.add(go_jif_saldos_iniciales);
+            go_jif_saldos_iniciales.show();
         }
     }
 }

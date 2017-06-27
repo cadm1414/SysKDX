@@ -36,12 +36,14 @@ import JAVA.INVENT.GUI.dlg_busq_familia;
 import JAVA.INVENT.GUI.dlg_busq_marca;
 import JAVA.INVENT.GUI.dlg_busq_producto;
 import JAVA.INVENT.GUI.dlg_busq_subfamilia;
+import JAVA.INVENT.GUI.dlg_ini_almacen;
 import JAVA.INVENT.GUI.jif_datos_articulo;
 import JAVA.INVENT.GUI.jif_datos_articulo_costo;
 import JAVA.INVENT.GUI.jif_datos_familia;
 import JAVA.INVENT.GUI.jif_datos_marca;
 import JAVA.INVENT.GUI.jif_datos_producto;
 import JAVA.INVENT.GUI.jif_datos_subfamilia;
+import JAVA.INVENT.GUI.jif_saldos_iniciales;
 import JAVA.INVENT.LOGICA.muestra_jif_invent;
 import JAVA.INVENT.LOGICA.muestra_pestania_invent;
 import JAVA.INVENT.LOGICA.muestra_reporte_invent;
@@ -76,7 +78,7 @@ public class variables_globales {
             gs_codigo_modulo[];
     public static int gi_codigo_empresa,
             gi_id_usuario,
-            gi_id_rol;
+            gi_id_rol;       
 
     //DAO
     public static DAO_registro_empresa go_dao_registro_empresa = new DAO_registro_empresa();
@@ -136,6 +138,7 @@ public class variables_globales {
     public static dlg_busq_unidad_medida go_dlg_busq_unidad_medida;
     public static dlg_busq_articulo go_dlg_busq_articulo;
     public static dlg_busq_articulo_costo go_dlg_busq_articulo_costo;
+    public static dlg_ini_almacen go_dlg_ini_almacen;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -150,6 +153,7 @@ public class variables_globales {
     public static jif_datos_unidad_medida go_jif_datos_unidad_medida;
     public static jif_datos_articulo go_jif_datos_articulo;
     public static jif_datos_articulo_costo go_jif_datos_articulo_costo;
+    public static jif_saldos_iniciales go_jif_saldos_iniciales;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;
