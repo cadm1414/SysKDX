@@ -19,7 +19,7 @@ public class pnl_datos_articulo_costo extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_codigo_articulo = new javax.swing.JFormattedTextField();
+        TXT_codigo_articulo = new javax.swing.JFormattedTextField();
         jLabel27 = new javax.swing.JLabel();
         TXT_nombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -66,13 +66,13 @@ public class pnl_datos_articulo_costo extends javax.swing.JPanel {
         jLabel2.setText(":");
 
         try {
-            txt_codigo_articulo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-######U")));
+            TXT_codigo_articulo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-######U")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txt_codigo_articulo.setEnabled(false);
-        txt_codigo_articulo.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
-        txt_codigo_articulo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_codigo_articulo.setEnabled(false);
+        TXT_codigo_articulo.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        TXT_codigo_articulo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/f5.png"))); // NOI18N
         jLabel27.setText(" ");
@@ -264,7 +264,7 @@ public class pnl_datos_articulo_costo extends javax.swing.JPanel {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txt_codigo_articulo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TXT_codigo_articulo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel27))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -322,7 +322,7 @@ public class pnl_datos_articulo_costo extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(txt_codigo_articulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_codigo_articulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXT_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -396,6 +396,7 @@ public class pnl_datos_articulo_costo extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> CBX_procedencia;
     public javax.swing.JComboBox<String> CBX_tipo_procedencia;
     public javax.swing.JFormattedTextField TXT_anio;
+    public javax.swing.JFormattedTextField TXT_codigo_articulo;
     public javax.swing.JTextField TXT_codigo_entidad;
     public javax.swing.JFormattedTextField TXT_costo;
     public javax.swing.JFormattedTextField TXT_fecha_ingreso;
@@ -431,6 +432,5 @@ public class pnl_datos_articulo_costo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JFormattedTextField txt_codigo_articulo;
     // End of variables declaration//GEN-END:variables
 }

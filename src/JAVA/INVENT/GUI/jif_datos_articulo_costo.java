@@ -25,7 +25,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
     static boolean lb_valor_op[] = new boolean[8];
     ResultSet lq_rs = null;
     int li_tipo_operacion;
-    String ls_codigo, ls_codigo_articulo, ls_oc, ls_periodo_produccion;
+    String ls_codigo, ls_codigo_articulo, ls_oc, ls_periodo_produccion, ls_item_orden;
     String ls_opcion = "M C F";
     String ls_modulo = "INVENT", ls_capa = "GUI", ls_clase = "jif_datos_articulo_costo";
 
@@ -58,7 +58,9 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
 
     private void activa_campos() {
         if (lo_pnl_datos_articulo_costo.CBX_procedencia.getSelectedIndex() == 1) {
-            lo_pnl_datos_articulo_costo.CBX_mes.setSelectedIndex(1);
+            if (li_tipo_operacion != 1) {
+                lo_pnl_datos_articulo_costo.CBX_mes.setSelectedIndex(1);
+            }
             lo_pnl_datos_articulo_costo.CBX_mes.setEnabled(true);
             lo_pnl_datos_articulo_costo.TXT_anio.setEnabled(true);
         } else {
@@ -92,9 +94,9 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
                 lo_pnl_datos_articulo_costo.TXT_nombre.setText(lq_rs.getString(2));
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_articulo", "ARTICULO NO EXISTE");
-                lo_pnl_datos_articulo_costo.txt_codigo_articulo.setText("");
+                lo_pnl_datos_articulo_costo.TXT_codigo_articulo.setText("");
                 lo_pnl_datos_articulo_costo.TXT_nombre.setText("");
-                lo_pnl_datos_articulo_costo.txt_codigo_articulo.requestFocus();
+                lo_pnl_datos_articulo_costo.TXT_codigo_articulo.requestFocus();
             }
         } catch (Exception e) {
         }
@@ -110,9 +112,9 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
-    
-    private void genera_codigo_orden(){
-        ls_codigo = lo_pnl_datos_articulo_costo.TXT_periodo.getText().trim()+lo_pnl_datos_articulo_costo.CBX_procedencia.getSelectedIndex()+lo_pnl_datos_articulo_costo.CBX_tipo_procedencia.getSelectedIndex()+lo_pnl_datos_articulo_costo.TXT_numero.getText().trim();
+
+    private void genera_codigo_orden() {
+        ls_codigo = lo_pnl_datos_articulo_costo.TXT_periodo.getText().trim() + lo_pnl_datos_articulo_costo.CBX_procedencia.getSelectedIndex() + lo_pnl_datos_articulo_costo.CBX_tipo_procedencia.getSelectedIndex() + lo_pnl_datos_articulo_costo.TXT_numero.getText().trim();
     }
 
     private void evt_f5_articulo() {
@@ -121,7 +123,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
         ls_codigo_articulo = go_dlg_busq_articulo.ls_codigo_articulo;
         if (ls_codigo_articulo != null) {
             get_descripcion_articulo(ls_codigo_articulo);
-            lo_pnl_datos_articulo_costo.txt_codigo_articulo.setText(ls_codigo_articulo);
+            lo_pnl_datos_articulo_costo.TXT_codigo_articulo.setText(ls_codigo_articulo);
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "SELECCIONE ARTICULO");
             lo_evt_datos_articulo_costo.limpia_datos(lo_pnl_datos_articulo_costo);
@@ -159,6 +161,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
         li_tipo_operacion = 1;
         lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
         lo_evt_datos_articulo_costo.activa_campos(1, lo_pnl_datos_articulo_costo, true);
+        activa_campos();
     }
 
     private void evt_eliminar() {
@@ -173,21 +176,56 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void evt_guardar() {
         lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
-        
         switch (li_tipo_operacion) {
             case 0:
                 if (lo_evt_datos_articulo_costo.valida_campos(lo_pnl_datos_articulo_costo)) {
-                    
+                    genera_codigo_orden();
+                    ls_codigo_articulo = lo_pnl_datos_articulo_costo.TXT_codigo_articulo.getText().trim();
+                    ls_periodo_produccion = go_fnc_operaciones_campos.completa_digitos(lo_pnl_datos_articulo_costo.CBX_mes.getSelectedIndex() + "", "0", 2) + "-" + lo_pnl_datos_articulo_costo.TXT_anio.getText().trim();
+                    ls_item_orden = go_dao_articulo_costo.FNC_genera_item_orden(ls_codigo, ls_codigo_articulo, ls_periodo_produccion);
+                    try {
+                        if (!ls_item_orden.equalsIgnoreCase("000")) {
+                            lo_bean_articulo_costo.setCodigo_orden(ls_codigo);
+                            lo_bean_articulo_costo.setItem_orden(ls_item_orden);
+                            lo_evt_datos_articulo_costo.setea_campos(lo_bean_articulo_costo, lo_pnl_datos_articulo_costo);
+                            if (go_dao_articulo_costo.IST_articulo_costo(lo_bean_articulo_costo)) {
+                                lo_evt_datos_articulo_costo.limpia_datos(lo_pnl_datos_articulo_costo);
+                                lo_evt_datos_articulo_costo.activa_campos(0, lo_pnl_datos_articulo_costo, false);
+                                lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                            }
+                        } else {
+                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "ARTICULO COSTO YA EXISTE");
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+                break;
+            case 1:
+                if (lo_evt_datos_articulo_costo.verifica_cambios(lo_bean_articulo_costo, lo_pnl_datos_articulo_costo)) {
+                    if (lo_evt_datos_articulo_costo.valida_campos(lo_pnl_datos_articulo_costo)) {
+                        try {
+                            ls_periodo_produccion = lo_bean_articulo_costo.getPeriodo_produccion();
+                            lo_evt_datos_articulo_costo.setea_campos(lo_bean_articulo_costo, lo_pnl_datos_articulo_costo);
+                            if (go_dao_articulo_costo.UPD_articulo_costo(lo_bean_articulo_costo, ls_periodo_produccion)) {
+                                lo_evt_datos_articulo_costo.limpia_datos(lo_pnl_datos_articulo_costo);
+                                lo_evt_datos_articulo_costo.activa_campos(0, lo_pnl_datos_articulo_costo, false);
+                                lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                } else {
+                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "NO SE A REALIZADO CAMBIOS");
                 }
                 break;
         }
     }
 
     private void evt_cancelar() {
-        li_tipo_operacion = 2;        
+        li_tipo_operacion = 2;
         lo_evt_datos_articulo_costo.activa_campos(0, lo_pnl_datos_articulo_costo, false);
         if (ls_codigo != null) {
             lo_evt_datos_articulo_costo.muestra_datos(lo_pnl_datos_articulo_costo, lo_bean_articulo_costo);
@@ -234,7 +272,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
         @Override
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_F5) {
-                if (ke.getSource() == lo_pnl_datos_articulo_costo.txt_codigo_articulo) {
+                if (ke.getSource() == lo_pnl_datos_articulo_costo.TXT_codigo_articulo) {
                     evt_f5_articulo();
                 }
             }
@@ -270,7 +308,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
                     //evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_guardar) {
-                    //evt_guardar();
+                    evt_guardar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_cancelar) {
                     evt_cancelar();
@@ -278,9 +316,9 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_reporte) {
                     //evt_reporte();
                 }
-                if (ke.getSource() == lo_pnl_datos_articulo_costo.txt_codigo_articulo && go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_articulo_costo.txt_codigo_articulo.getText().trim(), 1, 12)) {
+                if (ke.getSource() == lo_pnl_datos_articulo_costo.TXT_codigo_articulo && go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_articulo_costo.TXT_codigo_articulo.getText().trim(), 1, 12)) {
                     lo_pnl_datos_articulo_costo.CBX_procedencia.requestFocus();
-                    get_descripcion_articulo(lo_pnl_datos_articulo_costo.txt_codigo_articulo.getText().trim());
+                    get_descripcion_articulo(lo_pnl_datos_articulo_costo.TXT_codigo_articulo.getText().trim());
                 }
                 if (ke.getSource() == lo_pnl_datos_articulo_costo.CBX_procedencia) {
                     get_tipo_procedencia();
@@ -300,11 +338,11 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
                     if (!go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_articulo_costo.TXT_costo)) {
                         lo_pnl_datos_articulo_costo.TXT_costo.setText("0.00000");
                     }
-                    if(lo_pnl_datos_articulo_costo.CBX_mes.isEnabled()){
+                    if (lo_pnl_datos_articulo_costo.CBX_mes.isEnabled()) {
                         lo_pnl_datos_articulo_costo.CBX_mes.requestFocus();
-                    }else{
+                    } else {
                         lo_pnl_datos_articulo_costo.TXT_codigo_entidad.requestFocus();
-                    }                    
+                    }
                 }
                 if (ke.getSource() == lo_pnl_datos_articulo_costo.CBX_mes) {
                     lo_pnl_datos_articulo_costo.TXT_anio.requestFocus();
@@ -366,7 +404,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
 
         @Override
         public void focusLost(java.awt.event.FocusEvent fe) {
-            if (fe.getSource() == lo_pnl_datos_articulo_costo.txt_codigo_articulo) {
+            if (fe.getSource() == lo_pnl_datos_articulo_costo.TXT_codigo_articulo) {
                 //get_descripcion_articulo(lo_pnl_datos_articulo_costo.txt_codigo_articulo.getText().trim());
             }
         }

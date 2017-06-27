@@ -14,7 +14,7 @@ public class DAO_taba_sunat {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_cbx_tabla_sunat('" + categoria + "') "
-                    + "as (codigo_sunat character varying(20),descripcion character varying(150))";
+                    + "as (codigo_sunat character varying(20),descripcion character varying(350))";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 return lq_rs;
