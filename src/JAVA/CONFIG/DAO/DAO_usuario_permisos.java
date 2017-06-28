@@ -119,4 +119,20 @@ public class DAO_usuario_permisos {
         return resp;
     }
     
+    public ResultSet SLT_grid_almacen_x_permiso(int id_usuario,String tipo_almacen,String status,String almacen) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_almacen_x_permiso("+id_usuario+",'"+tipo_almacen+"','"+status+"','"+almacen+"') "
+                    + "as (codigo_almacen character(4),nombre_almacen character varying(100))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_usuario_permisos", e.getMessage());
+        }
+        return null;
+    }
+    
 }

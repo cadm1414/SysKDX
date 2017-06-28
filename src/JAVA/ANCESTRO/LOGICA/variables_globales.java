@@ -30,6 +30,7 @@ import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
 import JAVA.INVENT.DAO.*;
+import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
 import JAVA.INVENT.GUI.dlg_busq_articulo;
 import JAVA.INVENT.GUI.dlg_busq_articulo_costo;
 import JAVA.INVENT.GUI.dlg_busq_familia;
@@ -44,6 +45,7 @@ import JAVA.INVENT.GUI.jif_datos_marca;
 import JAVA.INVENT.GUI.jif_datos_producto;
 import JAVA.INVENT.GUI.jif_datos_subfamilia;
 import JAVA.INVENT.GUI.jif_saldos_iniciales;
+import JAVA.INVENT.LOGICA.muestra_dlg_invent;
 import JAVA.INVENT.LOGICA.muestra_jif_invent;
 import JAVA.INVENT.LOGICA.muestra_pestania_invent;
 import JAVA.INVENT.LOGICA.muestra_reporte_invent;
@@ -76,9 +78,10 @@ public class variables_globales {
             gs_nombre_rol,
             gs_modulo[],
             gs_codigo_modulo[];
+    public static String[] gs_parametros  = new String[99999];
     public static int gi_codigo_empresa,
             gi_id_usuario,
-            gi_id_rol;       
+            gi_id_rol;
 
     //DAO
     public static DAO_registro_empresa go_dao_registro_empresa = new DAO_registro_empresa();
@@ -123,6 +126,7 @@ public class variables_globales {
     public static muestra_jif_invent go_muestra_jif_invent = new muestra_jif_invent();
     public static muestra_pestania_invent go_muestra_pestania_invent = new muestra_pestania_invent();
     public static muestra_reporte_invent go_muestra_reporte_invent = new muestra_reporte_invent();
+    public static muestra_dlg_invent go_muestra_dlg_invent = new muestra_dlg_invent();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;
@@ -139,6 +143,7 @@ public class variables_globales {
     public static dlg_busq_articulo go_dlg_busq_articulo;
     public static dlg_busq_articulo_costo go_dlg_busq_articulo_costo;
     public static dlg_ini_almacen go_dlg_ini_almacen;
+    public static dlg_almacen_x_permiso go_dlg_almacen_x_permiso;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

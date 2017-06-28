@@ -78,7 +78,7 @@ public class opciones_menu {
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("SALDOS INICIALES")) {
-                    go_muestra_jif_invent.muestra_jif_saldos_iniciales();
+                    go_muestra_dlg_invent.muestra_dlg_saldos_iniciales();
                     resp = "I";
                 }
                 break;                

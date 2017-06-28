@@ -1,29 +1,24 @@
 package JAVA.INVENT.GUI;
 
+import JAVA.ANCESTRO.GUI.pnl_opciones_3;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 
 public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
 
     pnl_grid_saldos_iniciales lo_pnl_grid_saldos_iniciales = new pnl_grid_saldos_iniciales();
+    pnl_opciones_3 lo_pnl_opciones_3 = new pnl_opciones_3();
     static int ls_indicador;
     
     public jif_saldos_iniciales() {
         initComponents();              
-        formulario();
-        parametros_iniciales();  
-    }
-
-    private void parametros_iniciales() {
-        go_dlg_ini_almacen = new dlg_ini_almacen(null, true);
-        go_dlg_ini_almacen.setVisible(true);
-        ls_indicador = go_dlg_ini_almacen.ls_indicador;
-        if ( ls_indicador== 0) {
-            this.dispose();
-        }
+        formulario(); 
     }
 
     private void formulario() {
-        lo_pnl_grid_saldos_iniciales.setBounds(10, 200, 1000, 500);
+        lo_pnl_opciones_3.setBounds(0, 10, 1000, 150);
+        lo_pnl_grid_saldos_iniciales.setBounds(15, 200, 1000, 500);        
+        
+        this.add(lo_pnl_opciones_3);
         this.add(lo_pnl_grid_saldos_iniciales);
     }
 
