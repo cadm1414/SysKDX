@@ -3,7 +3,7 @@ package JAVA.INVENT.GUI;
 public class pnl_grid_saldos_iniciales extends javax.swing.JPanel {
 
     public pnl_grid_saldos_iniciales() {
-        initComponents();
+        initComponents();        
     }
 
     @SuppressWarnings("unchecked")
@@ -16,7 +16,7 @@ public class pnl_grid_saldos_iniciales extends javax.swing.JPanel {
         TBL_saldos_iniciales.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TBL_saldos_iniciales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0001", "000001", "0001-000101B", "MULTISABORES", "KG", "00-0001-2016", "00-2016",  new Integer(90000),  new Double(1240301.5),  new Double(1.501), null, null}
+
             },
             new String [] {
                 "Item", "Lote", "C. Articulo", "Nombre", "U.M.", "N. Compra", "P. Produccion", "Bulto", "P. Bruto", "Tara", "P. Neto", ""
@@ -25,11 +25,20 @@ public class pnl_grid_saldos_iniciales extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, false, false, true, true, false, false, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        TBL_saldos_iniciales.setCellSelectionEnabled(true);
+        TBL_saldos_iniciales.setEnabled(false);
         TBL_saldos_iniciales.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_saldos_iniciales);
         if (TBL_saldos_iniciales.getColumnModel().getColumnCount() > 0) {
@@ -70,14 +79,14 @@ public class pnl_grid_saldos_iniciales extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 53, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TBL_saldos_iniciales;
+    public javax.swing.JTable TBL_saldos_iniciales;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

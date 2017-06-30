@@ -100,4 +100,20 @@ public class DAO_tipo_movimiento {
         }
         return resp;
     }
+    
+    public ResultSet SLT_grid_tipo_movimiento_parametros(String tipo_movimiento,String es_transferencia,String tipo_almacen,String es_visible,String status,String codigo_movimiento) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_tipo_movimiento_parametros('"+tipo_movimiento+"','"+es_transferencia+"','"+tipo_almacen+"','"+es_visible+"','"+status+"','"+codigo_movimiento+"') "
+                    + "as (codigo_movimiento character(2),descripcion character varying(100))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_tipo_movimiento_parametros", e.getMessage());
+        }
+        return null;
+    }
 }

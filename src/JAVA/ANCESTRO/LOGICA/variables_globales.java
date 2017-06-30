@@ -15,6 +15,7 @@ import JAVA.CONFIG.GUI.dlg_busq_tipo_movimiento;
 import JAVA.CONFIG.GUI.dlg_busq_ubigeo;
 import JAVA.CONFIG.GUI.dlg_busq_unidad_medida;
 import JAVA.CONFIG.GUI.dlg_busq_usuario;
+import JAVA.CONFIG.GUI.dlg_tipo_movimiento_parametros;
 import JAVA.CONFIG.GUI.frm_datos_general;
 import JAVA.CONFIG.GUI.jif_datos_almacen;
 import JAVA.CONFIG.GUI.jif_datos_sucursal;
@@ -107,6 +108,8 @@ public class variables_globales {
     public static DAO_grupo_percepcion go_dao_grupo_percepcion = new DAO_grupo_percepcion();
     public static DAO_articulo go_dao_articulo = new DAO_articulo();
     public static DAO_articulo_costo go_dao_articulo_costo = new DAO_articulo_costo();
+    public static DAO_tipo_documento go_dao_tipo_documento = new DAO_tipo_documento();
+    public static DAO_kardex go_dao_kardex = new DAO_kardex();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -144,6 +147,7 @@ public class variables_globales {
     public static dlg_busq_articulo_costo go_dlg_busq_articulo_costo;
     public static dlg_ini_almacen go_dlg_ini_almacen;
     public static dlg_almacen_x_permiso go_dlg_almacen_x_permiso;
+    public static dlg_tipo_movimiento_parametros go_dlg_tipo_movimiento_parametros;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

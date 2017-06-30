@@ -145,9 +145,9 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
         go_dlg_busq_articulo_costo.setVisible(true);
         ls_codigo_articulo = go_dlg_busq_articulo_costo.ls_codigo_articulo;
         ls_oc = go_dlg_busq_articulo_costo.ls_oc;
-        ls_periodo_produccion = go_dlg_busq_articulo_costo.ls_periodo_produccion;
-        ls_codigo = ls_oc.substring(8, 12) + ls_oc.substring(0, 2) + ls_oc.substring(3, 7);
-        if (ls_codigo != null) {
+        ls_periodo_produccion = go_dlg_busq_articulo_costo.ls_periodo_produccion;        
+        if (ls_periodo_produccion != null) {
+            ls_codigo = ls_oc.substring(8, 12) + ls_oc.substring(0, 2) + ls_oc.substring(3, 7);
             get_descripcion_articulo_costo(ls_codigo, ls_codigo_articulo, ls_periodo_produccion);
             lo_evt_opciones_2.activa_btn_opciones(2, lo_pnl_opciones_2, lb_valor_op);
         } else {
