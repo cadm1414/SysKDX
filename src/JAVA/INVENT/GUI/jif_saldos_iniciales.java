@@ -116,7 +116,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
 
     private void genera_peso_neto(int fila) {
         try {
-            double peso_neto = ((double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 9) * (int) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7)) + (double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8);
+            double peso_neto =(double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8)- ((double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 9) * (int) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7)) ;
             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.setValueAt(peso_neto, fila, 10);
         } catch (Exception e) {
         }
@@ -272,9 +272,19 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.editCellAt(fila, 7);
                         }
                     }
+                    if(lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 8){
+                        if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7)==null) {
+                            lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.setValueAt(0, fila, 7);
+                            lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 7, false, false);
+                        }
+                    }
                     if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 9) {
-                        if ((double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8) == 0) {
+                        if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8)==null) {
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 8, false, false);
+                        }else{
+                            if ((Double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8)==0){
+                                lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 8, false, false);
+                            }
                         }
                     }
                     if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 10) {

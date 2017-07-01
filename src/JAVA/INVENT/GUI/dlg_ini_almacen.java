@@ -109,6 +109,9 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
                 if (ke.getSource() == lo_pnl_ini_almacen.TXT_codigo) {
                     evt_f5();
                 }
+            }            
+            if(ke.getKeyCode() == KeyEvent.VK_ESCAPE){
+                dispose();
             }
 
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {

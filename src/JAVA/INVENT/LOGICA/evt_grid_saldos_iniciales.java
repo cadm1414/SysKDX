@@ -22,6 +22,7 @@ public class evt_grid_saldos_iniciales {
 
     public JButton genera_btn_eliminar() {
         JButton BTN_eliminar = new JButton("x");
+        BTN_eliminar.setForeground(new java.awt.Color(204, 0, 51));
         return BTN_eliminar;
     }
 
@@ -33,7 +34,7 @@ public class evt_grid_saldos_iniciales {
 
         if (fila == (fila_s + 1)) {
             String item = go_fnc_operaciones_campos.completa_digitos(fila + 1 + "", "0", 3);
-            modelo.addRow(new Object[]{item, "", "", "", "", "", "", 0, 0, 0, 0, genera_btn_eliminar()});
+            modelo.addRow(new Object[]{item, "", "", "", "", "", "", null, null, null,null, genera_btn_eliminar()});
             OBJ_pgs.TBL_saldos_iniciales.changeSelection(fila, 1, false, false);
             OBJ_pgs.TBL_saldos_iniciales.editCellAt(fila, 1);
         } else {
