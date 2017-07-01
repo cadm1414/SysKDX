@@ -12,7 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.ResultSet;
+import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 
@@ -63,6 +66,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
         lo_evt_grid_saldos_iniciales.evento_press(lo_pnl_grid_saldos_iniciales, KeyEvnt);
         lo_evt_cab_saldos_iniciales.evento_press(lo_pnl_cab_saldos_iniciales, KeyEvnt);
+        lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.addMouseListener(MouseEvent);
     }
 
     private void activa_botones() {
@@ -111,8 +115,11 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
     }
 
     private void genera_peso_neto(int fila) {
-        double peso_neto = ((double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 9) * (int) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7)) + (double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8);
-        lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.setValueAt(peso_neto, fila, 10);
+        try {
+            double peso_neto = ((double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 9) * (int) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7)) + (double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8);
+            lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.setValueAt(peso_neto, fila, 10);
+        } catch (Exception e) {
+        }
     }
 
     private void evt_f5() {
@@ -275,6 +282,39 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                     }
                 }
             }
+        }
+    };
+
+    MouseListener MouseEvent = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent me) {
+            if (me.getSource() == lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales) {
+                int columna = lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getColumnModel().getColumnIndexAtX(me.getX());
+                int fila = me.getY() / lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getRowHeight();
+                Object value = lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, columna);
+                if (value instanceof JButton) {
+                    if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ITEM " + go_fnc_operaciones_campos.completa_digitos((fila + 1) + "", "0", 3) + "?") == 0) {
+                        lo_evt_grid_saldos_iniciales.elimina_fila(lo_pnl_grid_saldos_iniciales, fila);
+                        lo_evt_grid_saldos_iniciales.genera_item(lo_pnl_grid_saldos_iniciales);
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent me) {
         }
     };
 

@@ -57,7 +57,7 @@
                 <Column editable="true" title="P. Bruto" type="java.lang.Double"/>
                 <Column editable="false" title="Tara" type="java.lang.Double"/>
                 <Column editable="false" title="P. Neto" type="java.lang.Double"/>
-                <Column editable="true" title="" type="java.lang.Boolean"/>
+                <Column editable="false" title="" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="cellSelectionEnabled" type="boolean" value="true"/>
@@ -78,7 +78,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="200" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="210" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -118,7 +118,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="5" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
