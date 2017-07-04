@@ -17,10 +17,10 @@ public class DAO_producto {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from fnc_codigo_producto() as (codigo text)";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs != null) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_codigo_producto", e.getMessage());
         }
@@ -33,10 +33,10 @@ public class DAO_producto {
             String SQL = "select * from slt_grid_producto() "
                     + "as (codigo_marca character(4),nombre_marca character varying(60),status text)";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_producto", e.getMessage());
         }
@@ -47,12 +47,12 @@ public class DAO_producto {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_datos_producto('" + codigo_producto + "') "
-                    + "as (codigo_producto character(4),nombre_producto character varying(60),clase_producto character(1),dias_almacen character varying(3),codigo_arancel character(2),afecto_detraccion character(1),afecto_percepcion character(1),status character(1))";
+                    + "as (codigo_producto character(4),nombre_producto character varying(60),clase_producto character(1),dias_almacen character varying(3),codigo_arancel character varying(2),afecto_detraccion character(1),afecto_percepcion character(1),status character(1))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_producto", e.getMessage());
         }
@@ -70,7 +70,7 @@ public class DAO_producto {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "DLT_producto", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_producto", e.getMessage());
@@ -90,7 +90,7 @@ public class DAO_producto {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_producto", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_producto", e.getMessage());
@@ -109,7 +109,7 @@ public class DAO_producto {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_producto", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_producto", e.getMessage());
@@ -123,10 +123,10 @@ public class DAO_producto {
             String SQL = "select * from slt_cbx_producto('"+estado+"') "
                     + "as (codigo_producto character(4),nombre_producto character varying(60))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cbx_producto", e.getMessage());
         }

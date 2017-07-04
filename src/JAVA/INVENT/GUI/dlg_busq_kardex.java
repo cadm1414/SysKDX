@@ -17,7 +17,9 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
     pnl_grid_busq_kardex lo_pnl_grid_kardex = new pnl_grid_busq_kardex();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
-    public String ls_codigo, ls_codigo_almacen, ls_fecha_ini, ls_fecha_fin, ls_codigo_movimiento, ls_tipo_movimiento, ls_es_transferencia;
+    public String ls_codigo;
+    String ls_codigo_almacen, ls_fecha_ini, ls_fecha_fin, ls_codigo_movimiento, ls_tipo_movimiento, ls_es_transferencia;
+    String ls_modulo = "INVENT", ls_capa = "GUI", ls_clase = "dlg_busq_kardex";
 
     public dlg_busq_kardex(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -52,8 +54,8 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
 
         TXT_dato.setDocument(new fnc_txt_mayuscula());
 
-        lo_pnl_grid_kardex.TBL_producto.addMouseListener(MouseEvnt);
-        lo_pnl_grid_kardex.TBL_producto.addKeyListener(KeyEvnt);
+        lo_pnl_grid_kardex.TBL_kardex.addMouseListener(MouseEvnt);
+        lo_pnl_grid_kardex.TBL_kardex.addKeyListener(KeyEvnt);
         TXT_dato.addKeyListener(KeyEvnt);
         TXT_fecha_ini.addKeyListener(KeyEvnt);
         TXT_fecha_fin.addKeyListener(KeyEvnt);
@@ -61,7 +63,7 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
 
     private void datos_tabla() {
         int a = 0;
-        lm_modelo = (DefaultTableModel) lo_pnl_grid_kardex.TBL_producto.getModel();
+        lm_modelo = (DefaultTableModel) lo_pnl_grid_kardex.TBL_kardex.getModel();
         try {
             lq_rs = go_dao_kardex.SLT_grid_kardex(ls_codigo_almacen, ls_fecha_ini, ls_fecha_fin, ls_codigo_movimiento, ls_tipo_movimiento, ls_es_transferencia);
             if (lq_rs != null) {
@@ -69,9 +71,9 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
                     lm_modelo.addRow(new Object[]{""});
                     for (int x = 0; x < 3; x++) {
                         if (x == 0) {
-                            lo_pnl_grid_kardex.TBL_producto.setValueAt(go_fnc_operaciones_campos.recupera_fecha_formato(lq_rs.getString(x + 1)), a, x);
+                            lo_pnl_grid_kardex.TBL_kardex.setValueAt(go_fnc_operaciones_campos.recupera_fecha_formato(lq_rs.getString(x + 1)), a, x);
                         } else {
-                            lo_pnl_grid_kardex.TBL_producto.setValueAt(lq_rs.getString(x + 1), a, x);
+                            lo_pnl_grid_kardex.TBL_kardex.setValueAt(lq_rs.getString(x + 1), a, x);
                         }
 
                     }
@@ -83,7 +85,7 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
     }
 
     public void limpia_tabla() {
-        DefaultTableModel modelo = (DefaultTableModel) lo_pnl_grid_kardex.TBL_producto.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) lo_pnl_grid_kardex.TBL_kardex.getModel();
         for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
             modelo.removeRow(i);
         }
@@ -97,7 +99,7 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
     }
 
     public void retorna() {
-        ls_codigo = lo_pnl_grid_kardex.TBL_producto.getValueAt(lo_pnl_grid_kardex.TBL_producto.getSelectedRow(), 0).toString();
+        ls_codigo = lo_pnl_grid_kardex.TBL_kardex.getValueAt(lo_pnl_grid_kardex.TBL_kardex.getSelectedRow(), 1).toString();
         this.dispose();
     }
 
@@ -110,19 +112,30 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
         @Override
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
-                if (ke.getSource() == TXT_fecha_ini) {
-                    actualiza_tabla();
-                    TXT_fecha_fin.requestFocus();
+                if (ke.getSource() == TXT_fecha_ini && !TXT_fecha_ini.getText().trim().equalsIgnoreCase("/  /")) {
+                    if (go_fnc_operaciones_campos.valida_fecha(TXT_fecha_ini.getText())) {
+                        actualiza_tabla();
+                        TXT_fecha_fin.requestFocus();
+                    } else {
+                        TXT_fecha_ini.setText(ls_fecha_ini);
+                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO");
+                    }
+
                 }
-                if (ke.getSource() == TXT_fecha_fin) {
-                    actualiza_tabla();
-                    TXT_dato.requestFocus();
+                if (ke.getSource() == TXT_fecha_fin && !TXT_fecha_fin.getText().trim().equalsIgnoreCase("/  /")) {
+                    if (go_fnc_operaciones_campos.valida_fecha(TXT_fecha_fin.getText())) {
+                        actualiza_tabla();
+                        TXT_dato.requestFocus();
+                    } else {
+                        TXT_fecha_ini.setText(ls_fecha_fin);
+                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO");
+                    }
                 }
                 if (ke.getSource() == TXT_dato) {
-                    lo_pnl_grid_kardex.TBL_producto.requestFocus();
-                    lo_pnl_grid_kardex.TBL_producto.changeSelection(0, 0, false, false);
+                    lo_pnl_grid_kardex.TBL_kardex.requestFocus();
+                    lo_pnl_grid_kardex.TBL_kardex.changeSelection(0, 0, false, false);
                 }
-                if (ke.getSource() == lo_pnl_grid_kardex.TBL_producto) {
+                if (ke.getSource() == lo_pnl_grid_kardex.TBL_kardex) {
                     retorna();
                 }
             }
@@ -134,7 +147,7 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
         @Override
         public void keyReleased(KeyEvent ke) {
             if (ke.getSource() == TXT_dato) {
-                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_kardex.TBL_producto, TXT_dato.getText(), 1);
+                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_kardex.TBL_kardex, TXT_dato.getText(), 1);
             }
         }
 
@@ -143,7 +156,7 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
     MouseListener MouseEvnt = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent me) {
-            if (me.getSource() == lo_pnl_grid_kardex.TBL_producto && me.getClickCount() == 2) {
+            if (me.getSource() == lo_pnl_grid_kardex.TBL_kardex && me.getClickCount() == 2) {
                 retorna();
             }
         }

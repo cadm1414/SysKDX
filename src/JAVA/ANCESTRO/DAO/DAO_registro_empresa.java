@@ -15,12 +15,12 @@ public class DAO_registro_empresa {
         try {
             lq_stm = go_conexion_emp.crearStatement();
             lq_rs = lq_stm.executeQuery("SELECT * FROM registro_empresa ORDER BY nombre_empresa");
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             } else {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "SLT_datos", "TABLA NO CONTIENE DATOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (SQLException e) {
             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "SLT_datos", e.getMessage());
         }

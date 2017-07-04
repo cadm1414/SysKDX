@@ -19,12 +19,12 @@ public class DAO_rol {
             String SQL = "select * from slt_datos_rol() "
                     + "as (id_rol integer,nombre_rol character varying(30))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_rol", "NO SE ENCONTRARON DATOS REGISTRADOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_rol", e.getMessage());
         }
@@ -58,7 +58,7 @@ public class DAO_rol {
                     resp = true;
                 }
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             SLT_reinicia_registro(OBJ_rol.getId_rol());
@@ -76,7 +76,7 @@ public class DAO_rol {
             if (lq_rs.next()) {
                 resp = lq_rs.getInt(1);
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
         }
         return resp;
@@ -87,7 +87,7 @@ public class DAO_rol {
             String SQL = "ALTER SEQUENCE rol_id restart " + numero;
             lq_stm = go_conexion_db.crearStatement();
             lq_stm.executeUpdate(SQL);
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
         }
     }
@@ -103,7 +103,7 @@ public class DAO_rol {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "DLT_rol", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_rol", e.getMessage());
@@ -137,7 +137,7 @@ public class DAO_rol {
                     resp = true;
                 }
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_rol", e.getMessage());

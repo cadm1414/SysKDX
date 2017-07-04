@@ -62,7 +62,7 @@ public class variables_globales {
 
     //CONEXION
     public static CONEXION_emp go_conexion_emp = new CONEXION_emp();
-    public static CONEXION_db go_conexion_db = new CONEXION_db();
+    public static CONEXION_db go_conexion_db = new CONEXION_db();    
 
     //FUNCIONES
     public static fnc_mensaje go_fnc_mensaje = new fnc_mensaje();
@@ -111,6 +111,7 @@ public class variables_globales {
     public static DAO_articulo_costo go_dao_articulo_costo = new DAO_articulo_costo();
     public static DAO_tipo_documento go_dao_tipo_documento = new DAO_tipo_documento();
     public static DAO_kardex go_dao_kardex = new DAO_kardex();
+    public static DAO_kardex_detalle go_dao_kardex_detalle = new DAO_kardex_detalle();
 
     //GUI
     public static frm_principal go_frm_principal;

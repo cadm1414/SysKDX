@@ -26,6 +26,13 @@ public class evt_grid_saldos_iniciales {
         return BTN_eliminar;
     }
 
+    public void limpia_tabla(pnl_grid_saldos_iniciales OBJ_pgs) {
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
+        for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+
     public void agrega_fila(pnl_grid_saldos_iniciales OBJ_pgs, int fila_s) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
         OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
@@ -34,7 +41,7 @@ public class evt_grid_saldos_iniciales {
 
         if (fila == (fila_s + 1)) {
             String item = go_fnc_operaciones_campos.completa_digitos(fila + 1 + "", "0", 3);
-            modelo.addRow(new Object[]{item, "", "", "", "", "", "", null, null, null,null, genera_btn_eliminar()});
+            modelo.addRow(new Object[]{item, "", "", "", "", "", "", null, null, null, null, genera_btn_eliminar()});
             OBJ_pgs.TBL_saldos_iniciales.changeSelection(fila, 1, false, false);
             OBJ_pgs.TBL_saldos_iniciales.editCellAt(fila, 1);
         } else {
@@ -43,19 +50,48 @@ public class evt_grid_saldos_iniciales {
         }
 
     }
-    
-    public void elimina_fila(pnl_grid_saldos_iniciales OBJ_pgs, int fila) {
-        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
-        modelo.removeRow(fila);        
-    }
 
-    public void genera_item(pnl_grid_saldos_iniciales OBJ_pgs){
+    public void recupera_detalle(pnl_grid_saldos_iniciales OBJ_pgs, String codigo) {
+        int a = 0;
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
-        for(int x = 0; x < OBJ_pgs.TBL_saldos_iniciales.getRowCount(); x++){
-            modelo.setValueAt(go_fnc_operaciones_campos.completa_digitos((x+1)+"", "0", 3), x, 0);
+        lq_rs = go_dao_kardex_detalle.SLT_datos_kardex_detalle(codigo);
+        if (lq_rs != null) {
+            try {
+                do {
+                    modelo.addRow(new Object[]{""});
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getString(1), a, 0);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getString(2), a, 1);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getString(3), a, 2);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getString(4), a, 3);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getString(5), a, 4);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getString(6), a, 5);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getString(7), a, 6);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getInt(8), a, 7);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getDouble(9), a, 8);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getDouble(10), a, 9);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(lq_rs.getDouble(11), a, 10);
+                    OBJ_pgs.TBL_saldos_iniciales.setValueAt(genera_btn_eliminar(), a, 11);
+                    a++;
+                } while (lq_rs.next());
+                OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
-    
+
+    public void elimina_fila(pnl_grid_saldos_iniciales OBJ_pgs, int fila) {
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
+        modelo.removeRow(fila);
+    }
+
+    public void genera_item(pnl_grid_saldos_iniciales OBJ_pgs) {
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
+        for (int x = 0; x < OBJ_pgs.TBL_saldos_iniciales.getRowCount(); x++) {
+            modelo.setValueAt(go_fnc_operaciones_campos.completa_digitos((x + 1) + "", "0", 3), x, 0);
+        }
+    }
+
     public KeyListener evento_press(pnl_grid_saldos_iniciales OBJ_pdc, KeyListener KeyEvnt) {
         OBJ_pdc.TBL_saldos_iniciales.addKeyListener(KeyEvnt);
         return KeyEvnt;

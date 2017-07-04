@@ -16,12 +16,12 @@ public class DAO_menu {
             String SQL = "select * from slt_datos_menu() "
                     + "as (codigo_modulo character(6),codigo_orden character varying(30),nombre_opcion character varying(100))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_menu", "NO SE ENCONTRARON DATOS REGISTRADOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_menu", e.getMessage());
         }

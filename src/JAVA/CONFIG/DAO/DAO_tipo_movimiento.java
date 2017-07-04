@@ -18,10 +18,10 @@ public class DAO_tipo_movimiento {
             String SQL = "select * from slt_grid_tipo_movimiento() "
                     + "as (codigo_movimiento character(2),descripcion character varying(100),status text)";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_tipo_movimiento", e.getMessage());
         }
@@ -34,10 +34,10 @@ public class DAO_tipo_movimiento {
             String SQL = "select * from slt_datos_tipo_movimiento('" + codigo + "') "
                     + "as (codigo_movimiento character(2),descripcion character varying(100),tipo_movimiento character(1),es_transferencia character(1),codigo_almacen_ref character(4),tipo_almacen character(1),status character(1),codigo_sunat character varying(20))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_tipo_movimiento", e.getMessage());
         }
@@ -55,7 +55,7 @@ public class DAO_tipo_movimiento {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "DLT_tipo_movimiento", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_tipo_movimiento", e.getMessage());
@@ -74,14 +74,14 @@ public class DAO_tipo_movimiento {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_tipo_movimiento", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_tipo_movimiento", e.getMessage());
         }
         return resp;
     }
-    
+
     public boolean UPD_tipo_movimiento(BEAN_tipo_movimiento OBJ_btm) throws SQLException {
         boolean resp = false;
         try {
@@ -93,24 +93,24 @@ public class DAO_tipo_movimiento {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_tipo_movimiento", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_tipo_movimiento", e.getMessage());
         }
         return resp;
     }
-    
-    public ResultSet SLT_grid_tipo_movimiento_parametros(String tipo_movimiento,String es_transferencia,String tipo_almacen,String es_visible,String status,String codigo_movimiento) {
+
+    public ResultSet SLT_grid_tipo_movimiento_parametros(String tipo_movimiento, String es_transferencia, String tipo_almacen, String es_visible, String status, String codigo_movimiento) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_grid_tipo_movimiento_parametros('"+tipo_movimiento+"','"+es_transferencia+"','"+tipo_almacen+"','"+es_visible+"','"+status+"','"+codigo_movimiento+"') "
+            String SQL = "select * from slt_grid_tipo_movimiento_parametros('" + tipo_movimiento + "','" + es_transferencia + "','" + tipo_almacen + "','" + es_visible + "','" + status + "','" + codigo_movimiento + "') "
                     + "as (codigo_movimiento character(2),descripcion character varying(100))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_tipo_movimiento_parametros", e.getMessage());
         }

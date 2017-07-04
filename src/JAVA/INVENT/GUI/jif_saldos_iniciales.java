@@ -6,6 +6,7 @@ import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.GUI.dlg_tipo_movimiento_parametros;
 import JAVA.CONFIG.LOGICA.cbx_tipo_documento;
+import JAVA.INVENT.BEAN.BEAN_kardex;
 import JAVA.INVENT.LOGICA.evt_cab_saldos_iniciales;
 import JAVA.INVENT.LOGICA.evt_grid_saldos_iniciales;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
     evt_opciones_3 lo_evt_opciones_3 = new evt_opciones_3();
     evt_grid_saldos_iniciales lo_evt_grid_saldos_iniciales = new evt_grid_saldos_iniciales();
     evt_cab_saldos_iniciales lo_evt_cab_saldos_iniciales = new evt_cab_saldos_iniciales();
+    BEAN_kardex lo_bean_kardex = new BEAN_kardex();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
     static boolean lb_valor_op[] = new boolean[8];
     cbx_tipo_documento lo_cbx_tipo_documento;
@@ -114,6 +116,23 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
         }
     }
 
+    private void get_descripcion_kardex(String codigo) {
+        try {
+            lq_rs = go_dao_kardex.SLT_datos_kardex(codigo);
+            if (lq_rs != null) {
+                lo_evt_cab_saldos_iniciales.setea_recupera(lo_bean_kardex, lq_rs);
+                lo_evt_cab_saldos_iniciales.muestra_datos(lo_pnl_cab_saldos_iniciales, lo_bean_kardex);
+                get_descripcion_kardex_detalle(codigo);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void get_descripcion_kardex_detalle(String codigo) {
+        lo_evt_grid_saldos_iniciales.limpia_tabla(lo_pnl_grid_saldos_iniciales);
+        lo_evt_grid_saldos_iniciales.recupera_detalle(lo_pnl_grid_saldos_iniciales, codigo);
+    }
+
     private void genera_peso_neto(int fila) {
         try {
             double peso_neto = (double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8) - ((double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 9) * (int) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7));
@@ -128,7 +147,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
         gs_parametros[2] = "01/01/" + gs_periodo;
         gs_parametros[3] = "00";
         gs_parametros[4] = "1";
-        gs_parametros[5] = "0";       
+        gs_parametros[5] = "0";
     }
 
     private void evt_f5() {
@@ -194,6 +213,17 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
         genera_parametros_busq();
         go_dlg_busq_kardex = new dlg_busq_kardex(null, true);
         go_dlg_busq_kardex.setVisible(true);
+        ls_codigo = go_dlg_busq_kardex.ls_codigo;
+        if (ls_codigo != null) {
+            ls_codigo = ls_codigo.substring(0, 2) + ls_codigo_almacen + ls_codigo.substring(3, 13);
+            get_descripcion_kardex(ls_codigo);
+            lo_evt_opciones_3.activa_btn_opciones(2, lo_pnl_opciones_3, lb_valor_op);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "SELECCIONE DOCUMENTO");
+            lo_evt_cab_saldos_iniciales.limpia_datos(lo_pnl_cab_saldos_iniciales);
+            lo_evt_grid_saldos_iniciales.limpia_tabla(lo_pnl_grid_saldos_iniciales);
+            lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+        }
     }
 
     ActionListener Listener = new ActionListener() {
@@ -258,7 +288,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                         }
                     } else {
                         lo_pnl_cab_saldos_iniciales.TXT_fecha_emision.setText("");
-                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO ");
+                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO");
                     }
                 }
                 if (ke.getSource() == lo_pnl_cab_saldos_iniciales.TXT_observacion) {
@@ -321,7 +351,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
     MouseListener MouseEvent = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent me) {
-            if (me.getSource() == lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales) {
+            if (me.getSource() == lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales && lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.isEnabled()) {
                 int columna = lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getColumnModel().getColumnIndexAtX(me.getX());
                 int fila = me.getY() / lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getRowHeight();
                 Object value = lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, columna);

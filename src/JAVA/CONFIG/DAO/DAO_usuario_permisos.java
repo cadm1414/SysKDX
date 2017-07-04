@@ -19,10 +19,10 @@ public class DAO_usuario_permisos {
             String SQL = "select * from slt_grid_usuario_permisos() "
                     + "as (codigo character(4),nombre character varying(100),tipo_almacen text)";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_usuario_permisos", e.getMessage());
         }
@@ -35,12 +35,12 @@ public class DAO_usuario_permisos {
             String SQL = "select * from slt_usuario_permisos_x_idusuario(" + id_usuario + ") "
                     + "as (id_usuario int,sucursal_almacen character(4),tipo_almacen text)";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_usuario_permisos_x_idusuario", "USUARIO NO CUENTA CON PERMISOS");
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_usuari_permisos_x_idusuario", e.getMessage());
         }
@@ -58,7 +58,7 @@ public class DAO_usuario_permisos {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "DLT_usuario_permisos", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_usuario_permisos", e.getMessage());
@@ -94,45 +94,44 @@ public class DAO_usuario_permisos {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_usuario_permisos", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_usuario_permisos", e.getMessage());
         }
         return resp;
     }
-    
+
     public int SLT_cta_usuario_permisos(int id_usuario) {
         int resp = 0;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_cta_usuario_permisos("+id_usuario+") as (cont bigint)";
+            String SQL = "select * from slt_cta_usuario_permisos(" + id_usuario + ") as (cont bigint)";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 resp = lq_rs.getInt(1);
-                return resp;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "SLT_cta_usuario_permisos", e.getMessage());
         }
         return resp;
     }
-    
-    public ResultSet SLT_grid_almacen_x_permiso(int id_usuario,String tipo_almacen,String status,String almacen) {
+
+    public ResultSet SLT_grid_almacen_x_permiso(int id_usuario, String tipo_almacen, String status, String almacen) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_grid_almacen_x_permiso("+id_usuario+",'"+tipo_almacen+"','"+status+"','"+almacen+"') "
+            String SQL = "select * from slt_grid_almacen_x_permiso(" + id_usuario + ",'" + tipo_almacen + "','" + status + "','" + almacen + "') "
                     + "as (codigo_almacen character(4),nombre_almacen character varying(100))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_usuario_permisos", e.getMessage());
         }
         return null;
     }
-    
+
 }

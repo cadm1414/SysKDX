@@ -16,12 +16,12 @@ public class DAO_periodo_empresa {
         try {
             lq_stm = go_conexion_emp.crearStatement();
             lq_rs = lq_stm.executeQuery("SELECT * FROM periodo_empresa WHERE codigo_empresa = " + OBJ_bpe.getCodigo_empresa() + " ORDER BY anio");
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             } else {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "SLT_datos_x_empresa", "TABLA NO CONTIENE DATOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (SQLException e) {
             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "SLT_datos_x_empresa", e.getMessage());
         }

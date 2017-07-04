@@ -17,10 +17,10 @@ public class DAO_familia {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from fnc_codigo_familia() as (codigo text)";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs != null) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_codigo_familia", e.getMessage());
         }
@@ -33,10 +33,10 @@ public class DAO_familia {
             String SQL = "select * from slt_grid_familia() "
                     + "as (codigo_familia character(4),nombre_familia character varying(60))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_familia", e.getMessage());
         }
@@ -49,10 +49,10 @@ public class DAO_familia {
             String SQL = "select * from slt_datos_familia('" + codigo_familia + "') "
                     + "as (codigo_familia character(4),nombre_familia character varying(60))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_familia", e.getMessage());
         }
@@ -70,7 +70,7 @@ public class DAO_familia {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "DLT_familia", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_familia", e.getMessage());
@@ -89,14 +89,14 @@ public class DAO_familia {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_familia", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_familia", e.getMessage());
         }
         return resp;
     }
-    
+
     public boolean UPD_familia(BEAN_familia OBJ_bfa) throws SQLException {
         boolean resp = false;
         try {
@@ -108,24 +108,24 @@ public class DAO_familia {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_familia", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_familia", e.getMessage());
         }
         return resp;
     }
-    
+
     public ResultSet SLT_cbx_familia() {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_cbx_familia() "
                     + "as (codigo_familia character(4),nombre_familia character varying(60))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cbx_familia", e.getMessage());
         }

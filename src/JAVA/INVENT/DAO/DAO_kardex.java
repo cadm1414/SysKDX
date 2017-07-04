@@ -16,10 +16,10 @@ public class DAO_kardex {
             String SQL = "select * from fnc_correlativo_guia_almacen('"+codigo_documento+"','"+serie_doc+"','"+tipo_movimiento+"','"+almacen+"') "
                     + "as (codigo text)";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs != null) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_correlativo_guia_almacen", e.getMessage());
         }
@@ -32,12 +32,28 @@ public class DAO_kardex {
             String SQL = "select * from slt_grid_kardex('"+codigo_almacen+"','"+fecha_ini+"','"+fecha_fin+"','"+codigo_movimiento+"','"+tipo_movimiento+"','"+es_transferencia+"') "
                     + "as (fecha_emision date,numero_documento text,status text)";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_kardex", e.getMessage());
+        }
+        return null;
+    }
+    
+    public ResultSet SLT_datos_kardex(String codigo_operacion) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_datos_kardex('"+codigo_operacion+"') "
+                    + "as (codigo_operacion character(16),fecha_registro timestamp with time zone,codigo_almacen character(4),fecha_emision date,codigo_movimiento character(2),codigo_documento character(2),serie_documento character varying(4),numero_documento character(10),codigo_documento_ref character(2),serie_documento_ref character varying(4),numero_docuemento_ref character(10),tipo_movimiento character(1),es_transferencia character(1),codigo_almacen_origen character varying(4),observacion character varying(250),status character(1))";	
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }            
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_kardex", e.getMessage());
         }
         return null;
     }

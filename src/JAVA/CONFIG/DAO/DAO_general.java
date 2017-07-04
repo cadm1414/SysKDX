@@ -18,7 +18,6 @@ public class DAO_general {
             String SQL = "select * from slt_general() "
                     + "as (ruc character(11),razon_social character varying(150),giro character varying(150),direccion character varying(150),codigo_ubigeo character(6),descripcion_ubigeo character varying(100),telefono character varying(20),fax character varying(20),e_mail character varying(60),website character varying(60),nombre_reporte character varying(60),fecha_actividad date,codigo_moneda character(3),imagen_logo character varying(100),imagen_portada character varying(100))";
             lq_rs = lq_stm.executeQuery(SQL);
-
             if (lq_rs.next()) {
                 do {
                     go_bean_general.setRuc(lq_rs.getString(1));
@@ -40,7 +39,7 @@ public class DAO_general {
             } else {
                 go_fnc_mensaje.GET_mensaje(gi_id_rol, ls_modulo, ls_capa, ls_clase, "SLT_datos", "TABLA NO CONTIENE DATOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(gi_id_rol, ls_modulo, ls_capa, ls_clase, "SLT_datos", e.getMessage());
         }
@@ -54,9 +53,8 @@ public class DAO_general {
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 resp = lq_rs.getInt(1);
-                return resp;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "SLT_cta_datos_general", e.getMessage());
         }
@@ -69,6 +67,7 @@ public class DAO_general {
             String SQL = "select * from ist_general('" + go_bean_general.getRuc() + "','" + go_bean_general.getRazon_social() + "','" + go_bean_general.getGiro() + "','" + go_bean_general.getDireccion() + "','" + go_bean_general.getCodigo_ubigeo() + "','" + go_bean_general.getDescripcion_ubigeo() + "','" + go_bean_general.getTelefono() + "','" + go_bean_general.getFax() + "','" + go_bean_general.getE_mail() + "','" + go_bean_general.getWebsite() + "','" + go_bean_general.getNombre_reporte() + "','" + go_bean_general.getFecha_actividad() + "','" + go_bean_general.getCodigo_moneda() + "','','') "
                     + "as (resp integer)";
             lq_rs = lq_stm.executeQuery(SQL);
+
             if (lq_rs.next()) {
                 if (lq_rs.getInt(1) == 1) {
                     lq_stm.getConnection().commit();
@@ -77,7 +76,7 @@ public class DAO_general {
                     go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "INS_general", "NO SE ACTUALIZO BASE DE DATOS");
                 }
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "INS_general", e.getMessage());
             lq_stm.getConnection().rollback();
@@ -93,7 +92,7 @@ public class DAO_general {
                 lq_stm.getConnection().commit();
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_general", "SE ACTUALIZO BASE DE DATOS");
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_general", e.getMessage());
             lq_stm.getConnection().rollback();

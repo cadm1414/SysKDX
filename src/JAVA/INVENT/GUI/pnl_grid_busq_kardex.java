@@ -11,10 +11,10 @@ public class pnl_grid_busq_kardex extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        TBL_producto = new javax.swing.JTable();
+        TBL_kardex = new javax.swing.JTable();
 
-        TBL_producto.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        TBL_producto.setModel(new javax.swing.table.DefaultTableModel(
+        TBL_kardex.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TBL_kardex.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -37,14 +37,14 @@ public class pnl_grid_busq_kardex extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(TBL_producto);
-        if (TBL_producto.getColumnModel().getColumnCount() > 0) {
-            TBL_producto.getColumnModel().getColumn(0).setResizable(false);
-            TBL_producto.getColumnModel().getColumn(0).setPreferredWidth(25);
-            TBL_producto.getColumnModel().getColumn(1).setResizable(false);
-            TBL_producto.getColumnModel().getColumn(1).setPreferredWidth(100);
-            TBL_producto.getColumnModel().getColumn(2).setResizable(false);
-            TBL_producto.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jScrollPane2.setViewportView(TBL_kardex);
+        if (TBL_kardex.getColumnModel().getColumnCount() > 0) {
+            TBL_kardex.getColumnModel().getColumn(0).setResizable(false);
+            TBL_kardex.getColumnModel().getColumn(0).setPreferredWidth(25);
+            TBL_kardex.getColumnModel().getColumn(1).setResizable(false);
+            TBL_kardex.getColumnModel().getColumn(1).setPreferredWidth(100);
+            TBL_kardex.getColumnModel().getColumn(2).setResizable(false);
+            TBL_kardex.getColumnModel().getColumn(2).setPreferredWidth(50);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -61,7 +61,7 @@ public class pnl_grid_busq_kardex extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTable TBL_producto;
+    public javax.swing.JTable TBL_kardex;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

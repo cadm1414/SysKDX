@@ -285,7 +285,8 @@ public class pnl_cab_saldos_iniciales extends javax.swing.JPanel {
         jLabel19.setText("F. Registro:");
 
         LBL_fecha_registro.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        LBL_fecha_registro.setText(" ");
+        LBL_fecha_registro.setForeground(new java.awt.Color(255, 0, 0));
+        LBL_fecha_registro.setText("  ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

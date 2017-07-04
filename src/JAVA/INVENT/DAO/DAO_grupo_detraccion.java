@@ -16,10 +16,10 @@ public class DAO_grupo_detraccion {
             String SQL = "select * from slt_cbx_grupo_detraccion('" + status + "') "
                     + "as (codigo_grupo character(3),concepto character varying(60))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cbx_grupo_detraccion", e.getMessage());
         }

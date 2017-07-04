@@ -18,11 +18,10 @@ public class DAO_usuario {
             String SQL = "select * from slt_usuario_sesion('" + OBJ_bus.getNombre_usuario() + "','" + OBJ_bus.getClave_usuario() + "') "
                     + "as (resp integer,id_usuario integer,nombre_usuario character varying(20),datos_usuario character varying(150),id_rol integer,status character(1),nombre_rol character varying(30))";
             lq_rs = lq_stm.executeQuery(SQL);
-
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "SLT_login_usuario", e.getMessage());
         }
@@ -35,10 +34,10 @@ public class DAO_usuario {
             String SQL = "select * from slt_grid_usuario() "
                     + "as (id_usuario integer,nombre_usuario character varying(20),nombre_rol character varying(30))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_usuario", e.getMessage());
         }
@@ -51,10 +50,10 @@ public class DAO_usuario {
             String SQL = "select * from slt_datos_usuario(" + id_usuario + ") "
                     + "as (id_usuario integer,nombre_usuario character varying(20),clave_usuario character varying(150),datos_usuario character varying(150),id_rol integer,status character(1))";
             lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            }            
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_usuario", e.getMessage());
         }
@@ -72,7 +71,7 @@ public class DAO_usuario {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "DLT_usuario", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_usuario", e.getMessage());
@@ -92,7 +91,7 @@ public class DAO_usuario {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_usuario", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             SLT_reinicia_registro(OBJ_bus.getId_usuario());
@@ -110,7 +109,7 @@ public class DAO_usuario {
             if (lq_rs.next()) {
                 resp = lq_rs.getInt(1);
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
         }
         return resp;
@@ -121,7 +120,7 @@ public class DAO_usuario {
             String SQL = "ALTER SEQUENCE usuario_id restart " + numero;
             lq_stm = go_conexion_db.crearStatement();
             lq_stm.executeUpdate(SQL);
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
         }
     }
@@ -137,7 +136,7 @@ public class DAO_usuario {
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_usuario", "SE ACTUALIZO BASE DE DATOS");
                 resp = true;
             }
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs,lq_stm.getConnection());
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_usuario", e.getMessage());

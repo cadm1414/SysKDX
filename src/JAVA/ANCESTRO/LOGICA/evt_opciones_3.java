@@ -52,6 +52,17 @@ public class evt_opciones_3 {
                 OBJ_pop.BTN_imprimir.setEnabled(false);
                 OBJ_pop.BTN_cancelar.setEnabled(true);
                 break;
+            case 2:
+                OBJ_pop.BTN_nuevo.setEnabled(valor_op[0]);
+                OBJ_pop.BTN_buscar.setEnabled(valor_op[1]);
+                OBJ_pop.BTN_editar.setEnabled(valor_op[2]);
+                OBJ_pop.BTN_eliminar.setEnabled(valor_op[3]);
+                OBJ_pop.BTN_guardar.setEnabled(false);
+                OBJ_pop.BTN_anular.setEnabled(false);
+                OBJ_pop.BTN_imprimir.setEnabled(valor_op[6]);
+                OBJ_pop.BTN_cancelar.setEnabled(false);
+                OBJ_pop.BTN_nuevo.requestFocus();
+                break;
         }
     }
     
