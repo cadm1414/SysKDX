@@ -305,7 +305,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
                     evt_editar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_eliminar) {
-                    //evt_eliminar();
+                    evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_guardar) {
                     evt_guardar();

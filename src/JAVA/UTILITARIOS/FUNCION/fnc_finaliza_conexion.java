@@ -8,8 +8,8 @@ public class fnc_finaliza_conexion {
 
     public void finalizar(Statement stm, Connection con) {
         try {
-            con.close();
-            stm.close();            
+            //stm.close();   
+            con.close();                     
         } catch (SQLException e) {
         }
     }

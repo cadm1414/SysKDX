@@ -24,6 +24,13 @@ public class evt_cab_saldos_iniciales {
                 OBJ_pdc.TXT_observacion.setEnabled(valor);
                 OBJ_pdc.TXT_numero.requestFocus();
                 break;
+            case 1:                
+                OBJ_pdc.CBX_tipo_doc_ref.setEnabled(valor);
+                OBJ_pdc.TXT_numero_ref.setEnabled(valor);
+                OBJ_pdc.TXT_fecha_emision.setEnabled(valor);
+                OBJ_pdc.TXT_observacion.setEnabled(valor);
+                OBJ_pdc.CBX_tipo_doc_ref.requestFocus();
+                break;
         }
     }
     
@@ -34,6 +41,7 @@ public class evt_cab_saldos_iniciales {
         OBJ_pdc.TXT_fecha_emision.setText(dia+mes+gs_periodo);
         OBJ_pdc.TXT_observacion.setText("");
         OBJ_pdc.CBX_estado.setSelectedIndex(1);
+        OBJ_pdc.LBL_numero_doc.setText("0000000000");
         OBJ_pdc.LBL_fecha_registro.setText("");
     }
     
