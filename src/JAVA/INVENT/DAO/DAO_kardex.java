@@ -25,4 +25,20 @@ public class DAO_kardex {
         }
         return null;
     }
+    
+    public ResultSet SLT_grid_kardex(String codigo_almacen,String fecha_ini,String fecha_fin,String codigo_movimiento,String tipo_movimiento,String es_transferencia) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_kardex('"+codigo_almacen+"','"+fecha_ini+"','"+fecha_fin+"','"+codigo_movimiento+"','"+tipo_movimiento+"','"+es_transferencia+"') "
+                    + "as (fecha_emision date,numero_documento text,status text)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_rs, lq_stm.getConnection());
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_kardex", e.getMessage());
+        }
+        return null;
+    }
 }

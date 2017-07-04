@@ -35,6 +35,7 @@ import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
 import JAVA.INVENT.GUI.dlg_busq_articulo;
 import JAVA.INVENT.GUI.dlg_busq_articulo_costo;
 import JAVA.INVENT.GUI.dlg_busq_familia;
+import JAVA.INVENT.GUI.dlg_busq_kardex;
 import JAVA.INVENT.GUI.dlg_busq_marca;
 import JAVA.INVENT.GUI.dlg_busq_producto;
 import JAVA.INVENT.GUI.dlg_busq_subfamilia;
@@ -148,6 +149,7 @@ public class variables_globales {
     public static dlg_ini_almacen go_dlg_ini_almacen;
     public static dlg_almacen_x_permiso go_dlg_almacen_x_permiso;
     public static dlg_tipo_movimiento_parametros go_dlg_tipo_movimiento_parametros;
+    public static dlg_busq_kardex go_dlg_busq_kardex;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

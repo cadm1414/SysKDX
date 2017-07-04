@@ -116,10 +116,19 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
 
     private void genera_peso_neto(int fila) {
         try {
-            double peso_neto =(double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8)- ((double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 9) * (int) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7)) ;
+            double peso_neto = (double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8) - ((double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 9) * (int) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7));
             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.setValueAt(peso_neto, fila, 10);
         } catch (Exception e) {
         }
+    }
+
+    private void genera_parametros_busq() {
+        gs_parametros[0] = ls_codigo_almacen;
+        gs_parametros[1] = "01/01/" + gs_periodo;
+        gs_parametros[2] = "01/01/" + gs_periodo;
+        gs_parametros[3] = "00";
+        gs_parametros[4] = "1";
+        gs_parametros[5] = "0";       
     }
 
     private void evt_f5() {
@@ -180,11 +189,21 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
         lo_evt_grid_saldos_iniciales.activa_campos(0, lo_pnl_grid_saldos_iniciales, true);
     }
 
+    private void evt_buscar() {
+        li_tipo_operacion = 2;
+        genera_parametros_busq();
+        go_dlg_busq_kardex = new dlg_busq_kardex(null, true);
+        go_dlg_busq_kardex.setVisible(true);
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (ae.getSource() == lo_pnl_opciones_3.BTN_nuevo) {
                 evt_nuevo();
+            }
+            if (ae.getSource() == lo_pnl_opciones_3.BTN_buscar) {
+                evt_buscar();
             }
         }
     };
@@ -200,12 +219,18 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
             if (ke.getKeyCode() == KeyEvent.VK_F1 && lo_pnl_opciones_3.BTN_nuevo.isEnabled()) {
                 evt_nuevo();
             }
+            if (ke.getKeyCode() == KeyEvent.VK_F2 && lo_pnl_opciones_3.BTN_buscar.isEnabled()) {
+                evt_buscar();
+            }
             if (ke.getKeyCode() == KeyEvent.VK_F5 && lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 2) {
                 evt_f5_articulo_costo();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_nuevo) {
                     evt_nuevo();
+                }
+                if (ke.getSource() == lo_pnl_opciones_3.BTN_buscar) {
+                    evt_buscar();
                 }
                 if (ke.getSource() == lo_pnl_cab_saldos_iniciales.TXT_numero) {
                     if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_saldos_iniciales.TXT_numero)) {
@@ -272,19 +297,17 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.editCellAt(fila, 7);
                         }
                     }
-                    if(lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 8){
-                        if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7)==null) {
+                    if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 8) {
+                        if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 7) == null) {
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.setValueAt(0, fila, 7);
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 7, false, false);
                         }
                     }
                     if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 9) {
-                        if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8)==null) {
+                        if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8) == null) {
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 8, false, false);
-                        }else{
-                            if ((Double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8)==0){
-                                lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 8, false, false);
-                            }
+                        } else if ((Double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8) == 0) {
+                            lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 8, false, false);
                         }
                     }
                     if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 10) {
