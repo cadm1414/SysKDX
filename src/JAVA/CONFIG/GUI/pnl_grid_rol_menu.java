@@ -13,12 +13,10 @@ public class pnl_grid_rol_menu extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TBL_rol_menu = new javax.swing.JTable(){
             public boolean isCellEditable(int row, int column) {
-                if (TBL_rol_menu.getValueAt(row, 2).toString().length() == 1 || TBL_rol_menu.getValueAt(row, 2).toString().length()== 3) {
-                    if(column>0){
-                        return false;
-                    }
-                }else{
-                    if(column>0 && column<4){
+                if(TBL_rol_menu.getValueAt(row, 3).toString().substring(0, 1).equalsIgnoreCase("M") || TBL_rol_menu.getValueAt(row, 3).toString().substring(0, 1).equalsIgnoreCase("S")){
+                    if(column == 0){
+                        return true;
+                    }else{
                         return false;
                     }
                 }

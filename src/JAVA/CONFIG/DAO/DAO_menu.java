@@ -27,4 +27,20 @@ public class DAO_menu {
         }
         return null;
     }
+    
+    public ResultSet SLT_tipo_menu() {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_tipo_menu() "
+                    + "as (codigo_menu character(6),codigo_opcion character varying(30),nombre_opcion text)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            } 
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_tipo_menu", e.getMessage());
+        }
+        return null;
+    }
 }

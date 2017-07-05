@@ -12,7 +12,7 @@ public class evt_grid_rol_menu {
     public void datos_tabla(pnl_grid_rol_menu OBJ_pgr, DefaultTableModel modelo) {
         int a = 0;
         modelo = (DefaultTableModel) OBJ_pgr.TBL_rol_menu.getModel();
-        lq_rs = go_dao_menu.SLT_datos_menu();
+        lq_rs = go_dao_menu.SLT_tipo_menu();
 
         if (lq_rs != null) {
             try {

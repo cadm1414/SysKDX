@@ -124,7 +124,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        if (TBL_rol_menu.getValueAt(row, 2).toString().length() == 1 || TBL_rol_menu.getValueAt(row, 2).toString().length()== 3) {&#xa;            if(column&gt;0){&#xa;                return false;&#xa;            }&#xa;        }else{&#xa;            if(column&gt;0 &amp;&amp; column&lt;4){&#xa;return false;&#xa;}&#xa;        }&#xa;return true;&#xa;    }&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        if(TBL_rol_menu.getValueAt(row, 3).toString().substring(0, 1).equalsIgnoreCase(&quot;M&quot;) || TBL_rol_menu.getValueAt(row, 3).toString().substring(0, 1).equalsIgnoreCase(&quot;S&quot;)){&#xa;            if(column == 0){&#xa;                return true;&#xa;            }else{&#xa;                return false;&#xa;            }       &#xa;        }&#xa;        return true;&#xa;    }&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
