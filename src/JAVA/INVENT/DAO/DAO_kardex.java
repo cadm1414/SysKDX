@@ -7,6 +7,7 @@ import JAVA.INVENT.GUI.pnl_grid_saldos_iniciales;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JTable;
 
 public class DAO_kardex {
     ResultSet lq_rs;
@@ -80,7 +81,7 @@ public class DAO_kardex {
         return resp;
     }
     
-    public boolean IST_kardex(BEAN_kardex OBJ_kar, pnl_grid_saldos_iniciales OBJ_pgs) throws SQLException {
+    public boolean IST_kardex(BEAN_kardex OBJ_kar, JTable OBJ_pgs) throws SQLException {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
@@ -88,19 +89,19 @@ public class DAO_kardex {
             
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
-                for (int i = 0; i < OBJ_pgs.TBL_saldos_iniciales.getRowCount(); i++) {
-                    lq_rs = go_dao_articulo.SLT_datos_articulo_x_articulo(OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 2).toString().trim());
+                for (int i = 0; i < OBJ_pgs.getRowCount(); i++) {
+                    lq_rs = go_dao_articulo.SLT_datos_articulo_x_articulo(OBJ_pgs.getValueAt(i, 2).toString().trim());
                     SQL = "select * from ist_kardex_detalle('"+OBJ_kar.getCodigo_operacion()+"',"
-                            + "'"+OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 0).toString().trim()+"',"
-                            + "'"+OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 5).toString().trim().substring(8, 12)+OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 5).toString().trim().substring(0,2)+OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 5).toString().trim().substring(3, 7)+"',"
-                            + "'"+OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 2).toString().trim()+"',"
-                            + "'"+OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 6).toString().trim()+"',"
-                            + "'"+OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 3).toString().trim()+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 0).toString().trim()+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 5).toString().trim().substring(8, 12)+OBJ_pgs.getValueAt(i, 5).toString().trim().substring(0,2)+OBJ_pgs.getValueAt(i, 5).toString().trim().substring(3, 7)+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 2).toString().trim()+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 6).toString().trim()+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 3).toString().trim()+"',"
                             + "'"+lq_rs.getString(4)+"',"
-                            + "'"+OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 1).toString().trim()+"',"
-                            + (double) OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 8)+","
-                            + (double) OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 10)+","
-                            + (int) OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, 7)+")";
+                            + "'"+OBJ_pgs.getValueAt(i, 1).toString().trim()+"',"
+                            + (double) OBJ_pgs.getValueAt(i, 8)+","
+                            + (double) OBJ_pgs.getValueAt(i, 10)+","
+                            + (int) OBJ_pgs.getValueAt(i, 7)+")";
                     lq_rs = lq_stm.executeQuery(SQL);
                 }
                 if (lq_rs.next()) {
@@ -113,6 +114,43 @@ public class DAO_kardex {
         } catch (Exception e) {
             lq_stm.getConnection().rollback();            
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_kardex", e.getMessage());
+        }
+        return resp;
+    }
+    
+    public boolean UPD_kardex(BEAN_kardex OBJ_kar, JTable OBJ_pgs) throws SQLException {
+        boolean resp = false;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from upd_kardex('"+OBJ_kar.getCodigo_operacion()+"','"+OBJ_kar.getCodigo_almacen()+"','"+OBJ_kar.getFecha_emision()+"','"+OBJ_kar.getCodigo_movimiento()+"','"+OBJ_kar.getCodigo_documento()+"','"+OBJ_kar.getSerie_documento()+"','"+OBJ_kar.getNumero_documento()+"','"+OBJ_kar.getCodigo_documento_ref()+"','"+OBJ_kar.getSerie_documento_ref()+"','"+OBJ_kar.getNumero_documento_ref()+"','"+OBJ_kar.getTipo_movimiento()+"','"+OBJ_kar.getEs_transferencia()+"','"+OBJ_kar.getCodigo_almacen_origen()+"','"+OBJ_kar.getObservacion()+"','"+OBJ_kar.getStatus()+"')";
+            
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                for (int i = 0; i < OBJ_pgs.getRowCount(); i++) {
+                    lq_rs = go_dao_articulo.SLT_datos_articulo_x_articulo(OBJ_pgs.getValueAt(i, 2).toString().trim());
+                    SQL = "select * from ist_kardex_detalle('"+OBJ_kar.getCodigo_operacion()+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 0).toString().trim()+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 5).toString().trim().substring(8, 12)+OBJ_pgs.getValueAt(i, 5).toString().trim().substring(0,2)+OBJ_pgs.getValueAt(i, 5).toString().trim().substring(3, 7)+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 2).toString().trim()+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 6).toString().trim()+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 3).toString().trim()+"',"
+                            + "'"+lq_rs.getString(4)+"',"
+                            + "'"+OBJ_pgs.getValueAt(i, 1).toString().trim()+"',"
+                            + (double) OBJ_pgs.getValueAt(i, 8)+","
+                            + (double) OBJ_pgs.getValueAt(i, 10)+","
+                            + (int) OBJ_pgs.getValueAt(i, 7)+")";
+                    lq_rs = lq_stm.executeQuery(SQL);
+                }
+                if (lq_rs.next()) {
+                    lq_stm.getConnection().commit();
+                    go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_kardex", "SE ACTUALIZO BASE DE DATOS");
+                    resp = true;
+                }
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();            
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_kardex", e.getMessage());
         }
         return resp;
     }

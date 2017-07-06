@@ -123,6 +123,27 @@ public class evt_cab_saldos_iniciales {
         }
     }
 
+    public boolean verifica_cambios(BEAN_kardex OBJ_kar, pnl_cab_saldos_iniciales OBJ_pcs, cbx_tipo_documento cbx_documento_ref) {
+        boolean resp = false;
+        if (OBJ_kar.getCodigo_documento_ref().equalsIgnoreCase(cbx_documento_ref.getID())) {
+            if (OBJ_kar.getNumero_documento_ref().equalsIgnoreCase(OBJ_pcs.TXT_numero_ref.getText().trim())) {
+                if (OBJ_kar.getFecha_emision().equalsIgnoreCase(OBJ_pcs.TXT_fecha_emision.getText().trim())) {
+                    if (OBJ_kar.getObservacion().equalsIgnoreCase(OBJ_pcs.TXT_observacion.getText().trim())) {
+                    } else {
+                        resp = true;
+                    }
+                } else {
+                    resp = true;
+                }
+            } else {
+                resp = true;
+            }
+        } else {
+            resp = true;
+        }
+        return resp;
+    }
+
     public KeyListener evento_press(pnl_cab_saldos_iniciales OBJ_pdc, KeyListener KeyEvnt) {
         OBJ_pdc.TXT_numero.addKeyListener(KeyEvnt);
         OBJ_pdc.CBX_tipo_doc_ref.addKeyListener(KeyEvnt);

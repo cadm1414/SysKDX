@@ -19,6 +19,9 @@ import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 
 public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
 
@@ -32,8 +35,9 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
     static boolean lb_valor_op[] = new boolean[8];
     cbx_tipo_documento lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref;
+    DefaultTableModel modelo;
     ResultSet lq_rs;
-    int li_tipo_operacion;
+    int li_tipo_operacion, cont = 0;
     String ls_codigo, ls_codigo_almacen, ls_codigo_movimiento, ls_codigo_articulo, ls_periodo_produccion, ls_oc;
     String ls_opcion = "M A A A";
     String ls_modulo = "INVENT", ls_capa = "GUI", ls_clase = "jif_saldos_iniciales";
@@ -63,6 +67,9 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
         gs_parametros[1] = "";
 
         get_descripcion_tipo_movimiento("00");
+
+        modelo = (DefaultTableModel) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getModel();
+        modelo.addTableModelListener(TablaListener);
 
         lo_evt_opciones_3.evento_click(lo_pnl_opciones_3, Listener);
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
@@ -241,6 +248,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
 
     private void evt_editar() {
         li_tipo_operacion = 1;
+        cont = 0;
         lo_evt_opciones_3.activa_btn_opciones(3, lo_pnl_opciones_3, lb_valor_op);
         lo_evt_cab_saldos_iniciales.activa_campos(1, lo_pnl_cab_saldos_iniciales, true);
         lo_evt_grid_saldos_iniciales.activa_campos(0, lo_pnl_grid_saldos_iniciales, true);
@@ -280,7 +288,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                             lo_bean_kardex.setCodigo_operacion(ls_codigo);
                             lo_bean_kardex.setCodigo_almacen(ls_codigo_almacen);
                             lo_evt_cab_saldos_iniciales.setea_campos(lo_bean_kardex, lo_pnl_cab_saldos_iniciales, lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref);
-                            if (go_dao_kardex.IST_kardex(lo_bean_kardex, lo_pnl_grid_saldos_iniciales)) {
+                            if (go_dao_kardex.IST_kardex(lo_bean_kardex, lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales)) {
                                 lo_evt_cab_saldos_iniciales.limpia_datos(lo_pnl_cab_saldos_iniciales);
                                 lo_evt_cab_saldos_iniciales.activa_campos(0, lo_pnl_cab_saldos_iniciales, false);
                                 lo_evt_grid_saldos_iniciales.limpia_tabla(lo_pnl_grid_saldos_iniciales);
@@ -290,6 +298,29 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                         } catch (Exception e) {
                         }
                     }
+                }
+                break;
+            case 1:
+                if (lo_evt_cab_saldos_iniciales.verifica_cambios(lo_bean_kardex, lo_pnl_cab_saldos_iniciales, lo_cbx_tipo_documento_ref) || cont != 0) {
+                    if (lo_evt_cab_saldos_iniciales.valida_campos(lo_pnl_cab_saldos_iniciales)) {
+                        if (lo_evt_grid_saldos_iniciales.valida_campos(lo_pnl_grid_saldos_iniciales)) {
+                            try {
+                                lo_evt_cab_saldos_iniciales.setea_campos(lo_bean_kardex, lo_pnl_cab_saldos_iniciales, lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref);
+                                if (go_dao_kardex_detalle.DLT_kardex_detalle(ls_codigo)) {
+                                    if (go_dao_kardex.UPD_kardex(lo_bean_kardex, lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales)) {
+                                        lo_evt_cab_saldos_iniciales.limpia_datos(lo_pnl_cab_saldos_iniciales);
+                                        lo_evt_cab_saldos_iniciales.activa_campos(0, lo_pnl_cab_saldos_iniciales, false);
+                                        lo_evt_grid_saldos_iniciales.limpia_tabla(lo_pnl_grid_saldos_iniciales);
+                                        lo_evt_grid_saldos_iniciales.activa_campos(0, lo_pnl_grid_saldos_iniciales, false);
+                                        lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                                    }
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                } else {
+                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "NO SE A REALIZADO CAMBIOS");
                 }
                 break;
         }
@@ -461,6 +492,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                         if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8) == null) {
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 8, false, false);
                         } else if ((Double) lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 8) == 0) {
+                            lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.setValueAt(null, fila, 8);
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 8, false, false);
                         }
                     }
@@ -502,6 +534,16 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
 
         @Override
         public void mouseExited(MouseEvent me) {
+        }
+    };
+
+    TableModelListener TablaListener = new TableModelListener() {
+
+        @Override
+        public void tableChanged(TableModelEvent tme) {
+            if (tme.getType() == TableModelEvent.UPDATE && li_tipo_operacion == 1) {
+                cont++;
+            }
         }
     };
 
