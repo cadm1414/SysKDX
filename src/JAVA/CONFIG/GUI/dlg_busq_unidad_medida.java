@@ -70,8 +70,12 @@ public class dlg_busq_unidad_medida extends javax.swing.JDialog {
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == TXT_dato) {
-                    lo_pnl_grid_busq_unidad_medida.TBL_unidad_medida.requestFocus();
-                    lo_pnl_grid_busq_unidad_medida.TBL_unidad_medida.changeSelection(0, 0, false, false);
+                    if (lo_pnl_grid_busq_unidad_medida.TBL_unidad_medida.getRowCount() != 0) {
+                        lo_pnl_grid_busq_unidad_medida.TBL_unidad_medida.requestFocus();
+                        lo_pnl_grid_busq_unidad_medida.TBL_unidad_medida.changeSelection(0, 0, false, false);
+                    } else {
+                        TXT_dato.requestFocus();
+                    }
                 }
                 if (ke.getSource() == lo_pnl_grid_busq_unidad_medida.TBL_unidad_medida) {
                     retorna();
@@ -132,11 +136,13 @@ public class dlg_busq_unidad_medida extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BUSQUEDA UNIDAD DE MEDIDA");
         setIconImage(getIconImage());
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
 
         TXT_dato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_dato.setNextFocusableComponent(TXT_dato);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -210,7 +216,7 @@ public class dlg_busq_unidad_medida extends javax.swing.JDialog {
 
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));       
+                getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));
         return retValue;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

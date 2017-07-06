@@ -41,7 +41,7 @@ public class dlg_almacen_x_permiso extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_almacen_x_permiso.TBL_almacen_acceso.getModel();
         try {
-            lq_rs = go_dao_usuario_permisos.SLT_grid_almacen_x_permiso(gi_id_usuario, "1", "1","%");
+            lq_rs = go_dao_usuario_permisos.SLT_grid_almacen_x_permiso(gi_id_usuario, "1", "1", "%");
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
@@ -70,8 +70,12 @@ public class dlg_almacen_x_permiso extends javax.swing.JDialog {
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == TXT_dato) {
-                    lo_pnl_grid_almacen_x_permiso.TBL_almacen_acceso.requestFocus();
-                    lo_pnl_grid_almacen_x_permiso.TBL_almacen_acceso.changeSelection(0, 0, false, false);
+                    if (lo_pnl_grid_almacen_x_permiso.TBL_almacen_acceso.getRowCount() != 0) {
+                        lo_pnl_grid_almacen_x_permiso.TBL_almacen_acceso.requestFocus();
+                        lo_pnl_grid_almacen_x_permiso.TBL_almacen_acceso.changeSelection(0, 0, false, false);
+                    } else {
+                        TXT_dato.requestFocus();
+                    }
                 }
                 if (ke.getSource() == lo_pnl_grid_almacen_x_permiso.TBL_almacen_acceso) {
                     retorna();
@@ -132,6 +136,7 @@ public class dlg_almacen_x_permiso extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BUSQUEDA ALMACEN");
         setIconImage(getIconImage());
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));

@@ -94,8 +94,13 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
     private void actualiza_tabla() {
         ls_fecha_ini = TXT_fecha_ini.getText();
         ls_fecha_fin = TXT_fecha_fin.getText();
-        limpia_tabla();
-        datos_tabla();
+        if (go_fnc_operaciones_campos.compara_fechas(ls_fecha_ini, ls_fecha_fin) <= 0) {
+            limpia_tabla();
+            datos_tabla();
+        } else {            
+            TXT_fecha_ini.requestFocus();
+            go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FECHA INICIAL TIENE QUE SER MENOR y/o IGUAL A FECHA FINAL");
+        }
     }
 
     public void retorna() {
@@ -114,8 +119,8 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == TXT_fecha_ini && !TXT_fecha_ini.getText().trim().equalsIgnoreCase("/  /")) {
                     if (go_fnc_operaciones_campos.valida_fecha(TXT_fecha_ini.getText())) {
-                        actualiza_tabla();
                         TXT_fecha_fin.requestFocus();
+                        actualiza_tabla();                        
                     } else {
                         TXT_fecha_ini.setText(ls_fecha_ini);
                         go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO");
@@ -124,16 +129,20 @@ public class dlg_busq_kardex extends javax.swing.JDialog {
                 }
                 if (ke.getSource() == TXT_fecha_fin && !TXT_fecha_fin.getText().trim().equalsIgnoreCase("/  /")) {
                     if (go_fnc_operaciones_campos.valida_fecha(TXT_fecha_fin.getText())) {
-                        actualiza_tabla();
                         TXT_dato.requestFocus();
+                        actualiza_tabla();                        
                     } else {
                         TXT_fecha_ini.setText(ls_fecha_fin);
                         go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO");
                     }
                 }
                 if (ke.getSource() == TXT_dato) {
-                    lo_pnl_grid_kardex.TBL_kardex.requestFocus();
-                    lo_pnl_grid_kardex.TBL_kardex.changeSelection(0, 0, false, false);
+                    if (lo_pnl_grid_kardex.TBL_kardex.getRowCount() != 0) {
+                        lo_pnl_grid_kardex.TBL_kardex.requestFocus();
+                        lo_pnl_grid_kardex.TBL_kardex.changeSelection(0, 0, false, false);
+                    } else {
+                        TXT_dato.requestFocus();
+                    }
                 }
                 if (ke.getSource() == lo_pnl_grid_kardex.TBL_kardex) {
                     retorna();

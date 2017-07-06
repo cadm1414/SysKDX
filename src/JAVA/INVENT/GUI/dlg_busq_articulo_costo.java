@@ -17,7 +17,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
     pnl_grid_busq_articulo_costo lo_pnl_grid_busq_articulo_costo = new pnl_grid_busq_articulo_costo();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
-    public String ls_codigo_articulo,ls_oc,ls_periodo_produccion;
+    public String ls_codigo_articulo, ls_oc, ls_periodo_produccion;
 
     public dlg_busq_articulo_costo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -58,7 +58,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
     public void retorna() {
         ls_codigo_articulo = lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getValueAt(lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getSelectedRow(), 0).toString();
         ls_oc = lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getValueAt(lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getSelectedRow(), 2).toString();
-        ls_periodo_produccion= lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getValueAt(lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getSelectedRow(), 4).toString();
+        ls_periodo_produccion = lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getValueAt(lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getSelectedRow(), 4).toString();
         this.dispose();
     }
 
@@ -72,8 +72,12 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == TXT_dato) {
-                    lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.requestFocus();
-                    lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.changeSelection(0, 0, false, false);
+                    if (lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getRowCount() != 0) {
+                        lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.requestFocus();
+                        lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.changeSelection(0, 0, false, false);
+                    } else {
+                        TXT_dato.requestFocus();
+                    }
                 }
                 if (ke.getSource() == lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo) {
                     retorna();
@@ -214,7 +218,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
 
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));       
+                getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));
         return retValue;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

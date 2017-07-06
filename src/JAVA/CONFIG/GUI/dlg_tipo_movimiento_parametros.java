@@ -18,7 +18,7 @@ public class dlg_tipo_movimiento_parametros extends javax.swing.JDialog {
     pnl_grid_tipo_movimiento_parametros lo_pnl_grid_tipo_movimiento_parametros = new pnl_grid_tipo_movimiento_parametros();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
-    public String ls_codigo_movimiento,ls_tipo_movimiento,ls_es_transferencia,ls_tipo_almacen,ls_es_visible,ls_status,ls_codigo_movimiento_p;
+    public String ls_codigo_movimiento, ls_tipo_movimiento, ls_es_transferencia, ls_tipo_almacen, ls_es_visible, ls_status, ls_codigo_movimiento_p;
 
     public dlg_tipo_movimiento_parametros(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -42,7 +42,7 @@ public class dlg_tipo_movimiento_parametros extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_tipo_movimiento_parametros.TBL_tipo_movimiento.getModel();
         try {
-            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros(ls_tipo_movimiento,ls_es_transferencia,ls_tipo_almacen,ls_es_visible,ls_status,ls_codigo_movimiento_p);
+            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros(ls_tipo_movimiento, ls_es_transferencia, ls_tipo_almacen, ls_es_visible, ls_status, ls_codigo_movimiento_p);
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
@@ -71,8 +71,12 @@ public class dlg_tipo_movimiento_parametros extends javax.swing.JDialog {
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == TXT_dato) {
-                    lo_pnl_grid_tipo_movimiento_parametros.TBL_tipo_movimiento.requestFocus();
-                    lo_pnl_grid_tipo_movimiento_parametros.TBL_tipo_movimiento.changeSelection(0, 0, false, false);
+                    if (lo_pnl_grid_tipo_movimiento_parametros.TBL_tipo_movimiento.getRowCount() != 0) {
+                        lo_pnl_grid_tipo_movimiento_parametros.TBL_tipo_movimiento.requestFocus();
+                        lo_pnl_grid_tipo_movimiento_parametros.TBL_tipo_movimiento.changeSelection(0, 0, false, false);
+                    } else {
+                        TXT_dato.requestFocus();
+                    }
                 }
                 if (ke.getSource() == lo_pnl_grid_tipo_movimiento_parametros.TBL_tipo_movimiento) {
                     retorna();
@@ -133,6 +137,7 @@ public class dlg_tipo_movimiento_parametros extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BUSQUEDA ALMACEN");
         setIconImage(getIconImage());
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));

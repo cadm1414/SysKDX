@@ -70,8 +70,12 @@ public class dlg_busq_familia extends javax.swing.JDialog {
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == TXT_dato) {
-                    lo_pnl_grid_busq_familia.TBL_familia.requestFocus();
-                    lo_pnl_grid_busq_familia.TBL_familia.changeSelection(0, 0, false, false);
+                    if (lo_pnl_grid_busq_familia.TBL_familia.getRowCount() != 0) {
+                        lo_pnl_grid_busq_familia.TBL_familia.requestFocus();
+                        lo_pnl_grid_busq_familia.TBL_familia.changeSelection(0, 0, false, false);
+                    } else {
+                        TXT_dato.requestFocus();
+                    }
                 }
                 if (ke.getSource() == lo_pnl_grid_busq_familia.TBL_familia) {
                     retorna();
@@ -132,6 +136,7 @@ public class dlg_busq_familia extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BUSQUEDA FAMILIA");
         setIconImage(getIconImage());
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
@@ -211,7 +216,7 @@ public class dlg_busq_familia extends javax.swing.JDialog {
 
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));       
+                getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));
         return retValue;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

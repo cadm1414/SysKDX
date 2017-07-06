@@ -97,6 +97,25 @@ public class fnc_operaciones_campos {
         return resp;
     }
 
+    /*COMPARA FECHAS
+     0 = fechas iguales
+     negativo = fecha menor
+     positivo = fecha mayor
+     */
+    public int compara_fechas(String dato_ini, String dato_fin) {
+        int resp = 0;
+        try {
+            SimpleDateFormat FormatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            FormatoFecha.setLenient(false);
+            Date fecha_ini = FormatoFecha.parse(dato_ini);
+            Date fecha_fin = FormatoFecha.parse(dato_fin);
+
+            resp = fecha_ini.compareTo(fecha_fin);
+        } catch (Exception e) {
+        }
+        return resp;
+    }
+
     public String recupera_fecha(String dato) {
         String fecha = (dato.substring(8, 10)) + (dato.substring(5, 7)) + (dato.substring(0, 4));
         return fecha;
