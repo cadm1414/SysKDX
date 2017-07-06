@@ -123,7 +123,6 @@ public class jif_datos_usuario extends javax.swing.JInternalFrame {
     }
 
     public void evt_guardar() {
-        lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
         lo_cbx_rol = (cbx_rol) lo_pnl_datos_usuario.CBX_rol.getSelectedItem();
         /*
         NUEVO = 0

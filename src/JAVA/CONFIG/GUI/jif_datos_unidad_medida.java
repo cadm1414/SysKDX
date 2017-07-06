@@ -125,7 +125,6 @@ public class jif_datos_unidad_medida extends javax.swing.JInternalFrame {
     }
 
     private void evt_guardar() {
-        lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
         lo_cbx_tabla_sunat = (cbx_tabla_sunat) lo_pnl_datos_unidad_medida.CBX_codigo_sunat.getSelectedItem();
         /*
         NUEVO = 0

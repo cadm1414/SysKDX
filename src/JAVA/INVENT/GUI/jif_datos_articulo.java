@@ -265,9 +265,7 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
         }
     }
 
-    private void evt_guardar() {
-        lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
-        
+    private void evt_guardar() {        
         lo_cbx_familia = (cbx_familia) lo_pnl_datos_articulo.CBX_familia.getSelectedItem();
         lo_cbx_existencia = (cbx_tabla_sunat) lo_pnl_datos_articulo.CBX_existencia.getSelectedItem();
         lo_cbx_producto = (cbx_producto) lo_pnl_datos_articulo.CBX_producto.getSelectedItem();

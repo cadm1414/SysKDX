@@ -171,7 +171,7 @@ public class DAO_articulo {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_datos_articulo_x_articulo('" + codigo_articulo + "') "
-                    + "as (nombre_articulo character varying(150),simbolo_unidad character varying,tara numeric(6,3))";
+                    + "as (nombre_articulo character varying(150),simbolo_unidad character varying,tara numeric(6,3),codigo_unidad character(4))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {

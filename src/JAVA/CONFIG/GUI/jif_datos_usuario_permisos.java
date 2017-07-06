@@ -162,7 +162,6 @@ public class jif_datos_usuario_permisos extends javax.swing.JInternalFrame {
     }
 
     private void evt_guardar() {
-        lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
         if (lo_evt_datos_usuario_permisos.valida_campos(lo_pnl_datos_usuario_permisos)) {
             try {
                 lo_evt_datos_usuario_permisos.setea_campos(lo_bean_usuario_permisos, lo_pnl_datos_usuario_permisos);

@@ -155,7 +155,6 @@ public class jif_datos_almacen extends javax.swing.JInternalFrame {
     }
 
     private void evt_guardar() {
-        lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
         lo_cbx_sucursal = (cbx_sucursal) lo_pnl_datos_almacen.CBX_sucursal.getSelectedItem();
         /*
         NUEVO = 0

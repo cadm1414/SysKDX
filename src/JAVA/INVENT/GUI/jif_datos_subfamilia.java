@@ -123,8 +123,7 @@ public class jif_datos_subfamilia extends javax.swing.JInternalFrame {
         }
     }
 
-    private void evt_guardar() {
-        lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
+    private void evt_guardar() {        
         lo_cbx_familia = (cbx_familia) lo_pnl_datos_subfamilia.CBX_familia.getSelectedItem();
         /*
         NUEVO = 0

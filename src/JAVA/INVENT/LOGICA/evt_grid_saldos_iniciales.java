@@ -36,7 +36,7 @@ public class evt_grid_saldos_iniciales {
     public void agrega_fila(pnl_grid_saldos_iniciales OBJ_pgs, int fila_s) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
         OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-
+        
         int fila = OBJ_pgs.TBL_saldos_iniciales.getRowCount();
 
         if (fila == (fila_s + 1)) {
@@ -90,6 +90,54 @@ public class evt_grid_saldos_iniciales {
         for (int x = 0; x < OBJ_pgs.TBL_saldos_iniciales.getRowCount(); x++) {
             modelo.setValueAt(go_fnc_operaciones_campos.completa_digitos((x + 1) + "", "0", 3), x, 0);
         }
+    }
+
+    public boolean valida_campos(pnl_grid_saldos_iniciales OBJ_pgs) {
+        boolean resp = false;
+        int valida = 0;
+        if (OBJ_pgs.TBL_saldos_iniciales.getRowCount() != 0) {
+            for (int i = 0; i < OBJ_pgs.TBL_saldos_iniciales.getRowCount(); i++) {
+                for (int x = 0; x < OBJ_pgs.TBL_saldos_iniciales.getColumnCount(); x++) {
+                    if (OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, x) != null) {
+                        if (!OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, x).toString().trim().equalsIgnoreCase("")) {
+                            if (x == 1) {
+                                String lote = OBJ_pgs.TBL_saldos_iniciales.getValueAt(i, x).toString().trim();
+                                if (go_fnc_operaciones_campos.cant_caracter(lote, 4, 6) && lote.matches("\\d*")) {
+                                    resp = true;
+                                } else {
+                                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "FORMATO DE LOTE INCORRECTO");
+                                    OBJ_pgs.TBL_saldos_iniciales.setValueAt("", i, 1);
+                                    OBJ_pgs.TBL_saldos_iniciales.changeSelection(i, 1, false, false);
+                                    resp = false;
+                                    valida++;
+                                    break;
+                                }
+                            }
+                        } else {
+                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "FILA NO CONTIENE DATOS");
+                            OBJ_pgs.TBL_saldos_iniciales.changeSelection(i, 1, false, false);
+                            valida++;
+                            resp = false;
+                            break;
+                        }
+                    } else {
+                        go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "FILA NO CONTIENE DATOS");
+                        OBJ_pgs.TBL_saldos_iniciales.changeSelection(i, 1, false, false);
+                        valida++;
+                        resp = false;
+                        break;
+                    }
+                }
+                if (valida != 0) {
+                    resp = false;
+                    break;
+                }
+            }
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "DOCUMENTO SIN DETALLE");
+            agrega_fila(OBJ_pgs, -1);
+        }
+        return resp;
     }
 
     public KeyListener evento_press(pnl_grid_saldos_iniciales OBJ_pdc, KeyListener KeyEvnt) {

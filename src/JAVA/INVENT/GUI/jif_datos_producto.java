@@ -132,7 +132,6 @@ public class jif_datos_producto extends javax.swing.JInternalFrame {
     }
 
     private void evt_guardar() {
-        lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
         /*
         NUEVO = 0
         EDITAR = 1

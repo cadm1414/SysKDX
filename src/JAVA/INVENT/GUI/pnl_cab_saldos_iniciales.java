@@ -1,11 +1,14 @@
 
 package JAVA.INVENT.GUI;
 
+import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+
 public class pnl_cab_saldos_iniciales extends javax.swing.JPanel {
 
     
     public pnl_cab_saldos_iniciales() {
         initComponents();
+        TXT_observacion.setDocument(new fnc_txt_mayuscula());
     }
 
     @SuppressWarnings("unchecked")

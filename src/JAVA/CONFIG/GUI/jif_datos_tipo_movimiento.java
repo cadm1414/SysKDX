@@ -127,7 +127,6 @@ public class jif_datos_tipo_movimiento extends javax.swing.JInternalFrame {
     }
 
     private void evt_guardar() {
-        lo_evt_opciones_2.activa_btn_opciones(5, lo_pnl_opciones_2, lb_valor_op);
         lo_cbx_almacen = (cbx_almacen) lo_pnl_datos_tipo_movimiento.CBX_almacen.getSelectedItem();
         lo_cbx_tabla_sunat = (cbx_tabla_sunat) lo_pnl_datos_tipo_movimiento.CBX_codigo_sunat.getSelectedItem();
         /*

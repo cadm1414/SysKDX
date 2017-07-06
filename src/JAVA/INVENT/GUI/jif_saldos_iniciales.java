@@ -31,7 +31,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
     BEAN_kardex lo_bean_kardex = new BEAN_kardex();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
     static boolean lb_valor_op[] = new boolean[8];
-    cbx_tipo_documento lo_cbx_tipo_documento;
+    cbx_tipo_documento lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref;
     ResultSet lq_rs;
     int li_tipo_operacion;
     String ls_codigo, ls_codigo_almacen, ls_codigo_movimiento, ls_codigo_articulo, ls_periodo_produccion, ls_oc;
@@ -150,6 +150,18 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
         gs_parametros[5] = "0";
     }
 
+    public void elimina_ult_fila() {
+        try {
+            int filas = lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getRowCount();
+            if (filas > 1) {
+                if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(filas - 1, 1).toString().trim().equalsIgnoreCase("") || lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(filas - 1, 2).toString().trim().equalsIgnoreCase("")) {
+                    lo_evt_grid_saldos_iniciales.elimina_fila(lo_pnl_grid_saldos_iniciales, filas - 1);
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+
     private void evt_f5() {
         go_dlg_tipo_movimiento_parametros = new dlg_tipo_movimiento_parametros(null, true);
         go_dlg_tipo_movimiento_parametros.ls_tipo_movimiento = "1";
@@ -250,15 +262,47 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
+    private void evt_guardar() {
+        lo_cbx_tipo_documento = (cbx_tipo_documento) lo_pnl_cab_saldos_iniciales.CBX_tipo_doc.getSelectedItem();
+        lo_cbx_tipo_documento_ref = (cbx_tipo_documento) lo_pnl_cab_saldos_iniciales.CBX_tipo_doc_ref.getSelectedItem();
+        //elimina_ult_fila();
+        /*
+        NUEVO = 0
+        EDITAR = 1
+         */
+        switch (li_tipo_operacion) {
+            case 0:
+                if (lo_evt_cab_saldos_iniciales.valida_campos(lo_pnl_cab_saldos_iniciales)) {
+                    if (lo_evt_grid_saldos_iniciales.valida_campos(lo_pnl_grid_saldos_iniciales)) {
+                        try {
+                            ls_codigo = lo_cbx_tipo_documento.getID() + ls_codigo_almacen + lo_pnl_cab_saldos_iniciales.TXT_numero.getText().trim();
+                            lo_bean_kardex.setCodigo_operacion(ls_codigo);
+                            lo_bean_kardex.setCodigo_almacen(ls_codigo_almacen);
+                            lo_evt_cab_saldos_iniciales.setea_campos(lo_bean_kardex, lo_pnl_cab_saldos_iniciales, lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref);
+                            if (go_dao_kardex.IST_kardex(lo_bean_kardex, lo_pnl_grid_saldos_iniciales)) {
+                                lo_evt_cab_saldos_iniciales.limpia_datos(lo_pnl_cab_saldos_iniciales);
+                                lo_evt_cab_saldos_iniciales.activa_campos(0, lo_pnl_cab_saldos_iniciales, false);
+                                lo_evt_grid_saldos_iniciales.limpia_tabla(lo_pnl_grid_saldos_iniciales);
+                                lo_evt_grid_saldos_iniciales.activa_campos(0, lo_pnl_grid_saldos_iniciales, false);
+                                lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
     private void evt_cancelar() {
         li_tipo_operacion = 2;
-        lo_evt_cab_saldos_iniciales.activa_campos(0, lo_pnl_cab_saldos_iniciales, false); 
+        lo_evt_cab_saldos_iniciales.activa_campos(0, lo_pnl_cab_saldos_iniciales, false);
         lo_evt_grid_saldos_iniciales.activa_campos(0, lo_pnl_grid_saldos_iniciales, false);
-         lo_evt_grid_saldos_iniciales.limpia_tabla(lo_pnl_grid_saldos_iniciales);
+        lo_evt_grid_saldos_iniciales.limpia_tabla(lo_pnl_grid_saldos_iniciales);
         if (ls_codigo != null) {
-            lo_evt_cab_saldos_iniciales.muestra_datos(lo_pnl_cab_saldos_iniciales, lo_bean_kardex);           
-            get_descripcion_kardex_detalle(ls_codigo);            
+            lo_evt_cab_saldos_iniciales.muestra_datos(lo_pnl_cab_saldos_iniciales, lo_bean_kardex);
+            get_descripcion_kardex_detalle(ls_codigo);
             lo_evt_opciones_3.activa_btn_opciones(2, lo_pnl_opciones_3, lb_valor_op);
         } else {
             lo_evt_cab_saldos_iniciales.limpia_datos(lo_pnl_cab_saldos_iniciales);
@@ -284,6 +328,9 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
             if (ae.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
                 evt_cancelar();
             }
+            if (ae.getSource() == lo_pnl_opciones_3.BTN_guardar) {
+                evt_guardar();
+            }
         }
     };
 
@@ -304,7 +351,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
             if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_3.BTN_editar.isEnabled()) {
                 evt_editar();
             }
-            if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_3.BTN_eliminar.isEnabled()) {
+            if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_3.BTN_eliminar.isEnabled()) {
                 evt_eliminar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ESCAPE && lo_pnl_opciones_3.BTN_cancelar.isEnabled()) {
@@ -312,6 +359,9 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
             }
             if (ke.getKeyCode() == KeyEvent.VK_F5 && lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 2) {
                 evt_f5_articulo_costo();
+            }
+            if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_3.BTN_guardar.isEnabled()) {
+                evt_guardar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_nuevo) {
@@ -325,6 +375,9 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
                     evt_eliminar();
+                }
+                if (ke.getSource() == lo_pnl_opciones_3.BTN_guardar) {
+                    evt_guardar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
                     evt_cancelar();
@@ -389,6 +442,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.setValueAt(lote, fila, 1);
                         }
                     }
+
                     if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getSelectedColumn() == 3) {
                         if (lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.getValueAt(fila, 2).toString().trim().equalsIgnoreCase("")) {
                             lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales.changeSelection(fila, 2, false, false);
