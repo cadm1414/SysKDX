@@ -23,7 +23,7 @@ public class pnl_ini_almacen extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        jLabel1.setText("ALMACEN");
+        jLabel1.setText("Almacen");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");

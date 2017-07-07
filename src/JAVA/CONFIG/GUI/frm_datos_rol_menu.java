@@ -16,9 +16,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public class frm_datos_rol_menu extends javax.swing.JFrame {
@@ -192,7 +196,7 @@ public class frm_datos_rol_menu extends javax.swing.JFrame {
         }
     }
 
-    private void evt_salir() {
+    private void evt_salir() throws UnknownHostException, SocketException {
         go_frm_principal = new frm_principal();
         go_evt_salir.ejecuta(go_frm_principal, this);
     }
@@ -219,7 +223,13 @@ public class frm_datos_rol_menu extends javax.swing.JFrame {
                 evt_reporte();
             }
             if (ae.getSource() == lo_pnl_salir.BTN_salir) {
-                evt_salir();
+                try {
+                    evt_salir();
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(frm_datos_rol_menu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SocketException ex) {
+                    Logger.getLogger(frm_datos_rol_menu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_cancelar) {
                 evt_cancelar();
@@ -271,7 +281,13 @@ public class frm_datos_rol_menu extends javax.swing.JFrame {
                     evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_salir.BTN_salir) {
-                    evt_salir();
+                    try {
+                        evt_salir();
+                    } catch (UnknownHostException ex) {
+                        Logger.getLogger(frm_datos_rol_menu.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SocketException ex) {
+                        Logger.getLogger(frm_datos_rol_menu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_cancelar) {
                     evt_cancelar();

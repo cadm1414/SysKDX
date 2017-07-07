@@ -2,9 +2,14 @@ package JAVA.ANCESTRO.GUI;
 
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.CONFIG.DAO.DAO_auditoria;
 import JAVA.CONFIG.LOGICA.jtr_menu_opciones;
 import JAVA.CONFIG.LOGICA.lst_menu_modulo;
 import JAVA.CONFIG.LOGICA.opciones_menu;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import javax.swing.Icon;
@@ -23,20 +28,37 @@ public class frm_principal extends javax.swing.JFrame {
     String ls_nodo;
     String ls_modulo = "ANCESTRO", ls_capa = "GUI", ls_clase = "frm_principal";
 
-    public frm_principal() {
+    public frm_principal() throws UnknownHostException, SocketException {
         initComponents();
         datos_pantalla();
         lista_modulo();
+        datos_pc();
+        registra_auditoria("INICIO DE SESION");
         this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
     private void datos_pantalla() {
-
         LBL_rol.setText(gs_nombre_rol);
         LBL_periodo.setText(gs_periodo);
         LBL_usuario.setText(gs_nombre_usuario);
         go_dao_general.SLT_datos();
         LBL_razon_social.setText(go_bean_general.getRazon_social());
+    }
+
+    private void datos_pc() throws UnknownHostException, SocketException {
+        InetAddress address = InetAddress.getLocalHost();
+        NetworkInterface network = NetworkInterface.getByInetAddress(address.getLocalHost());
+        byte[] mac = network.getHardwareAddress();
+        gs_direccion_ip = address.getHostAddress();
+        gs_nombre_pc = address.getHostName();
+        gs_direccion_mac = go_fnc_operaciones_campos.get_mac(mac);
+    }
+
+    private void registra_auditoria(String dato) {
+        try {
+            go_dao_auditoria.IST_auditoria(dato, "", "CONFIG", "0", "0013");
+        } catch (Exception e) {
+        }
     }
 
     private void lista_modulo() {
@@ -313,11 +335,12 @@ public class frm_principal extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if (go_fnc_mensaje.get_respuesta(0, "DESEA SALIR DEL SISTEMA") == 0) {
+            registra_auditoria("CIERRA SESION");
             System.exit(0);
         }
     }//GEN-LAST:event_formWindowClosing
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws UnknownHostException, SocketException {
         new frm_principal().setVisible(true);
 
     }

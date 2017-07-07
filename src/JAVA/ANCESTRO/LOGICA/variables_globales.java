@@ -57,6 +57,7 @@ import JAVA.INVENT.REPORT.pnl_rpt_lista_producto;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_subfamilia;
 import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
+import java.net.InetAddress;
 
 public class variables_globales {
 
@@ -79,12 +80,15 @@ public class variables_globales {
             gs_datos_usuario,
             gs_nombre_rol,
             gs_modulo[],
-            gs_codigo_modulo[];
+            gs_codigo_modulo[],
+            gs_direccion_ip,
+            gs_nombre_pc,
+            gs_direccion_mac;
     public static String[] gs_parametros  = new String[99999];
     public static int gi_codigo_empresa,
             gi_id_usuario,
             gi_id_rol;
-
+    
     //DAO
     public static DAO_registro_empresa go_dao_registro_empresa = new DAO_registro_empresa();
     public static DAO_periodo_empresa go_dao_periodo_empresa = new DAO_periodo_empresa();
@@ -112,6 +116,7 @@ public class variables_globales {
     public static DAO_tipo_documento go_dao_tipo_documento = new DAO_tipo_documento();
     public static DAO_kardex go_dao_kardex = new DAO_kardex();
     public static DAO_kardex_detalle go_dao_kardex_detalle = new DAO_kardex_detalle();
+    public static DAO_auditoria go_dao_auditoria = new DAO_auditoria();
 
     //GUI
     public static frm_principal go_frm_principal;

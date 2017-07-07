@@ -14,7 +14,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 
 public class frm_inicia_sesion extends javax.swing.JFrame {
 
