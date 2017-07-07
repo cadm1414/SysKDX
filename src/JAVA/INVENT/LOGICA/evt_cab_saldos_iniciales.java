@@ -6,14 +6,10 @@ import JAVA.INVENT.BEAN.BEAN_kardex;
 import JAVA.INVENT.GUI.pnl_cab_saldos_iniciales;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
-import java.util.Calendar;
 
 public class evt_cab_saldos_iniciales {
 
-    String ls_modulo = "INVENT", ls_capa = "LOGICA", ls_clase = "evt_cab_saldos_iniciales";
-    Calendar fecha = Calendar.getInstance();
-    String mes = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.MONTH) + 1) + "", "0", 2);
-    String dia = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.DAY_OF_MONTH)) + "", "0", 2);
+    String ls_modulo = "INVENT", ls_capa = "LOGICA", ls_clase = "evt_cab_saldos_iniciales";  
 
     public void activa_campos(int op, pnl_cab_saldos_iniciales OBJ_pdc, boolean valor) {
         switch (op) {
@@ -39,7 +35,7 @@ public class evt_cab_saldos_iniciales {
         OBJ_pdc.TXT_numero.setText("");
         OBJ_pdc.TXT_numero_ref.setText("");
         OBJ_pdc.TXT_numero.setText("");
-        OBJ_pdc.TXT_fecha_emision.setText(dia + mes + gs_periodo);
+        OBJ_pdc.TXT_fecha_emision.setText(gs_dia + gs_mes + gs_periodo);
         OBJ_pdc.TXT_observacion.setText("");
         OBJ_pdc.CBX_estado.setSelectedIndex(1);
         OBJ_pdc.LBL_numero_doc.setText("0000000000");

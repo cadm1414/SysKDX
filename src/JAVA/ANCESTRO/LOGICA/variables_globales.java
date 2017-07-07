@@ -40,6 +40,7 @@ import JAVA.INVENT.GUI.dlg_busq_marca;
 import JAVA.INVENT.GUI.dlg_busq_producto;
 import JAVA.INVENT.GUI.dlg_busq_subfamilia;
 import JAVA.INVENT.GUI.dlg_ini_almacen;
+import JAVA.INVENT.GUI.dlg_rpt_stock;
 import JAVA.INVENT.GUI.jif_datos_articulo;
 import JAVA.INVENT.GUI.jif_datos_articulo_costo;
 import JAVA.INVENT.GUI.jif_datos_familia;
@@ -55,9 +56,9 @@ import JAVA.INVENT.REPORT.pnl_rpt_lista_familia;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_marca;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_producto;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_subfamilia;
+import JAVA.INVENT.REPORT.pnl_rpt_stock_normal;
 import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
-import java.net.InetAddress;
 
 public class variables_globales {
 
@@ -83,7 +84,9 @@ public class variables_globales {
             gs_codigo_modulo[],
             gs_direccion_ip,
             gs_nombre_pc,
-            gs_direccion_mac;
+            gs_direccion_mac,
+            gs_dia,
+            gs_mes;
     public static String[] gs_parametros  = new String[99999];
     public static int gi_codigo_empresa,
             gi_id_usuario,
@@ -156,6 +159,7 @@ public class variables_globales {
     public static dlg_almacen_x_permiso go_dlg_almacen_x_permiso;
     public static dlg_tipo_movimiento_parametros go_dlg_tipo_movimiento_parametros;
     public static dlg_busq_kardex go_dlg_busq_kardex;
+    public static dlg_rpt_stock go_dlg_rpt_stock;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -183,4 +187,5 @@ public class variables_globales {
     public static pnl_rpt_lista_familia go_pnl_rpt_lista_familia;
     public static pnl_rpt_lista_subfamilia go_pnl_rpt_lista_subfamilia;
     public static pnl_rpt_lista_unidad_medida go_pnl_rpt_lista_unidad_medida;
+    public static pnl_rpt_stock_normal go_pnl_rpt_stock_normal;
 }

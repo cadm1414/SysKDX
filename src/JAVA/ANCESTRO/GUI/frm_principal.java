@@ -11,6 +11,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.sql.ResultSet;
+import java.util.Calendar;
 import java.util.HashMap;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -23,6 +24,7 @@ public class frm_principal extends javax.swing.JFrame {
     jtr_menu_opciones lo_jtr_menu_opciones = new jtr_menu_opciones();
     opciones_menu lo_opciones_menu = new opciones_menu();
     DefaultMutableTreeNode nodoSeleccionado;
+    Calendar fecha = Calendar.getInstance();
     ResultSet lq_rs = null;
     boolean resp;
     String ls_nodo;
@@ -43,6 +45,8 @@ public class frm_principal extends javax.swing.JFrame {
         LBL_usuario.setText(gs_nombre_usuario);
         go_dao_general.SLT_datos();
         LBL_razon_social.setText(go_bean_general.getRazon_social());
+        gs_mes = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.MONTH) + 1) + "", "0", 2);
+        gs_dia = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.DAY_OF_MONTH)) + "", "0", 2);
     }
 
     private void datos_pc() throws UnknownHostException, SocketException {

@@ -28,13 +28,18 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
     }
 
     private void formulario() {
-        lo_pnl_rpt_stock.setBounds(10, 10, 500, 70);
-        lo_pnl_aceptar_cancelar.setBounds(100, 70, 200, 50);
+        lo_pnl_rpt_stock.setBounds(10, 10, 500, 130);
+        lo_pnl_aceptar_cancelar.setBounds(100, 130, 200, 50);
 
         this.add(lo_pnl_rpt_stock);
         this.add(lo_pnl_aceptar_cancelar);
 
+        lo_pnl_rpt_stock.TXT_fecha_fin.setText(gs_dia + gs_mes + gs_periodo);
+
         lo_pnl_rpt_stock.TXT_codigo.addKeyListener(KeyEvnt);
+        lo_pnl_rpt_stock.CBX_tipo.addKeyListener(KeyEvnt);
+        lo_pnl_rpt_stock.TXT_fecha_fin.addKeyListener(KeyEvnt);
+
         lo_evt_aceptar_cancelar.evento_click(lo_pnl_aceptar_cancelar, Listener);
         lo_evt_aceptar_cancelar.evento_press(lo_pnl_aceptar_cancelar, KeyEvnt);
     }
@@ -51,8 +56,8 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
             if (lq_rs != null) {
                 lo_pnl_rpt_stock.TXT_codigo.setText(lq_rs.getString(1));
                 lo_pnl_rpt_stock.TXT_nombre.setText(lq_rs.getString(2));
-                gs_parametros[0]=lq_rs.getString(1);
-                gs_parametros[1]=lq_rs.getString(2);
+                gs_parametros[0] = lq_rs.getString(1);
+                gs_parametros[1] = lq_rs.getString(2);
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_almacen", "USUARIO SIN PERMISOS y/o ALMACEN NO EXISTE");
                 limpia_datos();
@@ -61,14 +66,22 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
         }
     }
 
-    private void muestra_jif() {
+    private void muestra_rpt() {
         if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_rpt_stock.TXT_codigo)) {
-            go_jif_saldos_iniciales = new jif_saldos_iniciales();
-            go_frm_principal.JDP_principal.add(go_jif_saldos_iniciales);
-            go_jif_saldos_iniciales.show();
-            dispose();
+            if (go_fnc_operaciones_campos.valida_fecha(lo_pnl_rpt_stock.TXT_fecha_fin.getText())) {
+                if (lo_pnl_rpt_stock.TXT_fecha_fin.getText().trim().substring(6, 10).equalsIgnoreCase(gs_periodo)) {
+                    
+                } else {
+                    go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FECHA NO PERTENECE AL PERIODO");
+                    lo_pnl_rpt_stock.TXT_fecha_fin.setText("");
+                    lo_pnl_rpt_stock.TXT_fecha_fin.requestFocus();
+                }
+            } else {
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "muestra_jif", "FORMATO DE FECHA INVALIDO");
+                lo_pnl_rpt_stock.TXT_fecha_fin.setText("");
+                lo_pnl_rpt_stock.TXT_fecha_fin.requestFocus();
+            }
         } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "muestra_jif", "INGRESE CODIGO");
             limpia_datos();
         }
     }
@@ -92,7 +105,8 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
                 dispose();
             }
             if (ae.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
-                muestra_jif();
+                get_descripcion_almacen(lo_pnl_rpt_stock.TXT_codigo.getText().trim());
+                muestra_rpt();
             }
         }
     };
@@ -109,18 +123,35 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
                 if (ke.getSource() == lo_pnl_rpt_stock.TXT_codigo) {
                     evt_f5();
                 }
-            }            
-            if(ke.getKeyCode() == KeyEvent.VK_ESCAPE){
+            }
+            if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 dispose();
             }
 
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_rpt_stock.TXT_codigo && go_fnc_operaciones_campos.cant_caracter(lo_pnl_rpt_stock.TXT_codigo.getText().trim(), 1, 4)) {
-                    lo_pnl_aceptar_cancelar.BTN_aceptar.requestFocus();
+                    lo_pnl_rpt_stock.CBX_tipo.requestFocus();
                     get_descripcion_almacen(lo_pnl_rpt_stock.TXT_codigo.getText().trim());
                 }
+                if (ke.getSource() == lo_pnl_rpt_stock.CBX_tipo) {
+                    lo_pnl_rpt_stock.TXT_fecha_fin.requestFocus();
+                }
+                if (ke.getSource() == lo_pnl_rpt_stock.TXT_fecha_fin && !lo_pnl_rpt_stock.TXT_fecha_fin.getText().trim().equalsIgnoreCase("/  /")) {
+                    if (go_fnc_operaciones_campos.valida_fecha(lo_pnl_rpt_stock.TXT_fecha_fin.getText())) {
+                        if (lo_pnl_rpt_stock.TXT_fecha_fin.getText().trim().substring(6, 10).equalsIgnoreCase(gs_periodo)) {
+                            getFocusOwner().transferFocus();
+                        } else {
+                            lo_pnl_rpt_stock.TXT_fecha_fin.setText("");
+                            go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FECHA NO PERTENECE AL PERIODO");
+                        }
+                    } else {
+                        lo_pnl_rpt_stock.TXT_fecha_fin.setText("");
+                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO ");
+                    }
+                }
                 if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
-                    muestra_jif();
+                    get_descripcion_almacen(lo_pnl_rpt_stock.TXT_codigo.getText().trim());
+                    muestra_rpt();
                 }
                 if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_cancelar) {
                     dispose();
@@ -147,11 +178,11 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 434, Short.MAX_VALUE)
+            .addGap(0, 441, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 124, Short.MAX_VALUE)
+            .addGap(0, 182, Short.MAX_VALUE)
         );
 
         pack();
@@ -174,9 +205,11 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
         });
     }
 
-    public Image getIconImage() {
+    public Image
+            getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(IMAGES_ruta_ancestro.class.getResource("parametros.png"));
+                getImage(IMAGES_ruta_ancestro.class
+                        .getResource("parametros.png"));
         return retValue;
     }
 

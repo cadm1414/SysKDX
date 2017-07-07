@@ -61,14 +61,13 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
         }
     }
 
-    private void muestra_jif() {
+    private void muestra_jif() {        
         if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_ini_almacen.TXT_codigo)) {
             go_jif_saldos_iniciales = new jif_saldos_iniciales();
             go_frm_principal.JDP_principal.add(go_jif_saldos_iniciales);
             go_jif_saldos_iniciales.show();
             dispose();
-        } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "muestra_jif", "INGRESE CODIGO");
+        } else {            
             limpia_datos();
         }
     }
@@ -92,6 +91,7 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
                 dispose();
             }
             if (ae.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
+                get_descripcion_almacen(lo_pnl_ini_almacen.TXT_codigo.getText().trim());
                 muestra_jif();
             }
         }
@@ -120,6 +120,7 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
                     get_descripcion_almacen(lo_pnl_ini_almacen.TXT_codigo.getText().trim());
                 }
                 if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
+                    get_descripcion_almacen(lo_pnl_ini_almacen.TXT_codigo.getText().trim());
                     muestra_jif();
                 }
                 if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_cancelar) {

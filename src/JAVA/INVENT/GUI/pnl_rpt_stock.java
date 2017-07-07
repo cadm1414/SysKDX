@@ -22,7 +22,7 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
         CBX_tipo = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        TXT_fecha_final = new javax.swing.JFormattedTextField();
+        TXT_fecha_fin = new javax.swing.JFormattedTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
 
@@ -62,12 +62,12 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
         jLabel6.setText(":");
 
         try {
-            TXT_fecha_final.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            TXT_fecha_fin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        TXT_fecha_final.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
-        TXT_fecha_final.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_fecha_fin.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        TXT_fecha_fin.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,7 +92,7 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel6)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TXT_fecha_final))
+                            .addComponent(TXT_fecha_fin))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -120,7 +120,7 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(TXT_fecha_final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXT_fecha_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -144,7 +144,7 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> CBX_tipo;
     public javax.swing.JFormattedTextField TXT_codigo;
-    public javax.swing.JFormattedTextField TXT_fecha_final;
+    public javax.swing.JFormattedTextField TXT_fecha_fin;
     public javax.swing.JTextField TXT_nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

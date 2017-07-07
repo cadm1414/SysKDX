@@ -12,9 +12,6 @@ import java.util.Calendar;
 public class evt_datos_articulo_costo {
 
     String ls_modulo = "INVENT", ls_capa = "LOGICA", ls_clase = "evt_datos_articulo_costo";
-    Calendar fecha = Calendar.getInstance();
-    String mes = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.MONTH) + 1) + "", "0", 2);
-    String dia = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.DAY_OF_MONTH)) + "", "0", 2);
 
     public void activa_campos(int op, pnl_datos_articulo_costo OBJ_pda, boolean valor) {
         switch (op) {
@@ -63,9 +60,9 @@ public class evt_datos_articulo_costo {
         OBJ_pda.TXT_anio.setText(gs_periodo);
         OBJ_pda.TXT_codigo_entidad.setText("999999");
         OBJ_pda.TXT_nombre_entidad.setText("....");
-        OBJ_pda.TXT_fecha_ingreso.setText(dia + mes + gs_periodo);
-        OBJ_pda.TXT_fecha_produccion.setText(dia + mes + gs_periodo);
-        OBJ_pda.TXT_fecha_vencimiento.setText(dia + mes + gs_periodo);
+        OBJ_pda.TXT_fecha_ingreso.setText(gs_dia + gs_mes + gs_periodo);
+        OBJ_pda.TXT_fecha_produccion.setText(gs_dia + gs_mes + gs_periodo);
+        OBJ_pda.TXT_fecha_vencimiento.setText(gs_dia + gs_mes + gs_periodo);
 
     }
 
