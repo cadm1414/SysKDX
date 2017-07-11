@@ -16,7 +16,7 @@
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="404"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="empresa" class="java.lang.String"/>
 	<parameter name="usuario" class="java.lang.String"/>
@@ -30,8 +30,8 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from rpt_stock_normal($P{almacen},$P{fecha_ini},$P{fecha_fin},$P{periodo})
- as (fecha_ingreso date,codigo_producto character(4),codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),oc text,tara numeric(6,3),periodo_produccion character(7),lote character(6),bultos bigint ,peso_bruto numeric,peso_neto numeric,dias integer,fecha_produccion date,fecha_vencimiento date,tipo_ingreso text)]]>
+		<![CDATA[select * from rpt_stock_valorizado($P{almacen},$P{fecha_ini},$P{fecha_fin},$P{periodo}) 
+as (fecha_ingreso date,codigo_producto character(4),codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),oc text,tara numeric(6,3),periodo_produccion character(7),lote character(6),bultos bigint ,peso_bruto numeric,peso_neto numeric,dias integer,costo numeric(6,5),valorizado numeric(11,2),tipo_ingreso text)]]>
 	</queryString>
 	<field name="fecha_ingreso" class="java.sql.Date"/>
 	<field name="codigo_producto" class="java.lang.String"/>
@@ -46,8 +46,8 @@
 	<field name="peso_bruto" class="java.math.BigDecimal"/>
 	<field name="peso_neto" class="java.math.BigDecimal"/>
 	<field name="dias" class="java.lang.Integer"/>
-	<field name="fecha_produccion" class="java.sql.Date"/>
-	<field name="fecha_vencimiento" class="java.sql.Date"/>
+	<field name="costo" class="java.math.BigDecimal"/>
+	<field name="valorizado" class="java.math.BigDecimal"/>
 	<field name="tipo_ingreso" class="java.lang.String"/>
 	<variable name="total_bulto" class="java.lang.Integer" resetType="Group" resetGroup="producto" calculation="Sum">
 		<variableExpression><![CDATA[$F{bultos}]]></variableExpression>
@@ -66,6 +66,12 @@
 	</variable>
 	<variable name="gen_neto" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{peso_neto}]]></variableExpression>
+	</variable>
+	<variable name="total_valor" class="java.lang.Integer" resetType="Group" resetGroup="producto" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorizado}]]></variableExpression>
+	</variable>
+	<variable name="gen_valor" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorizado}]]></variableExpression>
 	</variable>
 	<group name="producto">
 		<groupExpression><![CDATA[$F{codigo_producto}]]></groupExpression>
@@ -105,6 +111,23 @@
 					</textElement>
 					<text><![CDATA[SUBTOTAL :]]></text>
 				</staticText>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="711" y="4" width="64" height="12" uuid="c03a924a-4dbf-408a-b7f7-704fbbb14a2d">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{total_valor}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="711" y="2" width="64" height="1" uuid="40089d87-b532-4839-9ded-4acaed2cad1b"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
 			</band>
 		</groupFooter>
 	</group>
@@ -142,11 +165,11 @@
 				<textFieldExpression><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="354" y="10" width="107" height="12" uuid="eacf20b1-487c-4cdf-b81c-27a9a23526d9"/>
+				<reportElement x="329" y="10" width="154" height="12" uuid="eacf20b1-487c-4cdf-b81c-27a9a23526d9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[STOCK DE MERCADERIA]]></text>
+				<text><![CDATA[STOCK DE MERCADERIA VALORIZADO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="352" y="22" width="20" height="12" uuid="f4be9b84-911d-471b-8eb7-cdb3d2e64aaa"/>
@@ -286,18 +309,11 @@
 				<text><![CDATA[DIAS ALM.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="664" y="4" width="35" height="20" uuid="f9145088-574c-426e-8759-3f8bca647e4b"/>
+				<reportElement x="664" y="4" width="46" height="20" uuid="f9145088-574c-426e-8759-3f8bca647e4b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[FECHA PROD.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="700" y="4" width="35" height="20" uuid="179c4362-dd55-44c2-97b7-6c6b735793cd"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isBold="false"/>
-				</textElement>
-				<text><![CDATA[FECHA VENCE.]]></text>
+				<text><![CDATA[COSTO]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="2" width="812" height="1" uuid="0e2af6d2-ce65-429d-82bb-2391a4d41d7e"/>
@@ -305,6 +321,13 @@
 			<line>
 				<reportElement x="0" y="25" width="812" height="1" uuid="1c1b10b2-a97b-4896-9af1-a5b23c7cc4a9"/>
 			</line>
+			<staticText>
+				<reportElement x="711" y="4" width="64" height="20" uuid="72811d6f-4d1a-481e-ae0f-f6dbcf347058"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[VALORIZACION]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -400,26 +423,19 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dias}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yy">
-				<reportElement x="664" y="0" width="35" height="12" uuid="03700bb3-f1e1-4adc-b007-03f852cc054f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+			<textField pattern="#,##0.00000;-#,##0.00000">
+				<reportElement x="664" y="0" width="46" height="12" uuid="67a79a80-9227-465f-af76-b14959fa9b41"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_produccion}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yy">
-				<reportElement x="700" y="0" width="35" height="12" uuid="d755b662-86f6-4cfe-875a-a90005fcc0c1"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="711" y="0" width="64" height="12" uuid="2f59ef6a-2d87-480f-9fb4-62206dee75af"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_vencimiento}]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd/MM/yy">
-				<reportElement x="735" y="0" width="77" height="12" uuid="a4daf357-c222-43f4-885c-a111581df4c3"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{tipo_ingreso}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valorizado}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -465,6 +481,27 @@
 				</textElement>
 				<text><![CDATA[TOTAL:]]></text>
 			</staticText>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="711" y="4" width="64" height="12" uuid="ebe828bd-47d0-406d-bfb6-4fdbe65d3d07">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{gen_valor}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="711" y="2" width="64" height="1" uuid="3cbe0167-0ab0-407b-b0b2-2b9b596fa5ea"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="711" y="17" width="64" height="1" uuid="b3a89497-0a2f-444c-86ca-59f5b6462da4"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
 		</band>
 	</columnFooter>
 	<pageFooter>

@@ -6,6 +6,8 @@ import JAVA.INVENT.REPORT.pnl_rpt_lista_familia;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_marca;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_producto;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_subfamilia;
+import JAVA.INVENT.REPORT.pnl_rpt_stock_normal;
+import JAVA.INVENT.REPORT.pnl_rpt_stock_valorizado;
 import java.awt.BorderLayout;
 import net.sf.jasperreports.view.JRViewer;
 
@@ -99,6 +101,36 @@ public class muestra_pestania_invent {
         go_pnl_rpt_lista_subfamilia.repaint();
         go_pnl_rpt_lista_subfamilia.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_subfamilia);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+    
+    public void rpt_stock_normal(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_stock_normal);        
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_stock_normal = new pnl_rpt_stock_normal();
+        go_pnl_rpt_stock_normal.removeAll();
+        go_pnl_rpt_stock_normal.setLayout(new BorderLayout());
+        go_pnl_rpt_stock_normal.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_stock_normal.setVisible(true);
+        go_pnl_rpt_stock_normal.repaint();
+        go_pnl_rpt_stock_normal.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_stock_normal);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+    
+    public void rpt_stock_valorizado(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_stock_valorizado);        
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_stock_valorizado = new pnl_rpt_stock_valorizado();
+        go_pnl_rpt_stock_valorizado.removeAll();
+        go_pnl_rpt_stock_valorizado.setLayout(new BorderLayout());
+        go_pnl_rpt_stock_valorizado.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_stock_valorizado.setVisible(true);
+        go_pnl_rpt_stock_valorizado.repaint();
+        go_pnl_rpt_stock_valorizado.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_stock_valorizado);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }

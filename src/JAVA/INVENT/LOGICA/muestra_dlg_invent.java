@@ -25,12 +25,8 @@ public class muestra_dlg_invent {
     }
 
     public void muestra_dlg_rpt_stock() {
-        if (go_pnl_rpt_lista_marca == null) {
-            go_dlg_rpt_stock = new dlg_rpt_stock(null, true);
-            go_dlg_rpt_stock.setVisible(true);
-        } else if (!go_pnl_rpt_lista_marca.isShowing()) {
-            go_dlg_rpt_stock = new dlg_rpt_stock(null, true);
-            go_dlg_rpt_stock.setVisible(true);
-        }
+        go_dlg_rpt_stock = new dlg_rpt_stock(null, true);   
+        go_dlg_rpt_stock.setVisible(true);
     }
+
 }

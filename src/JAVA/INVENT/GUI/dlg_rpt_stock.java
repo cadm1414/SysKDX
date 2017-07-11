@@ -11,6 +11,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import net.sf.jasperreports.engine.JRParameter;
 
 public class dlg_rpt_stock extends javax.swing.JDialog {
 
@@ -56,8 +60,6 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
             if (lq_rs != null) {
                 lo_pnl_rpt_stock.TXT_codigo.setText(lq_rs.getString(1));
                 lo_pnl_rpt_stock.TXT_nombre.setText(lq_rs.getString(2));
-                gs_parametros[0] = lq_rs.getString(1);
-                gs_parametros[1] = lq_rs.getString(2);
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_almacen", "USUARIO SIN PERMISOS y/o ALMACEN NO EXISTE");
                 limpia_datos();
@@ -70,7 +72,24 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
         if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_rpt_stock.TXT_codigo)) {
             if (go_fnc_operaciones_campos.valida_fecha(lo_pnl_rpt_stock.TXT_fecha_fin.getText())) {
                 if (lo_pnl_rpt_stock.TXT_fecha_fin.getText().trim().substring(6, 10).equalsIgnoreCase(gs_periodo)) {
-                    
+                    Map<String, Object> parametros = new HashMap<>();
+                    parametros.put("empresa", go_bean_general.getNombre_reporte());
+                    parametros.put("usuario", gs_datos_usuario);
+                    parametros.put("almacen", lo_pnl_rpt_stock.TXT_codigo.getText());
+                    parametros.put("fecha_ini", go_fnc_operaciones_campos.formarto_date("01/01/" + gs_periodo));
+                    parametros.put("fecha_fin", go_fnc_operaciones_campos.formarto_date(lo_pnl_rpt_stock.TXT_fecha_fin.getText()));
+                    parametros.put("periodo", gs_periodo);
+                    parametros.put("nombre_almacen", lo_pnl_rpt_stock.TXT_nombre.getText().trim());
+                    parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+                    switch (lo_pnl_rpt_stock.CBX_tipo.getSelectedIndex()) {
+                        case 0:
+                            go_muestra_reporte_invent.reporte_pestania("rpt_stock_normal.jasper", parametros, "STOCK ALMACEN", 4);
+                            break;
+                        case 1:
+                            go_muestra_reporte_invent.reporte_pestania("rpt_stock_valorizado.jasper", parametros, "STOCK ALMACEN VALORIZADO", 5);
+                            break;
+                    }
+                    dispose();
                 } else {
                     go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FECHA NO PERTENECE AL PERIODO");
                     lo_pnl_rpt_stock.TXT_fecha_fin.setText("");

@@ -96,6 +96,18 @@ public class fnc_operaciones_campos {
 
         return resp;
     }
+    
+    public Date formarto_date(String dato) {
+        Date fecha = null;
+        try {
+            SimpleDateFormat FormatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            FormatoFecha.setLenient(false);
+            fecha = FormatoFecha.parse(dato);
+        } catch (Exception e) {
+        }
+
+        return fecha;
+    }
 
     /*COMPARA FECHAS
      0 = fechas iguales

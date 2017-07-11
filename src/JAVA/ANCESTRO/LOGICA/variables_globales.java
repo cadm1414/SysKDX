@@ -57,6 +57,7 @@ import JAVA.INVENT.REPORT.pnl_rpt_lista_marca;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_producto;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_subfamilia;
 import JAVA.INVENT.REPORT.pnl_rpt_stock_normal;
+import JAVA.INVENT.REPORT.pnl_rpt_stock_valorizado;
 import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
 
@@ -188,4 +189,5 @@ public class variables_globales {
     public static pnl_rpt_lista_subfamilia go_pnl_rpt_lista_subfamilia;
     public static pnl_rpt_lista_unidad_medida go_pnl_rpt_lista_unidad_medida;
     public static pnl_rpt_stock_normal go_pnl_rpt_stock_normal;
+    public static pnl_rpt_stock_valorizado go_pnl_rpt_stock_valorizado;
 }
