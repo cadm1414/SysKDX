@@ -149,6 +149,18 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
             if (lq_rs != null) {
                 lo_evt_datos_articulo.setea_recupera(lo_bean_articulo, lq_rs);
                 lo_evt_datos_articulo.muestra_datos(lo_pnl_datos_articulo, lo_bean_articulo);
+               
+                ls_clase_producto = lo_bean_articulo.getClase_producto();
+                if(lo_pnl_datos_articulo.CBX_detraccion.getSelectedIndex()==0){
+                    ls_afecto_detraccion = "0";
+                }else{
+                    ls_afecto_detraccion = "1";
+                }
+                if(lo_pnl_datos_articulo.CBX_percepcion.getSelectedIndex()==0){
+                    ls_afecto_percepcion = "0";
+                }else{
+                    ls_afecto_percepcion = "1";
+                }
             }
         } catch (Exception e) {
         }
@@ -244,7 +256,7 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
     private void evt_editar() {        
         li_tipo_operacion = 1;
         lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
-        int cant = go_dao_articulo_costo.SLT_cta_articulo_costo_x_articulo(ls_codigo);
+        int cant = go_dao_articulo_costo.SLT_cta_articulo_costo_x_articulo(ls_codigo);        
         if (cant == 0) {
             lo_evt_datos_articulo.activa_campos(1, lo_pnl_datos_articulo, true);
         }else{

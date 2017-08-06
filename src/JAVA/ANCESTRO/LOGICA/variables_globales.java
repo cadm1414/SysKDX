@@ -47,6 +47,7 @@ import JAVA.INVENT.GUI.jif_datos_familia;
 import JAVA.INVENT.GUI.jif_datos_marca;
 import JAVA.INVENT.GUI.jif_datos_producto;
 import JAVA.INVENT.GUI.jif_datos_subfamilia;
+import JAVA.INVENT.GUI.jif_guia_ingreso;
 import JAVA.INVENT.GUI.jif_saldos_iniciales;
 import JAVA.INVENT.LOGICA.muestra_dlg_invent;
 import JAVA.INVENT.LOGICA.muestra_jif_invent;
@@ -92,6 +93,7 @@ public class variables_globales {
     public static int gi_codigo_empresa,
             gi_id_usuario,
             gi_id_rol;
+    public static int[] gi_parametros_2  = new int[99999];
     
     //DAO
     public static DAO_registro_empresa go_dao_registro_empresa = new DAO_registro_empresa();
@@ -176,6 +178,7 @@ public class variables_globales {
     public static jif_datos_articulo go_jif_datos_articulo;
     public static jif_datos_articulo_costo go_jif_datos_articulo_costo;
     public static jif_saldos_iniciales go_jif_saldos_iniciales;
+    public static jif_guia_ingreso go_jif_guia_ingreso;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

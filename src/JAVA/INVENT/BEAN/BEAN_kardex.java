@@ -4,10 +4,18 @@ public class BEAN_kardex {
 
     String codigo_operacion, fecha_registro, codigo_almacen, fecha_emision, codigo_movimiento, codigo_documento,
             serie_documento, numero_documento, codigo_documento_ref, serie_documento_ref, numero_documento_ref,
-            tipo_movimiento, es_transferencia, codigo_almacen_origen, observacion, status;
+            tipo_movimiento, es_transferencia, codigo_almacen_origen, observacion, status, lote_ref;
 
     public String getCodigo_operacion() {
         return codigo_operacion;
+    }
+
+    public String getLote_ref() {
+        return lote_ref;
+    }
+
+    public void setLote_ref(String lote_ref) {
+        this.lote_ref = lote_ref;
     }
 
     public void setCodigo_operacion(String codigo_operacion) {

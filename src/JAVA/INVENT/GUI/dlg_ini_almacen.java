@@ -51,8 +51,8 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
             if (lq_rs != null) {
                 lo_pnl_ini_almacen.TXT_codigo.setText(lq_rs.getString(1));
                 lo_pnl_ini_almacen.TXT_nombre.setText(lq_rs.getString(2));
-                gs_parametros[0]=lq_rs.getString(1);
-                gs_parametros[1]=lq_rs.getString(2);
+                gs_parametros[0] = lq_rs.getString(1);
+                gs_parametros[1] = lq_rs.getString(2);
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_almacen", "USUARIO SIN PERMISOS y/o ALMACEN NO EXISTE");
                 limpia_datos();
@@ -61,13 +61,23 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
         }
     }
 
-    private void muestra_jif() {        
+    private void muestra_jif() {
         if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_ini_almacen.TXT_codigo)) {
-            go_jif_saldos_iniciales = new jif_saldos_iniciales();
-            go_frm_principal.JDP_principal.add(go_jif_saldos_iniciales);
-            go_jif_saldos_iniciales.show();
+            switch (gi_parametros_2[0]) {
+                case 0:
+                    go_jif_saldos_iniciales = new jif_saldos_iniciales();
+                    go_frm_principal.JDP_principal.add(go_jif_saldos_iniciales);
+                    go_jif_saldos_iniciales.show();
+                    break;
+                case 1:
+                    go_jif_guia_ingreso = new jif_guia_ingreso();
+                    go_frm_principal.JDP_principal.add(go_jif_guia_ingreso);
+                    go_jif_guia_ingreso.show();
+                    break;
+            }
+            gi_parametros_2[0] = 0;
             dispose();
-        } else {            
+        } else {
             limpia_datos();
         }
     }
@@ -109,8 +119,8 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
                 if (ke.getSource() == lo_pnl_ini_almacen.TXT_codigo) {
                     evt_f5();
                 }
-            }            
-            if(ke.getKeyCode() == KeyEvent.VK_ESCAPE){
+            }
+            if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 dispose();
             }
 

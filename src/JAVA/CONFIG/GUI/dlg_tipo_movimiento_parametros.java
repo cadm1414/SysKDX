@@ -1,6 +1,5 @@
 package JAVA.CONFIG.GUI;
 
-import JAVA.INVENT.GUI.*;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
@@ -18,7 +17,7 @@ public class dlg_tipo_movimiento_parametros extends javax.swing.JDialog {
     pnl_grid_tipo_movimiento_parametros lo_pnl_grid_tipo_movimiento_parametros = new pnl_grid_tipo_movimiento_parametros();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
-    public String ls_codigo_movimiento, ls_tipo_movimiento, ls_es_transferencia, ls_tipo_almacen, ls_es_visible, ls_status, ls_codigo_movimiento_p;
+    public String ls_codigo_movimiento;
 
     public dlg_tipo_movimiento_parametros(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -42,7 +41,7 @@ public class dlg_tipo_movimiento_parametros extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_tipo_movimiento_parametros.TBL_tipo_movimiento.getModel();
         try {
-            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros(ls_tipo_movimiento, ls_es_transferencia, ls_tipo_almacen, ls_es_visible, ls_status, ls_codigo_movimiento_p);
+            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros(gs_parametros[0],gs_parametros[1],gs_parametros[2],gs_parametros[3],gs_parametros[4],gs_parametros[5]);
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
@@ -135,7 +134,7 @@ public class dlg_tipo_movimiento_parametros extends javax.swing.JDialog {
         PNL_grid = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("BUSQUEDA ALMACEN");
+        setTitle("BUSQUEDA MOVIMIENTO");
         setIconImage(getIconImage());
         setResizable(false);
 

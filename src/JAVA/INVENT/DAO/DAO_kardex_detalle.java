@@ -45,4 +45,22 @@ public class DAO_kardex_detalle {
         }
         return resp;
     }
+    
+    public int FNC_verifica_lote(String codigo_almacen,String lote) {
+        int cont = 0;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from fnc_verifica_lote('" + codigo_almacen + "','"+lote+"','"+gs_periodo+"') "
+                    + "as (correlativo integer)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                cont = lq_rs.getInt(1);
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_kardex_detalle", e.getMessage());
+        }
+        return cont;
+    }
+    
 }

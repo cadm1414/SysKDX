@@ -7,7 +7,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
-import java.util.Calendar;
 
 public class evt_datos_articulo_costo {
 

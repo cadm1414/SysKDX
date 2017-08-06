@@ -131,7 +131,7 @@ public class evt_datos_articulo {
     }
 
     public void setea_recupera(BEAN_articulo OBJ_bar, ResultSet lq_rs) {
-        try {
+        try {            
             OBJ_bar.setCodigo_articulo(lq_rs.getString(1));
             OBJ_bar.setNombre_articulo(lq_rs.getString(2));
             OBJ_bar.setCodigo_producto(lq_rs.getString(3));
@@ -183,11 +183,9 @@ public class evt_datos_articulo {
                     go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "SELECCIONE PERCEPCION");
                     OBJ_pda.CBX_percepcion.requestFocus();
                 }
-
             } else {
                 resp = true;
             }
-
         }
         if (!go_fnc_operaciones_campos.campo_blanco(OBJ_pda.TXT_tara)) {
             OBJ_pda.TXT_tara.setText("0.0");
@@ -196,7 +194,7 @@ public class evt_datos_articulo {
     }
 
     public void setea_campos(BEAN_articulo OBJ_bar, pnl_datos_articulo OBJ_pda, cbx_familia cbx_familia, cbx_marca cbx_marca, cbx_producto cbx_producto, cbx_unidad_medida cbx_unidad, cbx_unidad_medida cbx_um_bulto, cbx_tabla_sunat cbx_existencia, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_grupo_percepcion cbx_grupo_percepcion, cbx_subfamilia cbx_subfamilia) {
-        try {
+        try {            
             OBJ_bar.setCodigo_articulo(go_fnc_operaciones_campos.get_campo_str(OBJ_pda.TXT_codigo));
             OBJ_bar.setNombre_articulo(go_fnc_operaciones_campos.get_campo_str(OBJ_pda.TXT_nombre));
             OBJ_bar.setCodigo_producto(cbx_producto.getID());

@@ -81,6 +81,10 @@ public class opciones_menu {
                     go_muestra_dlg_invent.muestra_dlg_saldos_iniciales();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("INGRESO")) {
+                    go_muestra_dlg_invent.muestra_dlg_guia_ingreso();
+                    resp = "I";
+                }
                 if (dato.equalsIgnoreCase("STOCK ALMACEN")) {
                     go_muestra_dlg_invent.muestra_dlg_rpt_stock();
                     resp = "I";

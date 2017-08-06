@@ -100,7 +100,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
 
     private void get_descripcion_tipo_movimiento(String codigo) {
         try {
-            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros("1", "0", "3", "1", "1", codigo);
+            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros("3", "0", "3", "1", "1", codigo);
             if (lq_rs != null) {
                 lo_pnl_cab_saldos_iniciales.TXT_codigo_movimiento.setText(lq_rs.getString(1));
                 lo_pnl_cab_saldos_iniciales.TXT_nombre_movimiento.setText(lq_rs.getString(2));
@@ -170,13 +170,13 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
     }
 
     private void evt_f5() {
-        go_dlg_tipo_movimiento_parametros = new dlg_tipo_movimiento_parametros(null, true);
-        go_dlg_tipo_movimiento_parametros.ls_tipo_movimiento = "1";
-        go_dlg_tipo_movimiento_parametros.ls_es_transferencia = "0";
-        go_dlg_tipo_movimiento_parametros.ls_tipo_almacen = "3";
-        go_dlg_tipo_movimiento_parametros.ls_es_visible = "1";
-        go_dlg_tipo_movimiento_parametros.ls_status = "1";
-        go_dlg_tipo_movimiento_parametros.ls_codigo_movimiento_p = "%";
+        gs_parametros[0] = "1";
+        gs_parametros[1] = "0";
+        gs_parametros[2] = "3";
+        gs_parametros[3] = "1";
+        gs_parametros[4] = "1";
+        gs_parametros[5] = "%";
+        go_dlg_tipo_movimiento_parametros = new dlg_tipo_movimiento_parametros(null, true);        
         go_dlg_tipo_movimiento_parametros.setVisible(true);
         ls_codigo_movimiento = go_dlg_tipo_movimiento_parametros.ls_codigo_movimiento;
         if (ls_codigo_movimiento != null) {
@@ -215,7 +215,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
         li_tipo_operacion = 0;
 
         try {
-            lq_rs = go_dao_kardex.FNC_correlativo_guia_almacen("GI", "", "1", ls_codigo_almacen);
+            lq_rs = go_dao_kardex.FNC_correlativo_guia_almacen("GI", ls_codigo_almacen, "1", ls_codigo_almacen);
             if (lq_rs.next()) {
                 lo_pnl_cab_saldos_iniciales.TXT_numero.setText(lq_rs.getString(1));
                 lo_pnl_cab_saldos_iniciales.LBL_numero_doc.setText(lq_rs.getString(1));
@@ -287,6 +287,7 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
                             ls_codigo = lo_cbx_tipo_documento.getID() + ls_codigo_almacen + lo_pnl_cab_saldos_iniciales.TXT_numero.getText().trim();
                             lo_bean_kardex.setCodigo_operacion(ls_codigo);
                             lo_bean_kardex.setCodigo_almacen(ls_codigo_almacen);
+                            lo_bean_kardex.setSerie_documento(ls_codigo_almacen);
                             lo_evt_cab_saldos_iniciales.setea_campos(lo_bean_kardex, lo_pnl_cab_saldos_iniciales, lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref);
                             if (go_dao_kardex.IST_kardex(lo_bean_kardex, lo_pnl_grid_saldos_iniciales.TBL_saldos_iniciales)) {
                                 lo_evt_cab_saldos_iniciales.limpia_datos(lo_pnl_cab_saldos_iniciales);

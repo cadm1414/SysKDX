@@ -49,7 +49,7 @@ public class DAO_kardex {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_datos_kardex('"+codigo_operacion+"','"+gs_periodo+"') "
-                    + "as (codigo_operacion character(16),fecha_registro timestamp with time zone,codigo_almacen character(4),fecha_emision date,codigo_movimiento character(2),codigo_documento character(2),serie_documento character varying(4),numero_documento character(10),codigo_documento_ref character(2),serie_documento_ref character varying(4),numero_docuemento_ref character(10),tipo_movimiento character(1),es_transferencia character(1),codigo_almacen_origen character varying(4),observacion character varying(250),status character(1))";	
+                    + "as (codigo_operacion character(16),fecha_registro timestamp with time zone,codigo_almacen character(4),fecha_emision date,codigo_movimiento character(2),codigo_documento character(2),serie_documento character varying(4),numero_documento character(10),codigo_documento_ref character(2),serie_documento_ref character varying(4),numero_docuemento_ref character(10),tipo_movimiento character(1),es_transferencia character(1),codigo_almacen_origen character varying(4),observacion character varying(250),status character(1),lote_ref character varying(6))";	
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
@@ -85,7 +85,7 @@ public class DAO_kardex {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from ist_kardex('"+OBJ_kar.getCodigo_operacion()+"','"+OBJ_kar.getCodigo_almacen()+"','"+OBJ_kar.getFecha_emision()+"','"+OBJ_kar.getCodigo_movimiento()+"','"+OBJ_kar.getCodigo_documento()+"','"+OBJ_kar.getSerie_documento()+"','"+OBJ_kar.getNumero_documento()+"','"+OBJ_kar.getCodigo_documento_ref()+"','"+OBJ_kar.getSerie_documento_ref()+"','"+OBJ_kar.getNumero_documento_ref()+"','"+OBJ_kar.getTipo_movimiento()+"','"+OBJ_kar.getEs_transferencia()+"','"+OBJ_kar.getCodigo_almacen_origen()+"','"+OBJ_kar.getObservacion()+"','"+OBJ_kar.getStatus()+"','"+gs_periodo+"')";
+            String SQL = "select * from ist_kardex('"+OBJ_kar.getCodigo_operacion()+"','"+OBJ_kar.getCodigo_almacen()+"','"+OBJ_kar.getFecha_emision()+"','"+OBJ_kar.getCodigo_movimiento()+"','"+OBJ_kar.getCodigo_documento()+"','"+OBJ_kar.getSerie_documento()+"','"+OBJ_kar.getNumero_documento()+"','"+OBJ_kar.getCodigo_documento_ref()+"','"+OBJ_kar.getSerie_documento_ref()+"','"+OBJ_kar.getNumero_documento_ref()+"','"+OBJ_kar.getTipo_movimiento()+"','"+OBJ_kar.getEs_transferencia()+"','"+OBJ_kar.getCodigo_almacen_origen()+"','"+OBJ_kar.getObservacion()+"','"+OBJ_kar.getStatus()+"','"+OBJ_kar.getLote_ref()+"','"+gs_periodo+"')";
             
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
@@ -124,7 +124,7 @@ public class DAO_kardex {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from upd_kardex('"+OBJ_kar.getCodigo_operacion()+"','"+OBJ_kar.getCodigo_almacen()+"','"+OBJ_kar.getFecha_emision()+"','"+OBJ_kar.getCodigo_movimiento()+"','"+OBJ_kar.getCodigo_documento()+"','"+OBJ_kar.getSerie_documento()+"','"+OBJ_kar.getNumero_documento()+"','"+OBJ_kar.getCodigo_documento_ref()+"','"+OBJ_kar.getSerie_documento_ref()+"','"+OBJ_kar.getNumero_documento_ref()+"','"+OBJ_kar.getTipo_movimiento()+"','"+OBJ_kar.getEs_transferencia()+"','"+OBJ_kar.getCodigo_almacen_origen()+"','"+OBJ_kar.getObservacion()+"','"+OBJ_kar.getStatus()+"','"+gs_periodo+"')";
+            String SQL = "select * from upd_kardex('"+OBJ_kar.getCodigo_operacion()+"','"+OBJ_kar.getCodigo_almacen()+"','"+OBJ_kar.getFecha_emision()+"','"+OBJ_kar.getCodigo_movimiento()+"','"+OBJ_kar.getCodigo_documento()+"','"+OBJ_kar.getSerie_documento()+"','"+OBJ_kar.getNumero_documento()+"','"+OBJ_kar.getCodigo_documento_ref()+"','"+OBJ_kar.getSerie_documento_ref()+"','"+OBJ_kar.getNumero_documento_ref()+"','"+OBJ_kar.getTipo_movimiento()+"','"+OBJ_kar.getEs_transferencia()+"','"+OBJ_kar.getCodigo_almacen_origen()+"','"+OBJ_kar.getObservacion()+"','"+OBJ_kar.getStatus()+"','"+OBJ_kar.getLote_ref()+"','"+gs_periodo+"')";
             
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {

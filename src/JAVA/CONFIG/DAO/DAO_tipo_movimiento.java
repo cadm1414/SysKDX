@@ -105,7 +105,7 @@ public class DAO_tipo_movimiento {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_grid_tipo_movimiento_parametros('" + tipo_movimiento + "','" + es_transferencia + "','" + tipo_almacen + "','" + es_visible + "','" + status + "','" + codigo_movimiento + "') "
-                    + "as (codigo_movimiento character(2),descripcion character varying(100))";
+                    + "as (codigo_movimiento character(2),descripcion character varying(100))";           
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
