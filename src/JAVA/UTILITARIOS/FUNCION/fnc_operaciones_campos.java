@@ -96,7 +96,7 @@ public class fnc_operaciones_campos {
 
         return resp;
     }
-    
+
     public Date formarto_date(String dato) {
         Date fecha = null;
         try {
@@ -152,6 +152,30 @@ public class fnc_operaciones_campos {
             sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
         }
         return sb.toString();
+    }
+
+    public boolean valida_ruc(String dato) {
+        boolean resp = false;
+        int[] datos = {5, 4, 3, 2, 7, 6, 5, 4, 3, 2};
+        try {
+            int suma = 0;
+            int digito, entero, op_final;
+            int digito_ini = Integer.parseInt(dato.substring(0, 2));
+            int digito_fin = Integer.parseInt(dato.substring(10, 11));
+            if (digito_ini == 10 || digito_ini == 15 || digito_ini == 17 || digito_ini == 20) {
+                for (int i = 0; i < 10; i++) {
+                    digito = Integer.parseInt(dato.substring(i, i + 1));
+                    suma = suma + digito * datos[i];
+                }
+                entero = (int) (suma / 11);
+                op_final = 11 - (suma - entero * 11);
+                if (digito_fin == op_final) {
+                    resp = true;
+                }
+            }
+        } catch (Exception e) {
+        }
+        return resp;
     }
 
     public String encriptar(String dato) {
