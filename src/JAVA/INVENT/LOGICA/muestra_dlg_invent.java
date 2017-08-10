@@ -51,6 +51,27 @@ public class muestra_dlg_invent {
             
         }
     }
+    
+    public void muestra_dlg_guia_salida() throws PropertyVetoException {
+        if (go_jif_guia_salida != null) {
+            if (go_jif_guia_salida.isClosed()) {
+                gi_parametros_2[0] = 2;
+                go_dlg_ini_almacen = new dlg_ini_almacen(null, true);
+                go_dlg_ini_almacen.setVisible(true);                
+            } else if (go_jif_guia_salida.isIcon()) {
+                go_jif_guia_salida.setIcon(false);
+            } else if (!go_jif_guia_salida.isShowing()) {
+                gi_parametros_2[0] = 2;
+                go_dlg_ini_almacen = new dlg_ini_almacen(null, true);
+                go_dlg_ini_almacen.setVisible(true);                
+            }
+        } else {
+            gi_parametros_2[0] = 2;
+            go_dlg_ini_almacen = new dlg_ini_almacen(null, true);
+            go_dlg_ini_almacen.setVisible(true);
+            
+        }
+    }
 
     public void muestra_dlg_rpt_stock() {
         go_dlg_rpt_stock = new dlg_rpt_stock(null, true);

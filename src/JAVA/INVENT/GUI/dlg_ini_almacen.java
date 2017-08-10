@@ -74,6 +74,11 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
                     go_frm_principal.JDP_principal.add(go_jif_guia_ingreso);
                     go_jif_guia_ingreso.show();
                     break;
+                case 2:
+                    go_jif_guia_salida = new jif_guia_salida();
+                    go_frm_principal.JDP_principal.add(go_jif_guia_salida);
+                    go_jif_guia_salida.show();
+                    break;
             }
             gi_parametros_2[0] = 0;
             dispose();

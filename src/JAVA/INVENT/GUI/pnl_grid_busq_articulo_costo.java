@@ -19,14 +19,14 @@ public class pnl_grid_busq_articulo_costo extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Codigo", "Nombre", "OC", "Numero", "P. Produccion"
+                "Codigo", "Nombre", "UM", "Tara", "OC", "P. Produc."
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -44,11 +44,13 @@ public class pnl_grid_busq_articulo_costo extends javax.swing.JPanel {
             TBL_articulo_costo.getColumnModel().getColumn(1).setResizable(false);
             TBL_articulo_costo.getColumnModel().getColumn(1).setPreferredWidth(220);
             TBL_articulo_costo.getColumnModel().getColumn(2).setResizable(false);
-            TBL_articulo_costo.getColumnModel().getColumn(2).setPreferredWidth(50);
+            TBL_articulo_costo.getColumnModel().getColumn(2).setPreferredWidth(10);
             TBL_articulo_costo.getColumnModel().getColumn(3).setResizable(false);
             TBL_articulo_costo.getColumnModel().getColumn(3).setPreferredWidth(20);
             TBL_articulo_costo.getColumnModel().getColumn(4).setResizable(false);
             TBL_articulo_costo.getColumnModel().getColumn(4).setPreferredWidth(50);
+            TBL_articulo_costo.getColumnModel().getColumn(5).setResizable(false);
+            TBL_articulo_costo.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -56,7 +58,7 @@ public class pnl_grid_busq_articulo_costo extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

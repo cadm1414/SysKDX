@@ -18,6 +18,7 @@ import JAVA.CONFIG.GUI.dlg_busq_usuario;
 import JAVA.CONFIG.GUI.dlg_tipo_movimiento_parametros;
 import JAVA.CONFIG.GUI.frm_datos_general;
 import JAVA.CONFIG.GUI.jif_datos_almacen;
+import JAVA.CONFIG.GUI.jif_datos_entidad;
 import JAVA.CONFIG.GUI.jif_datos_sucursal;
 import JAVA.CONFIG.GUI.jif_datos_tipo_movimiento;
 import JAVA.CONFIG.GUI.jif_datos_unidad_medida;
@@ -38,6 +39,7 @@ import JAVA.INVENT.GUI.dlg_busq_familia;
 import JAVA.INVENT.GUI.dlg_busq_kardex;
 import JAVA.INVENT.GUI.dlg_busq_marca;
 import JAVA.INVENT.GUI.dlg_busq_producto;
+import JAVA.INVENT.GUI.dlg_busq_stock_x_lote;
 import JAVA.INVENT.GUI.dlg_busq_subfamilia;
 import JAVA.INVENT.GUI.dlg_ini_almacen;
 import JAVA.INVENT.GUI.dlg_rpt_stock;
@@ -48,6 +50,7 @@ import JAVA.INVENT.GUI.jif_datos_marca;
 import JAVA.INVENT.GUI.jif_datos_producto;
 import JAVA.INVENT.GUI.jif_datos_subfamilia;
 import JAVA.INVENT.GUI.jif_guia_ingreso;
+import JAVA.INVENT.GUI.jif_guia_salida;
 import JAVA.INVENT.GUI.jif_saldos_iniciales;
 import JAVA.INVENT.LOGICA.muestra_dlg_invent;
 import JAVA.INVENT.LOGICA.muestra_jif_invent;
@@ -163,6 +166,7 @@ public class variables_globales {
     public static dlg_tipo_movimiento_parametros go_dlg_tipo_movimiento_parametros;
     public static dlg_busq_kardex go_dlg_busq_kardex;
     public static dlg_rpt_stock go_dlg_rpt_stock;
+    public static dlg_busq_stock_x_lote go_dlg_busq_stock_x_lote;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -179,6 +183,8 @@ public class variables_globales {
     public static jif_datos_articulo_costo go_jif_datos_articulo_costo;
     public static jif_saldos_iniciales go_jif_saldos_iniciales;
     public static jif_guia_ingreso go_jif_guia_ingreso;
+    public static jif_guia_salida go_jif_guia_salida;
+    public static jif_datos_entidad go_jif_datos_entidad;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

@@ -63,4 +63,20 @@ public class DAO_kardex_detalle {
         return cont;
     }
     
+    public ResultSet SLT_stock_x_lote(String codigo_almacen,String lote) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_stock_x_lote('" + codigo_almacen + "','"+lote+"','"+gs_periodo+"') "
+                    + "as (codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),tara numeric(6,3),oc text,periodo_produccion character(7),bultos bigint ,peso_bruto numeric,peso_neto numeric)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_stock_x_lote", e.getMessage());
+        }
+        return null;
+    }
+    
 }

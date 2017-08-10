@@ -33,7 +33,7 @@ public class DAO_articulo_costo {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_grid_articulo_costo() "
-                    + "as (codigo_articulo character(12),nombre_articulo character varying(150),oc text,numero character(4),periodo_produccion character(7))";
+                    + "as (codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),tara numeric,oc text,periodo_produccion character(7))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {

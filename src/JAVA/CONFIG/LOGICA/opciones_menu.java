@@ -51,6 +51,10 @@ public class opciones_menu {
                     go_muestra_jif.muestra_jif_unidad_medida();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("ENTIDAD")) {
+                    go_muestra_jif.muestra_jif_entidad();
+                    resp = "I";
+                }
                 break;
             case "INVENT":
                 if (dato.equalsIgnoreCase("MARCA")) {
@@ -83,6 +87,10 @@ public class opciones_menu {
                 }
                 if (dato.equalsIgnoreCase("INGRESO")) {
                     go_muestra_dlg_invent.muestra_dlg_guia_ingreso();
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("SALIDA")) {
+                    go_muestra_dlg_invent.muestra_dlg_guia_salida();
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("STOCK ALMACEN")) {

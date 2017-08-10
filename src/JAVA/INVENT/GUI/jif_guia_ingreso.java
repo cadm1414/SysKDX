@@ -98,7 +98,7 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
 
     private void get_descripcion_tipo_movimiento(String codigo) {
         try {
-            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros("1", "0", "3", "1", "1", codigo);
+            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros("1", "0", "%", "1", "1", codigo);
             if (lq_rs != null) {
                 lo_pnl_cab_guia_ingreso.TXT_codigo_movimiento.setText(lq_rs.getString(1));
                 lo_pnl_cab_guia_ingreso.TXT_nombre_movimiento.setText(lq_rs.getString(2));
@@ -161,7 +161,7 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
     private void evt_f5_tipo_movimiento() {
         gs_parametros[0] = "1";
         gs_parametros[1] = "0";
-        gs_parametros[2] = "3";
+        gs_parametros[2] = "%";
         gs_parametros[3] = "1";
         gs_parametros[4] = "1";
         gs_parametros[5] = "%";
