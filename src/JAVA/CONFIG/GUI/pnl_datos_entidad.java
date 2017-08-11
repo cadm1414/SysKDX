@@ -1,10 +1,15 @@
 package JAVA.CONFIG.GUI;
 
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+import java.text.DecimalFormatSymbols;
 
 public class pnl_datos_entidad extends javax.swing.JPanel {
 
+    public static DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+
     public pnl_datos_entidad() {
+        simbolos.setDecimalSeparator('.');
+        simbolos.setGroupingSeparator(',');
         initComponents();
         TXT_numero_doc_id.setDocument(new fnc_txt_mayuscula());
         TXT_papellido.setDocument(new fnc_txt_mayuscula());
@@ -90,7 +95,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         CBX_tipo_comercio = new javax.swing.JComboBox<>();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        TXT_vendedor = new javax.swing.JComboBox<>();
+        CBX_vendedor = new javax.swing.JComboBox<>();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         TXT_observacion = new javax.swing.JTextField();
@@ -459,14 +464,17 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
                             .addComponent(jLabel26))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CBX_pais, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXT_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(TXT_codigo_ubigeo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel27)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_descripcion_ubigeo)))
+                        .addComponent(TXT_descripcion_ubigeo))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TXT_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CBX_pais, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(52, 52, 52))
         );
         jPanel4Layout.setVerticalGroup(
@@ -520,7 +528,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel33.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel33.setText(":");
 
-        TXT_limite_cr.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        TXT_limite_cr.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00",simbolos))));
         TXT_limite_cr.setEnabled(false);
         TXT_limite_cr.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_limite_cr.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -550,8 +558,8 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel39.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel39.setText(":");
 
-        TXT_vendedor.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        TXT_vendedor.setEnabled(false);
+        CBX_vendedor.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_vendedor.setEnabled(false);
 
         jLabel40.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel40.setText("Observacion");
@@ -594,7 +602,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel39)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TXT_vendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(CBX_vendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -640,7 +648,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
                     .addComponent(jLabel39)
-                    .addComponent(TXT_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBX_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
@@ -664,6 +672,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         JRD_entidad_excluida.setEnabled(false);
 
         JRD_es_domiciliado.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        JRD_es_domiciliado.setSelected(true);
         JRD_es_domiciliado.setText("Domiciliado");
         JRD_es_domiciliado.setEnabled(false);
 
@@ -738,6 +747,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> CBX_tipo_comercio;
     public javax.swing.JComboBox<String> CBX_tipo_documento_id;
     public javax.swing.JComboBox<String> CBX_tipo_persona;
+    public javax.swing.JComboBox<String> CBX_vendedor;
     private javax.swing.ButtonGroup GBT_procedencia;
     public javax.swing.JRadioButton JRD_agente_percepcion;
     public javax.swing.JRadioButton JRD_agente_retencion;
@@ -761,7 +771,6 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
     public javax.swing.JTextField TXT_papellido;
     public javax.swing.JTextField TXT_razon_social;
     public javax.swing.JTextField TXT_sapellido;
-    public javax.swing.JComboBox<String> TXT_vendedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

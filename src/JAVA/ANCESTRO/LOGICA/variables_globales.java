@@ -126,6 +126,9 @@ public class variables_globales {
     public static DAO_kardex go_dao_kardex = new DAO_kardex();
     public static DAO_kardex_detalle go_dao_kardex_detalle = new DAO_kardex_detalle();
     public static DAO_auditoria go_dao_auditoria = new DAO_auditoria();
+    public static DAO_pais go_dao_pais = new DAO_pais();
+    public static DAO_entidad go_dao_entidad = new DAO_entidad();
+    public static DAO_vendedor go_dao_vendedor = new DAO_vendedor();
 
     //GUI
     public static frm_principal go_frm_principal;

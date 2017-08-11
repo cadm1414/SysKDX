@@ -3,10 +3,12 @@ package JAVA.ANCESTRO.LOGICA;
 import JAVA.CONFIG.LOGICA.cbx_almacen;
 import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
+import JAVA.CONFIG.LOGICA.cbx_pais;
 import JAVA.CONFIG.LOGICA.cbx_rol;
 import JAVA.CONFIG.LOGICA.cbx_tabla_sunat;
 import JAVA.CONFIG.LOGICA.cbx_tipo_documento;
 import JAVA.CONFIG.LOGICA.cbx_unidad_medida;
+import JAVA.CONFIG.LOGICA.cbx_vendedor;
 import JAVA.INVENT.LOGICA.cbx_familia;
 import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
 import JAVA.INVENT.LOGICA.cbx_grupo_percepcion;
@@ -33,6 +35,8 @@ public class cbx_trato_datos {
     cbx_grupo_detraccion lo_cbx_grupo_detraccion;
     cbx_grupo_percepcion lo_cbx_grupo_percepcion;
     cbx_tipo_documento lo_cbx_tipo_documento;
+    cbx_pais lo_cbx_pais;
+    cbx_vendedor lo_cbx_vendedor;
 
     /*VALORES OPERACION
     0 = cbx_moneda
@@ -48,6 +52,8 @@ public class cbx_trato_datos {
     10 = cbx_grupo_detraccion
     11 = cbx_grupo_percepcion
     12 = cbx_tipo_documento
+    13 = cbx_pais
+    14 = cbx_vendedor
      */
     public void recupera_valor(int op, ResultSet rs, JComboBox cbx_combo) {
         switch (op) {
@@ -181,6 +187,26 @@ public class cbx_trato_datos {
                 } catch (Exception e) {
                 }
                 break;
+            case 13:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_pais(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
+            case 14:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_vendedor(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -299,6 +325,24 @@ public class cbx_trato_datos {
                 for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
                     lo_cbx_tipo_documento = (cbx_tipo_documento) cbx_combo.getItemAt(i);
                     codigo = lo_cbx_tipo_documento.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 13:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_pais = (cbx_pais) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_pais.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 14:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_vendedor = (cbx_vendedor) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_vendedor.getID();
                     if (codigo.equalsIgnoreCase(dato.trim())) {
                         cbx_combo.setSelectedIndex(i);
                     }

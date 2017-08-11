@@ -111,9 +111,6 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="JRD_es_proveedor">
           <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="default"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="10" style="0"/>
             </Property>
@@ -126,9 +123,6 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="JRD_es_trabajador">
           <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="default"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="10" style="0"/>
             </Property>
@@ -713,14 +707,19 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="CBX_pais" min="-2" pref="85" max="-2" attributes="0"/>
-                      <Component id="TXT_direccion" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="TXT_codigo_ubigeo" min="-2" pref="61" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="TXT_descripcion_ubigeo" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="TXT_direccion" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                              <Component id="CBX_pais" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
@@ -910,7 +909,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="TXT_vendedor" max="32767" attributes="0"/>
+                                  <Component id="CBX_vendedor" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel34" min="-2" pref="70" max="-2" attributes="0"/>
@@ -966,7 +965,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="TXT_vendedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CBX_vendedor" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -1063,8 +1062,8 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="TXT_limite_cr">
           <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="#,##0.00" subtype="-1" type="0"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(&quot;#,##0.00&quot;,simbolos)))" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusLostBehavior" type="int" value="0"/>
@@ -1158,7 +1157,7 @@
             <Property name="text" type="java.lang.String" value=":"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="TXT_vendedor">
+        <Component class="javax.swing.JComboBox" name="CBX_vendedor">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="10" style="0"/>
@@ -1286,6 +1285,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="10" style="0"/>
             </Property>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Domiciliado"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
