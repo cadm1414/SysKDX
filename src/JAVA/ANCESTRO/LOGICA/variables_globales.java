@@ -9,6 +9,7 @@ import JAVA.ANCESTRO.GUI.frm_principal;
 import JAVA.CONFIG.BEAN.BEAN_general;
 import JAVA.CONFIG.DAO.*;
 import JAVA.CONFIG.GUI.dlg_busq_almacen;
+import JAVA.CONFIG.GUI.dlg_busq_entidad;
 import JAVA.CONFIG.GUI.dlg_busq_rol;
 import JAVA.CONFIG.GUI.dlg_busq_sucursal;
 import JAVA.CONFIG.GUI.dlg_busq_tipo_movimiento;
@@ -170,6 +171,7 @@ public class variables_globales {
     public static dlg_busq_kardex go_dlg_busq_kardex;
     public static dlg_rpt_stock go_dlg_rpt_stock;
     public static dlg_busq_stock_x_lote go_dlg_busq_stock_x_lote;
+    public static dlg_busq_entidad go_dlg_busq_entidad;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

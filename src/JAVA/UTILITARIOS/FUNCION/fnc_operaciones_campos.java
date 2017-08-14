@@ -146,6 +146,14 @@ public class fnc_operaciones_campos {
         return resp;
     }
 
+    public boolean int_boolean(int dato) {
+        boolean resp = false;
+        if (dato == 1) {
+            resp = true;
+        }
+        return resp;
+    }
+
     public String get_mac(byte[] mac) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < mac.length; i++) {

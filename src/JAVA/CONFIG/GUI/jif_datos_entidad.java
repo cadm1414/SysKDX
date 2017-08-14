@@ -6,7 +6,11 @@ import JAVA.ANCESTRO.LOGICA.evt_opciones_2;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.go_cbx_trato_datos;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.go_dao_tabla_sunat;
+import JAVA.CONFIG.BEAN.BEAN_entidad;
+import JAVA.CONFIG.LOGICA.cbx_pais;
+import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.CONFIG.LOGICA.cbx_tabla_sunat;
+import JAVA.CONFIG.LOGICA.cbx_vendedor;
 import JAVA.CONFIG.LOGICA.evt_datos_entidad;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +28,11 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     pnl_datos_contacto lo_pnl_datos_contacto = new pnl_datos_contacto();
     pnl_datos_direccion lo_pnl_datos_direccion = new pnl_datos_direccion();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
+    BEAN_entidad lo_bean_entidad = new BEAN_entidad();
     cbx_tabla_sunat lo_cbx_tipo_doc_id;
+    cbx_sucursal lo_cbx_sucursal;
+    cbx_vendedor lo_cbx_vendedor;
+    cbx_pais lo_cbx_pais;
     static boolean lb_valor_op[] = new boolean[8];
     ResultSet lq_rs;
     int li_tipo_operacion;
@@ -32,7 +40,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     String ls_opcion = "M C F";
     String ls_modulo = "CONFIG", ls_capa = "GUI", ls_clase = "jif_datos_entidad";
 
-    public jif_datos_entidad() {        
+    public jif_datos_entidad() {
         initComponents();
         formulario();
         activa_botones();
@@ -45,8 +53,8 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     private void formulario() {
         lo_pnl_opciones_2.setBounds(0, 0, 655, 120);
         TBP_entidad.addTab("REGISTRO", lo_pnl_datos_entidad);
-        TBP_entidad.addTab("DIRECCION", lo_pnl_datos_direccion);
-        TBP_entidad.addTab("CONTACTO", lo_pnl_datos_contacto);
+        //TBP_entidad.addTab("DIRECCION", lo_pnl_datos_direccion);
+        //TBP_entidad.addTab("CONTACTO", lo_pnl_datos_contacto);
 
         this.add(lo_pnl_opciones_2);
 
@@ -96,9 +104,9 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         lq_rs = go_dao_tabla_sunat.SLT_cbx_tabla_sunat("002");
         if (lq_rs != null) {
             go_cbx_trato_datos.recupera_valor(4, lq_rs, lo_pnl_datos_entidad.CBX_tipo_documento_id);
-        }       
+        }
     }
-    
+
     private void get_sucursal() {
         lq_rs = go_dao_sucursal.SLT_cbx_sucursal("1");
         if (lq_rs != null) {
@@ -112,7 +120,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
             go_cbx_trato_datos.recupera_valor(13, lq_rs, lo_pnl_datos_entidad.CBX_pais);
         }
     }
-    
+
     private void get_vendedor() {
         lq_rs = go_dao_vendedor.SLT_cbx_vendedor();
         if (lq_rs != null) {
@@ -120,13 +128,24 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         }
     }
 
+    private void get_descripcion_entidad(String codigo) {
+        try {
+            lq_rs = go_dao_entidad.SLT_datos_entidad(codigo);
+            if (lq_rs != null) {
+                lo_evt_datos_entidad.setea_recupera(lo_bean_entidad, lq_rs);
+                lo_evt_datos_entidad.muestra_datos(lo_pnl_datos_entidad, lo_bean_entidad);
+            }
+        } catch (Exception e) {
+        }
+    }
+
     private void genera_razon_social() {
         lo_pnl_datos_entidad.TXT_razon_social.setText(lo_pnl_datos_entidad.TXT_papellido.getText().trim() + " " + lo_pnl_datos_entidad.TXT_sapellido.getText().trim() + " " + lo_pnl_datos_entidad.TXT_nombre.getText().trim() + " ");
     }
-    
-    private void genera_codigo_entidad(String caracter){
+
+    private void genera_codigo_entidad(String caracter) {
         try {
-            lq_rs = go_dao_entidad.FNC_codigo_entidad(caracter);
+            lq_rs = go_dao_entidad.FNC_codigo_entidad(caracter.substring(0, 1));
             if (lq_rs.next()) {
                 lo_pnl_datos_entidad.TXT_codigo_entidad.setText(lq_rs.getString(1));
             }
@@ -142,6 +161,78 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, true);
     }
 
+    private void evt_buscar() {
+        li_tipo_operacion = 2;
+        go_dlg_busq_entidad = new dlg_busq_entidad(null, true);
+        go_dlg_busq_entidad.setVisible(true);
+        ls_codigo = go_dlg_busq_entidad.ls_codigo_entidad;
+        if (ls_codigo != null) {
+            get_descripcion_entidad(ls_codigo);
+            lo_evt_opciones_2.activa_btn_opciones(2, lo_pnl_opciones_2, lb_valor_op);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "SELECCIONE ENTIDAD");
+            lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
+            lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+        }
+    }
+
+    private void evt_editar() {
+        li_tipo_operacion = 1;
+        lo_cbx_tipo_doc_id = (cbx_tabla_sunat) lo_pnl_datos_entidad.CBX_tipo_documento_id.getSelectedItem();
+        lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
+        lo_evt_datos_entidad.activa_campos(1, lo_pnl_datos_entidad, true);
+    }
+
+    private void evt_eliminar() {
+        if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ENTIDAD " + lo_bean_entidad.getRazon_social() + "?") == 0) {
+            try {
+
+                if (go_dao_entidad.DLT_entidad(ls_codigo)) {
+                    lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                    lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);
+                    lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    private void evt_guardar() {
+        lo_cbx_tipo_doc_id = (cbx_tabla_sunat) lo_pnl_datos_entidad.CBX_tipo_documento_id.getSelectedItem();
+        lo_cbx_sucursal = (cbx_sucursal) lo_pnl_datos_entidad.CBX_sucursal.getSelectedItem();
+        lo_cbx_vendedor = (cbx_vendedor) lo_pnl_datos_entidad.CBX_vendedor.getSelectedItem();
+        lo_cbx_pais = (cbx_pais) lo_pnl_datos_entidad.CBX_pais.getSelectedItem();
+
+        switch (li_tipo_operacion) {
+            case 0:
+                if (lo_evt_datos_entidad.valida_campos(lo_pnl_datos_entidad, lo_cbx_tipo_doc_id)) {
+                    try {
+                        lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal);
+                        if (go_dao_entidad.IST_entidad(lo_bean_entidad)) {
+                            lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
+                            lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);
+                            lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+                break;
+            case 1:
+                break;
+        }
+    }
+
+    private void evt_cancelar() {
+        lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);
+        if (ls_codigo != null) {
+            lo_evt_datos_entidad.muestra_datos(lo_pnl_datos_entidad, lo_bean_entidad);
+            lo_evt_opciones_2.activa_btn_opciones(2, lo_pnl_opciones_2, lb_valor_op);
+        } else {
+            lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
+            lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+        }
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -149,19 +240,19 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                 evt_nuevo();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_buscar) {
-                //evt_buscar();
+                evt_buscar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_editar) {
-                //evt_editar();
+                evt_editar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_eliminar) {
-                //evt_eliminar();
+                evt_eliminar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_guardar) {
-                //evt_guardar();
+                evt_guardar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_cancelar) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_reporte) {
                 //evt_reporte();
@@ -186,38 +277,39 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                 evt_nuevo();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F2 && lo_pnl_opciones_2.BTN_buscar.isEnabled()) {
-                //evt_buscar();
+                evt_buscar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_2.BTN_editar.isEnabled()) {
-                //evt_editar();
+                evt_editar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_2.BTN_eliminar.isEnabled()) {
-                //evt_eliminar();
+                evt_eliminar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_2.BTN_guardar.isEnabled()) {
-                //evt_guardar();
+                evt_guardar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ESCAPE && lo_pnl_opciones_2.BTN_cancelar.isEnabled()) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_nuevo) {
                     evt_nuevo();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_buscar) {
-                    //evt_buscar();
+                    evt_buscar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_editar) {
-                    //evt_editar();
+
+                    evt_editar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_eliminar) {
-                    //evt_eliminar();
+                    evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_guardar) {
-                    //evt_guardar();
+                    evt_guardar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_cancelar) {
-                    //evt_cancelar();
+                    evt_cancelar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_reporte) {
                     //evt_reporte();
@@ -269,7 +361,10 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                     }
                 }
                 if (ke.getSource() == lo_pnl_datos_entidad.TXT_papellido) {
-                    genera_codigo_entidad(lo_pnl_datos_entidad.TXT_razon_social.getText().trim().substring(0, 1));
+                    if (li_tipo_operacion == 0) {
+                        genera_codigo_entidad(lo_pnl_datos_entidad.TXT_razon_social.getText().trim());
+                    }
+
                     if (go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_entidad.TXT_papellido.getText().trim(), 1, 3)) {
                         getFocusOwner().transferFocus();
                     }
@@ -285,7 +380,9 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                     }
                 }
                 if (ke.getSource() == lo_pnl_datos_entidad.TXT_razon_social) {
-                    genera_codigo_entidad(lo_pnl_datos_entidad.TXT_razon_social.getText().trim().substring(0, 1));
+                    if (li_tipo_operacion == 0) {
+                        genera_codigo_entidad(lo_pnl_datos_entidad.TXT_razon_social.getText().trim());
+                    }
                     if (go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_entidad.TXT_razon_social.getText().trim(), 1, 3)) {
                         getFocusOwner().transferFocus();
                     }
@@ -297,6 +394,9 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_datos_entidad.TXT_codigo_ubigeo && go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_entidad.TXT_codigo_ubigeo)) {
                     get_descripcion_ubigeo();
+                }
+                if (ke.getSource() == lo_pnl_datos_entidad.CBX_forma_pago || ke.getSource() == lo_pnl_datos_entidad.TXT_dias_cr || ke.getSource() == lo_pnl_datos_entidad.TXT_limite_cr || ke.getSource() == lo_pnl_datos_entidad.CBX_sucursal || ke.getSource() == lo_pnl_datos_entidad.CBX_vendedor || ke.getSource() == lo_pnl_datos_entidad.CBX_tipo_comercio || ke.getSource() == lo_pnl_datos_entidad.TXT_observacion || ke.getSource() == lo_pnl_datos_entidad.JRD_agente_percepcion || ke.getSource() == lo_pnl_datos_entidad.JRD_agente_retencion || ke.getSource() == lo_pnl_datos_entidad.JRD_entidad_excluida || ke.getSource() == lo_pnl_datos_entidad.JRD_es_domiciliado) {
+                    getFocusOwner().transferFocus();
                 }
             }
         }
@@ -312,75 +412,82 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     ItemListener ItemEvent = new ItemListener() {
         @Override
         public void itemStateChanged(java.awt.event.ItemEvent ie) {
-            if (ie.getSource() == lo_pnl_datos_entidad.JRD_es_proveedor) {
-                if (lo_pnl_datos_entidad.JRD_es_proveedor.isSelected() == true) {
-                    lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(false);
-                    lo_pnl_datos_entidad.JRD_es_trabajador.setEnabled(false);
-                    lo_pnl_datos_entidad.JRD_es_trabajador.setSelected(false);
-                    go_cbx_trato_datos.selecciona_valor(4, "6", lo_pnl_datos_entidad.CBX_tipo_documento_id);
-                } else {
-                    lo_pnl_datos_entidad.JRD_es_trabajador.setEnabled(true);
-                    lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(true);
-                }
-            }
-            if (ie.getSource() == lo_pnl_datos_entidad.JRD_es_trabajador) {
-                if (lo_pnl_datos_entidad.JRD_es_trabajador.isSelected() == true) {
-                    lo_pnl_datos_entidad.JRD_es_proveedor.setEnabled(false);
-                    lo_pnl_datos_entidad.CBX_tipo_persona.setEnabled(false);
-                    lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(false);
-                    lo_pnl_datos_entidad.JRD_es_proveedor.setSelected(false);
-                    lo_pnl_datos_entidad.CBX_tipo_persona.setSelectedIndex(0);
-                    go_cbx_trato_datos.selecciona_valor(4, "1", lo_pnl_datos_entidad.CBX_tipo_documento_id);
-                } else {
-                    lo_pnl_datos_entidad.JRD_es_proveedor.setEnabled(true);
-                    lo_pnl_datos_entidad.CBX_tipo_persona.setEnabled(true);
-                    lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(true);
-                }
-            }
-            if (ie.getSource() == lo_pnl_datos_entidad.CBX_tipo_persona) {
-                if (lo_pnl_datos_entidad.CBX_tipo_persona.getSelectedIndex() == 1) {
-                    go_cbx_trato_datos.selecciona_valor(4, "6", lo_pnl_datos_entidad.CBX_tipo_documento_id);
-                    lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(false);
-                    lo_pnl_datos_entidad.TXT_papellido.setEnabled(false);
-                    lo_pnl_datos_entidad.TXT_sapellido.setEnabled(false);
-                    lo_pnl_datos_entidad.TXT_nombre.setEnabled(false);
-                    lo_pnl_datos_entidad.TXT_papellido.setText("");
-                    lo_pnl_datos_entidad.TXT_sapellido.setText("");
-                    lo_pnl_datos_entidad.TXT_nombre.setText("");
-                    lo_pnl_datos_entidad.TXT_razon_social.setEnabled(true);
-
-                } else {
-                    lo_pnl_datos_entidad.TXT_papellido.setEnabled(true);
-                    lo_pnl_datos_entidad.TXT_sapellido.setEnabled(true);
-                    lo_pnl_datos_entidad.TXT_nombre.setEnabled(true);
-                    lo_pnl_datos_entidad.TXT_razon_social.setEnabled(false);
+            if (li_tipo_operacion != 2) {
+                if (ie.getSource() == lo_pnl_datos_entidad.JRD_es_proveedor && li_tipo_operacion == 0) {
                     if (lo_pnl_datos_entidad.JRD_es_proveedor.isSelected() == true) {
                         lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(false);
+                        lo_pnl_datos_entidad.JRD_es_trabajador.setEnabled(false);
+                        lo_pnl_datos_entidad.JRD_es_trabajador.setSelected(false);
+                        go_cbx_trato_datos.selecciona_valor(4, "6", lo_pnl_datos_entidad.CBX_tipo_documento_id);
                     } else {
+                        lo_pnl_datos_entidad.JRD_es_trabajador.setEnabled(true);
                         lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(true);
                     }
                 }
-            }
-            if (ie.getSource() == lo_pnl_datos_entidad.JRD_extranjero) {
-                if (lo_pnl_datos_entidad.JRD_extranjero.isSelected() == true) {
-                    go_cbx_trato_datos.selecciona_valor(13, "US", lo_pnl_datos_entidad.CBX_pais);
-                    lo_pnl_datos_entidad.CBX_pais.setEnabled(true);
-                    lo_pnl_datos_entidad.TXT_codigo_ubigeo.setEnabled(false);
-                    lo_pnl_datos_entidad.TXT_codigo_ubigeo.setText("");
-                    lo_pnl_datos_entidad.TXT_descripcion_ubigeo.setText("");
-                } else {
-                    go_cbx_trato_datos.selecciona_valor(13, "PE", lo_pnl_datos_entidad.CBX_pais);
-                    lo_pnl_datos_entidad.CBX_pais.setEnabled(false);
-                    lo_pnl_datos_entidad.TXT_codigo_ubigeo.setEnabled(true);
+                if (ie.getSource() == lo_pnl_datos_entidad.JRD_es_trabajador && li_tipo_operacion == 0) {
+                    if (lo_pnl_datos_entidad.JRD_es_trabajador.isSelected() == true) {
+                        lo_pnl_datos_entidad.JRD_es_proveedor.setEnabled(false);
+                        lo_pnl_datos_entidad.CBX_tipo_persona.setEnabled(false);
+                        lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(false);
+                        lo_pnl_datos_entidad.JRD_es_proveedor.setSelected(false);
+                        lo_pnl_datos_entidad.CBX_tipo_persona.setSelectedIndex(0);
+                        go_cbx_trato_datos.selecciona_valor(4, "1", lo_pnl_datos_entidad.CBX_tipo_documento_id);
+                    } else {
+                        lo_pnl_datos_entidad.JRD_es_proveedor.setEnabled(true);
+                        lo_pnl_datos_entidad.CBX_tipo_persona.setEnabled(true);
+                        lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(true);
+                    }
                 }
-            }
-            if (ie.getSource() == lo_pnl_datos_entidad.CBX_forma_pago) {
-                if (lo_pnl_datos_entidad.CBX_forma_pago.getSelectedIndex() == 1) {
-                    lo_pnl_datos_entidad.TXT_limite_cr.setEnabled(true);
-                    lo_pnl_datos_entidad.TXT_dias_cr.setEnabled(true);
-                } else {
-                    lo_pnl_datos_entidad.TXT_limite_cr.setEnabled(false);
-                    lo_pnl_datos_entidad.TXT_dias_cr.setEnabled(false);
+                if (ie.getSource() == lo_pnl_datos_entidad.CBX_tipo_persona) {
+                    if (lo_pnl_datos_entidad.CBX_tipo_persona.getSelectedIndex() == 1) {
+                        go_cbx_trato_datos.selecciona_valor(4, "6", lo_pnl_datos_entidad.CBX_tipo_documento_id);
+                        lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(false);
+                        lo_pnl_datos_entidad.TXT_papellido.setEnabled(false);
+                        lo_pnl_datos_entidad.TXT_sapellido.setEnabled(false);
+                        lo_pnl_datos_entidad.TXT_nombre.setEnabled(false);
+                        lo_pnl_datos_entidad.TXT_papellido.setText("");
+                        lo_pnl_datos_entidad.TXT_sapellido.setText("");
+                        lo_pnl_datos_entidad.TXT_nombre.setText("");
+                        lo_pnl_datos_entidad.TXT_razon_social.setEnabled(true);
+
+                    } else {
+                        lo_pnl_datos_entidad.TXT_papellido.setEnabled(true);
+                        lo_pnl_datos_entidad.TXT_sapellido.setEnabled(true);
+                        lo_pnl_datos_entidad.TXT_nombre.setEnabled(true);
+                        lo_pnl_datos_entidad.TXT_razon_social.setEnabled(false);
+                        if (lo_pnl_datos_entidad.JRD_es_proveedor.isSelected() == true) {
+                            lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(false);
+                        } else {
+                            lo_pnl_datos_entidad.CBX_tipo_documento_id.setEnabled(true);
+                        }
+                    }
+                }
+                if (ie.getSource() == lo_pnl_datos_entidad.JRD_extranjero) {
+                    if (lo_pnl_datos_entidad.JRD_extranjero.isSelected() == true) {
+                        go_cbx_trato_datos.selecciona_valor(13, "US", lo_pnl_datos_entidad.CBX_pais);
+                        lo_pnl_datos_entidad.CBX_pais.setEnabled(true);
+                        lo_pnl_datos_entidad.TXT_codigo_ubigeo.setEnabled(false);
+                        lo_pnl_datos_entidad.TXT_codigo_ubigeo.setText("999999");
+                        lo_pnl_datos_entidad.TXT_descripcion_ubigeo.setText("");
+                        get_descripcion_ubigeo();
+                    } else {
+                        go_cbx_trato_datos.selecciona_valor(13, "PE", lo_pnl_datos_entidad.CBX_pais);
+                        lo_pnl_datos_entidad.CBX_pais.setEnabled(false);
+                        lo_pnl_datos_entidad.TXT_codigo_ubigeo.setEnabled(true);
+                        lo_pnl_datos_entidad.TXT_codigo_ubigeo.setText("");
+                        lo_pnl_datos_entidad.TXT_descripcion_ubigeo.setText("");
+                    }
+                }
+                if (ie.getSource() == lo_pnl_datos_entidad.CBX_forma_pago) {
+                    if (lo_pnl_datos_entidad.CBX_forma_pago.getSelectedIndex() == 1) {
+                        lo_pnl_datos_entidad.TXT_limite_cr.setEnabled(true);
+                        lo_pnl_datos_entidad.TXT_dias_cr.setEnabled(true);
+                    } else {
+                        lo_pnl_datos_entidad.TXT_limite_cr.setText(0 + "");
+                        lo_pnl_datos_entidad.TXT_dias_cr.setText(0 + "");
+                        lo_pnl_datos_entidad.TXT_limite_cr.setEnabled(false);
+                        lo_pnl_datos_entidad.TXT_dias_cr.setEnabled(false);
+                    }
                 }
             }
         }
