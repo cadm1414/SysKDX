@@ -1,10 +1,16 @@
 
 package JAVA.CONFIG.GUI;
 
+import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+
 public class pnl_datos_direccion extends javax.swing.JPanel {
 
     public pnl_datos_direccion() {
         initComponents();
+        TXT_descripcion_ubigeo.setDocument(new fnc_txt_mayuscula());
+        TXT_direccion.setDocument(new fnc_txt_mayuscula());
+        TXT_nombre_direccion.setDocument(new fnc_txt_mayuscula());
+        TXT_referencia.setDocument(new fnc_txt_mayuscula());
     }
 
     @SuppressWarnings("unchecked")
@@ -45,6 +51,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");
 
+        TXT_nombre_direccion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_nombre_direccion.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -53,6 +60,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel4.setText(":");
 
+        TXT_direccion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_direccion.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -67,6 +75,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel12.setText(":");
 
+        TXT_referencia.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_referencia.setEnabled(false);
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -220,19 +229,20 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        TBL_direccion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TBL_direccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Direccion", "T. Direccion"
+                "Codigo", "Nombre", "Direccion", "T. Direccion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -244,14 +254,17 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
             }
         });
         TBL_direccion.setEnabled(false);
+        TBL_direccion.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_direccion);
         if (TBL_direccion.getColumnModel().getColumnCount() > 0) {
             TBL_direccion.getColumnModel().getColumn(0).setResizable(false);
-            TBL_direccion.getColumnModel().getColumn(0).setPreferredWidth(20);
+            TBL_direccion.getColumnModel().getColumn(0).setPreferredWidth(10);
             TBL_direccion.getColumnModel().getColumn(1).setResizable(false);
-            TBL_direccion.getColumnModel().getColumn(1).setPreferredWidth(150);
+            TBL_direccion.getColumnModel().getColumn(1).setPreferredWidth(50);
             TBL_direccion.getColumnModel().getColumn(2).setResizable(false);
-            TBL_direccion.getColumnModel().getColumn(2).setPreferredWidth(50);
+            TBL_direccion.getColumnModel().getColumn(2).setPreferredWidth(180);
+            TBL_direccion.getColumnModel().getColumn(3).setResizable(false);
+            TBL_direccion.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -260,12 +273,14 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

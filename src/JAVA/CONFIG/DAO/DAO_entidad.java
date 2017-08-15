@@ -97,4 +97,23 @@ public class DAO_entidad {
         return resp;
     }
     
+    public boolean UPD_entidad(BEAN_entidad OBJ_bet) throws SQLException {
+        boolean resp = false;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from upd_entidad('"+OBJ_bet.getCodigo_entidad()+"','"+OBJ_bet.getEs_cliente()+"','"+OBJ_bet.getEs_proveedor()+"','"+OBJ_bet.getEs_trabajador()+"','"+OBJ_bet.getStatus()+"','"+OBJ_bet.getTipo_procedencia()+"',$$"+OBJ_bet.getRazon_social()+"$$,$$"+OBJ_bet.getNombre_comercial()+"$$,'"+OBJ_bet.getTipo_persona()+"','"+OBJ_bet.getTipo_documento_id()+"','"+OBJ_bet.getNumero_documento_id()+"','"+OBJ_bet.getEs_domiciliado()+"','"+OBJ_bet.getDireccion()+"','"+OBJ_bet.getCodigo_ubigeo()+"','"+OBJ_bet.getDescripcion_ubigeo()+"','"+OBJ_bet.getCodigo_pais()+"',"+OBJ_bet.getDias_credito()+","+OBJ_bet.getLimite_credito()+",'"+OBJ_bet.getCodigo_sucursal()+"','"+OBJ_bet.getTipo_comercio()+"','"+OBJ_bet.getCodigo_vendedor()+"','"+OBJ_bet.getAgente_percepcion()+"','"+OBJ_bet.getAgente_retencion()+"','"+OBJ_bet.getEntidad_excluida()+"','"+OBJ_bet.getObservacion()+"','"+OBJ_bet.getForma_pago()+"',$$"+OBJ_bet.getNombres()+"$$,$$"+OBJ_bet.getPrimer_apellido()+"$$,$$"+OBJ_bet.getSegundo_apellido()+"$$)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                lq_stm.getConnection().commit();
+                go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_entidad", "SE ACTUALIZO BASE DE DATOS");
+                resp = true;
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "UPD_entidad", e.getMessage());
+        }
+        return resp;
+    }
+    
 }

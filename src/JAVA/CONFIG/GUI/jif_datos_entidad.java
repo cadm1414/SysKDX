@@ -11,6 +11,7 @@ import JAVA.CONFIG.LOGICA.cbx_pais;
 import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.CONFIG.LOGICA.cbx_tabla_sunat;
 import JAVA.CONFIG.LOGICA.cbx_vendedor;
+import JAVA.CONFIG.LOGICA.evt_datos_direccion;
 import JAVA.CONFIG.LOGICA.evt_datos_entidad;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     evt_datos_entidad lo_evt_datos_entidad = new evt_datos_entidad();
     pnl_datos_contacto lo_pnl_datos_contacto = new pnl_datos_contacto();
     pnl_datos_direccion lo_pnl_datos_direccion = new pnl_datos_direccion();
+    evt_datos_direccion lo_evt_datos_direccion = new evt_datos_direccion();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
     BEAN_entidad lo_bean_entidad = new BEAN_entidad();
     cbx_tabla_sunat lo_cbx_tipo_doc_id;
@@ -53,8 +55,6 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     private void formulario() {
         lo_pnl_opciones_2.setBounds(0, 0, 655, 120);
         TBP_entidad.addTab("REGISTRO", lo_pnl_datos_entidad);
-        //TBP_entidad.addTab("DIRECCION", lo_pnl_datos_direccion);
-        //TBP_entidad.addTab("CONTACTO", lo_pnl_datos_contacto);
 
         this.add(lo_pnl_opciones_2);
 
@@ -62,6 +62,8 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         lo_evt_opciones_2.evento_press(lo_pnl_opciones_2, KeyEvnt);
         lo_evt_datos_entidad.evento_press(lo_pnl_datos_entidad, KeyEvnt);
         lo_evt_datos_entidad.evento_item(lo_pnl_datos_entidad, ItemEvent);
+        lo_evt_datos_direccion.evento_press(lo_pnl_datos_direccion, KeyEvnt);
+        lo_evt_datos_direccion.evento_click(lo_pnl_datos_direccion, Listener);
     }
 
     private void activa_botones() {
@@ -129,12 +131,15 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     }
 
     private void get_descripcion_entidad(String codigo) {
+        TBP_entidad.addTab("DIRECCION", lo_pnl_datos_direccion);
+        TBP_entidad.addTab("CONTACTO", lo_pnl_datos_contacto);
         try {
             lq_rs = go_dao_entidad.SLT_datos_entidad(codigo);
             if (lq_rs != null) {
                 lo_evt_datos_entidad.setea_recupera(lo_bean_entidad, lq_rs);
                 lo_evt_datos_entidad.muestra_datos(lo_pnl_datos_entidad, lo_bean_entidad);
             }
+            lo_evt_datos_direccion.datos_tabla(codigo, lo_pnl_datos_direccion);
         } catch (Exception e) {
         }
     }
@@ -155,6 +160,8 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
 
     private void evt_nuevo() {
         ls_codigo = null;
+        TBP_entidad.remove(lo_pnl_datos_contacto);
+        TBP_entidad.remove(lo_pnl_datos_direccion);
         lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
         li_tipo_operacion = 0;
         lo_evt_opciones_2.activa_btn_opciones(1, lo_pnl_opciones_2, lb_valor_op);
@@ -173,6 +180,8 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "SELECCIONE ENTIDAD");
             lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
             lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+            TBP_entidad.remove(lo_pnl_datos_contacto);
+            TBP_entidad.remove(lo_pnl_datos_direccion);
         }
     }
 
@@ -181,16 +190,18 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         lo_cbx_tipo_doc_id = (cbx_tabla_sunat) lo_pnl_datos_entidad.CBX_tipo_documento_id.getSelectedItem();
         lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
         lo_evt_datos_entidad.activa_campos(1, lo_pnl_datos_entidad, true);
+        lo_evt_datos_direccion.activa_campos(0, lo_pnl_datos_direccion, true);
     }
 
     private void evt_eliminar() {
         if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ENTIDAD " + lo_bean_entidad.getRazon_social() + "?") == 0) {
             try {
-
                 if (go_dao_entidad.DLT_entidad(ls_codigo)) {
                     lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
                     lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);
                     lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
+                    TBP_entidad.remove(lo_pnl_datos_contacto);
+                    TBP_entidad.remove(lo_pnl_datos_direccion);
                 }
             } catch (Exception e) {
             }
@@ -212,12 +223,31 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                             lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
                             lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);
                             lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                            TBP_entidad.remove(lo_pnl_datos_contacto);
+                            TBP_entidad.remove(lo_pnl_datos_direccion);
                         }
                     } catch (Exception e) {
                     }
                 }
                 break;
             case 1:
+                if (lo_evt_datos_entidad.verifica_cambios(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_sucursal, lo_cbx_vendedor)) {
+                    if (lo_evt_datos_entidad.valida_campos(lo_pnl_datos_entidad, lo_cbx_tipo_doc_id)) {
+                        try {
+                            lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal);
+                            if (go_dao_entidad.UPD_entidad(lo_bean_entidad)) {
+                                lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
+                                lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);
+                                lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+                                TBP_entidad.remove(lo_pnl_datos_contacto);
+                                TBP_entidad.remove(lo_pnl_datos_direccion);
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                } else {
+                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "NO SE A REALIZADO CAMBIOS");
+                }
                 break;
         }
     }
@@ -227,9 +257,33 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         if (ls_codigo != null) {
             lo_evt_datos_entidad.muestra_datos(lo_pnl_datos_entidad, lo_bean_entidad);
             lo_evt_opciones_2.activa_btn_opciones(2, lo_pnl_opciones_2, lb_valor_op);
+            lo_evt_datos_direccion.activa_campos(0, lo_pnl_datos_direccion, false);
         } else {
             lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
             lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
+        }
+    }
+
+    private void evt_nuevo_direccion() {
+        lo_evt_datos_direccion.activa_campos(1, lo_pnl_datos_direccion, true);
+        lo_evt_datos_direccion.limpia_datos(lo_pnl_datos_direccion);
+    }
+
+    private void evt_eliminar_direccion() {
+        try {
+            if (!lo_pnl_datos_direccion.TBL_direccion.getValueAt(lo_pnl_datos_direccion.TBL_direccion.getSelectedRow(), 0).toString().equalsIgnoreCase("000")) {
+                if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR DIRECCION " + lo_pnl_datos_direccion.TBL_direccion.getValueAt(lo_pnl_datos_direccion.TBL_direccion.getSelectedRow(), 0) + "?") == 0) {
+                    if (go_dao_entidad_direccion.DLT_entidad_direccion(ls_codigo,lo_pnl_datos_direccion.TBL_direccion.getValueAt(lo_pnl_datos_direccion.TBL_direccion.getSelectedRow(), 0).toString())) {
+                        lo_evt_datos_direccion.datos_tabla(ls_codigo, lo_pnl_datos_direccion);
+                        lo_evt_datos_direccion.limpia_datos(lo_pnl_datos_direccion);
+                        lo_evt_datos_direccion.activa_campos(1, lo_pnl_datos_direccion, false);
+                    }
+                }
+            } else {
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_eliminar_direccion", "DIRECCION PRINCIPAL NO PUEDE SER ELIMINADA");
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_eliminar_direccion", "SELECCIONE DIRECCION");
         }
     }
 
@@ -256,6 +310,12 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_reporte) {
                 //evt_reporte();
+            }
+            if (ae.getSource() == lo_pnl_datos_direccion.BTN_nuevo) {
+                evt_nuevo_direccion();
+            }
+            if (ae.getSource() == lo_pnl_datos_direccion.BTN_eliminar) {
+                evt_eliminar_direccion();
             }
         }
     };
@@ -503,6 +563,8 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("ENTIDAD");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/CONFIG/IMAGES/entidad.png"))); // NOI18N
+
+        TBP_entidad.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

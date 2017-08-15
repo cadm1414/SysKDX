@@ -45,10 +45,11 @@ public class evt_datos_entidad {
                 break;
             case 1:
                 OBJ_pde.JRD_es_cliente.setEnabled(valor);
+                OBJ_pde.TXT_numero_doc_id.setEnabled(valor);
                 if (OBJ_pde.CBX_tipo_documento_id.getSelectedItem().toString().equalsIgnoreCase("DNI")) {
                     OBJ_pde.JRD_es_trabajador.setEnabled(valor);
-                }else{
-                     OBJ_pde.JRD_es_proveedor.setEnabled(valor);
+                } else {
+                    OBJ_pde.JRD_es_proveedor.setEnabled(valor);
                 }
                 OBJ_pde.CBX_estado.setEnabled(valor);
                 if (OBJ_pde.CBX_tipo_persona.getSelectedIndex() == 0) {
@@ -190,6 +191,55 @@ public class evt_datos_entidad {
         } else {
             OBJ_dpe.JRD_es_cliente.requestFocus();
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "SELECCIONE TIPO ENTIDAD");
+        }
+        return resp;
+    }
+
+    public boolean verifica_cambios(BEAN_entidad OBJ_bal, pnl_datos_entidad OBJ_dpe, cbx_sucursal cbx_sucursal, cbx_vendedor cbx_vendedor) {
+        boolean resp = false;
+        int forma_pago = 0;
+        if (OBJ_bal.getForma_pago().equalsIgnoreCase("CR")) {
+            forma_pago = 1;
+        }
+        if (OBJ_dpe.JRD_es_cliente.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getEs_cliente()))) {
+            if (OBJ_dpe.JRD_es_proveedor.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getEs_proveedor()))) {
+                if (OBJ_dpe.JRD_es_trabajador.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getEs_trabajador()))) {
+                    if (OBJ_dpe.CBX_estado.getSelectedIndex() == Integer.parseInt(OBJ_bal.getStatus())) {
+                        if (OBJ_dpe.TXT_numero_doc_id.getText().trim().equalsIgnoreCase(OBJ_bal.getNumero_documento_id()) && OBJ_dpe.TXT_papellido.getText().trim().equalsIgnoreCase(OBJ_bal.getPrimer_apellido()) && OBJ_dpe.TXT_sapellido.getText().trim().equalsIgnoreCase(OBJ_bal.getSegundo_apellido()) && OBJ_dpe.TXT_nombre.getText().trim().equalsIgnoreCase(OBJ_bal.getNombres()) && OBJ_dpe.TXT_razon_social.getText().trim().equalsIgnoreCase(OBJ_bal.getRazon_social()) && OBJ_dpe.TXT_nombre_comercial.getText().trim().equalsIgnoreCase(OBJ_bal.getNombre_comercial()) && OBJ_dpe.TXT_observacion.getText().trim().equalsIgnoreCase(OBJ_bal.getObservacion())) {
+                            if (OBJ_dpe.CBX_forma_pago.getSelectedIndex() == forma_pago) {
+                                if (Integer.parseInt(OBJ_dpe.TXT_dias_cr.getText().trim()) == OBJ_bal.getDias_credito() && Double.parseDouble(OBJ_dpe.TXT_limite_cr.getText().trim().replaceAll(",", "")) == OBJ_bal.getLimite_credito()) {
+                                    if (OBJ_dpe.CBX_tipo_comercio.getSelectedIndex() == Integer.parseInt(OBJ_bal.getTipo_comercio())) {
+                                        if (cbx_sucursal.getID().equalsIgnoreCase(OBJ_bal.getCodigo_sucursal()) && cbx_vendedor.getID().equalsIgnoreCase(OBJ_bal.getCodigo_vendedor())) {
+                                            if (OBJ_dpe.JRD_agente_percepcion.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getAgente_percepcion())) && OBJ_dpe.JRD_agente_retencion.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getAgente_retencion())) && OBJ_dpe.JRD_entidad_excluida.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getEntidad_excluida())) && OBJ_dpe.JRD_es_domiciliado.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getEs_domiciliado()))) {
+                                            } else {
+                                                resp = true;
+                                            }
+                                        } else {
+                                            resp = true;
+                                        }
+                                    } else {
+                                        resp = true;
+                                    }
+                                } else {
+                                    resp = true;
+                                }
+                            } else {
+                                resp = true;
+                            }
+                        } else {
+                            resp = true;
+                        }
+                    } else {
+                        resp = true;
+                    }
+                } else {
+                    resp = true;
+                }
+            } else {
+                resp = true;
+            }
+        } else {
+            resp = true;
         }
         return resp;
     }

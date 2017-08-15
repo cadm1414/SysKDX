@@ -130,6 +130,7 @@ public class variables_globales {
     public static DAO_pais go_dao_pais = new DAO_pais();
     public static DAO_entidad go_dao_entidad = new DAO_entidad();
     public static DAO_vendedor go_dao_vendedor = new DAO_vendedor();
+    public static DAO_entidad_direccion go_dao_entidad_direccion = new DAO_entidad_direccion();
 
     //GUI
     public static frm_principal go_frm_principal;
