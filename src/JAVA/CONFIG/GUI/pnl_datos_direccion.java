@@ -39,7 +39,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         BTN_nuevo = new javax.swing.JButton();
         BTN_editar = new javax.swing.JButton();
         BTN_eliminar = new javax.swing.JButton();
-        BTN_agregar = new javax.swing.JButton();
+        BTN_guardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TBL_direccion = new javax.swing.JTable();
 
@@ -195,9 +195,9 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         BTN_eliminar.setText("Eliminar");
         BTN_eliminar.setEnabled(false);
 
-        BTN_agregar.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        BTN_agregar.setText("Agregar");
-        BTN_agregar.setEnabled(false);
+        BTN_guardar.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        BTN_guardar.setText("Guardar");
+        BTN_guardar.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -212,7 +212,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
                             .addComponent(BTN_editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTN_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(BTN_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BTN_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -225,7 +225,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BTN_eliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BTN_agregar)
+                .addComponent(BTN_guardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -297,9 +297,9 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton BTN_agregar;
     public javax.swing.JButton BTN_editar;
     public javax.swing.JButton BTN_eliminar;
+    public javax.swing.JButton BTN_guardar;
     public javax.swing.JButton BTN_nuevo;
     public javax.swing.JComboBox<String> CBX_tipo_direccion;
     public javax.swing.JTable TBL_direccion;

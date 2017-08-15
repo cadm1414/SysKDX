@@ -151,7 +151,7 @@ public class evt_datos_entidad {
                         if (go_fnc_operaciones_campos.cant_caracter(OBJ_dpe.TXT_razon_social.getText().trim(), 1, 3)) {
                             if (go_fnc_operaciones_campos.cant_caracter(OBJ_dpe.TXT_direccion.getText().trim(), 1, 3)) {
                                 if (go_fnc_operaciones_campos.cant_caracter(OBJ_dpe.TXT_codigo_ubigeo.getText().trim(), 4, 6)) {
-                                    if (go_fnc_operaciones_campos.cant_caracter(OBJ_dpe.TXT_codigo_ubigeo.getText().trim(), 1, 3)) {
+                                    if (go_fnc_operaciones_campos.cant_caracter(OBJ_dpe.TXT_codigo_ubigeo.getText().trim(), 1, 6)) {
                                         if (go_fnc_operaciones_campos.campo_blanco(OBJ_dpe.TXT_dias_cr)) {
                                             if (go_fnc_operaciones_campos.campo_blanco(OBJ_dpe.TXT_limite_cr)) {
                                                 resp = true;
