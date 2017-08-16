@@ -41,7 +41,7 @@ public class dlg_almacen_x_permiso extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_almacen_x_permiso.TBL_almacen_acceso.getModel();
         try {
-            lq_rs = go_dao_usuario_permisos.SLT_grid_almacen_x_permiso(gi_id_usuario, "1", "1", "%");
+            lq_rs = go_dao_usuario_permisos.SLT_grid_almacen_x_permiso(gi_id_usuario, gs_parametros[0], "1", "%");
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});

@@ -1,9 +1,10 @@
-package JAVA.INVENT.GUI;
+package JAVA.VENTAS.GUI;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_aceptar_cancelar;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import JAVA.ANCESTRO.LOGICA.evt_aceptar_cancelar;
+import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,49 +13,68 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 
-public class dlg_ini_almacen extends javax.swing.JDialog {
+public class dlg_ini_serie extends javax.swing.JDialog {
 
-    pnl_ini_almacen lo_pnl_ini_almacen = new pnl_ini_almacen();
+    pnl_ini_serie lo_pnl_ini_serie = new pnl_ini_serie();
     pnl_aceptar_cancelar lo_pnl_aceptar_cancelar = new pnl_aceptar_cancelar();
     evt_aceptar_cancelar lo_evt_aceptar_cancelar = new evt_aceptar_cancelar();
     ResultSet lq_rs;
     String ls_codigo, ls_nombre;
-    String ls_modulo = "INVENT", ls_capa = "GUI", ls_clase = "dlg_ini_almacen";
+    String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_ini_serie";
 
-    public dlg_ini_almacen(java.awt.Frame parent, boolean modal) {
+    public dlg_ini_serie(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         formulario();
     }
 
     private void formulario() {
-        lo_pnl_ini_almacen.setBounds(10, 10, 500, 70);
-        lo_pnl_aceptar_cancelar.setBounds(100, 70, 200, 50);
+        lo_pnl_ini_serie.setBounds(10, 10, 500, 100);
+        lo_pnl_aceptar_cancelar.setBounds(100, 100, 200, 50);
 
-        this.add(lo_pnl_ini_almacen);
+        this.add(lo_pnl_ini_serie);
         this.add(lo_pnl_aceptar_cancelar);
 
-        lo_pnl_ini_almacen.TXT_codigo.addKeyListener(KeyEvnt);
+        lo_pnl_ini_serie.TXT_codigo.addKeyListener(KeyEvnt);
+        lo_pnl_ini_serie.CBX_serie.addKeyListener(KeyEvnt);
         lo_evt_aceptar_cancelar.evento_click(lo_pnl_aceptar_cancelar, Listener);
         lo_evt_aceptar_cancelar.evento_press(lo_pnl_aceptar_cancelar, KeyEvnt);
     }
 
     private void limpia_datos() {
-        lo_pnl_ini_almacen.TXT_codigo.setText("");
-        lo_pnl_ini_almacen.TXT_nombre.setText("");
-        lo_pnl_ini_almacen.TXT_codigo.requestFocus();
+        lo_pnl_ini_serie.TXT_codigo.setText("");
+        lo_pnl_ini_serie.TXT_nombre.setText("");
+        lo_pnl_ini_serie.CBX_serie.removeAllItems();
+        lo_pnl_ini_serie.TXT_codigo.requestFocus();
     }
 
-    private void get_descripcion_almacen(String codigo) {
+    private void get_serie(String codigo) {
         try {
-            lq_rs = go_dao_usuario_permisos.SLT_grid_almacen_x_permiso(gi_id_usuario, "1", "1", codigo);
+            lq_rs = go_dao_serie.SLT_cbx_serie(codigo);
             if (lq_rs != null) {
-                lo_pnl_ini_almacen.TXT_codigo.setText(lq_rs.getString(1));
-                lo_pnl_ini_almacen.TXT_nombre.setText(lq_rs.getString(2));
+                do {
+                    lo_pnl_ini_serie.CBX_serie.addItem(lq_rs.getString(1));
+                } while (lq_rs.next());
+                gs_parametros[2] = lo_pnl_ini_serie.CBX_serie.getSelectedItem().toString();
+            } else {
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_serie", "SUCURSAL NO CUENTA CON SERIE");
+                limpia_datos();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void get_descripcion_sucursal(String codigo) {
+        try {
+            lq_rs = go_dao_usuario_permisos.SLT_grid_almacen_x_permiso(gi_id_usuario, "2", "1", codigo);
+            if (lq_rs != null) {
+                lo_pnl_ini_serie.TXT_codigo.setText(lq_rs.getString(1));
+                lo_pnl_ini_serie.TXT_nombre.setText(lq_rs.getString(2));
                 gs_parametros[0] = lq_rs.getString(1);
                 gs_parametros[1] = lq_rs.getString(2);
+                get_serie(codigo);
             } else {
-                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_almacen", "USUARIO SIN PERMISOS y/o ALMACEN NO EXISTE");
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_sucursal", "USUARIO SIN PERMISOS y/o SUCURSAL NO EXISTE");
                 limpia_datos();
             }
         } catch (Exception e) {
@@ -62,22 +82,18 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
     }
 
     private void muestra_jif() {
-        if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_ini_almacen.TXT_codigo)) {
+        if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_ini_serie.TXT_codigo)) {
             switch (gi_parametros_2[0]) {
                 case 0:
-                    go_jif_saldos_iniciales = new jif_saldos_iniciales();
-                    go_frm_principal.JDP_principal.add(go_jif_saldos_iniciales);
-                    go_jif_saldos_iniciales.show();
+                    go_jif_pedido = new jif_pedido();
+                    go_frm_principal.JDP_principal.add(go_jif_pedido);
+                    go_jif_pedido.show();
                     break;
                 case 1:
-                    go_jif_guia_ingreso = new jif_guia_ingreso();
-                    go_frm_principal.JDP_principal.add(go_jif_guia_ingreso);
-                    go_jif_guia_ingreso.show();
+
                     break;
                 case 2:
-                    go_jif_guia_salida = new jif_guia_salida();
-                    go_frm_principal.JDP_principal.add(go_jif_guia_salida);
-                    go_jif_guia_salida.show();
+
                     break;
             }
             gi_parametros_2[0] = 0;
@@ -88,16 +104,23 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
     }
 
     private void evt_f5() {
-        gs_parametros[0] = "1";
+        gs_parametros[0] = "2";
         go_dlg_almacen_x_permiso = new dlg_almacen_x_permiso(null, true);
         go_dlg_almacen_x_permiso.setVisible(true);
         ls_codigo = go_dlg_almacen_x_permiso.ls_codigo_almacen;
         gs_parametros[0] = "";
         if (ls_codigo != null) {
-            get_descripcion_almacen(ls_codigo);
+            get_descripcion_sucursal(ls_codigo);
         } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_f5", "SELECCIONE ALMACEN");
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_f5", "SELECCIONE SUCURSAL");
             limpia_datos();
+        }
+    }
+
+    private void evt_aceptar() {
+        get_descripcion_sucursal(lo_pnl_ini_serie.TXT_codigo.getText().trim());
+        if (lo_pnl_ini_serie.CBX_serie.getItemCount() > 0) {
+            muestra_jif();
         }
     }
 
@@ -108,8 +131,7 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
                 dispose();
             }
             if (ae.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
-                get_descripcion_almacen(lo_pnl_ini_almacen.TXT_codigo.getText().trim());
-                muestra_jif();
+                evt_aceptar();
             }
         }
     };
@@ -123,7 +145,7 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
         @Override
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_F5) {
-                if (ke.getSource() == lo_pnl_ini_almacen.TXT_codigo) {
+                if (ke.getSource() == lo_pnl_ini_serie.TXT_codigo) {
                     evt_f5();
                 }
             }
@@ -132,13 +154,15 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
             }
 
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
-                if (ke.getSource() == lo_pnl_ini_almacen.TXT_codigo && go_fnc_operaciones_campos.cant_caracter(lo_pnl_ini_almacen.TXT_codigo.getText().trim(), 1, 4)) {
+                if (ke.getSource() == lo_pnl_ini_serie.TXT_codigo && go_fnc_operaciones_campos.cant_caracter(lo_pnl_ini_serie.TXT_codigo.getText().trim(), 1, 4)) {
+                    lo_pnl_ini_serie.CBX_serie.requestFocus();
+                    get_descripcion_sucursal(lo_pnl_ini_serie.TXT_codigo.getText().trim());
+                }
+                if (ke.getSource() == lo_pnl_ini_serie.CBX_serie) {
                     lo_pnl_aceptar_cancelar.BTN_aceptar.requestFocus();
-                    get_descripcion_almacen(lo_pnl_ini_almacen.TXT_codigo.getText().trim());
                 }
                 if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
-                    get_descripcion_almacen(lo_pnl_ini_almacen.TXT_codigo.getText().trim());
-                    muestra_jif();
+                    evt_aceptar();
                 }
                 if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_cancelar) {
                     dispose();
@@ -169,7 +193,7 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 124, Short.MAX_VALUE)
+            .addGap(0, 140, Short.MAX_VALUE)
         );
 
         pack();
@@ -180,7 +204,7 @@ public class dlg_ini_almacen extends javax.swing.JDialog {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                dlg_ini_almacen dialog = new dlg_ini_almacen(new javax.swing.JFrame(), true);
+                dlg_ini_serie dialog = new dlg_ini_serie(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

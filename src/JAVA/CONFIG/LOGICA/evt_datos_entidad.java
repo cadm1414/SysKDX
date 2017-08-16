@@ -36,7 +36,6 @@ public class evt_datos_entidad {
                 OBJ_pde.JRD_agente_percepcion.setEnabled(valor);
                 OBJ_pde.JRD_agente_retencion.setEnabled(valor);
                 OBJ_pde.JRD_entidad_excluida.setEnabled(valor);
-                OBJ_pde.JRD_es_domiciliado.setEnabled(valor);
                 OBJ_pde.CBX_tipo_comercio.setEnabled(valor);
                 OBJ_pde.TXT_dias_cr.setEnabled(false);
                 OBJ_pde.TXT_limite_cr.setEnabled(false);

@@ -605,9 +605,11 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                         lo_pnl_datos_entidad.TXT_codigo_ubigeo.setEnabled(false);
                         lo_pnl_datos_entidad.TXT_codigo_ubigeo.setText("999999");
                         lo_pnl_datos_entidad.TXT_descripcion_ubigeo.setText("");
+                        lo_pnl_datos_entidad.JRD_es_domiciliado.setSelected(false);
                         get_descripcion_ubigeo(lo_pnl_datos_entidad.TXT_codigo_ubigeo, lo_pnl_datos_entidad.TXT_descripcion_ubigeo);
                     } else {
                         go_cbx_trato_datos.selecciona_valor(13, "PE", lo_pnl_datos_entidad.CBX_pais);
+                        lo_pnl_datos_entidad.JRD_es_domiciliado.setSelected(true);
                         lo_pnl_datos_entidad.CBX_pais.setEnabled(false);
                         lo_pnl_datos_entidad.TXT_codigo_ubigeo.setEnabled(true);
                         lo_pnl_datos_entidad.TXT_codigo_ubigeo.setText("");

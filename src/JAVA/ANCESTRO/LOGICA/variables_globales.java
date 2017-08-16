@@ -65,6 +65,10 @@ import JAVA.INVENT.REPORT.pnl_rpt_stock_normal;
 import JAVA.INVENT.REPORT.pnl_rpt_stock_valorizado;
 import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
+import JAVA.VENTAS.DAO.DAO_serie;
+import JAVA.VENTAS.GUI.dlg_ini_serie;
+import JAVA.VENTAS.GUI.jif_pedido;
+import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
 
 public class variables_globales {
 
@@ -131,6 +135,7 @@ public class variables_globales {
     public static DAO_entidad go_dao_entidad = new DAO_entidad();
     public static DAO_vendedor go_dao_vendedor = new DAO_vendedor();
     public static DAO_entidad_direccion go_dao_entidad_direccion = new DAO_entidad_direccion();
+    public static DAO_serie go_dao_serie = new DAO_serie();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -151,6 +156,7 @@ public class variables_globales {
     public static muestra_pestania_invent go_muestra_pestania_invent = new muestra_pestania_invent();
     public static muestra_reporte_invent go_muestra_reporte_invent = new muestra_reporte_invent();
     public static muestra_dlg_invent go_muestra_dlg_invent = new muestra_dlg_invent();
+    public static muestra_dlg_ventas go_muestra_dlg_ventas = new muestra_dlg_ventas();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;
@@ -173,6 +179,7 @@ public class variables_globales {
     public static dlg_rpt_stock go_dlg_rpt_stock;
     public static dlg_busq_stock_x_lote go_dlg_busq_stock_x_lote;
     public static dlg_busq_entidad go_dlg_busq_entidad;
+    public static dlg_ini_serie go_dlg_ini_serie;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -191,6 +198,7 @@ public class variables_globales {
     public static jif_guia_ingreso go_jif_guia_ingreso;
     public static jif_guia_salida go_jif_guia_salida;
     public static jif_datos_entidad go_jif_datos_entidad;
+    public static jif_pedido go_jif_pedido;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

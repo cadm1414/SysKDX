@@ -72,7 +72,7 @@ public class opciones_menu {
                 if (dato.equalsIgnoreCase("SUBFAMILIA")) {
                     go_muestra_jif_invent.muestra_jif_subfamilia();
                     resp = "I";
-                }                
+                }
                 if (dato.equalsIgnoreCase("ITEM")) {
                     go_muestra_jif_invent.muestra_jif_articulo();
                     resp = "I";
@@ -97,7 +97,13 @@ public class opciones_menu {
                     go_muestra_dlg_invent.muestra_dlg_rpt_stock();
                     resp = "I";
                 }
-                break;                
+                break;
+            case "VENTAS":
+                if (dato.equalsIgnoreCase("PEDIDOS")) {
+                    go_muestra_dlg_ventas.muestra_dlg_pedido();
+                    resp = "I";
+                }
+                break;
         }
         return resp;
     }
