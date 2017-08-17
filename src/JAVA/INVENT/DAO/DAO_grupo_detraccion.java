@@ -19,9 +19,24 @@ public class DAO_grupo_detraccion {
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;
-            }            
+            }
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cbx_grupo_detraccion", e.getMessage());
+        }
+        return null;
+    }
+
+    public ResultSet SLT_grupo_detraccion_porcentaje(String codigo_grupo) {        
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grupo_detraccion_porcentaje('" + codigo_grupo + "') "
+                    + "as (porcentaje numeric(5,3),monto_minimo numeric(11,2))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
         }
         return null;
     }

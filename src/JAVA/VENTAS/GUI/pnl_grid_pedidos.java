@@ -50,7 +50,6 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        TBL_pedidos.setColumnSelectionAllowed(false);
         TBL_pedidos.setEnabled(false);
         TBL_pedidos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_pedidos);

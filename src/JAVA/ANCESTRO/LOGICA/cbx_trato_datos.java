@@ -15,6 +15,7 @@ import JAVA.INVENT.LOGICA.cbx_grupo_percepcion;
 import JAVA.INVENT.LOGICA.cbx_marca;
 import JAVA.INVENT.LOGICA.cbx_producto;
 import JAVA.INVENT.LOGICA.cbx_subfamilia;
+import JAVA.VENTAS.LOGICA.cbx_igv;
 import java.sql.ResultSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -37,6 +38,7 @@ public class cbx_trato_datos {
     cbx_tipo_documento lo_cbx_tipo_documento;
     cbx_pais lo_cbx_pais;
     cbx_vendedor lo_cbx_vendedor;
+    cbx_igv lo_cbx_igv;
 
     /*VALORES OPERACION
     0 = cbx_moneda
@@ -54,6 +56,7 @@ public class cbx_trato_datos {
     12 = cbx_tipo_documento
     13 = cbx_pais
     14 = cbx_vendedor
+    15 = cbx_igv
      */
     public void recupera_valor(int op, ResultSet rs, JComboBox cbx_combo) {
         switch (op) {
@@ -207,6 +210,16 @@ public class cbx_trato_datos {
                 } catch (Exception e) {
                 }
                 break;
+            case 15:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_igv(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -343,6 +356,15 @@ public class cbx_trato_datos {
                 for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
                     lo_cbx_vendedor = (cbx_vendedor) cbx_combo.getItemAt(i);
                     codigo = lo_cbx_vendedor.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 15:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_igv = (cbx_igv) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_igv.getID();
                     if (codigo.equalsIgnoreCase(dato.trim())) {
                         cbx_combo.setSelectedIndex(i);
                     }

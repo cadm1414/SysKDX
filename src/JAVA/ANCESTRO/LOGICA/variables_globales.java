@@ -10,6 +10,7 @@ import JAVA.CONFIG.BEAN.BEAN_general;
 import JAVA.CONFIG.DAO.*;
 import JAVA.CONFIG.GUI.dlg_busq_almacen;
 import JAVA.CONFIG.GUI.dlg_busq_entidad;
+import JAVA.CONFIG.GUI.dlg_busq_entidad_parametros;
 import JAVA.CONFIG.GUI.dlg_busq_rol;
 import JAVA.CONFIG.GUI.dlg_busq_sucursal;
 import JAVA.CONFIG.GUI.dlg_busq_tipo_movimiento;
@@ -65,7 +66,10 @@ import JAVA.INVENT.REPORT.pnl_rpt_stock_normal;
 import JAVA.INVENT.REPORT.pnl_rpt_stock_valorizado;
 import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
+import JAVA.VENTAS.DAO.DAO_igv;
+import JAVA.VENTAS.DAO.DAO_pedido;
 import JAVA.VENTAS.DAO.DAO_serie;
+import JAVA.VENTAS.DAO.DAO_tipo_cambio;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_pedido;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
@@ -136,6 +140,9 @@ public class variables_globales {
     public static DAO_vendedor go_dao_vendedor = new DAO_vendedor();
     public static DAO_entidad_direccion go_dao_entidad_direccion = new DAO_entidad_direccion();
     public static DAO_serie go_dao_serie = new DAO_serie();
+    public static DAO_igv go_dao_igv = new DAO_igv();
+    public static DAO_pedido go_dao_pedido = new DAO_pedido();
+    public static DAO_tipo_cambio go_dao_tipo_cambio = new DAO_tipo_cambio();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -180,6 +187,7 @@ public class variables_globales {
     public static dlg_busq_stock_x_lote go_dlg_busq_stock_x_lote;
     public static dlg_busq_entidad go_dlg_busq_entidad;
     public static dlg_ini_serie go_dlg_ini_serie;
+    public static dlg_busq_entidad_parametros go_dlg_busq_entidad_parametros;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
