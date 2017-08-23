@@ -82,7 +82,7 @@ public class DAO_producto {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from ist_producto('" + OBJ_bpr.getCodigo_producto() + "','" + OBJ_bpr.getNombre_producto() + "','" + OBJ_bpr.getClase_producto() + "','" + OBJ_bpr.getDias_almacen() + "','','" + OBJ_bpr.getStatus() + "','" + OBJ_bpr.getAfecto_detraccion() + "','" + OBJ_bpr.getAfecto_percepcion() + "')";
+            String SQL = "select * from ist_producto('" + OBJ_bpr.getCodigo_producto() + "',$$" + OBJ_bpr.getNombre_producto() + "$$,'" + OBJ_bpr.getClase_producto() + "','" + OBJ_bpr.getDias_almacen() + "','','" + OBJ_bpr.getStatus() + "','" + OBJ_bpr.getAfecto_detraccion() + "','" + OBJ_bpr.getAfecto_percepcion() + "')";
             System.out.println(SQL);
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
@@ -102,7 +102,7 @@ public class DAO_producto {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from upd_producto('" + OBJ_bpr.getCodigo_producto() + "','" + OBJ_bpr.getNombre_producto() + "','" + OBJ_bpr.getClase_producto() + "','" + OBJ_bpr.getDias_almacen() + "','','" + OBJ_bpr.getStatus() + "','" + OBJ_bpr.getAfecto_detraccion() + "','" + OBJ_bpr.getAfecto_percepcion() + "')";
+            String SQL = "select * from upd_producto('" + OBJ_bpr.getCodigo_producto() + "',$$" + OBJ_bpr.getNombre_producto() + "$$,'" + OBJ_bpr.getClase_producto() + "','" + OBJ_bpr.getDias_almacen() + "','','" + OBJ_bpr.getStatus() + "','" + OBJ_bpr.getAfecto_detraccion() + "','" + OBJ_bpr.getAfecto_percepcion() + "')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();

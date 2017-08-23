@@ -100,7 +100,7 @@ public class DAO_articulo_costo {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from ist_articulo_costo('" + OBJ_bar.getCodigo_orden() + "','" + OBJ_bar.getItem_orden() + "','" + OBJ_bar.getCodigo_articulo() + "','" + OBJ_bar.getCodigo_procedencia() + "','" + OBJ_bar.getTipo_procedencia() + "','" + OBJ_bar.getPeriodo() + "','" + OBJ_bar.getNumero() + "','" + OBJ_bar.getCodigo_entidad() + "','" + OBJ_bar.getNombre_articulo() + "','" + OBJ_bar.getFecha_ingreso() + "','" + OBJ_bar.getFecha_produccion() + "','" + OBJ_bar.getFecha_vencimiento() + "'," + OBJ_bar.getCosto() + ",'" + OBJ_bar.getPeriodo_produccion() + "','0','0')";
+            String SQL = "select * from ist_articulo_costo('" + OBJ_bar.getCodigo_orden() + "','" + OBJ_bar.getItem_orden() + "','" + OBJ_bar.getCodigo_articulo() + "','" + OBJ_bar.getCodigo_procedencia() + "','" + OBJ_bar.getTipo_procedencia() + "','" + OBJ_bar.getPeriodo() + "','" + OBJ_bar.getNumero() + "','" + OBJ_bar.getCodigo_entidad() + "',$$" + OBJ_bar.getNombre_articulo() + "$$,'" + OBJ_bar.getFecha_ingreso() + "','" + OBJ_bar.getFecha_produccion() + "','" + OBJ_bar.getFecha_vencimiento() + "'," + OBJ_bar.getCosto() + ",'" + OBJ_bar.getPeriodo_produccion() + "','0','0')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();
@@ -119,7 +119,7 @@ public class DAO_articulo_costo {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from upd_articulo_costo('" + OBJ_bar.getCodigo_orden() + "','" + OBJ_bar.getItem_orden() + "','" + OBJ_bar.getCodigo_articulo() + "','" + OBJ_bar.getCodigo_procedencia() + "','" + OBJ_bar.getTipo_procedencia() + "','" + OBJ_bar.getPeriodo() + "','" + OBJ_bar.getNumero() + "','" + OBJ_bar.getCodigo_entidad() + "','" + OBJ_bar.getNombre_articulo() + "','" + OBJ_bar.getFecha_ingreso() + "','" + OBJ_bar.getFecha_produccion() + "','" + OBJ_bar.getFecha_vencimiento() + "'," + OBJ_bar.getCosto() + ",'" + OBJ_bar.getPeriodo_produccion() + "','0','0','" + periodo_produccion + "')";
+            String SQL = "select * from upd_articulo_costo('" + OBJ_bar.getCodigo_orden() + "','" + OBJ_bar.getItem_orden() + "','" + OBJ_bar.getCodigo_articulo() + "','" + OBJ_bar.getCodigo_procedencia() + "','" + OBJ_bar.getTipo_procedencia() + "','" + OBJ_bar.getPeriodo() + "','" + OBJ_bar.getNumero() + "','" + OBJ_bar.getCodigo_entidad() + "',$$" + OBJ_bar.getNombre_articulo() + "$$,'" + OBJ_bar.getFecha_ingreso() + "','" + OBJ_bar.getFecha_produccion() + "','" + OBJ_bar.getFecha_vencimiento() + "'," + OBJ_bar.getCosto() + ",'" + OBJ_bar.getPeriodo_produccion() + "','0','0','" + periodo_produccion + "')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();

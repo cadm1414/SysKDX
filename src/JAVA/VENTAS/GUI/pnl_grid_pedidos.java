@@ -60,31 +60,31 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
             TBL_pedidos.getColumnModel().getColumn(0).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(0).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(1).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(1).setPreferredWidth(15);
+            TBL_pedidos.getColumnModel().getColumn(1).setPreferredWidth(10);
             TBL_pedidos.getColumnModel().getColumn(2).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(2).setPreferredWidth(50);
             TBL_pedidos.getColumnModel().getColumn(3).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(3).setPreferredWidth(210);
+            TBL_pedidos.getColumnModel().getColumn(3).setPreferredWidth(200);
             TBL_pedidos.getColumnModel().getColumn(4).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(4).setPreferredWidth(10);
+            TBL_pedidos.getColumnModel().getColumn(4).setPreferredWidth(5);
             TBL_pedidos.getColumnModel().getColumn(5).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(5).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(6).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(6).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(7).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(7).setPreferredWidth(5);
+            TBL_pedidos.getColumnModel().getColumn(7).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(8).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(8).setPreferredWidth(30);
+            TBL_pedidos.getColumnModel().getColumn(8).setPreferredWidth(50);
             TBL_pedidos.getColumnModel().getColumn(9).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(9).setPreferredWidth(30);
+            TBL_pedidos.getColumnModel().getColumn(9).setPreferredWidth(40);
             TBL_pedidos.getColumnModel().getColumn(10).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(10).setPreferredWidth(30);
+            TBL_pedidos.getColumnModel().getColumn(10).setPreferredWidth(40);
             TBL_pedidos.getColumnModel().getColumn(11).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(11).setPreferredWidth(30);
+            TBL_pedidos.getColumnModel().getColumn(11).setPreferredWidth(50);
             TBL_pedidos.getColumnModel().getColumn(12).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(12).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(13).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(13).setPreferredWidth(10);
+            TBL_pedidos.getColumnModel().getColumn(13).setPreferredWidth(15);
         }
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
@@ -202,14 +202,17 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JRD_masivo, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(JRD_masivo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(JRD_masivo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -217,12 +220,12 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -82,7 +82,7 @@ public class DAO_marca {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from ist_marca('" + OBJ_bma.getCodigo_marca() + "','" + OBJ_bma.getNombre_marca() + "','" + OBJ_bma.getStatus() + "')";
+            String SQL = "select * from ist_marca('" + OBJ_bma.getCodigo_marca() + "',$$" + OBJ_bma.getNombre_marca() + "$$,'" + OBJ_bma.getStatus() + "')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();
@@ -101,7 +101,7 @@ public class DAO_marca {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from upd_marca('" + OBJ_bma.getCodigo_marca() + "','" + OBJ_bma.getNombre_marca() + "','" + OBJ_bma.getStatus() + "')";
+            String SQL = "select * from upd_marca('" + OBJ_bma.getCodigo_marca() + "',$$" + OBJ_bma.getNombre_marca() + "$$,'" + OBJ_bma.getStatus() + "')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();

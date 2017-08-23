@@ -67,7 +67,7 @@ public class DAO_entidad_direccion {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from ist_entidad_direccion('" + OBJ_bet.getCodigo_entidad() + "','" + OBJ_bet.getNombre_direccion() + "','" + OBJ_bet.getDireccion() + "','" + OBJ_bet.getCodigo_ubigeo() + "','" + OBJ_bet.getDescripcion_ubigeo() + "','" + OBJ_bet.getReferencia() + "','" + OBJ_bet.getTipo_direccion() + "')";
+            String SQL = "select * from ist_entidad_direccion('" + OBJ_bet.getCodigo_entidad() + "',$$" + OBJ_bet.getNombre_direccion() + "$$,$$" + OBJ_bet.getDireccion() + "$$,'" + OBJ_bet.getCodigo_ubigeo() + "','" + OBJ_bet.getDescripcion_ubigeo() + "','" + OBJ_bet.getReferencia() + "','" + OBJ_bet.getTipo_direccion() + "')";
 
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
@@ -87,7 +87,7 @@ public class DAO_entidad_direccion {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from upd_entidad_direccion('" + OBJ_bet.getCodigo_entidad() + "','" + OBJ_bet.getCodigo_direccion() + "','" + OBJ_bet.getNombre_direccion() + "','" + OBJ_bet.getDireccion() + "','" + OBJ_bet.getCodigo_ubigeo() + "','" + OBJ_bet.getDescripcion_ubigeo() + "','" + OBJ_bet.getReferencia() + "','" + OBJ_bet.getTipo_direccion() + "')";
+            String SQL = "select * from upd_entidad_direccion('" + OBJ_bet.getCodigo_entidad() + "','" + OBJ_bet.getCodigo_direccion() + "',$$" + OBJ_bet.getNombre_direccion() + "$$,$$" + OBJ_bet.getDireccion() + "$$,'" + OBJ_bet.getCodigo_ubigeo() + "','" + OBJ_bet.getDescripcion_ubigeo() + "','" + OBJ_bet.getReferencia() + "','" + OBJ_bet.getTipo_direccion() + "')";
 
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
