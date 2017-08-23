@@ -37,9 +37,9 @@ public class evt_grid_pedidos {
     }
 
     public void agrega_fila(pnl_grid_pedidos OBJ_pgp, int fila_s) {
-        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_pedido());
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();        
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
 
         int fila = OBJ_pgp.TBL_pedidos.getRowCount();
 
@@ -56,6 +56,7 @@ public class evt_grid_pedidos {
     }
 
     public KeyListener evento_press(pnl_grid_pedidos OBJ_pgp, KeyListener KeyEvnt) {
+        OBJ_pgp.TBL_pedidos.addKeyListener(KeyEvnt);
         OBJ_pgp.JRD_masivo.addKeyListener(KeyEvnt);
         return KeyEvnt;
     }

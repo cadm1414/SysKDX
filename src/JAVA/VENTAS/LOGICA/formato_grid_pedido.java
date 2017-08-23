@@ -12,18 +12,21 @@ public class formato_grid_pedido extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        
+
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         Component c = renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         String s = "";
-        
+
         if (column == 8) {
-            DecimalFormat dFormat = new DecimalFormat("#.00000");
-            Double d = (Double) value;
-            s = dFormat.format(d);
-            c = renderer.getTableCellRendererComponent(table, s,
-                    isSelected, hasFocus, row, column);
-            ((JLabel) c).setHorizontalAlignment(SwingConstants.RIGHT);
+            try {
+                DecimalFormat dFormat = new DecimalFormat("#.00000");
+                Double d = (Double) value;
+                s = dFormat.format(d);
+                c = renderer.getTableCellRendererComponent(table, s,
+                        isSelected, hasFocus, row, column);
+                ((JLabel) c).setHorizontalAlignment(SwingConstants.RIGHT);
+            } catch (Exception e) {
+            }
         }
         return c;
     }

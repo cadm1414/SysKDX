@@ -2,6 +2,7 @@ package JAVA.INVENT.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.INVENT.GUI.pnl_grid_saldos_iniciales;
+import JAVA.VENTAS.LOGICA.formato_grid_pedido;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import javax.swing.JButton;
@@ -33,9 +34,10 @@ public class evt_grid_saldos_iniciales {
         }
     }
 
-    public void agrega_fila(pnl_grid_saldos_iniciales OBJ_pgs, int fila_s) {
-        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
+    public void agrega_fila(pnl_grid_saldos_iniciales OBJ_pgs, int fila_s) {        
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();        
         OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        
         int fila = OBJ_pgs.TBL_saldos_iniciales.getRowCount();
 
         if (fila == (fila_s + 1)) {

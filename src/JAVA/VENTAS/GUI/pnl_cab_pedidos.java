@@ -226,7 +226,7 @@ public class pnl_cab_pedidos extends javax.swing.JPanel {
         CBX_status.setNextFocusableComponent(JRD_precio_igv);
 
         JRD_precio_igv.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        JRD_precio_igv.setText("Precio Incluye IGV");
+        JRD_precio_igv.setText("Precio Sin IGV");
         JRD_precio_igv.setEnabled(false);
 
         CBX_moneda.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N

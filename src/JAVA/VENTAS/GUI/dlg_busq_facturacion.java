@@ -1,6 +1,5 @@
 package JAVA.VENTAS.GUI;
 
-import JAVA.INVENT.GUI.*;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
@@ -26,6 +25,12 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
         formulario();
         datos_tabla();
     }
+    
+    private void limpia_parametros(){
+        gs_parametros[0] = "";
+        gs_parametros[1] = "";
+        gs_parametros[2] = "";
+    }
 
     private void formulario() {
         lo_pnl_grid_facturacion.setBounds(0, 0, 800, 220);
@@ -42,7 +47,8 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_facturacion.TBL_facturacion.getModel();
         try {
-            lq_rs = go_dao_kardex_detalle.slt_grid_facturacion("0001","0", "000");
+            lq_rs = go_dao_kardex_detalle.slt_grid_facturacion(gs_parametros[0],gs_parametros[1], gs_parametros[2]);
+            limpia_parametros();
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
@@ -63,9 +69,13 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
     }
 
     public void retorna() {
-        ls_codigo_articulo = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 0).toString();
-        ls_oc = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 4).toString();
-        ls_periodo_produccion = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 5).toString();
+        gs_parametros[0] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 0).toString();
+        gs_parametros[1] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 1).toString();
+        gs_parametros[2] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 2).toString();
+        gs_parametros[3] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 3).toString();
+        gs_parametros[4] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 4).toString();
+        gs_parametros[5] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 5).toString();
+        
         this.dispose();
     }
 

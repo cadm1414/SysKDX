@@ -37,7 +37,6 @@ public class pnl_grid_facturacion extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        TBL_facturacion.setEnabled(false);
         TBL_facturacion.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_facturacion);
         if (TBL_facturacion.getColumnModel().getColumnCount() > 0) {
