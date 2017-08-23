@@ -15,6 +15,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         TXT_observacion.setDocument(new fnc_txt_mayuscula());
         TXT_codigo_barra.setDocument(new fnc_txt_mayuscula());
         TXT_caracteristica.setDocument(new fnc_txt_mayuscula());
+        TXT_serie.setDocument(new fnc_txt_mayuscula());
     }
 
     @SuppressWarnings("unchecked")
@@ -50,6 +51,9 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         jLabel29 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        TXT_serie = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -177,6 +181,15 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         jLabel37.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jLabel37.setText(":");
 
+        jLabel38.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        jLabel38.setText("Serie");
+
+        jLabel39.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        jLabel39.setText(":");
+
+        TXT_serie.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_serie.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -237,7 +250,14 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(189, 189, 189)
                         .addComponent(jLabel34))
-                    .addComponent(TXT_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(TXT_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel39)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TXT_serie, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TXT_caracteristica)
                     .addComponent(TXT_nombre))
                 .addContainerGap(76, Short.MAX_VALUE))
@@ -246,10 +266,15 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(TXT_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel38)
+                        .addComponent(jLabel39)
+                        .addComponent(TXT_serie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(TXT_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -551,6 +576,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
     public javax.swing.JTextField TXT_codigo_barra;
     public javax.swing.JTextField TXT_nombre;
     public javax.swing.JTextField TXT_observacion;
+    public javax.swing.JTextField TXT_serie;
     public javax.swing.JFormattedTextField TXT_tara;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -583,6 +609,8 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

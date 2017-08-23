@@ -18,6 +18,7 @@ public class evt_datos_articulo {
             case 0:
                 //OBJ_pda.TXT_codigo.setEnabled(valor);
                 //OBJ_pda.TXT_nombre.setEnabled(valor);
+                OBJ_pda.TXT_serie.setEnabled(valor);
                 OBJ_pda.CBX_producto.setEnabled(valor);
                 OBJ_pda.CBX_marca.setEnabled(valor);
                 OBJ_pda.TXT_caracteristica.setEnabled(valor);
@@ -35,7 +36,7 @@ public class evt_datos_articulo {
                 OBJ_pda.CBX_subfamilia.setEnabled(valor);
                 OBJ_pda.TXT_observacion.setEnabled(valor);
 
-                OBJ_pda.CBX_producto.requestFocus();
+                OBJ_pda.TXT_serie.requestFocus();
                 break;
             case 1:
                 OBJ_pda.TXT_caracteristica.setEnabled(valor);
@@ -75,6 +76,7 @@ public class evt_datos_articulo {
     }
 
     public void limpia_datos(pnl_datos_articulo OBJ_pda) {
+        OBJ_pda.TXT_serie.setText("");
         OBJ_pda.TXT_codigo.setText("");
         OBJ_pda.TXT_nombre.setText("");
         OBJ_pda.CBX_producto.setSelectedIndex(0);
@@ -102,7 +104,7 @@ public class evt_datos_articulo {
         OBJ_pda.TXT_observacion.setText("");
     }
 
-    public void muestra_datos(pnl_datos_articulo OBJ_pda, BEAN_articulo OBJ_bar) {
+    public void muestra_datos(pnl_datos_articulo OBJ_pda, BEAN_articulo OBJ_bar) {        
         OBJ_pda.TXT_codigo.setText(OBJ_bar.getCodigo_articulo());
         OBJ_pda.TXT_nombre.setText(OBJ_bar.getNombre_articulo());
         go_cbx_trato_datos.selecciona_valor(6, OBJ_bar.getCodigo_producto(), OBJ_pda.CBX_producto);
@@ -128,6 +130,7 @@ public class evt_datos_articulo {
 
         go_cbx_trato_datos.selecciona_valor(9, OBJ_bar.getCodigo_subfamilia(), OBJ_pda.CBX_subfamilia);
         OBJ_pda.TXT_observacion.setText(OBJ_bar.getObservacion());
+        OBJ_pda.TXT_serie.setText(OBJ_bar.getSerie());
     }
 
     public void setea_recupera(BEAN_articulo OBJ_bar, ResultSet lq_rs) {
@@ -153,6 +156,7 @@ public class evt_datos_articulo {
             OBJ_bar.setCodigo_familia(lq_rs.getString(19));
             OBJ_bar.setCodigo_subfamilia(lq_rs.getString(20));
             OBJ_bar.setObservacion(lq_rs.getString(21));
+            OBJ_bar.setSerie(lq_rs.getString(22));
         } catch (Exception e) {
         }
     }
@@ -213,6 +217,7 @@ public class evt_datos_articulo {
             OBJ_bar.setCodigo_familia(cbx_familia.getID());
             OBJ_bar.setCodigo_subfamilia(cbx_subfamilia.getID());
             OBJ_bar.setObservacion(go_fnc_operaciones_campos.get_campo_str(OBJ_pda.TXT_observacion));
+            OBJ_bar.setSerie(go_fnc_operaciones_campos.get_campo_str(OBJ_pda.TXT_serie));
         } catch (Exception e) {
         }
     }
@@ -276,6 +281,7 @@ public class evt_datos_articulo {
 
     public KeyListener evento_press(pnl_datos_articulo OBJ_pda, KeyListener KeyEvnt) {
         OBJ_pda.TXT_codigo.addKeyListener(KeyEvnt);
+        OBJ_pda.TXT_serie.addKeyListener(KeyEvnt);
         OBJ_pda.TXT_nombre.addKeyListener(KeyEvnt);
         OBJ_pda.CBX_producto.addKeyListener(KeyEvnt);
         OBJ_pda.CBX_marca.addKeyListener(KeyEvnt);

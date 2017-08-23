@@ -1,4 +1,4 @@
-package JAVA.INVENT.GUI;
+package JAVA.CONFIG.GUI;
 
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
@@ -12,14 +12,14 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
-public class dlg_busq_articulo_costo extends javax.swing.JDialog {
+public class dlg_busq_vendedor extends javax.swing.JDialog {
 
-    pnl_grid_busq_articulo_costo lo_pnl_grid_busq_articulo_costo = new pnl_grid_busq_articulo_costo();
+    pnl_grid_busq_vendedor lo_pnl_grid_busq_vendedor = new pnl_grid_busq_vendedor();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
-    public String ls_codigo_articulo, ls_oc, ls_periodo_produccion;
+    public String ls_codigo_vendedor,ls_nombre_vendedor;
 
-    public dlg_busq_articulo_costo(java.awt.Frame parent, boolean modal) {
+    public dlg_busq_vendedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         formulario();
@@ -27,26 +27,26 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
     }
 
     private void formulario() {
-        lo_pnl_grid_busq_articulo_costo.setBounds(0, 0, 600, 220);
-        PNL_grid.add(lo_pnl_grid_busq_articulo_costo);
+        lo_pnl_grid_busq_vendedor.setBounds(0, 0, 300, 220);
+        PNL_grid.add(lo_pnl_grid_busq_vendedor);
 
         TXT_dato.setDocument(new fnc_txt_mayuscula());
 
-        lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.addMouseListener(MouseEvnt);
-        lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.addKeyListener(KeyEvnt);
+        lo_pnl_grid_busq_vendedor.TBL_vendedor.addMouseListener(MouseEvnt);
+        lo_pnl_grid_busq_vendedor.TBL_vendedor.addKeyListener(KeyEvnt);
         TXT_dato.addKeyListener(KeyEvnt);
     }
 
     private void datos_tabla() {
         int a = 0;
-        lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getModel();
+        lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_vendedor.TBL_vendedor.getModel();
         try {
-            lq_rs = go_dao_articulo_costo.SLT_grid_articulo_costo();
+            lq_rs = go_dao_vendedor.SLT_grid_vendedor();
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
-                    for (int x = 0; x < 6; x++) {
-                        lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.setValueAt(lq_rs.getString(x + 1), a, x);
+                    for (int x = 0; x < 3; x++) {
+                        lo_pnl_grid_busq_vendedor.TBL_vendedor.setValueAt(lq_rs.getString(x + 1), a, x);
                     }
                     a++;
                 } while (lq_rs.next());
@@ -56,9 +56,8 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
     }
 
     public void retorna() {
-        ls_codigo_articulo = lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getValueAt(lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getSelectedRow(), 0).toString();
-        ls_oc = lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getValueAt(lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getSelectedRow(), 4).toString();
-        ls_periodo_produccion = lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getValueAt(lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getSelectedRow(), 5).toString();
+        ls_codigo_vendedor = lo_pnl_grid_busq_vendedor.TBL_vendedor.getValueAt(lo_pnl_grid_busq_vendedor.TBL_vendedor.getSelectedRow(), 0).toString();
+        ls_nombre_vendedor = lo_pnl_grid_busq_vendedor.TBL_vendedor.getValueAt(lo_pnl_grid_busq_vendedor.TBL_vendedor.getSelectedRow(), 1).toString();
         this.dispose();
     }
 
@@ -72,14 +71,14 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == TXT_dato) {
-                    if (lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.getRowCount() != 0) {
-                        lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.requestFocus();
-                        lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo.changeSelection(0, 0, false, false);
+                    if (lo_pnl_grid_busq_vendedor.TBL_vendedor.getRowCount() != 0) {
+                        lo_pnl_grid_busq_vendedor.TBL_vendedor.requestFocus();
+                        lo_pnl_grid_busq_vendedor.TBL_vendedor.changeSelection(0, 0, false, false);
                     } else {
                         TXT_dato.requestFocus();
                     }
                 }
-                if (ke.getSource() == lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo) {
+                if (ke.getSource() == lo_pnl_grid_busq_vendedor.TBL_vendedor) {
                     retorna();
                 }
             }
@@ -91,7 +90,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
         @Override
         public void keyReleased(KeyEvent ke) {
             if (ke.getSource() == TXT_dato) {
-                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo, TXT_dato.getText(), 1);
+                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_vendedor.TBL_vendedor, TXT_dato.getText(), 1);
             }
         }
 
@@ -100,7 +99,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
     MouseListener MouseEvnt = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent me) {
-            if (me.getSource() == lo_pnl_grid_busq_articulo_costo.TBL_articulo_costo && me.getClickCount() == 2) {
+            if (me.getSource() == lo_pnl_grid_busq_vendedor.TBL_vendedor && me.getClickCount() == 2) {
                 retorna();
             }
         }
@@ -136,7 +135,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
         PNL_grid = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("BUSQUEDA ARTICULO");
+        setTitle("BUSQUEDA VENDEDOR");
         setIconImage(getIconImage());
         setResizable(false);
 
@@ -171,7 +170,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
         );
         PNL_gridLayout.setVerticalGroup(
             PNL_gridLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 225, Short.MAX_VALUE)
+            .addGap(0, 230, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,7 +182,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 377, Short.MAX_VALUE))
+                        .addGap(0, 99, Short.MAX_VALUE))
                     .addComponent(PNL_grid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -204,7 +203,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                dlg_busq_articulo_costo dialog = new dlg_busq_articulo_costo(new javax.swing.JFrame(), true);
+                dlg_busq_vendedor dialog = new dlg_busq_vendedor(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -221,6 +220,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
                 getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));
         return retValue;
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PNL_grid;
     private javax.swing.JTextField TXT_dato;

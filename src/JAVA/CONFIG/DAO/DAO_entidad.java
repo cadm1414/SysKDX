@@ -131,5 +131,21 @@ public class DAO_entidad {
         }
         return null;
     }
+    
+    public ResultSet SLT_datos_entidad_x_facturacion(String codigo_entidad,String dato) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_datos_entidad_x_facturacion('" + codigo_entidad + "','"+dato+"') "
+                    + "as (codigo_entidad character(6),razon_social character varying(250),numero_doc character varying(15),es_domiciliado character(1),codigo_vendedor character(4),nombre_vendedor character varying(250),forma_pago character(2),dias_credito integer,codigo_ubigeo character(6),direccion character varying(250),descripcion_ubigeo character varying(100))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_entidad_x_facturacion", e.getMessage());
+        }
+        return null;
+    }
 
 }

@@ -149,16 +149,16 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
             if (lq_rs != null) {
                 lo_evt_datos_articulo.setea_recupera(lo_bean_articulo, lq_rs);
                 lo_evt_datos_articulo.muestra_datos(lo_pnl_datos_articulo, lo_bean_articulo);
-               
+
                 ls_clase_producto = lo_bean_articulo.getClase_producto();
-                if(lo_pnl_datos_articulo.CBX_detraccion.getSelectedIndex()==0){
+                if (lo_pnl_datos_articulo.CBX_detraccion.getSelectedIndex() == 0) {
                     ls_afecto_detraccion = "0";
-                }else{
+                } else {
                     ls_afecto_detraccion = "1";
                 }
-                if(lo_pnl_datos_articulo.CBX_percepcion.getSelectedIndex()==0){
+                if (lo_pnl_datos_articulo.CBX_percepcion.getSelectedIndex() == 0) {
                     ls_afecto_percepcion = "0";
-                }else{
+                } else {
                     ls_afecto_percepcion = "1";
                 }
             }
@@ -167,7 +167,11 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
     }
 
     private void genera_nombre() {
-        ls_nombre = lo_pnl_datos_articulo.CBX_producto.getSelectedItem() + " " + lo_pnl_datos_articulo.CBX_marca.getSelectedItem() + " " + lo_pnl_datos_articulo.TXT_caracteristica.getText().trim();
+        if (lo_pnl_datos_articulo.TXT_serie.getText().trim().equalsIgnoreCase("")) {
+            ls_nombre = lo_pnl_datos_articulo.CBX_producto.getSelectedItem() + " " + lo_pnl_datos_articulo.CBX_marca.getSelectedItem() + " " + lo_pnl_datos_articulo.TXT_caracteristica.getText().trim();
+        } else {
+            ls_nombre = lo_pnl_datos_articulo.TXT_serie.getText().trim()+" "+lo_pnl_datos_articulo.CBX_producto.getSelectedItem() + " " + lo_pnl_datos_articulo.CBX_marca.getSelectedItem() + " " + lo_pnl_datos_articulo.TXT_caracteristica.getText().trim();
+        }
         lo_pnl_datos_articulo.TXT_nombre.setText(ls_nombre);
     }
 
@@ -253,15 +257,15 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
         }
     }
 
-    private void evt_editar() {        
+    private void evt_editar() {
         li_tipo_operacion = 1;
         lo_evt_opciones_2.activa_btn_opciones(3, lo_pnl_opciones_2, lb_valor_op);
-        int cant = go_dao_articulo_costo.SLT_cta_articulo_costo_x_articulo(ls_codigo);        
+        int cant = go_dao_articulo_costo.SLT_cta_articulo_costo_x_articulo(ls_codigo);
         if (cant == 0) {
             lo_evt_datos_articulo.activa_campos(1, lo_pnl_datos_articulo, true);
-        }else{
+        } else {
             lo_evt_datos_articulo.activa_campos(2, lo_pnl_datos_articulo, true);
-        }        
+        }
     }
 
     private void evt_eliminar() {
@@ -277,7 +281,7 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
         }
     }
 
-    private void evt_guardar() {        
+    private void evt_guardar() {
         lo_cbx_familia = (cbx_familia) lo_pnl_datos_articulo.CBX_familia.getSelectedItem();
         lo_cbx_existencia = (cbx_tabla_sunat) lo_pnl_datos_articulo.CBX_existencia.getSelectedItem();
         lo_cbx_producto = (cbx_producto) lo_pnl_datos_articulo.CBX_producto.getSelectedItem();
@@ -432,12 +436,10 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_datos_articulo.CBX_unidad_medida) {
                     if (lo_pnl_datos_articulo.CBX_um_bulto.isEnabled()) {
                         lo_pnl_datos_articulo.CBX_um_bulto.requestFocus();
+                    } else if (lo_pnl_datos_articulo.TXT_tara.isEnabled()) {
+                        lo_pnl_datos_articulo.TXT_tara.requestFocus();
                     } else {
-                        if (lo_pnl_datos_articulo.TXT_tara.isEnabled()) {
-                            lo_pnl_datos_articulo.TXT_tara.requestFocus();
-                        } else {
-                            lo_pnl_datos_articulo.CBX_estado.requestFocus();
-                        }
+                        lo_pnl_datos_articulo.CBX_estado.requestFocus();
                     }
                 }
                 if (ke.getSource() == lo_pnl_datos_articulo.CBX_um_bulto) {
@@ -460,12 +462,10 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_datos_articulo.CBX_existencia) {
                     if (lo_pnl_datos_articulo.CBX_detraccion.isEnabled()) {
                         lo_pnl_datos_articulo.CBX_detraccion.requestFocus();
+                    } else if (lo_pnl_datos_articulo.CBX_percepcion.isEnabled()) {
+                        lo_pnl_datos_articulo.CBX_percepcion.requestFocus();
                     } else {
-                        if (lo_pnl_datos_articulo.CBX_percepcion.isEnabled()) {
-                            lo_pnl_datos_articulo.CBX_percepcion.requestFocus();
-                        } else {
-                            lo_pnl_datos_articulo.CBX_operacion.requestFocus();
-                        }
+                        lo_pnl_datos_articulo.CBX_operacion.requestFocus();
                     }
                 }
                 if (ke.getSource() == lo_pnl_datos_articulo.CBX_detraccion) {
@@ -493,12 +493,15 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_datos_articulo.TXT_observacion) {
                     lo_pnl_opciones_2.BTN_guardar.requestFocus();
                 }
+                if (ke.getSource() == lo_pnl_datos_articulo.TXT_serie) {
+                    getFocusOwner().transferFocus();
+                }
             }
         }
 
         @Override
         public void keyReleased(KeyEvent ke) {
-            if (ke.getSource() == lo_pnl_datos_articulo.TXT_caracteristica) {
+            if (ke.getSource() == lo_pnl_datos_articulo.TXT_caracteristica || ke.getSource() == lo_pnl_datos_articulo.TXT_serie) {
                 genera_nombre();
             }
         }

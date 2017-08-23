@@ -44,19 +44,19 @@ public class pnl_grid_busq_stock_x_lote extends javax.swing.JPanel {
             TBL_stock_lote.getColumnModel().getColumn(1).setResizable(false);
             TBL_stock_lote.getColumnModel().getColumn(1).setPreferredWidth(220);
             TBL_stock_lote.getColumnModel().getColumn(2).setResizable(false);
-            TBL_stock_lote.getColumnModel().getColumn(2).setPreferredWidth(10);
+            TBL_stock_lote.getColumnModel().getColumn(2).setPreferredWidth(5);
             TBL_stock_lote.getColumnModel().getColumn(3).setResizable(false);
-            TBL_stock_lote.getColumnModel().getColumn(3).setPreferredWidth(20);
+            TBL_stock_lote.getColumnModel().getColumn(3).setPreferredWidth(15);
             TBL_stock_lote.getColumnModel().getColumn(4).setResizable(false);
             TBL_stock_lote.getColumnModel().getColumn(4).setPreferredWidth(50);
             TBL_stock_lote.getColumnModel().getColumn(5).setResizable(false);
-            TBL_stock_lote.getColumnModel().getColumn(5).setPreferredWidth(50);
+            TBL_stock_lote.getColumnModel().getColumn(5).setPreferredWidth(40);
             TBL_stock_lote.getColumnModel().getColumn(6).setResizable(false);
             TBL_stock_lote.getColumnModel().getColumn(6).setPreferredWidth(20);
             TBL_stock_lote.getColumnModel().getColumn(7).setResizable(false);
-            TBL_stock_lote.getColumnModel().getColumn(7).setPreferredWidth(25);
+            TBL_stock_lote.getColumnModel().getColumn(7).setPreferredWidth(35);
             TBL_stock_lote.getColumnModel().getColumn(8).setResizable(false);
-            TBL_stock_lote.getColumnModel().getColumn(8).setPreferredWidth(25);
+            TBL_stock_lote.getColumnModel().getColumn(8).setPreferredWidth(35);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -64,7 +64,7 @@ public class pnl_grid_busq_stock_x_lote extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

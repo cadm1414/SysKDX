@@ -4,11 +4,19 @@ public class BEAN_articulo {
 
     String codigo_articulo, fecha_registro, nombre_articulo, caracteristica, clase_producto, codigo_barra, codigo_producto, codigo_marca, codigo_familia,
             codigo_subfamilia, codigo_unidad, tipo_operacion, status, observacion, codigo_percepcion, codigo_detraccion, afecto_igv, afecto_detraccion,
-            afecto_percepcion, bulto_um, categoria, codigo_sunat;
+            afecto_percepcion, bulto_um, categoria, codigo_sunat, serie;
     double tara;
 
     public String getCodigo_articulo() {
         return codigo_articulo;
+    }
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
     }
 
     public void setCodigo_articulo(String codigo_articulo) {

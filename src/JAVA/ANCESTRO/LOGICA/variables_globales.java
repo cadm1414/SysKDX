@@ -17,6 +17,7 @@ import JAVA.CONFIG.GUI.dlg_busq_tipo_movimiento;
 import JAVA.CONFIG.GUI.dlg_busq_ubigeo;
 import JAVA.CONFIG.GUI.dlg_busq_unidad_medida;
 import JAVA.CONFIG.GUI.dlg_busq_usuario;
+import JAVA.CONFIG.GUI.dlg_busq_vendedor;
 import JAVA.CONFIG.GUI.dlg_tipo_movimiento_parametros;
 import JAVA.CONFIG.GUI.frm_datos_general;
 import JAVA.CONFIG.GUI.jif_datos_almacen;
@@ -70,6 +71,7 @@ import JAVA.VENTAS.DAO.DAO_igv;
 import JAVA.VENTAS.DAO.DAO_pedido;
 import JAVA.VENTAS.DAO.DAO_serie;
 import JAVA.VENTAS.DAO.DAO_tipo_cambio;
+import JAVA.VENTAS.GUI.dlg_busq_facturacion;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_pedido;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
@@ -188,6 +190,8 @@ public class variables_globales {
     public static dlg_busq_entidad go_dlg_busq_entidad;
     public static dlg_ini_serie go_dlg_ini_serie;
     public static dlg_busq_entidad_parametros go_dlg_busq_entidad_parametros;
+    public static dlg_busq_vendedor go_dlg_busq_vendedor;
+    public static dlg_busq_facturacion go_dlg_busq_facturacion;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

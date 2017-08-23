@@ -36,7 +36,6 @@ public class evt_grid_saldos_iniciales {
     public void agrega_fila(pnl_grid_saldos_iniciales OBJ_pgs, int fila_s) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
         OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-        
         int fila = OBJ_pgs.TBL_saldos_iniciales.getRowCount();
 
         if (fila == (fila_s + 1)) {

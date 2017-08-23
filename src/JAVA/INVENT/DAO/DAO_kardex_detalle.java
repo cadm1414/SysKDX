@@ -79,4 +79,20 @@ public class DAO_kardex_detalle {
         return null;
     }
     
+     public ResultSet slt_grid_facturacion(String codigo_sucursal,String tipo_doc,String codigo_detraccion) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_facturacion('"+codigo_sucursal+"','" + tipo_doc + "','"+codigo_detraccion+"','"+gs_periodo+"') "
+                    + "as (codigo_articulo character(12),nombre_articulo character varying(150),tara numeric,simbolo_um character varying(3),afecto_igv character(1),porcentaje numeric,bulto integer,peso_bruto numeric,peso_neto numeric)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_facturacion", e.getMessage());
+        }
+        return null;
+    }
+    
 }

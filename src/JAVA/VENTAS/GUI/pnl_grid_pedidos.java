@@ -25,6 +25,8 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        JRD_masivo = new javax.swing.JRadioButton();
 
         TBL_pedidos.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TBL_pedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -50,6 +52,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TBL_pedidos.setCellSelectionEnabled(true);
         TBL_pedidos.setEnabled(false);
         TBL_pedidos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_pedidos);
@@ -65,13 +68,13 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
             TBL_pedidos.getColumnModel().getColumn(4).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(4).setPreferredWidth(10);
             TBL_pedidos.getColumnModel().getColumn(5).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(5).setPreferredWidth(5);
+            TBL_pedidos.getColumnModel().getColumn(5).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(6).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(6).setPreferredWidth(5);
+            TBL_pedidos.getColumnModel().getColumn(6).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(7).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(7).setPreferredWidth(10);
+            TBL_pedidos.getColumnModel().getColumn(7).setPreferredWidth(5);
             TBL_pedidos.getColumnModel().getColumn(8).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(8).setPreferredWidth(25);
+            TBL_pedidos.getColumnModel().getColumn(8).setPreferredWidth(30);
             TBL_pedidos.getColumnModel().getColumn(9).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(9).setPreferredWidth(30);
             TBL_pedidos.getColumnModel().getColumn(10).setResizable(false);
@@ -81,7 +84,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
             TBL_pedidos.getColumnModel().getColumn(12).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(12).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(13).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(13).setPreferredWidth(1);
+            TBL_pedidos.getColumnModel().getColumn(13).setPreferredWidth(5);
         }
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
@@ -189,6 +192,29 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ITEM", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
+
+        JRD_masivo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        JRD_masivo.setText("Registro Masivo");
+        JRD_masivo.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JRD_masivo)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JRD_masivo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,14 +222,19 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 48, Short.MAX_VALUE))
         );
@@ -211,6 +242,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JRadioButton JRD_masivo;
     private javax.swing.JLabel LBL_afecto;
     private javax.swing.JLabel LBL_igv;
     private javax.swing.JLabel LBL_importe;
@@ -225,6 +257,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,9 +1,7 @@
 package JAVA.CONFIG.LOGICA;
 
-import static JAVA.ANCESTRO.LOGICA.variables_globales.go_dao_menu;
 import java.awt.Color;
 import java.awt.Component;
-import java.sql.ResultSet;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
