@@ -503,7 +503,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                         } catch (Exception e) {
 
                         }
-                        lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
+                        //lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
                     }
                 }
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 11) {

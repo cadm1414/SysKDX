@@ -59,13 +59,12 @@ public class evt_grid_pedidos {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
         double importe = 0.0;
         try {
-            if (afecto_igv == 0) {
-                for (int i = 0; i > modelo.getRowCount(); i++) {
-                    importe = importe + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(11, i).toString());
+            if (afecto_igv == 0) {                
+                for (int i = 0; i < modelo.getRowCount(); i++) {
+                    importe = importe + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());
                 }
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
         
         OBJ_pgp.LBL_importe.setText(importe + "");
