@@ -17,6 +17,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
 
 public class jif_pedido extends javax.swing.JInternalFrame {
 
@@ -45,6 +47,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         get_moneda();
         get_igv();
         get_grupo_detraccion();
+        lo_pnl_grid_pedidos.TBL_pedidos.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selectNextColumnCell");
     }
 
     private void formulario() {
@@ -472,6 +475,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 int fila = lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow();
                 genera_peso_bruto(fila);
                 genera_importe(fila);
+                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Integer.parseInt(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()), lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
 
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 2) {
                     if (lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 1) == null) {
@@ -494,6 +498,11 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                         lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(null, fila, 8);
                         lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 8, false, false);
                     } else {
+                        try {
+                            lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(go_dao_reportes.RPT_utilidad_ponderada(ls_codigo_sucursal, lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 2).toString(), Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 8).toString())), fila, 12);
+                        } catch (Exception e) {
+
+                        }
                         lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
                     }
                 }
@@ -504,6 +513,9 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                         lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(null, fila, 10);
                         lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
                     }
+                }
+                if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 12) {
+                    lo_evt_grid_pedidos.agrega_fila(lo_pnl_grid_pedidos, fila);
                 }
             }
         }

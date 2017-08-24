@@ -80,7 +80,7 @@ public class variables_globales {
 
     //CONEXION
     public static CONEXION_emp go_conexion_emp = new CONEXION_emp();
-    public static CONEXION_db go_conexion_db = new CONEXION_db();    
+    public static CONEXION_db go_conexion_db = new CONEXION_db();
 
     //FUNCIONES
     public static fnc_mensaje go_fnc_mensaje = new fnc_mensaje();
@@ -103,12 +103,12 @@ public class variables_globales {
             gs_direccion_mac,
             gs_dia,
             gs_mes;
-    public static String[] gs_parametros  = new String[99999];
+    public static String[] gs_parametros = new String[99999];
     public static int gi_codigo_empresa,
             gi_id_usuario,
             gi_id_rol;
-    public static int[] gi_parametros_2  = new int[99999];
-    
+    public static int[] gi_parametros_2 = new int[99999];
+
     //DAO
     public static DAO_registro_empresa go_dao_registro_empresa = new DAO_registro_empresa();
     public static DAO_periodo_empresa go_dao_periodo_empresa = new DAO_periodo_empresa();
@@ -145,6 +145,7 @@ public class variables_globales {
     public static DAO_igv go_dao_igv = new DAO_igv();
     public static DAO_pedido go_dao_pedido = new DAO_pedido();
     public static DAO_tipo_cambio go_dao_tipo_cambio = new DAO_tipo_cambio();
+    public static DAO_reportes go_dao_reportes = new DAO_reportes();
 
     //GUI
     public static frm_principal go_frm_principal;

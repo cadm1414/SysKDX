@@ -243,12 +243,12 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JRadioButton JRD_masivo;
-    private javax.swing.JLabel LBL_afecto;
-    private javax.swing.JLabel LBL_igv;
-    private javax.swing.JLabel LBL_importe;
-    private javax.swing.JLabel LBL_inafecto;
-    private javax.swing.JLabel LBL_percepcion;
-    private javax.swing.JLabel LBL_total;
+    public javax.swing.JLabel LBL_afecto;
+    public javax.swing.JLabel LBL_igv;
+    public javax.swing.JLabel LBL_importe;
+    public javax.swing.JLabel LBL_inafecto;
+    public javax.swing.JLabel LBL_percepcion;
+    public javax.swing.JLabel LBL_total;
     public javax.swing.JTable TBL_pedidos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
