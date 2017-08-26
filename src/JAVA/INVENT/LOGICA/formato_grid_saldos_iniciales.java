@@ -1,6 +1,5 @@
 package JAVA.INVENT.LOGICA;
 
-import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JTable;

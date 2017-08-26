@@ -16,7 +16,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.ResultSet;
+import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 
@@ -73,6 +76,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         lo_evt_cab_pedidos.evento_item(lo_pnl_cab_pedidos, ItemEvent);
         lo_evt_grid_pedidos.evento_item(lo_pnl_grid_pedidos, ItemEvent);
         lo_evt_grid_pedidos.evento_press(lo_pnl_grid_pedidos, KeyEvnt);
+        lo_pnl_grid_pedidos.TBL_pedidos.addMouseListener(MouseEvent);
     }
 
     private void activa_botones() {
@@ -475,7 +479,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 int fila = lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow();
                 genera_peso_bruto(fila);
                 genera_importe(fila);
-                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Integer.parseInt(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()), lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
 
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 2) {
                     if (lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 1) == null) {
@@ -546,17 +550,55 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 }
                 if (ie.getSource() == lo_pnl_cab_pedidos.CBX_codigo_detraccion) {
                     get_porcentaje_detraccion();
+                    lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos);
                 }
                 if (ie.getSource() == lo_pnl_cab_pedidos.CBX_direccion && !lo_pnl_cab_pedidos.TXT_codigo_entidad.getText().trim().equalsIgnoreCase("")) {
                     lo_cbx_entidad_ubigeo = (cbx_entidad_ubigeo) lo_pnl_cab_pedidos.CBX_direccion.getSelectedItem();
                     lo_pnl_cab_pedidos.TXT_codigo_ubigeo.setText(lo_cbx_entidad_ubigeo.getID());
                     lo_pnl_cab_pedidos.TXT_descripcion.setText(lo_cbx_entidad_ubigeo.descripcion());
                 }
+                if (ie.getSource() == lo_pnl_cab_pedidos.JRD_precio_igv) {
+                    lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                }
                 if (ie.getSource() == lo_pnl_grid_pedidos.JRD_masivo && lo_pnl_grid_pedidos.JRD_masivo.isSelected() == true) {
 //                    go_dlg_busq_facturacion = new dlg_busq_facturacion(null, true);
 //                    go_dlg_busq_facturacion.setVisible(true);
                 }
             }
+        }
+    };
+
+    MouseListener MouseEvent = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent me) {
+            if (me.getSource() == lo_pnl_grid_pedidos.TBL_pedidos && lo_pnl_grid_pedidos.TBL_pedidos.isEnabled()) {
+                int columna = lo_pnl_grid_pedidos.TBL_pedidos.getColumnModel().getColumnIndexAtX(me.getX());
+                int fila = me.getY() / lo_pnl_grid_pedidos.TBL_pedidos.getRowHeight();
+                Object value = lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, columna);
+                if (value instanceof JButton) {
+                    if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ITEM " + go_fnc_operaciones_campos.completa_digitos((fila + 1) + "", "0", 3) + "?") == 0) {
+                        lo_evt_grid_pedidos.elimina_fila(lo_pnl_grid_pedidos, fila);
+                        lo_evt_grid_pedidos.genera_item(lo_pnl_grid_pedidos);
+                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent me) {
         }
     };
 

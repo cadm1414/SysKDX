@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class formato_grid_pedido extends DefaultTableCellRenderer {
 
     public static DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-    
+
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -26,10 +26,13 @@ public class formato_grid_pedido extends DefaultTableCellRenderer {
 
         switch (column) {
             case 8:
-                dFormat = new DecimalFormat("#,##0.00000",simbolos);
+                dFormat = new DecimalFormat("#,##0.00000", simbolos);
                 break;
             case 11:
-                dFormat = new DecimalFormat("#,##0.00",simbolos);
+                dFormat = new DecimalFormat("#,##0.00", simbolos);
+                break;
+            case 12:
+                dFormat = new DecimalFormat("#,##0", simbolos);
                 break;
         }
         try {
