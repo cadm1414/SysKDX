@@ -70,30 +70,37 @@ public class evt_grid_pedidos {
         simbolos.setDecimalSeparator('.');
         simbolos.setGroupingSeparator(',');
         dFormat = new DecimalFormat("#,##0.00", simbolos);
-        double importe = 0.0, inafecto = 0.0, total = 0.0, percepcion = 0.0, afecto = 0.0, igv = 0.0, afecto_s = 0.0, igv_s = 0.0;
+        double importe = 0.0, inafecto = 0.0, total = 0.0, percepcion = 0.0, percepcion_s = 0.0, afecto = 0.0, igv = 0.0, afecto_s = 0.0, igv_s = 0.0;
         dFormat.format(total);
         try {
             switch (afecto_igv) {
                 case 0:
                     for (int i = 0; i < modelo.getRowCount(); i++) {
-                        total = total + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());
-                        percepcion = percepcion + ((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()));
+                        total = total + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());                        
+                        percepcion_s = 0.00;
+                        inafecto = 0.00;
+                        igv_s = 0.00;
+                        afecto_s = 0.00;
                     }
                     break;
                 case 1:
                     for (int i = 0; i < modelo.getRowCount(); i++) {
-                        percepcion = percepcion + ((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()));
                         if ((boolean) OBJ_pgp.TBL_pedidos.getValueAt(i, 6) == false) {
                             inafecto = inafecto + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());
+                            percepcion = ((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()));
+                            percepcion_s = percepcion_s + percepcion;
                         } else {
                             if (es_sigv == false) {
                                 afecto = Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()) / (igv_p + 1);
+                                percepcion = ((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()));
                             } else {
                                 afecto = Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());
+                                percepcion = (Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()) * (1 + igv_p);
                             }
                             igv = afecto * igv_p;
                             afecto_s = afecto_s + afecto;
                             igv_s = igv_s + igv;
+                            percepcion_s = percepcion_s + percepcion;
                         }
                     }
                     break;
@@ -102,12 +109,12 @@ public class evt_grid_pedidos {
         }
 
         total = total + inafecto + afecto_s + igv_s;
-        importe = total + percepcion;
+        importe = total + percepcion_s;
         OBJ_pgp.LBL_total.setText(dFormat.format(total) + "");
         OBJ_pgp.LBL_inafecto.setText(dFormat.format(inafecto) + "");
         OBJ_pgp.LBL_afecto.setText(dFormat.format(afecto_s) + "");
         OBJ_pgp.LBL_igv.setText(dFormat.format(igv_s) + "");
-        OBJ_pgp.LBL_percepcion.setText(dFormat.format(percepcion) + "");
+        OBJ_pgp.LBL_percepcion.setText(dFormat.format(percepcion_s) + "");
         OBJ_pgp.LBL_importe.setText(dFormat.format(importe) + "");
     }
 
@@ -121,6 +128,53 @@ public class evt_grid_pedidos {
         for (int x = 0; x < OBJ_pgp.TBL_pedidos.getRowCount(); x++) {
             modelo.setValueAt(go_fnc_operaciones_campos.completa_digitos((x + 1) + "", "0", 3), x, 0);
         }
+    }
+
+    public boolean valida_campos(pnl_grid_pedidos OBJ_pgp) {
+        boolean resp = false;
+        int valida = 0;
+        if (OBJ_pgp.TBL_pedidos.getRowCount() != 0) {
+            for (int i = 0; i < OBJ_pgp.TBL_pedidos.getRowCount(); i++) {
+                for (int x = 1; x < OBJ_pgp.TBL_pedidos.getColumnCount(); x++) {
+                    if (OBJ_pgp.TBL_pedidos.getValueAt(i, x) != null) {
+                        if (!OBJ_pgp.TBL_pedidos.getValueAt(i, x).toString().trim().equalsIgnoreCase("")) {
+                            if (x == 8 || x == 10) {
+                                if (Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, x).toString().trim()) > -1) {
+                                    resp = true;
+                                } else {
+                                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "PRECIO/PESO INCORRECTOS");
+                                    OBJ_pgp.TBL_pedidos.setValueAt("", i, 1);
+                                    OBJ_pgp.TBL_pedidos.changeSelection(i, 1, false, false);
+                                    resp = false;
+                                    valida++;
+                                    break;
+                                }
+                            }
+                        } else {
+                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "FILA NO CONTIENE DATOS");
+                            OBJ_pgp.TBL_pedidos.changeSelection(i, 1, false, false);
+                            valida++;
+                            resp = false;
+                            break;
+                        }
+                    } else {
+                        go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "FILA NO CONTIENE DATOS");
+                        OBJ_pgp.TBL_pedidos.changeSelection(i, 1, false, false);
+                        valida++;
+                        resp = false;
+                        break;
+                    }
+                }
+                if (valida != 0) {
+                    resp = false;
+                    break;
+                }
+            }
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "DOCUMENTO SIN DETALLE");
+            agrega_fila(OBJ_pgp, -1);
+        }
+        return resp;
     }
 
     public KeyListener evento_press(pnl_grid_pedidos OBJ_pgp, KeyListener KeyEvnt) {

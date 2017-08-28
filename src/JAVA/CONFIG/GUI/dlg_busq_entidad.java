@@ -175,7 +175,7 @@ public class dlg_busq_entidad extends javax.swing.JDialog {
         PNL_grid.setLayout(PNL_gridLayout);
         PNL_gridLayout.setHorizontalGroup(
             PNL_gridLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
         PNL_gridLayout.setVerticalGroup(
             PNL_gridLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
