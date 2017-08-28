@@ -11,8 +11,8 @@ public class formato_grid_saldos_iniciales extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-        if(value instanceof JButton){
-            JButton BTN_eliminar = (JButton)value;
+        if (value instanceof JButton) {
+            JButton BTN_eliminar = (JButton) value;
             return BTN_eliminar;
         }
         return this;

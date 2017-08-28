@@ -1,6 +1,5 @@
 package JAVA.VENTAS.LOGICA;
 
-import static JAVA.CONFIG.GUI.pnl_datos_entidad.simbolos;
 import java.awt.Component;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -36,15 +35,14 @@ public class formato_grid_pedido extends DefaultTableCellRenderer {
                 break;
         }
         try {
-
             Double d = (Double) value;
             s = dFormat.format(d);
             c = renderer.getTableCellRendererComponent(table, s,
                     isSelected, hasFocus, row, column);
             ((JLabel) c).setHorizontalAlignment(SwingConstants.RIGHT);
+
         } catch (Exception e) {
         }
-
         return c;
     }
 

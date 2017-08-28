@@ -77,12 +77,12 @@ public class evt_grid_pedidos {
                 case 0:
                     for (int i = 0; i < modelo.getRowCount(); i++) {
                         total = total + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());
-                        percepcion = percepcion + ((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString())/100)*Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()));
+                        percepcion = percepcion + ((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()));
                     }
                     break;
                 case 1:
                     for (int i = 0; i < modelo.getRowCount(); i++) {
-                        percepcion = percepcion + ((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString())/100)*Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()));
+                        percepcion = percepcion + ((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()));
                         if ((boolean) OBJ_pgp.TBL_pedidos.getValueAt(i, 6) == false) {
                             inafecto = inafecto + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());
                         } else {
@@ -110,7 +110,7 @@ public class evt_grid_pedidos {
         OBJ_pgp.LBL_percepcion.setText(dFormat.format(percepcion) + "");
         OBJ_pgp.LBL_importe.setText(dFormat.format(importe) + "");
     }
-    
+
     public void elimina_fila(pnl_grid_pedidos OBJ_pgp, int fila) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
         modelo.removeRow(fila);

@@ -1,6 +1,7 @@
 package JAVA.VENTAS.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.VENTAS.GUI.pnl_cab_pedidos;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
@@ -22,7 +23,7 @@ public class evt_cab_pedidos {
                 OBJ_pcp.CBX_direccion.setEnabled(valor);
                 OBJ_pcp.TXT_codigo_vendedor.setEnabled(valor);
                 OBJ_pcp.TXT_observacion.setEnabled(valor);
-                OBJ_pcp.TXT_numero_doc.requestFocus();               
+                OBJ_pcp.TXT_numero_doc.requestFocus();
                 break;
         }
     }
@@ -50,9 +51,103 @@ public class evt_cab_pedidos {
         OBJ_pcp.TXT_nombre_vendedor.setText("");
         OBJ_pcp.CBX_forma_pago.setSelectedIndex(0);
         OBJ_pcp.TXT_dias_credito.setText("");
-        OBJ_pcp.TXT_observacion.setText("");      
+        OBJ_pcp.TXT_observacion.setText("");
         OBJ_pcp.CBX_status.setSelectedIndex(1);
         OBJ_pcp.LBL_fecha_registro.setText("");
+        OBJ_pcp.JRD_domiciliado.setSelected(true);
+        OBJ_pcp.JRD_precio_igv.setSelected(false);
+    }
+
+    public boolean valida_moneda(double tc, String codigo_moneda) {
+        boolean resp = false;
+        if (codigo_moneda.equalsIgnoreCase("PEN")) {
+            resp = true;
+        } else if (tc > 0) {
+            resp = true;
+        }
+        return resp;
+    }
+
+    public boolean valida_tipo_documento(int td, String numero_doc) {
+        boolean resp = false;
+        switch (td) {
+            case 0:
+                if (go_fnc_operaciones_campos.valida_ruc(numero_doc)) {
+                    resp = true;
+                }
+                break;
+            case 1:
+                if (go_fnc_operaciones_campos.cant_caracter(numero_doc, 4, 8)) {
+                    resp = true;
+                }
+                break;
+        }
+        return resp;
+    }
+
+    public boolean valida_campos(pnl_cab_pedidos OBJ_pcp, cbx_moneda cbx_moneda) {
+        boolean resp = false;
+        if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_numero_doc)) {
+            OBJ_pcp.TXT_numero_doc.setText(go_fnc_operaciones_campos.completa_digitos(OBJ_pcp.TXT_numero_doc.getText().trim(), "0", 10));
+            OBJ_pcp.LBL_numero_doc.setText(OBJ_pcp.TXT_numero_doc.getText());
+            if (go_fnc_operaciones_campos.valida_fecha(OBJ_pcp.TXT_fecha_emision.getText())) {
+                if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_tipo_cambio)) {
+                    if (valida_moneda(Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText()), cbx_moneda.getID())) {
+                        if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_entidad)) {
+                            if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_razon_social)) {
+                                if (valida_tipo_documento(OBJ_pcp.CBX_tipo_documento_id.getSelectedIndex(), OBJ_pcp.TXT_doc_id.getText().trim())) {
+                                    if (!OBJ_pcp.CBX_direccion.getSelectedItem().toString().trim().equalsIgnoreCase("")) {
+                                        if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_ubigeo)) {
+                                            if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_pagador)) {
+                                                if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_vendedor)) {
+                                                    resp = true;
+                                                } else {
+                                                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "CODIGO VENDEDOR");
+                                                    OBJ_pcp.TXT_codigo_vendedor.requestFocus();
+                                                }
+                                            } else {
+                                                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "CODIGO PAGADOR");
+                                                OBJ_pcp.TXT_codigo_pagador.requestFocus();
+                                            }
+                                        } else {
+                                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "CODIGO UBIGEO");
+                                            OBJ_pcp.TXT_codigo_ubigeo.requestFocus();
+                                        }
+                                    } else {
+                                        go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE DIRECCION");
+                                        OBJ_pcp.CBX_direccion.requestFocus();
+                                    }
+                                } else {
+                                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE N° DOCUMENTO CORRECTO");
+                                    OBJ_pcp.TXT_doc_id.requestFocus();
+                                }
+                            } else {
+                                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "RAZON SOCIAL");
+                                OBJ_pcp.TXT_razon_social.requestFocus();
+                            }
+                        } else {
+                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE ENTIDAD");
+                            OBJ_pcp.TXT_codigo_entidad.requestFocus();
+                        }
+                    } else {
+                        go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE TIPO DE CAMBIO");
+                        OBJ_pcp.TXT_tipo_cambio.setText("");
+                        OBJ_pcp.TXT_tipo_cambio.requestFocus();
+                    }
+                } else {
+                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE TIPO DE CAMBIO");
+                    OBJ_pcp.TXT_tipo_cambio.requestFocus();
+                }
+            } else {
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "FECHA INVALIDA");
+                OBJ_pcp.TXT_fecha_emision.setText("");
+                OBJ_pcp.TXT_fecha_emision.requestFocus();
+            }
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE NUMERO DOCUMENTO");
+            OBJ_pcp.TXT_numero_doc.requestFocus();
+        }
+        return resp;
     }
 
     public KeyListener evento_press(pnl_cab_pedidos OBJ_pcp, KeyListener KeyEvnt) {

@@ -117,6 +117,8 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     lo_pnl_cab_pedidos.TXT_tipo_cambio.setEnabled(true);
                     lo_pnl_cab_pedidos.TXT_tipo_cambio.setText("");
                     lo_pnl_cab_pedidos.TXT_tipo_cambio.requestFocus();
+                }else{
+                    lo_pnl_cab_pedidos.TXT_tipo_cambio.setText("");
                 }
             } catch (Exception e) {
             }
@@ -334,6 +336,22 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, true);
     }
 
+    private void evt_guardar() {
+        lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_pedidos.CBX_moneda.getSelectedItem();
+        lo_cbx_grupo_detraccion = (cbx_grupo_detraccion) lo_pnl_cab_pedidos.CBX_codigo_detraccion.getSelectedItem();
+        lo_cbx_entidad_ubigeo = (cbx_entidad_ubigeo) lo_pnl_cab_pedidos.CBX_direccion.getSelectedItem();
+
+        switch (li_tipo_operacion) {
+            case 0:
+                if(lo_evt_cab_pedidos.valida_campos(lo_pnl_cab_pedidos,lo_cbx_moneda)){
+                    
+                }
+                break;
+            case 1:
+                break;
+        }
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -353,7 +371,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 //evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_guardar) {
-                //evt_guardar();
+                evt_guardar();
             }
         }
     };
@@ -382,7 +400,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 // evt_cancelar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_3.BTN_guardar.isEnabled()) {
-                // evt_guardar();
+                evt_guardar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F5) {
                 if (ke.getSource() == lo_pnl_cab_pedidos.TXT_codigo_entidad) {
@@ -409,7 +427,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     // evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_guardar) {
-                    // evt_guardar();
+                    evt_guardar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
                     //evt_cancelar();

@@ -177,7 +177,7 @@ public class fnc_operaciones_campos {
                 }
                 entero = (int) (suma / 11);
                 op_final = 11 - (suma - entero * 11);
-                if (digito_fin == op_final) {
+                if (digito_fin == op_final%10) {
                     resp = true;
                 }
             }

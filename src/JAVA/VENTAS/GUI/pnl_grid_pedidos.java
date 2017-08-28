@@ -1,7 +1,9 @@
 package JAVA.VENTAS.GUI;
+import java.awt.Component; 
+import javax.swing.text.JTextComponent;
 
 public class pnl_grid_pedidos extends javax.swing.JPanel {
-
+          
     public pnl_grid_pedidos() {
         initComponents();        
     }
@@ -11,7 +13,16 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        TBL_pedidos = new javax.swing.JTable();
+        TBL_pedidos = new javax.swing.JTable(){
+            public void changeSelection(int row, int column, boolean toggle,boolean extend){
+                super.changeSelection(row, column, toggle, extend);
+                if (editCellAt(row, column)){
+                    Component editor = getEditorComponent();
+                    editor.requestFocusInWindow();
+                    ((JTextComponent)editor).selectAll();
+                }
+            }
+        };
         jPanel1 = new javax.swing.JPanel();
         LBL_inafecto = new javax.swing.JLabel();
         LBL_afecto = new javax.swing.JLabel();

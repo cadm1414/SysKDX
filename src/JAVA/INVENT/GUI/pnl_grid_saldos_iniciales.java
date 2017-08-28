@@ -1,9 +1,12 @@
 package JAVA.INVENT.GUI;
 
+import java.awt.Component;
+import javax.swing.text.JTextComponent;
+
 public class pnl_grid_saldos_iniciales extends javax.swing.JPanel {
 
     public pnl_grid_saldos_iniciales() {
-        initComponents();        
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -11,7 +14,16 @@ public class pnl_grid_saldos_iniciales extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        TBL_saldos_iniciales = new javax.swing.JTable();
+        TBL_saldos_iniciales = new javax.swing.JTable(){
+            public void changeSelection(int row, int column, boolean toggle,boolean extend){
+                super.changeSelection(row, column, toggle, extend);
+                if (editCellAt(row, column)){
+                    Component editor = getEditorComponent();
+                    editor.requestFocusInWindow();
+                    ((JTextComponent)editor).selectAll();
+                }
+            }
+        };
 
         TBL_saldos_iniciales.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TBL_saldos_iniciales.setModel(new javax.swing.table.DefaultTableModel(

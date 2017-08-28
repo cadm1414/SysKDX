@@ -1,9 +1,12 @@
 package JAVA.INVENT.GUI;
 
+import java.awt.Component;
+import javax.swing.text.JTextComponent;
+
 public class pnl_grid_guia_salida extends javax.swing.JPanel {
 
     public pnl_grid_guia_salida() {
-        initComponents();        
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -11,7 +14,16 @@ public class pnl_grid_guia_salida extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        TBL_guia_salida = new javax.swing.JTable();
+        TBL_guia_salida = new javax.swing.JTable(){
+            public void changeSelection(int row, int column, boolean toggle,boolean extend){
+                super.changeSelection(row, column, toggle, extend);
+                if (editCellAt(row, column)){
+                    Component editor = getEditorComponent();
+                    editor.requestFocusInWindow();
+                    ((JTextComponent)editor).selectAll();
+                }
+            }
+        };
 
         TBL_guia_salida.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TBL_guia_salida.setModel(new javax.swing.table.DefaultTableModel(
