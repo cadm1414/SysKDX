@@ -30,4 +30,24 @@ public class muestra_dlg_ventas {
         }
     }
     
+    public void muestra_dlg_factura() throws PropertyVetoException {
+        if (go_jif_factura != null) {
+            if (go_jif_factura.isClosed()) {
+                gi_parametros_2[0] = 1;
+                go_dlg_ini_serie = new dlg_ini_serie(null, true);
+                go_dlg_ini_serie.setVisible(true);                
+            } else if (go_jif_factura.isIcon()) {
+                go_jif_factura.setIcon(false);
+            } else if (!go_jif_factura.isShowing()) {
+                gi_parametros_2[0] = 1;
+                go_dlg_ini_serie = new dlg_ini_serie(null, true);
+                go_dlg_ini_serie.setVisible(true);                
+            }
+        } else {
+            gi_parametros_2[0] = 1;
+            go_dlg_ini_serie = new dlg_ini_serie(null, true);
+            go_dlg_ini_serie.setVisible(true);            
+        }
+    }
+    
 }

@@ -90,7 +90,7 @@ public class evt_grid_pedidos {
                 case 1:
                     for (int i = 0; i < modelo.getRowCount(); i++) {
                         if ((boolean) OBJ_pgp.TBL_pedidos.getValueAt(i, 6) == false) {
-                            inafecto = inafecto + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());
+                            inafecto = go_fnc_operaciones_campos.redondea(inafecto + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()),2);
                             percepcion = go_fnc_operaciones_campos.redondea((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()),2);
                             percepcion_s = percepcion_s + percepcion;
                         } else {

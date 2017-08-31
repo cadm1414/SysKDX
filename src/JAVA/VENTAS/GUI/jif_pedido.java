@@ -47,7 +47,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
     ResultSet lq_rs;
     int li_tipo_operacion, cont = 0, li_cantidad;
     double ld_tipo_cambio, ld_porcentaje_detraccion, ld_monto_minimo;
-    String ls_codigo, ls_codigo_sucursal, ls_serie, ls_codigo_vendedor, ls_nombre_vendedor, ls_codigo_articulo;
+    String ls_codigo, ls_codigo_sucursal, ls_serie, ls_codigo_vendedor, ls_nombre_vendedor, ls_codigo_articulo, ls_codigo_entidad;
     String ls_opcion = "M A A";
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "jif_pedido";
 
@@ -82,7 +82,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         modelo = (DefaultTableModel) lo_pnl_grid_pedidos.TBL_pedidos.getModel();
         modelo.addTableModelListener(TablaListener);
 
-        li_cantidad = go_dao_serie.SLT_cant_items(lo_pnl_cab_pedidos.TXT_serie.getText().trim(), ls_codigo_sucursal, 0);
+        li_cantidad = go_dao_serie.SLT_cant_items(ls_serie, ls_codigo_sucursal, 0);
 
         lo_evt_opciones_3.evento_click(lo_pnl_opciones_3, Listener);
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
@@ -290,6 +290,8 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
         gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
         gs_parametros[3] = lo_pnl_cab_pedidos.TXT_serie.getText().trim();
+        gs_parametros[4] = "%";
+        gs_parametros[5] = "%";
     }
 
     private void genera_peso_bruto(int fila) {
@@ -312,9 +314,9 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         get_parametros(op);
         go_dlg_busq_entidad_parametros = new dlg_busq_entidad_parametros(null, true);
         go_dlg_busq_entidad_parametros.setVisible(true);
-        ls_codigo = go_dlg_busq_entidad_parametros.ls_codigo_entidad;
-        if (ls_codigo != null) {
-            get_descripcion_entidad(ls_codigo, op);
+        ls_codigo_entidad = go_dlg_busq_entidad_parametros.ls_codigo_entidad;
+        if (ls_codigo_entidad != null) {
+            get_descripcion_entidad(ls_codigo_entidad, op);
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_f5_entidad", "SELECCIONE ENTIDAD");
             lo_pnl_cab_pedidos.TXT_codigo_entidad.setText("");
@@ -588,7 +590,16 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     if (go_fnc_operaciones_campos.valida_fecha(lo_pnl_cab_pedidos.TXT_fecha_emision.getText())) {
                         if (lo_pnl_cab_pedidos.TXT_fecha_emision.getText().trim().substring(6, 10).equalsIgnoreCase(gs_periodo)) {
                             getFocusOwner().transferFocus();
-                            get_tipo_cambio();
+                            switch (li_tipo_operacion) {
+                                case 0:
+                                    get_tipo_cambio();
+                                    break;
+                                case 1:
+                                    if (!lo_bean_pedido.getFecha_emision().equalsIgnoreCase(lo_pnl_cab_pedidos.TXT_fecha_emision.getText().trim())) {
+                                        get_tipo_cambio();
+                                    }
+                                    break;
+                            }
                         } else {
                             lo_pnl_cab_pedidos.TXT_fecha_emision.setText("");
                             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FECHA NO PERTENECE AL PERIODO");

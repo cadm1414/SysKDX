@@ -35,6 +35,7 @@ public class evt_cab_pedidos {
                 OBJ_pcp.TXT_observacion.setEnabled(valor);
                 OBJ_pcp.CBX_forma_pago.setEnabled(valor);
                 OBJ_pcp.TXT_dias_credito.setEnabled(valor);
+                OBJ_pcp.TXT_tipo_cambio.setEnabled(false);
                 OBJ_pcp.TXT_numero_doc.requestFocus();
                 break;
             case 1:
@@ -47,6 +48,7 @@ public class evt_cab_pedidos {
                 OBJ_pcp.TXT_codigo_entidad.setEnabled(valor);
                 OBJ_pcp.TXT_codigo_vendedor.setEnabled(valor);
                 OBJ_pcp.TXT_observacion.setEnabled(valor);
+                OBJ_pcp.TXT_tipo_cambio.setEnabled((Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText())!=0)?true:false);
 
                 if (OBJ_pcp.CBX_forma_pago.getSelectedIndex() == 1) {
                     OBJ_pcp.CBX_forma_pago.setEnabled(valor);

@@ -18,7 +18,7 @@ public class dlg_busq_pedido extends javax.swing.JDialog {
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
     public String ls_codigo;
-    String ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie;
+    String ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_es_facturado,ls_codigo_doc_ref;
     String ls_modulo = "INVENT", ls_capa = "GUI", ls_clase = "dlg_busq_kardex";
 
     public dlg_busq_pedido(java.awt.Frame parent, boolean modal) {
@@ -34,11 +34,15 @@ public class dlg_busq_pedido extends javax.swing.JDialog {
         ls_fecha_ini = gs_parametros[1];
         ls_fecha_fin = gs_parametros[2];
         ls_serie = gs_parametros[3];
+        ls_es_facturado = gs_parametros[4];
+        ls_codigo_doc_ref = gs_parametros[5];
 
         gs_parametros[0] = "";
         gs_parametros[1] = "";
         gs_parametros[2] = "";
         gs_parametros[3] = "";
+        gs_parametros[4] = "";
+        gs_parametros[5] = "";
 
         TXT_fecha_ini.setText(ls_fecha_ini);
         TXT_fecha_fin.setText(ls_fecha_fin);
@@ -61,7 +65,7 @@ public class dlg_busq_pedido extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_pedido.TBL_pedidos.getModel();
         try {
-            lq_rs = go_dao_pedido.SLT_grid_pedido(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie);
+            lq_rs = go_dao_pedido.SLT_grid_pedido(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_es_facturado,ls_codigo_doc_ref);
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});

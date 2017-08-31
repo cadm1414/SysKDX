@@ -75,6 +75,7 @@ import JAVA.VENTAS.DAO.DAO_tipo_cambio;
 import JAVA.VENTAS.GUI.dlg_busq_facturacion;
 import JAVA.VENTAS.GUI.dlg_busq_pedido;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
+import JAVA.VENTAS.GUI.jif_factura;
 import JAVA.VENTAS.GUI.jif_pedido;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
 
@@ -216,6 +217,7 @@ public class variables_globales {
     public static jif_guia_salida go_jif_guia_salida;
     public static jif_datos_entidad go_jif_datos_entidad;
     public static jif_pedido go_jif_pedido;
+    public static jif_factura go_jif_factura;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

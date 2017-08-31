@@ -90,7 +90,9 @@ public class dlg_ini_serie extends javax.swing.JDialog {
                     go_jif_pedido.show();
                     break;
                 case 1:
-
+                    go_jif_factura = new jif_factura();
+                    go_frm_principal.JDP_principal.add(go_jif_factura);
+                    go_jif_factura.show();
                     break;
                 case 2:
 
