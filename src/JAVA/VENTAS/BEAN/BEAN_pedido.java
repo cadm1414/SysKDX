@@ -5,8 +5,16 @@ public class BEAN_pedido {
     String codigo_operacion, codigo_sucursal, periodo, mes, codigo_documento, serie_documento, numero_documento, fecha_emision, codigo_documento_ref,
             codigo_moneda, afecto_igv, codigo_igv, codigo_grupo, status, es_facturado, es_precio_igv, codigo_entidad, razon_social, tipo_documento_id,
             numero_documento_id, direccion, codigo_ubigeo, descripcion_ubigeo, codigo_pagador, nombre_pagador, codigo_vendedor, nombre_vendedor, forma_pago,
-            observacion, es_domiciliado;
+            observacion, es_domiciliado, fecha_registro;
     int dias_credito;
+
+    public String getFecha_registro() {
+        return fecha_registro;
+    }
+
+    public void setFecha_registro(String fecha_registro) {
+        this.fecha_registro = fecha_registro;
+    }
     double tipo_cambio, porcentaje_detraccion, inafecto, base, igv, total, percepcion, total_documento, exonerado,
             importe_detraccion, inafecto_mn, base_mn, igv_mn, total_mn, percepcion_mn, total_documento_mn, exonerado_mn, importe_detraccion_mn;
 

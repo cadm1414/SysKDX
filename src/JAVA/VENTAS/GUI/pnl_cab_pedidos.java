@@ -718,6 +718,7 @@ public class pnl_cab_pedidos extends javax.swing.JPanel {
         jLabel45.setText(":");
 
         LBL_fecha_registro.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        LBL_fecha_registro.setForeground(new java.awt.Color(204, 0, 51));
         LBL_fecha_registro.setText(" ");
 
         jLabel47.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -744,7 +745,7 @@ public class pnl_cab_pedidos extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel45)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LBL_fecha_registro, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LBL_fecha_registro, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(

@@ -75,6 +75,14 @@ public class fnc_operaciones_campos {
 
         return resp;
     }
+    
+    public double redondea(double numero,int digito){
+        double resp=0;
+        resp = numero * Math.pow(10, digito);
+        resp = Math.round(resp);
+        resp = resp/Math.pow(10, digito);
+        return resp;
+    }
 
     public String completa_digitos(String dato, String valor, int cant) {
         String resp = dato;

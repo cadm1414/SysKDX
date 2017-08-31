@@ -35,7 +35,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        LBL_simbolo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         JRD_masivo = new javax.swing.JRadioButton();
 
@@ -141,9 +141,9 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel5.setText("Percep.");
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel6.setText("Importe");
+        LBL_simbolo.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        LBL_simbolo.setForeground(new java.awt.Color(255, 0, 0));
+        LBL_simbolo.setText("Imp (S/.)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,7 +155,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LBL_simbolo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -198,7 +198,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                     .addComponent(LBL_percepcion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(LBL_simbolo)
                     .addComponent(LBL_importe))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -259,6 +259,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
     public javax.swing.JLabel LBL_importe;
     public javax.swing.JLabel LBL_inafecto;
     public javax.swing.JLabel LBL_percepcion;
+    public javax.swing.JLabel LBL_simbolo;
     public javax.swing.JLabel LBL_total;
     public javax.swing.JTable TBL_pedidos;
     private javax.swing.JLabel jLabel1;
@@ -266,7 +267,6 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -69,9 +69,11 @@ import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
 import JAVA.VENTAS.DAO.DAO_igv;
 import JAVA.VENTAS.DAO.DAO_pedido;
+import JAVA.VENTAS.DAO.DAO_pedido_detalle;
 import JAVA.VENTAS.DAO.DAO_serie;
 import JAVA.VENTAS.DAO.DAO_tipo_cambio;
 import JAVA.VENTAS.GUI.dlg_busq_facturacion;
+import JAVA.VENTAS.GUI.dlg_busq_pedido;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_pedido;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
@@ -146,6 +148,7 @@ public class variables_globales {
     public static DAO_pedido go_dao_pedido = new DAO_pedido();
     public static DAO_tipo_cambio go_dao_tipo_cambio = new DAO_tipo_cambio();
     public static DAO_reportes go_dao_reportes = new DAO_reportes();
+    public static DAO_pedido_detalle go_dao_pedido_detalle = new DAO_pedido_detalle();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -193,6 +196,7 @@ public class variables_globales {
     public static dlg_busq_entidad_parametros go_dlg_busq_entidad_parametros;
     public static dlg_busq_vendedor go_dlg_busq_vendedor;
     public static dlg_busq_facturacion go_dlg_busq_facturacion;
+    public static dlg_busq_pedido go_dlg_busq_pedido;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
