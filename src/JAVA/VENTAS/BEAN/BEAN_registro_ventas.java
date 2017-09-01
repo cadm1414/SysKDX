@@ -1,23 +1,15 @@
+
 package JAVA.VENTAS.BEAN;
 
-public class BEAN_pedido {
-
+public class BEAN_registro_ventas {
     String codigo_operacion, codigo_sucursal, periodo, mes, codigo_documento, serie_documento, numero_documento, fecha_emision, codigo_documento_ref,
             codigo_moneda, afecto_igv, codigo_igv, codigo_grupo, status, es_facturado, es_precio_igv, codigo_entidad, razon_social, tipo_documento_id,
             numero_documento_id, direccion, codigo_ubigeo, descripcion_ubigeo, codigo_pagador, nombre_pagador, codigo_vendedor, nombre_vendedor, forma_pago,
-            observacion, es_domiciliado, fecha_registro;
+            observacion, es_domiciliado, fecha_registro,fecha_vencimiento,es_guiar,codigo_guiar,es_pedido,codigo_pedido,fecha_doc_ref,codigo_tipo_doc_ref,
+            serie_doc_ref,numero_doc_ref,registra_item,concepto_doc_ref;
     int dias_credito;
     double tipo_cambio, porcentaje_detraccion, inafecto, base, igv, total, percepcion, total_documento, exonerado,
             importe_detraccion, inafecto_mn, base_mn, igv_mn, total_mn, percepcion_mn, total_documento_mn, exonerado_mn, importe_detraccion_mn;
-    
-    public String getFecha_registro() {
-        return fecha_registro;
-    }
-
-    public void setFecha_registro(String fecha_registro) {
-        this.fecha_registro = fecha_registro;
-    }
-    
 
     public String getCodigo_operacion() {
         return codigo_operacion;
@@ -243,6 +235,118 @@ public class BEAN_pedido {
         this.forma_pago = forma_pago;
     }
 
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+    public String getEs_domiciliado() {
+        return es_domiciliado;
+    }
+
+    public void setEs_domiciliado(String es_domiciliado) {
+        this.es_domiciliado = es_domiciliado;
+    }
+
+    public String getFecha_registro() {
+        return fecha_registro;
+    }
+
+    public void setFecha_registro(String fecha_registro) {
+        this.fecha_registro = fecha_registro;
+    }
+
+    public String getFecha_vencimiento() {
+        return fecha_vencimiento;
+    }
+
+    public void setFecha_vencimiento(String fecha_vencimiento) {
+        this.fecha_vencimiento = fecha_vencimiento;
+    }
+
+    public String getEs_guiar() {
+        return es_guiar;
+    }
+
+    public void setEs_guiar(String es_guiar) {
+        this.es_guiar = es_guiar;
+    }
+
+    public String getCodigo_guiar() {
+        return codigo_guiar;
+    }
+
+    public void setCodigo_guiar(String codigo_guiar) {
+        this.codigo_guiar = codigo_guiar;
+    }
+
+    public String getEs_pedido() {
+        return es_pedido;
+    }
+
+    public void setEs_pedido(String es_pedido) {
+        this.es_pedido = es_pedido;
+    }
+
+    public String getCodigo_pedido() {
+        return codigo_pedido;
+    }
+
+    public void setCodigo_pedido(String codigo_pedido) {
+        this.codigo_pedido = codigo_pedido;
+    }
+
+    public String getFecha_doc_ref() {
+        return fecha_doc_ref;
+    }
+
+    public void setFecha_doc_ref(String fecha_doc_ref) {
+        this.fecha_doc_ref = fecha_doc_ref;
+    }
+
+    public String getCodigo_tipo_doc_ref() {
+        return codigo_tipo_doc_ref;
+    }
+
+    public void setCodigo_tipo_doc_ref(String codigo_tipo_doc_ref) {
+        this.codigo_tipo_doc_ref = codigo_tipo_doc_ref;
+    }
+
+    public String getSerie_doc_ref() {
+        return serie_doc_ref;
+    }
+
+    public void setSerie_doc_ref(String serie_doc_ref) {
+        this.serie_doc_ref = serie_doc_ref;
+    }
+
+    public String getNumero_doc_ref() {
+        return numero_doc_ref;
+    }
+
+    public void setNumero_doc_ref(String numero_doc_ref) {
+        this.numero_doc_ref = numero_doc_ref;
+    }
+
+    public String getRegistra_item() {
+        return registra_item;
+    }
+
+    public void setRegistra_item(String registra_item) {
+        this.registra_item = registra_item;
+    }
+
+    public String getConcepto_doc_ref() {
+        return concepto_doc_ref;
+    }
+
+    public void setConcepto_doc_ref(String concepto_doc_ref) {
+        this.concepto_doc_ref = concepto_doc_ref;
+    }
+
     public int getDias_credito() {
         return dias_credito;
     }
@@ -265,22 +369,6 @@ public class BEAN_pedido {
 
     public void setPorcentaje_detraccion(double porcentaje_detraccion) {
         this.porcentaje_detraccion = porcentaje_detraccion;
-    }
-
-    public String getObservacion() {
-        return observacion;
-    }
-
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
-    }
-
-    public String getEs_domiciliado() {
-        return es_domiciliado;
-    }
-
-    public void setEs_domiciliado(String es_domiciliado) {
-        this.es_domiciliado = es_domiciliado;
     }
 
     public double getInafecto() {

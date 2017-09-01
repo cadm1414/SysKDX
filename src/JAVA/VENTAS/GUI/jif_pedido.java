@@ -128,7 +128,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 if (ld_tipo_cambio != 0) {
                     lo_pnl_cab_pedidos.TXT_tipo_cambio.setEnabled(false);
                     lo_pnl_cab_pedidos.TXT_tipo_cambio.setText(ld_tipo_cambio + "");
-                } else if (go_fnc_mensaje.get_respuesta(0, "FECHA SIN TIPO DE CAMBIO ¿DESEA AGREGAR TIPO CAMBIO MANUAL?") == 0) {
+                } else if (go_fnc_mensaje.get_respuesta(0, "FECHA SIN TIPO DE CAMBIO ¿DESEA AGREGAR TIPO CAMBIO MANUAL?") == 0 ) {
                     lo_pnl_cab_pedidos.TXT_tipo_cambio.setEnabled(true);
                     lo_pnl_cab_pedidos.TXT_tipo_cambio.setText("");
                     lo_pnl_cab_pedidos.TXT_tipo_cambio.requestFocus();
@@ -158,7 +158,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         }
     }
 
-    private void get_parametros(int op) {
+    private void get_parametros_entidad(int op) {
         gs_parametros[1] = "1";
         gs_parametros[2] = "1";
         gs_parametros[3] = "%";
@@ -311,7 +311,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
     }
 
     private void evt_f5_entidad(int op) {
-        get_parametros(op);
+        get_parametros_entidad(op);
         go_dlg_busq_entidad_parametros = new dlg_busq_entidad_parametros(null, true);
         go_dlg_busq_entidad_parametros.setVisible(true);
         ls_codigo_entidad = go_dlg_busq_entidad_parametros.ls_codigo_entidad;

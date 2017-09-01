@@ -70,6 +70,7 @@ import JAVA.UTILITARIOS.FUNCION.*;
 import JAVA.VENTAS.DAO.DAO_igv;
 import JAVA.VENTAS.DAO.DAO_pedido;
 import JAVA.VENTAS.DAO.DAO_pedido_detalle;
+import JAVA.VENTAS.DAO.DAO_registro_ventas;
 import JAVA.VENTAS.DAO.DAO_serie;
 import JAVA.VENTAS.DAO.DAO_tipo_cambio;
 import JAVA.VENTAS.GUI.dlg_busq_facturacion;
@@ -150,6 +151,7 @@ public class variables_globales {
     public static DAO_tipo_cambio go_dao_tipo_cambio = new DAO_tipo_cambio();
     public static DAO_reportes go_dao_reportes = new DAO_reportes();
     public static DAO_pedido_detalle go_dao_pedido_detalle = new DAO_pedido_detalle();
+    public static DAO_registro_ventas go_dao_registro_ventas = new DAO_registro_ventas();
 
     //GUI
     public static frm_principal go_frm_principal;
