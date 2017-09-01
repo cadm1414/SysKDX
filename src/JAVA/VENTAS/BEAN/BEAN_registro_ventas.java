@@ -1,12 +1,12 @@
-
 package JAVA.VENTAS.BEAN;
 
 public class BEAN_registro_ventas {
-    String codigo_operacion, codigo_sucursal, periodo, mes, codigo_documento, serie_documento, numero_documento, fecha_emision, codigo_documento_ref,
+
+    String codigo_operacion, codigo_sucursal, periodo, mes, codigo_documento, serie_documento, numero_documento, fecha_emision,
             codigo_moneda, afecto_igv, codigo_igv, codigo_grupo, status, es_facturado, es_precio_igv, codigo_entidad, razon_social, tipo_documento_id,
             numero_documento_id, direccion, codigo_ubigeo, descripcion_ubigeo, codigo_pagador, nombre_pagador, codigo_vendedor, nombre_vendedor, forma_pago,
-            observacion, es_domiciliado, fecha_registro,fecha_vencimiento,es_guiar,codigo_guiar,es_pedido,codigo_pedido,fecha_doc_ref,codigo_tipo_doc_ref,
-            serie_doc_ref,numero_doc_ref,registra_item,concepto_doc_ref;
+            observacion, es_domiciliado, fecha_registro, fecha_vencimiento, es_guiar, codigo_guiar, es_pedido, codigo_pedido, fecha_doc_ref, codigo_tipo_doc_ref,
+            serie_doc_ref, numero_doc_ref, registra_item, concepto_doc_ref;
     int dias_credito;
     double tipo_cambio, porcentaje_detraccion, inafecto, base, igv, total, percepcion, total_documento, exonerado,
             importe_detraccion, inafecto_mn, base_mn, igv_mn, total_mn, percepcion_mn, total_documento_mn, exonerado_mn, importe_detraccion_mn;
@@ -73,14 +73,6 @@ public class BEAN_registro_ventas {
 
     public void setFecha_emision(String fecha_emision) {
         this.fecha_emision = fecha_emision;
-    }
-
-    public String getCodigo_documento_ref() {
-        return codigo_documento_ref;
-    }
-
-    public void setCodigo_documento_ref(String codigo_documento_ref) {
-        this.codigo_documento_ref = codigo_documento_ref;
     }
 
     public String getCodigo_moneda() {

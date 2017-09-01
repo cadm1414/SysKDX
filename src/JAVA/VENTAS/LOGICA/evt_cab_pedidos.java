@@ -216,14 +216,14 @@ public class evt_cab_pedidos {
             OBJ_bpe.setDias_credito(Integer.parseInt(OBJ_pcp.TXT_dias_credito.getText()));
             OBJ_bpe.setObservacion(OBJ_pcp.TXT_observacion.getText().trim());
             OBJ_bpe.setEs_domiciliado(go_fnc_operaciones_campos.boolean_int(OBJ_pcp.JRD_domiciliado.isSelected()) + "");
-            OBJ_bpe.setInafecto(Double.parseDouble(OBJ_pgp.LBL_inafecto.getText()));
-            OBJ_bpe.setBase(Double.parseDouble(OBJ_pgp.LBL_afecto.getText()));
-            OBJ_bpe.setIgv(Double.parseDouble(OBJ_pgp.LBL_igv.getText()));
-            OBJ_bpe.setTotal(Double.parseDouble(OBJ_pgp.LBL_total.getText()));
-            OBJ_bpe.setPercepcion(Double.parseDouble(OBJ_pgp.LBL_percepcion.getText()));
-            OBJ_bpe.setTotal_documento(Double.parseDouble(OBJ_pgp.LBL_importe.getText()));
-            OBJ_bpe.setExonerado((OBJ_pcp.JRD_domiciliado.isSelected() == false) ? Double.parseDouble(OBJ_pgp.LBL_importe.getText()) : 0.00);
-            OBJ_bpe.setImporte_detraccion((Double.parseDouble(OBJ_pgp.LBL_total.getText()) >= monto_min) ? Double.parseDouble(OBJ_pgp.LBL_total.getText()) * Double.parseDouble(OBJ_pcp.TXT_detraccion.getText()) : 0.00);
+            OBJ_bpe.setInafecto(Double.parseDouble(OBJ_pgp.LBL_inafecto.getText().replaceAll(",", "")));
+            OBJ_bpe.setBase(Double.parseDouble(OBJ_pgp.LBL_afecto.getText().replaceAll(",", "")));
+            OBJ_bpe.setIgv(Double.parseDouble(OBJ_pgp.LBL_igv.getText().replaceAll(",", "")));
+            OBJ_bpe.setTotal(Double.parseDouble(OBJ_pgp.LBL_total.getText().replaceAll(",", "")));
+            OBJ_bpe.setPercepcion(Double.parseDouble(OBJ_pgp.LBL_percepcion.getText().replaceAll(",", "")));
+            OBJ_bpe.setTotal_documento(Double.parseDouble(OBJ_pgp.LBL_importe.getText().replaceAll(",", "")));
+            OBJ_bpe.setExonerado((OBJ_pcp.JRD_domiciliado.isSelected() == false) ? Double.parseDouble(OBJ_pgp.LBL_importe.getText().replaceAll(",", "")) : 0.00);
+            OBJ_bpe.setImporte_detraccion((Double.parseDouble(OBJ_pgp.LBL_total.getText().replaceAll(",", "")) >= monto_min) ? Double.parseDouble(OBJ_pgp.LBL_total.getText().replaceAll(",", "")) * Double.parseDouble(OBJ_pcp.TXT_detraccion.getText()) : 0.00);
             OBJ_bpe.setInafecto_mn(OBJ_bpe.getInafecto() * tipo_cambio);
             OBJ_bpe.setBase_mn(OBJ_bpe.getBase() * tipo_cambio);
             OBJ_bpe.setIgv_mn(OBJ_bpe.getIgv() * tipo_cambio);
@@ -233,6 +233,7 @@ public class evt_cab_pedidos {
             OBJ_bpe.setExonerado_mn(OBJ_bpe.getExonerado() * tipo_cambio);
             OBJ_bpe.setImporte_detraccion_mn(OBJ_bpe.getImporte_detraccion() * tipo_cambio);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -311,7 +312,7 @@ public class evt_cab_pedidos {
         OBJ_pdp.JRD_precio_igv.setSelected(go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bpe.getEs_precio_igv())));
         OBJ_pdp.TXT_codigo_entidad.setText(OBJ_bpe.getCodigo_entidad());
         OBJ_pdp.TXT_razon_social.setText(OBJ_bpe.getRazon_social());
-        OBJ_pdp.CBX_tipo_documento_id.setSelectedItem((OBJ_bpe.getTipo_documento_id().equalsIgnoreCase("6")) ? 0 : 1);
+        OBJ_pdp.CBX_tipo_documento_id.setSelectedIndex((OBJ_bpe.getTipo_documento_id().equalsIgnoreCase("6")) ? 0 : 1);
         OBJ_pdp.TXT_doc_id.setText(OBJ_bpe.getNumero_documento_id());
         OBJ_pdp.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bpe.getEs_domiciliado())));
         try {

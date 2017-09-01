@@ -4,8 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -75,12 +77,12 @@ public class fnc_operaciones_campos {
 
         return resp;
     }
-    
-    public double redondea(double numero,int digito){
-        double resp=0;
+
+    public double redondea(double numero, int digito) {
+        double resp = 0;
         resp = numero * Math.pow(10, digito);
         resp = Math.round(resp);
-        resp = resp/Math.pow(10, digito);
+        resp = resp / Math.pow(10, digito);
         return resp;
     }
 
@@ -131,7 +133,22 @@ public class fnc_operaciones_campos {
             Date fecha_fin = FormatoFecha.parse(dato_fin);
 
             resp = fecha_ini.compareTo(fecha_fin);
-        } catch (Exception e) {
+        } catch (ParseException e) {
+        }
+        return resp;
+    }
+
+    public String suma_dias(String dato, int dias) {
+        String resp = null;
+        try {
+            SimpleDateFormat FormatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            FormatoFecha.setLenient(false);
+            Date fecha = FormatoFecha.parse(dato);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fecha);
+            calendar.add(Calendar.DAY_OF_YEAR, dias);
+            resp = FormatoFecha.format(calendar.getTime());
+        } catch (ParseException e) {
         }
         return resp;
     }
@@ -185,7 +202,7 @@ public class fnc_operaciones_campos {
                 }
                 entero = (int) (suma / 11);
                 op_final = 11 - (suma - entero * 11);
-                if (digito_fin == op_final%10) {
+                if (digito_fin == op_final % 10) {
                     resp = true;
                 }
             }
