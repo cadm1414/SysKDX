@@ -257,7 +257,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
     private void get_descripcion_pedido_detalle(String codigo) {
         lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
         lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle(codigo);
-        lo_evt_grid_pedidos.recupera_detalle(lq_rs,lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_pedido.getEs_precio_igv()));
+        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_pedido.getEs_precio_igv()));
     }
 
     private void limpia_parametros() {
@@ -717,6 +717,14 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 }
                 if (ie.getSource() == lo_pnl_cab_pedidos.JRD_precio_igv) {
                     lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                }
+                if (ie.getSource() == lo_pnl_cab_pedidos.CBX_forma_pago) {
+                    if (lo_pnl_cab_pedidos.CBX_forma_pago.getSelectedIndex() == 0) {
+                        lo_pnl_cab_pedidos.TXT_dias_credito.setText("0");
+                        lo_pnl_cab_pedidos.TXT_dias_credito.setEnabled(false);
+                    }else{
+                        lo_pnl_cab_pedidos.TXT_dias_credito.setEnabled(true);
+                    }
                 }
                 if (ie.getSource() == lo_pnl_grid_pedidos.JRD_masivo && lo_pnl_grid_pedidos.JRD_masivo.isSelected() == true) {
 //                    go_dlg_busq_facturacion = new dlg_busq_facturacion(null, true);

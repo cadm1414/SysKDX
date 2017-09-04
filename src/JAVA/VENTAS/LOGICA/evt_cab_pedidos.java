@@ -409,6 +409,7 @@ public class evt_cab_pedidos {
         OBJ_pcp.CBX_codigo_detraccion.addItemListener(ItemEvent);
         OBJ_pcp.CBX_direccion.addItemListener(ItemEvent);
         OBJ_pcp.JRD_precio_igv.addItemListener(ItemEvent);
+        OBJ_pcp.CBX_forma_pago.addItemListener(ItemEvent);
         return ItemEvent;
     }
 }

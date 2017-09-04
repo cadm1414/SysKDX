@@ -124,17 +124,13 @@ public class evt_cab_factura {
         OBJ_pgp.LBL_importe.setText(dFormat.format(OBJ_bpe.getTotal_documento()) + "");
     }
 
-    public void muestra_datos_ref(int op, String codigo, pnl_cab_factura OBJ_pnf, pnl_grid_pedidos OBJ_pgp) {
+    public void muestra_datos_ref(int op,ResultSet rs, String codigo, pnl_cab_factura OBJ_pnf, pnl_grid_pedidos OBJ_pgp) {
         simbolos.setDecimalSeparator('.');
         simbolos.setGroupingSeparator(',');
         dFormat = new DecimalFormat("#,##0.00", simbolos);
-        try {
-            rs = go_dao_pedido.SLT_datos_ref_factura(op, codigo);
-            if (rs != null) {
-                /*
-                0=pedido
-                1=guia
-                 */
+        try {            
+            
+               
                 switch (op) {
                     case 0:
                         OBJ_pnf.TXT_guiar.setText("0000000000");
@@ -180,7 +176,7 @@ public class evt_cab_factura {
                 OBJ_pnf.TXT_fecha_emision.setEnabled(true);
                 OBJ_pnf.TXT_observacion.setEnabled(true);
                 OBJ_pnf.TXT_fecha_emision.requestFocus();
-            }
+            
         } catch (Exception e) {
         }
     }
@@ -517,6 +513,7 @@ public class evt_cab_factura {
         OBJ_pcf.CBX_codigo_detraccion.addItemListener(ItemEvent);
         OBJ_pcf.CBX_direccion.addItemListener(ItemEvent);
         OBJ_pcf.JRD_precio_igv.addItemListener(ItemEvent);
+        OBJ_pcf.CBX_forma_pago.addItemListener(ItemEvent);
         return ItemEvent;
     }
 }

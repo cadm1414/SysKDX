@@ -80,7 +80,9 @@ import JAVA.VENTAS.GUI.dlg_busq_registro_ventas;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_factura;
 import JAVA.VENTAS.GUI.jif_pedido;
+import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
+import JAVA.VENTAS.LOGICA.muestra_jif_ventas;
 
 public class variables_globales {
 
@@ -176,6 +178,7 @@ public class variables_globales {
     public static muestra_reporte_invent go_muestra_reporte_invent = new muestra_reporte_invent();
     public static muestra_dlg_invent go_muestra_dlg_invent = new muestra_dlg_invent();
     public static muestra_dlg_ventas go_muestra_dlg_ventas = new muestra_dlg_ventas();
+    public static muestra_jif_ventas go_muestra_jif_ventas = new muestra_jif_ventas();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;
@@ -225,6 +228,7 @@ public class variables_globales {
     public static jif_pedido go_jif_pedido;
     public static jif_factura go_jif_factura;
     public static jif_factura go_jif_boleta;
+    public static jif_tipo_cambio go_jif_tipo_cambio;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

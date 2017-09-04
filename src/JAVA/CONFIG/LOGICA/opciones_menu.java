@@ -111,6 +111,10 @@ public class opciones_menu {
                     go_muestra_dlg_ventas.muestra_dlg_boleta("03");
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("TIPO DE CAMBIO")) {
+                    go_muestra_jif_ventas.muestra_jif_entidad();
+                    resp = "I";
+                }
                 break;
         }
         return resp;

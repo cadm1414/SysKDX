@@ -328,19 +328,32 @@ public class jif_factura extends javax.swing.JInternalFrame {
     }
 
     private void muestra_datos_ref(int op, String codigo) {
-        lo_evt_cab_factura.activa_campos(0, lo_pnl_cab_factura, false, ls_tipo_documento);
-        lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
-        lo_evt_cab_factura.muestra_datos_ref(op, codigo, lo_pnl_cab_factura, lo_pnl_grid_pedidos);
-        genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(), Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
-        switch (op) {
-            case 0:
-                lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle(codigo);
-                if (lq_rs != null) {
-                    lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()));
-                }
-                break;
+        /*
+            0=pedido
+            1=guia
+         */
+        lq_rs = go_dao_pedido.SLT_datos_ref_factura(op, codigo);
+        if (lq_rs != null) {
+            lo_evt_cab_factura.muestra_datos_ref(op, lq_rs, codigo, lo_pnl_cab_factura, lo_pnl_grid_pedidos);
+            genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(), Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
+            switch (op) {
+                case 0:
+                    lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle(codigo);
+                    if (lq_rs != null) {
+                        lo_evt_cab_factura.activa_campos(0, lo_pnl_cab_factura, false, ls_tipo_documento);
+                        lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
+                        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()));
+                        lo_pnl_cab_factura.TXT_fecha_emision.setEnabled(true);
+                        lo_pnl_cab_factura.TXT_pedido.setEnabled(true);
+                        lo_pnl_cab_factura.TXT_observacion.setEnabled(true);
+                        lo_pnl_cab_factura.TXT_observacion.requestFocus();
+                    }
+                    break;
+            }
+            get_tipo_cambio();
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "muestra_datos_ref", "NO EXISTE PEDIDO");
         }
-        get_tipo_cambio();
     }
 
     private void evt_f5_entidad(int op) {
@@ -681,8 +694,12 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     if (lo_pnl_cab_factura.TXT_pedido.getText().trim().equalsIgnoreCase("0000000000")) {
                         getFocusOwner().transferFocus();
                     } else {
-                        ls_codigo_pedido = "OP" + ls_serie + lo_pnl_cab_factura.TXT_pedido.getText().trim();
-                        muestra_datos_ref(0, ls_codigo_pedido);
+                        String cp = "OP" + ls_serie + lo_pnl_cab_factura.TXT_pedido.getText().trim();
+                        if (!ls_codigo_pedido.equalsIgnoreCase(cp)) {
+                            muestra_datos_ref(0, cp);
+                        } else {
+                            getFocusOwner().transferFocus();
+                        }
                     }
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.CBX_moneda || ke.getSource() == lo_pnl_cab_factura.JRD_precio_igv || ke.getSource() == lo_pnl_cab_factura.CBX_forma_pago) {
@@ -795,6 +812,15 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     }
                     if (ie.getSource() == lo_pnl_cab_factura.JRD_precio_igv) {
                         lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_factura.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_factura.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                    }
+                    if (ie.getSource() == lo_pnl_cab_factura.CBX_forma_pago) {
+                        if (lo_pnl_cab_factura.CBX_forma_pago.getSelectedIndex() == 0) {
+                            lo_pnl_cab_factura.TXT_dias_credito.setText("0");
+                            lo_pnl_cab_factura.TXT_dias_credito.setEnabled(false);
+                            lo_pnl_cab_factura.LBL_fecha_vence.setText(lo_pnl_cab_factura.TXT_fecha_emision.getText());
+                        } else {
+                            lo_pnl_cab_factura.TXT_dias_credito.setEnabled(true);
+                        }
                     }
                 }
             }
