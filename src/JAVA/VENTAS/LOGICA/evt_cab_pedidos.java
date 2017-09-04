@@ -183,8 +183,7 @@ public class evt_cab_pedidos {
     }
 
     public void setea_campos(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_entidad_ubigeo cbx_entidad_ubigeo, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, pnl_grid_pedidos OBJ_pgp, double monto_min) {
-        try {
-            double tipo_cambio = (cbx_moneda.getID().equalsIgnoreCase("PEN")) ? 1 : Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText());
+        try {            
             OBJ_bpe.setPeriodo(gs_periodo);
             OBJ_bpe.setMes(OBJ_pcp.TXT_fecha_emision.getText().trim().substring(3, 5));
             OBJ_bpe.setCodigo_documento("OP");
@@ -224,14 +223,7 @@ public class evt_cab_pedidos {
             OBJ_bpe.setTotal_documento(Double.parseDouble(OBJ_pgp.LBL_importe.getText().replaceAll(",", "")));
             OBJ_bpe.setExonerado((OBJ_pcp.JRD_domiciliado.isSelected() == false) ? Double.parseDouble(OBJ_pgp.LBL_importe.getText().replaceAll(",", "")) : 0.00);
             OBJ_bpe.setImporte_detraccion((Double.parseDouble(OBJ_pgp.LBL_total.getText().replaceAll(",", "")) >= monto_min) ? Double.parseDouble(OBJ_pgp.LBL_total.getText().replaceAll(",", "")) * Double.parseDouble(OBJ_pcp.TXT_detraccion.getText()) : 0.00);
-            OBJ_bpe.setInafecto_mn(OBJ_bpe.getInafecto() * tipo_cambio);
-            OBJ_bpe.setBase_mn(OBJ_bpe.getBase() * tipo_cambio);
-            OBJ_bpe.setIgv_mn(OBJ_bpe.getIgv() * tipo_cambio);
-            OBJ_bpe.setTotal_mn(OBJ_bpe.getTotal() * tipo_cambio);
-            OBJ_bpe.setPercepcion_mn(OBJ_bpe.getPercepcion() * tipo_cambio);
-            OBJ_bpe.setTotal_documento_mn(OBJ_bpe.getTotal_documento() * tipo_cambio);
-            OBJ_bpe.setExonerado_mn(OBJ_bpe.getExonerado() * tipo_cambio);
-            OBJ_bpe.setImporte_detraccion_mn(OBJ_bpe.getImporte_detraccion() * tipo_cambio);
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -280,15 +272,7 @@ public class evt_cab_pedidos {
             OBJ_bpe.setPercepcion(lq_rs.getDouble(39));
             OBJ_bpe.setTotal_documento(lq_rs.getDouble(40));
             OBJ_bpe.setExonerado(lq_rs.getDouble(41));
-            OBJ_bpe.setImporte_detraccion(lq_rs.getDouble(42));
-            OBJ_bpe.setInafecto_mn(lq_rs.getDouble(43));
-            OBJ_bpe.setBase_mn(lq_rs.getDouble(44));
-            OBJ_bpe.setIgv_mn(lq_rs.getDouble(45));
-            OBJ_bpe.setTotal_mn(lq_rs.getDouble(46));
-            OBJ_bpe.setPercepcion_mn(lq_rs.getDouble(47));
-            OBJ_bpe.setTotal_documento_mn(lq_rs.getDouble(48));
-            OBJ_bpe.setExonerado_mn(lq_rs.getDouble(49));
-            OBJ_bpe.setImporte_detraccion_mn(lq_rs.getDouble(50));
+            OBJ_bpe.setImporte_detraccion(lq_rs.getDouble(42));           
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -189,6 +189,12 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
             }
         }
     }
+    
+    private void actualiza_producto(){
+        li_tipo_operacion=2;
+        lo_pnl_datos_articulo.CBX_producto.removeAllItems();
+        get_producto();
+    }
 
     private void activa_campos() {
         try {
@@ -233,6 +239,7 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
 
     private void evt_nuevo() {
         ls_codigo = null;
+        actualiza_producto();
         lo_evt_datos_articulo.limpia_datos(lo_pnl_datos_articulo);
         li_tipo_operacion = 0;
         lo_evt_opciones_2.activa_btn_opciones(1, lo_pnl_opciones_2, lb_valor_op);

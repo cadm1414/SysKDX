@@ -8,8 +8,8 @@ public class BEAN_pedido {
             observacion, es_domiciliado, fecha_registro;
     int dias_credito;
     double tipo_cambio, porcentaje_detraccion, inafecto, base, igv, total, percepcion, total_documento, exonerado,
-            importe_detraccion, inafecto_mn, base_mn, igv_mn, total_mn, percepcion_mn, total_documento_mn, exonerado_mn, importe_detraccion_mn;
-    
+            importe_detraccion;
+
     public String getFecha_registro() {
         return fecha_registro;
     }
@@ -17,7 +17,6 @@ public class BEAN_pedido {
     public void setFecha_registro(String fecha_registro) {
         this.fecha_registro = fecha_registro;
     }
-    
 
     public String getCodigo_operacion() {
         return codigo_operacion;
@@ -346,69 +345,4 @@ public class BEAN_pedido {
     public void setImporte_detraccion(double importe_detraccion) {
         this.importe_detraccion = importe_detraccion;
     }
-
-    public double getInafecto_mn() {
-        return inafecto_mn;
-    }
-
-    public void setInafecto_mn(double inafecto_mn) {
-        this.inafecto_mn = inafecto_mn;
-    }
-
-    public double getBase_mn() {
-        return base_mn;
-    }
-
-    public void setBase_mn(double base_mn) {
-        this.base_mn = base_mn;
-    }
-
-    public double getIgv_mn() {
-        return igv_mn;
-    }
-
-    public void setIgv_mn(double igv_mn) {
-        this.igv_mn = igv_mn;
-    }
-
-    public double getTotal_mn() {
-        return total_mn;
-    }
-
-    public void setTotal_mn(double total_mn) {
-        this.total_mn = total_mn;
-    }
-
-    public double getPercepcion_mn() {
-        return percepcion_mn;
-    }
-
-    public void setPercepcion_mn(double percepcion_mn) {
-        this.percepcion_mn = percepcion_mn;
-    }
-
-    public double getTotal_documento_mn() {
-        return total_documento_mn;
-    }
-
-    public void setTotal_documento_mn(double total_documento_mn) {
-        this.total_documento_mn = total_documento_mn;
-    }
-
-    public double getExonerado_mn() {
-        return exonerado_mn;
-    }
-
-    public void setExonerado_mn(double exonerado_mn) {
-        this.exonerado_mn = exonerado_mn;
-    }
-
-    public double getImporte_detraccion_mn() {
-        return importe_detraccion_mn;
-    }
-
-    public void setImporte_detraccion_mn(double importe_detraccion_mn) {
-        this.importe_detraccion_mn = importe_detraccion_mn;
-    }
-
 }

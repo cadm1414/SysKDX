@@ -104,7 +104,11 @@ public class opciones_menu {
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("FACTURA")) {
-                    go_muestra_dlg_ventas.muestra_dlg_factura();
+                    go_muestra_dlg_ventas.muestra_dlg_factura("01");
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("BOLETA")) {
+                    go_muestra_dlg_ventas.muestra_dlg_boleta("03");
                     resp = "I";
                 }
                 break;

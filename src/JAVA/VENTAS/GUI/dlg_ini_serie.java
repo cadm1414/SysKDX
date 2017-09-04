@@ -19,7 +19,7 @@ public class dlg_ini_serie extends javax.swing.JDialog {
     pnl_aceptar_cancelar lo_pnl_aceptar_cancelar = new pnl_aceptar_cancelar();
     evt_aceptar_cancelar lo_evt_aceptar_cancelar = new evt_aceptar_cancelar();
     ResultSet lq_rs;
-    String ls_codigo, ls_nombre;
+    String ls_codigo, ls_nombre, ls_tipo_documento;
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_ini_serie";
 
     public dlg_ini_serie(java.awt.Frame parent, boolean modal) {
@@ -31,6 +31,8 @@ public class dlg_ini_serie extends javax.swing.JDialog {
     private void formulario() {
         lo_pnl_ini_serie.setBounds(10, 10, 500, 100);
         lo_pnl_aceptar_cancelar.setBounds(100, 100, 200, 50);
+
+        ls_tipo_documento = gs_parametros[0];
 
         this.add(lo_pnl_ini_serie);
         this.add(lo_pnl_aceptar_cancelar);
@@ -72,6 +74,7 @@ public class dlg_ini_serie extends javax.swing.JDialog {
                 lo_pnl_ini_serie.TXT_nombre.setText(lq_rs.getString(2));
                 gs_parametros[0] = lq_rs.getString(1);
                 gs_parametros[1] = lq_rs.getString(2);
+                gs_parametros[3] = ls_tipo_documento;
                 get_serie(codigo);
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_sucursal", "USUARIO SIN PERMISOS y/o SUCURSAL NO EXISTE");
@@ -95,7 +98,9 @@ public class dlg_ini_serie extends javax.swing.JDialog {
                     go_jif_factura.show();
                     break;
                 case 2:
-
+                    go_jif_boleta = new jif_factura();
+                    go_frm_principal.JDP_principal.add(go_jif_boleta);
+                    go_jif_boleta.show();
                     break;
             }
             gi_parametros_2[0] = 0;

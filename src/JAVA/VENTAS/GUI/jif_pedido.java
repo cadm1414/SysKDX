@@ -122,25 +122,8 @@ public class jif_pedido extends javax.swing.JInternalFrame {
     private void get_tipo_cambio() {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_pedidos.CBX_moneda.getSelectedItem();
         lo_pnl_grid_pedidos.LBL_simbolo.setText("Imp (" + lo_cbx_moneda.simbolo_moneda().trim() + ")");
-        if (!lo_cbx_moneda.getID().equalsIgnoreCase("PEN")) {
-            try {
-                ld_tipo_cambio = go_dao_tipo_cambio.SLT_tipo_cambio_monto("0", lo_cbx_moneda.getID(), lo_pnl_cab_pedidos.TXT_fecha_emision.getText());
-                if (ld_tipo_cambio != 0) {
-                    lo_pnl_cab_pedidos.TXT_tipo_cambio.setEnabled(false);
-                    lo_pnl_cab_pedidos.TXT_tipo_cambio.setText(ld_tipo_cambio + "");
-                } else if (go_fnc_mensaje.get_respuesta(0, "FECHA SIN TIPO DE CAMBIO ¿DESEA AGREGAR TIPO CAMBIO MANUAL?") == 0 ) {
-                    lo_pnl_cab_pedidos.TXT_tipo_cambio.setEnabled(true);
-                    lo_pnl_cab_pedidos.TXT_tipo_cambio.setText("");
-                    lo_pnl_cab_pedidos.TXT_tipo_cambio.requestFocus();
-                } else {
-                    lo_pnl_cab_pedidos.TXT_tipo_cambio.setText("");
-                }
-            } catch (Exception e) {
-            }
-        } else {
-            lo_pnl_cab_pedidos.TXT_tipo_cambio.setEnabled(false);
-            lo_pnl_cab_pedidos.TXT_tipo_cambio.setText("0.000");
-        }
+        lo_pnl_cab_pedidos.TXT_tipo_cambio.setEnabled(false);
+        lo_pnl_cab_pedidos.TXT_tipo_cambio.setText("0.000");
     }
 
     private void get_porcentaje_detraccion() {
@@ -273,7 +256,8 @@ public class jif_pedido extends javax.swing.JInternalFrame {
 
     private void get_descripcion_pedido_detalle(String codigo) {
         lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
-        lo_evt_grid_pedidos.recupera_detalle(lo_pnl_grid_pedidos, codigo, lo_bean_pedido.getEs_precio_igv());
+        lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle(codigo);
+        lo_evt_grid_pedidos.recupera_detalle(lq_rs,lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_pedido.getEs_precio_igv()));
     }
 
     private void limpia_parametros() {

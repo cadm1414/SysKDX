@@ -71,10 +71,12 @@ import JAVA.VENTAS.DAO.DAO_igv;
 import JAVA.VENTAS.DAO.DAO_pedido;
 import JAVA.VENTAS.DAO.DAO_pedido_detalle;
 import JAVA.VENTAS.DAO.DAO_registro_ventas;
+import JAVA.VENTAS.DAO.DAO_registro_ventas_detalle;
 import JAVA.VENTAS.DAO.DAO_serie;
 import JAVA.VENTAS.DAO.DAO_tipo_cambio;
 import JAVA.VENTAS.GUI.dlg_busq_facturacion;
 import JAVA.VENTAS.GUI.dlg_busq_pedido;
+import JAVA.VENTAS.GUI.dlg_busq_registro_ventas;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_factura;
 import JAVA.VENTAS.GUI.jif_pedido;
@@ -152,6 +154,7 @@ public class variables_globales {
     public static DAO_reportes go_dao_reportes = new DAO_reportes();
     public static DAO_pedido_detalle go_dao_pedido_detalle = new DAO_pedido_detalle();
     public static DAO_registro_ventas go_dao_registro_ventas = new DAO_registro_ventas();
+    public static DAO_registro_ventas_detalle go_dao_registro_ventas_detalle = new DAO_registro_ventas_detalle();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -200,6 +203,7 @@ public class variables_globales {
     public static dlg_busq_vendedor go_dlg_busq_vendedor;
     public static dlg_busq_facturacion go_dlg_busq_facturacion;
     public static dlg_busq_pedido go_dlg_busq_pedido;
+    public static dlg_busq_registro_ventas go_dlg_busq_registro_ventas;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -220,6 +224,7 @@ public class variables_globales {
     public static jif_datos_entidad go_jif_datos_entidad;
     public static jif_pedido go_jif_pedido;
     public static jif_factura go_jif_factura;
+    public static jif_factura go_jif_boleta;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

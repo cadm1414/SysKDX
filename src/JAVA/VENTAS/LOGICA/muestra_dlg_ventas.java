@@ -30,21 +30,47 @@ public class muestra_dlg_ventas {
         }
     }
     
-    public void muestra_dlg_factura() throws PropertyVetoException {
+    public void muestra_dlg_factura(String tipo_documento) throws PropertyVetoException {
         if (go_jif_factura != null) {
             if (go_jif_factura.isClosed()) {
                 gi_parametros_2[0] = 1;
+                gs_parametros[0] = tipo_documento;
                 go_dlg_ini_serie = new dlg_ini_serie(null, true);
                 go_dlg_ini_serie.setVisible(true);                
             } else if (go_jif_factura.isIcon()) {
                 go_jif_factura.setIcon(false);
             } else if (!go_jif_factura.isShowing()) {
                 gi_parametros_2[0] = 1;
+                gs_parametros[0] = tipo_documento;
                 go_dlg_ini_serie = new dlg_ini_serie(null, true);
                 go_dlg_ini_serie.setVisible(true);                
             }
         } else {
             gi_parametros_2[0] = 1;
+            gs_parametros[0] = tipo_documento;
+            go_dlg_ini_serie = new dlg_ini_serie(null, true);
+            go_dlg_ini_serie.setVisible(true);            
+        }
+    }
+    
+    public void muestra_dlg_boleta(String tipo_documento) throws PropertyVetoException {
+        if (go_jif_boleta != null) {
+            if (go_jif_boleta.isClosed()) {
+                gi_parametros_2[0] = 2;
+                gs_parametros[0] = tipo_documento;
+                go_dlg_ini_serie = new dlg_ini_serie(null, true);
+                go_dlg_ini_serie.setVisible(true);                
+            } else if (go_jif_boleta.isIcon()) {
+                go_jif_boleta.setIcon(false);
+            } else if (!go_jif_boleta.isShowing()) {
+                gi_parametros_2[0] = 2;
+                gs_parametros[0] = tipo_documento;
+                go_dlg_ini_serie = new dlg_ini_serie(null, true);
+                go_dlg_ini_serie.setVisible(true);                
+            }
+        } else {
+            gi_parametros_2[0] = 2;
+            gs_parametros[0] = tipo_documento;
             go_dlg_ini_serie = new dlg_ini_serie(null, true);
             go_dlg_ini_serie.setVisible(true);            
         }
