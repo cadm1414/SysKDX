@@ -45,7 +45,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Item", "Bulto", "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "Perc.", "Precio", "P. Bruto", "P. Neto", "Importe", "%", ""
+                "Item", "Bulto", "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "Perc.", "Precio", "C. Bruto", "C. Neto", "Importe", "%", ""
             }
         ) {
             Class[] types = new Class [] {

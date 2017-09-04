@@ -10,7 +10,6 @@ import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.INVENT.LOGICA.cbx_entidad_ubigeo;
 import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
 import JAVA.VENTAS.BEAN.BEAN_registro_ventas;
-import static JAVA.VENTAS.GUI.jif_pedido.lb_valor_op;
 import JAVA.VENTAS.LOGICA.cbx_igv;
 import JAVA.VENTAS.LOGICA.evt_cab_factura;
 import JAVA.VENTAS.LOGICA.evt_grid_pedidos;

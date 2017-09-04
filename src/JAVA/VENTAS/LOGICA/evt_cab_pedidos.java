@@ -48,7 +48,7 @@ public class evt_cab_pedidos {
                 OBJ_pcp.TXT_codigo_entidad.setEnabled(valor);
                 OBJ_pcp.TXT_codigo_vendedor.setEnabled(valor);
                 OBJ_pcp.TXT_observacion.setEnabled(valor);
-                OBJ_pcp.TXT_tipo_cambio.setEnabled((Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText())!=0)?true:false);
+                OBJ_pcp.TXT_tipo_cambio.setEnabled((Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText()) != 0) ? true : false);
 
                 if (OBJ_pcp.CBX_forma_pago.getSelectedIndex() == 1) {
                     OBJ_pcp.CBX_forma_pago.setEnabled(valor);
@@ -124,47 +124,41 @@ public class evt_cab_pedidos {
             OBJ_pcp.LBL_numero_doc.setText(OBJ_pcp.TXT_numero_doc.getText());
             if (go_fnc_operaciones_campos.valida_fecha(OBJ_pcp.TXT_fecha_emision.getText())) {
                 if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_tipo_cambio)) {
-                    if (valida_moneda(Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText()), cbx_moneda.getID())) {
-                        if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_entidad)) {
-                            if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_razon_social)) {
-                                if (valida_tipo_documento(OBJ_pcp.CBX_tipo_documento_id.getSelectedIndex(), OBJ_pcp.TXT_doc_id.getText().trim())) {
-                                    if (!OBJ_pcp.CBX_direccion.getSelectedItem().toString().trim().equalsIgnoreCase("")) {
-                                        if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_ubigeo)) {
-                                            if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_pagador)) {
-                                                if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_vendedor)) {
-                                                    resp = true;
-                                                } else {
-                                                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "CODIGO VENDEDOR");
-                                                    OBJ_pcp.TXT_codigo_vendedor.requestFocus();
-                                                }
+                    if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_entidad)) {
+                        if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_razon_social)) {
+                            if (valida_tipo_documento(OBJ_pcp.CBX_tipo_documento_id.getSelectedIndex(), OBJ_pcp.TXT_doc_id.getText().trim())) {
+                                if (!OBJ_pcp.CBX_direccion.getSelectedItem().toString().trim().equalsIgnoreCase("")) {
+                                    if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_ubigeo)) {
+                                        if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_pagador)) {
+                                            if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_vendedor)) {
+                                                resp = true;
                                             } else {
-                                                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "CODIGO PAGADOR");
-                                                OBJ_pcp.TXT_codigo_pagador.requestFocus();
+                                                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "CODIGO VENDEDOR");
+                                                OBJ_pcp.TXT_codigo_vendedor.requestFocus();
                                             }
                                         } else {
-                                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "CODIGO UBIGEO");
-                                            OBJ_pcp.TXT_codigo_ubigeo.requestFocus();
+                                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "CODIGO PAGADOR");
+                                            OBJ_pcp.TXT_codigo_pagador.requestFocus();
                                         }
                                     } else {
-                                        go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE DIRECCION");
-                                        OBJ_pcp.CBX_direccion.requestFocus();
+                                        go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "CODIGO UBIGEO");
+                                        OBJ_pcp.TXT_codigo_ubigeo.requestFocus();
                                     }
                                 } else {
-                                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE N° DOCUMENTO CORRECTO");
-                                    OBJ_pcp.TXT_doc_id.requestFocus();
+                                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE DIRECCION");
+                                    OBJ_pcp.CBX_direccion.requestFocus();
                                 }
                             } else {
-                                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "RAZON SOCIAL");
-                                OBJ_pcp.TXT_razon_social.requestFocus();
+                                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE N° DOCUMENTO CORRECTO");
+                                OBJ_pcp.TXT_doc_id.requestFocus();
                             }
                         } else {
-                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE ENTIDAD");
-                            OBJ_pcp.TXT_codigo_entidad.requestFocus();
+                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "RAZON SOCIAL");
+                            OBJ_pcp.TXT_razon_social.requestFocus();
                         }
                     } else {
-                        go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE TIPO DE CAMBIO");
-                        OBJ_pcp.TXT_tipo_cambio.setText("");
-                        OBJ_pcp.TXT_tipo_cambio.requestFocus();
+                        go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE ENTIDAD");
+                        OBJ_pcp.TXT_codigo_entidad.requestFocus();
                     }
                 } else {
                     go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE TIPO DE CAMBIO");
@@ -183,7 +177,7 @@ public class evt_cab_pedidos {
     }
 
     public void setea_campos(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_entidad_ubigeo cbx_entidad_ubigeo, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, pnl_grid_pedidos OBJ_pgp, double monto_min) {
-        try {            
+        try {
             OBJ_bpe.setPeriodo(gs_periodo);
             OBJ_bpe.setMes(OBJ_pcp.TXT_fecha_emision.getText().trim().substring(3, 5));
             OBJ_bpe.setCodigo_documento("OP");
@@ -223,7 +217,7 @@ public class evt_cab_pedidos {
             OBJ_bpe.setTotal_documento(Double.parseDouble(OBJ_pgp.LBL_importe.getText().replaceAll(",", "")));
             OBJ_bpe.setExonerado((OBJ_pcp.JRD_domiciliado.isSelected() == false) ? Double.parseDouble(OBJ_pgp.LBL_importe.getText().replaceAll(",", "")) : 0.00);
             OBJ_bpe.setImporte_detraccion((Double.parseDouble(OBJ_pgp.LBL_total.getText().replaceAll(",", "")) >= monto_min) ? Double.parseDouble(OBJ_pgp.LBL_total.getText().replaceAll(",", "")) * Double.parseDouble(OBJ_pcp.TXT_detraccion.getText()) : 0.00);
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -272,7 +266,7 @@ public class evt_cab_pedidos {
             OBJ_bpe.setPercepcion(lq_rs.getDouble(39));
             OBJ_bpe.setTotal_documento(lq_rs.getDouble(40));
             OBJ_bpe.setExonerado(lq_rs.getDouble(41));
-            OBJ_bpe.setImporte_detraccion(lq_rs.getDouble(42));           
+            OBJ_bpe.setImporte_detraccion(lq_rs.getDouble(42));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

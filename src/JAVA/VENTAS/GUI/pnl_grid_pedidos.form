@@ -66,8 +66,8 @@
                 <Column editable="false" title="IGV" type="java.lang.Boolean"/>
                 <Column editable="false" title="Perc." type="java.lang.Integer"/>
                 <Column editable="true" title="Precio" type="java.lang.Double"/>
-                <Column editable="false" title="P. Bruto" type="java.lang.Double"/>
-                <Column editable="true" title="P. Neto" type="java.lang.Double"/>
+                <Column editable="false" title="C. Bruto" type="java.lang.Double"/>
+                <Column editable="true" title="C. Neto" type="java.lang.Double"/>
                 <Column editable="false" title="Importe" type="java.lang.Double"/>
                 <Column editable="false" title="%" type="java.lang.Integer"/>
                 <Column editable="false" title="" type="java.lang.Object"/>
