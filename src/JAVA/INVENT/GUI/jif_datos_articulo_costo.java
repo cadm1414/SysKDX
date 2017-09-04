@@ -382,7 +382,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
                     lo_pnl_datos_articulo_costo.TXT_periodo.requestFocus();
                 }
                 if (ke.getSource() == lo_pnl_datos_articulo_costo.TXT_periodo && go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_articulo_costo.TXT_periodo.getText().trim(), 1, 4)) {
-                    lo_pnl_datos_articulo_costo.TXT_costo.requestFocus();
+                    getFocusOwner().transferFocus();
                 }
                 if (ke.getSource() == lo_pnl_datos_articulo_costo.TXT_costo) {
                     if (!go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_articulo_costo.TXT_costo)) {
@@ -477,7 +477,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 372, Short.MAX_VALUE)
+            .addGap(0, 435, Short.MAX_VALUE)
         );
 
         pack();

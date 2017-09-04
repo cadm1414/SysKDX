@@ -21,7 +21,7 @@ public class CONEXION_db {
     public Connection getConexion_db() {
         try {
             Properties lp_p = new Properties();
-            lp_p.load(new FileInputStream(ls_path + "\\config.ini"));
+            lp_p.load(new FileInputStream(ls_path + "\\config.properties"));
             ls_server = lp_p.getProperty("Server_db");
             ls_nombre = gs_base_datos;
             ls_port = lp_p.getProperty("Port_db");

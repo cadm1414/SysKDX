@@ -21,11 +21,11 @@ public class CONEXION_emp {
     public Connection getConexion_emp() {
         try {
             Properties lp_p = new Properties();
-            lp_p.load(new FileInputStream(ls_path + "\\config.ini"));
+            lp_p.load(new FileInputStream(ls_path + "\\config.properties"));
             ls_server = lp_p.getProperty("Server_emp");
             ls_nombre = lp_p.getProperty("Nombre_emp");
             ls_port = lp_p.getProperty("Port_emp");
-
+            
             Class.forName("org.postgresql.Driver");
             lq_con = DriverManager.getConnection("jdbc:postgresql://" + ls_server + ":" + ls_port + "/" + ls_nombre, "postgres", "tigohu");
             lq_con.setAutoCommit(false);
