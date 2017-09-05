@@ -183,7 +183,7 @@ public class evt_grid_pedidos {
 
     public void recupera_detalle(ResultSet rs, pnl_grid_pedidos OBJ_pgp, int es_precio_igv) {
         int a = 0;
-        limpia_tabla(OBJ_pgp, 1);
+        //limpia_tabla(OBJ_pgp, 1);
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());

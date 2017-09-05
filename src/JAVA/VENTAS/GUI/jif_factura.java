@@ -514,6 +514,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                             lo_bean_registro_ventas.setCodigo_sucursal(ls_codigo_sucursal);
                             lo_bean_registro_ventas.setCodigo_guiar(ls_codigo_guiar);
                             lo_bean_registro_ventas.setCodigo_pedido(ls_codigo_pedido);
+                            genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(),Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
                             lo_evt_cab_factura.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_factura, lo_cbx_entidad_ubigeo, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_pnl_grid_pedidos, ld_monto_minimo);
                             if (go_dao_registro_ventas.IST_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100)) {
                                 lo_evt_cab_factura.limpia_datos(lo_pnl_cab_factura, ls_tipo_documento);

@@ -2,11 +2,51 @@ package JAVA.INVENT.BEAN;
 
 public class BEAN_articulo_costo {
 
-    String codigo_orden, item_orden, codigo_articulo, codigo_procedencia, tipo_procedencia, periodo, numero, codigo_entidad, nombre_articulo, fecha_ingreso, fecha_produccion, fecha_vencimiento, periodo_produccion, cierre_costo, enlace_oc;
-    double costo;
+    String codigo_orden, item_orden, codigo_articulo, codigo_procedencia, tipo_procedencia, periodo, numero, codigo_entidad, nombre_articulo, fecha_ingreso, fecha_produccion, fecha_vencimiento, periodo_produccion, cierre_costo, enlace_oc,codigo_moneda,codigo_igv,es_igv;
+    double costo,costo_sigv_mn,tipo_cambio;
 
     public String getCodigo_orden() {
         return codigo_orden;
+    }
+
+    public String getCodigo_moneda() {
+        return codigo_moneda;
+    }
+
+    public void setCodigo_moneda(String codigo_moneda) {
+        this.codigo_moneda = codigo_moneda;
+    }
+
+    public String getCodigo_igv() {
+        return codigo_igv;
+    }
+
+    public void setCodigo_igv(String codigo_igv) {
+        this.codigo_igv = codigo_igv;
+    }
+
+    public String getEs_igv() {
+        return es_igv;
+    }
+
+    public void setEs_igv(String es_igv) {
+        this.es_igv = es_igv;
+    }
+
+    public double getCosto_sigv_mn() {
+        return costo_sigv_mn;
+    }
+
+    public void setCosto_sigv_mn(double costo_sigv_mn) {
+        this.costo_sigv_mn = costo_sigv_mn;
+    }
+
+    public double getTipo_cambio() {
+        return tipo_cambio;
+    }
+
+    public void setTipo_cambio(double tipo_cambio) {
+        this.tipo_cambio = tipo_cambio;
     }
 
     public void setCodigo_orden(String codigo_orden) {

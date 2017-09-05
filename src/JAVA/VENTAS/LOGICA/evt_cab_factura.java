@@ -124,59 +124,57 @@ public class evt_cab_factura {
         OBJ_pgp.LBL_importe.setText(dFormat.format(OBJ_bpe.getTotal_documento()) + "");
     }
 
-    public void muestra_datos_ref(int op,ResultSet rs, String codigo, pnl_cab_factura OBJ_pnf, pnl_grid_pedidos OBJ_pgp) {
+    public void muestra_datos_ref(int op, ResultSet rs, String codigo, pnl_cab_factura OBJ_pnf, pnl_grid_pedidos OBJ_pgp) {
         simbolos.setDecimalSeparator('.');
         simbolos.setGroupingSeparator(',');
         dFormat = new DecimalFormat("#,##0.00", simbolos);
-        try {            
-            
-               
-                switch (op) {
-                    case 0:
-                        OBJ_pnf.TXT_guiar.setText("0000000000");
-                        OBJ_pnf.TXT_pedido.setText(rs.getString(2));
-                        OBJ_pnf.TXT_pedido.setEnabled(true);
-                        break;
-                    case 1:
-                        OBJ_pnf.TXT_guiar.setText(rs.getString(2));
-                        OBJ_pnf.TXT_pedido.setText("0000000000");
-                        OBJ_pnf.TXT_guiar.setEnabled(true);
-                        break;
-                }
-                go_cbx_trato_datos.selecciona_valor(0, rs.getString(3), OBJ_pnf.CBX_moneda);
-                OBJ_pnf.CBX_afecto_igv.setSelectedIndex(rs.getInt(4));
-                go_cbx_trato_datos.selecciona_valor(15, rs.getString(5), OBJ_pnf.CBX_igv);
-                go_cbx_trato_datos.selecciona_valor(10, rs.getString(6), OBJ_pnf.CBX_codigo_detraccion);
-                OBJ_pnf.TXT_detraccion.setText(rs.getString(7));
-                OBJ_pnf.TXT_codigo_entidad.setText(rs.getString(8));
-                OBJ_pnf.TXT_razon_social.setText(rs.getString(9));
-                OBJ_pnf.TXT_doc_id.setText(rs.getString(10));
-                OBJ_pnf.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(rs.getInt(11)));
-                try {
-                    ResultSet rs_a = go_dao_entidad.SLT_datos_entidad_x_facturacion(rs.getString(8), rs.getString(12));
-                    go_cbx_trato_datos.recupera_valor(16, rs_a, OBJ_pnf.CBX_direccion);
-                    go_cbx_trato_datos.selecciona_valor(16, rs_a.getString(13), OBJ_pnf.CBX_direccion);
-                } catch (Exception e) {
-                }
-                OBJ_pnf.TXT_codigo_ubigeo.setText(rs.getString(14));
-                OBJ_pnf.TXT_descripcion.setText(rs.getString(15));
-                OBJ_pnf.TXT_codigo_pagador.setText(rs.getString(16));
-                OBJ_pnf.TXT_pagador.setText(rs.getString(17));
-                OBJ_pnf.TXT_codigo_vendedor.setText(rs.getString(18));
-                OBJ_pnf.TXT_nombre_vendedor.setText(rs.getString(19));
-                OBJ_pnf.CBX_forma_pago.setSelectedIndex((rs.getString(20).equalsIgnoreCase("EF")) ? 0 : 1);
-                OBJ_pnf.TXT_dias_credito.setText(rs.getInt(21) + "");
-                OBJ_pgp.LBL_inafecto.setText(dFormat.format(rs.getDouble(22)) + "");
-                OBJ_pgp.LBL_afecto.setText(dFormat.format(rs.getDouble(23)) + "");
-                OBJ_pgp.LBL_igv.setText(dFormat.format(rs.getDouble(24)) + "");
-                OBJ_pgp.LBL_total.setText(dFormat.format(rs.getDouble(25)) + "");
-                OBJ_pgp.LBL_percepcion.setText(dFormat.format(rs.getDouble(26)) + "");
-                OBJ_pgp.LBL_importe.setText(dFormat.format(rs.getDouble(27)) + "");
-                OBJ_pnf.JRD_precio_igv.setSelected(go_fnc_operaciones_campos.int_boolean(rs.getInt(28)));
-                OBJ_pnf.TXT_fecha_emision.setEnabled(true);
-                OBJ_pnf.TXT_observacion.setEnabled(true);
-                OBJ_pnf.TXT_fecha_emision.requestFocus();
-            
+        try {
+            switch (op) {
+                case 0:
+                    OBJ_pnf.TXT_guiar.setText("0000000000");
+                    OBJ_pnf.TXT_pedido.setText(rs.getString(2));
+                    OBJ_pnf.TXT_pedido.setEnabled(true);
+                    break;
+                case 1:
+                    OBJ_pnf.TXT_guiar.setText(rs.getString(2));
+                    OBJ_pnf.TXT_pedido.setText("0000000000");
+                    OBJ_pnf.TXT_guiar.setEnabled(true);
+                    break;
+            }
+            go_cbx_trato_datos.selecciona_valor(0, rs.getString(3), OBJ_pnf.CBX_moneda);
+            OBJ_pnf.CBX_afecto_igv.setSelectedIndex(rs.getInt(4));
+            go_cbx_trato_datos.selecciona_valor(15, rs.getString(5), OBJ_pnf.CBX_igv);
+            go_cbx_trato_datos.selecciona_valor(10, rs.getString(6), OBJ_pnf.CBX_codigo_detraccion);
+            OBJ_pnf.TXT_detraccion.setText(rs.getString(7));
+            OBJ_pnf.TXT_codigo_entidad.setText(rs.getString(8));
+            OBJ_pnf.TXT_razon_social.setText(rs.getString(9));
+            OBJ_pnf.TXT_doc_id.setText(rs.getString(10));
+            OBJ_pnf.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(rs.getInt(11)));
+            try {
+                ResultSet rs_a = go_dao_entidad.SLT_datos_entidad_x_facturacion(rs.getString(8), rs.getString(12));
+                go_cbx_trato_datos.recupera_valor(16, rs_a, OBJ_pnf.CBX_direccion);
+                go_cbx_trato_datos.selecciona_valor(16, rs_a.getString(13), OBJ_pnf.CBX_direccion);
+            } catch (Exception e) {
+            }
+            OBJ_pnf.TXT_codigo_ubigeo.setText(rs.getString(14));
+            OBJ_pnf.TXT_descripcion.setText(rs.getString(15));
+            OBJ_pnf.TXT_codigo_pagador.setText(rs.getString(16));
+            OBJ_pnf.TXT_pagador.setText(rs.getString(17));
+            OBJ_pnf.TXT_codigo_vendedor.setText(rs.getString(18));
+            OBJ_pnf.TXT_nombre_vendedor.setText(rs.getString(19));
+            OBJ_pnf.CBX_forma_pago.setSelectedIndex((rs.getString(20).equalsIgnoreCase("EF")) ? 0 : 1);
+            OBJ_pnf.TXT_dias_credito.setText(rs.getInt(21) + "");
+            OBJ_pgp.LBL_inafecto.setText(dFormat.format(rs.getDouble(22)) + "");
+            OBJ_pgp.LBL_afecto.setText(dFormat.format(rs.getDouble(23)) + "");
+            OBJ_pgp.LBL_igv.setText(dFormat.format(rs.getDouble(24)) + "");
+            OBJ_pgp.LBL_total.setText(dFormat.format(rs.getDouble(25)) + "");
+            OBJ_pgp.LBL_percepcion.setText(dFormat.format(rs.getDouble(26)) + "");
+            OBJ_pgp.LBL_importe.setText(dFormat.format(rs.getDouble(27)) + "");
+            OBJ_pnf.JRD_precio_igv.setSelected(go_fnc_operaciones_campos.int_boolean(rs.getInt(28)));
+            OBJ_pnf.TXT_fecha_emision.setEnabled(true);
+            OBJ_pnf.TXT_observacion.setEnabled(true);
+            OBJ_pnf.TXT_fecha_emision.requestFocus();
+
         } catch (Exception e) {
         }
     }
