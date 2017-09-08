@@ -257,10 +257,10 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
     private void evt_guardar() {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_datos_articulo_costo.CBX_moneda.getSelectedItem();
         lo_cbx_igv = (cbx_igv) lo_pnl_datos_articulo_costo.CBX_igv.getSelectedItem();
-        
+
         switch (li_tipo_operacion) {
             case 0:
-                if (lo_evt_datos_articulo_costo.valida_campos(lo_pnl_datos_articulo_costo,lo_cbx_moneda)) {
+                if (lo_evt_datos_articulo_costo.valida_campos(lo_pnl_datos_articulo_costo, lo_cbx_moneda)) {
                     genera_codigo_orden();
                     ls_codigo_articulo = lo_pnl_datos_articulo_costo.TXT_codigo_articulo.getText().trim();
                     ls_periodo_produccion = go_fnc_operaciones_campos.completa_digitos(lo_pnl_datos_articulo_costo.CBX_mes.getSelectedIndex() + "", "0", 2) + "-" + lo_pnl_datos_articulo_costo.TXT_anio.getText().trim();
@@ -269,7 +269,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
                         if (!ls_item_orden.equalsIgnoreCase("000")) {
                             lo_bean_articulo_costo.setCodigo_orden(ls_codigo);
                             lo_bean_articulo_costo.setItem_orden(ls_item_orden);
-                            lo_evt_datos_articulo_costo.setea_campos(lo_bean_articulo_costo, lo_pnl_datos_articulo_costo,lo_cbx_moneda,lo_cbx_igv);
+                            lo_evt_datos_articulo_costo.setea_campos(lo_bean_articulo_costo, lo_pnl_datos_articulo_costo, lo_cbx_moneda, lo_cbx_igv);
                             if (go_dao_articulo_costo.IST_articulo_costo(lo_bean_articulo_costo)) {
                                 lo_evt_datos_articulo_costo.limpia_datos(lo_pnl_datos_articulo_costo);
                                 lo_evt_datos_articulo_costo.activa_campos(0, lo_pnl_datos_articulo_costo, false);
@@ -277,6 +277,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
                             }
                         } else {
                             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "ARTICULO COSTO YA EXISTE");
+                            ls_codigo = null;
                         }
                     } catch (Exception e) {
                     }
@@ -284,10 +285,10 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
                 break;
             case 1:
                 if (lo_evt_datos_articulo_costo.verifica_cambios(lo_bean_articulo_costo, lo_pnl_datos_articulo_costo)) {
-                    if (lo_evt_datos_articulo_costo.valida_campos(lo_pnl_datos_articulo_costo,lo_cbx_moneda)) {
+                    if (lo_evt_datos_articulo_costo.valida_campos(lo_pnl_datos_articulo_costo, lo_cbx_moneda)) {
                         try {
                             ls_periodo_produccion = lo_bean_articulo_costo.getPeriodo_produccion();
-                            lo_evt_datos_articulo_costo.setea_campos(lo_bean_articulo_costo, lo_pnl_datos_articulo_costo,lo_cbx_moneda,lo_cbx_igv);
+                            lo_evt_datos_articulo_costo.setea_campos(lo_bean_articulo_costo, lo_pnl_datos_articulo_costo, lo_cbx_moneda, lo_cbx_igv);
                             if (go_dao_articulo_costo.UPD_articulo_costo(lo_bean_articulo_costo, ls_periodo_produccion)) {
                                 lo_evt_datos_articulo_costo.limpia_datos(lo_pnl_datos_articulo_costo);
                                 lo_evt_datos_articulo_costo.activa_campos(0, lo_pnl_datos_articulo_costo, false);

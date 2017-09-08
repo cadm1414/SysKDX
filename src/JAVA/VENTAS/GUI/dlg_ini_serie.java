@@ -51,13 +51,13 @@ public class dlg_ini_serie extends javax.swing.JDialog {
     }
 
     private void get_serie(String codigo) {
+        lo_pnl_ini_serie.CBX_serie.removeAllItems();
         try {
             lq_rs = go_dao_serie.SLT_cbx_serie(codigo);
             if (lq_rs != null) {
                 do {
                     lo_pnl_ini_serie.CBX_serie.addItem(lq_rs.getString(1));
                 } while (lq_rs.next());
-                gs_parametros[2] = lo_pnl_ini_serie.CBX_serie.getSelectedItem().toString();
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_serie", "SUCURSAL NO CUENTA CON SERIE");
                 limpia_datos();
@@ -102,6 +102,11 @@ public class dlg_ini_serie extends javax.swing.JDialog {
                     go_frm_principal.JDP_principal.add(go_jif_boleta);
                     go_jif_boleta.show();
                     break;
+                case 3:
+                    go_jif_guia_remision = new jif_guia_remision();
+                    go_frm_principal.JDP_principal.add(go_jif_guia_remision);
+                    go_jif_guia_remision.show();
+                    break;
             }
             gi_parametros_2[0] = 0;
             dispose();
@@ -125,9 +130,14 @@ public class dlg_ini_serie extends javax.swing.JDialog {
     }
 
     private void evt_aceptar() {
-        get_descripcion_sucursal(lo_pnl_ini_serie.TXT_codigo.getText().trim());
+
         if (lo_pnl_ini_serie.CBX_serie.getItemCount() > 0) {
+            gs_parametros[2] = lo_pnl_ini_serie.CBX_serie.getSelectedItem().toString();
+            get_descripcion_sucursal(lo_pnl_ini_serie.TXT_codigo.getText().trim());
             muestra_jif();
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_f5", "SELECCIONE SUCURSAL");
+            limpia_datos();
         }
     }
 

@@ -224,4 +224,40 @@ public class DAO_registro_ventas {
         }
         return resp;
     }
+
+    public int SLT_cta_rv_x_documento(String sucursal, String codigo_documento, String serie_doc, String numero_doc) {
+        int resp = 0;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_cta_rv_x_documento('" + sucursal + "','" + codigo_documento + "','" + serie_doc + "','" + numero_doc + "','" + gs_periodo + "') "
+                    + "as (contador integer)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                resp = lq_rs.getInt(1);
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_correlativo_registro_ventas", e.getMessage());
+        }
+        return resp;
+    }
+
+    public boolean IST_anula_registro_ventas(String SQL,String codigo_operacion) throws SQLException {
+        boolean resp = false;        
+        try {
+            lq_stm = go_conexion_db.crearStatement();            
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                lq_stm.getConnection().commit();
+                go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_anula_registro_ventas", "SE ACTUALIZO BASE DE DATOS");
+                resp = true;
+                go_dao_auditoria.IST_auditoria(codigo_operacion, SQL, ls_modulo, "1", "0029");
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_anula_registro_ventas", e.getMessage());
+        }
+        return resp;
+    }
 }

@@ -73,7 +73,7 @@ public class evt_cab_pedidos {
         OBJ_pcp.TXT_codigo_entidad.setText("");
         OBJ_pcp.TXT_razon_social.setText("");
         OBJ_pcp.CBX_tipo_documento_id.setSelectedIndex(0);
-        OBJ_pcp.TXT_numero_doc.setText("");
+        OBJ_pcp.TXT_doc_id.setText("");
         OBJ_pcp.CBX_direccion.removeAllItems();
         OBJ_pcp.TXT_codigo_ubigeo.setText("");
         OBJ_pcp.TXT_descripcion.setText("");

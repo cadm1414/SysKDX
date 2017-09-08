@@ -317,6 +317,14 @@ public class jif_factura extends javax.swing.JInternalFrame {
         gs_parametros[3] = lo_pnl_cab_factura.TXT_serie.getText().trim();
         gs_parametros[4] = ls_tipo_documento;
     }
+    
+    private void genera_parametros_anula() {
+        gs_parametros[0] = ls_codigo_sucursal;
+        gs_parametros[1] = lo_pnl_cab_factura.TXT_sucursal.getText().trim();
+        gs_parametros[2] = ls_tipo_documento;
+        gs_parametros[3] = ls_serie;
+        gs_parametros[4] = gs_dia + "/" + gs_mes + "/" + gs_periodo;        
+    }
 
     private void limpia_parametros() {
         gs_parametros[0] = "";
@@ -341,7 +349,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle(codigo);
                     if (lq_rs != null) {
                         lo_evt_cab_factura.activa_campos(0, lo_pnl_cab_factura, false, ls_tipo_documento);
-                        lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
+                        //lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
                         lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()));
                         lo_pnl_cab_factura.TXT_fecha_emision.setEnabled(true);
                         lo_pnl_cab_factura.TXT_pedido.setEnabled(true);
@@ -553,6 +561,12 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 break;
         }
     }
+    
+    private void evt_anular() {
+        genera_parametros_anula();
+        go_dlg_anula_factura = new dlg_anula_factura(null, true);
+        go_dlg_anula_factura.setVisible(true);
+    }
 
     private void evt_cancelar() {
         li_tipo_operacion = 2;
@@ -589,6 +603,9 @@ public class jif_factura extends javax.swing.JInternalFrame {
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_guardar) {
                 evt_guardar();
+            }
+            if (ae.getSource() == lo_pnl_opciones_3.BTN_anular) {
+                evt_anular();
             }
         }
     };
@@ -648,6 +665,9 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_guardar) {
                     evt_guardar();
+                }
+                if (ke.getSource() == lo_pnl_opciones_3.BTN_anular) {
+                    evt_anular();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
                     evt_cancelar();

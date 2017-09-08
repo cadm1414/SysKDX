@@ -107,6 +107,14 @@ public class fnc_operaciones_campos {
         return resp;
     }
 
+    public boolean valida_periodo(String dato, String periodo) {
+        boolean resp = false;
+        if (dato.substring(6, 10).equalsIgnoreCase(periodo)) {
+            resp = true;
+        } 
+        return resp;
+    }
+
     public Date formarto_date(String dato) {
         Date fecha = null;
         try {

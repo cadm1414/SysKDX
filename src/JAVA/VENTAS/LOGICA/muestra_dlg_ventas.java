@@ -76,4 +76,27 @@ public class muestra_dlg_ventas {
         }
     }
     
+    public void muestra_dlg_guia_remision(String tipo_documento) throws PropertyVetoException {
+        if (go_jif_guia_remision != null) {
+            if (go_jif_guia_remision.isClosed()) {
+                gi_parametros_2[0] = 3;
+                gs_parametros[0] = tipo_documento;
+                go_dlg_ini_serie = new dlg_ini_serie(null, true);
+                go_dlg_ini_serie.setVisible(true);                
+            } else if (go_jif_guia_remision.isIcon()) {
+                go_jif_guia_remision.setIcon(false);
+            } else if (!go_jif_guia_remision.isShowing()) {
+                gi_parametros_2[0] = 3;
+                gs_parametros[0] = tipo_documento;
+                go_dlg_ini_serie = new dlg_ini_serie(null, true);
+                go_dlg_ini_serie.setVisible(true);                
+            }
+        } else {
+            gi_parametros_2[0] = 3;
+            gs_parametros[0] = tipo_documento;
+            go_dlg_ini_serie = new dlg_ini_serie(null, true);
+            go_dlg_ini_serie.setVisible(true);            
+        }
+    }
+    
 }
