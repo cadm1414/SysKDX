@@ -94,25 +94,25 @@ public class evt_grid_pedidos {
                             percepcion = go_fnc_operaciones_campos.redondea((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()), 2);
                             percepcion_s = percepcion_s + percepcion;
                         } else {
-                            if (es_sigv == false) {
-                                afecto = go_fnc_operaciones_campos.redondea(Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()) / (igv_p + 1), 2);
-                                percepcion = go_fnc_operaciones_campos.redondea((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()), 2);
-                            } else {
-                                afecto = Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());
-                                percepcion = go_fnc_operaciones_campos.redondea((Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 7).toString()) / 100) * Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString()) * (1 + igv_p), 2);
-                            }
-                            igv = go_fnc_operaciones_campos.redondea(afecto * igv_p, 2);
-                            afecto_s = afecto_s + afecto;
-                            igv_s = igv_s + igv;
-                            percepcion_s = percepcion_s + percepcion;
+                            afecto = afecto + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 11).toString());
                         }
                     }
+                    if (es_sigv == false) {
+                        total = go_fnc_operaciones_campos.redondea(afecto, 2);
+                        afecto_s = go_fnc_operaciones_campos.redondea(total / (igv_p + 1), 2);
+                        igv_s = go_fnc_operaciones_campos.redondea(total - afecto_s, 2);
+                    } else {
+                        afecto_s = go_fnc_operaciones_campos.redondea(afecto, 2);
+                        igv_s = go_fnc_operaciones_campos.redondea(afecto_s * igv_p, 2);
+                        total = afecto_s + igv_s;
+                    }
+
                     break;
             }
         } catch (Exception e) {
         }
 
-        total = total + inafecto + afecto_s + igv_s;
+        //total = total + inafecto + afecto_s + igv_s;
         importe = total + percepcion_s;
         OBJ_pgp.LBL_total.setText(dFormat.format(total) + "");
         OBJ_pgp.LBL_inafecto.setText(dFormat.format(inafecto) + "");

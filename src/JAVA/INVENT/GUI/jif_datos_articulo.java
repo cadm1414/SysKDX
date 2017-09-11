@@ -197,6 +197,7 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
     }
 
     private void activa_campos() {
+        lo_cbx_producto = (cbx_producto) lo_pnl_datos_articulo.CBX_producto.getSelectedItem();
         try {
             lq_rs = go_dao_articulo.FNC_activa_campos_articulo(lo_cbx_producto.getID());
             if (lq_rs != null) {
@@ -217,6 +218,7 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
                 lo_pnl_datos_articulo.CBX_percepcion.setEnabled(true);
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
