@@ -20,7 +20,7 @@ public class muestra_reporte_invent {
         try {
             path = ruta_invent_report.class.getResource(reporte);
             jr = (JasperReport) JRLoader.loadObject(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, parametro, go_conexion_db.getConexion_db());            
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametro, go_conexion_db.getConexion_db());
             JRViewer jr = new JRViewer(jp);
             switch (op) {
                 case 0:
@@ -40,6 +40,9 @@ public class muestra_reporte_invent {
                     break;
                 case 5:
                     go_muestra_pestania_invent.rpt_stock_valorizado(jr, nombre);
+                    break;
+                case 6:
+                    go_muestra_pestania_invent.rpt_stock_futuro(jr, nombre);
                     break;
             }
 

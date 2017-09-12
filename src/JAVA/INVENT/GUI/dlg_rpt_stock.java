@@ -82,10 +82,13 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
                     parametros.put("nombre_almacen", lo_pnl_rpt_stock.TXT_nombre.getText().trim());
                     parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
                     switch (lo_pnl_rpt_stock.CBX_tipo.getSelectedIndex()) {
-                        case 0:
+                        case 1:
+                            go_muestra_reporte_invent.reporte_pestania("rpt_stock_futuro.jasper", parametros, "STOCK ALMACEN - PEDIDOS", 6);
+                            break;
+                        case 2:
                             go_muestra_reporte_invent.reporte_pestania("rpt_stock_normal.jasper", parametros, "STOCK ALMACEN", 4);
                             break;
-                        case 1:
+                        case 3:
                             go_muestra_reporte_invent.reporte_pestania("rpt_stock_valorizado.jasper", parametros, "STOCK ALMACEN VALORIZADO", 5);
                             break;
                     }
@@ -106,6 +109,7 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
     }
 
     private void evt_f5() {
+        gs_parametros[0] = "1";
         go_dlg_almacen_x_permiso = new dlg_almacen_x_permiso(null, true);
         go_dlg_almacen_x_permiso.setVisible(true);
         ls_codigo = go_dlg_almacen_x_permiso.ls_codigo_almacen;
