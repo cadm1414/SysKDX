@@ -8,6 +8,7 @@ import JAVA.INVENT.REPORT.pnl_rpt_lista_producto;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_subfamilia;
 import JAVA.INVENT.REPORT.pnl_rpt_stock_futuro;
 import JAVA.INVENT.REPORT.pnl_rpt_stock_normal;
+import JAVA.INVENT.REPORT.pnl_rpt_stock_simplificado;
 import JAVA.INVENT.REPORT.pnl_rpt_stock_valorizado;
 import java.awt.BorderLayout;
 import net.sf.jasperreports.view.JRViewer;
@@ -147,6 +148,21 @@ public class muestra_pestania_invent {
         go_pnl_rpt_stock_futuro.repaint();
         go_pnl_rpt_stock_futuro.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_stock_futuro);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+    
+    public void rpt_stock_simplificado(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_stock_simplificado);        
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_stock_simplificado = new pnl_rpt_stock_simplificado();
+        go_pnl_rpt_stock_simplificado.removeAll();
+        go_pnl_rpt_stock_simplificado.setLayout(new BorderLayout());
+        go_pnl_rpt_stock_simplificado.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_stock_simplificado.setVisible(true);
+        go_pnl_rpt_stock_simplificado.repaint();
+        go_pnl_rpt_stock_simplificado.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_stock_simplificado);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }

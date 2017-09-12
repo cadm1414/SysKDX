@@ -75,11 +75,13 @@ public class pnl_datos_almacen extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_codigo_almacen.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_codigo_almacen.setEnabled(false);
         TXT_codigo_almacen.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_codigo_almacen.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         TXT_nombre_almacen.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_almacen.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_almacen.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -89,6 +91,7 @@ public class pnl_datos_almacen extends javax.swing.JPanel {
         jLabel6.setText(":");
 
         TXT_direccion_almacen.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_direccion_almacen.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_direccion_almacen.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -134,6 +137,7 @@ public class pnl_datos_almacen extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_descripcion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_descripcion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_descripcion.setEnabled(false);
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -147,10 +151,12 @@ public class pnl_datos_almacen extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_ubigeo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_ubigeo.setEnabled(false);
         TXT_ubigeo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         TXT_nota.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nota.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nota.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

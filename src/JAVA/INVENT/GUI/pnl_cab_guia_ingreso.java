@@ -63,6 +63,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         jLabel2.setText(":");
 
         TXT_nombre_almacen.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_almacen.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_almacen.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -76,6 +77,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_codigo_movimiento.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_codigo_movimiento.setEnabled(false);
         TXT_codigo_movimiento.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_codigo_movimiento.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -85,6 +87,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_nombre_movimiento.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_movimiento.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_movimiento.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -107,6 +110,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_numero.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_numero.setEnabled(false);
         TXT_numero.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_numero.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -116,6 +120,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_numero_ref.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_numero_ref.setEnabled(false);
         TXT_numero_ref.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_numero_ref.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -146,6 +151,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_fecha_emision.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_fecha_emision.setEnabled(false);
         TXT_fecha_emision.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_fecha_emision.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -157,6 +163,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         jLabel16.setText(":");
 
         TXT_observacion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_observacion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_observacion.setEnabled(false);
 
         jLabel20.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -171,6 +178,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_serie_ref.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_serie_ref.setEnabled(false);
         TXT_serie_ref.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_serie_ref.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -186,6 +194,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_lote.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_lote.setEnabled(false);
         TXT_lote.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_lote.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N

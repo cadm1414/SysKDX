@@ -51,6 +51,7 @@ public class pnl_datos_usuario extends javax.swing.JPanel {
         jLabel5.setText("Estado");
 
         TXT_datos.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_datos.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_datos.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -68,9 +69,11 @@ public class pnl_datos_usuario extends javax.swing.JPanel {
         jLabel10.setText(":");
 
         TXT_usuario.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_usuario.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_usuario.setEnabled(false);
 
         TXT_pass.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_pass.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_pass.setEnabled(false);
 
         CBX_rol.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N

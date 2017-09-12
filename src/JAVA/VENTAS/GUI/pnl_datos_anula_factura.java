@@ -65,6 +65,7 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
         jLabel10.setText(":");
 
         TXT_sucursal.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_sucursal.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_sucursal.setEnabled(false);
 
         CBX_tipo_doc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -75,6 +76,7 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_serie.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_serie.setEnabled(false);
         TXT_serie.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_serie.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -84,6 +86,7 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_numero_doc.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_numero_doc.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_numero_doc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
@@ -92,10 +95,12 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_fecha_emision.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_fecha_emision.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_fecha_emision.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         TXT_motivo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_motivo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

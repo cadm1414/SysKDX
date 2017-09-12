@@ -38,11 +38,13 @@ public class pnl_datos_usuario_permisos extends javax.swing.JPanel {
         jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_id_usuario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("####"))));
+        TXT_id_usuario.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_id_usuario.setEnabled(false);
         TXT_id_usuario.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_id_usuario.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         TXT_usuario.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_usuario.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_usuario.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

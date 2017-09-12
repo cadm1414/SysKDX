@@ -150,6 +150,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel2.setText(":");
 
         TXT_codigo_entidad.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_codigo_entidad.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_codigo_entidad.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -169,6 +170,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel8.setText(":");
 
         TXT_papellido.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_papellido.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_papellido.setEnabled(false);
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -178,6 +180,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel10.setText(":");
 
         TXT_sapellido.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_sapellido.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_sapellido.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -187,6 +190,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel6.setText(":");
 
         TXT_nombre.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre.setEnabled(false);
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -206,6 +210,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel14.setText(":");
 
         TXT_razon_social.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_razon_social.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_razon_social.setEnabled(false);
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -215,6 +220,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel16.setText(":");
 
         TXT_nombre_comercial.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_comercial.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_comercial.setEnabled(false);
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -233,6 +239,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel20.setText(":");
 
         TXT_numero_doc_id.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_numero_doc_id.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_numero_doc_id.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -414,6 +421,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel24.setText(":");
 
         TXT_direccion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_direccion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_direccion.setEnabled(false);
 
         jLabel25.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -427,6 +435,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_codigo_ubigeo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_codigo_ubigeo.setEnabled(false);
         TXT_codigo_ubigeo.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_codigo_ubigeo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -436,6 +445,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_descripcion_ubigeo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_descripcion_ubigeo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_descripcion_ubigeo.setEnabled(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -510,6 +520,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel31.setText(":");
 
         TXT_dias_cr.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        TXT_dias_cr.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_dias_cr.setEnabled(false);
         TXT_dias_cr.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_dias_cr.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -521,6 +532,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel33.setText(":");
 
         TXT_limite_cr.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00",simbolos))));
+        TXT_limite_cr.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_limite_cr.setEnabled(false);
         TXT_limite_cr.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_limite_cr.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -560,6 +572,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel41.setText(":");
 
         TXT_observacion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_observacion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_observacion.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);

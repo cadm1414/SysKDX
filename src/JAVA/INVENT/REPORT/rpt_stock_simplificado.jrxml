@@ -26,7 +26,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from rpt_stock_futuro($P{almacen},$P{fecha_ini},$P{fecha_fin},$P{periodo})
+		<![CDATA[select * from rpt_stock_simplificado($P{almacen},$P{fecha_ini},$P{fecha_fin},$P{periodo})
 as (codigo_producto character(4),codigo_articulo character(12),nombre_articulo character varying(150),codigo_unidad character(4),simbolo_unidad character varying(3),peso_bruto numeric,peso_neto numeric,bultos numeric)]]>
 	</queryString>
 	<field name="codigo_producto" class="java.lang.String"/>
@@ -122,11 +122,11 @@ as (codigo_producto character(4),codigo_articulo character(12),nombre_articulo c
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="192" y="11" width="153" height="12" uuid="db26ab3d-aac2-4431-abe3-fff1d20f36de"/>
+				<reportElement x="190" y="11" width="159" height="12" uuid="db26ab3d-aac2-4431-abe3-fff1d20f36de"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[STOCK DE MERCADERIA + PEDIDOS]]></text>
+				<text><![CDATA[STOCK DE MERCADERIA SIMPLIFICADO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="271" y="23" width="16" height="12" uuid="c13d01ae-1424-4acb-a2cd-bb71a4100815"/>

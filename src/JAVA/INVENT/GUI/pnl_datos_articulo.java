@@ -97,6 +97,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_codigo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_codigo.setEnabled(false);
         TXT_codigo.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_codigo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -108,6 +109,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         jLabel4.setText(":");
 
         TXT_nombre.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -135,6 +137,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         jLabel10.setText(":");
 
         TXT_caracteristica.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_caracteristica.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_caracteristica.setEnabled(false);
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -163,6 +166,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
 
         TXT_tara.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.000",simbolos))));
         TXT_tara.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        TXT_tara.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_tara.setEnabled(false);
         TXT_tara.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_tara.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -188,6 +192,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         jLabel39.setText(":");
 
         TXT_serie.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_serie.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_serie.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -434,6 +439,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         jLabel26.setText(":");
 
         TXT_codigo_barra.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_codigo_barra.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_codigo_barra.setEnabled(false);
 
         jLabel31.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -461,6 +467,7 @@ public class pnl_datos_articulo extends javax.swing.JPanel {
         jLabel36.setText(":");
 
         TXT_observacion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_observacion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_observacion.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

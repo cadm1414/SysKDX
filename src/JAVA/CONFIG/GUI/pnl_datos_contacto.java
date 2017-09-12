@@ -46,6 +46,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");
 
+        TXT_nombre_contacto.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_contacto.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -54,6 +55,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel4.setText(":");
 
+        TXT_cargo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_cargo.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -62,8 +64,10 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel6.setText(":");
 
+        TXT_telefono.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_telefono.setEnabled(false);
 
+        TXT_anexo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_anexo.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -78,6 +82,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel10.setText(":");
 
+        TXT_celular.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_celular.setEnabled(false);
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -86,6 +91,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel12.setText(":");
 
+        TXT_email.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_email.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

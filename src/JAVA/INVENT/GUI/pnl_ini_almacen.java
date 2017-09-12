@@ -33,6 +33,7 @@ public class pnl_ini_almacen extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_codigo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_codigo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/f5.png"))); // NOI18N
@@ -40,6 +41,7 @@ public class pnl_ini_almacen extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_nombre.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

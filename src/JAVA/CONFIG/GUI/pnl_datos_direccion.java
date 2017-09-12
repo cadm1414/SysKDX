@@ -52,6 +52,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         jLabel2.setText(":");
 
         TXT_nombre_direccion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_direccion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_direccion.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -61,6 +62,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         jLabel4.setText(":");
 
         TXT_direccion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_direccion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_direccion.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -76,6 +78,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         jLabel12.setText(":");
 
         TXT_referencia.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_referencia.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_referencia.setEnabled(false);
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -93,6 +96,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_codigo_ubigeo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_codigo_ubigeo.setEnabled(false);
         TXT_codigo_ubigeo.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_codigo_ubigeo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -102,6 +106,7 @@ public class pnl_datos_direccion extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_descripcion_ubigeo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_descripcion_ubigeo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_descripcion_ubigeo.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

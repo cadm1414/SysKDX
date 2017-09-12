@@ -43,11 +43,13 @@ public class pnl_datos_marca extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        TXT_codigo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_codigo.setEnabled(false);
         TXT_codigo.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_codigo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         TXT_nombre.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N

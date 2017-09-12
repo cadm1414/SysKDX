@@ -23,6 +23,7 @@ public class pnl_datos_rol_menu extends javax.swing.JPanel {
         jLabel1.setText("Nombre Rol :");
 
         TXT_nombre_rol.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_rol.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_rol.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

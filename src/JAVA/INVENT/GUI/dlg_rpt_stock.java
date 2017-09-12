@@ -82,8 +82,11 @@ public class dlg_rpt_stock extends javax.swing.JDialog {
                     parametros.put("nombre_almacen", lo_pnl_rpt_stock.TXT_nombre.getText().trim());
                     parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
                     switch (lo_pnl_rpt_stock.CBX_tipo.getSelectedIndex()) {
+                        case 0:
+                            go_muestra_reporte_invent.reporte_pestania("rpt_stock_simplificado.jasper", parametros, "STOCK ALMACEN SIMPLIFICADO", 7);
+                            break;
                         case 1:
-                            go_muestra_reporte_invent.reporte_pestania("rpt_stock_futuro.jasper", parametros, "STOCK ALMACEN - PEDIDOS", 6);
+                            go_muestra_reporte_invent.reporte_pestania("rpt_stock_futuro.jasper", parametros, "STOCK ALMACEN PEDIDOS", 6);
                             break;
                         case 2:
                             go_muestra_reporte_invent.reporte_pestania("rpt_stock_normal.jasper", parametros, "STOCK ALMACEN", 4);

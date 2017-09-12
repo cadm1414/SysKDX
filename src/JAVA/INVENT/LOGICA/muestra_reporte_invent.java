@@ -44,6 +44,9 @@ public class muestra_reporte_invent {
                 case 6:
                     go_muestra_pestania_invent.rpt_stock_futuro(jr, nombre);
                     break;
+                case 7:
+                    go_muestra_pestania_invent.rpt_stock_simplificado(jr, nombre);
+                    break;
             }
 
         } catch (Exception e) {
