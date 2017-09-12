@@ -1,9 +1,13 @@
 package JAVA.VENTAS.GUI;
 
+import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+
 public class pnl_datos_pl extends javax.swing.JPanel {
 
     public pnl_datos_pl() {
         initComponents();
+        TXT_descripcion_pl.setDocument(new fnc_txt_mayuscula());
+        TXT_direccion.setDocument(new fnc_txt_mayuscula());
     }
 
     @SuppressWarnings("unchecked")

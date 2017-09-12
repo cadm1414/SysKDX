@@ -9,7 +9,7 @@
 	</parameter>
 	<parameter name="periodo" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_formato_factura_20600319427($P{codigo_operacion},$P{periodo}) as (numero text,fecha_emision date,codigo_entidad character(6),razon_social character varying(250),numero_doc_id character varying(15),direccion character varying(250),ubigeo character varying(100),codigo_guiar character(16),fecha_vence date,base numeric,igv numeric,total numeric,forma_pago character(2),nombre_articulo text,serie character varying(30),monto_igv integer,cantidad numeric,precio numeric,importe numeric,numero_letras unknown)]]>
+		<![CDATA[select * from rpt_formato_factura_20600319427($P{codigo_operacion},$P{periodo}) as (numero text,fecha_emision date,codigo_entidad character(6),razon_social character varying(250),numero_doc_id character varying(15),direccion character varying(250),ubigeo character varying(100),codigo_guiar character(16),fecha_vence date,base numeric,igv numeric,total numeric,forma_pago character(2),nombre_articulo text,serie character varying(30),monto_igv integer,cantidad numeric,precio numeric,importe numeric,nombre_comun character varying(60),simbolo_moneda character(4),numero_letras unknown)]]>
 	</queryString>
 	<field name="numero" class="java.lang.String"/>
 	<field name="fecha_emision" class="java.sql.Date"/>
@@ -30,83 +30,106 @@
 	<field name="cantidad" class="java.math.BigDecimal"/>
 	<field name="precio" class="java.math.BigDecimal"/>
 	<field name="importe" class="java.math.BigDecimal"/>
+	<field name="nombre_comun" class="java.lang.String"/>
+	<field name="simbolo_moneda" class="java.lang.String"/>
 	<field name="numero_letras" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="208" splitType="Stretch">
-			<textField>
-				<reportElement x="47" y="170" width="336" height="20" uuid="1b4f3932-5d83-4684-a8e2-9757258300a2"/>
+		<band height="210" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="47" y="173" width="336" height="20" uuid="1b4f3932-5d83-4684-a8e2-9757258300a2"/>
 				<textElement textAlignment="Left">
-					<font fontName="Tahoma" size="9"/>
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{direccion}+" "+$F{ubigeo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="47" y="145" width="336" height="20" uuid="ee1a0e8a-3248-4e1d-9483-bab81039810e"/>
+				<reportElement x="47" y="151" width="336" height="20" uuid="ee1a0e8a-3248-4e1d-9483-bab81039810e"/>
 				<textElement textAlignment="Left">
-					<font fontName="Tahoma" size="9"/>
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="453" y="145" width="66" height="20" uuid="aa48fb43-3f94-4bf1-a0e8-c3fbcb946539"/>
+				<reportElement x="456" y="152" width="66" height="20" uuid="aa48fb43-3f94-4bf1-a0e8-c3fbcb946539"/>
 				<textElement>
-					<font fontName="Tahoma" size="9"/>
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numero_doc_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="385" y="124" width="54" height="20" uuid="fefd9024-0009-4230-b83e-26670cdb12fd"/>
+				<reportElement x="385" y="129" width="54" height="20" uuid="fefd9024-0009-4230-b83e-26670cdb12fd"/>
 				<textElement>
-					<font fontName="Tahoma" size="9"/>
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_vence}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="355" y="124" width="30" height="20" uuid="97377026-0b5e-4d39-b4de-042be2b5bfe9"/>
+				<reportElement x="355" y="129" width="30" height="20" uuid="97377026-0b5e-4d39-b4de-042be2b5bfe9"/>
 				<textElement>
-					<font fontName="Tahoma" size="9"/>
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<text><![CDATA[F.V.:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="28" y="116" width="32" height="20" uuid="8cffa396-24b3-4eb1-87c8-9bde20f6db10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.getDay()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="116" width="32" height="20" uuid="c7c7fc0e-9fd9-487f-bba1-21df57243f3f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.getMonth()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="249" y="116" width="32" height="20" uuid="b4711985-11da-4bb1-ab8b-d2c6f4455056"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.getYear()-100]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="33" height="20" uuid="f19d1fca-bfba-4ead-ba17-fb9aab79a8f7"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cantidad}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="42" y="0" width="56" height="20" uuid="683122d0-e883-482e-bf0f-714e66d83141"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="9"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="105" y="0" width="263" height="20" uuid="c43d417d-2168-4996-af55-82543ed260d7"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="9"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_articulo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="379" y="0" width="66" height="20" uuid="d80d37ea-44fb-4c4e-86fa-4c873ca5d6ac"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="449" y="0" width="70" height="20" uuid="69f688d6-e9ca-437b-85c1-f22355d37465"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
 			</textField>
@@ -115,39 +138,81 @@
 	<pageFooter>
 		<band height="68" splitType="Stretch">
 			<textField>
-				<reportElement x="449" y="0" width="70" height="20" uuid="560f3226-1403-4ea8-a5e3-019ef89def3d"/>
-				<textElement textAlignment="Right" verticalAlignment="Top">
-					<font fontName="Tahoma" size="9"/>
+				<reportElement x="459" y="2" width="60" height="20" uuid="560f3226-1403-4ea8-a5e3-019ef89def3d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{base}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="449" y="20" width="70" height="20" uuid="4ca76729-249d-40e2-89ab-a3af8e43deb4"/>
-				<textElement textAlignment="Right" verticalAlignment="Top">
-					<font fontName="Tahoma" size="9"/>
+				<reportElement x="459" y="22" width="60" height="20" uuid="4ca76729-249d-40e2-89ab-a3af8e43deb4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{igv}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="449" y="40" width="70" height="20" uuid="7db82b47-bfde-4def-8585-3714ea5d6a43"/>
-				<textElement textAlignment="Right" verticalAlignment="Top">
-					<font fontName="Tahoma" size="9"/>
+				<reportElement x="459" y="42" width="60" height="20" uuid="7db82b47-bfde-4def-8585-3714ea5d6a43"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="415" y="20" width="27" height="20" uuid="be3d41ea-f7ec-4e0e-bfc5-cf497fccd1e7"/>
-				<textElement>
-					<font fontName="Tahoma" size="9"/>
+				<reportElement x="420" y="22" width="19" height="20" uuid="be3d41ea-f7ec-4e0e-bfc5-cf497fccd1e7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{monto_igv}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="33" y="0" width="406" height="20" uuid="103eaf46-bfb8-4db8-8315-e781e0bc3e42"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="9"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="28" y="0" width="352" height="20" uuid="103eaf46-bfb8-4db8-8315-e781e0bc3e42"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Courier New" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{numero_letras}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{numero_letras}+" "+ $F{nombre_comun}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="2" width="17" height="20" uuid="a383ca62-0482-454c-b914-ff207b908699"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{simbolo_moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="22" width="17" height="20" uuid="2d2b60a3-df39-41b6-a6ad-ca84a274cfa0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{simbolo_moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="42" width="17" height="20" uuid="1b08d8d6-037a-4728-b895-51de2fde93f8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{simbolo_moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="20" width="32" height="20" uuid="f7039885-9345-40ee-a832-928681a54d84"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.getMonth()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="20" width="32" height="20" uuid="30011dac-edfb-4209-becd-347c6a21160d"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.getDay()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="302" y="20" width="32" height="20" uuid="8c1a72ad-b02a-4de5-9ca0-1068e00bb12d"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.getYear()-100]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

@@ -12,14 +12,14 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
-public class dlg_busq_entidad_direccion extends javax.swing.JDialog {
+public class dlg_busq_transportista extends javax.swing.JDialog {
 
-    pnl_grid_busq_entidad_direccion lo_pnl_grid_busq_entidad_direccion = new pnl_grid_busq_entidad_direccion();
+    pnl_grid_busq_transportista lo_pnl_grid_busq_transportista = new pnl_grid_busq_transportista();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
-    public String ls_codigo_direccion,ls_codigo_entidad;
+    public String ls_codigo_transportista;
 
-    public dlg_busq_entidad_direccion(java.awt.Frame parent, boolean modal) {
+    public dlg_busq_transportista(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         formulario();
@@ -27,28 +27,26 @@ public class dlg_busq_entidad_direccion extends javax.swing.JDialog {
     }
 
     private void formulario() {
-        lo_pnl_grid_busq_entidad_direccion.setBounds(0, 0, 700, 220);
-        PNL_grid.add(lo_pnl_grid_busq_entidad_direccion);
+        lo_pnl_grid_busq_transportista.setBounds(0, 0, 700, 220);
+        PNL_grid.add(lo_pnl_grid_busq_transportista);
 
         TXT_dato.setDocument(new fnc_txt_mayuscula());
 
-        ls_codigo_entidad = gs_parametros[0];
-        gs_parametros[0] = "";
-        lo_pnl_grid_busq_entidad_direccion.TBL_direccion.addMouseListener(MouseEvnt);
-        lo_pnl_grid_busq_entidad_direccion.TBL_direccion.addKeyListener(KeyEvnt);
+        lo_pnl_grid_busq_transportista.TBL_transportista.addMouseListener(MouseEvnt);
+        lo_pnl_grid_busq_transportista.TBL_transportista.addKeyListener(KeyEvnt);
         TXT_dato.addKeyListener(KeyEvnt);
     }
 
     private void datos_tabla() {
         int a = 0;
-        lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_entidad_direccion.TBL_direccion.getModel();
+        lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_transportista.TBL_transportista.getModel();
         try {
-            lq_rs = go_dao_entidad_direccion.SLT_grid_entidad_direccion(ls_codigo_entidad);
+            lq_rs = go_dao_transportista.SLT_grid_transportista("1");
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
                     for (int x = 0; x < 4; x++) {
-                        lo_pnl_grid_busq_entidad_direccion.TBL_direccion.setValueAt(lq_rs.getString(x + 1), a, x);
+                        lo_pnl_grid_busq_transportista.TBL_transportista.setValueAt(lq_rs.getString(x + 1), a, x);
                     }
                     a++;
                 } while (lq_rs.next());
@@ -58,7 +56,7 @@ public class dlg_busq_entidad_direccion extends javax.swing.JDialog {
     }
 
     public void retorna() {
-        ls_codigo_direccion = lo_pnl_grid_busq_entidad_direccion.TBL_direccion.getValueAt(lo_pnl_grid_busq_entidad_direccion.TBL_direccion.getSelectedRow(), 0).toString();
+        ls_codigo_transportista = lo_pnl_grid_busq_transportista.TBL_transportista.getValueAt(lo_pnl_grid_busq_transportista.TBL_transportista.getSelectedRow(), 0).toString();
         this.dispose();
     }
 
@@ -72,14 +70,14 @@ public class dlg_busq_entidad_direccion extends javax.swing.JDialog {
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == TXT_dato) {
-                    if (lo_pnl_grid_busq_entidad_direccion.TBL_direccion.getRowCount() != 0) {
-                        lo_pnl_grid_busq_entidad_direccion.TBL_direccion.requestFocus();
-                        lo_pnl_grid_busq_entidad_direccion.TBL_direccion.changeSelection(0, 0, false, false);
+                    if (lo_pnl_grid_busq_transportista.TBL_transportista.getRowCount() != 0) {
+                        lo_pnl_grid_busq_transportista.TBL_transportista.requestFocus();
+                        lo_pnl_grid_busq_transportista.TBL_transportista.changeSelection(0, 0, false, false);
                     } else {
                         TXT_dato.requestFocus();
                     }
                 }
-                if (ke.getSource() == lo_pnl_grid_busq_entidad_direccion.TBL_direccion) {
+                if (ke.getSource() == lo_pnl_grid_busq_transportista.TBL_transportista) {
                     retorna();
                 }
             }
@@ -91,7 +89,7 @@ public class dlg_busq_entidad_direccion extends javax.swing.JDialog {
         @Override
         public void keyReleased(KeyEvent ke) {
             if (ke.getSource() == TXT_dato) {
-                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_entidad_direccion.TBL_direccion, TXT_dato.getText(), 1);
+                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_transportista.TBL_transportista, TXT_dato.getText(), 1);
             }
         }
 
@@ -100,7 +98,7 @@ public class dlg_busq_entidad_direccion extends javax.swing.JDialog {
     MouseListener MouseEvnt = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent me) {
-            if (me.getSource() == lo_pnl_grid_busq_entidad_direccion.TBL_direccion && me.getClickCount() == 2) {
+            if (me.getSource() == lo_pnl_grid_busq_transportista.TBL_transportista && me.getClickCount() == 2) {
                 retorna();
             }
         }
@@ -136,7 +134,7 @@ public class dlg_busq_entidad_direccion extends javax.swing.JDialog {
         PNL_grid = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("BUSQUEDA DIRECCION");
+        setTitle("BUSQUEDA TRANSPORTISTA");
         setIconImage(getIconImage());
         setResizable(false);
 
@@ -204,7 +202,7 @@ public class dlg_busq_entidad_direccion extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                dlg_busq_entidad_direccion dialog = new dlg_busq_entidad_direccion(new javax.swing.JFrame(), true);
+                dlg_busq_transportista dialog = new dlg_busq_transportista(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

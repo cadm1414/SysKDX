@@ -75,6 +75,7 @@ import JAVA.VENTAS.GUI.dlg_busq_entidad_direccion;
 import JAVA.VENTAS.GUI.dlg_busq_facturacion;
 import JAVA.VENTAS.GUI.dlg_busq_pedido;
 import JAVA.VENTAS.GUI.dlg_busq_registro_ventas;
+import JAVA.VENTAS.GUI.dlg_busq_transportista;
 import JAVA.VENTAS.GUI.dlg_datos_pl;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_factura;
@@ -180,6 +181,7 @@ public class variables_globales {
     public static muestra_dlg_invent go_muestra_dlg_invent = new muestra_dlg_invent();
     public static muestra_dlg_ventas go_muestra_dlg_ventas = new muestra_dlg_ventas();
     public static muestra_jif_ventas go_muestra_jif_ventas = new muestra_jif_ventas();
+    public static activa_buscador go_activa_buscador = new activa_buscador();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;
@@ -211,6 +213,7 @@ public class variables_globales {
     public static dlg_anula_factura go_dlg_anula_factura;
     public static dlg_datos_pl go_dlg_datos_pl;
     public static dlg_busq_entidad_direccion go_dlg_busq_entidad_direccion;
+    public static dlg_busq_transportista go_dlg_busq_transportista;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

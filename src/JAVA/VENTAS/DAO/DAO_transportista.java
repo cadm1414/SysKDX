@@ -43,4 +43,22 @@ public class DAO_transportista {
         }
         return null;
     }
+    
+    public ResultSet SLT_grid_transportista(String estado) {
+
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_transportista('" + estado + "') "
+                    + "as (codigo_transportista character(4),nombre_transportista character varying(250),razon_social character varying(250),estado text)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_transportista", e.getMessage());
+        }
+        return null;
+    }
+    
 }
