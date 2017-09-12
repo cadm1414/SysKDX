@@ -129,7 +129,8 @@ public class DAO_pedido {
                             + precio_sigv + ","
                             + importe_sigv + ","
                             + percepcion + ","
-                            + "'" + gs_periodo + "')";
+                            + "'" + gs_periodo + "',"
+                            + (double) OBJ_pgp.getValueAt(i, 12) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -195,7 +196,8 @@ public class DAO_pedido {
                             + precio_sigv + ","
                             + importe_sigv + ","
                             + percepcion + ","
-                            + "'" + gs_periodo + "')";
+                            + "'" + gs_periodo + "',"
+                            + (double) OBJ_pgp.getValueAt(i, 12) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -229,11 +231,11 @@ public class DAO_pedido {
         }
         return resp;
     }
-    
-    public ResultSet SLT_datos_ref_factura(int op,String codigo_operacion) {
+
+    public ResultSet SLT_datos_ref_factura(int op, String codigo_operacion) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_datos_ref_factura("+op+",'" + codigo_operacion + "','" + gs_periodo + "') "
+            String SQL = "select * from slt_datos_ref_factura(" + op + ",'" + codigo_operacion + "','" + gs_periodo + "') "
                     + "as (codigo_operacion character(16),numero character(10),codigo_moneda character(3),afecto_igv character(1),codigo_igv character(4),codigo_grupo character(3),porcentaje_detraccion numeric(5,3),codigo_entidad character(6),razon_social character varying(250),numero_documento_id character varying(15),es_domiciliado character(1),tipo_documento_id character(1),direccion character varying(250),codigo_ubigeo character(6),descripcion_ubigeo character varying(100),codigo_pagador character(6),nombre_pagador character varying(250),codigo_vendedor character(4),nombre_vendedor character varying(250),forma_pago character(2),dias_credito integer,inafecto numeric(14,2),base numeric(14,2),igv numeric(14,2),total numeric(14,2),percepcion numeric(14,2),total_documento numeric(14,2),es_precio_igv character(1))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());

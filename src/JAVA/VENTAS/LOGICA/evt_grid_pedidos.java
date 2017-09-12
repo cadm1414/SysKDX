@@ -199,6 +199,7 @@ public class evt_grid_pedidos {
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(6), a, 5);
                     OBJ_pgp.TBL_pedidos.setValueAt(go_fnc_operaciones_campos.int_boolean(rs.getInt(7)), a, 6);
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(8), a, 7);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(15), a, 12);
                     switch (es_precio_igv) {
                         case 0:
                             if (rs.getString(7).equalsIgnoreCase("1")) {

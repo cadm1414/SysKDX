@@ -71,6 +71,7 @@ import JAVA.UTILITARIOS.CONEXION.*;
 import JAVA.UTILITARIOS.FUNCION.*;
 import JAVA.VENTAS.DAO.*;
 import JAVA.VENTAS.GUI.dlg_anula_factura;
+import JAVA.VENTAS.GUI.dlg_busq_entidad_direccion;
 import JAVA.VENTAS.GUI.dlg_busq_facturacion;
 import JAVA.VENTAS.GUI.dlg_busq_pedido;
 import JAVA.VENTAS.GUI.dlg_busq_registro_ventas;
@@ -209,6 +210,7 @@ public class variables_globales {
     public static dlg_busq_registro_ventas go_dlg_busq_registro_ventas;
     public static dlg_anula_factura go_dlg_anula_factura;
     public static dlg_datos_pl go_dlg_datos_pl;
+    public static dlg_busq_entidad_direccion go_dlg_busq_entidad_direccion;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

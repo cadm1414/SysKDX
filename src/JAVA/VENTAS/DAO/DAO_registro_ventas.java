@@ -135,7 +135,8 @@ public class DAO_registro_ventas {
                             + precio_sigv * tipo_cambio + ","
                             + importe_sigv * tipo_cambio + ","
                             + percepcion * tipo_cambio + ","
-                            + "'" + gs_periodo + "')";
+                            + "'" + gs_periodo + "',"
+                            + (double) OBJ_pgp.getValueAt(i, 12) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -207,7 +208,8 @@ public class DAO_registro_ventas {
                             + precio_sigv * tipo_cambio + ","
                             + importe_sigv * tipo_cambio + ","
                             + percepcion * tipo_cambio + ","
-                            + "'" + gs_periodo + "')";
+                            + "'" + gs_periodo + "',"
+                            + (double) OBJ_pgp.getValueAt(i, 12) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -242,10 +244,10 @@ public class DAO_registro_ventas {
         return resp;
     }
 
-    public boolean IST_anula_registro_ventas(String SQL,String codigo_operacion) throws SQLException {
-        boolean resp = false;        
+    public boolean IST_anula_registro_ventas(String SQL, String codigo_operacion) throws SQLException {
+        boolean resp = false;
         try {
-            lq_stm = go_conexion_db.crearStatement();            
+            lq_stm = go_conexion_db.crearStatement();
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();

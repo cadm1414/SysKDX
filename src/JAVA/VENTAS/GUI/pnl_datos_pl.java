@@ -54,7 +54,7 @@ public class pnl_datos_pl extends javax.swing.JPanel {
         TXT_direccion = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        codigo_ubigeo = new javax.swing.JFormattedTextField();
+        TXT_codigo_ubigeo = new javax.swing.JFormattedTextField();
         jLabel34 = new javax.swing.JLabel();
         TXT_descripcion_ubigeo = new javax.swing.JTextField();
 
@@ -319,7 +319,7 @@ public class pnl_datos_pl extends javax.swing.JPanel {
         jLabel22.setText(":");
 
         try {
-            TXT_codigo_direccion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+            TXT_codigo_direccion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -352,14 +352,14 @@ public class pnl_datos_pl extends javax.swing.JPanel {
         jLabel26.setText(":");
 
         try {
-            codigo_ubigeo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######")));
+            TXT_codigo_ubigeo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        codigo_ubigeo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        codigo_ubigeo.setEnabled(false);
-        codigo_ubigeo.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
-        codigo_ubigeo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_codigo_ubigeo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        TXT_codigo_ubigeo.setEnabled(false);
+        TXT_codigo_ubigeo.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        TXT_codigo_ubigeo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/f5.png"))); // NOI18N
         jLabel34.setText(" ");
@@ -397,7 +397,7 @@ public class pnl_datos_pl extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel26)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(codigo_ubigeo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXT_codigo_ubigeo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel34)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -423,7 +423,7 @@ public class pnl_datos_pl extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(jLabel26)
-                    .addComponent(codigo_ubigeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_codigo_ubigeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel34)
                     .addComponent(TXT_descripcion_ubigeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -455,6 +455,7 @@ public class pnl_datos_pl extends javax.swing.JPanel {
     public javax.swing.JTextField TXT_civ_v2;
     public javax.swing.JFormattedTextField TXT_codigo_direccion;
     public javax.swing.JFormattedTextField TXT_codigo_transportista;
+    public javax.swing.JFormattedTextField TXT_codigo_ubigeo;
     public javax.swing.JTextField TXT_codigo_vehiculo;
     public javax.swing.JTextField TXT_codigo_vehiculo_v2;
     public javax.swing.JTextField TXT_descripcion_pl;
@@ -466,7 +467,6 @@ public class pnl_datos_pl extends javax.swing.JPanel {
     public javax.swing.JTextField TXT_marca_v2;
     public javax.swing.JTextField TXT_nombre_transportista;
     public javax.swing.JTextField TXT_ruc_empresa;
-    public javax.swing.JFormattedTextField codigo_ubigeo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
