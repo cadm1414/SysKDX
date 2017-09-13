@@ -106,20 +106,19 @@ public class evt_grid_pedidos {
                         igv_s = go_fnc_operaciones_campos.redondea(afecto_s * igv_p, 2);
                         total = afecto_s + igv_s;
                     }
-
+                    total = total + inafecto;
                     break;
             }
+            //total = total + inafecto + afecto_s + igv_s;
+            importe = total + percepcion_s;
+            OBJ_pgp.LBL_total.setText(dFormat.format(total) + "");
+            OBJ_pgp.LBL_inafecto.setText(dFormat.format(inafecto) + "");
+            OBJ_pgp.LBL_afecto.setText(dFormat.format(afecto_s) + "");
+            OBJ_pgp.LBL_igv.setText(dFormat.format(igv_s) + "");
+            OBJ_pgp.LBL_percepcion.setText(dFormat.format(percepcion_s) + "");
+            OBJ_pgp.LBL_importe.setText(dFormat.format(importe) + "");
         } catch (Exception e) {
         }
-
-        //total = total + inafecto + afecto_s + igv_s;
-        importe = total + percepcion_s;
-        OBJ_pgp.LBL_total.setText(dFormat.format(total) + "");
-        OBJ_pgp.LBL_inafecto.setText(dFormat.format(inafecto) + "");
-        OBJ_pgp.LBL_afecto.setText(dFormat.format(afecto_s) + "");
-        OBJ_pgp.LBL_igv.setText(dFormat.format(igv_s) + "");
-        OBJ_pgp.LBL_percepcion.setText(dFormat.format(percepcion_s) + "");
-        OBJ_pgp.LBL_importe.setText(dFormat.format(importe) + "");
     }
 
     public void elimina_fila(pnl_grid_pedidos OBJ_pgp, int fila) {

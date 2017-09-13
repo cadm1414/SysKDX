@@ -15,7 +15,7 @@ public class DAO_pedido_detalle {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_datos_pedido_detalle('" + codigo_operacion + "','"+gs_periodo+"') "
-                    + "as (item character(3),bulto integer,codigo_articulo character(12),nombre_articulo character varying(150),tara numeric(6,3),simbolo_unidad character varying(3),afecto_igv character(1),porcentaje_percepcion numeric(5,3),precio_cigv numeric(11,5),precio_sigv numeric(11,5),peso_bruto numeric(12,5),peso_neto numeric(12,5),importe_cigv numeric(11,2),importe_sigv numeric(11,2),porcentaje_utilidad numeric(11,2))";
+                    + "as (item character(3),bulto integer,codigo_articulo character(12),nombre_articulo character varying(150),tara numeric(6,3),simbolo_unidad character varying(3),afecto_igv character(1),porcentaje_percepcion numeric(5,3),precio_cigv numeric(11,5),precio_sigv numeric(11,5),peso_bruto numeric(12,5),peso_neto numeric(12,5),importe_cigv numeric(11,2),importe_sigv numeric(11,2),porcentaje_utilidad numeric(11,2),es_facturado character(1))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
@@ -44,6 +44,22 @@ public class DAO_pedido_detalle {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_pedido_detalle", e.getMessage());
         }
         return resp;
+    }
+    
+    public ResultSet SLT_grid_pedido_pendiente(String codigo_operacion) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_pedido_pendiente('" + codigo_operacion + "','"+gs_periodo+"') "
+                    + "as (item character(3),codigo_articulo character(12),nombre_articulo character varying(150),bulto integer,peso_bruto numeric(12,5),peso_neto numeric(12,5),es_facturado character(1))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_pedido_pendiente", e.getMessage());
+        }
+        return null;
     }
     
 }

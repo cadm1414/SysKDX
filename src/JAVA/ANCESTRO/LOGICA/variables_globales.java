@@ -77,6 +77,7 @@ import JAVA.VENTAS.GUI.dlg_busq_pedido;
 import JAVA.VENTAS.GUI.dlg_busq_registro_ventas;
 import JAVA.VENTAS.GUI.dlg_busq_transportista;
 import JAVA.VENTAS.GUI.dlg_datos_pl;
+import JAVA.VENTAS.GUI.dlg_datos_seleccion_pedido;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_factura;
 import JAVA.VENTAS.GUI.jif_guia_remision;
@@ -214,6 +215,7 @@ public class variables_globales {
     public static dlg_datos_pl go_dlg_datos_pl;
     public static dlg_busq_entidad_direccion go_dlg_busq_entidad_direccion;
     public static dlg_busq_transportista go_dlg_busq_transportista;
+    public static dlg_datos_seleccion_pedido go_dlg_datos_seleccion_pedido;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

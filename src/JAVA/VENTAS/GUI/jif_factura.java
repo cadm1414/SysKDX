@@ -81,7 +81,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
         lo_pnl_cab_factura.TXT_sucursal.setText(gs_parametros[1]);
         lo_pnl_cab_factura.TXT_serie.setText(gs_parametros[2]);
 
-        li_cantidad = go_dao_serie.SLT_cant_items(ls_serie, ls_codigo_sucursal, 0);
+        li_cantidad = go_dao_serie.SLT_cant_items(ls_serie, ls_codigo_sucursal, (ls_tipo_documento.equalsIgnoreCase("01")) ? 3 : 2);
         this.setTitle((ls_tipo_documento.equalsIgnoreCase("01")) ? "FACTURA" : "BOLETA");
 
         modelo = (DefaultTableModel) lo_pnl_grid_pedidos.TBL_pedidos.getModel();
@@ -317,13 +317,13 @@ public class jif_factura extends javax.swing.JInternalFrame {
         gs_parametros[3] = lo_pnl_cab_factura.TXT_serie.getText().trim();
         gs_parametros[4] = ls_tipo_documento;
     }
-    
+
     private void genera_parametros_anula() {
         gs_parametros[0] = ls_codigo_sucursal;
         gs_parametros[1] = lo_pnl_cab_factura.TXT_sucursal.getText().trim();
         gs_parametros[2] = ls_tipo_documento;
         gs_parametros[3] = ls_serie;
-        gs_parametros[4] = gs_dia + "/" + gs_mes + "/" + gs_periodo;        
+        gs_parametros[4] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
     }
 
     private void limpia_parametros() {
@@ -522,7 +522,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                             lo_bean_registro_ventas.setCodigo_sucursal(ls_codigo_sucursal);
                             lo_bean_registro_ventas.setCodigo_guiar(ls_codigo_guiar);
                             lo_bean_registro_ventas.setCodigo_pedido(ls_codigo_pedido);
-                            genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(),Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
+                            genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(), Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
                             lo_evt_cab_factura.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_factura, lo_cbx_entidad_ubigeo, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_pnl_grid_pedidos, ld_monto_minimo);
                             if (go_dao_registro_ventas.IST_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100)) {
                                 lo_evt_cab_factura.limpia_datos(lo_pnl_cab_factura, ls_tipo_documento);
@@ -561,7 +561,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 break;
         }
     }
-    
+
     private void evt_anular() {
         genera_parametros_anula();
         go_dlg_anula_factura = new dlg_anula_factura(null, true);
@@ -796,8 +796,8 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     } else {
                         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_factura.CBX_moneda.getSelectedItem();
                         double precio_sigv = Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 8).toString());
-                        precio_sigv = (lo_pnl_cab_factura.JRD_precio_igv.isSelected()==true)?precio_sigv:(precio_sigv)/(1+(Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString())/100));
-                        lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(go_dao_reportes.RPT_utilidad_ponderada(ls_codigo_sucursal, lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 2).toString(), precio_sigv,lo_cbx_moneda.getID()), fila, 12);
+                        precio_sigv = (lo_pnl_cab_factura.JRD_precio_igv.isSelected() == true) ? precio_sigv : (precio_sigv) / (1 + (Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100));
+                        lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(go_dao_reportes.RPT_utilidad_ponderada(ls_codigo_sucursal, lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 2).toString(), precio_sigv, lo_cbx_moneda.getID()), fila, 12);
                         //lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
                     }
                 }

@@ -3,7 +3,6 @@ package JAVA.VENTAS.GUI;
 import JAVA.ANCESTRO.GUI.pnl_aceptar_cancelar;
 import JAVA.ANCESTRO.LOGICA.evt_aceptar_cancelar;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
-import JAVA.CONFIG.DAO.DAO_entidad_direccion;
 import JAVA.VENTAS.IMAGES.VENTAS_ruta_images;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -165,7 +164,23 @@ public class dlg_datos_pl extends javax.swing.JDialog {
 
     private void evt_aceptar() {
         if (valida_campos() == true) {
-            
+            gs_parametros[0] = lo_pnl_datos_pl.TXT_codigo_transportista.getText().trim();
+            gs_parametros[1] = lo_pnl_datos_pl.TXT_nombre_transportista.getText().trim();
+            gs_parametros[2] = lo_pnl_datos_pl.TXT_licencia.getText().trim();
+            gs_parametros[3] = lo_pnl_datos_pl.TXT_empresa.getText().trim();
+            gs_parametros[4] = lo_pnl_datos_pl.TXT_ruc_empresa.getText().trim();
+            gs_parametros[5] = lo_pnl_datos_pl.TXT_codigo_vehiculo.getText().trim();
+            gs_parametros[6] = lo_pnl_datos_pl.TXT_marca.getText().trim();
+            gs_parametros[7] = lo_pnl_datos_pl.TXT_civ.getText().trim();
+            gs_parametros[8] = lo_pnl_datos_pl.TXT_codigo_vehiculo_v2.getText().trim();
+            gs_parametros[9] = lo_pnl_datos_pl.TXT_marca_v2.getText().trim();
+            gs_parametros[10] = lo_pnl_datos_pl.TXT_civ_v2.getText().trim();
+            gs_parametros[11] = lo_pnl_datos_pl.TXT_codigo_direccion.getText().trim();
+            gs_parametros[12] = lo_pnl_datos_pl.TXT_descripcion_pl.getText().trim();
+            gs_parametros[13] = lo_pnl_datos_pl.TXT_direccion.getText().trim();
+            gs_parametros[14] = lo_pnl_datos_pl.TXT_codigo_ubigeo.getText().trim();
+            gs_parametros[15] = lo_pnl_datos_pl.TXT_descripcion_ubigeo.getText().trim();
+            dispose();
         }
     }
 
