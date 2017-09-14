@@ -132,6 +132,9 @@ public class evt_cab_pedidos {
                                         if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_pagador)) {
                                             if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_codigo_vendedor)) {
                                                 resp = true;
+                                                if (!go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_dias_credito)) {
+                                                    OBJ_pcp.TXT_dias_credito.setText("0");
+                                                }
                                             } else {
                                                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE CODIGO VENDEDOR");
                                                 OBJ_pcp.TXT_codigo_vendedor.requestFocus();

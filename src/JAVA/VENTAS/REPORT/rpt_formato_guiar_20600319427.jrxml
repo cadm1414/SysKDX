@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="630" columnWidth="570" leftMargin="5" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe6d38cc-f2a8-4b72-be57-31a2764a7620">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="codigo_operacion" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="periodo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from rpt_formato_guiar_20600319427($P{codigo_operacion},$P{periodo}) as (fecha_emision date,punto_partida text,documento_ref text,razon_social character varying(250),numero_documento_id character varying(15),punto_llegada text,tipo_operacion character(1),peso_neto numeric,serie character varying(30),nombre_articulo text,simbolo_unidad character varying(3))]]>
+	</queryString>
+	<field name="fecha_emision" class="java.sql.Date"/>
+	<field name="punto_partida" class="java.lang.String"/>
+	<field name="documento_ref" class="java.lang.String"/>
+	<field name="razon_social" class="java.lang.String"/>
+	<field name="numero_documento_id" class="java.lang.String"/>
+	<field name="punto_llegada" class="java.lang.String"/>
+	<field name="tipo_operacion" class="java.lang.String">
+		<fieldDescription><![CDATA[0 = venta
+1 = compra
+2 = ambos]]></fieldDescription>
+	</field>
+	<field name="peso_neto" class="java.math.BigDecimal"/>
+	<field name="serie" class="java.lang.String"/>
+	<field name="nombre_articulo" class="java.lang.String"/>
+	<field name="simbolo_unidad" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="225" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="58" y="169" width="366" height="20" uuid="1b4f3932-5d83-4684-a8e2-9757258300a2"/>
+				<textElement textAlignment="Left">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="148" width="366" height="20" uuid="ee1a0e8a-3248-4e1d-9483-bab81039810e"/>
+				<textElement textAlignment="Left">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{punto_partida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="148" width="85" height="20" uuid="aa48fb43-3f94-4bf1-a0e8-c3fbcb946539"/>
+				<textElement>
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{documento_ref}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="47" y="116" width="32" height="20" uuid="8cffa396-24b3-4eb1-87c8-9bde20f6db10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.getDay()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="116" width="32" height="20" uuid="c7c7fc0e-9fd9-487f-bba1-21df57243f3f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.getMonth()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="116" width="32" height="20" uuid="b4711985-11da-4bb1-ab8b-d2c6f4455056"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.getYear()-100]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="169" width="85" height="20" uuid="b12fdad2-6a13-4558-bdbe-57c57e9e0efa"/>
+				<textElement>
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_documento_id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="58" y="189" width="366" height="20" uuid="2bbc3ddb-1998-4cc6-b37e-306dde629d70"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{punto_llegada}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="33" height="21" uuid="f19d1fca-bfba-4ead-ba17-fb9aab79a8f7"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{peso_neto}.intValue()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="42" y="0" width="56" height="21" uuid="683122d0-e883-482e-bf0f-714e66d83141"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="0" width="263" height="21" uuid="c43d417d-2168-4996-af55-82543ed260d7"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_articulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="66" height="21" uuid="d80d37ea-44fb-4c4e-86fa-4c873ca5d6ac"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{simbolo_unidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="77" y="11" width="13" height="13" uuid="1e1e5522-0ad5-46ad-a392-a19cb61e5efc"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "0" ) ? "X" : "" )]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

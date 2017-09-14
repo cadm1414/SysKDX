@@ -84,6 +84,7 @@ import JAVA.VENTAS.GUI.jif_factura;
 import JAVA.VENTAS.GUI.jif_guia_remision;
 import JAVA.VENTAS.GUI.jif_pedido;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
+import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
 import JAVA.VENTAS.LOGICA.muestra_jif_ventas;
 
@@ -162,6 +163,7 @@ public class variables_globales {
     public static DAO_registro_ventas_detalle go_dao_registro_ventas_detalle = new DAO_registro_ventas_detalle();
     public static DAO_transportista go_dao_transportista = new DAO_transportista();
     public static DAO_guia_remision go_dao_guia_remision = new DAO_guia_remision();
+    public static DAO_guia_remision_detalle go_dao_guia_remision_detalle = new DAO_guia_remision_detalle();
     
     //GUI
     public static frm_principal go_frm_principal;
@@ -185,6 +187,7 @@ public class variables_globales {
     public static muestra_dlg_ventas go_muestra_dlg_ventas = new muestra_dlg_ventas();
     public static muestra_jif_ventas go_muestra_jif_ventas = new muestra_jif_ventas();
     public static activa_buscador go_activa_buscador = new activa_buscador();
+    public static evt_imprime_doc_ventas go_evt_imprime_doc_ventas = new evt_imprime_doc_ventas();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;

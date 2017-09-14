@@ -54,19 +54,21 @@ public class evt_grid_pedidos {
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
         int fila = OBJ_pgp.TBL_pedidos.getRowCount();
-        if (fila < cantidad) {
-            if (fila == (fila_s + 1)) {
+
+        if (fila == (fila_s + 1)) {
+            if (fila < cantidad) {
                 String item = go_fnc_operaciones_campos.completa_digitos(fila + 1 + "", "0", 3);
                 modelo.addRow(new Object[]{item, 0, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar()});
                 OBJ_pgp.TBL_pedidos.changeSelection(fila, 1, false, false);
                 OBJ_pgp.TBL_pedidos.editCellAt(fila, 1);
             } else {
-                OBJ_pgp.TBL_pedidos.changeSelection(fila_s + 1, 1, false, false);
-                OBJ_pgp.TBL_pedidos.editCellAt(fila_s + 1, 1);
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "agrega_fila", "NO SE PUEDE EXEDER DE " + cantidad + " ITEMS");
             }
         } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "agrega_fila", "NO SE PUEDE EXEDER DE " + cantidad + " ITEMS");
+            OBJ_pgp.TBL_pedidos.changeSelection(fila_s + 1, 1, false, false);
+            OBJ_pgp.TBL_pedidos.editCellAt(fila_s + 1, 1);
         }
+
     }
 
     public void suma_importes(int afecto_igv, double igv_p, boolean es_sigv, pnl_grid_pedidos OBJ_pgp) {

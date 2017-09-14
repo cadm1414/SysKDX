@@ -137,6 +137,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
                 getFocusOwner().transferFocus();
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "muestra_datos_ref", "PEDIDO NO EXISTE y/o ES FACTURADO");
+                ls_item_seleccion[0] = "0";
                 lo_pnl_datos_seleccion_pedido.TXT_pedido.setText("");
                 lo_pnl_datos_seleccion_pedido.TXT_pedido.requestFocus();
             }
@@ -183,6 +184,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
                 evt_aceptar();
             }
             if (ae.getSource() == lo_pnl_aceptar_cancelar.BTN_cancelar) {
+                ls_item_seleccion[0] = "0";
                 dispose();
             }
         }
