@@ -94,8 +94,23 @@ public class dlg_anula_factura extends javax.swing.JDialog {
         if (valido_datos()) {
             lo_cbx_tipo_documento = (cbx_tipo_documento) lo_pnl_datos_anula_factura.CBX_tipo_doc.getSelectedItem();
             ls_codigo_operacion = lo_cbx_tipo_documento.getID() + lo_pnl_datos_anula_factura.TXT_serie.getText().trim() + lo_pnl_datos_anula_factura.TXT_numero_doc.getText().trim();
-            if (go_dao_registro_ventas.SLT_cta_rv_x_documento(ls_codigo_sucursal, lo_cbx_tipo_documento.getID(), lo_pnl_datos_anula_factura.TXT_serie.getText(), lo_pnl_datos_anula_factura.TXT_numero_doc.getText()) == 0) {
-                String SQL = "select * from ist_registro_ventas('" + ls_codigo_operacion + "','" + ls_codigo_sucursal + "','" + gs_periodo + "','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText().trim().substring(3, 5) + "','" + lo_cbx_tipo_documento.getID() + "','" + lo_pnl_datos_anula_factura.TXT_serie.getText() + "','" + lo_pnl_datos_anula_factura.TXT_numero_doc.getText().trim() + "','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText().trim() + "','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText().trim() + "','PEN',0.000,'1','0001','000',0.000,'0','0','0','999999','....','1','........','...','999999','....','999999','......','....','....','EF',0,'','0',0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,'0','GR00000000000000','0','OP00000000000000','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText() + "','..','','','0','','" + gs_periodo + "')";
+
+            if (lo_cbx_tipo_documento.getID().equalsIgnoreCase("09")) {
+                if (go_dao_guia_remision.SLT_cta_gr_x_documento(ls_codigo_sucursal, lo_cbx_tipo_documento.getID(), lo_pnl_datos_anula_factura.TXT_serie.getText(), lo_pnl_datos_anula_factura.TXT_numero_doc.getText()) == 0) {
+                    String SQL = "select * from ist_guia_remision('" + ls_codigo_operacion + "','" + ls_codigo_sucursal + "','" + gs_periodo + "','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText().trim().substring(3, 5) + "','" + lo_cbx_tipo_documento.getID() + "','" + lo_pnl_datos_anula_factura.TXT_serie.getText() + "','" + lo_pnl_datos_anula_factura.TXT_numero_doc.getText().trim() + "','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText().trim() + "','0','0','OP00000000000000','..','0000','0000000000','PEN',0.000,'1','0001','000',0.000,'0','0','1','999999','...','1','...','','999999','...','999999','...','0001','...','EF',0,'" + lo_pnl_datos_anula_factura.TXT_motivo.getText().trim() + "','0','0001','...','...','...','...........','AAA999','...','....','000000','...','...','...','...','...','999999','....',0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,'" + gs_periodo + "')";
+                    try {
+                        if (go_dao_guia_remision.IST_anula_guia_remision(SQL, ls_codigo_operacion)) {
+                            dispose();
+                        }
+                    } catch (Exception e) {
+                    }
+                } else {
+                    go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "evt_aceptar", "DOCUMENTO SE ENCUENTRA REGISTRADO");
+                    lo_pnl_datos_anula_factura.TXT_numero_doc.requestFocus();
+                }
+            } else if (go_dao_registro_ventas.SLT_cta_rv_x_documento(ls_codigo_sucursal, lo_cbx_tipo_documento.getID(), lo_pnl_datos_anula_factura.TXT_serie.getText(), lo_pnl_datos_anula_factura.TXT_numero_doc.getText()) == 0) {
+
+                String SQL = "select * from ist_registro_ventas('" + ls_codigo_operacion + "','" + ls_codigo_sucursal + "','" + gs_periodo + "','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText().trim().substring(3, 5) + "','" + lo_cbx_tipo_documento.getID() + "','" + lo_pnl_datos_anula_factura.TXT_serie.getText() + "','" + lo_pnl_datos_anula_factura.TXT_numero_doc.getText().trim() + "','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText().trim() + "','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText().trim() + "','PEN',0.000,'1','0001','000',0.000,'0','0','0','999999','....','1','........','...','999999','....','999999','......','....','....','EF',0,'" + lo_pnl_datos_anula_factura.TXT_motivo.getText().trim() + "','0',0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,'0','GR00000000000000','0','OP00000000000000','" + lo_pnl_datos_anula_factura.TXT_fecha_emision.getText() + "','..','','','0','','" + gs_periodo + "')";
                 try {
                     if (go_dao_registro_ventas.IST_anula_registro_ventas(SQL, ls_codigo_operacion)) {
                         dispose();
@@ -103,7 +118,7 @@ public class dlg_anula_factura extends javax.swing.JDialog {
                 } catch (Exception e) {
                 }
             } else {
-                go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "DOCUMENTO SE ENCUENTRA REGISTRADO");
+                go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "evt_aceptar", "DOCUMENTO SE ENCUENTRA REGISTRADO");
                 lo_pnl_datos_anula_factura.TXT_numero_doc.requestFocus();
             }
         }

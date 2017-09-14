@@ -171,10 +171,6 @@ public class evt_cab_factura {
             OBJ_pgp.LBL_percepcion.setText(dFormat.format(rs.getDouble(26)) + "");
             OBJ_pgp.LBL_importe.setText(dFormat.format(rs.getDouble(27)) + "");
             OBJ_pnf.JRD_precio_igv.setSelected(go_fnc_operaciones_campos.int_boolean(rs.getInt(28)));
-            OBJ_pnf.TXT_fecha_emision.setEnabled(true);
-            OBJ_pnf.TXT_observacion.setEnabled(true);
-            OBJ_pnf.TXT_fecha_emision.requestFocus();
-
         } catch (Exception e) {
         }
     }

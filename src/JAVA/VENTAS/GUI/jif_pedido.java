@@ -257,7 +257,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
     private void get_descripcion_pedido_detalle(String codigo) {
         lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
         lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle(codigo);
-        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_pedido.getEs_precio_igv()));
+        lo_evt_grid_pedidos.recupera_detalle(lq_rs,lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_pedido.getEs_precio_igv()));
     }
 
     private void limpia_parametros() {

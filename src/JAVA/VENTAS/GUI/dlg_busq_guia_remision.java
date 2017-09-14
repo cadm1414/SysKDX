@@ -12,16 +12,16 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
-public class dlg_busq_registro_ventas extends javax.swing.JDialog {
+public class dlg_busq_guia_remision extends javax.swing.JDialog {
 
-    pnl_grid_busq_registro_ventas lo_pnl_grid_registro_ventas = new pnl_grid_busq_registro_ventas();
+    pnl_grid_busq_guia_remision lo_pnl_grid_busq_guia_remision = new pnl_grid_busq_guia_remision();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
     public String ls_codigo;
     String ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_codigo_documento;
-    String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_busq_registro_ventas";
+    String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_busq_guia_remision";
 
-    public dlg_busq_registro_ventas(java.awt.Frame parent, boolean modal) {
+    public dlg_busq_guia_remision(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         formulario();
@@ -47,13 +47,13 @@ public class dlg_busq_registro_ventas extends javax.swing.JDialog {
     }
 
     private void formulario() {
-        lo_pnl_grid_registro_ventas.setBounds(0, 0, 300, 220);
-        PNL_grid.add(lo_pnl_grid_registro_ventas);
+        lo_pnl_grid_busq_guia_remision.setBounds(0, 0, 300, 220);
+        PNL_grid.add(lo_pnl_grid_busq_guia_remision);
 
         TXT_dato.setDocument(new fnc_txt_mayuscula());
 
-        lo_pnl_grid_registro_ventas.TBL_registro_ventas.addMouseListener(MouseEvnt);
-        lo_pnl_grid_registro_ventas.TBL_registro_ventas.addKeyListener(KeyEvnt);
+        lo_pnl_grid_busq_guia_remision.TBL_guia_remision.addMouseListener(MouseEvnt);
+        lo_pnl_grid_busq_guia_remision.TBL_guia_remision.addKeyListener(KeyEvnt);
         TXT_dato.addKeyListener(KeyEvnt);
         TXT_fecha_ini.addKeyListener(KeyEvnt);
         TXT_fecha_fin.addKeyListener(KeyEvnt);
@@ -61,17 +61,17 @@ public class dlg_busq_registro_ventas extends javax.swing.JDialog {
 
     private void datos_tabla() {
         int a = 0;
-        lm_modelo = (DefaultTableModel) lo_pnl_grid_registro_ventas.TBL_registro_ventas.getModel();
+        lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_guia_remision.TBL_guia_remision.getModel();
         try {
-            lq_rs = go_dao_registro_ventas.SLT_grid_registro_ventas(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_codigo_documento);
+            lq_rs = go_dao_guia_remision.SLT_grid_guia_remision(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_codigo_documento);
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
                     for (int x = 0; x < 3; x++) {
                         if (x == 0) {
-                            lo_pnl_grid_registro_ventas.TBL_registro_ventas.setValueAt(go_fnc_operaciones_campos.recupera_fecha_formato(lq_rs.getString(x + 1)), a, x);
+                            lo_pnl_grid_busq_guia_remision.TBL_guia_remision.setValueAt(go_fnc_operaciones_campos.recupera_fecha_formato(lq_rs.getString(x + 1)), a, x);
                         } else {
-                            lo_pnl_grid_registro_ventas.TBL_registro_ventas.setValueAt(lq_rs.getString(x + 1), a, x);
+                            lo_pnl_grid_busq_guia_remision.TBL_guia_remision.setValueAt(lq_rs.getString(x + 1), a, x);
                         }
 
                     }
@@ -83,7 +83,7 @@ public class dlg_busq_registro_ventas extends javax.swing.JDialog {
     }
 
     public void limpia_tabla() {
-        DefaultTableModel modelo = (DefaultTableModel) lo_pnl_grid_registro_ventas.TBL_registro_ventas.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) lo_pnl_grid_busq_guia_remision.TBL_guia_remision.getModel();
         for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
             modelo.removeRow(i);
         }
@@ -102,7 +102,7 @@ public class dlg_busq_registro_ventas extends javax.swing.JDialog {
     }
 
     public void retorna() {
-        ls_codigo = lo_pnl_grid_registro_ventas.TBL_registro_ventas.getValueAt(lo_pnl_grid_registro_ventas.TBL_registro_ventas.getSelectedRow(), 1).toString();
+        ls_codigo = lo_pnl_grid_busq_guia_remision.TBL_guia_remision.getValueAt(lo_pnl_grid_busq_guia_remision.TBL_guia_remision.getSelectedRow(), 1).toString();
         this.dispose();
     }
 
@@ -135,14 +135,14 @@ public class dlg_busq_registro_ventas extends javax.swing.JDialog {
                     }
                 }
                 if (ke.getSource() == TXT_dato) {
-                    if (lo_pnl_grid_registro_ventas.TBL_registro_ventas.getRowCount() != 0) {
-                        lo_pnl_grid_registro_ventas.TBL_registro_ventas.requestFocus();
-                        lo_pnl_grid_registro_ventas.TBL_registro_ventas.changeSelection(0, 0, false, false);
+                    if (lo_pnl_grid_busq_guia_remision.TBL_guia_remision.getRowCount() != 0) {
+                        lo_pnl_grid_busq_guia_remision.TBL_guia_remision.requestFocus();
+                        lo_pnl_grid_busq_guia_remision.TBL_guia_remision.changeSelection(0, 0, false, false);
                     } else {
                         TXT_dato.requestFocus();
                     }
                 }
-                if (ke.getSource() == lo_pnl_grid_registro_ventas.TBL_registro_ventas) {
+                if (ke.getSource() == lo_pnl_grid_busq_guia_remision.TBL_guia_remision) {
                     retorna();
                 }
             }
@@ -154,7 +154,7 @@ public class dlg_busq_registro_ventas extends javax.swing.JDialog {
         @Override
         public void keyReleased(KeyEvent ke) {
             if (ke.getSource() == TXT_dato) {
-                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_registro_ventas.TBL_registro_ventas, TXT_dato.getText(), 1);
+                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_guia_remision.TBL_guia_remision, TXT_dato.getText(), 1);
             }
         }
 
@@ -163,7 +163,7 @@ public class dlg_busq_registro_ventas extends javax.swing.JDialog {
     MouseListener MouseEvnt = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent me) {
-            if (me.getSource() == lo_pnl_grid_registro_ventas.TBL_registro_ventas && me.getClickCount() == 2) {
+            if (me.getSource() == lo_pnl_grid_busq_guia_remision.TBL_guia_remision && me.getClickCount() == 2) {
                 retorna();
             }
         }
@@ -337,7 +337,7 @@ public class dlg_busq_registro_ventas extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                dlg_busq_registro_ventas dialog = new dlg_busq_registro_ventas(new javax.swing.JFrame(), true);
+                dlg_busq_guia_remision dialog = new dlg_busq_guia_remision(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

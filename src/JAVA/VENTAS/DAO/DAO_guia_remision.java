@@ -1,8 +1,11 @@
 package JAVA.VENTAS.DAO;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.VENTAS.BEAN.BEAN_guia_remision;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JTable;
 
 public class DAO_guia_remision {
 
@@ -24,5 +27,124 @@ public class DAO_guia_remision {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_correlativo_guia_remision", e.getMessage());
         }
         return null;
+    }
+
+    public ResultSet SLT_grid_guia_remision(String codigo_sucursal, String fecha_ini, String fecha_fin, String serie, String codigo_documento) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_guia_remision('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + serie + "','" + codigo_documento + "','" + gs_periodo + "') "
+                    + "as (fecha_emision date,numero_documento text,status text)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_guia_remision", e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean IST_guia_remision(BEAN_guia_remision OBJ_ped, JTable OBJ_pgp, double porcentaje_igv) throws SQLException {
+        boolean resp = false;
+        double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from ist_guia_remision('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','" + OBJ_ped.getCodigo_documento() + "','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getTipo_operacion() + "','" + OBJ_ped.getEs_pedido() + "','" + OBJ_ped.getCodigo_pedido() + "','" + OBJ_ped.getCodigo_documento_ref() + "','" + OBJ_ped.getSerie_documento_ref() + "','" + OBJ_ped.getNumero_documento_ref() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "','" + OBJ_ped.getCodigo_transportista() + "','" + OBJ_ped.getNombre_transportista() + "','" + OBJ_ped.getNumero_licencia() + "','" + OBJ_ped.getRazon_social_trans() + "','" + OBJ_ped.getRuc_trans() + "','" + OBJ_ped.getCodigo_vehiculo() + "','" + OBJ_ped.getMarca() + "','" + OBJ_ped.getNumero_civ() + "','" + OBJ_ped.getCodigo_vehiculo_2() + "','" + OBJ_ped.getMarca_2() + "','" + OBJ_ped.getNumero_civ_2() + "','" + OBJ_ped.getCodigo_direccion_pl() + "','" + OBJ_ped.getNombre_direccion_pl() + "','" + OBJ_ped.getPunto_llegada() + "','" + OBJ_ped.getCodigo_ubigeo_pl() + "','" + OBJ_ped.getDescripcion_ubigeo_pl() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + ",'" + gs_periodo + "')";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                for (int i = 0; i < OBJ_pgp.getRowCount(); i++) {
+                    switch (OBJ_ped.getAfecto_igv()) {
+                        case "0":
+                            precio_cigv = 0.0;
+                            importe_cigv = 0.0;
+                            precio_sigv = (double) OBJ_pgp.getValueAt(i, 8);
+                            importe_sigv = (double) OBJ_pgp.getValueAt(i, 11);
+                            percepcion = 0.0;
+                            break;
+                        case "1":
+                            if (!(boolean) OBJ_pgp.getValueAt(i, 6)) {
+                                precio_cigv = 0.0;
+                                importe_cigv = 0.0;
+                                precio_sigv = (double) OBJ_pgp.getValueAt(i, 8);
+                                importe_sigv = (double) OBJ_pgp.getValueAt(i, 11);
+                                percepcion = (double) OBJ_pgp.getValueAt(i, 11) * (double) OBJ_pgp.getValueAt(i, 7) / 100;
+                            } else {
+                                precio_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 8) : (double) OBJ_pgp.getValueAt(i, 8) * (porcentaje_igv + 1);
+                                importe_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 11) : (double) OBJ_pgp.getValueAt(i, 11) * (porcentaje_igv + 1);
+                                precio_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? (double) OBJ_pgp.getValueAt(i, 8) : (double) OBJ_pgp.getValueAt(i, 8) / (porcentaje_igv + 1);
+                                importe_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? (double) OBJ_pgp.getValueAt(i, 11) : (double) OBJ_pgp.getValueAt(i, 11) / (porcentaje_igv + 1);
+                                percepcion = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 11) * ((double) OBJ_pgp.getValueAt(i, 7) / 100) : ((double) OBJ_pgp.getValueAt(i, 11) * (porcentaje_igv + 1)) * ((double) OBJ_pgp.getValueAt(i, 7) / 100);
+                            }
+                            break;
+                    }
+
+                    String SQL2 = "select * from ist_guia_remision_detalle('" + OBJ_ped.getCodigo_operacion() + "',"
+                            + "'" + go_fnc_operaciones_campos.completa_digitos((i + 1) + "", "0", 3) + "',"
+                            + "'" + OBJ_pgp.getValueAt(i, 2).toString().trim() + "',"
+                            + "$$" + OBJ_pgp.getValueAt(i, 3).toString().trim() + "$$,"
+                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 6)) + "',"
+                            + (double) OBJ_pgp.getValueAt(i, 7) + ","
+                            + (int) OBJ_pgp.getValueAt(i, 1) + ","
+                            + (double) OBJ_pgp.getValueAt(i, 9) + ","
+                            + (double) OBJ_pgp.getValueAt(i, 10) + ","
+                            + precio_cigv + ","
+                            + importe_cigv + ","
+                            + precio_sigv + ","
+                            + importe_sigv + ","
+                            + percepcion + ","
+                            + "'" + gs_periodo + "',"
+                            + (double) OBJ_pgp.getValueAt(i, 12) + ")";
+                    lq_rs = lq_stm.executeQuery(SQL2);
+                }
+                if (lq_rs.next()) {
+                    lq_stm.getConnection().commit();
+                    go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_guia_remision", "SE ACTUALIZO BASE DE DATOS");
+                    resp = true;
+                    go_dao_auditoria.IST_auditoria(OBJ_ped.getCodigo_operacion(), SQL, ls_modulo, "1", "0042");
+                }
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_guia_remision", e.getMessage());
+        }
+        return resp;
+    }
+
+    public int SLT_cta_gr_x_documento(String sucursal, String codigo_documento, String serie_doc, String numero_doc) {
+        int resp = 0;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_cta_gr_x_documento('" + sucursal + "','" + codigo_documento + "','" + serie_doc + "','" + numero_doc + "','" + gs_periodo + "') "
+                    + "as (contador integer)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                resp = lq_rs.getInt(1);
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_cta_gr_x_documento", e.getMessage());
+        }
+        return resp;
+    }
+
+    public boolean IST_anula_guia_remision(String SQL, String codigo_operacion) throws SQLException {
+        boolean resp = false;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                lq_stm.getConnection().commit();
+                go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_anula_guia_remision", "SE ACTUALIZO BASE DE DATOS");
+                resp = true;
+                go_dao_auditoria.IST_auditoria(codigo_operacion, SQL, ls_modulo, "1", "0042");
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_anula_guia_remision", e.getMessage());
+        }
+        return resp;
     }
 }

@@ -27,7 +27,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
     DefaultTableModel modelo;
     String ls_codigo_pedido, ls_espedido, ls_serie, ls_codigo_sucursal, ls_codigo_documento;
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_datos_seleccion_pedido";
-    public static String ls_item_seleccion[];
+    public String ls_item_seleccion[];
 
     public dlg_datos_seleccion_pedido(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -46,7 +46,8 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         ls_codigo_sucursal = gs_parametros[1];
         ls_codigo_documento = gs_parametros[2];
         li_item = gi_parametros_2[0];
-        ls_item_seleccion = new String[li_item];
+        ls_item_seleccion = new String[li_item + 1];
+        ls_item_seleccion[0] = "0";
 
         gs_parametros[0] = "";
         gs_parametros[1] = "";
@@ -120,6 +121,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         try {
             lq_rs = go_dao_pedido_detalle.SLT_grid_pedido_pendiente(codigo);
             if (lq_rs != null) {
+                li_tipo_operacion = 1;
                 lo_pnl_datos_seleccion_pedido.TXT_pedido.setText(codigo.substring(6));
                 do {
                     modelo.addRow(new Object[]{"", "", "", null, null, null, false});
@@ -132,6 +134,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
                     lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setValueAt(go_fnc_operaciones_campos.int_boolean(lq_rs.getInt(7)), a, 6);
                     a++;
                 } while (lq_rs.next());
+                getFocusOwner().transferFocus();
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "muestra_datos_ref", "PEDIDO NO EXISTE y/o ES FACTURADO");
                 lo_pnl_datos_seleccion_pedido.TXT_pedido.setText("");
@@ -139,7 +142,6 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
-        li_tipo_operacion = 1;
     }
 
     private void evt_f5_pedido() {
@@ -156,13 +158,17 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
     }
 
     private void evt_aceptar() {
-        int a = 0;
+        int a = 1;
+        ls_item_seleccion[0] = ls_codigo_pedido;
         if (Integer.parseInt(lo_pnl_datos_seleccion_pedido.LBL_total.getText()) != 0) {
             for (int i = 0; i < modelo.getRowCount(); i++) {
                 if ((boolean) lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 6)) {
                     ls_item_seleccion[a] = lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 0).toString();
                     a++;
-                }                 
+                }
+            }
+            for (int i = a; i < ls_item_seleccion.length; i++) {
+                ls_item_seleccion[i] = "";
             }
             dispose();
         } else {
@@ -198,8 +204,8 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_datos_seleccion_pedido.TXT_pedido && go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_seleccion_pedido.TXT_pedido)) {
                     lo_pnl_datos_seleccion_pedido.TXT_pedido.setText(go_fnc_operaciones_campos.completa_digitos(lo_pnl_datos_seleccion_pedido.TXT_pedido.getText().trim(), "0", 10));
-                    muestra_datos_ref("OP" + ls_serie + lo_pnl_datos_seleccion_pedido.TXT_pedido.getText().trim());
-                    getFocusOwner().transferFocus();
+                    ls_codigo_pedido = "OP" + ls_serie + lo_pnl_datos_seleccion_pedido.TXT_pedido.getText().trim();
+                    muestra_datos_ref(ls_codigo_pedido);
                 }
             }
         }

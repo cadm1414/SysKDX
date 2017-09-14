@@ -19,7 +19,7 @@ public class dlg_busq_pedido extends javax.swing.JDialog {
     ResultSet lq_rs;
     public String ls_codigo;
     String ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_es_facturado,ls_codigo_doc_ref;
-    String ls_modulo = "INVENT", ls_capa = "GUI", ls_clase = "dlg_busq_kardex";
+    String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_busq_pedido";
 
     public dlg_busq_pedido(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
