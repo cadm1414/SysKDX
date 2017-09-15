@@ -22,10 +22,11 @@ public class evt_imprime_doc_ventas {
     public void imprime_documentos(int op, String reporte, Map<String, Object> parametros) {
         try {
             path = ruta_ventas_report.class.getResource(reporte);
+
             jr = (JasperReport) JRLoader.loadObject(path);
-            JasperPrint aa = JasperFillManager.fillReport(jr, parametros, go_conexion_db.getConexion_db());
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametros, go_conexion_db.getConexion_db());
             // TRUE: muestra la ventana de dialogo "preferencias de impresion"
-            JasperPrintManager.printReport(aa, false);
+            JasperPrintManager.printReport(jp, true);
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", e.getMessage());
         }
