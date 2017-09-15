@@ -78,6 +78,7 @@ import JAVA.VENTAS.GUI.dlg_busq_pedido;
 import JAVA.VENTAS.GUI.dlg_busq_registro_ventas;
 import JAVA.VENTAS.GUI.dlg_busq_transportista;
 import JAVA.VENTAS.GUI.dlg_datos_pl;
+import JAVA.VENTAS.GUI.dlg_datos_seleccion_guiar;
 import JAVA.VENTAS.GUI.dlg_datos_seleccion_pedido;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_factura;
@@ -164,7 +165,7 @@ public class variables_globales {
     public static DAO_transportista go_dao_transportista = new DAO_transportista();
     public static DAO_guia_remision go_dao_guia_remision = new DAO_guia_remision();
     public static DAO_guia_remision_detalle go_dao_guia_remision_detalle = new DAO_guia_remision_detalle();
-    
+
     //GUI
     public static frm_principal go_frm_principal;
     public static frm_datos_general go_frm_datos_general;
@@ -222,7 +223,7 @@ public class variables_globales {
     public static dlg_busq_transportista go_dlg_busq_transportista;
     public static dlg_datos_seleccion_pedido go_dlg_datos_seleccion_pedido;
     public static dlg_busq_guia_remision go_dlg_busq_guia_remision;
-
+    public static dlg_datos_seleccion_guiar go_dlg_datos_seleccion_guiar;
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
     public static jif_datos_sucursal go_jif_datos_sucursal;

@@ -64,7 +64,7 @@ public class pnl_cab_factura extends javax.swing.JPanel {
         TXT_guiar = new javax.swing.JFormattedTextField();
         TXT_pedido = new javax.swing.JFormattedTextField();
         JRD_precio_igv = new javax.swing.JRadioButton();
-        TXT_serie1 = new javax.swing.JFormattedTextField();
+        TXT_serie_guia = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -286,16 +286,16 @@ public class pnl_cab_factura extends javax.swing.JPanel {
         JRD_precio_igv.setEnabled(false);
 
         try {
-            TXT_serie1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+            TXT_serie_guia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        TXT_serie1.setText("0000");
-        TXT_serie1.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        TXT_serie1.setEnabled(false);
-        TXT_serie1.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
-        TXT_serie1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        TXT_serie1.setNextFocusableComponent(TXT_numero_doc);
+        TXT_serie_guia.setText("0000");
+        TXT_serie_guia.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        TXT_serie_guia.setEnabled(false);
+        TXT_serie_guia.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        TXT_serie_guia.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_serie_guia.setNextFocusableComponent(TXT_numero_doc);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -329,7 +329,7 @@ public class pnl_cab_factura extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TXT_serie1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TXT_serie_guia, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TXT_guiar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(TXT_fecha_emision, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -451,7 +451,7 @@ public class pnl_cab_factura extends javax.swing.JPanel {
                                         .addComponent(jLabel55)
                                         .addComponent(jLabel54)
                                         .addComponent(TXT_guiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(TXT_serie1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(TXT_serie_guia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -899,7 +899,7 @@ public class pnl_cab_factura extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -940,7 +940,7 @@ public class pnl_cab_factura extends javax.swing.JPanel {
     public javax.swing.JFormattedTextField TXT_pedido;
     public javax.swing.JTextField TXT_razon_social;
     public javax.swing.JFormattedTextField TXT_serie;
-    public javax.swing.JFormattedTextField TXT_serie1;
+    public javax.swing.JFormattedTextField TXT_serie_guia;
     public javax.swing.JTextField TXT_sucursal;
     public javax.swing.JFormattedTextField TXT_tipo_cambio;
     private javax.swing.JLabel jLabel1;

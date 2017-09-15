@@ -341,7 +341,8 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
         gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
         gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
         gs_parametros[3] = lo_pnl_cab_guiar.TXT_serie.getText().trim();
-        gs_parametros[4] = "09";
+        gs_parametros[4] = "%";
+        gs_parametros[5] = "%";
     }
 
     private void limpia_parametros() {

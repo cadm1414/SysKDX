@@ -23,12 +23,16 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRParameter;
 
 public class jif_factura extends javax.swing.JInternalFrame {
 
@@ -51,7 +55,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
     ResultSet lq_rs;
     int li_tipo_operacion, cont = 0, li_cantidad;
     double ld_tipo_cambio, ld_porcentaje_detraccion, ld_monto_minimo;
-    String ls_codigo, ls_codigo_sucursal, ls_serie, ls_codigo_vendedor, ls_nombre_vendedor, ls_tipo_documento,
+    String ls_codigo, ls_codigo_sucursal, ls_serie, ls_codigo_vendedor, ls_nombre_vendedor, ls_tipo_documento, ls_item_seleccion[][],
             ls_codigo_entidad, ls_codigo_articulo, ls_esguia = "0", ls_espedido = "0", ls_codigo_pedido, ls_codigo_guiar;
     String ls_opcion;
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "jif_pedido";
@@ -83,6 +87,8 @@ public class jif_factura extends javax.swing.JInternalFrame {
 
         li_cantidad = go_dao_serie.SLT_cant_items(ls_serie, ls_codigo_sucursal, (ls_tipo_documento.equalsIgnoreCase("01")) ? 3 : 2);
         this.setTitle((ls_tipo_documento.equalsIgnoreCase("01")) ? "FACTURA" : "BOLETA");
+        ls_item_seleccion = new String[li_cantidad + 1][2];
+        ls_item_seleccion[0][0] = "0";
 
         modelo = (DefaultTableModel) lo_pnl_grid_pedidos.TBL_pedidos.getModel();
         modelo.addTableModelListener(TablaListener);
@@ -427,6 +433,50 @@ public class jif_factura extends javax.swing.JInternalFrame {
         }
     }
 
+    private void evt_f5_seleccion_guiar() {
+        gs_parametros[0] = ls_serie;
+        gs_parametros[1] = ls_codigo_sucursal;
+        gs_parametros[2] = ls_tipo_documento;
+        gs_parametros[3] = ls_serie + "-" + lo_pnl_cab_factura.TXT_numero_doc.getText().trim();
+        gi_parametros_2[0] = li_cantidad;
+
+        go_dlg_datos_seleccion_guiar = new dlg_datos_seleccion_guiar(null, true);
+        go_dlg_datos_seleccion_guiar.setVisible(true);
+        ls_item_seleccion = go_dlg_datos_seleccion_guiar.ls_item_seleccion;
+
+        if (ls_item_seleccion[0][0].equalsIgnoreCase("1")) {
+            ls_esguia = "1";
+            ls_codigo_guiar = ls_item_seleccion[1][0];
+            lo_pnl_cab_factura.TXT_numero_doc.setText(ls_item_seleccion[0][1]);
+            try {
+                lq_rs = go_dao_pedido.SLT_datos_ref_factura(1, ls_codigo_guiar);
+                lo_pnl_cab_factura.TXT_serie_guia.setText(ls_codigo_guiar.substring(2, 6));
+                lo_pnl_cab_factura.TXT_guiar.setText(ls_codigo_guiar.substring(6));
+
+                if (lq_rs != null) {
+                    lo_evt_cab_factura.activa_campos(0, lo_pnl_cab_factura, false, ls_tipo_documento);
+                    lo_evt_cab_factura.muestra_datos_ref(1, lq_rs, ls_codigo_pedido, lo_pnl_cab_factura, lo_pnl_grid_pedidos);
+                    get_tipo_cambio();
+                    genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(), Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
+                    
+                    lo_pnl_cab_factura.TXT_observacion.setEnabled(true);
+                    for (int i = 1; i < ls_item_seleccion.length; i++) {
+                        lq_rs = go_dao_guia_remision_detalle.SLT_datos_guia_remision_detalle_x_item(ls_item_seleccion[i][0], ls_item_seleccion[i][1]);
+                        if (lq_rs != null) {
+                            lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
+                            lo_evt_grid_pedidos.recupera_detalle_gf(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()));
+                        }
+                    }
+                    lo_pnl_cab_factura.TXT_fecha_emision.setEnabled(true);
+                    lo_pnl_cab_factura.TXT_numero_doc.setEnabled(true);
+                }
+            } catch (Exception e) {
+            }
+
+        }
+
+    }
+
     private void evt_nuevo() {
         ls_codigo = null;
         ls_codigo_guiar = "GR00000000000000";
@@ -531,6 +581,12 @@ public class jif_factura extends javax.swing.JInternalFrame {
                                 lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
                                 lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
                             }
+                            if (go_fnc_mensaje.get_respuesta(0, "¿DESEA IMPRIMIR DOCUMENTO Nro  " + ls_tipo_documento + " - " + lo_bean_registro_ventas.getNumero_documento() + "?") == 0) {
+                                try {
+                                    evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
+                                } catch (Exception e) {
+                                }
+                            }
                         } catch (Exception e) {
                         }
                     }
@@ -583,6 +639,18 @@ public class jif_factura extends javax.swing.JInternalFrame {
         }
     }
 
+    private void evt_imprimir(String status, String codigo) {
+        if (status.equalsIgnoreCase("1")) {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("codigo_operacion", codigo);
+            parametros.put("periodo", gs_periodo);
+            parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_factura_" + go_bean_general.getRuc() + ".jasper", parametros);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "DOCUMENTO NO SE PUEDE IMPRIMIR");
+        }
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -606,6 +674,9 @@ public class jif_factura extends javax.swing.JInternalFrame {
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_anular) {
                 evt_anular();
+            }
+            if (ae.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
+                evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
             }
         }
     };
@@ -649,6 +720,9 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_pedido) {
                     evt_f5_pedido();
                 }
+                if (ke.getSource() == lo_pnl_cab_factura.TXT_guiar) {
+                    evt_f5_seleccion_guiar();
+                }
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_nuevo) {
@@ -671,6 +745,9 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
                     evt_cancelar();
+                }
+                if (ke.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
+                    evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_numero_doc) {
                     if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_factura.TXT_numero_doc)) {
@@ -707,7 +784,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     if (lo_pnl_cab_factura.TXT_guiar.getText().trim().equalsIgnoreCase("0000000000")) {
                         getFocusOwner().transferFocus();
                     } else {
-                        //BUSCA GUIA
+                        getFocusOwner().transferFocus();
                     }
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_pedido) {

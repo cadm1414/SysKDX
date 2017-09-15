@@ -511,7 +511,7 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
                     if (lo_pnl_grid_guia_ingreso.TBL_guia_ingreso.getSelectedColumn() == 8) {
                         if (lo_pnl_grid_guia_ingreso.TBL_guia_ingreso.getValueAt(fila, 7) == null) {
                             lo_pnl_grid_guia_ingreso.TBL_guia_ingreso.setValueAt(0, fila, 7);
-                            lo_pnl_grid_guia_ingreso.TBL_guia_ingreso.changeSelection(fila, 7, false, false);
+                            //lo_pnl_grid_guia_ingreso.TBL_guia_ingreso.changeSelection(fila, 7, false, false);
                         }
                     }
                     if (lo_pnl_grid_guia_ingreso.TBL_guia_ingreso.getSelectedColumn() == 9) {

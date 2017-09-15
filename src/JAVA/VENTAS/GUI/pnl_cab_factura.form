@@ -100,7 +100,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="TXT_serie1" min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Component id="TXT_serie_guia" min="-2" pref="34" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="TXT_guiar" min="-2" pref="70" max="-2" attributes="0"/>
                               </Group>
@@ -260,7 +260,7 @@
                                           <Component id="jLabel55" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="TXT_guiar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TXT_serie1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TXT_serie_guia" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -712,7 +712,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="TXT_serie1">
+        <Component class="javax.swing.JFormattedTextField" name="TXT_serie_guia">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="####" subtype="-1" type="5"/>

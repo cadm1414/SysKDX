@@ -275,6 +275,50 @@ public class evt_grid_pedidos {
             }
         }
     }
+    
+    public void recupera_detalle_gf(ResultSet rs, pnl_grid_pedidos OBJ_pgp, int es_precio_igv) {        
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
+        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
+        int a = modelo.getRowCount();
+        if (rs != null) {
+            try {
+                do {
+                    modelo.addRow(new Object[]{null, null, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar()});
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(1), a, 0);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getInt(2), a, 1);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(3), a, 2);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(4), a, 3);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(5), a, 4);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(6), a, 5);
+                    OBJ_pgp.TBL_pedidos.setValueAt(go_fnc_operaciones_campos.int_boolean(rs.getInt(7)), a, 6);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(8), a, 7);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(15), a, 12);
+                    switch (es_precio_igv) {
+                        case 0:
+                            if (rs.getString(7).equalsIgnoreCase("1")) {
+                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(9), a, 8);
+                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(13), a, 11);
+                            } else {
+                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(10), a, 8);
+                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(14), a, 11);
+                            }
+                            break;
+                        case 1:
+                            OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(10), a, 8);
+                            OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(14), a, 11);
+                            break;
+                    }
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(11), a, 9);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(12), a, 10);
+                    a++;
+
+                } while (rs.next());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
     public KeyListener evento_press(pnl_grid_pedidos OBJ_pgp, KeyListener KeyEvnt) {
         OBJ_pgp.TBL_pedidos.addKeyListener(KeyEvnt);

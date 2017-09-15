@@ -29,10 +29,10 @@ public class DAO_guia_remision {
         return null;
     }
 
-    public ResultSet SLT_grid_guia_remision(String codigo_sucursal, String fecha_ini, String fecha_fin, String serie, String codigo_documento) {
+    public ResultSet SLT_grid_guia_remision(String codigo_sucursal, String fecha_ini, String fecha_fin, String serie, String es_facturado, String codigo_documento_ref) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_grid_guia_remision('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + serie + "','" + codigo_documento + "','" + gs_periodo + "') "
+            String SQL = "select * from slt_grid_guia_remision('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + serie + "','" + es_facturado + "','" + codigo_documento_ref + "','" + gs_periodo + "') "
                     + "as (fecha_emision date,numero_documento text,status text)";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());

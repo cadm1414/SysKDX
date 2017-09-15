@@ -94,6 +94,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_emision}.getYear()-100]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="456" y="173" width="84" height="20" uuid="2ba791c9-8a79-4105-837a-f0e8e56d4bb6"/>
+				<textElement>
+					<font fontName="Courier New" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{codigo_guiar}.equalsIgnoreCase( "GR00000000000000" )? "" : $F{codigo_guiar}.substring( 2, 6 )+"-"+$F{codigo_guiar}.substring( 6 ) )]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>
@@ -119,14 +126,14 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_articulo}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00;-#,##0.00">
 				<reportElement x="379" y="0" width="66" height="20" uuid="d80d37ea-44fb-4c4e-86fa-4c873ca5d6ac"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00;-#,##0.00">
 				<reportElement x="449" y="0" width="70" height="20" uuid="69f688d6-e9ca-437b-85c1-f22355d37465"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Courier New" size="9"/>
@@ -137,21 +144,21 @@
 	</detail>
 	<pageFooter>
 		<band height="68" splitType="Stretch">
-			<textField>
+			<textField pattern="#,##0.00;-#,##0.00">
 				<reportElement x="459" y="2" width="60" height="20" uuid="560f3226-1403-4ea8-a5e3-019ef89def3d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{base}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00;-#,##0.00">
 				<reportElement x="459" y="22" width="60" height="20" uuid="4ca76729-249d-40e2-89ab-a3af8e43deb4"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{igv}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00;-#,##0.00">
 				<reportElement x="459" y="42" width="60" height="20" uuid="7db82b47-bfde-4def-8585-3714ea5d6a43"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9"/>
@@ -198,21 +205,21 @@
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_emision}.getMonth()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $F{forma_pago}.equalsIgnoreCase( "EF" )? $F{fecha_emision}.getMonth()+"" : "" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="186" y="20" width="32" height="20" uuid="30011dac-edfb-4209-becd-347c6a21160d"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_emision}.getDay()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $F{forma_pago}.equalsIgnoreCase( "EF" )? $F{fecha_emision}.getDay() +"": "" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="302" y="20" width="32" height="20" uuid="8c1a72ad-b02a-4de5-9ca0-1068e00bb12d"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_emision}.getYear()-100]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $F{forma_pago}.equalsIgnoreCase( "EF" )? ($F{fecha_emision}.getYear()-100)+"" : "" )]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
