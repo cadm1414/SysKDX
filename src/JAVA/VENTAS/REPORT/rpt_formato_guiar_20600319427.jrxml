@@ -9,9 +9,9 @@
 	</parameter>
 	<parameter name="periodo" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_formato_guiar_20600319427($P{codigo_operacion},$P{periodo}) as (fecha_emision date,punto_partida text,documento_ref text,razon_social character varying(250),numero_documento_id character varying(15),punto_llegada text,tipo_operacion character(1),peso_neto numeric,serie character varying(30),nombre_articulo text,simbolo_unidad character varying(3))]]>
+		<![CDATA[select * from rpt_formato_guiar_20600319427($P{codigo_operacion},$P{periodo}) as (fecha_emision text,punto_partida text,documento_ref text,razon_social character varying(250),numero_documento_id character varying(15),punto_llegada text,tipo_operacion character(1),peso_neto numeric,serie character varying(30),nombre_articulo text,simbolo_unidad character varying(3))]]>
 	</queryString>
-	<field name="fecha_emision" class="java.sql.Date"/>
+	<field name="fecha_emision" class="java.lang.String"/>
 	<field name="punto_partida" class="java.lang.String"/>
 	<field name="documento_ref" class="java.lang.String"/>
 	<field name="razon_social" class="java.lang.String"/>
@@ -32,56 +32,56 @@
 	<pageHeader>
 		<band height="223" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="84" y="164" width="366" height="20" uuid="1b4f3932-5d83-4684-a8e2-9757258300a2"/>
+				<reportElement x="84" y="167" width="366" height="20" uuid="1b4f3932-5d83-4684-a8e2-9757258300a2"/>
 				<textElement textAlignment="Left">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="97" y="143" width="375" height="20" uuid="ee1a0e8a-3248-4e1d-9483-bab81039810e"/>
+				<reportElement x="97" y="146" width="375" height="20" uuid="ee1a0e8a-3248-4e1d-9483-bab81039810e"/>
 				<textElement textAlignment="Left">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{punto_partida}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="507" y="143" width="85" height="20" uuid="aa48fb43-3f94-4bf1-a0e8-c3fbcb946539"/>
+				<reportElement x="507" y="146" width="85" height="20" uuid="aa48fb43-3f94-4bf1-a0e8-c3fbcb946539"/>
 				<textElement>
 					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{documento_ref}.substring(1,4)+"-"+$F{documento_ref}.substring(8)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="81" y="113" width="26" height="20" uuid="8cffa396-24b3-4eb1-87c8-9bde20f6db10"/>
+				<reportElement x="84" y="116" width="23" height="20" uuid="8cffa396-24b3-4eb1-87c8-9bde20f6db10"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_emision}.getDay()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(0,2)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="107" y="113" width="26" height="20" uuid="c7c7fc0e-9fd9-487f-bba1-21df57243f3f"/>
+				<reportElement x="107" y="116" width="26" height="20" uuid="c7c7fc0e-9fd9-487f-bba1-21df57243f3f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_emision}.getMonth()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(2,4)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="133" y="113" width="26" height="20" uuid="b4711985-11da-4bb1-ab8b-d2c6f4455056"/>
+				<reportElement x="133" y="116" width="26" height="20" uuid="b4711985-11da-4bb1-ab8b-d2c6f4455056"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_emision}.getYear()-100]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(6)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="507" y="164" width="85" height="20" uuid="b12fdad2-6a13-4558-bdbe-57c57e9e0efa"/>
+				<reportElement x="507" y="167" width="85" height="20" uuid="b12fdad2-6a13-4558-bdbe-57c57e9e0efa"/>
 				<textElement>
 					<font fontName="Courier New" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numero_documento_id}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="97" y="184" width="375" height="20" uuid="2bbc3ddb-1998-4cc6-b37e-306dde629d70"/>
+				<reportElement x="97" y="187" width="375" height="20" uuid="2bbc3ddb-1998-4cc6-b37e-306dde629d70"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
@@ -124,7 +124,7 @@
 	<pageFooter>
 		<band height="40" splitType="Stretch">
 			<textField>
-				<reportElement x="111" y="2" width="13" height="13" uuid="1e1e5522-0ad5-46ad-a392-a19cb61e5efc"/>
+				<reportElement x="116" y="7" width="13" height="13" uuid="1e1e5522-0ad5-46ad-a392-a19cb61e5efc"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9"/>
 				</textElement>
