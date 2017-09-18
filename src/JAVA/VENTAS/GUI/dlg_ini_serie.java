@@ -130,7 +130,6 @@ public class dlg_ini_serie extends javax.swing.JDialog {
     }
 
     private void evt_aceptar() {
-
         if (lo_pnl_ini_serie.CBX_serie.getItemCount() > 0) {
             gs_parametros[2] = lo_pnl_ini_serie.CBX_serie.getSelectedItem().toString();
             get_descripcion_sucursal(lo_pnl_ini_serie.TXT_codigo.getText().trim());

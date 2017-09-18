@@ -2,6 +2,7 @@
 package JAVA.VENTAS.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.VENTAS.GUI.dlg_control_pedido;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import java.beans.PropertyVetoException;
 
@@ -97,6 +98,11 @@ public class muestra_dlg_ventas {
             go_dlg_ini_serie = new dlg_ini_serie(null, true);
             go_dlg_ini_serie.setVisible(true);            
         }
+    }
+    
+    public void muestra_dlg_control_pedido() {
+        go_dlg_control_pedido = new dlg_control_pedido(null, true);
+        go_dlg_control_pedido.setVisible(true);
     }
     
 }

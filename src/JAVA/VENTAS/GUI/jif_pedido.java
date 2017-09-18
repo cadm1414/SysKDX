@@ -88,7 +88,6 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
         lo_evt_cab_pedidos.evento_press(lo_pnl_cab_pedidos, KeyEvnt);
         lo_evt_cab_pedidos.evento_item(lo_pnl_cab_pedidos, ItemEvent);
-        lo_evt_grid_pedidos.evento_item(lo_pnl_grid_pedidos, ItemEvent);
         lo_evt_grid_pedidos.evento_press(lo_pnl_grid_pedidos, KeyEvnt);
         lo_pnl_grid_pedidos.TBL_pedidos.addMouseListener(MouseEvent);
     }
@@ -258,6 +257,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
         lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle(codigo);
         lo_evt_grid_pedidos.recupera_detalle(lq_rs,lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_pedido.getEs_precio_igv()));
+        lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
     }
 
     private void limpia_parametros() {
@@ -616,9 +616,6 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     get_nombre_vendedor();
                 }
                 if (ke.getSource() == lo_pnl_cab_pedidos.TXT_observacion) {
-                    lo_pnl_grid_pedidos.JRD_masivo.requestFocus();
-                }
-                if (ke.getSource() == lo_pnl_grid_pedidos.JRD_masivo) {
                     if (lo_pnl_grid_pedidos.TBL_pedidos.getRowCount() == 0) {
                         lo_pnl_grid_pedidos.TBL_pedidos.requestFocus();
                         lo_evt_grid_pedidos.agrega_fila(lo_pnl_grid_pedidos, -1, li_cantidad);
@@ -640,7 +637,8 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 genera_peso_bruto(fila);
                 genera_importe(fila);
                 lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
-
+                lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
+                
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 2) {
                     if (lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 1) == null) {
                         lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(0, fila, 1);
@@ -720,6 +718,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 }
                 if (ie.getSource() == lo_pnl_cab_pedidos.JRD_precio_igv) {
                     lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                    lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                 }
                 if (ie.getSource() == lo_pnl_cab_pedidos.CBX_forma_pago) {
                     if (lo_pnl_cab_pedidos.CBX_forma_pago.getSelectedIndex() == 0) {
@@ -728,10 +727,6 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     } else {
                         lo_pnl_cab_pedidos.TXT_dias_credito.setEnabled(true);
                     }
-                }
-                if (ie.getSource() == lo_pnl_grid_pedidos.JRD_masivo && lo_pnl_grid_pedidos.JRD_masivo.isSelected() == true) {
-//                    go_dlg_busq_facturacion = new dlg_busq_facturacion(null, true);
-//                    go_dlg_busq_facturacion.setVisible(true);
                 }
             }
         }
@@ -749,6 +744,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                         lo_evt_grid_pedidos.elimina_fila(lo_pnl_grid_pedidos, fila);
                         lo_evt_grid_pedidos.genera_item(lo_pnl_grid_pedidos);
                         lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                        lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     }
                 }
             }

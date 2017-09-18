@@ -119,6 +119,10 @@ public class opciones_menu {
                     go_muestra_jif_ventas.muestra_jif_entidad();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("CONTROL PEDIDOS")) {
+                    go_muestra_dlg_ventas.muestra_dlg_control_pedido();
+                    resp = "I";
+                }
                 break;
         }
         return resp;

@@ -3,7 +3,6 @@ package JAVA.VENTAS.LOGICA;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.INVENT.LOGICA.formato_grid_saldos_iniciales;
 import JAVA.VENTAS.GUI.pnl_grid_pedidos;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
@@ -22,7 +21,6 @@ public class evt_grid_pedidos {
         switch (op) {
             case 0:
                 OBJ_pgp.TBL_pedidos.setEnabled(valor);
-                OBJ_pgp.JRD_masivo.setEnabled(valor);
                 break;
         }
     }
@@ -34,9 +32,9 @@ public class evt_grid_pedidos {
             OBJ_pgp.LBL_afecto.setText("0.00");
             OBJ_pgp.LBL_igv.setText("0.00");
             OBJ_pgp.LBL_importe.setText("0.00");
-            OBJ_pgp.LBL_percepcion.setText("0.00");
+            OBJ_pgp.LBL_percepcion.setText("0.00");            
         }
-
+        OBJ_pgp.LBL_utilidad_p.setText("0.00 %");
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
         for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
             modelo.removeRow(i);
@@ -69,6 +67,24 @@ public class evt_grid_pedidos {
             OBJ_pgp.TBL_pedidos.editCellAt(fila_s + 1, 1);
         }
 
+    }
+
+    public void calculo_utilidad(pnl_grid_pedidos OBJ_pgp) {
+        try {
+            double total = 0, acumula = 0;
+            DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                acumula = acumula + Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, 12).toString());
+            }
+            if (acumula == 0) {
+                total = 0;
+            } else {
+                total = go_fnc_operaciones_campos.redondea(acumula / modelo.getRowCount(), 2);
+            }
+            OBJ_pgp.LBL_utilidad_p.setText(total + " %");
+        } catch (Exception e) {
+            
+        }
     }
 
     public void suma_importes(int afecto_igv, double igv_p, boolean es_sigv, pnl_grid_pedidos OBJ_pgp) {
@@ -275,8 +291,8 @@ public class evt_grid_pedidos {
             }
         }
     }
-    
-    public void recupera_detalle_gf(ResultSet rs, pnl_grid_pedidos OBJ_pgp, int es_precio_igv) {        
+
+    public void recupera_detalle_gf(ResultSet rs, pnl_grid_pedidos OBJ_pgp, int es_precio_igv) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
@@ -322,12 +338,7 @@ public class evt_grid_pedidos {
 
     public KeyListener evento_press(pnl_grid_pedidos OBJ_pgp, KeyListener KeyEvnt) {
         OBJ_pgp.TBL_pedidos.addKeyListener(KeyEvnt);
-        OBJ_pgp.JRD_masivo.addKeyListener(KeyEvnt);
         return KeyEvnt;
     }
 
-    public ItemListener evento_item(pnl_grid_pedidos OBJ_pgp, ItemListener ItemEvent) {
-        OBJ_pgp.JRD_masivo.addItemListener(ItemEvent);
-        return ItemEvent;
-    }
 }

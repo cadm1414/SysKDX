@@ -77,6 +77,7 @@ import JAVA.VENTAS.GUI.dlg_busq_guia_remision;
 import JAVA.VENTAS.GUI.dlg_busq_pedido;
 import JAVA.VENTAS.GUI.dlg_busq_registro_ventas;
 import JAVA.VENTAS.GUI.dlg_busq_transportista;
+import JAVA.VENTAS.GUI.dlg_control_pedido;
 import JAVA.VENTAS.GUI.dlg_datos_pl;
 import JAVA.VENTAS.GUI.dlg_datos_seleccion_guiar;
 import JAVA.VENTAS.GUI.dlg_datos_seleccion_pedido;
@@ -88,6 +89,10 @@ import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
 import JAVA.VENTAS.LOGICA.muestra_jif_ventas;
+import JAVA.VENTAS.LOGICA.muestra_pestania_ventas;
+import JAVA.VENTAS.LOGICA.muestra_reporte_ventas;
+import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido;
+import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
 
 public class variables_globales {
 
@@ -189,6 +194,8 @@ public class variables_globales {
     public static muestra_jif_ventas go_muestra_jif_ventas = new muestra_jif_ventas();
     public static activa_buscador go_activa_buscador = new activa_buscador();
     public static evt_imprime_doc_ventas go_evt_imprime_doc_ventas = new evt_imprime_doc_ventas();
+    public static muestra_reporte_ventas go_muestra_reporte_ventas = new muestra_reporte_ventas();
+    public static muestra_pestania_ventas go_muestra_pestania_ventas = new muestra_pestania_ventas();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;
@@ -224,6 +231,7 @@ public class variables_globales {
     public static dlg_datos_seleccion_pedido go_dlg_datos_seleccion_pedido;
     public static dlg_busq_guia_remision go_dlg_busq_guia_remision;
     public static dlg_datos_seleccion_guiar go_dlg_datos_seleccion_guiar;
+    public static dlg_control_pedido go_dlg_control_pedido;
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
     public static jif_datos_sucursal go_jif_datos_sucursal;
@@ -262,4 +270,6 @@ public class variables_globales {
     public static pnl_rpt_stock_valorizado go_pnl_rpt_stock_valorizado;
     public static pnl_rpt_stock_futuro go_pnl_rpt_stock_futuro;
     public static pnl_rpt_stock_simplificado go_pnl_rpt_stock_simplificado;
+    public static pnl_rpt_control_pedido go_pnl_rpt_control_pedido;
+    public static pnl_rpt_control_pedido_pendiente go_pnl_rpt_control_pedido_pendiente;
 }

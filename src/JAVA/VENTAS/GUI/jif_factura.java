@@ -104,7 +104,6 @@ public class jif_factura extends javax.swing.JInternalFrame {
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
         lo_evt_cab_factura.evento_press(lo_pnl_cab_factura, KeyEvnt);
         lo_evt_cab_factura.evento_item(lo_pnl_cab_factura, ItemEvent);
-        lo_evt_grid_pedidos.evento_item(lo_pnl_grid_pedidos, ItemEvent);
         lo_evt_grid_pedidos.evento_press(lo_pnl_grid_pedidos, KeyEvnt);
         lo_pnl_grid_pedidos.TBL_pedidos.addMouseListener(MouseEvent);
 
@@ -285,6 +284,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
         lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
         lq_rs = go_dao_registro_ventas_detalle.SLT_datos_registro_ventas_detalle(codigo);
         lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_registro_ventas.getEs_precio_igv()));
+        lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
     }
 
     private void genera_peso_bruto(int fila) {
@@ -849,7 +849,8 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 genera_peso_bruto(fila);
                 genera_importe(fila);
                 lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_factura.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_factura.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
-
+                lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
+                
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 2) {
                     if (lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 1) == null) {
                         lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(0, fila, 1);
@@ -913,6 +914,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     }
                     if (ie.getSource() == lo_pnl_cab_factura.JRD_precio_igv) {
                         lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_factura.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_factura.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                        lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     }
                     if (ie.getSource() == lo_pnl_cab_factura.CBX_forma_pago) {
                         if (lo_pnl_cab_factura.CBX_forma_pago.getSelectedIndex() == 0) {
@@ -940,6 +942,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                         lo_evt_grid_pedidos.elimina_fila(lo_pnl_grid_pedidos, fila);
                         lo_evt_grid_pedidos.genera_item(lo_pnl_grid_pedidos);
                         lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_factura.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_factura.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                        lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     }
                 }
             }

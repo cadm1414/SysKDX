@@ -37,7 +37,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         LBL_simbolo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        JRD_masivo = new javax.swing.JRadioButton();
+        LBL_utilidad_p = new javax.swing.JLabel();
 
         TBL_pedidos.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TBL_pedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -203,27 +203,27 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ITEM", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "% UTILIDAD", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
 
-        JRD_masivo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        JRD_masivo.setText("R.Masivo");
-        JRD_masivo.setEnabled(false);
+        LBL_utilidad_p.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        LBL_utilidad_p.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LBL_utilidad_p.setText("0.00 %");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(JRD_masivo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LBL_utilidad_p, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(JRD_masivo)
-                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LBL_utilidad_p)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -253,7 +253,6 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JRadioButton JRD_masivo;
     public javax.swing.JLabel LBL_afecto;
     public javax.swing.JLabel LBL_igv;
     public javax.swing.JLabel LBL_importe;
@@ -261,6 +260,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
     public javax.swing.JLabel LBL_percepcion;
     public javax.swing.JLabel LBL_simbolo;
     public javax.swing.JLabel LBL_total;
+    public javax.swing.JLabel LBL_utilidad_p;
     public javax.swing.JTable TBL_pedidos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
