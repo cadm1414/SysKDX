@@ -235,14 +235,14 @@ as (codigo_producto character(4),codigo_articulo character(12),nombre_articulo c
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[PESO BRUTO]]></text>
+				<text><![CDATA[CANT. BRUTO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="490" y="2" width="64" height="20" uuid="c8bbac08-63e8-457a-90d9-cb833bbd9956"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[PESO NETO]]></text>
+				<text><![CDATA[CANT. NETO]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1" y="23" width="554" height="1" uuid="3aaa7f8c-0d3a-4148-b1fa-2d62c3974d90"/>

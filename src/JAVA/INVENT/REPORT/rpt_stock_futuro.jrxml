@@ -65,14 +65,14 @@ as (codigo_producto character(4),codigo_articulo character(12),nombre_articulo c
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{total_neto}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{total_bulto}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00;-#,##0.00">
 					<reportElement x="420" y="1" width="60" height="12" uuid="721a7c57-e050-4f1c-b07b-c69db17ac3a4"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{total_bruto}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{total_neto}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="310" y="1" width="60" height="12" uuid="7ba18669-1847-403a-9c9c-66ad5dbcfe07"/>
@@ -99,12 +99,12 @@ as (codigo_producto character(4),codigo_articulo character(12),nombre_articulo c
 						<pen lineStyle="Dashed"/>
 					</graphicElement>
 				</line>
-				<textField pattern="#,##0.###">
+				<textField pattern="#,##0.00;-#,##0.00">
 					<reportElement x="370" y="1" width="40" height="12" uuid="4967bb5e-8d38-4a85-86b3-f0fdb52d93c0"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{total_bulto}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{total_bruto}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -228,21 +228,21 @@ as (codigo_producto character(4),codigo_articulo character(12),nombre_articulo c
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[BULTOS]]></text>
+				<text><![CDATA[REAL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="420" y="2" width="60" height="20" uuid="55388067-971a-4231-ab2a-48565cd1fff9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[PESO BRUTO]]></text>
+				<text><![CDATA[PEDIDOS]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="490" y="2" width="64" height="20" uuid="c8bbac08-63e8-457a-90d9-cb833bbd9956"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[PESO NETO]]></text>
+				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1" y="23" width="554" height="1" uuid="3aaa7f8c-0d3a-4148-b1fa-2d62c3974d90"/>
@@ -293,21 +293,21 @@ as (codigo_producto character(4),codigo_articulo character(12),nombre_articulo c
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{peso_neto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bultos}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;-#,##0.00">
 				<reportElement x="420" y="0" width="60" height="12" uuid="35467e86-be8d-4675-8bda-19302216da96"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{peso_bruto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{peso_neto}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0;-#,##0">
+			<textField pattern="#,##0.00;-#,##0.00">
 				<reportElement x="370" y="0" width="40" height="12" uuid="a3cb8dfd-d762-45bb-b5c5-75f3e8781789"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bultos}.intValue()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{peso_bruto}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -338,26 +338,26 @@ as (codigo_producto character(4),codigo_articulo character(12),nombre_articulo c
 				</textElement>
 				<text><![CDATA[TOTAL :]]></text>
 			</staticText>
-			<textField pattern="#,##0.###">
-				<reportElement x="370" y="2" width="40" height="12" uuid="2e7acd53-7a28-41fc-a056-480f6bd4c731"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{gen_bulto}]]></textFieldExpression>
-			</textField>
 			<textField pattern="#,##0.00;-#,##0.00">
-				<reportElement x="420" y="2" width="60" height="12" uuid="a66e17cf-a8b2-45e7-ae49-836da8036dbe"/>
+				<reportElement x="370" y="2" width="40" height="12" uuid="2e7acd53-7a28-41fc-a056-480f6bd4c731"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{gen_bruto}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00;-#,##0.00">
-				<reportElement x="490" y="2" width="64" height="12" uuid="11063692-6a49-41b0-81a8-1f4d8656e746"/>
+				<reportElement x="420" y="2" width="60" height="12" uuid="a66e17cf-a8b2-45e7-ae49-836da8036dbe"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{gen_neto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="490" y="2" width="64" height="12" uuid="11063692-6a49-41b0-81a8-1f4d8656e746"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{gen_bulto}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
