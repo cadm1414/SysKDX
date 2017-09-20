@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d2cc8695-2d47-4fd3-9a71-bb4d47246389">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="codigo_sucursal" class="java.lang.String"/>
@@ -291,7 +290,7 @@
 				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="20" y="0" width="50" height="12" uuid="89325e0e-51ed-4c49-be8e-eac1f12d4901"/>
+				<reportElement x="20" y="0" width="47" height="12" uuid="89325e0e-51ed-4c49-be8e-eac1f12d4901"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
@@ -311,8 +310,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{codigo_entidad}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="70" y="0" width="40" height="12" uuid="fdcf0165-570e-4295-b055-042c9a88a5b5"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="67" y="0" width="44" height="12" uuid="fdcf0165-570e-4295-b055-042c9a88a5b5"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>

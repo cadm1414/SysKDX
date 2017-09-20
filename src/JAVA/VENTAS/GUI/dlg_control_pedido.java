@@ -108,7 +108,7 @@ public class dlg_control_pedido extends javax.swing.JDialog {
         parametros.put("fecha_fin", go_fnc_operaciones_campos.formarto_date(lo_pnl_control_pedido.TXT_fecha_fin.getText()));
         parametros.put("periodo", gs_periodo);
         parametros.put("nombre_almacen", lo_pnl_control_pedido.TXT_nombre.getText().trim());
-        parametros.put("estado", (lo_pnl_control_pedido.CBX_tipo.getSelectedIndex() == 0) ? "%" : "0");
+        parametros.put("estado", (lo_pnl_control_pedido.CBX_tipo.getSelectedIndex() == 1) ? "0" : "%");
         parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
         switch (lo_pnl_control_pedido.CBX_tipo.getSelectedIndex()) {
             case 0:
@@ -116,6 +116,9 @@ public class dlg_control_pedido extends javax.swing.JDialog {
                 break;
             case 1:
                 go_muestra_reporte_ventas.reporte_pestania("rpt_control_pedido.jasper", parametros, "CONTROL PEDIDOS - PENDIENTES", 1);
+                break;
+            case 2:
+                go_muestra_reporte_ventas.reporte_pestania("rpt_diferencia_pedido.jasper", parametros, "DIFERENCIA PEDIDO-FACTURA", 2);
                 break;
         }
     }

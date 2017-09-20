@@ -1,4 +1,5 @@
 package JAVA.VENTAS.GUI;
+import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import java.awt.Component; 
 import javax.swing.text.JTextComponent;
 
@@ -6,6 +7,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
           
     public pnl_grid_pedidos() {
         initComponents();        
+        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 14);
     }
 
     @SuppressWarnings("unchecked")
@@ -21,6 +23,21 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                     editor.requestFocusInWindow();
                     ((JTextComponent)editor).selectAll();
                 }
+            }
+            public boolean isCellEditable(int row, int column) {
+                boolean resp = false;
+                switch(column){
+                    case 1:
+                    resp = (Double.parseDouble(this.getValueAt(row, 14).toString())>0)?true:false;
+                    break;
+                    case 8:
+                    resp = (!gs_tipo_comercio.equalsIgnoreCase("0"))?false:true;
+                    break;
+                    case 10:
+                    resp = (Double.parseDouble(this.getValueAt(row, 14).toString())>0)?false:true;
+                    break;
+                }
+                return resp;
             }
         };
         jPanel1 = new javax.swing.JPanel();
@@ -45,14 +62,14 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Item", "Bulto", "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "Perc.", "Precio", "C. Bruto", "C. Neto", "Importe", "%", ""
+                "Item", "Bulto", "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "Perc.", "Precio", "C. Bruto", "C. Neto", "Importe", "%", "", "presentacion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false, false, false, true, false, true, false, false, false
+                false, true, false, false, false, false, false, false, true, false, true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -96,6 +113,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
             TBL_pedidos.getColumnModel().getColumn(12).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(13).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(13).setPreferredWidth(15);
+            TBL_pedidos.getColumnModel().getColumn(14).setResizable(false);
         }
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N

@@ -56,7 +56,7 @@
               <Font name="Arial" size="10" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="14" rowCount="0">
+              <Table columnCount="15" rowCount="0">
                 <Column editable="false" title="Item" type="java.lang.String"/>
                 <Column editable="true" title="Bulto" type="java.lang.Integer"/>
                 <Column editable="false" title="C. Articulo" type="java.lang.String"/>
@@ -71,6 +71,7 @@
                 <Column editable="false" title="Importe" type="java.lang.Double"/>
                 <Column editable="false" title="%" type="java.lang.Integer"/>
                 <Column editable="false" title="" type="java.lang.Object"/>
+                <Column editable="false" title="presentacion" type="java.lang.Double"/>
               </Table>
             </Property>
             <Property name="cellSelectionEnabled" type="boolean" value="true"/>
@@ -146,6 +147,11 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
               </TableColumnModel>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
@@ -154,7 +160,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public void changeSelection(int row, int column, boolean toggle,boolean extend){&#xa;        super.changeSelection(row, column, toggle, extend);&#xa;        if (editCellAt(row, column)){&#xa;            Component editor = getEditorComponent();&#xa;            editor.requestFocusInWindow();&#xa;    ((JTextComponent)editor).selectAll();&#xa;        }&#xa;    }&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public void changeSelection(int row, int column, boolean toggle,boolean extend){&#xa;        super.changeSelection(row, column, toggle, extend);&#xa;        if (editCellAt(row, column)){&#xa;            Component editor = getEditorComponent();&#xa;            editor.requestFocusInWindow();&#xa;            ((JTextComponent)editor).selectAll();&#xa;        }&#xa;    }&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        boolean resp = false;&#xa;        switch(column){&#xa;            case 1:&#xa;            resp = (Double.parseDouble(this.getValueAt(row, 14).toString())&gt;0)?true:false;&#xa;            break;&#xa;            case 8:&#xa;            resp = (!gs_tipo_comercio.equalsIgnoreCase(&quot;0&quot;))?false:true;&#xa;            break;&#xa;            case 10:&#xa;            resp = (Double.parseDouble(this.getValueAt(row, 14).toString())&gt;0)?false:true;&#xa;            break;&#xa;        }&#xa;        return resp;&#xa;    }&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>

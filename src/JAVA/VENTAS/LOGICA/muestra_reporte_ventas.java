@@ -26,8 +26,11 @@ public class muestra_reporte_ventas {
                 case 0:
                     go_muestra_pestania_ventas.rpt_control_pedido(jr, nombre);
                     break;
-                case 1:                   
+                case 1:
                     go_muestra_pestania_ventas.rpt_control_pedido_pendiente(jr, nombre);
+                    break;
+                case 2:
+                    go_muestra_pestania_ventas.rpt_diferencia_pedido(jr, nombre);
                     break;
             }
         } catch (Exception e) {

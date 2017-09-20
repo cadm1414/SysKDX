@@ -16,7 +16,7 @@ public class DAO_usuario {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_usuario_sesion('" + OBJ_bus.getNombre_usuario() + "','" + OBJ_bus.getClave_usuario() + "') "
-                    + "as (resp integer,id_usuario integer,nombre_usuario character varying(20),datos_usuario character varying(150),id_rol integer,status character(1),nombre_rol character varying(30))";
+                    + "as (resp integer,id_usuario integer,nombre_usuario character varying(20),datos_usuario character varying(150),id_rol integer,status character(1),nombre_rol character varying(30),tipo_comercio character(1),codigo_entidad character(6),codigo_vendedor character(4))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {

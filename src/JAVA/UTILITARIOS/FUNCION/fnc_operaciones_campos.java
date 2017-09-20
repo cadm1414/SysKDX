@@ -15,7 +15,9 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableColumn;
 import org.apache.commons.codec.binary.Base64;
 
 public class fnc_operaciones_campos {
@@ -111,7 +113,7 @@ public class fnc_operaciones_campos {
         boolean resp = false;
         if (dato.substring(6, 10).equalsIgnoreCase(periodo)) {
             resp = true;
-        } 
+        }
         return resp;
     }
 
@@ -193,6 +195,14 @@ public class fnc_operaciones_campos {
             sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
         }
         return sb.toString();
+    }
+
+    public void oculta_columna(JTable tabla, int posicion) {
+        TableColumn columna = tabla.getColumnModel().getColumn(posicion );
+        columna.setMaxWidth(0);
+        columna.setMinWidth(0);
+        columna.setPreferredWidth(0);
+        tabla.doLayout();
     }
 
     public boolean valida_ruc(String dato) {

@@ -27,7 +27,7 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
     String ls_usuario, ls_clave;
     String ls_modulo = "ANCESTRO", ls_capa = "GUI", ls_clase = "frm_inicia_sesion";
 
-    public frm_inicia_sesion() {        
+    public frm_inicia_sesion() {
         initComponents();
         formulario();
         get_empresa();
@@ -171,6 +171,9 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
                             gs_datos_usuario = lq_rs.getString(4);
                             gi_id_rol = lq_rs.getInt(5);
                             gs_nombre_rol = lq_rs.getString(7);
+                            gs_tipo_comercio = lq_rs.getString(8);
+                            gs_entidad_usuario = lq_rs.getString(9);
+                            gs_vendedor_usuario = lq_rs.getString(10);
 
                             go_frm_principal = new frm_principal();
                             go_frm_principal.setVisible(true);
@@ -188,6 +191,9 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
                             gs_datos_usuario = lq_rs.getString(4);
                             gi_id_rol = lq_rs.getInt(5);
                             gs_nombre_rol = lq_rs.getString(7);
+                            gs_tipo_comercio = lq_rs.getString(8);
+                            gs_entidad_usuario = lq_rs.getString(9);
+                            gs_vendedor_usuario = lq_rs.getString(10);
 
                             go_frm_datos_general = new frm_datos_general();
                             go_frm_datos_general.setVisible(true);
@@ -213,11 +219,11 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
         go_fnc_operaciones_campos.set_campo_vacio(lo_pnl_inicia_sesion.TXT_usuario);
         go_fnc_operaciones_campos.get_focus(lo_pnl_inicia_sesion.TXT_usuario);
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(IMAGES_ruta_ancestro.class.getResource("login.png"));       
+                getImage(IMAGES_ruta_ancestro.class.getResource("login.png"));
         return retValue;
     }
 

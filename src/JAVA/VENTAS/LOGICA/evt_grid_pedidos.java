@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 
 public class evt_grid_pedidos {
 
@@ -50,13 +51,13 @@ public class evt_grid_pedidos {
     public void agrega_fila(pnl_grid_pedidos OBJ_pgp, int fila_s, int cantidad) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
+        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());        
         int fila = OBJ_pgp.TBL_pedidos.getRowCount();
-
+       
         if (fila == (fila_s + 1)) {
             if (fila < cantidad) {
                 String item = go_fnc_operaciones_campos.completa_digitos(fila + 1 + "", "0", 3);
-                modelo.addRow(new Object[]{item, 0, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar()});
+                modelo.addRow(new Object[]{item, 0, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar(),1});
                 OBJ_pgp.TBL_pedidos.changeSelection(fila, 1, false, false);
                 OBJ_pgp.TBL_pedidos.editCellAt(fila, 1);
             } else {
@@ -208,7 +209,7 @@ public class evt_grid_pedidos {
         if (rs != null) {
             try {
                 do {
-                    modelo.addRow(new Object[]{null, null, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar()});
+                    modelo.addRow(new Object[]{null, null, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar(),1});
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(1), a, 0);
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getInt(2), a, 1);
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(3), a, 2);
@@ -300,7 +301,7 @@ public class evt_grid_pedidos {
         if (rs != null) {
             try {
                 do {
-                    modelo.addRow(new Object[]{null, null, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar()});
+                    modelo.addRow(new Object[]{null, null, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar(),1});
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(1), a, 0);
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getInt(2), a, 1);
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(3), a, 2);

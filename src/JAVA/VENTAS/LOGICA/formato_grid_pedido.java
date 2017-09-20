@@ -43,6 +43,7 @@ public class formato_grid_pedido extends DefaultTableCellRenderer {
 
         } catch (Exception e) {
         }
+        
         return c;
     }
 

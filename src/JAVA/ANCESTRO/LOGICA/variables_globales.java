@@ -93,6 +93,7 @@ import JAVA.VENTAS.LOGICA.muestra_pestania_ventas;
 import JAVA.VENTAS.LOGICA.muestra_reporte_ventas;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
+import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
 
 public class variables_globales {
 
@@ -120,7 +121,10 @@ public class variables_globales {
             gs_nombre_pc,
             gs_direccion_mac,
             gs_dia,
-            gs_mes;
+            gs_mes,
+            gs_tipo_comercio,
+            gs_entidad_usuario,
+            gs_vendedor_usuario;
     public static String[] gs_parametros = new String[99999];
     public static int gi_codigo_empresa,
             gi_id_usuario,
@@ -170,6 +174,7 @@ public class variables_globales {
     public static DAO_transportista go_dao_transportista = new DAO_transportista();
     public static DAO_guia_remision go_dao_guia_remision = new DAO_guia_remision();
     public static DAO_guia_remision_detalle go_dao_guia_remision_detalle = new DAO_guia_remision_detalle();
+    public static DAO_precios go_dao_precios = new DAO_precios();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -272,4 +277,5 @@ public class variables_globales {
     public static pnl_rpt_stock_simplificado go_pnl_rpt_stock_simplificado;
     public static pnl_rpt_control_pedido go_pnl_rpt_control_pedido;
     public static pnl_rpt_control_pedido_pendiente go_pnl_rpt_control_pedido_pendiente;
+    public static pnl_rpt_diferencia_pedido go_pnl_rpt_diferencia_pedido;
 }
