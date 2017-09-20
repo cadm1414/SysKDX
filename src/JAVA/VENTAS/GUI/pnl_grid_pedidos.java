@@ -28,13 +28,13 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                 boolean resp = false;
                 switch(column){
                     case 1:
-                    resp = (Double.parseDouble(this.getValueAt(row, 14).toString())>0)?true:false;
+                    resp = true;
                     break;
                     case 8:
                     resp = (!gs_tipo_comercio.equalsIgnoreCase("0"))?false:true;
                     break;
                     case 10:
-                    resp = (Double.parseDouble(this.getValueAt(row, 14).toString())>0)?false:true;
+                    resp = (Double.parseDouble(this.getValueAt(row, 14).toString())>0 && Double.parseDouble(this.getValueAt(row, 1).toString())>0)?false:true;
                     break;
                 }
                 return resp;

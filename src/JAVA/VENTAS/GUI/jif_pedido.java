@@ -21,12 +21,16 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRParameter;
 
 public class jif_pedido extends javax.swing.JInternalFrame {
 
@@ -278,6 +282,12 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         gs_parametros[5] = "%";
     }
 
+    private void genera_peso_neto(int fila) {
+        if (Integer.parseInt(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 1).toString()) > 0 && Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 14).toString()) > 0) {
+            lo_pnl_grid_pedidos.TBL_pedidos.setValueAt((Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 14).toString()) * Integer.parseInt(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 1).toString())), fila, 10);
+        }
+    }
+
     private void genera_peso_bruto(int fila) {
         try {
             double peso_bruto = (double) lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 10) + ((double) lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 4) * (int) lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 1));
@@ -329,11 +339,6 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(lq_rs.getDouble(1), lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 8);
                 }
                 lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(lq_rs.getDouble(2), lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 14);
-
-                if (Integer.parseInt(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 1).toString()) > 0) {
-                    lo_pnl_grid_pedidos.TBL_pedidos.setValueAt((lq_rs.getDouble(2) * Integer.parseInt(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 1).toString())), lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 10);
-                }
-
             } catch (Exception e) {
             }
         }
@@ -372,7 +377,6 @@ public class jif_pedido extends javax.swing.JInternalFrame {
 
         switch (gs_tipo_comercio) {
             case "0":
-                lo_evt_opciones_3.activa_btn_opciones(1, lo_pnl_opciones_3, lb_valor_op);
                 lo_evt_cab_pedidos.activa_campos(0, lo_pnl_cab_pedidos, true);
                 break;
             case "1":
@@ -383,7 +387,9 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_dias_credito.setEnabled(false);
                 lo_pnl_cab_pedidos.TXT_observacion.setEnabled(true);
                 lo_pnl_cab_pedidos.TXT_observacion.requestFocus();
+                break;
         }
+        lo_evt_opciones_3.activa_btn_opciones(1, lo_pnl_opciones_3, lb_valor_op);
         lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, true);
     }
 
@@ -459,6 +465,12 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                                 lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
                                 lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
                                 lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                                if (go_fnc_mensaje.get_respuesta(0, "¿DESEA IMPRIMIR DOCUMENTO Nro  OP  - " + lo_bean_pedido.getNumero_documento() + "?") == 0) {
+                                    try {
+                                        evt_imprimir(lo_bean_pedido.getStatus(), lo_bean_pedido.getCodigo_operacion());
+                                    } catch (Exception e) {
+                                    }
+                                }
                             }
                         } catch (Exception e) {
                         }
@@ -506,6 +518,21 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         }
     }
 
+    private void evt_imprimir(String status, String codigo) {
+        if (status.equalsIgnoreCase("1")) {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("codigo_operacion", codigo);
+            parametros.put("periodo", gs_periodo);
+            parametros.put("nombre_sucursal", lo_pnl_cab_pedidos.TXT_sucursal.getText());
+            parametros.put("empresa", go_bean_general.getRazon_social());
+            parametros.put("usuario", gs_datos_usuario);
+            parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_pedido_" + go_bean_general.getRuc() + ".jasper", parametros);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "DOCUMENTO NO SE PUEDE IMPRIMIR");
+        }
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -526,6 +553,9 @@ public class jif_pedido extends javax.swing.JInternalFrame {
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_guardar) {
                 evt_guardar();
+            }
+            if (ae.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
+                evt_imprimir(lo_bean_pedido.getStatus(), lo_bean_pedido.getCodigo_operacion());
             }
         }
     };
@@ -585,6 +615,9 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
                     evt_cancelar();
+                }
+                if (ke.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
+                    evt_imprimir(lo_bean_pedido.getStatus(), lo_bean_pedido.getCodigo_operacion());
                 }
                 if (ke.getSource() == lo_pnl_cab_pedidos.TXT_numero_doc) {
                     if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_pedidos.TXT_numero_doc)) {
@@ -658,6 +691,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
             if (ke.getSource() == lo_pnl_grid_pedidos.TBL_pedidos) {
                 int fila = lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow();
                 genera_peso_bruto(fila);
+                genera_peso_neto(fila);
                 genera_importe(fila);
                 lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
                 lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);

@@ -94,6 +94,7 @@ import JAVA.VENTAS.LOGICA.muestra_reporte_ventas;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
+import JAVA.VENTAS.REPORT.pnl_rpt_formato_pedido;
 
 public class variables_globales {
 
@@ -278,4 +279,5 @@ public class variables_globales {
     public static pnl_rpt_control_pedido go_pnl_rpt_control_pedido;
     public static pnl_rpt_control_pedido_pendiente go_pnl_rpt_control_pedido_pendiente;
     public static pnl_rpt_diferencia_pedido go_pnl_rpt_diferencia_pedido;
+    public static pnl_rpt_formato_pedido go_pnl_rpt_formato_pedido;
 }

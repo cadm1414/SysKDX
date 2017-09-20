@@ -65,7 +65,7 @@ public class dlg_busq_pedido extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_pedido.TBL_pedidos.getModel();
         try {
-            lq_rs = go_dao_pedido.SLT_grid_pedido(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_es_facturado,ls_codigo_doc_ref);
+            lq_rs = go_dao_pedido.SLT_grid_pedido(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_es_facturado,ls_codigo_doc_ref,gs_entidad_usuario,gs_vendedor_usuario);
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});

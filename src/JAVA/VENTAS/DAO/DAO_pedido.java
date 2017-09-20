@@ -29,10 +29,10 @@ public class DAO_pedido {
         return null;
     }
 
-    public ResultSet SLT_grid_pedido(String codigo_sucursal, String fecha_ini, String fecha_fin, String serie, String es_facturado, String codigo_doc_ref) {
+    public ResultSet SLT_grid_pedido(String codigo_sucursal, String fecha_ini, String fecha_fin, String serie, String es_facturado, String codigo_doc_ref, String codigo_entidad,String codigo_vendedor) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_grid_pedido('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + serie + "','" + es_facturado + "','" + codigo_doc_ref + "','" + gs_periodo + "') "
+            String SQL = "select * from slt_grid_pedido('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + serie + "','" + es_facturado + "','" + codigo_doc_ref + "','"+codigo_entidad+"','"+codigo_vendedor+"','" + gs_periodo + "') "
                     + "as (fecha_emision date,numero_documento text,status text)";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
