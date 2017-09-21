@@ -135,7 +135,7 @@ public class dlg_ini_serie extends javax.swing.JDialog {
             get_descripcion_sucursal(lo_pnl_ini_serie.TXT_codigo.getText().trim());
             muestra_jif();
         } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_f5", "SELECCIONE SUCURSAL");
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_aceptar", "SELECCIONE SUCURSAL");
             limpia_datos();
         }
     }

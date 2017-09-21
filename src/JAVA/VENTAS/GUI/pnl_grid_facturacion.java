@@ -42,7 +42,6 @@ public class pnl_grid_facturacion extends javax.swing.JPanel {
         if (TBL_facturacion.getColumnModel().getColumnCount() > 0) {
             TBL_facturacion.getColumnModel().getColumn(0).setResizable(false);
             TBL_facturacion.getColumnModel().getColumn(0).setPreferredWidth(45);
-            TBL_facturacion.getColumnModel().getColumn(1).setResizable(false);
             TBL_facturacion.getColumnModel().getColumn(1).setPreferredWidth(200);
             TBL_facturacion.getColumnModel().getColumn(2).setResizable(false);
             TBL_facturacion.getColumnModel().getColumn(2).setPreferredWidth(7);

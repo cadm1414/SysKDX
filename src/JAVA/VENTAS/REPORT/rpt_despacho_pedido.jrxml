@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="ff1f7eb6-27ea-4012-8057-5190bbdbf92a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -11,7 +12,7 @@
 	<parameter name="empresa" class="java.lang.String"/>
 	<parameter name="usuario" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_despacho_pedido('OP00010000000001','2017') as (nombre_producto character varying(60),numero_documento character(10),fecha_emision date,codigo_entidad character(6),razon_social character varying(250),codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),bulto integer,peso_bruto numeric,peso_neto numeric)]]>
+		<![CDATA[select * from rpt_despacho_pedido( $P{codigo_operacion} , $P{periodo} ) as (nombre_producto character varying(60),numero_documento character(10),fecha_emision date,codigo_entidad character(6),razon_social character varying(250),codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),observacion text,bulto integer,peso_bruto numeric,peso_neto numeric)]]>
 	</queryString>
 	<field name="nombre_producto" class="java.lang.String"/>
 	<field name="numero_documento" class="java.lang.String"/>
@@ -21,6 +22,7 @@
 	<field name="codigo_articulo" class="java.lang.String"/>
 	<field name="nombre_articulo" class="java.lang.String"/>
 	<field name="simbolo_unidad" class="java.lang.String"/>
+	<field name="observacion" class="java.lang.String"/>
 	<field name="bulto" class="java.lang.Integer"/>
 	<field name="peso_bruto" class="java.math.BigDecimal"/>
 	<field name="peso_neto" class="java.math.BigDecimal"/>
@@ -39,7 +41,7 @@
 	<group name="producto">
 		<groupExpression><![CDATA[$F{nombre_producto}]]></groupExpression>
 		<groupFooter>
-			<band height="16">
+			<band height="18">
 				<textField pattern="#,##0">
 					<reportElement x="350" y="3" width="36" height="12" uuid="0c05431a-30a5-4795-bfef-959b1e92fc7a"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -53,6 +55,13 @@
 						<pen lineStyle="Dashed"/>
 					</graphicElement>
 				</line>
+				<staticText>
+					<reportElement x="281" y="5" width="69" height="12" uuid="086f8248-8fb1-4af9-9021-e7d8df84748a"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Subtotal Bultos :]]></text>
+				</staticText>
 			</band>
 		</groupFooter>
 	</group>
@@ -203,6 +212,13 @@
 				</textElement>
 				<text><![CDATA[DESPACHO MERCADERIA]]></text>
 			</staticText>
+			<textField pattern="000">
+				<reportElement x="450" y="60" width="102" height="12" uuid="a431682d-8b6e-42f2-98da-0123bf97e812"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -381,6 +397,13 @@
 			<line>
 				<reportElement x="350" y="3" width="36" height="1" uuid="108f21b2-e052-4914-bfb4-1499be5e4470"/>
 			</line>
+			<staticText>
+				<reportElement x="281" y="5" width="69" height="12" uuid="5ab66e07-d98c-4a6d-a265-8d7d90db5ffb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Bultos :]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>

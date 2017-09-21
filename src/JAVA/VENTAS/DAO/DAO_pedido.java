@@ -29,10 +29,10 @@ public class DAO_pedido {
         return null;
     }
 
-    public ResultSet SLT_grid_pedido(String codigo_sucursal, String fecha_ini, String fecha_fin, String serie, String es_facturado, String codigo_doc_ref, String codigo_entidad,String codigo_vendedor) {
+    public ResultSet SLT_grid_pedido(String codigo_sucursal, String fecha_ini, String fecha_fin, String serie, String es_facturado, String codigo_doc_ref, String codigo_entidad, String codigo_vendedor) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_grid_pedido('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + serie + "','" + es_facturado + "','" + codigo_doc_ref + "','"+codigo_entidad+"','"+codigo_vendedor+"','" + gs_periodo + "') "
+            String SQL = "select * from slt_grid_pedido('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + serie + "','" + es_facturado + "','" + codigo_doc_ref + "','" + codigo_entidad + "','" + codigo_vendedor + "','" + gs_periodo + "') "
                     + "as (fecha_emision date,numero_documento text,status text)";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
@@ -86,7 +86,7 @@ public class DAO_pedido {
         double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from ist_pedido('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','"+OBJ_ped.getCodigo_documento()+"','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getCodigo_documento_ref() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + ",'" + gs_periodo + "')";
+            String SQL = "select * from ist_pedido('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','" + OBJ_ped.getCodigo_documento() + "','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getCodigo_documento_ref() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + ",'" + gs_periodo + "')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 for (int i = 0; i < OBJ_pgp.getRowCount(); i++) {
@@ -153,7 +153,7 @@ public class DAO_pedido {
         double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from upd_pedido('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','"+OBJ_ped.getCodigo_documento()+"','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getCodigo_documento_ref() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + ",'" + gs_periodo + "')";
+            String SQL = "select * from upd_pedido('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','" + OBJ_ped.getCodigo_documento() + "','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getCodigo_documento_ref() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + ",'" + gs_periodo + "')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 for (int i = 0; i < OBJ_pgp.getRowCount(); i++) {
@@ -246,5 +246,22 @@ public class DAO_pedido {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_ref_factura", e.getMessage());
         }
         return null;
+    }
+
+    public int SLT_cta_pedido_parametros(String codigo_sucursal, String serie, String numero) {
+        int resp = 0;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_cta_pedido_parametros('" + codigo_sucursal + "','" + serie + "','" + numero + "','" + gs_entidad_usuario + "','" + gs_vendedor_usuario + "','" + gs_periodo + "') "
+                    + "as (cont bigint)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                resp = lq_rs.getInt(1);
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_ref_factura", e.getMessage());
+        }
+        return resp;
     }
 }

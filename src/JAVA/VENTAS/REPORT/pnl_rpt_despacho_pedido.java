@@ -9,12 +9,12 @@ package JAVA.VENTAS.REPORT;
  *
  * @author maiz del norte
  */
-public class pnl_rpt_formato_pedido extends javax.swing.JPanel {
+public class pnl_rpt_despacho_pedido extends javax.swing.JPanel {
 
     /**
-     * Creates new form pnl_rpt_formato_pedido
+     * Creates new form pnl_rpt_despacho_pedido
      */
-    public pnl_rpt_formato_pedido() {
+    public pnl_rpt_despacho_pedido() {
         initComponents();
     }
 

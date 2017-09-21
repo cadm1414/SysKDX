@@ -123,6 +123,10 @@ public class opciones_menu {
                     go_muestra_dlg_ventas.muestra_dlg_control_pedido();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("DESPACHO PEDIDO")) {
+                    go_muestra_dlg_ventas.muestra_dlg_despacho_pedido();
+                    resp = "I";
+                }
                 break;
         }
         return resp;

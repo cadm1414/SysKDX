@@ -81,6 +81,7 @@ import JAVA.VENTAS.GUI.dlg_control_pedido;
 import JAVA.VENTAS.GUI.dlg_datos_pl;
 import JAVA.VENTAS.GUI.dlg_datos_seleccion_guiar;
 import JAVA.VENTAS.GUI.dlg_datos_seleccion_pedido;
+import JAVA.VENTAS.GUI.dlg_despacho_pedido;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_factura;
 import JAVA.VENTAS.GUI.jif_guia_remision;
@@ -93,8 +94,8 @@ import JAVA.VENTAS.LOGICA.muestra_pestania_ventas;
 import JAVA.VENTAS.LOGICA.muestra_reporte_ventas;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
+import JAVA.VENTAS.REPORT.pnl_rpt_despacho_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
-import JAVA.VENTAS.REPORT.pnl_rpt_formato_pedido;
 
 public class variables_globales {
 
@@ -238,6 +239,8 @@ public class variables_globales {
     public static dlg_busq_guia_remision go_dlg_busq_guia_remision;
     public static dlg_datos_seleccion_guiar go_dlg_datos_seleccion_guiar;
     public static dlg_control_pedido go_dlg_control_pedido;
+    public static dlg_despacho_pedido go_dlg_despacho_pedido;
+    
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
     public static jif_datos_sucursal go_jif_datos_sucursal;
@@ -279,5 +282,5 @@ public class variables_globales {
     public static pnl_rpt_control_pedido go_pnl_rpt_control_pedido;
     public static pnl_rpt_control_pedido_pendiente go_pnl_rpt_control_pedido_pendiente;
     public static pnl_rpt_diferencia_pedido go_pnl_rpt_diferencia_pedido;
-    public static pnl_rpt_formato_pedido go_pnl_rpt_formato_pedido;
+    public static pnl_rpt_despacho_pedido go_pnl_rpt_despacho_pedido;
 }
