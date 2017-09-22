@@ -128,6 +128,12 @@ public class opciones_menu {
                     resp = "I";
                 }
                 break;
+            case "CTACOB":
+                if (dato.equalsIgnoreCase("SALDO CTA CORRIENTE")) {
+                    go_muestra_dlg_ctacob.muestra_dlg_rpt_saldo_cta_corriente();
+                    resp = "I";
+                }
+                break;
         }
         return resp;
     }

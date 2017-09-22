@@ -256,7 +256,7 @@ public class evt_grid_pedidos {
                 do {
                     for (int i = 1; i < items.length; i++) {
                         if (items[i].toString().equalsIgnoreCase(rs.getString(1))) {
-                            modelo.addRow(new Object[]{null, null, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar()});
+                            modelo.addRow(new Object[]{null, null, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar(),1});
                             OBJ_pgp.TBL_pedidos.setValueAt((rs.getInt(1) + agrega) + "", a, 0);
                             OBJ_pgp.TBL_pedidos.setValueAt(rs.getInt(2), a, 1);
                             OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(3), a, 2);

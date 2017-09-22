@@ -34,6 +34,11 @@ import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
+import JAVA.CTACOB.GUI.dlg_rpt_saldo_cta_corriente;
+import JAVA.CTACOB.LOGICA.muestra_dlg_ctacob;
+import JAVA.CTACOB.LOGICA.muestra_pestania_ctacob;
+import JAVA.CTACOB.LOGICA.muestra_reporte_ctacob;
+import JAVA.CTACOB.REPORT.pnl_rpt_saldo_cta_corriente;
 import JAVA.INVENT.DAO.*;
 import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
 import JAVA.INVENT.GUI.dlg_busq_articulo;
@@ -203,6 +208,9 @@ public class variables_globales {
     public static evt_imprime_doc_ventas go_evt_imprime_doc_ventas = new evt_imprime_doc_ventas();
     public static muestra_reporte_ventas go_muestra_reporte_ventas = new muestra_reporte_ventas();
     public static muestra_pestania_ventas go_muestra_pestania_ventas = new muestra_pestania_ventas();
+    public static muestra_dlg_ctacob go_muestra_dlg_ctacob = new muestra_dlg_ctacob();
+    public static muestra_reporte_ctacob go_muestra_reporte_ctacob = new muestra_reporte_ctacob();
+    public static muestra_pestania_ctacob go_muestra_pestania_ctacob = new muestra_pestania_ctacob();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;
@@ -240,6 +248,7 @@ public class variables_globales {
     public static dlg_datos_seleccion_guiar go_dlg_datos_seleccion_guiar;
     public static dlg_control_pedido go_dlg_control_pedido;
     public static dlg_despacho_pedido go_dlg_despacho_pedido;
+    public static dlg_rpt_saldo_cta_corriente go_dlg_rpt_saldo_cta_corriente;
     
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -283,4 +292,5 @@ public class variables_globales {
     public static pnl_rpt_control_pedido_pendiente go_pnl_rpt_control_pedido_pendiente;
     public static pnl_rpt_diferencia_pedido go_pnl_rpt_diferencia_pedido;
     public static pnl_rpt_despacho_pedido go_pnl_rpt_despacho_pedido;
+    public static pnl_rpt_saldo_cta_corriente go_pnl_rpt_saldo_cta_corriente;
 }

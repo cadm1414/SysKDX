@@ -467,6 +467,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                             lo_evt_grid_pedidos.recupera_detalle_gf(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()));
                         }
                     }
+                    lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     lo_pnl_cab_factura.TXT_fecha_emision.setEnabled(true);
                     lo_pnl_cab_factura.TXT_numero_doc.setEnabled(true);
                 }
