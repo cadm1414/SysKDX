@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_aceptar_cancelar;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import JAVA.ANCESTRO.LOGICA.evt_aceptar_cancelar;
+import JAVA.CTACOB.GUI.jif_recibo_cobranza;
 import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -106,6 +107,11 @@ public class dlg_ini_serie extends javax.swing.JDialog {
                     go_jif_guia_remision = new jif_guia_remision();
                     go_frm_principal.JDP_principal.add(go_jif_guia_remision);
                     go_jif_guia_remision.show();
+                    break;
+                case 4:
+                    go_jif_recibo_cobranza = new jif_recibo_cobranza();
+                    go_frm_principal.JDP_principal.add(go_jif_recibo_cobranza);
+                    go_jif_recibo_cobranza.show();
                     break;
             }
             gi_parametros_2[0] = 0;

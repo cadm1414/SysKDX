@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="812" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="15" isFloatColumnFooter="true" uuid="233bce46-88d5-4613-80e8-e6a66f6e3edc">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SITMC"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -16,7 +17,7 @@
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="404"/>
+	<property name="ireport.x" value="351"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="empresa" class="java.lang.String"/>
 	<parameter name="usuario" class="java.lang.String"/>
@@ -31,7 +32,7 @@
 	</parameter>
 	<queryString>
 		<![CDATA[select * from rpt_stock_valorizado($P{almacen},$P{fecha_ini},$P{fecha_fin},$P{periodo}) 
-as (fecha_ingreso date,codigo_producto character(4),codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),oc text,tara numeric(6,3),periodo_produccion character(7),lote character(6),bultos bigint ,peso_bruto numeric,peso_neto numeric,dias integer,costo numeric(6,5),valorizado numeric(11,2),tipo_ingreso text)]]>
+as (fecha_ingreso date,codigo_producto character(4),codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),oc text,tara numeric(6,3),periodo_produccion character(7),lote character(6),bultos bigint ,peso_bruto numeric,peso_neto numeric,dias integer,costo numeric(12,5),valorizado numeric(11,2),tipo_ingreso text)]]>
 	</queryString>
 	<field name="fecha_ingreso" class="java.sql.Date"/>
 	<field name="codigo_producto" class="java.lang.String"/>
@@ -49,28 +50,30 @@ as (fecha_ingreso date,codigo_producto character(4),codigo_articulo character(12
 	<field name="costo" class="java.math.BigDecimal"/>
 	<field name="valorizado" class="java.math.BigDecimal"/>
 	<field name="tipo_ingreso" class="java.lang.String"/>
+	<sortField name="codigo_producto"/>
+	<sortField name="fecha_ingreso"/>
 	<variable name="total_bulto" class="java.lang.Integer" resetType="Group" resetGroup="producto" calculation="Sum">
 		<variableExpression><![CDATA[$F{bultos}]]></variableExpression>
 	</variable>
-	<variable name="total_bruto" class="java.lang.Integer" resetType="Group" resetGroup="producto" calculation="Sum">
+	<variable name="total_bruto" class="java.math.BigDecimal" resetType="Group" resetGroup="producto" calculation="Sum">
 		<variableExpression><![CDATA[$F{peso_bruto}]]></variableExpression>
 	</variable>
-	<variable name="total_neto" class="java.lang.Integer" resetType="Group" resetGroup="producto" calculation="Sum">
+	<variable name="total_neto" class="java.math.BigDecimal" resetType="Group" resetGroup="producto" calculation="Sum">
 		<variableExpression><![CDATA[$F{peso_neto}]]></variableExpression>
 	</variable>
 	<variable name="gen_bulto" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{bultos}]]></variableExpression>
 	</variable>
-	<variable name="gen_bruto" class="java.lang.Integer" calculation="Sum">
+	<variable name="gen_bruto" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{peso_bruto}]]></variableExpression>
 	</variable>
-	<variable name="gen_neto" class="java.lang.Integer" calculation="Sum">
+	<variable name="gen_neto" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{peso_neto}]]></variableExpression>
 	</variable>
-	<variable name="total_valor" class="java.lang.Integer" resetType="Group" resetGroup="producto" calculation="Sum">
+	<variable name="total_valor" class="java.math.BigDecimal" resetType="Group" resetGroup="producto" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorizado}]]></variableExpression>
 	</variable>
-	<variable name="gen_valor" class="java.lang.Integer" calculation="Sum">
+	<variable name="gen_valor" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{valorizado}]]></variableExpression>
 	</variable>
 	<group name="producto">

@@ -415,6 +415,11 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(gs_parametros[3], lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 5);
                 lo_pnl_grid_pedidos.TBL_pedidos.setValueAt((gs_parametros[4].equalsIgnoreCase("true")) ? true : false, lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 6);
                 lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(Double.parseDouble(gs_parametros[5]), lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 7);
+                lq_rs = go_dao_precios.SLT_datos_precio_x_articulo(gs_parametros[0], gs_tipo_comercio);
+                if (!gs_tipo_comercio.equalsIgnoreCase("0")) {
+                    lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(lq_rs.getDouble(1), lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 8);
+                }
+                lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(lq_rs.getDouble(2), lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 14);
             } catch (Exception e) {
             }
         }
@@ -458,7 +463,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     lo_evt_cab_factura.muestra_datos_ref(1, lq_rs, ls_codigo_pedido, lo_pnl_cab_factura, lo_pnl_grid_pedidos);
                     get_tipo_cambio();
                     genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(), Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
-                    
+
                     lo_pnl_cab_factura.TXT_observacion.setEnabled(true);
                     for (int i = 1; i < ls_item_seleccion.length; i++) {
                         lq_rs = go_dao_guia_remision_detalle.SLT_datos_guia_remision_detalle_x_item(ls_item_seleccion[i][0], ls_item_seleccion[i][1]);
@@ -851,7 +856,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 genera_importe(fila);
                 lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_factura.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_factura.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
                 lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
-                
+
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 2) {
                     if (lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 1) == null) {
                         lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(0, fila, 1);

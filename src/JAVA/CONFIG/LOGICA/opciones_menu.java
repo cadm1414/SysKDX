@@ -133,6 +133,10 @@ public class opciones_menu {
                     go_muestra_dlg_ctacob.muestra_dlg_rpt_saldo_cta_corriente();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("RECIBO COBRANZA")) {
+                    go_muestra_dlg_ctacob.muestra_dlg_recibo_cobranza("RC");
+                    resp = "I";
+                }
                 break;
         }
         return resp;

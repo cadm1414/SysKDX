@@ -34,6 +34,8 @@ import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
+import JAVA.CTACOB.DAO.DAO_banco;
+import JAVA.CTACOB.DAO.DAO_recibo_cobranza;
 import JAVA.CTACOB.GUI.dlg_rpt_saldo_cta_corriente;
 import JAVA.CTACOB.LOGICA.muestra_dlg_ctacob;
 import JAVA.CTACOB.LOGICA.muestra_pestania_ctacob;
@@ -91,6 +93,7 @@ import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.jif_factura;
 import JAVA.VENTAS.GUI.jif_guia_remision;
 import JAVA.VENTAS.GUI.jif_pedido;
+import JAVA.CTACOB.GUI.jif_recibo_cobranza;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
@@ -182,6 +185,8 @@ public class variables_globales {
     public static DAO_guia_remision go_dao_guia_remision = new DAO_guia_remision();
     public static DAO_guia_remision_detalle go_dao_guia_remision_detalle = new DAO_guia_remision_detalle();
     public static DAO_precios go_dao_precios = new DAO_precios();
+    public static DAO_banco go_dao_banco = new DAO_banco();
+    public static DAO_recibo_cobranza go_dao_recibo_cobranza = new DAO_recibo_cobranza();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -249,7 +254,7 @@ public class variables_globales {
     public static dlg_control_pedido go_dlg_control_pedido;
     public static dlg_despacho_pedido go_dlg_despacho_pedido;
     public static dlg_rpt_saldo_cta_corriente go_dlg_rpt_saldo_cta_corriente;
-    
+
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
     public static jif_datos_sucursal go_jif_datos_sucursal;
@@ -272,6 +277,7 @@ public class variables_globales {
     public static jif_factura go_jif_boleta;
     public static jif_tipo_cambio go_jif_tipo_cambio;
     public static jif_guia_remision go_jif_guia_remision;
+    public static jif_recibo_cobranza go_jif_recibo_cobranza;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;
