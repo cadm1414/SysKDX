@@ -2,7 +2,8 @@
 package JAVA.CTACOB.GUI;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
-
+import java.awt.Component; 
+import javax.swing.text.JTextComponent;
 public class pnl_grid_recibo_cobranza extends javax.swing.JPanel {
 
     public pnl_grid_recibo_cobranza() {
@@ -16,7 +17,16 @@ public class pnl_grid_recibo_cobranza extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        TBL_cobranza = new javax.swing.JTable();
+        TBL_cobranza = new javax.swing.JTable(){
+            public void changeSelection(int row, int column, boolean toggle,boolean extend){
+                super.changeSelection(row, column, toggle, extend);
+                if (editCellAt(row, column)){
+                    Component editor = getEditorComponent();
+                    editor.requestFocusInWindow();
+                    ((JTextComponent)editor).selectAll();
+                }
+            }
+        };
         jPanel1 = new javax.swing.JPanel();
         LBL_total_pago = new javax.swing.JLabel();
         LBL_simbolo = new javax.swing.JLabel();
@@ -27,14 +37,14 @@ public class pnl_grid_recibo_cobranza extends javax.swing.JPanel {
 
             },
             new String [] {
-                "codigo_rv", "codigo_vendedor", "T.D.", "Serie Doc.", "Numero Doc.", "F. Emision", "C.M.", "Total Doc.", "Pago", "Saldo"
+                "codigo_rv", "codigo_vendedor", "Item", "T.D.", "Serie", "Numero", "F. Emision", "C.M.", "Total Doc.", "Pago", "Saldo", ""
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -46,6 +56,7 @@ public class pnl_grid_recibo_cobranza extends javax.swing.JPanel {
             }
         });
         TBL_cobranza.setColumnSelectionAllowed(true);
+        TBL_cobranza.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_cobranza);
         if (TBL_cobranza.getColumnModel().getColumnCount() > 0) {
             TBL_cobranza.getColumnModel().getColumn(0).setResizable(false);
@@ -55,19 +66,23 @@ public class pnl_grid_recibo_cobranza extends javax.swing.JPanel {
             TBL_cobranza.getColumnModel().getColumn(2).setResizable(false);
             TBL_cobranza.getColumnModel().getColumn(2).setPreferredWidth(1);
             TBL_cobranza.getColumnModel().getColumn(3).setResizable(false);
-            TBL_cobranza.getColumnModel().getColumn(3).setPreferredWidth(6);
+            TBL_cobranza.getColumnModel().getColumn(3).setPreferredWidth(1);
             TBL_cobranza.getColumnModel().getColumn(4).setResizable(false);
-            TBL_cobranza.getColumnModel().getColumn(4).setPreferredWidth(30);
+            TBL_cobranza.getColumnModel().getColumn(4).setPreferredWidth(6);
             TBL_cobranza.getColumnModel().getColumn(5).setResizable(false);
-            TBL_cobranza.getColumnModel().getColumn(5).setPreferredWidth(15);
+            TBL_cobranza.getColumnModel().getColumn(5).setPreferredWidth(30);
             TBL_cobranza.getColumnModel().getColumn(6).setResizable(false);
-            TBL_cobranza.getColumnModel().getColumn(6).setPreferredWidth(1);
+            TBL_cobranza.getColumnModel().getColumn(6).setPreferredWidth(25);
             TBL_cobranza.getColumnModel().getColumn(7).setResizable(false);
-            TBL_cobranza.getColumnModel().getColumn(7).setPreferredWidth(30);
+            TBL_cobranza.getColumnModel().getColumn(7).setPreferredWidth(1);
             TBL_cobranza.getColumnModel().getColumn(8).setResizable(false);
             TBL_cobranza.getColumnModel().getColumn(8).setPreferredWidth(30);
             TBL_cobranza.getColumnModel().getColumn(9).setResizable(false);
             TBL_cobranza.getColumnModel().getColumn(9).setPreferredWidth(30);
+            TBL_cobranza.getColumnModel().getColumn(10).setResizable(false);
+            TBL_cobranza.getColumnModel().getColumn(10).setPreferredWidth(30);
+            TBL_cobranza.getColumnModel().getColumn(11).setResizable(false);
+            TBL_cobranza.getColumnModel().getColumn(11).setPreferredWidth(1);
         }
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL PAGO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
@@ -108,10 +123,10 @@ public class pnl_grid_recibo_cobranza extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

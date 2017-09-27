@@ -35,7 +35,9 @@ import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_usuario_permisos;
 import JAVA.CTACOB.DAO.DAO_banco;
+import JAVA.CTACOB.DAO.DAO_cuenta_corriente_rv;
 import JAVA.CTACOB.DAO.DAO_recibo_cobranza;
+import JAVA.CTACOB.GUI.dlg_datos_seleccion_saldos;
 import JAVA.CTACOB.GUI.dlg_rpt_saldo_cta_corriente;
 import JAVA.CTACOB.LOGICA.muestra_dlg_ctacob;
 import JAVA.CTACOB.LOGICA.muestra_pestania_ctacob;
@@ -187,6 +189,7 @@ public class variables_globales {
     public static DAO_precios go_dao_precios = new DAO_precios();
     public static DAO_banco go_dao_banco = new DAO_banco();
     public static DAO_recibo_cobranza go_dao_recibo_cobranza = new DAO_recibo_cobranza();
+    public static DAO_cuenta_corriente_rv go_dao_cuenta_corriente_rv = new DAO_cuenta_corriente_rv();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -254,6 +257,7 @@ public class variables_globales {
     public static dlg_control_pedido go_dlg_control_pedido;
     public static dlg_despacho_pedido go_dlg_despacho_pedido;
     public static dlg_rpt_saldo_cta_corriente go_dlg_rpt_saldo_cta_corriente;
+    public static dlg_datos_seleccion_saldos go_dlg_datos_seleccion_saldos;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

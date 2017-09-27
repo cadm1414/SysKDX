@@ -733,8 +733,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     }
                 }
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 12) {
-                    lo_evt_grid_pedidos.agrega_fila(lo_pnl_grid_pedidos, fila, li_cantidad
-                    );
+                    lo_evt_grid_pedidos.agrega_fila(lo_pnl_grid_pedidos, fila, li_cantidad);
                 }
             }
         }

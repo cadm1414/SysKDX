@@ -52,7 +52,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         gs_parametros[0] = "";
         gs_parametros[1] = "";
         gs_parametros[2] = "";
-        gi_parametros_2[3] = 0;
+        gi_parametros_2[0] = 0;
 
         modelo = (DefaultTableModel) lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getModel();
         modelo.addTableModelListener(TablaListener);

@@ -17,10 +17,10 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" min="-2" pref="624" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="636" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="51" max="32767" attributes="0"/>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,17 +50,19 @@
               <Font name="Arial" size="10" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="10" rowCount="0">
+              <Table columnCount="12" rowCount="0">
                 <Column editable="false" title="codigo_rv" type="java.lang.String"/>
                 <Column editable="false" title="codigo_vendedor" type="java.lang.String"/>
+                <Column editable="false" title="Item" type="java.lang.String"/>
                 <Column editable="false" title="T.D." type="java.lang.String"/>
-                <Column editable="false" title="Serie Doc." type="java.lang.String"/>
-                <Column editable="false" title="Numero Doc." type="java.lang.String"/>
+                <Column editable="false" title="Serie" type="java.lang.String"/>
+                <Column editable="false" title="Numero" type="java.lang.String"/>
                 <Column editable="false" title="F. Emision" type="java.lang.String"/>
                 <Column editable="false" title="C.M." type="java.lang.String"/>
                 <Column editable="false" title="Total Doc." type="java.lang.Double"/>
                 <Column editable="true" title="Pago" type="java.lang.Double"/>
                 <Column editable="false" title="Saldo" type="java.lang.Double"/>
+                <Column editable="false" title="" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -80,6 +82,11 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="6" resizable="false">
                   <Title/>
                   <Editor/>
@@ -90,7 +97,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="15" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="25" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -115,14 +122,20 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
               </TableColumnModel>
             </Property>
             <Property name="columnSelectionAllowed" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;public void changeSelection(int row, int column, boolean toggle,boolean extend){&#xa;        super.changeSelection(row, column, toggle, extend);&#xa;        if (editCellAt(row, column)){&#xa;            Component editor = getEditorComponent();&#xa;            editor.requestFocusInWindow();&#xa;            ((JTextComponent)editor).selectAll();&#xa;        }&#xa;    }&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>

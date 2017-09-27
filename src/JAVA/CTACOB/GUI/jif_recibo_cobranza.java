@@ -9,9 +9,18 @@ import JAVA.CTACOB.LOGICA.evt_cab_recibo_cobranza;
 import JAVA.CTACOB.LOGICA.evt_grid_recibo_cobranza;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.ResultSet;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 
 public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
 
@@ -23,9 +32,11 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
     evt_grid_recibo_cobranza lo_evt_grid_recibo_cobranza = new evt_grid_recibo_cobranza();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
     static boolean lb_valor_op[] = new boolean[8];
+    DefaultTableModel modelo, modelo_retorno;
     ResultSet lq_rs;
     cbx_moneda lo_cbx_moneda;
-    int li_tipo_operacion;
+    int li_tipo_operacion, li_cantidad, cont = 0;
+    double ld_tipo_cambio;
     String ls_codigo_sucursal, ls_serie, ls_codigo;
     String ls_opcion = "M A A";
     String ls_modulo = "CTACOB", ls_capa = "GUI", ls_clase = "jif_recibo_cobranza";
@@ -36,6 +47,7 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
         activa_botones();
         get_moneda();
         get_banco();
+        lo_pnl_grid_recibo_cobranza.TBL_cobranza.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selectNextColumnCell");
     }
 
     private void formulario() {
@@ -56,8 +68,16 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
         gs_parametros[1] = "";
         gs_parametros[2] = "";
 
+        li_cantidad = go_dao_serie.SLT_cant_items(ls_serie, ls_codigo_sucursal, 6);
+        modelo = (DefaultTableModel) lo_pnl_grid_recibo_cobranza.TBL_cobranza.getModel();
+        modelo.addTableModelListener(TablaListener);
+
+        lo_evt_cab_recibo_cobranza.evento_press(lo_pnl_cab_recibo_cobranza, KeyEvnt);
+        lo_evt_cab_recibo_cobranza.evento_item(lo_pnl_cab_recibo_cobranza, ItemEvent);
         lo_evt_opciones_3.evento_click(lo_pnl_opciones_3, Listener);
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
+        lo_evt_grid_recibo_cobranza.evento_press(lo_pnl_grid_recibo_cobranza, KeyEvnt);
+        lo_pnl_grid_recibo_cobranza.TBL_cobranza.addMouseListener(MouseEvent);
     }
 
     private void activa_botones() {
@@ -82,12 +102,61 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
     private void get_tipo_cambio() {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_recibo_cobranza.CBX_moneda.getSelectedItem();
         lo_pnl_grid_recibo_cobranza.LBL_simbolo.setText(lo_cbx_moneda.simbolo_moneda().trim());
-        lo_pnl_cab_recibo_cobranza.TXT_tipo_cambio.setEnabled(false);
-        lo_pnl_cab_recibo_cobranza.TXT_tipo_cambio.setText("0.000");
+        try {
+            ld_tipo_cambio = go_dao_tipo_cambio.SLT_tipo_cambio_monto("0", "USD", lo_pnl_cab_recibo_cobranza.TXT_fecha_emision.getText());
+            lo_pnl_cab_recibo_cobranza.TXT_tipo_cambio.setText(ld_tipo_cambio + "");
+        } catch (Exception e) {
+        }
+    }
+
+    private void genera_saldo(int fila) {
+        try {
+            double saldo = (double) lo_pnl_grid_recibo_cobranza.TBL_cobranza.getValueAt(fila, 8) - (double) lo_pnl_grid_recibo_cobranza.TBL_cobranza.getValueAt(fila, 9);
+            lo_pnl_grid_recibo_cobranza.TBL_cobranza.setValueAt(saldo, fila, 10);
+        } catch (Exception e) {
+        }
+    }
+
+    private void evt_f5_entidad() {
+        go_activa_buscador.busq_entidad(lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador, lo_pnl_cab_recibo_cobranza.TXT_nombre_pagador);
+    }
+
+    private void evt_f5_saldos() {
+        if (go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador.getText().trim(), 4, 6) && go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador)) {
+            gs_parametros[0] = ls_codigo_sucursal;
+            gs_parametros[1] = lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador.getText().trim();
+            gs_parametros[2] = "31/12/" + gs_periodo;
+            gi_parametros_2[0] = li_cantidad;
+            go_dlg_datos_seleccion_saldos = new dlg_datos_seleccion_saldos(null, true);
+            go_dlg_datos_seleccion_saldos.setVisible(true);
+            modelo_retorno = go_dlg_datos_seleccion_saldos.modelo;
+            if (modelo_retorno.getRowCount() > 0) {
+                for (int x = 0; x < modelo_retorno.getRowCount(); x++) {
+                    modelo.setValueAt(modelo_retorno.getValueAt(x, 0).toString(), x, 0);
+                    modelo.setValueAt(modelo_retorno.getValueAt(x, 1).toString(), x, 1);
+                    modelo.setValueAt(modelo_retorno.getValueAt(x, 2).toString(), x, 3);
+                    modelo.setValueAt(modelo_retorno.getValueAt(x, 3).toString(), x, 4);
+                    modelo.setValueAt(modelo_retorno.getValueAt(x, 4).toString(), x, 5);
+                    modelo.setValueAt(modelo_retorno.getValueAt(x, 5).toString(), x, 6);
+                    modelo.setValueAt(modelo_retorno.getValueAt(x, 6).toString(), x, 7);
+                    modelo.setValueAt(Double.parseDouble(modelo_retorno.getValueAt(x, 7).toString()), x, 8);
+                    if (x + 1 < modelo_retorno.getRowCount()) {
+                        lo_evt_grid_recibo_cobranza.agrega_fila(lo_pnl_grid_recibo_cobranza, lo_pnl_grid_recibo_cobranza.TBL_cobranza.getSelectedRow(), li_cantidad);
+                    }
+                }
+                lo_pnl_grid_recibo_cobranza.TBL_cobranza.changeSelection(0, 9, false, false);
+            }
+        } else {
+            lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador.setText("");
+            lo_pnl_cab_recibo_cobranza.TXT_nombre_pagador.setText("");
+            go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "evt_f5_saldos", "INGRESE CLIENTE");
+            lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador.requestFocus();
+        }
     }
 
     private void evt_nuevo() {
         ls_codigo = null;
+        get_tipo_cambio();
         lo_evt_cab_recibo_cobranza.limpia_datos(lo_pnl_cab_recibo_cobranza);
         lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
         li_tipo_operacion = 0;
@@ -158,6 +227,14 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
             if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_3.BTN_guardar.isEnabled()) {
                 //evt_guardar();
             }
+            if (ke.getKeyCode() == KeyEvent.VK_F5) {
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador) {
+                    evt_f5_entidad();
+                }
+                if (ke.getSource() == lo_pnl_grid_recibo_cobranza.TBL_cobranza && lo_pnl_grid_recibo_cobranza.TBL_cobranza.getSelectedColumn() == 3) {
+                    evt_f5_saldos();
+                }
+            }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_nuevo) {
                     evt_nuevo();
@@ -180,14 +257,164 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
                     //evt_imprimir(lo_bean_pedido.getStatus(), lo_bean_pedido.getCodigo_operacion());
                 }
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_numero_doc) {
+                    if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_recibo_cobranza.TXT_numero_doc)) {
+                        lo_pnl_cab_recibo_cobranza.TXT_numero_doc.setText(go_fnc_operaciones_campos.completa_digitos(lo_pnl_cab_recibo_cobranza.TXT_numero_doc.getText().trim(), "0", 10));
+                        lo_pnl_cab_recibo_cobranza.LBL_numero_doc.setText(lo_pnl_cab_recibo_cobranza.TXT_numero_doc.getText());
+                        lo_pnl_cab_recibo_cobranza.TXT_fecha_emision.requestFocus();
+                    }
+                }
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_fecha_emision && !lo_pnl_cab_recibo_cobranza.TXT_fecha_emision.getText().trim().equalsIgnoreCase("/  /")) {
+                    if (go_fnc_operaciones_campos.valida_fecha(lo_pnl_cab_recibo_cobranza.TXT_fecha_emision.getText())) {
+                        if (go_fnc_operaciones_campos.valida_periodo(lo_pnl_cab_recibo_cobranza.TXT_fecha_emision.getText(), gs_periodo)) {
+                            get_tipo_cambio();
+                            getFocusOwner().transferFocus();
+                        } else {
+                            lo_pnl_cab_recibo_cobranza.TXT_fecha_emision.setText("");
+                            go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FECHA NO PERTENECE AL PERIODO");
+                        }
+                    } else {
+                        lo_pnl_cab_recibo_cobranza.TXT_fecha_emision.setText("");
+                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO");
+                    }
+                }
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.CBX_moneda) {
+                    lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador.requestFocus();
+                }
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_tipo_cambio && go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_recibo_cobranza.TXT_tipo_cambio)) {
+                    getFocusOwner().transferFocus();
+                }
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador.getText().trim(), 4, 6)) {
+                    getFocusOwner().transferFocus();
+                    go_activa_buscador.get_descripcion_entidad(lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador.getText().trim(), lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador, lo_pnl_cab_recibo_cobranza.TXT_nombre_pagador);
+                }
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.CBX_forma_pago || ke.getSource() == lo_pnl_cab_recibo_cobranza.CBX_banco || ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_observacion) {
+                    getFocusOwner().transferFocus();
+                }
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_numero_op) {
+                    if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_recibo_cobranza.TXT_numero_op)) {
+                        lo_pnl_cab_recibo_cobranza.TXT_numero_op.setText(go_fnc_operaciones_campos.completa_digitos(lo_pnl_cab_recibo_cobranza.TXT_numero_op.getText().trim(), "0", 12));
+                        getFocusOwner().transferFocus();
+                    }
+                }
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_fecha_op && !lo_pnl_cab_recibo_cobranza.TXT_fecha_op.getText().trim().equalsIgnoreCase("/  /")) {
+                    if (go_fnc_operaciones_campos.valida_fecha(lo_pnl_cab_recibo_cobranza.TXT_fecha_op.getText())) {
+                        getFocusOwner().transferFocus();
+                    } else {
+                        lo_pnl_cab_recibo_cobranza.TXT_fecha_op.setText("");
+                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO");
+                    }
+                }
+                if (ke.getSource() == lo_pnl_cab_recibo_cobranza.JRD_rendido) {
+                    if (lo_pnl_grid_recibo_cobranza.TBL_cobranza.getRowCount() == 0) {
+                        lo_pnl_grid_recibo_cobranza.TBL_cobranza.requestFocus();
+                        lo_evt_grid_recibo_cobranza.agrega_fila(lo_pnl_grid_recibo_cobranza, -1, li_cantidad);
+                    } else {
+                        lo_pnl_grid_recibo_cobranza.TBL_cobranza.requestFocus();
+                        lo_pnl_grid_recibo_cobranza.TBL_cobranza.changeSelection(0, 1, false, false);
+                    }
+                }
             }
         }
 
         @Override
         public void keyReleased(KeyEvent ke) {
+            if (ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_numero_doc) {
+                lo_pnl_cab_recibo_cobranza.LBL_numero_doc.setText(lo_pnl_cab_recibo_cobranza.TXT_numero_doc.getText());
+            }
+            if (ke.getSource() == lo_pnl_grid_recibo_cobranza.TBL_cobranza) {
+                int fila = lo_pnl_grid_recibo_cobranza.TBL_cobranza.getSelectedRow();
+                lo_evt_grid_recibo_cobranza.suma_importes(lo_pnl_grid_recibo_cobranza);
+                genera_saldo(fila);
 
+                if (lo_pnl_grid_recibo_cobranza.TBL_cobranza.getSelectedColumn() == 4) {
+                    if (lo_pnl_grid_recibo_cobranza.TBL_cobranza.getValueAt(fila, 3).toString().trim().equalsIgnoreCase("")) {
+                        lo_pnl_grid_recibo_cobranza.TBL_cobranza.changeSelection(fila, 3, false, false);
+                    } else {
+                        lo_pnl_grid_recibo_cobranza.TBL_cobranza.changeSelection(fila, 9, false, false);
+                    }
+                }
+
+                if (lo_pnl_grid_recibo_cobranza.TBL_cobranza.getSelectedColumn() == 10) {
+                    if ((Double) lo_pnl_grid_recibo_cobranza.TBL_cobranza.getValueAt(fila, 9) == 0.00) {
+                        lo_pnl_grid_recibo_cobranza.TBL_cobranza.setValueAt(0.00, fila, 9);
+                        lo_pnl_grid_recibo_cobranza.TBL_cobranza.changeSelection(fila, 9, false, false);
+                    }
+                }
+
+                if (lo_pnl_grid_recibo_cobranza.TBL_cobranza.getSelectedColumn() == 11) {
+                    lo_evt_grid_recibo_cobranza.agrega_fila(lo_pnl_grid_recibo_cobranza, fila, li_cantidad);
+                }
+            }
+        }
+    };
+
+    ItemListener ItemEvent = new ItemListener() {
+        @Override
+        public void itemStateChanged(java.awt.event.ItemEvent ie) {
+            if (li_tipo_operacion != 2) {
+                if (ie.getSource() == lo_pnl_cab_recibo_cobranza.CBX_moneda) {
+                    get_tipo_cambio();
+                }
+                if (ie.getSource() == lo_pnl_cab_recibo_cobranza.CBX_forma_pago) {
+                    if (lo_pnl_cab_recibo_cobranza.CBX_forma_pago.getSelectedIndex() != 0) {
+                        lo_pnl_cab_recibo_cobranza.CBX_banco.setEnabled(true);
+                        lo_pnl_cab_recibo_cobranza.TXT_numero_op.setEnabled(true);
+                        lo_pnl_cab_recibo_cobranza.TXT_fecha_op.setEnabled(true);
+                        lo_pnl_cab_recibo_cobranza.TXT_numero_op.setText("");
+                    } else {
+                        lo_pnl_cab_recibo_cobranza.CBX_banco.setEnabled(false);
+                        lo_pnl_cab_recibo_cobranza.TXT_numero_op.setEnabled(false);
+                        lo_pnl_cab_recibo_cobranza.TXT_fecha_op.setEnabled(false);
+                        lo_pnl_cab_recibo_cobranza.TXT_numero_op.setText("000000000000");
+                    }
+                }
+            }
+        }
+    };
+
+    MouseListener MouseEvent = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent me) {
+            if (me.getSource() == lo_pnl_grid_recibo_cobranza.TBL_cobranza && lo_pnl_grid_recibo_cobranza.TBL_cobranza.isEnabled()) {
+                int columna = lo_pnl_grid_recibo_cobranza.TBL_cobranza.getColumnModel().getColumnIndexAtX(me.getX());
+                int fila = me.getY() / lo_pnl_grid_recibo_cobranza.TBL_cobranza.getRowHeight();
+                Object value = lo_pnl_grid_recibo_cobranza.TBL_cobranza.getValueAt(fila, columna);
+                if (value instanceof JButton) {
+                    if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ITEM " + go_fnc_operaciones_campos.completa_digitos((fila + 1) + "", "0", 3) + "?") == 0) {
+                        lo_evt_grid_recibo_cobranza.elimina_fila(lo_pnl_grid_recibo_cobranza, fila);
+                        lo_evt_grid_recibo_cobranza.genera_item(lo_pnl_grid_recibo_cobranza);
+                        lo_evt_grid_recibo_cobranza.suma_importes(lo_pnl_grid_recibo_cobranza);
+                    }
+                }
+            }
         }
 
+        @Override
+        public void mousePressed(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent me) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent me) {
+        }
+    };
+
+    TableModelListener TablaListener = new TableModelListener() {
+
+        @Override
+        public void tableChanged(TableModelEvent tme) {
+            if (tme.getType() == TableModelEvent.UPDATE && li_tipo_operacion == 1) {
+                cont++;
+            }
+        }
     };
 
     @SuppressWarnings("unchecked")

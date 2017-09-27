@@ -14,8 +14,7 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
         initComponents();
         TXT_sucursal.setDocument(new fnc_txt_mayuscula());
         TXT_codigo_pagador.setDocument(new fnc_txt_mayuscula());
-        TXT_nombre_pagador.setDocument(new fnc_txt_mayuscula());
-        
+        TXT_nombre_pagador.setDocument(new fnc_txt_mayuscula());        
         TXT_observacion.setDocument(new fnc_txt_mayuscula());
     }
 
@@ -46,9 +45,9 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        TXT_codigo_pagador = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         TXT_nombre_pagador = new javax.swing.JTextField();
+        TXT_codigo_pagador = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -65,7 +64,7 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         TXT_fecha_op = new javax.swing.JFormattedTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        JRD_rendido = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
@@ -127,6 +126,7 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
         TXT_tipo_cambio.setEnabled(false);
         TXT_tipo_cambio.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_tipo_cambio.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_tipo_cambio.setNextFocusableComponent(TXT_codigo_pagador);
 
         jLabel22.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel22.setText("Estado");
@@ -254,10 +254,6 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
         jLabel31.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel31.setText(":");
 
-        TXT_codigo_pagador.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        TXT_codigo_pagador.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        TXT_codigo_pagador.setEnabled(false);
-
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/f5.png"))); // NOI18N
         jLabel32.setText(" ");
         jLabel32.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -265,6 +261,16 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
         TXT_nombre_pagador.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_nombre_pagador.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_pagador.setEnabled(false);
+
+        try {
+            TXT_codigo_pagador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("U#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        TXT_codigo_pagador.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        TXT_codigo_pagador.setEnabled(false);
+        TXT_codigo_pagador.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        TXT_codigo_pagador.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -289,9 +295,9 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(jLabel31)
-                    .addComponent(TXT_codigo_pagador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXT_nombre_pagador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXT_nombre_pagador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_codigo_pagador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
@@ -318,6 +324,7 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
         CBX_forma_pago.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_forma_pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EFECTIVO", "DEPOSITO", "LETRA" }));
         CBX_forma_pago.setEnabled(false);
+        CBX_forma_pago.setNextFocusableComponent(CBX_banco);
 
         try {
             TXT_numero_op.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("############")));
@@ -328,6 +335,7 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
         TXT_numero_op.setEnabled(false);
         TXT_numero_op.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_numero_op.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_numero_op.setNextFocusableComponent(TXT_fecha_op);
 
         jLabel46.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel46.setText("Observacion");
@@ -341,6 +349,7 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
 
         CBX_banco.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_banco.setEnabled(false);
+        CBX_banco.setNextFocusableComponent(TXT_numero_op);
 
         jLabel49.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel49.setText("Fecha");
@@ -358,9 +367,9 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
         TXT_fecha_op.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_fecha_op.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
-        jRadioButton1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jRadioButton1.setText("Rendido");
-        jRadioButton1.setEnabled(false);
+        JRD_rendido.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        JRD_rendido.setText("Rendido");
+        JRD_rendido.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -401,7 +410,7 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
                         .addComponent(jLabel50)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TXT_fecha_op, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jRadioButton1))
+                    .addComponent(JRD_rendido))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -425,7 +434,7 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
                     .addComponent(jLabel46)
                     .addComponent(TXT_observacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel48)
-                    .addComponent(jRadioButton1))
+                    .addComponent(JRD_rendido))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -522,9 +531,10 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> CBX_forma_pago;
     public javax.swing.JComboBox<String> CBX_moneda;
     public javax.swing.JComboBox<String> CBX_status;
+    public javax.swing.JRadioButton JRD_rendido;
     public javax.swing.JLabel LBL_fecha_registro;
     public javax.swing.JLabel LBL_numero_doc;
-    public javax.swing.JTextField TXT_codigo_pagador;
+    public javax.swing.JFormattedTextField TXT_codigo_pagador;
     public javax.swing.JFormattedTextField TXT_fecha_emision;
     public javax.swing.JFormattedTextField TXT_fecha_op;
     public javax.swing.JTextField TXT_nombre_pagador;
@@ -566,6 +576,5 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    public javax.swing.JRadioButton jRadioButton1;
     // End of variables declaration//GEN-END:variables
 }
