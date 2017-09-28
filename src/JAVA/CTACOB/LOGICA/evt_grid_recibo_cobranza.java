@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CTACOB.GUI.pnl_grid_recibo_cobranza;
 import JAVA.INVENT.LOGICA.formato_grid_saldos_iniciales;
 import java.awt.event.KeyListener;
+import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.JButton;
@@ -134,6 +135,33 @@ public class evt_grid_recibo_cobranza {
             agrega_fila(OBJ_pgp, -1, cantidad);
         }
         return resp;
+    }
+
+    public void recupera_detalle(ResultSet rs, pnl_grid_recibo_cobranza OBJ_pgp) {
+        int a = 0;
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_cobranza.getModel();
+        OBJ_pgp.TBL_cobranza.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        OBJ_pgp.TBL_cobranza.setDefaultRenderer(Double.class, new formato_grid_recibo_cobranza());
+        if (rs != null) {
+            try {
+                do {   
+                    modelo.addRow(new Object[]{"", "", "", "", "", "", "", "", null, 0.00, null, genera_btn_eliminar()});
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getString(1), a, 0);
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getString(2), a, 1);
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getString(3), a, 2);
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getString(4), a, 3);
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getString(5), a, 4);
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getString(6), a, 5);
+                    OBJ_pgp.TBL_cobranza.setValueAt(go_fnc_operaciones_campos.recupera_fecha_formato(rs.getString(7)), a, 6);
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getString(8), a, 7);
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getDouble(9), a, 8);
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getDouble(10), a, 9);
+                    OBJ_pgp.TBL_cobranza.setValueAt(rs.getDouble(11), a, 10);
+                    a++;
+                } while (rs.next());
+            } catch (Exception e) {
+            }
+        }
     }
 
     public KeyListener evento_press(pnl_grid_recibo_cobranza OBJ_pgp, KeyListener KeyEvnt) {

@@ -113,12 +113,38 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
         }
     }
 
+    private void get_descripcion_recibo_cobranza(String codigo) {
+        try {
+            lq_rs = go_dao_recibo_cobranza.SLT_datos_recibo_cobranza(codigo);
+            if (lq_rs != null) {
+                lo_evt_cab_recibo_cobranza.setea_recupera(lo_bean_recibo_cobranza, lq_rs);
+                lo_evt_cab_recibo_cobranza.muestra_datos(lo_pnl_cab_recibo_cobranza, lo_bean_recibo_cobranza, lo_pnl_grid_recibo_cobranza);
+                lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_recibo_cobranza.CBX_moneda.getSelectedItem();
+                lo_pnl_grid_recibo_cobranza.LBL_simbolo.setText(lo_cbx_moneda.simbolo_moneda().trim());
+                get_descripcion_recibo_cobranza_detalle(codigo);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void get_descripcion_recibo_cobranza_detalle(String codigo) {
+        lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
+        lq_rs = go_dao_recibo_cobranza_detalle.SLT_datos_recibo_cobranza_detalle(codigo);
+        lo_evt_grid_recibo_cobranza.recupera_detalle(lq_rs, lo_pnl_grid_recibo_cobranza);
+    }
+
     private void genera_saldo(int fila) {
         try {
             double saldo = (double) lo_pnl_grid_recibo_cobranza.TBL_cobranza.getValueAt(fila, 8) - (double) lo_pnl_grid_recibo_cobranza.TBL_cobranza.getValueAt(fila, 9);
             lo_pnl_grid_recibo_cobranza.TBL_cobranza.setValueAt(saldo, fila, 10);
         } catch (Exception e) {
         }
+    }
+
+    private void genera_parametros_busq() {
+        gs_parametros[0] = ls_codigo_sucursal;
+        gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
     }
 
     private void evt_f5_entidad() {
@@ -178,6 +204,44 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
         lo_evt_grid_recibo_cobranza.activa_campos(0, lo_pnl_grid_recibo_cobranza, true);
     }
 
+    private void evt_buscar() {
+        li_tipo_operacion = 2;
+        genera_parametros_busq();
+        go_dlg_busq_recibo_cobranza = new dlg_busq_recibo_cobranza(null, true);
+        go_dlg_busq_recibo_cobranza.setVisible(true);
+        ls_codigo = go_dlg_busq_recibo_cobranza.ls_codigo;
+        if (ls_codigo != null) {
+            get_descripcion_recibo_cobranza(ls_codigo);
+            lo_evt_opciones_3.activa_btn_opciones(2, lo_pnl_opciones_3, lb_valor_op);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "SELECCIONE DOCUMENTO");
+            lo_evt_cab_recibo_cobranza.limpia_datos(lo_pnl_cab_recibo_cobranza);
+            lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
+            lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+        }
+    }
+
+    private void evt_editar() {
+
+    }
+
+    private void evt_eliminar() {
+        if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR DOCUMENTO Nro RC-" + lo_bean_recibo_cobranza.getNumero_documento() + "?") == 0) {
+            try {
+                if (go_dao_recibo_cobranza_detalle.DLT_recibo_cobranza_detalle(ls_codigo)) {
+                    if (go_dao_recibo_cobranza.DLT_recibo_cobranza(ls_codigo)) {
+                        lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                        lo_evt_cab_recibo_cobranza.activa_campos(0, lo_pnl_cab_recibo_cobranza, false);
+                        lo_evt_cab_recibo_cobranza.limpia_datos(lo_pnl_cab_recibo_cobranza);
+                        lo_evt_grid_recibo_cobranza.activa_campos(0, lo_pnl_grid_recibo_cobranza, false);
+                        lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+
     private void evt_guardar() {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_recibo_cobranza.CBX_moneda.getSelectedItem();
         lo_cbx_banco = (cbx_banco) lo_pnl_cab_recibo_cobranza.CBX_banco.getSelectedItem();
@@ -205,6 +269,21 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
         }
     }
 
+    private void evt_cancelar() {
+        li_tipo_operacion = 2;
+        lo_evt_cab_recibo_cobranza.activa_campos(0, lo_pnl_cab_recibo_cobranza, false);
+        lo_evt_grid_recibo_cobranza.activa_campos(0, lo_pnl_grid_recibo_cobranza, false);
+        lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
+        if (ls_codigo != null) {
+            lo_evt_cab_recibo_cobranza.muestra_datos(lo_pnl_cab_recibo_cobranza, lo_bean_recibo_cobranza, lo_pnl_grid_recibo_cobranza);
+            get_descripcion_recibo_cobranza_detalle(ls_codigo);
+            lo_evt_opciones_3.activa_btn_opciones(2, lo_pnl_opciones_3, lb_valor_op);
+        } else {
+            lo_evt_cab_recibo_cobranza.limpia_datos(lo_pnl_cab_recibo_cobranza);
+            lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+        }
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -212,16 +291,16 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                 evt_nuevo();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_buscar) {
-                //evt_buscar();
+                evt_buscar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_editar) {
-                //evt_editar();
+                evt_editar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
-                //evt_eliminar();
+                evt_eliminar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_guardar) {
                 evt_guardar();
@@ -244,16 +323,16 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                 evt_nuevo();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F2 && lo_pnl_opciones_3.BTN_buscar.isEnabled()) {
-                //evt_buscar();
+                evt_buscar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_3.BTN_editar.isEnabled()) {
-                //evt_editar();
+                evt_editar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_3.BTN_eliminar.isEnabled()) {
-                // evt_eliminar();
+                evt_eliminar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ESCAPE && lo_pnl_opciones_3.BTN_cancelar.isEnabled()) {
-                // evt_cancelar();
+                evt_cancelar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_3.BTN_guardar.isEnabled()) {
                 evt_guardar();
@@ -271,19 +350,19 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                     evt_nuevo();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_buscar) {
-                    //evt_buscar();
+                    evt_buscar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_editar) {
-                    //evt_editar();
+                    evt_editar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
-                    //evt_eliminar();
+                    evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_guardar) {
                     evt_guardar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
-                    //evt_cancelar();
+                    evt_cancelar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
                     //evt_imprimir(lo_bean_pedido.getStatus(), lo_bean_pedido.getCodigo_operacion());
