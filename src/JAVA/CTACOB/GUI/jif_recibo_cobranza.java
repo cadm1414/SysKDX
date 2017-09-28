@@ -5,6 +5,8 @@ import JAVA.ANCESTRO.GUI.pnl_opciones_3;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_3;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
+import JAVA.CTACOB.BEAN.BEAN_recibo_cobranza;
+import JAVA.CTACOB.LOGICA.cbx_banco;
 import JAVA.CTACOB.LOGICA.evt_cab_recibo_cobranza;
 import JAVA.CTACOB.LOGICA.evt_grid_recibo_cobranza;
 import java.awt.event.ActionEvent;
@@ -31,10 +33,12 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
     pnl_grid_recibo_cobranza lo_pnl_grid_recibo_cobranza = new pnl_grid_recibo_cobranza();
     evt_grid_recibo_cobranza lo_evt_grid_recibo_cobranza = new evt_grid_recibo_cobranza();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
+    BEAN_recibo_cobranza lo_bean_recibo_cobranza = new BEAN_recibo_cobranza();
     static boolean lb_valor_op[] = new boolean[8];
     DefaultTableModel modelo, modelo_retorno;
     ResultSet lq_rs;
     cbx_moneda lo_cbx_moneda;
+    cbx_banco lo_cbx_banco;
     int li_tipo_operacion, li_cantidad, cont = 0;
     double ld_tipo_cambio;
     String ls_codigo_sucursal, ls_serie, ls_codigo;
@@ -174,6 +178,33 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
         lo_evt_grid_recibo_cobranza.activa_campos(0, lo_pnl_grid_recibo_cobranza, true);
     }
 
+    private void evt_guardar() {
+        lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_recibo_cobranza.CBX_moneda.getSelectedItem();
+        lo_cbx_banco = (cbx_banco) lo_pnl_cab_recibo_cobranza.CBX_banco.getSelectedItem();
+        switch (li_tipo_operacion) {
+            case 0:
+                if (lo_evt_cab_recibo_cobranza.valida_campos(lo_pnl_cab_recibo_cobranza, lo_cbx_moneda)) {
+                    if (lo_evt_grid_recibo_cobranza.valida_campos(lo_pnl_grid_recibo_cobranza, li_cantidad)) {
+                        try {
+                            ls_codigo = "RC" + ls_codigo_sucursal + lo_pnl_cab_recibo_cobranza.TXT_numero_doc.getText().trim();
+                            lo_bean_recibo_cobranza.setCodigo_operacion(ls_codigo);
+                            lo_bean_recibo_cobranza.setCodigo_sucursal(ls_codigo_sucursal);
+                            lo_evt_cab_recibo_cobranza.setea_campos(lo_bean_recibo_cobranza, lo_pnl_cab_recibo_cobranza, lo_cbx_moneda, lo_cbx_banco, lo_pnl_grid_recibo_cobranza);
+                            if (go_dao_recibo_cobranza.IST_recibo_cobranza(lo_bean_recibo_cobranza, lo_pnl_grid_recibo_cobranza.TBL_cobranza)) {
+                                lo_evt_cab_recibo_cobranza.limpia_datos(lo_pnl_cab_recibo_cobranza);
+                                lo_evt_cab_recibo_cobranza.activa_campos(0, lo_pnl_cab_recibo_cobranza, false);
+                                lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
+                                lo_evt_grid_recibo_cobranza.activa_campos(0, lo_pnl_grid_recibo_cobranza, false);
+                                lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -193,7 +224,7 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                 //evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_guardar) {
-                //evt_guardar();
+                evt_guardar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
                 //evt_imprimir(lo_bean_pedido.getStatus(), lo_bean_pedido.getCodigo_operacion());
@@ -225,7 +256,7 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                 // evt_cancelar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_3.BTN_guardar.isEnabled()) {
-                //evt_guardar();
+                evt_guardar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F5) {
                 if (ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador) {
@@ -249,7 +280,7 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                     //evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_guardar) {
-                    //evt_guardar();
+                    evt_guardar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
                     //evt_cancelar();
@@ -422,6 +453,7 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setClosable(true);
+        setIconifiable(true);
         setTitle("RECIBO DE COBRANZA");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/formulario.png"))); // NOI18N
 

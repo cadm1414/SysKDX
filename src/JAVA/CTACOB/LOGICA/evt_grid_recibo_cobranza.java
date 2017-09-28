@@ -89,6 +89,53 @@ public class evt_grid_recibo_cobranza {
         }
     }
 
+    public boolean valida_campos(pnl_grid_recibo_cobranza OBJ_pgp, int cantidad) {
+        boolean resp = false;
+        int valida = 0;
+        if (OBJ_pgp.TBL_cobranza.getRowCount() != 0) {
+            for (int i = 0; i < OBJ_pgp.TBL_cobranza.getRowCount(); i++) {
+                for (int x = 1; x < OBJ_pgp.TBL_cobranza.getColumnCount() - 2; x++) {
+                    if (OBJ_pgp.TBL_cobranza.getValueAt(i, x) != null) {
+                        if (!OBJ_pgp.TBL_cobranza.getValueAt(i, x).toString().trim().equalsIgnoreCase("")) {
+                            if (x == 9) {
+                                if (Double.parseDouble(OBJ_pgp.TBL_cobranza.getValueAt(i, x).toString().trim()) > -1) {
+                                    resp = true;
+                                } else {
+                                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "PAGO NO PUEDE SER MENOR y/o IGUAL A CERO");
+                                    OBJ_pgp.TBL_cobranza.setValueAt(0.00, i, 9);
+                                    OBJ_pgp.TBL_cobranza.changeSelection(i, 9, false, false);
+                                    resp = false;
+                                    valida++;
+                                    break;
+                                }
+                            }
+                        } else {
+                            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "FILA NO CONTIENE DATOS");
+                            OBJ_pgp.TBL_cobranza.changeSelection(i, 2, false, false);
+                            valida++;
+                            resp = false;
+                            break;
+                        }
+                    } else {
+                        go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "FILA NO CONTIENE DATOS");
+                        OBJ_pgp.TBL_cobranza.changeSelection(i, 2, false, false);
+                        valida++;
+                        resp = false;
+                        break;
+                    }
+                }
+                if (valida != 0) {
+                    resp = false;
+                    break;
+                }
+            }
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "DOCUMENTO SIN DETALLE");
+            agrega_fila(OBJ_pgp, -1, cantidad);
+        }
+        return resp;
+    }
+
     public KeyListener evento_press(pnl_grid_recibo_cobranza OBJ_pgp, KeyListener KeyEvnt) {
         OBJ_pgp.TBL_cobranza.addKeyListener(KeyEvnt);
         return KeyEvnt;
