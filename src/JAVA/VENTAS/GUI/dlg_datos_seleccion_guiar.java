@@ -43,7 +43,7 @@ public class dlg_datos_seleccion_guiar extends javax.swing.JDialog {
         this.add(lo_pnl_aceptar_cancelar);
 
         ls_serie = gs_parametros[0];
-        ls_codigo_sucursal = gs_parametros[1];
+        ls_codigo_sucursal = "%";
         ls_codigo_documento_ref = gs_parametros[2];
         ls_numero_doc = gs_parametros[3];
         li_item = gi_parametros_2[0];

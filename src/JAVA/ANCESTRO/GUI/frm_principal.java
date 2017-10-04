@@ -6,6 +6,8 @@ import JAVA.CONFIG.DAO.DAO_auditoria;
 import JAVA.CONFIG.LOGICA.jtr_menu_opciones;
 import JAVA.CONFIG.LOGICA.lst_menu_modulo;
 import JAVA.CONFIG.LOGICA.opciones_menu;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -92,6 +94,13 @@ public class frm_principal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(IMAGES_ruta_ancestro.class.getResource("imagen_inicio.png"));
+        return retValue;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -120,6 +129,7 @@ public class frm_principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("System");
+        setIconImage(getIconImage());
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

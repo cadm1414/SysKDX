@@ -2,6 +2,7 @@ package JAVA.INVENT.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.INVENT.GUI.dlg_ini_almacen;
+import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
 import JAVA.INVENT.GUI.dlg_rpt_stock;
 import java.beans.PropertyVetoException;
 
@@ -76,6 +77,11 @@ public class muestra_dlg_invent {
     public void muestra_dlg_rpt_stock() {
         go_dlg_rpt_stock = new dlg_rpt_stock(null, true);
         go_dlg_rpt_stock.setVisible(true);
+    }
+    
+    public void muestra_dlg_rpt_kardex_mercaderia() {
+        go_dlg_rpt_kardex_mercaderia = new dlg_rpt_kardex_mercaderia(null, true);
+        go_dlg_rpt_kardex_mercaderia.setVisible(true);
     }
 
 }

@@ -135,7 +135,7 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
                 dispose();
             }
             if (ae.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
-                //evt_aceptar();
+                evt_aceptar();
             }
         }
     };

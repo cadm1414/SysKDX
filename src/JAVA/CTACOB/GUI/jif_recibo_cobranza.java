@@ -222,7 +222,11 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
     }
 
     private void evt_editar() {
-
+        li_tipo_operacion = 1;
+        cont = 0;
+        lo_evt_opciones_3.activa_btn_opciones(3, lo_pnl_opciones_3, lb_valor_op);
+        lo_evt_cab_recibo_cobranza.activa_campos(1, lo_pnl_cab_recibo_cobranza, true);
+        lo_evt_grid_recibo_cobranza.activa_campos(0, lo_pnl_grid_recibo_cobranza, true);
     }
 
     private void evt_eliminar() {
@@ -264,6 +268,29 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                         } catch (Exception e) {
                         }
                     }
+                }
+                break;
+            case 1:
+                if (lo_evt_cab_recibo_cobranza.verifica_cambios(lo_bean_recibo_cobranza, lo_pnl_cab_recibo_cobranza, lo_cbx_moneda, lo_cbx_banco) || cont != 0) {
+                    if (lo_evt_cab_recibo_cobranza.valida_campos(lo_pnl_cab_recibo_cobranza, lo_cbx_moneda)) {
+                        if (lo_evt_grid_recibo_cobranza.valida_campos(lo_pnl_grid_recibo_cobranza, li_cantidad)) {
+                            try {
+                                lo_evt_cab_recibo_cobranza.setea_campos(lo_bean_recibo_cobranza, lo_pnl_cab_recibo_cobranza, lo_cbx_moneda, lo_cbx_banco, lo_pnl_grid_recibo_cobranza);
+                                if(go_dao_recibo_cobranza_detalle.DLT_recibo_cobranza_detalle(ls_codigo)){
+                                    if(go_dao_recibo_cobranza.UPD_recibo_cobranza(lo_bean_recibo_cobranza, lo_pnl_grid_recibo_cobranza.TBL_cobranza)){
+                                        lo_evt_cab_recibo_cobranza.limpia_datos(lo_pnl_cab_recibo_cobranza);
+                                        lo_evt_cab_recibo_cobranza.activa_campos(0, lo_pnl_cab_recibo_cobranza, false);
+                                        lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
+                                        lo_evt_grid_recibo_cobranza.activa_campos(0, lo_pnl_grid_recibo_cobranza, false);
+                                        lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                                    }
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                } else {
+                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "NO SE A REALIZADO CAMBIOS");
                 }
                 break;
         }

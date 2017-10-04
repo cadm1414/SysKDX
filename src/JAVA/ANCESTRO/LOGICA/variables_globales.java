@@ -41,6 +41,7 @@ import JAVA.CTACOB.DAO.DAO_recibo_cobranza_detalle;
 import JAVA.CTACOB.GUI.dlg_busq_recibo_cobranza;
 import JAVA.CTACOB.GUI.dlg_datos_seleccion_saldos;
 import JAVA.CTACOB.GUI.dlg_rpt_saldo_cta_corriente;
+import JAVA.CTACOB.GUI.dlg_rpt_tarjeta_cuenta_corriente;
 import JAVA.CTACOB.LOGICA.muestra_dlg_ctacob;
 import JAVA.CTACOB.LOGICA.muestra_pestania_ctacob;
 import JAVA.CTACOB.LOGICA.muestra_reporte_ctacob;
@@ -98,6 +99,10 @@ import JAVA.VENTAS.GUI.jif_factura;
 import JAVA.VENTAS.GUI.jif_guia_remision;
 import JAVA.VENTAS.GUI.jif_pedido;
 import JAVA.CTACOB.GUI.jif_recibo_cobranza;
+import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
+import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
+import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_normal;
+import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_val;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
@@ -262,6 +267,9 @@ public class variables_globales {
     public static dlg_rpt_saldo_cta_corriente go_dlg_rpt_saldo_cta_corriente;
     public static dlg_datos_seleccion_saldos go_dlg_datos_seleccion_saldos;
     public static dlg_busq_recibo_cobranza go_dlg_busq_recibo_cobranza;
+    public static dlg_rpt_kardex_mercaderia go_dlg_rpt_kardex_mercaderia;
+    public static dlg_rpt_tarjeta_cuenta_corriente go_dlg_rpt_tarjeta_cuenta_corriente;
+    public static pnl_rpt_tarjeta_cuenta_corriente go_pnl_rpt_tarjeta_cuenta_corriente;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -307,4 +315,6 @@ public class variables_globales {
     public static pnl_rpt_diferencia_pedido go_pnl_rpt_diferencia_pedido;
     public static pnl_rpt_despacho_pedido go_pnl_rpt_despacho_pedido;
     public static pnl_rpt_saldo_cta_corriente go_pnl_rpt_saldo_cta_corriente;
+    public static pnl_rpt_kardex_mercaderia_normal go_pnl_rpt_kardex_mercaderia_normal;
+    public static pnl_rpt_kardex_mercaderia_val go_pnl_rpt_kardex_mercaderia_val;
 }

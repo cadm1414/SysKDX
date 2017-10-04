@@ -97,6 +97,10 @@ public class opciones_menu {
                     go_muestra_dlg_invent.muestra_dlg_rpt_stock();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("KARDEX MERCADERIA")) {
+                    go_muestra_dlg_invent.muestra_dlg_rpt_kardex_mercaderia();
+                    resp = "I";
+                }
                 break;
             case "VENTAS":
                 if (dato.equalsIgnoreCase("PEDIDOS")) {
@@ -135,6 +139,10 @@ public class opciones_menu {
                 }
                 if (dato.equalsIgnoreCase("RECIBO COBRANZA")) {
                     go_muestra_dlg_ctacob.muestra_dlg_recibo_cobranza("RC");
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("TARJETA CTA CORRIENTE")) {
+                    go_muestra_dlg_ctacob.muestra_dlg_rpt_tarjeta_cuenta_corriente();
                     resp = "I";
                 }
                 break;

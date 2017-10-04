@@ -31,6 +31,15 @@ public class evt_cab_recibo_cobranza {
                 OBJ_pcp.JRD_rendido.setEnabled(valor);
                 OBJ_pcp.TXT_numero_doc.requestFocus();
                 break;
+            case 1:
+                OBJ_pcp.TXT_fecha_emision.setEnabled(valor);
+                OBJ_pcp.CBX_moneda.setEnabled(valor);
+                OBJ_pcp.TXT_observacion.setEnabled(valor);
+                OBJ_pcp.CBX_forma_pago.setEnabled(valor);
+                OBJ_pcp.TXT_tipo_cambio.setEnabled(false);
+                OBJ_pcp.JRD_rendido.setEnabled(valor);
+                OBJ_pcp.TXT_fecha_emision.requestFocus();
+                break;
         }
     }
 
@@ -150,7 +159,7 @@ public class evt_cab_recibo_cobranza {
             OBJ_bpe.setMonto(lq_rs.getDouble(19));
             OBJ_bpe.setMonto_mn(lq_rs.getDouble(20));
         } catch (Exception e) {
-           
+
         }
     }
 
@@ -174,6 +183,48 @@ public class evt_cab_recibo_cobranza {
         OBJ_pdp.TXT_observacion.setText(OBJ_bpe.getObservacion());
         OBJ_pdp.JRD_rendido.setSelected(go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bpe.getEs_rendido())));
         OBJ_pgp.LBL_total_pago.setText(dFormat.format(OBJ_bpe.getMonto()) + "");
+    }
+
+    public boolean verifica_cambios(BEAN_recibo_cobranza OBJ_bpe, pnl_cab_recibo_cobranza OBJ_pcp, cbx_moneda cbx_moneda, cbx_banco cbx_banco) {
+        boolean resp = false;
+        if (OBJ_bpe.getFecha_emision().equalsIgnoreCase(OBJ_pcp.TXT_fecha_emision.getText().trim())) {
+            if (OBJ_bpe.getCodigo_moneda().equalsIgnoreCase(cbx_moneda.getID())) {
+                if (OBJ_bpe.getTipo_cambio() == (Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText()))) {
+                    if (OBJ_bpe.getForma_pago().equalsIgnoreCase(OBJ_pcp.CBX_forma_pago.getSelectedIndex() + "")) {
+                        if (OBJ_bpe.getCodigo_banco().equalsIgnoreCase(cbx_banco.getID())) {
+                            if (OBJ_bpe.getNumero_operacion().equalsIgnoreCase(OBJ_pcp.TXT_numero_op.getText().trim())) {
+                                if (OBJ_bpe.getFecha_comprobante().equalsIgnoreCase(OBJ_pcp.TXT_fecha_op.getText())) {
+                                    if (OBJ_bpe.getObservacion().equalsIgnoreCase(OBJ_pcp.TXT_observacion.getText().trim())) {
+                                        if (OBJ_bpe.getEs_rendido().equalsIgnoreCase(go_fnc_operaciones_campos.boolean_int(OBJ_pcp.JRD_rendido.isSelected())+"")) {
+                                            
+                                        } else {
+                                            resp = true;
+                                        }
+                                    } else {
+                                        resp = true;
+                                    }
+                                } else {
+                                    resp = true;
+                                }
+                            } else {
+                                resp = true;
+                            }
+                        } else {
+                            resp = true;
+                        }
+                    } else {
+                        resp = true;
+                    }
+                } else {
+                    resp = true;
+                }
+            } else {
+                resp = true;
+            }
+        } else {
+            resp = true;
+        }
+        return resp;
     }
 
     public KeyListener evento_press(pnl_cab_recibo_cobranza OBJ_pcp, KeyListener KeyEvnt) {

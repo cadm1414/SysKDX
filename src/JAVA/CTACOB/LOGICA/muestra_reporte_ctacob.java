@@ -26,6 +26,9 @@ public class muestra_reporte_ctacob {
                 case 0:
                     go_muestra_pestania_ctacob.rpt_saldo_cta_corriente(jr, nombre);
                     break;
+                case 1:
+                    go_muestra_pestania_ctacob.rpt_tarjeta_cuenta_corriente(jr, nombre);
+                    break;
             }
         } catch (Exception e) {
         }

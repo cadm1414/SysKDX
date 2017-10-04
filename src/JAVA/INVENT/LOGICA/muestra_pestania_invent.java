@@ -2,6 +2,8 @@ package JAVA.INVENT.LOGICA;
 
 import JAVA.ANCESTRO.LOGICA.jt_panel;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_normal;
+import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_val;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_familia;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_marca;
 import JAVA.INVENT.REPORT.pnl_rpt_lista_producto;
@@ -163,6 +165,36 @@ public class muestra_pestania_invent {
         go_pnl_rpt_stock_simplificado.repaint();
         go_pnl_rpt_stock_simplificado.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_stock_simplificado);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+    
+    public void rpt_kardex_mercaderia_normal(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_kardex_mercaderia_normal);        
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_kardex_mercaderia_normal = new pnl_rpt_kardex_mercaderia_normal();
+        go_pnl_rpt_kardex_mercaderia_normal.removeAll();
+        go_pnl_rpt_kardex_mercaderia_normal.setLayout(new BorderLayout());
+        go_pnl_rpt_kardex_mercaderia_normal.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_kardex_mercaderia_normal.setVisible(true);
+        go_pnl_rpt_kardex_mercaderia_normal.repaint();
+        go_pnl_rpt_kardex_mercaderia_normal.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_kardex_mercaderia_normal);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+    
+    public void rpt_kardex_mercaderia_val(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_kardex_mercaderia_val);        
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_kardex_mercaderia_val = new pnl_rpt_kardex_mercaderia_val();
+        go_pnl_rpt_kardex_mercaderia_val.removeAll();
+        go_pnl_rpt_kardex_mercaderia_val.setLayout(new BorderLayout());
+        go_pnl_rpt_kardex_mercaderia_val.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_kardex_mercaderia_val.setVisible(true);
+        go_pnl_rpt_kardex_mercaderia_val.repaint();
+        go_pnl_rpt_kardex_mercaderia_val.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_kardex_mercaderia_val);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }

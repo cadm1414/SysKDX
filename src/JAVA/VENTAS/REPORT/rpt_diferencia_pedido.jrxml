@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ecc34eb8-2a28-4566-bd57-652b69519baa">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ecc34eb8-2a28-4566-bd57-652b69519baa">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="codigo_sucursal" class="java.lang.String"/>
 	<parameter name="fecha_ini" class="java.util.Date"/>
 	<parameter name="fecha_fin" class="java.util.Date"/>
@@ -24,6 +26,9 @@
 	<field name="total_factura" class="java.math.BigDecimal"/>
 	<field name="total_factura_mn" class="java.math.BigDecimal"/>
 	<field name="diferencia_mn" class="java.math.BigDecimal"/>
+	<variable name="total_diferencia" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{diferencia_mn}]]></variableExpression>
+	</variable>
 	<group name="entidad">
 		<groupExpression><![CDATA[$F{codigo_entidad}]]></groupExpression>
 		<groupHeader>
@@ -276,6 +281,27 @@
 			</textField>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="15">
+			<textField pattern="#,##0.00#">
+				<reportElement x="415" y="3" width="65" height="12" uuid="8181b8af-0b5d-4b1f-984c-f441877b3193"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diferencia_mn}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="415" y="1" width="65" height="1" uuid="1bd34d1e-1517-4552-9271-9669cf0162fc"/>
+			</line>
+			<staticText>
+				<reportElement x="379" y="3" width="34" height="12" uuid="5ef2767d-c2bd-44be-96f1-707484ac6507"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
 	<pageFooter>
 		<band height="30" splitType="Stretch">
 			<textField>

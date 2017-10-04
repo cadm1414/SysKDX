@@ -47,6 +47,12 @@ public class muestra_reporte_invent {
                 case 7:
                     go_muestra_pestania_invent.rpt_stock_simplificado(jr, nombre);
                     break;
+                case 8 :
+                    go_muestra_pestania_invent.rpt_kardex_mercaderia_normal(jr, nombre);
+                    break;
+                case 9 :
+                    go_muestra_pestania_invent.rpt_kardex_mercaderia_val(jr, nombre);
+                    break;
             }
 
         } catch (Exception e) {
