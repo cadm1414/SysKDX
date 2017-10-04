@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
@@ -43,7 +44,10 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
         lo_pnl_rpt_saldo_cta_corriente.TXT_fecha_ini.setText("01" + "01" + gs_periodo);
         lo_pnl_rpt_saldo_cta_corriente.TXT_fecha_fin.setText(gs_dia + gs_mes + gs_periodo);
 
+        lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.addItemListener(ItemEvent);
+        lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.addKeyListener(KeyEvnt);
         lo_pnl_rpt_saldo_cta_corriente.TXT_codigo.addKeyListener(KeyEvnt);
+        lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.addKeyListener(KeyEvnt);
         lo_pnl_rpt_saldo_cta_corriente.TXT_fecha_fin.addKeyListener(KeyEvnt);
         lo_evt_aceptar_cancelar.evento_click(lo_pnl_aceptar_cancelar, Listener);
         lo_evt_aceptar_cancelar.evento_press(lo_pnl_aceptar_cancelar, KeyEvnt);
@@ -57,6 +61,9 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
                 lo_pnl_rpt_saldo_cta_corriente.TXT_nombre.setText(lq_rs.getString(2));
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_sucursal", "USUARIO SIN PERMISOS y/o SUCURSAL NO EXISTE");
+                lo_pnl_rpt_saldo_cta_corriente.TXT_codigo.setText("");
+                lo_pnl_rpt_saldo_cta_corriente.TXT_nombre.setText("");
+                lo_pnl_rpt_saldo_cta_corriente.TXT_codigo.requestFocus();
             }
         } catch (Exception e) {
         }
@@ -100,8 +107,8 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
         parametros.put("fecha_fin", go_fnc_operaciones_campos.formarto_date(lo_pnl_rpt_saldo_cta_corriente.TXT_fecha_fin.getText()));
         parametros.put("periodo", gs_periodo);
         parametros.put("nombre_sucursal", lo_pnl_rpt_saldo_cta_corriente.TXT_nombre.getText().trim());
-        parametros.put("codigo_pagador", "%");
-        parametros.put("codigo_vendedor", "%");
+        parametros.put("codigo_pagador", (lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.getSelectedIndex() == 1) ? lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.getText().trim() : "%");
+        parametros.put("codigo_vendedor", (lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.getSelectedIndex() == 2) ? lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.getText().trim() : "%");
         parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
 
         go_muestra_reporte_ctacob.reporte_pestania("rpt_saldo_cta_corriente.jasper", parametros, "SALDO CTA CORRIENTE", 0);
@@ -152,6 +159,16 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
                 if (ke.getSource() == lo_pnl_rpt_saldo_cta_corriente.TXT_codigo) {
                     evt_f5();
                 }
+                if (ke.getSource() == lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc) {
+                    switch (lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.getSelectedIndex()) {
+                        case 1:
+                            go_activa_buscador.busq_entidad(lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc, lo_pnl_rpt_saldo_cta_corriente.TXT_nombre_vc);
+                            break;
+                        case 2:
+                            go_activa_buscador.busq_vendedor(lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc, lo_pnl_rpt_saldo_cta_corriente.TXT_nombre_vc);
+                            break;
+                    }
+                }
             }
             if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
                 dispose();
@@ -167,9 +184,29 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
                         getFocusOwner().transferFocus();
                     }
                 }
-
+                if (ke.getSource() == lo_pnl_rpt_saldo_cta_corriente.CBX_filtro) {
+                    getFocusOwner().transferFocus();
+                }
+                if (ke.getSource() == lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc) {
+                    getFocusOwner().transferFocus();
+                    switch (lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.getSelectedIndex()) {
+                        case 1:
+                            if (go_fnc_operaciones_campos.cant_caracter(lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.getText().trim(), 4, 6)) {
+                                go_activa_buscador.get_descripcion_entidad(lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.getText().trim(), lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc, lo_pnl_rpt_saldo_cta_corriente.TXT_nombre_vc);
+                            }
+                            break;
+                        case 2:
+                            if (go_fnc_operaciones_campos.cant_caracter(lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.getText().trim(), 4, 4)) {
+                                go_activa_buscador.get_descripcion_vendedor(lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.getText().trim(), lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc, lo_pnl_rpt_saldo_cta_corriente.TXT_nombre_vc);
+                            }
+                            break;
+                    }
+                }
                 if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
                     evt_aceptar();
+                }
+                if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_cancelar) {
+                    dispose();
                 }
             }
         }
@@ -179,6 +216,23 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
 
         }
 
+    };
+
+    ItemListener ItemEvent = new ItemListener() {
+        @Override
+        public void itemStateChanged(java.awt.event.ItemEvent ie) {
+            if (ie.getSource() == lo_pnl_rpt_saldo_cta_corriente.CBX_filtro) {
+                if (lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.getSelectedIndex() == 0) {
+                    lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.setText("");
+                    lo_pnl_rpt_saldo_cta_corriente.TXT_nombre_vc.setText("");
+                    lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.setEnabled(false);
+                } else {
+                    lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.setText("");
+                    lo_pnl_rpt_saldo_cta_corriente.TXT_nombre_vc.setText("");
+                    lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.setEnabled(true);
+                }
+            }
+        }
     };
 
     @SuppressWarnings("unchecked")

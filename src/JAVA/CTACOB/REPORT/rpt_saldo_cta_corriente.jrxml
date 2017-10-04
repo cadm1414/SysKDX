@@ -161,7 +161,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="208" y="11" width="110" height="12" uuid="cd3d54cd-e198-483a-8f7b-c77ab843b7a3">
+				<reportElement x="210" y="11" width="110" height="12" uuid="cd3d54cd-e198-483a-8f7b-c77ab843b7a3">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -189,7 +189,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($P{codigo_pagador}.equalsIgnoreCase( "%" ))?"GENERAL":""]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(!$P{codigo_pagador}.equalsIgnoreCase( "%" ))?$F{nombre_pagador}:((!$P{codigo_vendedor}.equalsIgnoreCase("%"))?$P{codigo_vendedor}:"GENERAL")]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="271" y="23" width="16" height="12" uuid="7039bfae-f1ce-4c6d-bd13-2ba1b45dd199"/>

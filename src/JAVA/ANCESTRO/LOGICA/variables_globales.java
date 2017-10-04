@@ -29,6 +29,7 @@ import JAVA.CONFIG.GUI.jif_datos_usuario;
 import JAVA.CONFIG.GUI.jif_datos_usuario_permisos;
 import JAVA.CONFIG.LOGICA.evt_datos_general;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_almacen;
+import JAVA.CONFIG.REPORT.pnl_rpt_lista_entidad;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
@@ -317,4 +318,5 @@ public class variables_globales {
     public static pnl_rpt_saldo_cta_corriente go_pnl_rpt_saldo_cta_corriente;
     public static pnl_rpt_kardex_mercaderia_normal go_pnl_rpt_kardex_mercaderia_normal;
     public static pnl_rpt_kardex_mercaderia_val go_pnl_rpt_kardex_mercaderia_val;
+    public static pnl_rpt_lista_entidad go_pnl_rpt_lista_entidad;
 }

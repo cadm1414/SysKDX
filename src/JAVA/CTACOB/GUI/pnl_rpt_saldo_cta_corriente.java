@@ -1,9 +1,12 @@
 package JAVA.CTACOB.GUI;
 
+import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+
 public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
 
     public pnl_rpt_saldo_cta_corriente() {
         initComponents();
+        TXT_codigo_vc.setDocument(new fnc_txt_mayuscula());
     }
 
     @SuppressWarnings("unchecked")
@@ -28,9 +31,9 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         TXT_fecha_fin = new javax.swing.JFormattedTextField();
-        TXT_codigo_vc = new javax.swing.JFormattedTextField();
         jLabel28 = new javax.swing.JLabel();
         TXT_nombre_vc = new javax.swing.JTextField();
+        TXT_codigo_vc = new javax.swing.JTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
 
@@ -63,8 +66,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
         jLabel4.setText(":");
 
         CBX_filtro.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        CBX_filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GENERAL" }));
-        CBX_filtro.setEnabled(false);
+        CBX_filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GENERAL", "CLIENTE", "VENDEDOR" }));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel5.setText("Tipo");
@@ -105,15 +107,6 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
         TXT_fecha_fin.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_fecha_fin.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
-        try {
-            TXT_codigo_vc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        TXT_codigo_vc.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        TXT_codigo_vc.setEnabled(false);
-        TXT_codigo_vc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/f5.png"))); // NOI18N
         jLabel28.setText(" ");
         jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -121,6 +114,9 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
         TXT_nombre_vc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_nombre_vc.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_vc.setEnabled(false);
+
+        TXT_codigo_vc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_codigo_vc.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,7 +142,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CBX_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_codigo_vc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXT_codigo_vc, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -183,13 +179,13 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TXT_codigo_vc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(TXT_nombre_vc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(jLabel4)
-                        .addComponent(CBX_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(CBX_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXT_codigo_vc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -218,7 +214,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 70, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -227,7 +223,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> CBX_filtro;
     public javax.swing.JComboBox<String> CBX_tipo;
     public javax.swing.JFormattedTextField TXT_codigo;
-    public javax.swing.JFormattedTextField TXT_codigo_vc;
+    public javax.swing.JTextField TXT_codigo_vc;
     public javax.swing.JFormattedTextField TXT_fecha_fin;
     public javax.swing.JFormattedTextField TXT_fecha_ini;
     public javax.swing.JTextField TXT_nombre;

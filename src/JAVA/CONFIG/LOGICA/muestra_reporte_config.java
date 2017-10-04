@@ -54,6 +54,9 @@ public class muestra_reporte_config {
                 case 5:
                     go_muestra_pestania.rpt_lista_unidad_medida(jr, nombre);
                     break;
+                case 6:
+                    go_muestra_pestania.rpt_lista_entidad(jr, nombre);
+                    break;
             }
 
         } catch (Exception e) {

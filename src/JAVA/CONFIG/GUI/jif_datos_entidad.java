@@ -20,6 +20,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JTextField;
 
 public class jif_datos_entidad extends javax.swing.JInternalFrame {
@@ -267,6 +269,13 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
             lo_evt_opciones_2.activa_btn_opciones(0, lo_pnl_opciones_2, lb_valor_op);
         }
     }
+    
+    public void evt_reporte(){
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("empresa", go_bean_general.getNombre_reporte());
+        parametros.put("usuario", gs_datos_usuario);
+        go_evt_muestra_reporte.reporte_pestania("rpt_lista_entidad.jasper", parametros,"Etidad",6);       
+    }
 
     private void evt_nuevo_direccion() {
         li_tipo_operacion_d = 0;
@@ -364,7 +373,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                 evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_2.BTN_reporte) {
-                //evt_reporte();
+                evt_reporte();
             }
             if (ae.getSource() == lo_pnl_datos_direccion.BTN_nuevo) {
                 evt_nuevo_direccion();
@@ -436,7 +445,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                     evt_cancelar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_2.BTN_reporte) {
-                    //evt_reporte();
+                    evt_reporte();
                 }
                 if (ke.getSource() == lo_pnl_datos_entidad.JRD_es_cliente || ke.getSource() == lo_pnl_datos_entidad.JRD_es_proveedor || ke.getSource() == lo_pnl_datos_entidad.JRD_es_trabajador || ke.getSource() == lo_pnl_datos_entidad.JRD_nacional || ke.getSource() == lo_pnl_datos_entidad.JRD_extranjero || ke.getSource() == lo_pnl_datos_entidad.CBX_estado || ke.getSource() == lo_pnl_datos_entidad.CBX_tipo_documento_id || ke.getSource() == lo_pnl_datos_entidad.TXT_nombre_comercial) {
                     getFocusOwner().transferFocus();

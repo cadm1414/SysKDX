@@ -3,6 +3,7 @@ package JAVA.CONFIG.LOGICA;
 import JAVA.ANCESTRO.LOGICA.jt_panel;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_almacen;
+import JAVA.CONFIG.REPORT.pnl_rpt_lista_entidad;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_sucursal;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_tipo_movimiento;
 import JAVA.CONFIG.REPORT.pnl_rpt_lista_unidad_medida;
@@ -156,6 +157,31 @@ public class muestra_pestania_config {
         go_pnl_rpt_lista_unidad_medida.repaint();
         go_pnl_rpt_lista_unidad_medida.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_unidad_medida);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+
+    }
+    
+    public void rpt_lista_entidad(JRViewer jr, String nombre) {
+        if (go_pnl_rpt_lista_entidad == null) {
+            genera_lista_entidad(jr, nombre);
+
+        } else if (!go_pnl_rpt_lista_entidad.isShowing()) {
+            go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_lista_entidad);
+            genera_lista_entidad(jr, nombre);
+        }
+    }
+    
+    public void genera_lista_entidad(JRViewer jr, String nombre) {
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_lista_entidad = new pnl_rpt_lista_entidad();
+        go_pnl_rpt_lista_entidad.removeAll();
+        go_pnl_rpt_lista_entidad.setLayout(new BorderLayout());
+        go_pnl_rpt_lista_entidad.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_lista_entidad.setVisible(true);
+        go_pnl_rpt_lista_entidad.repaint();
+        go_pnl_rpt_lista_entidad.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_lista_entidad);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
 

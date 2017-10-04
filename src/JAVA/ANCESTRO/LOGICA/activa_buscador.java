@@ -3,6 +3,7 @@ package JAVA.ANCESTRO.LOGICA;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.GUI.dlg_busq_entidad;
 import JAVA.CONFIG.GUI.dlg_busq_ubigeo;
+import JAVA.CONFIG.GUI.dlg_busq_vendedor;
 import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
 import JAVA.INVENT.GUI.dlg_busq_articulo;
 import java.sql.ResultSet;
@@ -134,6 +135,37 @@ public class activa_buscador {
                 nombre.setText(lq_rs.getString(2));
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_articulo", "ARTICULO NO EXISTE");
+                codigo.setText("");
+                nombre.setText("");
+                codigo.requestFocus();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public void busq_vendedor(JTextField codigo, JTextField nombre) {
+        go_dlg_busq_vendedor = new dlg_busq_vendedor(null, true);
+        go_dlg_busq_vendedor.setVisible(true);
+        String ls_codigo_vendedor = go_dlg_busq_vendedor.ls_codigo_vendedor;
+        if (ls_codigo_vendedor != null) {
+            codigo.setText(ls_codigo_vendedor);
+            get_descripcion_vendedor(ls_codigo_vendedor, codigo, nombre);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "busq_vendedor", "SELECCIONE VENDEDOR");
+            codigo.setText("");
+            nombre.setText("");
+            codigo.requestFocus();
+        }
+    }
+
+    public void get_descripcion_vendedor(String ls_codigo, JTextField codigo, JTextField nombre) {
+        try {
+            lq_rs = go_dao_vendedor.SLT_datos_vendedor(ls_codigo, "1");
+            if (lq_rs != null) {
+                codigo.setText(lq_rs.getString(1));
+                nombre.setText(lq_rs.getString(2));
+            } else {
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_vendedor", "VENDEDOR NO EXISTE y/o BLOQUEADO");
                 codigo.setText("");
                 nombre.setText("");
                 codigo.requestFocus();
