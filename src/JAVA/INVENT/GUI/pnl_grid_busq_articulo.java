@@ -37,14 +37,14 @@ public class pnl_grid_busq_articulo extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TBL_articulo.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(TBL_articulo);
         if (TBL_articulo.getColumnModel().getColumnCount() > 0) {
             TBL_articulo.getColumnModel().getColumn(0).setResizable(false);
-            TBL_articulo.getColumnModel().getColumn(0).setPreferredWidth(50);
-            TBL_articulo.getColumnModel().getColumn(1).setResizable(false);
-            TBL_articulo.getColumnModel().getColumn(1).setPreferredWidth(200);
+            TBL_articulo.getColumnModel().getColumn(0).setPreferredWidth(20);
+            TBL_articulo.getColumnModel().getColumn(1).setPreferredWidth(315);
             TBL_articulo.getColumnModel().getColumn(2).setResizable(false);
-            TBL_articulo.getColumnModel().getColumn(2).setPreferredWidth(30);
+            TBL_articulo.getColumnModel().getColumn(2).setPreferredWidth(5);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -52,7 +52,7 @@ public class pnl_grid_busq_articulo extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

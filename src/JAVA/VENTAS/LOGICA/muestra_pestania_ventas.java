@@ -6,6 +6,7 @@ import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
 import JAVA.VENTAS.REPORT.pnl_rpt_despacho_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
+import JAVA.VENTAS.REPORT.pnl_rpt_registro_ventas;
 import java.awt.BorderLayout;
 import net.sf.jasperreports.view.JRViewer;
 
@@ -67,6 +68,21 @@ public class muestra_pestania_ventas {
         go_pnl_rpt_despacho_pedido.repaint();
         go_pnl_rpt_despacho_pedido.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_despacho_pedido);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+    
+    public void rpt_registro_ventas(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_registro_ventas);
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_registro_ventas = new pnl_rpt_registro_ventas();
+        go_pnl_rpt_registro_ventas.removeAll();
+        go_pnl_rpt_registro_ventas.setLayout(new BorderLayout());
+        go_pnl_rpt_registro_ventas.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_registro_ventas.setVisible(true);
+        go_pnl_rpt_registro_ventas.repaint();
+        go_pnl_rpt_registro_ventas.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_registro_ventas);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }

@@ -27,7 +27,7 @@ public class dlg_busq_articulo extends javax.swing.JDialog {
     }
 
     private void formulario() {
-        lo_pnl_grid_busq_articulo.setBounds(0, 0, 500, 220);
+        lo_pnl_grid_busq_articulo.setBounds(0, 0, 700, 220);
         PNL_grid.add(lo_pnl_grid_busq_articulo);
 
         TXT_dato.setDocument(new fnc_txt_mayuscula());
@@ -181,7 +181,7 @@ public class dlg_busq_articulo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 214, Short.MAX_VALUE))
+                        .addGap(0, 338, Short.MAX_VALUE))
                     .addComponent(PNL_grid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

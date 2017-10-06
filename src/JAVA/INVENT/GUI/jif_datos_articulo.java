@@ -500,6 +500,12 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
                     lo_pnl_datos_articulo.TXT_observacion.requestFocus();
                 }
                 if (ke.getSource() == lo_pnl_datos_articulo.TXT_observacion) {
+                   getFocusOwner().transferFocus();
+                }
+                if (ke.getSource() == lo_pnl_datos_articulo.TXT_presentacion) {
+                    if(lo_pnl_datos_articulo.TXT_presentacion.getText().trim().equalsIgnoreCase("")){
+                        lo_pnl_datos_articulo.TXT_presentacion.setText("0.00");
+                    }
                     lo_pnl_opciones_2.BTN_guardar.requestFocus();
                 }
                 if (ke.getSource() == lo_pnl_datos_articulo.TXT_serie) {

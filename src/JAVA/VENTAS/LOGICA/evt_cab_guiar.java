@@ -381,6 +381,7 @@ public class evt_cab_guiar {
         simbolos.setGroupingSeparator(',');
         dFormat = new DecimalFormat("#,##0.00", simbolos);
         OBJ_pdp.TXT_numero_doc.setText(OBJ_bpe.getNumero_documento());
+        OBJ_pdp.LBL_numero_doc.setText(OBJ_bpe.getNumero_documento());
         OBJ_pdp.TXT_fecha_emision.setText(OBJ_bpe.getFecha_emision());
         OBJ_pdp.LBL_fecha_registro.setText(OBJ_bpe.getFecha_registro());
         OBJ_pdp.CBX_tipo_op.setSelectedIndex(Integer.parseInt(OBJ_bpe.getTipo_operacion()));

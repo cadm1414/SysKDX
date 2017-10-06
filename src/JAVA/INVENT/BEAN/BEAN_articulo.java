@@ -5,7 +5,15 @@ public class BEAN_articulo {
     String codigo_articulo, fecha_registro, nombre_articulo, caracteristica, clase_producto, codigo_barra, codigo_producto, codigo_marca, codigo_familia,
             codigo_subfamilia, codigo_unidad, tipo_operacion, status, observacion, codigo_percepcion, codigo_detraccion, afecto_igv, afecto_detraccion,
             afecto_percepcion, bulto_um, categoria, codigo_sunat, serie;
-    double tara;
+    double tara,presentacion;
+
+    public double getPresentacion() {
+        return presentacion;
+    }
+
+    public void setPresentacion(double presentacion) {
+        this.presentacion = presentacion;
+    }
 
     public String getCodigo_articulo() {
         return codigo_articulo;

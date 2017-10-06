@@ -881,7 +881,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_factura.CBX_moneda.getSelectedItem();
                         double precio_sigv = Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 8).toString());
                         precio_sigv = (lo_pnl_cab_factura.JRD_precio_igv.isSelected() == true) ? precio_sigv : (precio_sigv) / (1 + (Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100));
-                        lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(go_dao_reportes.RPT_utilidad_ponderada(ls_codigo_sucursal, lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 2).toString(), precio_sigv, lo_cbx_moneda.getID()), fila, 12);
+                        lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(go_dao_reportes.RPT_utilidad_ponderada(ls_codigo_sucursal, lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 2).toString(), precio_sigv, lo_cbx_moneda.getID(),(ls_codigo.equalsIgnoreCase("")||ls_codigo==null)?"%":ls_codigo), fila, 12);
                         //lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
                     }
                 }

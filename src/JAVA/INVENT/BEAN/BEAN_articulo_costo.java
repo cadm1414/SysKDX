@@ -2,8 +2,8 @@ package JAVA.INVENT.BEAN;
 
 public class BEAN_articulo_costo {
 
-    String codigo_orden, item_orden, codigo_articulo, codigo_procedencia, tipo_procedencia, periodo, numero, codigo_entidad, nombre_articulo, fecha_ingreso, fecha_produccion, fecha_vencimiento, periodo_produccion, cierre_costo, enlace_oc,codigo_moneda,codigo_igv,es_igv;
-    double costo,costo_sigv_mn,tipo_cambio;
+    String codigo_orden, item_orden, codigo_articulo, codigo_procedencia, tipo_procedencia, periodo, numero, codigo_entidad, nombre_articulo, fecha_ingreso, fecha_produccion, fecha_vencimiento, periodo_produccion, cierre_costo, enlace_oc, codigo_moneda, codigo_igv, es_igv;
+    double costo, costo_sigv_mn, tipo_cambio;
 
     public String getCodigo_orden() {
         return codigo_orden;
@@ -172,5 +172,5 @@ public class BEAN_articulo_costo {
     public void setCosto(double costo) {
         this.costo = costo;
     }
-    
+
 }

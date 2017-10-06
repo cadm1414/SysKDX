@@ -104,6 +104,7 @@ import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
 import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_normal;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_val;
+import JAVA.VENTAS.GUI.dlg_rpt_registro_ventas;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
@@ -114,6 +115,7 @@ import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
 import JAVA.VENTAS.REPORT.pnl_rpt_despacho_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
+import JAVA.VENTAS.REPORT.pnl_rpt_registro_ventas;
 
 public class variables_globales {
 
@@ -270,7 +272,7 @@ public class variables_globales {
     public static dlg_busq_recibo_cobranza go_dlg_busq_recibo_cobranza;
     public static dlg_rpt_kardex_mercaderia go_dlg_rpt_kardex_mercaderia;
     public static dlg_rpt_tarjeta_cuenta_corriente go_dlg_rpt_tarjeta_cuenta_corriente;
-    public static pnl_rpt_tarjeta_cuenta_corriente go_pnl_rpt_tarjeta_cuenta_corriente;
+    public static dlg_rpt_registro_ventas go_dlg_rpt_registro_ventas;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -319,4 +321,7 @@ public class variables_globales {
     public static pnl_rpt_kardex_mercaderia_normal go_pnl_rpt_kardex_mercaderia_normal;
     public static pnl_rpt_kardex_mercaderia_val go_pnl_rpt_kardex_mercaderia_val;
     public static pnl_rpt_lista_entidad go_pnl_rpt_lista_entidad;
+    public static pnl_rpt_tarjeta_cuenta_corriente go_pnl_rpt_tarjeta_cuenta_corriente;
+    public static pnl_rpt_registro_ventas go_pnl_rpt_registro_ventas;
+    
 }

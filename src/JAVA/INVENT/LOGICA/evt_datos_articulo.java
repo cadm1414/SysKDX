@@ -35,7 +35,7 @@ public class evt_datos_articulo {
                 OBJ_pda.CBX_familia.setEnabled(valor);
                 OBJ_pda.CBX_subfamilia.setEnabled(valor);
                 OBJ_pda.TXT_observacion.setEnabled(valor);
-
+                OBJ_pda.TXT_presentacion.setEnabled(valor);
                 OBJ_pda.TXT_serie.requestFocus();
                 break;
             case 1:
@@ -61,6 +61,7 @@ public class evt_datos_articulo {
                 OBJ_pda.CBX_subfamilia.setEnabled(valor);
                 OBJ_pda.TXT_observacion.setEnabled(valor);
                 OBJ_pda.TXT_caracteristica.requestFocus();
+                OBJ_pda.TXT_presentacion.setEnabled(valor);
                 break;
             case 2:
                 OBJ_pda.CBX_afecto.setEnabled(valor);
@@ -70,7 +71,7 @@ public class evt_datos_articulo {
                 OBJ_pda.CBX_familia.setEnabled(valor);
                 OBJ_pda.CBX_subfamilia.setEnabled(valor);
                 OBJ_pda.TXT_observacion.setEnabled(valor);
-                OBJ_pda.TXT_caracteristica.requestFocus();
+                //OBJ_pda.TXT_caracteristica.requestFocus();
                 OBJ_pda.CBX_afecto.requestFocus();
         }
     }
@@ -93,6 +94,7 @@ public class evt_datos_articulo {
         OBJ_pda.CBX_operacion.setSelectedIndex(0);
         OBJ_pda.TXT_codigo_barra.setText("");
         OBJ_pda.CBX_familia.setSelectedIndex(0);
+        OBJ_pda.TXT_presentacion.setText("0.00");
 
         OBJ_pda.CBX_subfamilia.removeAllItems();
         ResultSet lq_rs = go_dao_subfamilia.SLT_cbx_subfamilia_x_familia("0001");
@@ -104,7 +106,7 @@ public class evt_datos_articulo {
         OBJ_pda.TXT_observacion.setText("");
     }
 
-    public void muestra_datos(pnl_datos_articulo OBJ_pda, BEAN_articulo OBJ_bar) {        
+    public void muestra_datos(pnl_datos_articulo OBJ_pda, BEAN_articulo OBJ_bar) {
         OBJ_pda.TXT_codigo.setText(OBJ_bar.getCodigo_articulo());
         OBJ_pda.TXT_nombre.setText(OBJ_bar.getNombre_articulo());
         go_cbx_trato_datos.selecciona_valor(6, OBJ_bar.getCodigo_producto(), OBJ_pda.CBX_producto);
@@ -131,10 +133,11 @@ public class evt_datos_articulo {
         go_cbx_trato_datos.selecciona_valor(9, OBJ_bar.getCodigo_subfamilia(), OBJ_pda.CBX_subfamilia);
         OBJ_pda.TXT_observacion.setText(OBJ_bar.getObservacion());
         OBJ_pda.TXT_serie.setText(OBJ_bar.getSerie());
+        OBJ_pda.TXT_presentacion.setText(OBJ_bar.getPresentacion() + "");
     }
 
     public void setea_recupera(BEAN_articulo OBJ_bar, ResultSet lq_rs) {
-        try {            
+        try {
             OBJ_bar.setCodigo_articulo(lq_rs.getString(1));
             OBJ_bar.setNombre_articulo(lq_rs.getString(2));
             OBJ_bar.setCodigo_producto(lq_rs.getString(3));
@@ -157,6 +160,7 @@ public class evt_datos_articulo {
             OBJ_bar.setCodigo_subfamilia(lq_rs.getString(20));
             OBJ_bar.setObservacion(lq_rs.getString(21));
             OBJ_bar.setSerie(lq_rs.getString(22));
+            OBJ_bar.setPresentacion(lq_rs.getDouble(23));
         } catch (Exception e) {
         }
     }
@@ -198,7 +202,7 @@ public class evt_datos_articulo {
     }
 
     public void setea_campos(BEAN_articulo OBJ_bar, pnl_datos_articulo OBJ_pda, cbx_familia cbx_familia, cbx_marca cbx_marca, cbx_producto cbx_producto, cbx_unidad_medida cbx_unidad, cbx_unidad_medida cbx_um_bulto, cbx_tabla_sunat cbx_existencia, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_grupo_percepcion cbx_grupo_percepcion, cbx_subfamilia cbx_subfamilia) {
-        try {            
+        try {
             OBJ_bar.setCodigo_articulo(go_fnc_operaciones_campos.get_campo_str(OBJ_pda.TXT_codigo));
             OBJ_bar.setNombre_articulo(go_fnc_operaciones_campos.get_campo_str(OBJ_pda.TXT_nombre));
             OBJ_bar.setCodigo_producto(cbx_producto.getID());
@@ -218,6 +222,7 @@ public class evt_datos_articulo {
             OBJ_bar.setCodigo_subfamilia(cbx_subfamilia.getID());
             OBJ_bar.setObservacion(go_fnc_operaciones_campos.get_campo_str(OBJ_pda.TXT_observacion));
             OBJ_bar.setSerie(go_fnc_operaciones_campos.get_campo_str(OBJ_pda.TXT_serie));
+            OBJ_bar.setPresentacion(Double.parseDouble(OBJ_pda.TXT_presentacion.getText()));
         } catch (Exception e) {
         }
     }
@@ -237,6 +242,10 @@ public class evt_datos_articulo {
                                                 if (OBJ_bar.getCodigo_familia().equalsIgnoreCase(cbx_familia.getID())) {
                                                     if (OBJ_bar.getCodigo_subfamilia().equalsIgnoreCase(cbx_subfamilia.getID())) {
                                                         if (OBJ_bar.getObservacion().equalsIgnoreCase(OBJ_pda.TXT_observacion.getText().trim())) {
+                                                            if (OBJ_bar.getPresentacion() == Double.parseDouble(OBJ_pda.TXT_presentacion.getText())) {
+                                                            } else {
+                                                                resp = true;
+                                                            }
                                                         } else {
                                                             resp = true;
                                                         }
@@ -299,6 +308,7 @@ public class evt_datos_articulo {
         OBJ_pda.CBX_familia.addKeyListener(KeyEvnt);
         OBJ_pda.CBX_subfamilia.addKeyListener(KeyEvnt);
         OBJ_pda.TXT_observacion.addKeyListener(KeyEvnt);
+        OBJ_pda.TXT_presentacion.addKeyListener(KeyEvnt);
         return KeyEvnt;
     }
 

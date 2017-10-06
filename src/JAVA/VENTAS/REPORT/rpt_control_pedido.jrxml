@@ -14,13 +14,14 @@
 	<parameter name="usuario" class="java.lang.String"/>
 	<parameter name="nombre_almacen" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_control_pedido( $P{codigo_sucursal} , $P{fecha_ini}  , $P{fecha_fin} ,$P{estado}, $P{periodo}  ) as (numero_documento character(10),fecha_emision date,codigo_entidad character(6),razon_social character varying(250),es_facturado character(1),codigo_articulo character(12),nombre_articulo character varying(150),bulto integer,peso_bruto numeric,peso_neto numeric,stock numeric)]]>
+		<![CDATA[select * from rpt_control_pedido( $P{codigo_sucursal} , $P{fecha_ini}  , $P{fecha_fin} ,$P{estado}, $P{periodo}  ) as (numero_documento character(10),fecha_emision date,codigo_entidad character(6),razon_social character varying(250),es_facturado character(1),simbolo_unidad character varying(3),codigo_articulo character(12),nombre_articulo character varying(150),bulto integer,peso_bruto numeric,peso_neto numeric,stock numeric)]]>
 	</queryString>
 	<field name="numero_documento" class="java.lang.String"/>
 	<field name="fecha_emision" class="java.sql.Date"/>
 	<field name="codigo_entidad" class="java.lang.String"/>
 	<field name="razon_social" class="java.lang.String"/>
 	<field name="es_facturado" class="java.lang.String"/>
+	<field name="simbolo_unidad" class="java.lang.String"/>
 	<field name="codigo_articulo" class="java.lang.String"/>
 	<field name="nombre_articulo" class="java.lang.String"/>
 	<field name="bulto" class="java.lang.Integer"/>
@@ -251,18 +252,18 @@
 				<text><![CDATA[RAZON SOCIAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="2" width="30" height="20" uuid="dff798ad-e796-4a20-a632-decc8e5e3ab5"/>
+				<reportElement x="350" y="2" width="20" height="20" uuid="dff798ad-e796-4a20-a632-decc8e5e3ab5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Estado]]></text>
+				<text><![CDATA[ET]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="2" width="30" height="20" uuid="cc652c50-b86c-4c50-ba55-6fa102288a3a"/>
+				<reportElement x="390" y="2" width="29" height="20" uuid="cc652c50-b86c-4c50-ba55-6fa102288a3a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Bultos]]></text>
+				<text><![CDATA[BULTO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="422" y="2" width="64" height="20" uuid="b3e9c8cb-805a-4aa9-be47-6d7210eb33ce"/>
@@ -277,6 +278,13 @@
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[CANT. NETO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="2" width="20" height="20" uuid="02a76efd-101f-4a9f-8177-27d165e742e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[UM]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -318,7 +326,7 @@
 				<textFieldExpression><![CDATA[$F{fecha_emision}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="350" y="0" width="30" height="12" uuid="41697420-b111-4e99-a631-6a4a6b877755"/>
+				<reportElement x="350" y="0" width="20" height="12" uuid="41697420-b111-4e99-a631-6a4a6b877755"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
@@ -339,11 +347,18 @@
 				<textFieldExpression><![CDATA[$F{peso_bruto}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement x="380" y="0" width="39" height="12" uuid="8a6f49c0-3c9f-4248-b499-942d1912b11d"/>
+				<reportElement x="390" y="0" width="29" height="12" uuid="8a6f49c0-3c9f-4248-b499-942d1912b11d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bulto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="20" height="12" uuid="116349a1-b773-4c2b-a3fa-6c53639bedfb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{simbolo_unidad}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
