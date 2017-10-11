@@ -105,6 +105,7 @@ import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_normal;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_val;
 import JAVA.VENTAS.GUI.dlg_rpt_registro_ventas;
+import JAVA.VENTAS.GUI.jif_cierre_pedidos;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
@@ -298,6 +299,7 @@ public class variables_globales {
     public static jif_tipo_cambio go_jif_tipo_cambio;
     public static jif_guia_remision go_jif_guia_remision;
     public static jif_recibo_cobranza go_jif_recibo_cobranza;
+    public static jif_cierre_pedidos go_jif_cierre_pedidos;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

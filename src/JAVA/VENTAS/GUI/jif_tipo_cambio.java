@@ -155,7 +155,7 @@ public class jif_tipo_cambio extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("TIPO DE CAMBIO");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/formulario.png"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/VENTAS/IMAGES/dolar.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

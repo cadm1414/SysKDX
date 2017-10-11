@@ -4,9 +4,10 @@
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="TIPO DE CAMBIO"/>
+    <Property name="title" type="java.lang.String" value="CIERRE PEDIDOS"/>
+    <Property name="toolTipText" type="java.lang.String" value=""/>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-      <Image iconType="3" name="/JAVA/VENTAS/IMAGES/dolar.png"/>
+      <Image iconType="3" name="/JAVA/VENTAS/IMAGES/baja.png"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -27,12 +28,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="488" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="504" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="613" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="423" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

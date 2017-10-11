@@ -264,4 +264,20 @@ public class DAO_pedido {
         }
         return resp;
     }
+
+    public ResultSet SLT_grid_cierre_pedidos(String codigo_sucursal, String serie) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_cierre_pedidos('" + codigo_sucursal + "','" + serie + "','" + gs_periodo + "') "
+                    + "as (codigo_operacion character(16),numero_documento character(10),fecha_emision date,codigo_entidad character(6),razon_social character varying(250))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_cierre_pedidos", e.getMessage());
+        }
+        return null;
+    }
 }

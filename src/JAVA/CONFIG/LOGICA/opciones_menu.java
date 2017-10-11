@@ -135,6 +135,10 @@ public class opciones_menu {
                     go_muestra_dlg_ventas.muestra_dlg_rpt_registro_ventas();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("CIERRE PEDIDOS")) {
+                    go_muestra_jif_ventas.muestra_jif_cierre_pedidos();
+                    resp = "I";
+                }
                 break;
             case "CTACOB":
                 if (dato.equalsIgnoreCase("SALDO CTA CORRIENTE")) {
