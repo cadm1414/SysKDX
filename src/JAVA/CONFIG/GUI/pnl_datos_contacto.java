@@ -1,10 +1,18 @@
 
 package JAVA.CONFIG.GUI;
 
+import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+
 public class pnl_datos_contacto extends javax.swing.JPanel {
 
     public pnl_datos_contacto() {
         initComponents();
+        TXT_anexo.setDocument(new fnc_txt_mayuscula());
+        TXT_cargo.setDocument(new fnc_txt_mayuscula());
+        TXT_celular.setDocument(new fnc_txt_mayuscula());
+        TXT_email.setDocument(new fnc_txt_mayuscula());
+        TXT_nombre_contacto.setDocument(new fnc_txt_mayuscula());
+        TXT_telefono.setDocument(new fnc_txt_mayuscula());
     }
 
     @SuppressWarnings("unchecked")
@@ -36,7 +44,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         BTN_nuevo = new javax.swing.JButton();
         BTN_editar = new javax.swing.JButton();
         BTN_eliminar = new javax.swing.JButton();
-        BTN_agregar = new javax.swing.JButton();
+        BTN_guardar = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
 
@@ -46,6 +54,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");
 
+        TXT_nombre_contacto.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_nombre_contacto.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_contacto.setEnabled(false);
 
@@ -55,6 +64,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel4.setText(":");
 
+        TXT_cargo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_cargo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_cargo.setEnabled(false);
 
@@ -64,9 +74,11 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel6.setText(":");
 
+        TXT_telefono.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_telefono.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_telefono.setEnabled(false);
 
+        TXT_anexo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_anexo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_anexo.setEnabled(false);
 
@@ -82,6 +94,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel10.setText(":");
 
+        TXT_celular.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_celular.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_celular.setEnabled(false);
 
@@ -91,6 +104,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel12.setText(":");
 
+        TXT_email.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_email.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_email.setEnabled(false);
 
@@ -115,25 +129,23 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(TXT_cargo))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel12)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(TXT_email))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(TXT_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(TXT_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel8)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TXT_anexo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TXT_anexo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(TXT_email)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -176,29 +188,38 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        TBL_contacto.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TBL_contacto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Nombre", "Estado"
+                "Codigo", "Nombre", "Cargo"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         TBL_contacto.setEnabled(false);
+        TBL_contacto.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_contacto);
         if (TBL_contacto.getColumnModel().getColumnCount() > 0) {
             TBL_contacto.getColumnModel().getColumn(0).setResizable(false);
-            TBL_contacto.getColumnModel().getColumn(0).setPreferredWidth(10);
+            TBL_contacto.getColumnModel().getColumn(0).setPreferredWidth(5);
             TBL_contacto.getColumnModel().getColumn(1).setResizable(false);
-            TBL_contacto.getColumnModel().getColumn(1).setPreferredWidth(200);
+            TBL_contacto.getColumnModel().getColumn(1).setPreferredWidth(250);
             TBL_contacto.getColumnModel().getColumn(2).setResizable(false);
             TBL_contacto.getColumnModel().getColumn(2).setPreferredWidth(50);
         }
@@ -217,9 +238,9 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
         BTN_eliminar.setText("Eliminar");
         BTN_eliminar.setEnabled(false);
 
-        BTN_agregar.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        BTN_agregar.setText("Agregar");
-        BTN_agregar.setEnabled(false);
+        BTN_guardar.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        BTN_guardar.setText("Guardar");
+        BTN_guardar.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -234,7 +255,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
                             .addComponent(BTN_editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTN_nuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(BTN_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BTN_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -247,7 +268,7 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BTN_eliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BTN_agregar)
+                .addComponent(BTN_guardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -257,12 +278,12 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -274,15 +295,15 @@ public class pnl_datos_contacto extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton BTN_agregar;
     public javax.swing.JButton BTN_editar;
     public javax.swing.JButton BTN_eliminar;
+    public javax.swing.JButton BTN_guardar;
     public javax.swing.JButton BTN_nuevo;
     public javax.swing.JTable TBL_contacto;
     public javax.swing.JTextField TXT_anexo;

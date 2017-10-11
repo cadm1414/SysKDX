@@ -85,7 +85,7 @@ public class pnl_rpt_kardex_mercaderia extends javax.swing.JPanel {
         jLabel6.setText(":");
 
         CBX_formato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        CBX_formato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NORMA", "VALORIZADO", "SUNAT" }));
+        CBX_formato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NORMAL", "VALORIZADO", "SUNAT" }));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel7.setText("F. Inicial");

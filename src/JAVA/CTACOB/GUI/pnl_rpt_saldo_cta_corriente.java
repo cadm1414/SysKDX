@@ -76,7 +76,6 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
 
         CBX_tipo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NORMAL", "VENCIDOS" }));
-        CBX_tipo.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel7.setText("F. Inicial");

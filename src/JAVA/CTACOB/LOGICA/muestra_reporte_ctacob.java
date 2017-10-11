@@ -31,6 +31,7 @@ public class muestra_reporte_ctacob {
                     break;
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

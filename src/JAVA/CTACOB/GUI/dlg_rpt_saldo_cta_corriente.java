@@ -46,6 +46,7 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
 
         lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.addItemListener(ItemEvent);
         lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.addKeyListener(KeyEvnt);
+        lo_pnl_rpt_saldo_cta_corriente.CBX_tipo.addKeyListener(KeyEvnt);
         lo_pnl_rpt_saldo_cta_corriente.TXT_codigo.addKeyListener(KeyEvnt);
         lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.addKeyListener(KeyEvnt);
         lo_pnl_rpt_saldo_cta_corriente.TXT_fecha_fin.addKeyListener(KeyEvnt);
@@ -109,6 +110,8 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
         parametros.put("nombre_sucursal", lo_pnl_rpt_saldo_cta_corriente.TXT_nombre.getText().trim());
         parametros.put("codigo_pagador", (lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.getSelectedIndex() == 1) ? lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.getText().trim() : "%");
         parametros.put("codigo_vendedor", (lo_pnl_rpt_saldo_cta_corriente.CBX_filtro.getSelectedIndex() == 2) ? lo_pnl_rpt_saldo_cta_corriente.TXT_codigo_vc.getText().trim() : "%");
+        parametros.put("tipo", lo_pnl_rpt_saldo_cta_corriente.CBX_tipo.getSelectedIndex()+"");
+        parametros.put("fecha_vence", (lo_pnl_rpt_saldo_cta_corriente.CBX_tipo.getSelectedIndex()==0)?go_fnc_operaciones_campos.formarto_date("01/01/2099"):go_fnc_operaciones_campos.formarto_date(lo_pnl_rpt_saldo_cta_corriente.TXT_fecha_fin.getText()));
         parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
 
         go_muestra_reporte_ctacob.reporte_pestania("rpt_saldo_cta_corriente.jasper", parametros, "SALDO CTA CORRIENTE", 0);
@@ -201,6 +204,9 @@ public class dlg_rpt_saldo_cta_corriente extends javax.swing.JDialog {
                             }
                             break;
                     }
+                }
+                if(ke.getSource() == lo_pnl_rpt_saldo_cta_corriente.CBX_tipo){
+                    getFocusOwner().transferFocus();
                 }
                 if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
                     evt_aceptar();

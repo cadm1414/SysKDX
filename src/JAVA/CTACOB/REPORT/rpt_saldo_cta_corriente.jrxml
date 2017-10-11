@@ -14,8 +14,11 @@
 	<parameter name="codigo_vendedor" class="java.lang.String"/>
 	<parameter name="periodo" class="java.lang.String"/>
 	<parameter name="nombre_sucursal" class="java.lang.String"/>
+	<parameter name="tipo" class="java.lang.String"/>
+	<parameter name="fecha_vence" class="java.util.Date"/>
 	<queryString>
-		<![CDATA[select * from rpt_saldo_cta_corriente( $P{sucursal} , $P{fecha_ini} , $P{fecha_fin} , $P{codigo_pagador} , $P{codigo_vendedor},  $P{periodo} ) as (codigo_documento character(2),numero text,fecha_emision date,fecha_vencimiento date,codigo_moneda character(3),codigo_entidad character(6),razon_social character varying(250),codigo_vendedor character(4),forma_pago character(2),dias_credito integer,codigo_pagador character(6),nombre_pagador character varying(250),monto_original numeric,deuda numeric,monto_original_mn numeric,deuda_mn numeric)]]>
+		<![CDATA[select * from rpt_saldo_cta_corriente( $P{sucursal} , $P{fecha_ini} , $P{fecha_fin} , $P{codigo_pagador} , $P{codigo_vendedor},  $P{periodo}) as (codigo_documento character(2),numero text,fecha_emision date,fecha_vencimiento date,codigo_moneda character(3),codigo_entidad character(6),razon_social character varying(250),codigo_vendedor character(4),forma_pago character(2),dias_credito integer,codigo_pagador character(6),nombre_pagador character varying(250),monto_original numeric,deuda numeric,monto_original_mn numeric,deuda_mn numeric)
+where fecha_vencimiento <=  $P{fecha_vence}]]>
 	</queryString>
 	<field name="codigo_documento" class="java.lang.String"/>
 	<field name="numero" class="java.lang.String"/>
@@ -161,7 +164,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="11" width="110" height="12" uuid="cd3d54cd-e198-483a-8f7b-c77ab843b7a3">
+				<reportElement x="194" y="11" width="110" height="12" uuid="cd3d54cd-e198-483a-8f7b-c77ab843b7a3">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -219,6 +222,13 @@
 				</textElement>
 				<text><![CDATA[DEL:]]></text>
 			</staticText>
+			<textField pattern="000">
+				<reportElement x="306" y="11" width="70" height="12" uuid="e392711e-afc3-4368-8049-9a5abe507a7e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{tipo}.equalsIgnoreCase( "0" ))?"GENERAL":"VENCIDOS"]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
