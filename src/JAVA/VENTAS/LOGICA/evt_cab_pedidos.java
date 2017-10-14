@@ -35,6 +35,7 @@ public class evt_cab_pedidos {
                 OBJ_pcp.TXT_observacion.setEnabled(valor);
                 OBJ_pcp.CBX_forma_pago.setEnabled(valor);
                 OBJ_pcp.TXT_dias_credito.setEnabled(valor);
+                OBJ_pcp.TXT_codigo_pagador.setEnabled(valor);
                 OBJ_pcp.TXT_tipo_cambio.setEnabled(false);
                 OBJ_pcp.TXT_numero_doc.requestFocus();
                 break;
@@ -404,6 +405,10 @@ public class evt_cab_pedidos {
         OBJ_pcp.CBX_forma_pago.addKeyListener(KeyEvnt);
         OBJ_pcp.TXT_observacion.addKeyListener(KeyEvnt);
         OBJ_pcp.TXT_dias_credito.addKeyListener(KeyEvnt);
+        OBJ_pcp.TXT_codigo_pagador.addKeyListener(KeyEvnt);
+        OBJ_pcp.TXT_razon_social.addKeyListener(KeyEvnt);
+        OBJ_pcp.TXT_doc_id.addKeyListener(KeyEvnt);
+        OBJ_pcp.TXT_codigo_ubigeo.addKeyListener(KeyEvnt);
         return KeyEvnt;
     }
 

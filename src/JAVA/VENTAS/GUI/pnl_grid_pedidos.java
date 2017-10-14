@@ -7,7 +7,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
           
     public pnl_grid_pedidos() {
         initComponents();        
-        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 14);
+        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 15);
     }
 
     @SuppressWarnings("unchecked")
@@ -62,14 +62,14 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Item", "Bulto", "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "Perc.", "Precio", "C. Bruto", "C. Neto", "Importe", "%", "", "presentacion"
+                "", "Item", "Bulto", "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "Perc.", "Precio", "C. Bruto", "C. Neto", "Importe", "%", "", "presentacion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Double.class
+                java.lang.Boolean.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false, false, false, true, false, true, false, false, false, false
+                true, false, true, false, false, false, false, false, false, true, false, true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -80,40 +80,40 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        TBL_pedidos.setCellSelectionEnabled(true);
+        TBL_pedidos.setColumnSelectionAllowed(false);
         TBL_pedidos.setEnabled(false);
         TBL_pedidos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_pedidos);
         if (TBL_pedidos.getColumnModel().getColumnCount() > 0) {
-            TBL_pedidos.getColumnModel().getColumn(0).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(0).setPreferredWidth(1);
+            TBL_pedidos.getColumnModel().getColumn(0).setPreferredWidth(0);
             TBL_pedidos.getColumnModel().getColumn(1).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(1).setPreferredWidth(10);
+            TBL_pedidos.getColumnModel().getColumn(1).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(2).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(2).setPreferredWidth(50);
+            TBL_pedidos.getColumnModel().getColumn(2).setPreferredWidth(10);
             TBL_pedidos.getColumnModel().getColumn(3).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(3).setPreferredWidth(200);
-            TBL_pedidos.getColumnModel().getColumn(4).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(4).setPreferredWidth(5);
+            TBL_pedidos.getColumnModel().getColumn(3).setPreferredWidth(50);
+            TBL_pedidos.getColumnModel().getColumn(4).setPreferredWidth(200);
             TBL_pedidos.getColumnModel().getColumn(5).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(5).setPreferredWidth(1);
+            TBL_pedidos.getColumnModel().getColumn(5).setPreferredWidth(5);
             TBL_pedidos.getColumnModel().getColumn(6).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(6).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(7).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(7).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(8).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(8).setPreferredWidth(50);
+            TBL_pedidos.getColumnModel().getColumn(8).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(9).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(9).setPreferredWidth(40);
+            TBL_pedidos.getColumnModel().getColumn(9).setPreferredWidth(50);
             TBL_pedidos.getColumnModel().getColumn(10).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(10).setPreferredWidth(40);
             TBL_pedidos.getColumnModel().getColumn(11).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(11).setPreferredWidth(50);
+            TBL_pedidos.getColumnModel().getColumn(11).setPreferredWidth(40);
             TBL_pedidos.getColumnModel().getColumn(12).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(12).setPreferredWidth(1);
+            TBL_pedidos.getColumnModel().getColumn(12).setPreferredWidth(50);
             TBL_pedidos.getColumnModel().getColumn(13).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(13).setPreferredWidth(15);
+            TBL_pedidos.getColumnModel().getColumn(13).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(14).setResizable(false);
+            TBL_pedidos.getColumnModel().getColumn(14).setPreferredWidth(15);
+            TBL_pedidos.getColumnModel().getColumn(15).setResizable(false);
         }
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
@@ -249,8 +249,8 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

@@ -69,6 +69,7 @@ public class activa_buscador {
             lq_rs = go_dao_entidad.SLT_datos_entidad(ls_codigo_entidad);
             if (lq_rs != null) {
                 descripcion.setText(lq_rs.getString(7));
+                codigo.transferFocus();
                 resp = true;
             } else {
                 codigo.setText("");
@@ -164,6 +165,7 @@ public class activa_buscador {
             if (lq_rs != null) {
                 codigo.setText(lq_rs.getString(1));
                 nombre.setText(lq_rs.getString(2));
+                codigo.transferFocus();
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_vendedor", "VENDEDOR NO EXISTE y/o BLOQUEADO");
                 codigo.setText("");

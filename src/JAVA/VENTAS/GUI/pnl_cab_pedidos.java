@@ -1,6 +1,5 @@
 package JAVA.VENTAS.GUI;
 
-import static JAVA.CONFIG.GUI.pnl_datos_entidad.simbolos;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.text.DecimalFormatSymbols;
 
