@@ -14,29 +14,32 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 public class evt_cab_factura {
-
+    
     public static DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
     DecimalFormat dFormat;
     ResultSet rs;
     String ls_modulo = "VENTAS", ls_capa = "LOGICA", ls_clase = "evt_cab_factura";
-
+    
     public void activa_campos(int op, pnl_cab_factura OBJ_pcf, boolean valor, String codigo_documento) {
         switch (op) {
             case 0:
                 OBJ_pcf.TXT_numero_doc.setEnabled(valor);
-                OBJ_pcf.TXT_guiar.setEnabled(valor);
-                OBJ_pcf.TXT_pedido.setEnabled(valor);
+                //OBJ_pcf.TXT_guiar.setEnabled(valor);
+                //OBJ_pcf.TXT_pedido.setEnabled(valor);
                 OBJ_pcf.TXT_fecha_emision.setEnabled(valor);
                 OBJ_pcf.CBX_moneda.setEnabled(valor);
                 OBJ_pcf.CBX_codigo_detraccion.setEnabled((codigo_documento.equalsIgnoreCase("01")) ? valor : false);
                 OBJ_pcf.JRD_precio_igv.setEnabled(valor);
                 OBJ_pcf.TXT_codigo_entidad.setEnabled(valor);
                 OBJ_pcf.CBX_direccion.setEnabled(valor);
+                OBJ_pcf.CBX_es_guia.setEnabled(valor);
+                OBJ_pcf.CBX_es_pedido.setEnabled(valor);
                 OBJ_pcf.TXT_codigo_vendedor.setEnabled(valor);
                 OBJ_pcf.TXT_observacion.setEnabled(valor);
                 OBJ_pcf.CBX_forma_pago.setEnabled(valor);
                 OBJ_pcf.TXT_dias_credito.setEnabled(valor);
                 OBJ_pcf.TXT_tipo_cambio.setEnabled(false);
+                OBJ_pcf.TXT_codigo_pagador.setEnabled(valor);
                 OBJ_pcf.TXT_numero_doc.requestFocus();
                 break;
             case 1:
@@ -45,7 +48,7 @@ public class evt_cab_factura {
                 OBJ_pcf.TXT_fecha_emision.requestFocus();
         }
     }
-
+    
     public void limpia_datos(pnl_cab_factura OBJ_pcf, String tipo_documento) {
         OBJ_pcf.LBL_numero_doc.setText("0000000000");
         OBJ_pcf.TXT_numero_doc.setText("");
@@ -77,7 +80,7 @@ public class evt_cab_factura {
         OBJ_pcf.JRD_domiciliado.setSelected(true);
         OBJ_pcf.JRD_precio_igv.setSelected(false);
     }
-
+    
     public void muestra_datos(pnl_cab_factura OBJ_pdp, BEAN_registro_ventas OBJ_bpe, pnl_grid_pedidos OBJ_pgp) {
         simbolos.setDecimalSeparator('.');
         simbolos.setGroupingSeparator(',');
@@ -124,7 +127,7 @@ public class evt_cab_factura {
         OBJ_pgp.LBL_percepcion.setText(dFormat.format(OBJ_bpe.getPercepcion()) + "");
         OBJ_pgp.LBL_importe.setText(dFormat.format(OBJ_bpe.getTotal_documento()) + "");
     }
-
+    
     public void muestra_datos_ref(int op, ResultSet rs, String codigo, pnl_cab_factura OBJ_pnf, pnl_grid_pedidos OBJ_pgp) {
         simbolos.setDecimalSeparator('.');
         simbolos.setGroupingSeparator(',');
@@ -175,7 +178,7 @@ public class evt_cab_factura {
         } catch (Exception e) {
         }
     }
-
+    
     public boolean valida_moneda(double tc, String codigo_moneda) {
         boolean resp = false;
         if (codigo_moneda.equalsIgnoreCase("PEN")) {
@@ -185,7 +188,7 @@ public class evt_cab_factura {
         }
         return resp;
     }
-
+    
     public boolean valida_tipo_documento(int td, String numero_doc) {
         boolean resp = false;
         switch (td) {
@@ -202,7 +205,7 @@ public class evt_cab_factura {
         }
         return resp;
     }
-
+    
     public boolean valida_campos(pnl_cab_factura OBJ_pcp, cbx_moneda cbx_moneda) {
         boolean resp = false;
         if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcp.TXT_numero_doc)) {
@@ -279,7 +282,7 @@ public class evt_cab_factura {
         }
         return resp;
     }
-
+    
     public boolean verifica_cambios(BEAN_registro_ventas OBJ_bpe, pnl_cab_factura OBJ_pcp, cbx_entidad_ubigeo cbx_entidad_ubigeo, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv) {
         boolean resp = false;
         if (OBJ_bpe.getFecha_emision().equalsIgnoreCase(OBJ_pcp.TXT_fecha_emision.getText().trim())) {
@@ -299,7 +302,7 @@ public class evt_cab_factura {
                                                                 if (((OBJ_bpe.getForma_pago().equalsIgnoreCase("EF")) ? 0 : 1) == OBJ_pcp.CBX_forma_pago.getSelectedIndex()) {
                                                                     if (OBJ_bpe.getCodigo_guiar().substring(6).equalsIgnoreCase(OBJ_pcp.TXT_guiar.getText().trim())) {
                                                                         if (OBJ_bpe.getCodigo_pedido().substring(6).equalsIgnoreCase(OBJ_pcp.TXT_pedido.getText().trim())) {
-
+                                                                            
                                                                         } else {
                                                                             resp = true;
                                                                         }
@@ -348,13 +351,13 @@ public class evt_cab_factura {
             } else {
                 resp = true;
             }
-
+            
         } else {
             resp = true;
         }
         return resp;
     }
-
+    
     public void setea_campos(BEAN_registro_ventas OBJ_bpe, pnl_cab_factura OBJ_pcp, cbx_entidad_ubigeo cbx_entidad_ubigeo, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, pnl_grid_pedidos OBJ_pgp, double monto_min) {
         try {
             double tipo_cambio = (cbx_moneda.getID().equalsIgnoreCase("PEN")) ? 1 : Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText());
@@ -417,7 +420,7 @@ public class evt_cab_factura {
             System.out.println(e.getMessage());
         }
     }
-
+    
     public void setea_recupera(BEAN_registro_ventas OBJ_bpe, ResultSet lq_rs) {
         try {
             OBJ_bpe.setCodigo_operacion(lq_rs.getString(1));
@@ -484,7 +487,7 @@ public class evt_cab_factura {
             System.out.println(e.getMessage());
         }
     }
-
+    
     public KeyListener evento_press(pnl_cab_factura OBJ_pcf, KeyListener KeyEvnt) {
         OBJ_pcf.TXT_numero_doc.addKeyListener(KeyEvnt);
         OBJ_pcf.TXT_fecha_emision.addKeyListener(KeyEvnt);
@@ -500,15 +503,24 @@ public class evt_cab_factura {
         OBJ_pcf.CBX_forma_pago.addKeyListener(KeyEvnt);
         OBJ_pcf.TXT_observacion.addKeyListener(KeyEvnt);
         OBJ_pcf.TXT_dias_credito.addKeyListener(KeyEvnt);
+        OBJ_pcf.TXT_codigo_pagador.addKeyListener(KeyEvnt);
+        OBJ_pcf.TXT_razon_social.addKeyListener(KeyEvnt);
+        OBJ_pcf.TXT_doc_id.addKeyListener(KeyEvnt);
+        OBJ_pcf.TXT_codigo_ubigeo.addKeyListener(KeyEvnt);
+        OBJ_pcf.CBX_es_pedido.addKeyListener(KeyEvnt);
+        OBJ_pcf.CBX_es_guia.addKeyListener(KeyEvnt);
+        OBJ_pcf.TXT_serie_guia.addKeyListener(KeyEvnt);
         return KeyEvnt;
     }
-
+    
     public ItemListener evento_item(pnl_cab_factura OBJ_pcf, ItemListener ItemEvent) {
         OBJ_pcf.CBX_moneda.addItemListener(ItemEvent);
         OBJ_pcf.CBX_codigo_detraccion.addItemListener(ItemEvent);
         OBJ_pcf.CBX_direccion.addItemListener(ItemEvent);
         OBJ_pcf.JRD_precio_igv.addItemListener(ItemEvent);
         OBJ_pcf.CBX_forma_pago.addItemListener(ItemEvent);
+        OBJ_pcf.CBX_es_pedido.addItemListener(ItemEvent);
+        OBJ_pcf.CBX_es_guia.addItemListener(ItemEvent);
         return ItemEvent;
     }
 }

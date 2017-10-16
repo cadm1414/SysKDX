@@ -1,6 +1,5 @@
 package JAVA.VENTAS.GUI;
 
-import static JAVA.CONFIG.GUI.pnl_datos_entidad.simbolos;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.text.DecimalFormatSymbols;
 
@@ -65,6 +64,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         JRD_precio_igv = new javax.swing.JRadioButton();
         CBX_doc_ref = new javax.swing.JComboBox<>();
         TXT_serie_doc_ref = new javax.swing.JFormattedTextField();
+        CBX_es_pedido = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -174,7 +174,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         CBX_tipo_op.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_tipo_op.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VENTA", "TRANSFERENCIA" }));
         CBX_tipo_op.setEnabled(false);
-        CBX_tipo_op.setNextFocusableComponent(TXT_pedido);
+        CBX_tipo_op.setNextFocusableComponent(CBX_es_pedido);
 
         jLabel55.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel55.setText("E. Pedido");
@@ -304,13 +304,18 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         TXT_serie_doc_ref.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_serie_doc_ref.setNextFocusableComponent(TXT_doc_ref);
 
+        CBX_es_pedido.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_es_pedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        CBX_es_pedido.setEnabled(false);
+        CBX_es_pedido.setNextFocusableComponent(TXT_pedido);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -336,7 +341,9 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel54)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(CBX_es_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TXT_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -346,7 +353,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TXT_fecha_emision, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TXT_fecha_emision, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -438,7 +445,8 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                     .addComponent(jLabel13)
                     .addComponent(CBX_moneda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JRD_precio_igv)
-                    .addComponent(TXT_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXT_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBX_es_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6))
         );
 
@@ -920,7 +928,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -942,6 +950,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> CBX_codigo_detraccion;
     public javax.swing.JComboBox<String> CBX_direccion;
     public javax.swing.JComboBox<String> CBX_doc_ref;
+    public javax.swing.JComboBox<String> CBX_es_pedido;
     public javax.swing.JComboBox<String> CBX_forma_pago;
     public javax.swing.JComboBox<String> CBX_igv;
     public javax.swing.JComboBox<String> CBX_moneda;

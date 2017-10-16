@@ -224,24 +224,7 @@ public class DAO_pedido {
         }
         return resp;
     }
-
-    public String FNC_verifica_pedido_facturado(String codigo_operacion) {
-        String resp = "";
-        try {
-            lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from fnc_verifica_pedido_facturado('" + codigo_operacion + "','" + gs_periodo + "') "
-                    + "as (es_facturado character(1))";
-            lq_rs = lq_stm.executeQuery(SQL);
-            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
-            if (lq_rs.next()) {
-                resp = lq_rs.getString(1);
-            }
-        } catch (Exception e) {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_verifica_pedido_facturado", e.getMessage());
-        }
-        return resp;
-    }
-
+    
     public ResultSet SLT_datos_ref_factura(int op, String codigo_operacion) {
         try {
             lq_stm = go_conexion_db.crearStatement();

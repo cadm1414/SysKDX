@@ -155,21 +155,22 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
             ls_codigo_pedido = ls_codigo_pedido.substring(0, 2) + ls_serie + ls_codigo_pedido.substring(3, 13);
             muestra_datos_ref(ls_codigo_pedido);
         }
-
     }
 
     private void evt_aceptar() {
-        int a = 1;
+        int a = 0;
         ls_item_seleccion[0] = ls_codigo_pedido;
+        ls_item_seleccion[1] = "";
         if (Integer.parseInt(lo_pnl_datos_seleccion_pedido.LBL_total.getText()) != 0) {
             for (int i = 0; i < modelo.getRowCount(); i++) {
                 if ((boolean) lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 6)) {
-                    ls_item_seleccion[a] = lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 0).toString();
+                    if (a == 0) {
+                        ls_item_seleccion[1] = ls_item_seleccion[1] + "'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 0).toString() + "'";
+                    } else {
+                        ls_item_seleccion[1] = ls_item_seleccion[1] + ",'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 0).toString() + "'";
+                    }
                     a++;
                 }
-            }
-            for (int i = a; i < ls_item_seleccion.length; i++) {
-                ls_item_seleccion[i] = "";
             }
             dispose();
         } else {

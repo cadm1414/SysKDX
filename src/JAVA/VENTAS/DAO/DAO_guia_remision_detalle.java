@@ -15,7 +15,7 @@ public class DAO_guia_remision_detalle {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from SLT_datos_guia_remision_detalle('" + codigo_operacion + "','" + gs_periodo + "') "
-                    + "as (item character(3),bulto integer,codigo_articulo character(12),nombre_articulo character varying(150),tara numeric(6,3),simbolo_unidad character varying(3),afecto_igv character(1),porcentaje_percepcion numeric(5,3),precio_cigv numeric(11,5),precio_sigv numeric(11,5),peso_bruto numeric(12,5),peso_neto numeric(12,5),importe_cigv numeric(11,2),importe_sigv numeric(11,2),porcentaje_utilidad numeric(11,2))";
+                    + "as (item character(3),es_presentacion character(1),bulto integer,codigo_articulo character(12),nombre_articulo character varying(150),tara numeric(6,3),simbolo_unidad character varying(3),afecto_igv character(1),porcentaje_percepcion numeric(5,3),precio_cigv numeric(11,5),precio_presentacion numeric,precio_sigv numeric(11,5),peso_bruto numeric(12,5),peso_neto numeric(12,5),importe_cigv numeric(11,2),importe_sigv numeric(11,2),porcentaje_utilidad numeric(11,2),presentacion numeric,precio_min numeric,codigo_op_origen character varying(16),item_origen character(3))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
@@ -76,5 +76,22 @@ public class DAO_guia_remision_detalle {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "slt_datos_guia_remision_detalle_x_item", e.getMessage());
         }
         return null;
+    }
+    
+    public int FNC_verifica_guia_facturado(String codigo_operacion) {
+        int resp = 0;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from fnc_verifica_guia_facturado('" + codigo_operacion + "','" + gs_periodo + "') "
+                    + "as (es_facturado integer)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                resp = lq_rs.getInt(1);
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_verifica_guia_facturado", e.getMessage());
+        }
+        return resp;
     }
 }

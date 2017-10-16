@@ -72,8 +72,8 @@ public class jif_factura extends javax.swing.JInternalFrame {
 
     private void formulario() {
         lo_pnl_opciones_3.setBounds(0, 10, 1000, 120);
-        lo_pnl_cab_factura.setBounds(12, 130, 1000, 260);
-        lo_pnl_grid_pedidos.setBounds(13, 390, 1000, 280);
+        lo_pnl_cab_factura.setBounds(12, 130, 1100, 260);
+        lo_pnl_grid_pedidos.setBounds(13, 390, 1100, 280);
 
         this.add(lo_pnl_opciones_3);
         this.add(lo_pnl_cab_factura);
@@ -180,85 +180,57 @@ public class jif_factura extends javax.swing.JInternalFrame {
         gs_parametros[2] = "1";
         gs_parametros[3] = "%";
         gs_parametros[4] = "%";
-
-        switch (op) {
-            case 0:
-                break;
-            case 1:
-                gs_parametros[0] = "%";
-                break;
-        }
     }
 
-    private void get_descripcion_entidad(String codigo, int op) {
+    private void get_forma_pago(String codigo) {
         try {
-            lq_rs = go_dao_entidad.SLT_datos_entidad_x_facturacion(codigo, (ls_tipo_documento.equalsIgnoreCase("01")) ? "6" : "1");
+            lq_rs = go_dao_entidad.SLT_datos_forma_pago(codigo);
             if (lq_rs != null) {
-                switch (op) {
-                    case 0:
-                        lo_pnl_cab_factura.TXT_codigo_entidad.setText(lq_rs.getString(1));
-                        lo_pnl_cab_factura.TXT_razon_social.setText(lq_rs.getString(2));
-                        lo_pnl_cab_factura.TXT_doc_id.setText(lq_rs.getString(3));
-                        lo_pnl_cab_factura.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(lq_rs.getInt(4)));
-                        lo_pnl_cab_factura.TXT_codigo_pagador.setText(lq_rs.getString(1));
-                        lo_pnl_cab_factura.TXT_pagador.setText(lq_rs.getString(2));
-                        lo_pnl_cab_factura.TXT_codigo_vendedor.setText(lq_rs.getString(5));
-                        lo_pnl_cab_factura.TXT_nombre_vendedor.setText(lq_rs.getString(6));
-                        if (lq_rs.getString(7).equalsIgnoreCase("EF")) {
-                            lo_pnl_cab_factura.CBX_forma_pago.setSelectedIndex(0);
-                            lo_pnl_cab_factura.TXT_dias_credito.setEnabled(false);
-                            lo_pnl_cab_factura.CBX_forma_pago.setEnabled(false);
-                        } else {
-                            lo_pnl_cab_factura.CBX_forma_pago.setSelectedIndex(1);
-                            lo_pnl_cab_factura.TXT_dias_credito.setEnabled(true);
-                            lo_pnl_cab_factura.CBX_forma_pago.setEnabled(true);
-                        }
-                        lo_pnl_cab_factura.TXT_dias_credito.setText(lq_rs.getString(8));
-                        genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText().trim(), lq_rs.getInt(8));
-                        go_cbx_trato_datos.recupera_valor(16, lq_rs, lo_pnl_cab_factura.CBX_direccion);
-                        lo_cbx_entidad_ubigeo = (cbx_entidad_ubigeo) lo_pnl_cab_factura.CBX_direccion.getSelectedItem();
-                        lo_pnl_cab_factura.TXT_codigo_ubigeo.setText(lo_cbx_entidad_ubigeo.getID());
-                        lo_pnl_cab_factura.TXT_descripcion.setText(lo_cbx_entidad_ubigeo.descripcion());
-                        if (!lo_pnl_cab_factura.JRD_domiciliado.isSelected()) {
-                            lo_pnl_cab_factura.CBX_afecto_igv.setSelectedIndex(0);
-                        } else {
-                            lo_pnl_cab_factura.CBX_afecto_igv.setSelectedIndex(1);
-                        }
-                        getFocusOwner().transferFocus();
-                        break;
-                }
-            } else {
-                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "ENTIDAD NO EXISTE y/o NO HABILITADO");
-                switch (op) {
-                    case 0:
-                        lo_pnl_cab_factura.TXT_codigo_entidad.setText("");
-                        lo_pnl_cab_factura.TXT_razon_social.setText("");
-                        lo_pnl_cab_factura.TXT_doc_id.setText("");
-                        lo_pnl_cab_factura.JRD_domiciliado.setSelected(false);
-                        lo_pnl_cab_factura.CBX_direccion.removeAllItems();
-                        lo_pnl_cab_factura.TXT_codigo_ubigeo.setText("");
-                        lo_pnl_cab_factura.TXT_descripcion.setText("");
-                        lo_pnl_cab_factura.CBX_forma_pago.setEnabled(false);
-                        break;
-                }
+                lo_pnl_cab_factura.CBX_forma_pago.setSelectedIndex(lq_rs.getInt(1));
+                lo_pnl_cab_factura.TXT_dias_credito.setText(lq_rs.getInt(2) + "");
+                lo_pnl_cab_factura.CBX_forma_pago.setEnabled((lq_rs.getInt(1) == 1) ? true : false);
+                lo_pnl_cab_factura.TXT_dias_credito.setEnabled((lq_rs.getInt(1) == 1) ? true : false);
             }
         } catch (Exception e) {
         }
     }
 
-    private void get_nombre_vendedor() {
+    private void get_descripcion_entidad(String codigo) {
         try {
-            lq_rs = go_dao_vendedor.SLT_datos_vendedor(lo_pnl_cab_factura.TXT_codigo_vendedor.getText().trim(), "1");
+            lq_rs = go_dao_entidad.SLT_datos_entidad_x_facturacion(codigo, (ls_tipo_documento.equalsIgnoreCase("01")) ? "6" : "1");
             if (lq_rs != null) {
-                ls_codigo_vendedor = lq_rs.getString(1);
-                ls_nombre_vendedor = lq_rs.getString(2);
-                lo_pnl_cab_factura.TXT_codigo_vendedor.setText(ls_codigo_vendedor);
-                lo_pnl_cab_factura.TXT_nombre_vendedor.setText(ls_nombre_vendedor);
+                lo_pnl_cab_factura.TXT_codigo_entidad.setText(lq_rs.getString(1));
+                lo_pnl_cab_factura.TXT_razon_social.setText(lq_rs.getString(2));
+                lo_pnl_cab_factura.TXT_doc_id.setText(lq_rs.getString(3));
+                lo_pnl_cab_factura.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(lq_rs.getInt(4)));
+                lo_pnl_cab_factura.TXT_codigo_pagador.setText(lq_rs.getString(1));
+                lo_pnl_cab_factura.TXT_pagador.setText(lq_rs.getString(2));
+                lo_pnl_cab_factura.TXT_codigo_vendedor.setText(lq_rs.getString(5));
+                lo_pnl_cab_factura.TXT_nombre_vendedor.setText(lq_rs.getString(6));
+                lo_pnl_cab_factura.TXT_dias_credito.setText(lq_rs.getString(8));
+                genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText().trim(), lq_rs.getInt(8));
+                go_cbx_trato_datos.recupera_valor(16, lq_rs, lo_pnl_cab_factura.CBX_direccion);
+                lo_cbx_entidad_ubigeo = (cbx_entidad_ubigeo) lo_pnl_cab_factura.CBX_direccion.getSelectedItem();
+                lo_pnl_cab_factura.TXT_codigo_ubigeo.setText(lo_cbx_entidad_ubigeo.getID());
+                lo_pnl_cab_factura.TXT_descripcion.setText(lo_cbx_entidad_ubigeo.descripcion());
+                if (!lo_pnl_cab_factura.JRD_domiciliado.isSelected()) {
+                    lo_pnl_cab_factura.CBX_afecto_igv.setSelectedIndex(0);
+                } else {
+                    lo_pnl_cab_factura.CBX_afecto_igv.setSelectedIndex(1);
+                }
+                get_forma_pago(lo_pnl_cab_factura.TXT_codigo_pagador.getText().trim());
                 getFocusOwner().transferFocus();
+
             } else {
-                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_nombre_vendedor", "VENDEDOR NO EXISTE y/o BLOQUEADO");
-                lo_pnl_cab_factura.TXT_codigo_vendedor.setText("");
-                lo_pnl_cab_factura.TXT_nombre_vendedor.setText("");
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "ENTIDAD NO EXISTE y/o NO HABILITADO");
+                lo_pnl_cab_factura.TXT_codigo_entidad.setText("");
+                lo_pnl_cab_factura.TXT_razon_social.setText("");
+                lo_pnl_cab_factura.TXT_doc_id.setText("");
+                lo_pnl_cab_factura.JRD_domiciliado.setSelected(false);
+                lo_pnl_cab_factura.CBX_direccion.removeAllItems();
+                lo_pnl_cab_factura.TXT_codigo_ubigeo.setText("");
+                lo_pnl_cab_factura.TXT_descripcion.setText("");
+                lo_pnl_cab_factura.CBX_forma_pago.setEnabled(false);
             }
         } catch (Exception e) {
         }
@@ -283,7 +255,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
     private void get_descripcion_registro_ventas_detalle(String codigo) {
         lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
         lq_rs = go_dao_registro_ventas_detalle.SLT_datos_registro_ventas_detalle(codigo);
-        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_registro_ventas.getEs_precio_igv()));
+        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_registro_ventas.getEs_precio_igv()), 0);
         lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
     }
 
@@ -305,6 +277,25 @@ public class jif_factura extends javax.swing.JInternalFrame {
 
     private void genera_fecha_vencimiento(String fecha, int dias) {
         lo_pnl_cab_factura.LBL_fecha_vence.setText(go_fnc_operaciones_campos.suma_dias(fecha, dias));
+    }
+
+    private void activa_facturacion(boolean valor) {
+        lo_pnl_cab_factura.TXT_razon_social.setEnabled(valor);
+        lo_pnl_cab_factura.TXT_doc_id.setEnabled(valor);
+        lo_pnl_cab_factura.TXT_doc_id.setEnabled(valor);
+        lo_pnl_cab_factura.CBX_direccion.setEditable(valor);
+        lo_pnl_cab_factura.TXT_codigo_ubigeo.setEnabled(valor);
+
+        lo_pnl_cab_factura.TXT_razon_social.setText("");
+        lo_pnl_cab_factura.TXT_doc_id.setText("");
+        lo_pnl_cab_factura.TXT_doc_id.setText("");
+        lo_pnl_cab_factura.TXT_codigo_ubigeo.setText("");
+        lo_pnl_cab_factura.TXT_descripcion.setText("");
+
+        try {
+            lo_pnl_cab_factura.CBX_direccion.removeAllItems();
+        } catch (Exception e) {
+        }
     }
 
     private void genera_parametros_pedido() {
@@ -356,7 +347,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     if (lq_rs != null) {
                         lo_evt_cab_factura.activa_campos(0, lo_pnl_cab_factura, false, ls_tipo_documento);
                         //lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
-                        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()));
+                        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()), 0);
                         lo_pnl_cab_factura.TXT_fecha_emision.setEnabled(true);
                         lo_pnl_cab_factura.TXT_pedido.setEnabled(true);
                         lo_pnl_cab_factura.TXT_observacion.setEnabled(true);
@@ -376,26 +367,10 @@ public class jif_factura extends javax.swing.JInternalFrame {
         go_dlg_busq_entidad_parametros.setVisible(true);
         ls_codigo_entidad = go_dlg_busq_entidad_parametros.ls_codigo_entidad;
         if (ls_codigo_entidad != null) {
-            get_descripcion_entidad(ls_codigo_entidad, op);
+            get_descripcion_entidad(ls_codigo_entidad);
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_f5_entidad", "SELECCIONE ENTIDAD");
             lo_pnl_cab_factura.TXT_codigo_entidad.setText("");
-        }
-    }
-
-    private void evt_f5_vendedor() {
-        go_dlg_busq_vendedor = new dlg_busq_vendedor(null, true);
-        go_dlg_busq_vendedor.setVisible(true);
-        ls_codigo_vendedor = go_dlg_busq_vendedor.ls_codigo_vendedor;
-        ls_nombre_vendedor = go_dlg_busq_vendedor.ls_nombre_vendedor;
-        if (ls_codigo_vendedor != null) {
-            lo_pnl_cab_factura.TXT_codigo_vendedor.setText(ls_codigo_vendedor);
-            lo_pnl_cab_factura.TXT_nombre_vendedor.setText(ls_nombre_vendedor);
-            getFocusOwner().transferFocus();
-        } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_f5_vendedor", "SELECCIONE VENDEDOR");
-            lo_pnl_cab_factura.TXT_codigo_vendedor.setText("");
-            lo_pnl_cab_factura.TXT_nombre_vendedor.setText("");
         }
     }
 
@@ -718,7 +693,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     evt_f5_entidad(0);
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_vendedor) {
-                    evt_f5_vendedor();
+                    go_activa_buscador.busq_vendedor(lo_pnl_cab_factura.TXT_codigo_vendedor, lo_pnl_cab_factura.TXT_nombre_vendedor);
                 }
                 if (ke.getSource() == lo_pnl_grid_pedidos.TBL_pedidos && lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 2) {
                     evt_f5_facturacion();
@@ -728,6 +703,13 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_guiar) {
                     evt_f5_seleccion_guiar();
+                }
+                if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_pagador) {
+                    go_activa_buscador.busq_entidad(lo_pnl_cab_factura.TXT_codigo_pagador, lo_pnl_cab_factura.TXT_pagador);
+                    get_forma_pago(lo_pnl_cab_factura.TXT_codigo_pagador.getText());
+                }
+                if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_ubigeo) {
+                    go_activa_buscador.busq_ubigeo(lo_pnl_cab_factura.TXT_codigo_ubigeo, lo_pnl_cab_factura.TXT_descripcion);
                 }
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -761,6 +743,10 @@ public class jif_factura extends javax.swing.JInternalFrame {
                         lo_pnl_cab_factura.LBL_numero_doc.setText(lo_pnl_cab_factura.TXT_numero_doc.getText());
                         lo_pnl_cab_factura.TXT_fecha_emision.requestFocus();
                     }
+                }
+                if (ke.getSource() == lo_pnl_cab_factura.TXT_serie_guia && go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_factura.TXT_serie_guia)) {
+                    lo_pnl_cab_factura.TXT_serie_guia.setText(go_fnc_operaciones_campos.completa_digitos(lo_pnl_cab_factura.TXT_serie_guia.getText().trim(), "0", 4));
+                    getFocusOwner().transferFocus();
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_fecha_emision && !lo_pnl_cab_factura.TXT_fecha_emision.getText().trim().equalsIgnoreCase("/  /")) {
                     if (go_fnc_operaciones_campos.valida_fecha(lo_pnl_cab_factura.TXT_fecha_emision.getText())) {
@@ -806,7 +792,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                         }
                     }
                 }
-                if (ke.getSource() == lo_pnl_cab_factura.CBX_moneda || ke.getSource() == lo_pnl_cab_factura.JRD_precio_igv || ke.getSource() == lo_pnl_cab_factura.CBX_forma_pago) {
+                if (ke.getSource() == lo_pnl_cab_factura.CBX_moneda || ke.getSource() == lo_pnl_cab_factura.JRD_precio_igv || ke.getSource() == lo_pnl_cab_factura.CBX_forma_pago || ke.getSource() == lo_pnl_cab_factura.CBX_es_guia || ke.getSource() == lo_pnl_cab_factura.CBX_es_pedido) {
                     getFocusOwner().transferFocus();
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_tipo_cambio && go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_factura.TXT_tipo_cambio)) {
@@ -817,13 +803,44 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     getFocusOwner().transferFocus();
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_entidad && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_factura.TXT_codigo_entidad.getText().trim(), 4, 6)) {
-                    get_descripcion_entidad(lo_pnl_cab_factura.TXT_codigo_entidad.getText().trim(), 0);
+                    if (li_tipo_operacion != 1) {
+                        if (lo_pnl_cab_factura.TXT_codigo_entidad.getText().trim().equalsIgnoreCase("999999")) {
+                            activa_facturacion(true);
+                            lo_pnl_cab_factura.TXT_codigo_pagador.setText("999999");
+                            lo_pnl_cab_factura.TXT_pagador.setText("...");
+                            get_forma_pago("999999");
+                            lo_pnl_cab_factura.TXT_razon_social.requestFocus();
+                        } else {
+                            activa_facturacion(false);
+                            get_descripcion_entidad(lo_pnl_cab_factura.TXT_codigo_entidad.getText().trim());
+                        }
+                    } else {
+                        getFocusOwner().transferFocus();
+                    }
+                }
+                if (ke.getSource() == lo_pnl_cab_factura.TXT_razon_social && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_factura.TXT_razon_social.getText().trim(), 1, 4)) {
+                    getFocusOwner().transferFocus();
+                }
+                if (ke.getSource() == lo_pnl_cab_factura.TXT_doc_id) {
+                    if (lo_evt_cab_factura.valida_tipo_documento(lo_pnl_cab_factura.CBX_tipo_documento_id.getSelectedIndex(), lo_pnl_cab_factura.TXT_doc_id.getText().trim())) {
+                        getFocusOwner().transferFocus();
+                    } else {
+                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "DOCUMENTO DE IDENTIDAD INCORRECTO");
+                        lo_pnl_cab_factura.CBX_tipo_documento_id.requestFocus();
+                    }
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.CBX_direccion && !lo_pnl_cab_factura.CBX_direccion.getSelectedItem().toString().equalsIgnoreCase("")) {
                     getFocusOwner().transferFocus();
                 }
+                if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_ubigeo && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_factura.TXT_codigo_ubigeo.getText().trim(), 4, 6)) {
+                    go_activa_buscador.get_descripcion_ubigeo(lo_pnl_cab_factura.TXT_codigo_ubigeo.getText().trim(), lo_pnl_cab_factura.TXT_codigo_ubigeo, lo_pnl_cab_factura.TXT_descripcion);
+                }
+                if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_pagador && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_factura.TXT_codigo_pagador.getText(), 4, 6)) {
+                    go_activa_buscador.get_descripcion_entidad(lo_pnl_cab_factura.TXT_codigo_pagador.getText().trim(), lo_pnl_cab_factura.TXT_codigo_pagador, lo_pnl_cab_factura.TXT_pagador);
+                    get_forma_pago(lo_pnl_cab_factura.TXT_codigo_pagador.getText());
+                }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_vendedor && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_factura.TXT_codigo_vendedor.getText(), 4, 4)) {
-                    get_nombre_vendedor();
+                    go_activa_buscador.get_descripcion_vendedor(lo_pnl_cab_factura.TXT_codigo_vendedor.getText().trim(), lo_pnl_cab_factura.TXT_codigo_vendedor, lo_pnl_cab_factura.TXT_nombre_vendedor);
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_dias_credito && go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_factura.TXT_dias_credito)) {
                     genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText().trim(), Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText().trim()));
@@ -881,7 +898,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_factura.CBX_moneda.getSelectedItem();
                         double precio_sigv = Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 8).toString());
                         precio_sigv = (lo_pnl_cab_factura.JRD_precio_igv.isSelected() == true) ? precio_sigv : (precio_sigv) / (1 + (Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100));
-                        lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(go_dao_reportes.RPT_utilidad_ponderada(ls_codigo_sucursal, lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 2).toString(), precio_sigv, lo_cbx_moneda.getID(),(ls_codigo.equalsIgnoreCase("")||ls_codigo==null)?"%":ls_codigo), fila, 12);
+                        lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(go_dao_reportes.RPT_utilidad_ponderada(ls_codigo_sucursal, lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 2).toString(), precio_sigv, lo_cbx_moneda.getID(), (ls_codigo.equalsIgnoreCase("") || ls_codigo == null) ? "%" : ls_codigo), fila, 12);
                         //lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
                     }
                 }
@@ -914,13 +931,51 @@ public class jif_factura extends javax.swing.JInternalFrame {
                         lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
                     }
                     if (ie.getSource() == lo_pnl_cab_factura.CBX_direccion && !lo_pnl_cab_factura.TXT_codigo_entidad.getText().trim().equalsIgnoreCase("")) {
-                        lo_cbx_entidad_ubigeo = (cbx_entidad_ubigeo) lo_pnl_cab_factura.CBX_direccion.getSelectedItem();
-                        lo_pnl_cab_factura.TXT_codigo_ubigeo.setText(lo_cbx_entidad_ubigeo.getID());
-                        lo_pnl_cab_factura.TXT_descripcion.setText(lo_cbx_entidad_ubigeo.descripcion());
+                        if (!lo_pnl_cab_factura.TXT_codigo_entidad.getText().trim().equalsIgnoreCase("999999")) {
+                            lo_cbx_entidad_ubigeo = (cbx_entidad_ubigeo) lo_pnl_cab_factura.CBX_direccion.getSelectedItem();
+                            lo_pnl_cab_factura.TXT_codigo_ubigeo.setText(lo_cbx_entidad_ubigeo.getID());
+                            lo_pnl_cab_factura.TXT_descripcion.setText(lo_cbx_entidad_ubigeo.descripcion());
+                        }
                     }
                     if (ie.getSource() == lo_pnl_cab_factura.JRD_precio_igv) {
                         lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_factura.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_factura.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
                         lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
+                    }
+
+                    if (ie.getSource() == lo_pnl_cab_factura.CBX_es_guia && li_tipo_operacion == 0) {
+                        switch (lo_pnl_cab_factura.CBX_es_guia.getSelectedIndex()) {
+                            case 0:
+                                lo_pnl_cab_factura.TXT_guiar.setEnabled(false);
+                                lo_pnl_cab_factura.TXT_serie_guia.setEnabled(false);
+                                lo_pnl_cab_factura.TXT_guiar.setText("0000000000");
+                                lo_pnl_cab_factura.TXT_serie_guia.setText("0000");
+                                lo_pnl_cab_factura.CBX_es_pedido.setEnabled(true);
+                                break;
+                            case 1:
+                                lo_pnl_cab_factura.TXT_guiar.setEnabled(true);
+                                lo_pnl_cab_factura.TXT_serie_guia.setEnabled(true);
+                                lo_pnl_cab_factura.TXT_guiar.setText("");
+                                lo_pnl_cab_factura.TXT_serie_guia.setText("");
+                                lo_pnl_cab_factura.CBX_es_pedido.setEnabled(false);
+                                lo_pnl_cab_factura.TXT_pedido.setEnabled(false);
+                                break;
+                        }
+                    }
+                    if (ie.getSource() == lo_pnl_cab_factura.CBX_es_pedido && li_tipo_operacion == 0) {
+                        switch (lo_pnl_cab_factura.CBX_es_pedido.getSelectedIndex()) {
+                            case 0:
+                                lo_pnl_cab_factura.TXT_pedido.setEnabled(false);
+                                lo_pnl_cab_factura.TXT_pedido.setText("0000000000");
+                                lo_pnl_cab_factura.CBX_es_guia.setEnabled(true);
+                                break;
+                            case 1:
+                                lo_pnl_cab_factura.TXT_pedido.setEnabled(true);
+                                lo_pnl_cab_factura.TXT_pedido.setText("");
+                                lo_pnl_cab_factura.CBX_es_guia.setEnabled(false);
+                                lo_pnl_cab_factura.TXT_guiar.setEnabled(false);
+                                lo_pnl_cab_factura.TXT_serie_guia.setEnabled(false);
+                                break;
+                        }
                     }
                     if (ie.getSource() == lo_pnl_cab_factura.CBX_forma_pago) {
                         if (lo_pnl_cab_factura.CBX_forma_pago.getSelectedIndex() == 0) {
@@ -994,7 +1049,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1014, Short.MAX_VALUE)
+            .addGap(0, 1109, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

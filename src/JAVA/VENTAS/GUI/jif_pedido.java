@@ -207,7 +207,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
     private void get_descripcion_pedido_detalle(String codigo) {
         lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
         lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle(codigo);
-        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_pedido.getEs_precio_igv()));
+        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_pedido.getEs_precio_igv()), 0);
         lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
     }
 
@@ -219,8 +219,14 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_dias_credito.setText(lq_rs.getInt(2) + "");
                 lo_pnl_cab_pedidos.CBX_forma_pago.setEnabled((lq_rs.getInt(1) == 1) ? true : false);
                 lo_pnl_cab_pedidos.TXT_dias_credito.setEnabled((lq_rs.getInt(1) == 1) ? true : false);
+            } else {
+                lo_pnl_cab_pedidos.CBX_forma_pago.setSelectedIndex(0);
+                lo_pnl_cab_pedidos.TXT_dias_credito.setText("0");
+                lo_pnl_cab_pedidos.CBX_forma_pago.setEnabled(false);
+                lo_pnl_cab_pedidos.TXT_dias_credito.setEnabled(false);
             }
         } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 
@@ -379,19 +385,19 @@ public class jif_pedido extends javax.swing.JInternalFrame {
     }
 
     private void evt_editar() {
-        if (go_dao_pedido.FNC_verifica_pedido_facturado(ls_codigo).equalsIgnoreCase("0")) {
+        if (go_dao_pedido_detalle.FNC_verifica_pedido_facturado(ls_codigo) == 0) {
             li_tipo_operacion = 1;
             cont = 0;
             lo_evt_opciones_3.activa_btn_opciones(3, lo_pnl_opciones_3, lb_valor_op);
             lo_evt_cab_pedidos.activa_campos(1, lo_pnl_cab_pedidos, true);
             lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, true);
         } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_editar", "PEDIDO FACTURADO");
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_editar", "PEDIDO TIENE ITEMS FACTURADOS");
         }
     }
 
     private void evt_eliminar() {
-        if (go_dao_pedido.FNC_verifica_pedido_facturado(ls_codigo).equalsIgnoreCase("0")) {
+        if (go_dao_pedido_detalle.FNC_verifica_pedido_facturado(ls_codigo) == 0) {
             if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR DOCUMENTO Nro OP-" + lo_bean_pedido.getNumero_documento() + "?") == 0) {
                 try {
                     if (go_dao_pedido_detalle.DLT_pedido_detalle(ls_codigo)) {
@@ -407,7 +413,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 }
             }
         } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_eliminar", "PEDIDO FACTURADO");
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_eliminar", "PEDIDO TIENE ITEMS FACTURADOS");
         }
     }
 
@@ -564,6 +570,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_cab_pedidos.TXT_codigo_pagador) {
                     go_activa_buscador.busq_entidad(lo_pnl_cab_pedidos.TXT_codigo_pagador, lo_pnl_cab_pedidos.TXT_pagador);
+                    get_forma_pago(lo_pnl_cab_pedidos.TXT_codigo_pagador.getText());
                 }
                 if (ke.getSource() == lo_pnl_cab_pedidos.TXT_codigo_ubigeo) {
                     go_activa_buscador.busq_ubigeo(lo_pnl_cab_pedidos.TXT_codigo_ubigeo, lo_pnl_cab_pedidos.TXT_descripcion);
@@ -669,6 +676,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_cab_pedidos.TXT_codigo_pagador && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_pedidos.TXT_codigo_pagador.getText(), 4, 6)) {
                     go_activa_buscador.get_descripcion_entidad(lo_pnl_cab_pedidos.TXT_codigo_pagador.getText().trim(), lo_pnl_cab_pedidos.TXT_codigo_pagador, lo_pnl_cab_pedidos.TXT_pagador);
+                    get_forma_pago(lo_pnl_cab_pedidos.TXT_codigo_pagador.getText());
                 }
                 if (ke.getSource() == lo_pnl_cab_pedidos.TXT_codigo_vendedor && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_pedidos.TXT_codigo_vendedor.getText(), 4, 4)) {
                     go_activa_buscador.get_descripcion_vendedor(lo_pnl_cab_pedidos.TXT_codigo_vendedor.getText().trim(), lo_pnl_cab_pedidos.TXT_codigo_vendedor, lo_pnl_cab_pedidos.TXT_nombre_vendedor);
@@ -709,7 +717,6 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                         lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 3, false, false);
                     } else {
                         lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 9, false, false);
-                        lo_pnl_grid_pedidos.TBL_pedidos.editCellAt(fila, 9);
                     }
                 }
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 10) {
@@ -721,7 +728,6 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     } else {
                         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_pedidos.CBX_moneda.getSelectedItem();
                         double precio_sigv = Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 9).toString());
-
                         precio_sigv = (lo_pnl_cab_pedidos.JRD_precio_igv.isSelected() == true) ? precio_sigv : (precio_sigv) / (1 + (Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100));
                         lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(go_dao_reportes.RPT_utilidad_ponderada(ls_codigo_sucursal, lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 3).toString(), precio_sigv, lo_cbx_moneda.getID(), (ls_codigo == null) ? "%" : ls_codigo), fila, 13);
                         //lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
