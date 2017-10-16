@@ -24,14 +24,17 @@ public class formato_grid_pedido extends DefaultTableCellRenderer {
         DecimalFormat dFormat = null;
 
         switch (column) {
-            case 8:
+            case 9:
                 dFormat = new DecimalFormat("#,##0.00000", simbolos);
                 break;
-            case 11:
+            case 12:
                 dFormat = new DecimalFormat("#,##0.00", simbolos);
                 break;
-            case 12:
+            case 13:
                 dFormat = new DecimalFormat("#,##0", simbolos);
+                break;
+            case 16:
+                dFormat = new DecimalFormat("#,##0.00000", simbolos);
                 break;
         }
         try {

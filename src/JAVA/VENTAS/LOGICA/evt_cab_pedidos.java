@@ -180,7 +180,7 @@ public class evt_cab_pedidos {
         return resp;
     }
 
-    public void setea_campos(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_entidad_ubigeo cbx_entidad_ubigeo, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, pnl_grid_pedidos OBJ_pgp, double monto_min) {
+    public void setea_campos(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, pnl_grid_pedidos OBJ_pgp, double monto_min) {
         try {
             OBJ_bpe.setPeriodo(gs_periodo);
             OBJ_bpe.setMes(OBJ_pcp.TXT_fecha_emision.getText().trim().substring(3, 5));
@@ -202,7 +202,7 @@ public class evt_cab_pedidos {
             OBJ_bpe.setRazon_social(OBJ_pcp.TXT_razon_social.getText().trim());
             OBJ_bpe.setTipo_documento_id((OBJ_pcp.CBX_tipo_documento_id.getSelectedIndex() == 0) ? "6" : "1");
             OBJ_bpe.setNumero_documento_id(OBJ_pcp.TXT_doc_id.getText().trim());
-            OBJ_bpe.setDireccion(OBJ_pcp.CBX_direccion.getSelectedItem().toString());
+            OBJ_bpe.setDireccion(OBJ_pcp.CBX_direccion.getSelectedItem().toString().toUpperCase());
             OBJ_bpe.setCodigo_ubigeo(OBJ_pcp.TXT_codigo_ubigeo.getText().trim());
             OBJ_bpe.setDescripcion_ubigeo(OBJ_pcp.TXT_descripcion.getText().trim());
             OBJ_bpe.setCodigo_pagador(OBJ_pcp.TXT_codigo_pagador.getText().trim());
@@ -299,9 +299,13 @@ public class evt_cab_pedidos {
         OBJ_pdp.TXT_doc_id.setText(OBJ_bpe.getNumero_documento_id());
         OBJ_pdp.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bpe.getEs_domiciliado())));
         try {
-            rs = go_dao_entidad.SLT_datos_entidad_x_facturacion(OBJ_bpe.getCodigo_entidad(), OBJ_bpe.getTipo_documento_id());
-            go_cbx_trato_datos.recupera_valor(16, rs, OBJ_pdp.CBX_direccion);
-            go_cbx_trato_datos.selecciona_valor(16, OBJ_bpe.getDireccion(), OBJ_pdp.CBX_direccion);
+            if (!OBJ_bpe.getCodigo_entidad().equalsIgnoreCase("999999")) {
+                rs = go_dao_entidad.SLT_datos_entidad_x_facturacion(OBJ_bpe.getCodigo_entidad(), OBJ_bpe.getTipo_documento_id());
+                go_cbx_trato_datos.recupera_valor(16, rs, OBJ_pdp.CBX_direccion);
+                go_cbx_trato_datos.selecciona_valor(16, OBJ_bpe.getDireccion(), OBJ_pdp.CBX_direccion);
+            }else{
+                OBJ_pdp.CBX_direccion.addItem(OBJ_bpe.getDireccion());                
+            }
         } catch (Exception e) {
         }
         OBJ_pdp.TXT_codigo_ubigeo.setText(OBJ_bpe.getCodigo_ubigeo());
@@ -321,7 +325,7 @@ public class evt_cab_pedidos {
         OBJ_pgp.LBL_importe.setText(dFormat.format(OBJ_bpe.getTotal_documento()) + "");
     }
 
-    public boolean verifica_cambios(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_entidad_ubigeo cbx_entidad_ubigeo, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv) {
+    public boolean verifica_cambios(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv) {
         boolean resp = false;
         if (OBJ_bpe.getFecha_emision().equalsIgnoreCase(OBJ_pcp.TXT_fecha_emision.getText().trim())) {
             if (((OBJ_bpe.getCodigo_documento_ref().equalsIgnoreCase("01")) ? 0 : 1) == OBJ_pcp.CBX_doc_ref.getSelectedIndex()) {

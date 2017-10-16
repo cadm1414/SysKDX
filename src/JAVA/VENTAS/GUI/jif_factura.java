@@ -415,7 +415,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(gs_parametros[3], lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 5);
                 lo_pnl_grid_pedidos.TBL_pedidos.setValueAt((gs_parametros[4].equalsIgnoreCase("true")) ? true : false, lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 6);
                 lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(Double.parseDouble(gs_parametros[5]), lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 7);
-                lq_rs = go_dao_precios.SLT_datos_precio_x_articulo(gs_parametros[0], gs_tipo_comercio);
+                //lq_rs = go_dao_precios.SLT_datos_precio_x_articulo(gs_parametros[0], gs_tipo_comercio);
                 if (!gs_tipo_comercio.equalsIgnoreCase("0")) {
                     lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(lq_rs.getDouble(1), lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 8);
                 }

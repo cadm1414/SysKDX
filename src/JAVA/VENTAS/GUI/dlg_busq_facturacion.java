@@ -69,13 +69,7 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
     }
 
     public void retorna() {
-        gs_parametros[0] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 0).toString();
-        gs_parametros[1] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 1).toString();
-        gs_parametros[2] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 2).toString();
-        gs_parametros[3] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 3).toString();
-        gs_parametros[4] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 4).toString();
-        gs_parametros[5] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 5).toString();
-        
+        gs_parametros[0] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 0).toString();        
         this.dispose();
     }
 

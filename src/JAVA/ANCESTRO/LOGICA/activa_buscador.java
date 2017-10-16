@@ -36,6 +36,7 @@ public class activa_buscador {
             lq_rs = go_dao_ubigeo.SLT_descripcion_ubigeo_x_codigo(ls_codigo_ubigeo);
             if (lq_rs != null) {
                 descripcion.setText(lq_rs.getString(1));
+                 codigo.transferFocus();
                 resp = true;
             } else {
                 codigo.setText("");

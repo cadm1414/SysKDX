@@ -147,5 +147,21 @@ public class DAO_entidad {
         }
         return null;
     }
+    
+    public ResultSet SLT_datos_forma_pago(String codigo_entidad) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_datos_forma_pago('"+codigo_entidad+"') "
+                    + "as (forma_pago integer,dias_credito integer)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_forma_pago", e.getMessage());
+        }
+        return null;
+    }
 
 }

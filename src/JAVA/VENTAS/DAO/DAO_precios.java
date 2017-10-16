@@ -10,11 +10,11 @@ public class DAO_precios {
     Statement lq_stm;
     String ls_modulo = "VENTAS", ls_capa = "DAO", ls_clase = "DAO_precios";
 
-    public ResultSet SLT_datos_precio_x_articulo(String codigo_articulo,String tipo_operacion) {
+    public ResultSet SLT_datos_precio_x_articulo(String codigo_articulo,String es_presentacion,String tipo_comercio) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_datos_precio_x_articulo('" + codigo_articulo + "','"+tipo_operacion+"') "
-                    + "as (precio_cigv numeric,presentacion numeric)";
+            String SQL = "select * from slt_datos_precio_x_articulo('" + codigo_articulo + "','"+es_presentacion+"','"+tipo_comercio+"') "
+                    + "as (codigo_articulo character(12),nombre_articulo character varying(150),tara numeric,simbolo_unidad character varying(3),afecto_igv character(1),percepcion numeric,presentacion numeric,precio numeric,precio_min numeric)";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {

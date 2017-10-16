@@ -8,6 +8,9 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
     public pnl_grid_pedidos() {
         initComponents();        
         go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 15);
+        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 16);
+        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 17);
+        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 18);
     }
 
     @SuppressWarnings("unchecked")
@@ -18,7 +21,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
         TBL_pedidos = new javax.swing.JTable(){
             public void changeSelection(int row, int column, boolean toggle,boolean extend){
                 super.changeSelection(row, column, toggle, extend);
-                if (editCellAt(row, column)){
+                if (editCellAt(row, column) && column != 1){
                     Component editor = getEditorComponent();
                     editor.requestFocusInWindow();
                     ((JTextComponent)editor).selectAll();
@@ -29,12 +32,14 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                 switch(column){
                     case 1:
                     resp = true;
+                    case 2:
+                    resp = true;
                     break;
-                    case 8:
+                    case 9:
                     resp = (!gs_tipo_comercio.equalsIgnoreCase("0"))?false:true;
                     break;
-                    case 10:
-                    resp = (Double.parseDouble(this.getValueAt(row, 14).toString())>0 && Double.parseDouble(this.getValueAt(row, 1).toString())>0)?false:true;
+                    case 11:
+                    resp = (Double.parseDouble(this.getValueAt(row, 15).toString())>0 && Double.parseDouble(this.getValueAt(row, 2).toString())>0)?false:true;
                     break;
                 }
                 return resp;
@@ -62,14 +67,14 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "", "Item", "Bulto", "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "Perc.", "Precio", "C. Bruto", "C. Neto", "Importe", "%", "", "presentacion"
+                "Item", "", "Bulto", "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "Perc.", "Precio", "C. Bruto", "C. Neto", "Importe", "%", "", "presentacion", "precio_min", "codigo_ref", "item_ref"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, false, false, false, false, false, false, true, false, true, false, false, false, false
+                false, true, true, false, false, false, false, false, false, true, false, true, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -80,14 +85,15 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        TBL_pedidos.setColumnSelectionAllowed(false);
+        TBL_pedidos.setCellSelectionEnabled(true);
         TBL_pedidos.setEnabled(false);
         TBL_pedidos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_pedidos);
         if (TBL_pedidos.getColumnModel().getColumnCount() > 0) {
-            TBL_pedidos.getColumnModel().getColumn(0).setPreferredWidth(0);
+            TBL_pedidos.getColumnModel().getColumn(0).setResizable(false);
+            TBL_pedidos.getColumnModel().getColumn(0).setPreferredWidth(1);
             TBL_pedidos.getColumnModel().getColumn(1).setResizable(false);
-            TBL_pedidos.getColumnModel().getColumn(1).setPreferredWidth(1);
+            TBL_pedidos.getColumnModel().getColumn(1).setPreferredWidth(0);
             TBL_pedidos.getColumnModel().getColumn(2).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(2).setPreferredWidth(10);
             TBL_pedidos.getColumnModel().getColumn(3).setResizable(false);
@@ -114,6 +120,13 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
             TBL_pedidos.getColumnModel().getColumn(14).setResizable(false);
             TBL_pedidos.getColumnModel().getColumn(14).setPreferredWidth(15);
             TBL_pedidos.getColumnModel().getColumn(15).setResizable(false);
+            TBL_pedidos.getColumnModel().getColumn(15).setPreferredWidth(0);
+            TBL_pedidos.getColumnModel().getColumn(16).setResizable(false);
+            TBL_pedidos.getColumnModel().getColumn(16).setPreferredWidth(0);
+            TBL_pedidos.getColumnModel().getColumn(17).setResizable(false);
+            TBL_pedidos.getColumnModel().getColumn(17).setPreferredWidth(0);
+            TBL_pedidos.getColumnModel().getColumn(18).setResizable(false);
+            TBL_pedidos.getColumnModel().getColumn(18).setPreferredWidth(0);
         }
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
