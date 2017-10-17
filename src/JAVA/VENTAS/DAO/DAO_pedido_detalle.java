@@ -47,10 +47,10 @@ public class DAO_pedido_detalle {
         return resp;
     }
 
-    public ResultSet SLT_grid_pedido_pendiente(String codigo_operacion) {
+    public ResultSet SLT_grid_pedido_pendiente(String codigo_operacion, String codigo_documento) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_grid_pedido_pendiente('" + codigo_operacion + "','" + gs_periodo + "') "
+            String SQL = "select * from slt_grid_pedido_pendiente('" + codigo_operacion + "','" + codigo_documento + "','" + gs_periodo + "') "
                     + "as (item character(3),codigo_articulo character(12),nombre_articulo character varying(150),bulto integer,peso_bruto numeric(12,5),peso_neto numeric(12,5),es_facturado character(1))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
@@ -76,7 +76,7 @@ public class DAO_pedido_detalle {
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();
                 go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "UPD_actualiza_facturado", "SE ACTUALIZO BASE DE DATOS");
-                resp = true;                
+                resp = true;
             }
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
@@ -85,11 +85,11 @@ public class DAO_pedido_detalle {
         }
         return resp;
     }
-    
-    public ResultSet SLT_datos_pedido_detalle_x_item(String codigo_operacion,String items) {
+
+    public ResultSet SLT_datos_pedido_detalle_x_item(String codigo_operacion, String items) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_datos_pedido_detalle_x_item('" + codigo_operacion + "',$$"+items+"$$,'" + gs_periodo + "') "
+            String SQL = "select * from slt_datos_pedido_detalle_x_item('" + codigo_operacion + "',$$" + items + "$$,'" + gs_periodo + "') "
                     + "as (item character(3),es_presentacion character(1),bulto integer,codigo_articulo character(12),nombre_articulo character varying(150),tara numeric(6,3),simbolo_unidad character varying(3),afecto_igv character(1),porcentaje_percepcion numeric(5,3),precio_cigv numeric(11,5),precio_presentacion numeric,precio_sigv numeric(11,5),peso_bruto numeric(12,5),peso_neto numeric(12,5),importe_cigv numeric(11,2),importe_sigv numeric(11,2),porcentaje_utilidad numeric(11,2),presentacion numeric,precio_min numeric,codigo_op_ref character(16),item_ref character(3))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
@@ -101,7 +101,7 @@ public class DAO_pedido_detalle {
         }
         return null;
     }
-    
+
     public int FNC_verifica_pedido_facturado(String codigo_operacion) {
         int resp = 0;
         try {

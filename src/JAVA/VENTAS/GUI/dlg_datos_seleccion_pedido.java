@@ -119,7 +119,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
 
         lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setDefaultRenderer(Double.class, new formato_grid_pedido());
         try {
-            lq_rs = go_dao_pedido_detalle.SLT_grid_pedido_pendiente(codigo);
+            lq_rs = go_dao_pedido_detalle.SLT_grid_pedido_pendiente(codigo, ls_codigo_documento);
             if (lq_rs != null) {
                 li_tipo_operacion = 1;
                 lo_pnl_datos_seleccion_pedido.TXT_pedido.setText(codigo.substring(6));

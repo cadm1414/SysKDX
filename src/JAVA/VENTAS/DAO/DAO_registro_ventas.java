@@ -83,7 +83,7 @@ public class DAO_registro_ventas {
 
     public boolean IST_registro_ventas(BEAN_registro_ventas OBJ_ped, JTable OBJ_pgp, double porcentaje_igv) throws SQLException {
         boolean resp = false;
-        double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0;
+        double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0, precio_cigv_und = 0.0;
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from ist_registro_ventas('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','" + OBJ_ped.getCodigo_documento() + "','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getFecha_vencimiento() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + "," + OBJ_ped.getInafecto_mn() + "," + OBJ_ped.getBase_mn() + "," + OBJ_ped.getIgv_mn() + "," + OBJ_ped.getTotal_mn() + "," + OBJ_ped.getPercepcion_mn() + "," + OBJ_ped.getTotal_documento_mn() + "," + OBJ_ped.getExonerado_mn() + "," + OBJ_ped.getImporte_detraccion_mn() + ",'" + OBJ_ped.getEs_guiar() + "','" + OBJ_ped.getCodigo_guiar() + "','" + OBJ_ped.getEs_pedido() + "','" + OBJ_ped.getCodigo_pedido() + "','" + OBJ_ped.getFecha_doc_ref() + "','" + OBJ_ped.getCodigo_tipo_doc_ref() + "','" + OBJ_ped.getSerie_doc_ref() + "','" + OBJ_ped.getNumero_doc_ref() + "','" + OBJ_ped.getRegistra_item() + "','" + OBJ_ped.getConcepto_doc_ref() + "','" + gs_periodo + "')";
@@ -94,38 +94,41 @@ public class DAO_registro_ventas {
                     switch (OBJ_ped.getAfecto_igv()) {
                         case "0":
                             precio_cigv = 0.0;
+                            precio_cigv_und = 0.00;
                             importe_cigv = 0.0;
-                            precio_sigv = (double) OBJ_pgp.getValueAt(i, 8);
-                            importe_sigv = (double) OBJ_pgp.getValueAt(i, 11);
+                            precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9) / (double) OBJ_pgp.getValueAt(i, 15), 5) : (double) OBJ_pgp.getValueAt(i, 9);
+                            importe_sigv = (double) OBJ_pgp.getValueAt(i, 12);
                             percepcion = 0.0;
                             break;
                         case "1":
-                            if (!(boolean) OBJ_pgp.getValueAt(i, 6)) {
+                            if (!(boolean) OBJ_pgp.getValueAt(i, 7)) {
                                 precio_cigv = 0.0;
+                                precio_cigv_und = 0.00;
                                 importe_cigv = 0.0;
-                                precio_sigv = (double) OBJ_pgp.getValueAt(i, 8);
-                                importe_sigv = (double) OBJ_pgp.getValueAt(i, 11);
-                                percepcion = (double) OBJ_pgp.getValueAt(i, 11) * (double) OBJ_pgp.getValueAt(i, 7) / 100;
+                                precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9) / (double) OBJ_pgp.getValueAt(i, 15), 5) : (double) OBJ_pgp.getValueAt(i, 9);
+                                importe_sigv = (double) OBJ_pgp.getValueAt(i, 12);
+                                percepcion = (double) OBJ_pgp.getValueAt(i, 12) * (double) OBJ_pgp.getValueAt(i, 8) / 100;
                             } else {
-                                precio_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 8) : (double) OBJ_pgp.getValueAt(i, 8) * (porcentaje_igv + 1);
-                                importe_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 11) : (double) OBJ_pgp.getValueAt(i, 11) * (porcentaje_igv + 1);
-                                precio_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? (double) OBJ_pgp.getValueAt(i, 8) : (double) OBJ_pgp.getValueAt(i, 8) / (porcentaje_igv + 1);
-                                importe_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? (double) OBJ_pgp.getValueAt(i, 11) : (double) OBJ_pgp.getValueAt(i, 11) / (porcentaje_igv + 1);
-                                percepcion = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 11) * ((double) OBJ_pgp.getValueAt(i, 7) / 100) : ((double) OBJ_pgp.getValueAt(i, 11) * (porcentaje_igv + 1)) * ((double) OBJ_pgp.getValueAt(i, 7) / 100);
+                                precio_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 9) : (double) OBJ_pgp.getValueAt(i, 9) * (porcentaje_igv + 1);
+                                precio_cigv_und = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea(precio_cigv / (double) OBJ_pgp.getValueAt(i, 15), 5) : precio_cigv;
+                                importe_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 12) : (double) OBJ_pgp.getValueAt(i, 12) * (porcentaje_igv + 1);
+                                precio_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? precio_cigv_und : precio_cigv_und / (porcentaje_igv + 1);
+                                importe_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? (double) OBJ_pgp.getValueAt(i, 12) : (double) OBJ_pgp.getValueAt(i, 12) / (porcentaje_igv + 1);
+                                percepcion = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 12) * ((double) OBJ_pgp.getValueAt(i, 8) / 100) : ((double) OBJ_pgp.getValueAt(i, 12) * (porcentaje_igv + 1)) * ((double) OBJ_pgp.getValueAt(i, 8) / 100);
                             }
                             break;
                     }
 
                     String SQL2 = "select * from ist_registro_ventas_detalle('" + OBJ_ped.getCodigo_operacion() + "',"
                             + "'" + OBJ_pgp.getValueAt(i, 0).toString().trim() + "',"
-                            + "'" + OBJ_pgp.getValueAt(i, 2).toString().trim() + "',"
-                            + "$$" + OBJ_pgp.getValueAt(i, 3).toString().trim() + "$$,"
-                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 6)) + "',"
-                            + (double) OBJ_pgp.getValueAt(i, 7) + ","
-                            + (int) OBJ_pgp.getValueAt(i, 1) + ","
-                            + (double) OBJ_pgp.getValueAt(i, 9) + ","
+                            + "'" + OBJ_pgp.getValueAt(i, 3).toString().trim() + "',"
+                            + "$$" + OBJ_pgp.getValueAt(i, 4).toString().trim() + "$$,"
+                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 7)) + "',"
+                            + (double) OBJ_pgp.getValueAt(i, 8) + ","
+                            + (int) OBJ_pgp.getValueAt(i, 2) + ","
                             + (double) OBJ_pgp.getValueAt(i, 10) + ","
-                            + precio_cigv + ","
+                            + (double) OBJ_pgp.getValueAt(i, 11) + ","
+                            + precio_cigv_und + ","
                             + importe_cigv + ","
                             + precio_sigv + ","
                             + importe_sigv + ","
@@ -136,7 +139,11 @@ public class DAO_registro_ventas {
                             + importe_sigv * tipo_cambio + ","
                             + percepcion * tipo_cambio + ","
                             + "'" + gs_periodo + "',"
-                            + (double) OBJ_pgp.getValueAt(i, 12) + ")";
+                            + (double) OBJ_pgp.getValueAt(i, 13) + ","
+                            + "'" + ((OBJ_pgp.getValueAt(i, 17).toString().trim().equalsIgnoreCase("")) ? OBJ_ped.getCodigo_operacion() : OBJ_pgp.getValueAt(i, 17).toString().trim()) + "',"
+                            + "'" + ((OBJ_pgp.getValueAt(i, 18).toString().trim().equalsIgnoreCase("")) ? OBJ_pgp.getValueAt(i, 0).toString().trim() : OBJ_pgp.getValueAt(i, 18).toString().trim()) + "',"
+                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
+                            + "'" + precio_cigv + "')";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -156,7 +163,7 @@ public class DAO_registro_ventas {
 
     public boolean UPD_registro_ventas(BEAN_registro_ventas OBJ_ped, JTable OBJ_pgp, double porcentaje_igv) throws SQLException {
         boolean resp = false;
-        double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0;
+        double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0, precio_cigv_und = 0.0;
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from upd_registro_ventas('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','" + OBJ_ped.getCodigo_documento() + "','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getFecha_vencimiento() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + "," + OBJ_ped.getInafecto_mn() + "," + OBJ_ped.getBase_mn() + "," + OBJ_ped.getIgv_mn() + "," + OBJ_ped.getTotal_mn() + "," + OBJ_ped.getPercepcion_mn() + "," + OBJ_ped.getTotal_documento_mn() + "," + OBJ_ped.getExonerado_mn() + "," + OBJ_ped.getImporte_detraccion_mn() + ",'" + OBJ_ped.getEs_guiar() + "','" + OBJ_ped.getCodigo_guiar() + "','" + OBJ_ped.getEs_pedido() + "','" + OBJ_ped.getCodigo_pedido() + "','" + OBJ_ped.getFecha_doc_ref() + "','" + OBJ_ped.getCodigo_tipo_doc_ref() + "','" + OBJ_ped.getSerie_doc_ref() + "','" + OBJ_ped.getNumero_doc_ref() + "','" + OBJ_ped.getRegistra_item() + "','" + OBJ_ped.getConcepto_doc_ref() + "','" + gs_periodo + "')";
@@ -167,38 +174,41 @@ public class DAO_registro_ventas {
                     switch (OBJ_ped.getAfecto_igv()) {
                         case "0":
                             precio_cigv = 0.0;
+                            precio_cigv_und = 0.00;
                             importe_cigv = 0.0;
-                            precio_sigv = (double) OBJ_pgp.getValueAt(i, 8);
-                            importe_sigv = (double) OBJ_pgp.getValueAt(i, 11);
+                            precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9) / (double) OBJ_pgp.getValueAt(i, 15), 5) : (double) OBJ_pgp.getValueAt(i, 9);
+                            importe_sigv = (double) OBJ_pgp.getValueAt(i, 12);
                             percepcion = 0.0;
                             break;
                         case "1":
-                            if (!(boolean) OBJ_pgp.getValueAt(i, 6)) {
+                            if (!(boolean) OBJ_pgp.getValueAt(i, 7)) {
                                 precio_cigv = 0.0;
+                                precio_cigv_und = 0.00;
                                 importe_cigv = 0.0;
-                                precio_sigv = (double) OBJ_pgp.getValueAt(i, 8);
-                                importe_sigv = (double) OBJ_pgp.getValueAt(i, 11);
-                                percepcion = (double) OBJ_pgp.getValueAt(i, 11) * (double) OBJ_pgp.getValueAt(i, 7) / 100;
+                                precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9) / (double) OBJ_pgp.getValueAt(i, 15), 5) : (double) OBJ_pgp.getValueAt(i, 9);
+                                importe_sigv = (double) OBJ_pgp.getValueAt(i, 12);
+                                percepcion = (double) OBJ_pgp.getValueAt(i, 12) * (double) OBJ_pgp.getValueAt(i, 8) / 100;
                             } else {
-                                precio_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 8) : (double) OBJ_pgp.getValueAt(i, 8) * (porcentaje_igv + 1);
-                                importe_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 11) : (double) OBJ_pgp.getValueAt(i, 11) * (porcentaje_igv + 1);
-                                precio_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? (double) OBJ_pgp.getValueAt(i, 8) : (double) OBJ_pgp.getValueAt(i, 8) / (porcentaje_igv + 1);
-                                importe_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? (double) OBJ_pgp.getValueAt(i, 11) : (double) OBJ_pgp.getValueAt(i, 11) / (porcentaje_igv + 1);
-                                percepcion = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 11) * ((double) OBJ_pgp.getValueAt(i, 7) / 100) : ((double) OBJ_pgp.getValueAt(i, 11) * (porcentaje_igv + 1)) * ((double) OBJ_pgp.getValueAt(i, 7) / 100);
+                                precio_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 9) : (double) OBJ_pgp.getValueAt(i, 9) * (porcentaje_igv + 1);
+                                precio_cigv_und = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea(precio_cigv / (double) OBJ_pgp.getValueAt(i, 15), 5) : precio_cigv;
+                                importe_cigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 12) : (double) OBJ_pgp.getValueAt(i, 12) * (porcentaje_igv + 1);
+                                precio_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? precio_cigv_und : precio_cigv_und / (porcentaje_igv + 1);
+                                importe_sigv = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("1")) ? (double) OBJ_pgp.getValueAt(i, 12) : (double) OBJ_pgp.getValueAt(i, 12) / (porcentaje_igv + 1);
+                                percepcion = (OBJ_ped.getEs_precio_igv().equalsIgnoreCase("0")) ? (double) OBJ_pgp.getValueAt(i, 12) * ((double) OBJ_pgp.getValueAt(i, 8) / 100) : ((double) OBJ_pgp.getValueAt(i, 12) * (porcentaje_igv + 1)) * ((double) OBJ_pgp.getValueAt(i, 8) / 100);
                             }
                             break;
                     }
 
                     String SQL2 = "select * from ist_registro_ventas_detalle('" + OBJ_ped.getCodigo_operacion() + "',"
                             + "'" + OBJ_pgp.getValueAt(i, 0).toString().trim() + "',"
-                            + "'" + OBJ_pgp.getValueAt(i, 2).toString().trim() + "',"
-                            + "$$" + OBJ_pgp.getValueAt(i, 3).toString().trim() + "$$,"
-                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 6)) + "',"
-                            + (double) OBJ_pgp.getValueAt(i, 7) + ","
-                            + (int) OBJ_pgp.getValueAt(i, 1) + ","
-                            + (double) OBJ_pgp.getValueAt(i, 9) + ","
+                            + "'" + OBJ_pgp.getValueAt(i, 3).toString().trim() + "',"
+                            + "$$" + OBJ_pgp.getValueAt(i, 4).toString().trim() + "$$,"
+                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 7)) + "',"
+                            + (double) OBJ_pgp.getValueAt(i, 8) + ","
+                            + (int) OBJ_pgp.getValueAt(i, 2) + ","
                             + (double) OBJ_pgp.getValueAt(i, 10) + ","
-                            + precio_cigv + ","
+                            + (double) OBJ_pgp.getValueAt(i, 11) + ","
+                            + precio_cigv_und + ","
                             + importe_cigv + ","
                             + precio_sigv + ","
                             + importe_sigv + ","
@@ -209,7 +219,11 @@ public class DAO_registro_ventas {
                             + importe_sigv * tipo_cambio + ","
                             + percepcion * tipo_cambio + ","
                             + "'" + gs_periodo + "',"
-                            + (double) OBJ_pgp.getValueAt(i, 12) + ")";
+                            + (double) OBJ_pgp.getValueAt(i, 13) + ","
+                            + "'" + ((OBJ_pgp.getValueAt(i, 17).toString().trim().equalsIgnoreCase("")) ? OBJ_ped.getCodigo_operacion() : OBJ_pgp.getValueAt(i, 17).toString().trim()) + "',"
+                            + "'" + ((OBJ_pgp.getValueAt(i, 18).toString().trim().equalsIgnoreCase("")) ? OBJ_pgp.getValueAt(i, 0).toString().trim() : OBJ_pgp.getValueAt(i, 18).toString().trim()) + "',"
+                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
+                            + "'" + precio_cigv + "')";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {

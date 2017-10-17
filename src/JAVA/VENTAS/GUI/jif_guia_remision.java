@@ -975,6 +975,9 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                         lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     }
                 }
+                if (columna == 1) {
+                    lo_evt_grid_pedidos.limpia_fila(lo_pnl_grid_pedidos, fila);
+                }
             }
         }
 
