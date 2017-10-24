@@ -203,6 +203,7 @@ public class variables_globales {
     public static DAO_cuenta_corriente_rv go_dao_cuenta_corriente_rv = new DAO_cuenta_corriente_rv();
     public static DAO_recibo_cobranza_detalle go_dao_recibo_cobranza_detalle = new DAO_recibo_cobranza_detalle();
     public static DAO_entidad_contacto go_dao_entidad_contacto = new DAO_entidad_contacto();
+    public static DAO_tipo_comercio go_dao_tipo_comercio = new DAO_tipo_comercio();
 
     //GUI
     public static frm_principal go_frm_principal;

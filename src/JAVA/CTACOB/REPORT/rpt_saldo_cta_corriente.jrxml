@@ -69,7 +69,7 @@ where fecha_vencimiento <=  $P{fecha_vence}]]>
 					<text><![CDATA[-]]></text>
 				</staticText>
 				<textField pattern="">
-					<reportElement x="34" y="0" width="168" height="12" uuid="fb6a77ae-e0c4-4145-8377-4d72a242141b"/>
+					<reportElement x="34" y="0" width="472" height="12" uuid="fb6a77ae-e0c4-4145-8377-4d72a242141b"/>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>

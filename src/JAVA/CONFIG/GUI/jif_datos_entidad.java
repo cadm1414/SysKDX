@@ -12,6 +12,7 @@ import JAVA.CONFIG.BEAN.BEAN_entidad_direccion;
 import JAVA.CONFIG.LOGICA.cbx_pais;
 import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.CONFIG.LOGICA.cbx_tabla_sunat;
+import JAVA.CONFIG.LOGICA.cbx_tipo_comercio;
 import JAVA.CONFIG.LOGICA.cbx_vendedor;
 import JAVA.CONFIG.LOGICA.evt_datos_contacto;
 import JAVA.CONFIG.LOGICA.evt_datos_direccion;
@@ -44,6 +45,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     cbx_sucursal lo_cbx_sucursal;
     cbx_vendedor lo_cbx_vendedor;
     cbx_pais lo_cbx_pais;
+    cbx_tipo_comercio lo_cbx_tipo_comercio;
     static boolean lb_valor_op[] = new boolean[8];
     ResultSet lq_rs;
     int li_tipo_operacion, li_tipo_operacion_d, li_tipo_operacion_c;
@@ -59,6 +61,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         get_pais();
         get_sucursal();
         get_vendedor();
+        get_tipo_comercio();
     }
 
     private void formulario() {
@@ -117,6 +120,13 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         lq_rs = go_dao_tabla_sunat.SLT_cbx_tabla_sunat("002");
         if (lq_rs != null) {
             go_cbx_trato_datos.recupera_valor(4, lq_rs, lo_pnl_datos_entidad.CBX_tipo_documento_id);
+        }
+    }
+    
+    private void get_tipo_comercio() {
+        lq_rs = go_dao_tipo_comercio.SLT_cbx_tipo_comercio();
+        if (lq_rs != null) {
+            go_cbx_trato_datos.recupera_valor(18, lq_rs, lo_pnl_datos_entidad.CBX_tipo_comercio);
         }
     }
 
@@ -226,12 +236,13 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         lo_cbx_sucursal = (cbx_sucursal) lo_pnl_datos_entidad.CBX_sucursal.getSelectedItem();
         lo_cbx_vendedor = (cbx_vendedor) lo_pnl_datos_entidad.CBX_vendedor.getSelectedItem();
         lo_cbx_pais = (cbx_pais) lo_pnl_datos_entidad.CBX_pais.getSelectedItem();
-
+        lo_cbx_tipo_comercio = (cbx_tipo_comercio) lo_pnl_datos_entidad.CBX_tipo_comercio.getSelectedItem();
+        
         switch (li_tipo_operacion) {
             case 0:
                 if (lo_evt_datos_entidad.valida_campos(lo_pnl_datos_entidad, lo_cbx_tipo_doc_id)) {
                     try {
-                        lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal);
+                        lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal,lo_cbx_tipo_comercio);
                         if (go_dao_entidad.IST_entidad(lo_bean_entidad)) {
                             lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
                             lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);
@@ -244,10 +255,10 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                 }
                 break;
             case 1:
-                if (lo_evt_datos_entidad.verifica_cambios(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_sucursal, lo_cbx_vendedor)) {
+                if (lo_evt_datos_entidad.verifica_cambios(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_sucursal, lo_cbx_vendedor,lo_cbx_tipo_comercio)) {
                     if (lo_evt_datos_entidad.valida_campos(lo_pnl_datos_entidad, lo_cbx_tipo_doc_id)) {
                         try {
-                            lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal);
+                            lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal,lo_cbx_tipo_comercio);
                             if (go_dao_entidad.UPD_entidad(lo_bean_entidad)) {
                                 lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
                                 lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);

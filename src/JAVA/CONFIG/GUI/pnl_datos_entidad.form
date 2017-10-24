@@ -939,7 +939,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="CBX_tipo_comercio" max="32767" attributes="0"/>
+                          <Component id="CBX_tipo_comercio" min="-2" pref="96" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel40" min="-2" pref="70" max="-2" attributes="0"/>
@@ -1149,11 +1149,7 @@
               <Font name="Arial" size="10" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="NINGUNO"/>
-                <StringItem index="1" value="MINORISTA"/>
-                <StringItem index="2" value="MAYORISTA"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>

@@ -52,12 +52,19 @@ public class frm_principal extends javax.swing.JFrame {
     }
 
     private void datos_pc() throws UnknownHostException, SocketException {
-        InetAddress address = InetAddress.getLocalHost();
-        NetworkInterface network = NetworkInterface.getByInetAddress(address.getLocalHost());
-        byte[] mac = network.getHardwareAddress();
-        gs_direccion_ip = address.getHostAddress();
-        gs_nombre_pc = address.getHostName();
-        gs_direccion_mac = go_fnc_operaciones_campos.get_mac(mac);
+        try {
+            InetAddress address = InetAddress.getLocalHost();
+            NetworkInterface network = NetworkInterface.getByInetAddress(address.getLocalHost());
+            byte[] mac = network.getHardwareAddress();
+            gs_direccion_ip = address.getHostAddress();
+            gs_nombre_pc = address.getHostName();
+            gs_direccion_mac = go_fnc_operaciones_campos.get_mac(mac);
+        } catch (Exception e) {
+            gs_direccion_mac = "00-00-00-00-00-00";
+            gs_nombre_pc ="SIN CONECCION";
+            gs_direccion_ip = "255.255.255.255";
+        }
+
     }
 
     private void registra_auditoria(String dato) {
@@ -94,7 +101,7 @@ public class frm_principal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-    
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().

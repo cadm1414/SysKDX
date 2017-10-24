@@ -75,7 +75,7 @@
                 <Column editable="false" title="presentacion" type="java.lang.Double"/>
                 <Column editable="false" title="precio_min" type="java.lang.Double"/>
                 <Column editable="false" title="codigo_ref" type="java.lang.String"/>
-                <Column editable="false" title="item_ref" type="java.lang.Object"/>
+                <Column editable="false" title="item_ref" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="cellSelectionEnabled" type="boolean" value="true"/>

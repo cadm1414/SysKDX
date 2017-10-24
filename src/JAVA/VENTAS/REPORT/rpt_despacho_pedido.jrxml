@@ -25,10 +25,10 @@
 	<field name="bulto" class="java.lang.Integer"/>
 	<field name="peso_bruto" class="java.math.BigDecimal"/>
 	<field name="peso_neto" class="java.math.BigDecimal"/>
-	<variable name="suma_kilos" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+	<variable name="suma_kilos" class="java.math.BigDecimal" resetType="Group" resetGroup="documento" calculation="Sum">
 		<variableExpression><![CDATA[($F{simbolo_unidad}.equalsIgnoreCase( "KG" ))?$F{peso_neto}:0.0]]></variableExpression>
 	</variable>
-	<variable name="suma_und" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+	<variable name="suma_und" class="java.math.BigDecimal" resetType="Group" resetGroup="documento" calculation="Sum">
 		<variableExpression><![CDATA[(!$F{simbolo_unidad}.equalsIgnoreCase( "KG" ))?$F{peso_neto}:0.0]]></variableExpression>
 	</variable>
 	<variable name="total_bulto" class="java.lang.Double" resetType="Group" resetGroup="producto" calculation="Sum">
@@ -37,6 +37,82 @@
 	<variable name="gen_bulto" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{bulto}]]></variableExpression>
 	</variable>
+	<group name="documento">
+		<groupExpression><![CDATA[$F{numero_documento}]]></groupExpression>
+		<groupFooter>
+			<band height="29" splitType="Prevent">
+				<textField pattern="#,##0.00">
+					<reportElement x="47" y="0" width="42" height="12" uuid="fc27d90d-eebd-4bff-ad1e-58494a7c23ba">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{suma_kilos}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="0" width="42" height="12" uuid="377b37a1-a0d0-491e-8539-1ebf126b5841"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total KG]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="43" y="0" width="4" height="12" uuid="17b4026d-8a0e-4b68-8c45-7484fc9e08cb"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00">
+					<reportElement x="47" y="14" width="42" height="12" uuid="5f3082a3-2cd8-489a-a346-00f0fb543511">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{suma_und}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="14" width="42" height="12" uuid="bd888ce3-de3e-45ce-8fb1-93917791c41a"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total UND]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="43" y="14" width="4" height="12" uuid="e8ad2d70-88c4-4376-a067-543a2db6584f"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="374" y="1" width="36" height="1" uuid="987afa8e-9967-4c35-b391-59c903c79442"/>
+					<graphicElement>
+						<pen lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<textField pattern="#,##0">
+					<reportElement x="374" y="5" width="36" height="12" uuid="3e8a521b-160c-4a4e-b6be-9400fd304a34"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{gen_bulto}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="374" y="3" width="36" height="1" uuid="c02ae0ba-9ae9-42d2-82d6-a359e9bd2357"/>
+				</line>
+				<staticText>
+					<reportElement x="305" y="5" width="69" height="12" uuid="bc3f71cd-c4bf-4c92-bca8-83d5d6b90c6b"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Bultos :]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
 	<group name="producto">
 		<groupExpression><![CDATA[$F{nombre_producto}]]></groupExpression>
 		<groupFooter>
@@ -332,79 +408,6 @@
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="26" splitType="Prevent">
-			<textField pattern="#,##0.00">
-				<reportElement x="47" y="0" width="42" height="12" uuid="521cd24d-f298-41f0-8e49-3e99dae0695f">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{suma_kilos}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="2" y="0" width="42" height="12" uuid="4c28313d-e627-4729-8933-e7689f47c525"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total KG]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="43" y="0" width="4" height="12" uuid="4a223889-345f-43a9-946e-f30b8fb2d5a8"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField pattern="#,##0.00">
-				<reportElement x="47" y="14" width="42" height="12" uuid="6a9fa9ea-a4b5-45d4-912c-72eab63462c1">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{suma_und}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="2" y="14" width="42" height="12" uuid="d5a942d9-cd56-420d-a77a-8180b9707041"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total UND]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="43" y="14" width="4" height="12" uuid="73b160ee-a0c3-4200-b044-c89382bd860c"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<line>
-				<reportElement x="374" y="1" width="36" height="1" uuid="aa5dc9b6-3ba2-490d-b91c-6d676feb77d8"/>
-				<graphicElement>
-					<pen lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<textField pattern="#,##0">
-				<reportElement x="374" y="5" width="36" height="12" uuid="865d0efb-2f9e-4edf-adcb-e1a4fcc240e3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{gen_bulto}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="374" y="3" width="36" height="1" uuid="108f21b2-e052-4914-bfb4-1499be5e4470"/>
-			</line>
-			<staticText>
-				<reportElement x="305" y="5" width="69" height="12" uuid="5ab66e07-d98c-4a6d-a265-8d7d90db5ffb"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total Bultos :]]></text>
-			</staticText>
-		</band>
-	</columnFooter>
 	<pageFooter>
 		<band height="30" splitType="Stretch">
 			<textField>

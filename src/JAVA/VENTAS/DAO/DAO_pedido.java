@@ -83,6 +83,7 @@ public class DAO_pedido {
 
     public boolean IST_pedido(BEAN_pedido OBJ_ped, JTable OBJ_pgp, double porcentaje_igv) throws SQLException {
         boolean resp = false;
+        String error_item = "";
         double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0, precio_cigv_und = 0.0;
         try {
             lq_stm = go_conexion_db.crearStatement();
@@ -95,7 +96,7 @@ public class DAO_pedido {
                             precio_cigv = 0.0;
                             precio_cigv_und = 0.00;
                             importe_cigv = 0.0;
-                            precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1))?go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9)/(double) OBJ_pgp.getValueAt(i, 15),5):(double) OBJ_pgp.getValueAt(i, 9);
+                            precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9) / (double) OBJ_pgp.getValueAt(i, 15), 5) : (double) OBJ_pgp.getValueAt(i, 9);
                             importe_sigv = (double) OBJ_pgp.getValueAt(i, 12);
                             percepcion = 0.0;
                             break;
@@ -104,7 +105,7 @@ public class DAO_pedido {
                                 precio_cigv = 0.0;
                                 precio_cigv_und = 0.00;
                                 importe_cigv = 0.0;
-                                precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1))?go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9)/(double) OBJ_pgp.getValueAt(i, 15),5):(double) OBJ_pgp.getValueAt(i, 9);
+                                precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9) / (double) OBJ_pgp.getValueAt(i, 15), 5) : (double) OBJ_pgp.getValueAt(i, 9);
                                 importe_sigv = (double) OBJ_pgp.getValueAt(i, 12);
                                 percepcion = (double) OBJ_pgp.getValueAt(i, 12) * (double) OBJ_pgp.getValueAt(i, 8) / 100;
                             } else {
@@ -118,6 +119,7 @@ public class DAO_pedido {
                             break;
                     }
 
+                    error_item = OBJ_pgp.getValueAt(i, 0).toString().trim();
                     String SQL2 = "select * from ist_pedido_detalle('" + OBJ_ped.getCodigo_operacion() + "',"
                             + "'" + OBJ_pgp.getValueAt(i, 0).toString().trim() + "',"
                             + "'" + OBJ_pgp.getValueAt(i, 3).toString().trim() + "',"
@@ -148,14 +150,15 @@ public class DAO_pedido {
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_pedido", e.getMessage());
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_pedido", "ERROR EN ITEM: " + error_item + "\n" + e.getMessage());
         }
         return resp;
     }
 
     public boolean UPD_pedido(BEAN_pedido OBJ_ped, JTable OBJ_pgp, double porcentaje_igv) throws SQLException {
         boolean resp = false;
-        double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0,precio_cigv_und = 0.0;;
+        String error_item = "";
+        double precio_cigv = 0.0, importe_cigv = 0.0, precio_sigv = 0.0, importe_sigv = 0.0, percepcion = 0.0, tipo_cambio = 0.0, precio_cigv_und = 0.0;;
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from upd_pedido('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','" + OBJ_ped.getCodigo_documento() + "','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getCodigo_documento_ref() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + ",'" + gs_periodo + "')";
@@ -167,7 +170,7 @@ public class DAO_pedido {
                             precio_cigv = 0.0;
                             precio_cigv_und = 0.00;
                             importe_cigv = 0.0;
-                            precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1))?go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9)/(double) OBJ_pgp.getValueAt(i, 15),5):(double) OBJ_pgp.getValueAt(i, 9);
+                            precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9) / (double) OBJ_pgp.getValueAt(i, 15), 5) : (double) OBJ_pgp.getValueAt(i, 9);
                             importe_sigv = (double) OBJ_pgp.getValueAt(i, 12);
                             percepcion = 0.0;
                             break;
@@ -176,7 +179,7 @@ public class DAO_pedido {
                                 precio_cigv = 0.0;
                                 precio_cigv_und = 0.00;
                                 importe_cigv = 0.0;
-                                precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1))?go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9)/(double) OBJ_pgp.getValueAt(i, 15),5):(double) OBJ_pgp.getValueAt(i, 9);
+                                precio_sigv = ((boolean) OBJ_pgp.getValueAt(i, 1)) ? go_fnc_operaciones_campos.redondea((double) OBJ_pgp.getValueAt(i, 9) / (double) OBJ_pgp.getValueAt(i, 15), 5) : (double) OBJ_pgp.getValueAt(i, 9);
                                 importe_sigv = (double) OBJ_pgp.getValueAt(i, 12);
                                 percepcion = (double) OBJ_pgp.getValueAt(i, 12) * (double) OBJ_pgp.getValueAt(i, 8) / 100;
                             } else {
@@ -190,6 +193,7 @@ public class DAO_pedido {
                             break;
                     }
 
+                    error_item = OBJ_pgp.getValueAt(i, 0).toString().trim();
                     String SQL2 = "select * from ist_pedido_detalle('" + OBJ_ped.getCodigo_operacion() + "',"
                             + "'" + OBJ_pgp.getValueAt(i, 0).toString().trim() + "',"
                             + "'" + OBJ_pgp.getValueAt(i, 3).toString().trim() + "',"
@@ -220,11 +224,11 @@ public class DAO_pedido {
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (Exception e) {
             lq_stm.getConnection().rollback();
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_pedido", e.getMessage());
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_pedido", "ERROR EN ITEM: " + error_item + "\n" + e.getMessage());
         }
         return resp;
     }
-    
+
     public ResultSet SLT_datos_ref_factura(int op, String codigo_operacion) {
         try {
             lq_stm = go_conexion_db.crearStatement();

@@ -359,7 +359,21 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.CBX_forma_pago.setEnabled(false);
                 lo_pnl_cab_pedidos.TXT_dias_credito.setEnabled(false);
                 lo_pnl_cab_pedidos.TXT_observacion.setEnabled(true);
-                lo_pnl_cab_pedidos.TXT_observacion.requestFocus();
+                lo_pnl_cab_pedidos.TXT_numero_doc.setEnabled(true);
+                lo_pnl_cab_pedidos.TXT_fecha_emision.setEnabled(true);
+                lo_pnl_cab_pedidos.TXT_observacion.requestFocus();                
+                break;
+            case "2":
+                go_fnc_operaciones_campos.oculta_columna(lo_pnl_grid_pedidos.TBL_pedidos, 13);
+                lo_pnl_grid_pedidos.LBL_utilidad_p.setVisible(false);
+                lo_pnl_cab_pedidos.CBX_doc_ref.setSelectedIndex(1);
+                get_descripcion_entidad(gs_entidad_usuario);
+                lo_pnl_cab_pedidos.CBX_forma_pago.setEnabled(false);
+                lo_pnl_cab_pedidos.TXT_dias_credito.setEnabled(false);
+                lo_pnl_cab_pedidos.TXT_observacion.setEnabled(true);
+                lo_pnl_cab_pedidos.TXT_numero_doc.setEnabled(true);
+                lo_pnl_cab_pedidos.TXT_fecha_emision.setEnabled(true);
+                lo_pnl_cab_pedidos.TXT_observacion.requestFocus();                
                 break;
         }
         lo_evt_opciones_3.activa_btn_opciones(1, lo_pnl_opciones_3, lb_valor_op);
@@ -396,7 +410,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         }
     }
 
-    private void evt_eliminar() {
+    private void evt_eliminar() {        
         if (go_dao_pedido_detalle.FNC_verifica_pedido_facturado(ls_codigo) == 0) {
             if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR DOCUMENTO Nro OP-" + lo_bean_pedido.getNumero_documento() + "?") == 0) {
                 try {

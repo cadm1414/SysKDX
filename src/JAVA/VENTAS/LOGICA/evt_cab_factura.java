@@ -78,6 +78,8 @@ public class evt_cab_factura {
         OBJ_pcf.LBL_fecha_vence.setText("__/__/__");
         OBJ_pcf.JRD_domiciliado.setSelected(true);
         OBJ_pcf.JRD_precio_igv.setSelected(false);
+        OBJ_pcf.CBX_es_guia.setSelectedIndex(0);
+        OBJ_pcf.CBX_es_pedido.setSelectedIndex(0);
     }
 
     public void muestra_datos(pnl_cab_factura OBJ_pdp, BEAN_registro_ventas OBJ_bpe, pnl_grid_pedidos OBJ_pgp) {
@@ -160,9 +162,14 @@ public class evt_cab_factura {
             OBJ_pnf.TXT_doc_id.setText(rs.getString(10));
             OBJ_pnf.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(rs.getInt(11)));
             try {
-                ResultSet rs_a = go_dao_entidad.SLT_datos_entidad_x_facturacion(rs.getString(8), rs.getString(12));
-                go_cbx_trato_datos.recupera_valor(16, rs_a, OBJ_pnf.CBX_direccion);
-                go_cbx_trato_datos.selecciona_valor(16, rs_a.getString(13), OBJ_pnf.CBX_direccion);
+                if (!OBJ_pnf.TXT_codigo_entidad.getText().equalsIgnoreCase("999999")) {
+                    ResultSet rs_a = go_dao_entidad.SLT_datos_entidad_x_facturacion(rs.getString(8), rs.getString(12));
+                    go_cbx_trato_datos.recupera_valor(16, rs_a, OBJ_pnf.CBX_direccion);
+                    go_cbx_trato_datos.selecciona_valor(16, rs_a.getString(13), OBJ_pnf.CBX_direccion);
+                } else {
+                    OBJ_pnf.CBX_direccion.addItem(rs.getString(13));
+                }
+
             } catch (Exception e) {
             }
             OBJ_pnf.TXT_codigo_ubigeo.setText(rs.getString(14));
@@ -374,8 +381,8 @@ public class evt_cab_factura {
             OBJ_bpe.setFecha_emision(go_fnc_operaciones_campos.get_campo_str(OBJ_pcp.TXT_fecha_emision));
             OBJ_bpe.setFecha_vencimiento(OBJ_pcp.LBL_fecha_vence.getText().trim());
             OBJ_bpe.setCodigo_moneda(cbx_moneda.getID());
-            OBJ_bpe.setEs_pedido(OBJ_pcp.CBX_es_pedido.getSelectedIndex()+""); 
-            OBJ_bpe.setEs_guiar(OBJ_pcp.CBX_es_guia.getSelectedIndex()+""); 
+            OBJ_bpe.setEs_pedido(OBJ_pcp.CBX_es_pedido.getSelectedIndex() + "");
+            OBJ_bpe.setEs_guiar(OBJ_pcp.CBX_es_guia.getSelectedIndex() + "");
             OBJ_bpe.setTipo_cambio(Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText()));
             OBJ_bpe.setAfecto_igv(OBJ_pcp.CBX_afecto_igv.getSelectedIndex() + "");
             OBJ_bpe.setCodigo_igv(cbx_igv.getID());

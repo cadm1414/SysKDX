@@ -1,11 +1,12 @@
-
 package JAVA.VENTAS.GUI;
+
+import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 
 public class pnl_datos_seleccion_guiar extends javax.swing.JPanel {
 
-
     public pnl_datos_seleccion_guiar() {
         initComponents();
+        go_fnc_operaciones_campos.oculta_columna(TBL_detalle_guiar, 0);
     }
 
     @SuppressWarnings("unchecked")

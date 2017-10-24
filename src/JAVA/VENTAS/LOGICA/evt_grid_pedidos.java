@@ -52,19 +52,19 @@ public class evt_grid_pedidos {
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
         int fila = OBJ_pgp.TBL_pedidos.getRowCount();
-
+        //boolean es_presentacion = (gs_tipo_comercio.equalsIgnoreCase("0")) ? false : true;
         if (fila == (fila_s + 1)) {
             if (fila < cantidad) {
                 String item = go_fnc_operaciones_campos.completa_digitos(fila + 1 + "", "0", 3);
-                modelo.addRow(new Object[]{item, (gs_tipo_comercio.equalsIgnoreCase("0")) ? false : true, 0, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar(), 1, 0.00, "", ""});
+                modelo.addRow(new Object[]{item, false, 0, "", "", 0.00, "", false, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, genera_btn_eliminar(), 1, 0.00, "", ""});
                 OBJ_pgp.TBL_pedidos.changeSelection(fila, 1, false, false);
-                OBJ_pgp.TBL_pedidos.editCellAt(fila, 1);
+                //OBJ_pgp.TBL_pedidos.editCellAt(fila, 1);
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "agrega_fila", "NO SE PUEDE EXEDER DE " + cantidad + " ITEMS");
             }
         } else {
             OBJ_pgp.TBL_pedidos.changeSelection(fila_s + 1, 1, false, false);
-            OBJ_pgp.TBL_pedidos.editCellAt(fila_s + 1, 1);
+            //OBJ_pgp.TBL_pedidos.editCellAt(fila_s + 1, 1);
         }
 
     }
@@ -169,8 +169,8 @@ public class evt_grid_pedidos {
         OBJ_pgp.TBL_pedidos.setValueAt(null, fila, 13);
         OBJ_pgp.TBL_pedidos.setValueAt(null, fila, 15);
         OBJ_pgp.TBL_pedidos.setValueAt(null, fila, 16);
-        OBJ_pgp.TBL_pedidos.setValueAt(null, fila, 17);
-        OBJ_pgp.TBL_pedidos.setValueAt(null, fila, 18);
+        OBJ_pgp.TBL_pedidos.setValueAt("", fila, 17);
+        OBJ_pgp.TBL_pedidos.setValueAt("", fila, 18);
     }
 
     public boolean valida_campos(pnl_grid_pedidos OBJ_pgp, int cantidad) {
@@ -273,7 +273,7 @@ public class evt_grid_pedidos {
             }
         }
     }
-    
+
     public void recupera_detalle_gf(ResultSet rs, pnl_grid_pedidos OBJ_pgp, int es_precio_igv) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
         OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
@@ -284,31 +284,37 @@ public class evt_grid_pedidos {
                 do {
                     modelo.addRow(new Object[]{null, null, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar(), 1});
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(1), a, 0);
-                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getInt(2), a, 1);
-                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(3), a, 2);
+                    OBJ_pgp.TBL_pedidos.setValueAt(go_fnc_operaciones_campos.int_boolean(rs.getInt(2)), a, 1);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getInt(3), a, 2);
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(4), a, 3);
-                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(5), a, 4);
-                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(6), a, 5);
-                    OBJ_pgp.TBL_pedidos.setValueAt(go_fnc_operaciones_campos.int_boolean(rs.getInt(7)), a, 6);
-                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(8), a, 7);
-                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(15), a, 12);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(5), a, 4);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(6), a, 5);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(7), a, 6);
+                    OBJ_pgp.TBL_pedidos.setValueAt(go_fnc_operaciones_campos.int_boolean(rs.getInt(8)), a, 7);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(9), a, 8);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(17), a, 13);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(18), a, 15);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(19), a, 16);
                     switch (es_precio_igv) {
                         case 0:
-                            if (rs.getString(7).equalsIgnoreCase("1")) {
-                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(9), a, 8);
-                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(13), a, 11);
+                            if (rs.getString(8).equalsIgnoreCase("1")) {
+                                OBJ_pgp.TBL_pedidos.setValueAt((go_fnc_operaciones_campos.int_boolean(rs.getInt(2))) ? rs.getDouble(11) : rs.getDouble(10), a, 9);
+                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(15), a, 12);
                             } else {
-                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(10), a, 8);
-                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(14), a, 11);
+                                OBJ_pgp.TBL_pedidos.setValueAt((go_fnc_operaciones_campos.int_boolean(rs.getInt(2))) ? rs.getDouble(11) : rs.getDouble(12), a, 9);
+                                OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(16), a, 12);
                             }
                             break;
                         case 1:
-                            OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(10), a, 8);
-                            OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(14), a, 11);
+                            OBJ_pgp.TBL_pedidos.setValueAt((go_fnc_operaciones_campos.int_boolean(rs.getInt(2))) ? rs.getDouble(11) : rs.getDouble(12), a, 9);
+                            OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(16), a, 12);
                             break;
                     }
-                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(11), a, 9);
-                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(12), a, 10);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(13), a, 10);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(14), a, 11);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(20), a, 17);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(21), a, 18);
+
                     a++;
 
                 } while (rs.next());

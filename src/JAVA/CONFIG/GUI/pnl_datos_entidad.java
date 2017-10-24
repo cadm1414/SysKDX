@@ -553,7 +553,6 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
         jLabel37.setText(":");
 
         CBX_tipo_comercio.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        CBX_tipo_comercio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NINGUNO", "MINORISTA", "MAYORISTA" }));
         CBX_tipo_comercio.setEnabled(false);
 
         jLabel38.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -619,7 +618,7 @@ public class pnl_datos_entidad extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel37)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBX_tipo_comercio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(CBX_tipo_comercio, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

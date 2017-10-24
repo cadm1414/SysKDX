@@ -229,7 +229,6 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 lo_pnl_cab_factura.TXT_codigo_entidad.setText("");
                 lo_pnl_cab_factura.TXT_razon_social.setText("");
                 lo_pnl_cab_factura.TXT_doc_id.setText("");
-                lo_pnl_cab_factura.JRD_domiciliado.setSelected(false);
                 lo_pnl_cab_factura.CBX_direccion.removeAllItems();
                 lo_pnl_cab_factura.TXT_codigo_ubigeo.setText("");
                 lo_pnl_cab_factura.TXT_descripcion.setText("");
@@ -261,8 +260,11 @@ public class jif_factura extends javax.swing.JInternalFrame {
     }
 
     private void genera_peso_neto(int fila) {
-        if (Integer.parseInt(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 2).toString()) > 0 && Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 15).toString()) > 0) {
-            lo_pnl_grid_pedidos.TBL_pedidos.setValueAt((Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 15).toString()) * Integer.parseInt(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 2).toString())), fila, 11);
+        try {
+            if (Integer.parseInt(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 2).toString()) > 0 && Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 15).toString()) > 0) {
+                lo_pnl_grid_pedidos.TBL_pedidos.setValueAt((Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(fila, 15).toString()) * Integer.parseInt(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(lo_pnl_grid_pedidos.TBL_pedidos.getSelectedRow(), 2).toString())), fila, 11);
+            }
+        } catch (Exception e) {
         }
     }
 
@@ -301,10 +303,8 @@ public class jif_factura extends javax.swing.JInternalFrame {
 
         lo_pnl_cab_factura.TXT_razon_social.setText("");
         lo_pnl_cab_factura.TXT_doc_id.setText("");
-        lo_pnl_cab_factura.TXT_doc_id.setText("");
         lo_pnl_cab_factura.TXT_codigo_ubigeo.setText("");
         lo_pnl_cab_factura.TXT_descripcion.setText("");
-
         try {
             lo_pnl_cab_factura.CBX_direccion.removeAllItems();
         } catch (Exception e) {
@@ -462,7 +462,6 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     get_tipo_cambio();
                     genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(), Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
 
-                    lo_pnl_cab_factura.TXT_observacion.setEnabled(true);
                     for (int i = 1; i < ls_item_guia.length; i++) {
                         lq_rs = go_dao_guia_remision_detalle.SLT_datos_guia_remision_detalle_x_item(ls_item_guia[i][0], ls_item_guia[i][1]);
                         if (lq_rs != null) {
@@ -470,9 +469,12 @@ public class jif_factura extends javax.swing.JInternalFrame {
                             lo_evt_grid_pedidos.recupera_detalle_gf(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()));
                         }
                     }
-                    lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
+                    lo_pnl_cab_factura.CBX_es_guia.setEnabled(true);                    
                     lo_pnl_cab_factura.TXT_fecha_emision.setEnabled(true);
                     lo_pnl_cab_factura.TXT_numero_doc.setEnabled(true);
+                    lo_pnl_cab_factura.TXT_observacion.setEnabled(true);
+                    lo_pnl_cab_factura.TXT_observacion.requestFocus();
+                    lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                 }
             } catch (Exception e) {
             }
