@@ -137,7 +137,7 @@ public class DAO_pedido {
                             + "'" + gs_periodo + "',"
                             + (double) OBJ_pgp.getValueAt(i, 13) + ","
                             + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
-                            + precio_cigv + ")";
+                            + (((boolean) OBJ_pgp.getValueAt(i, 7))?precio_cigv:(double) OBJ_pgp.getValueAt(i, 9)) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -211,7 +211,7 @@ public class DAO_pedido {
                             + "'" + gs_periodo + "',"
                             + (double) OBJ_pgp.getValueAt(i, 13) + ","
                             + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
-                            + precio_cigv + ")";
+                            + (((boolean) OBJ_pgp.getValueAt(i, 7))?precio_cigv:(double) OBJ_pgp.getValueAt(i, 9)) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {

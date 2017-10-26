@@ -47,8 +47,11 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_facturacion.TBL_facturacion.getModel();
         try {
-            lq_rs = go_dao_kardex_detalle.slt_grid_facturacion(gs_parametros[0],gs_parametros[1], gs_parametros[2]);
-            limpia_parametros();
+            if(!gs_parametros[1].equalsIgnoreCase("")){
+                lq_rs = go_dao_kardex_detalle.slt_grid_facturacion(gs_parametros[0],gs_parametros[1], gs_parametros[2]);
+            }else{
+                lq_rs = go_dao_registro_ventas_detalle.slt_grid_facturacion_ref(gs_parametros[0]);
+            }                
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
@@ -61,15 +64,22 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
                     lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getInt(7), a, 6);
                     lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getDouble(8), a, 7);
                     lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getDouble(9), a, 8);
+                    if(!gs_parametros[1].equalsIgnoreCase("")){
+                        lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getString(10), a, 9);
+                    }else{
+                         lo_pnl_grid_facturacion.TBL_facturacion.setValueAt("", a, 9);
+                    }
                     a++;
                 } while (lq_rs.next());
             }
+            limpia_parametros();
         } catch (Exception e) {
         }
     }
 
     public void retorna() {
-        gs_parametros[0] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 0).toString();        
+        gs_parametros[0] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 0).toString(); 
+        gs_parametros[1] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 9).toString(); 
         this.dispose();
     }
 

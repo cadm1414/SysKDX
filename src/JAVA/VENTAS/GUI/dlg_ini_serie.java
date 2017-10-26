@@ -113,6 +113,11 @@ public class dlg_ini_serie extends javax.swing.JDialog {
                     go_frm_principal.JDP_principal.add(go_jif_recibo_cobranza);
                     go_jif_recibo_cobranza.show();
                     break;
+                case 5:
+                    go_jif_nota_credito = new jif_nota_credito();
+                    go_frm_principal.JDP_principal.add(go_jif_nota_credito);
+                    go_jif_nota_credito.show();
+                    break;
             }
             gi_parametros_2[0] = 0;
             dispose();

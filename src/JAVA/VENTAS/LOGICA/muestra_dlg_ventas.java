@@ -117,4 +117,27 @@ public class muestra_dlg_ventas {
         go_dlg_rpt_registro_ventas.setVisible(true);
     }
     
+    public void muestra_dlg_nota_credito(String tipo_documento) throws PropertyVetoException {
+        if (go_jif_nota_credito != null) {
+            if (go_jif_nota_credito.isClosed()) {
+                gi_parametros_2[0] = 5;
+                gs_parametros[0] = tipo_documento;
+                go_dlg_ini_serie = new dlg_ini_serie(null, true);
+                go_dlg_ini_serie.setVisible(true);                
+            } else if (go_jif_nota_credito.isIcon()) {
+                go_jif_nota_credito.setIcon(false);
+            } else if (!go_jif_nota_credito.isShowing()) {
+                gi_parametros_2[0] = 5;
+                gs_parametros[0] = tipo_documento;
+                go_dlg_ini_serie = new dlg_ini_serie(null, true);
+                go_dlg_ini_serie.setVisible(true);                
+            }
+        } else {
+            gi_parametros_2[0] = 5;
+            gs_parametros[0] = tipo_documento;
+            go_dlg_ini_serie = new dlg_ini_serie(null, true);
+            go_dlg_ini_serie.setVisible(true);            
+        }
+    }
+    
 }

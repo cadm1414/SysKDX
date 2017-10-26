@@ -331,35 +331,6 @@ public class jif_factura extends javax.swing.JInternalFrame {
         gs_parametros[0] = "";
     }
 
-    private void muestra_datos_ref(int op, String codigo) {
-        /*
-            0=pedido
-            1=guia
-         */
-        lq_rs = go_dao_pedido.SLT_datos_ref_factura(op, codigo);
-        if (lq_rs != null) {
-            lo_evt_cab_factura.muestra_datos_ref(op, lq_rs, codigo, lo_pnl_cab_factura, lo_pnl_grid_pedidos);
-            genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(), Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
-            switch (op) {
-                case 0:
-                    lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle(codigo);
-                    if (lq_rs != null) {
-                        lo_evt_cab_factura.activa_campos(0, lo_pnl_cab_factura, false, ls_tipo_documento);
-                        //lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
-                        lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()), 0);
-                        lo_pnl_cab_factura.TXT_fecha_emision.setEnabled(true);
-                        lo_pnl_cab_factura.TXT_pedido.setEnabled(true);
-                        lo_pnl_cab_factura.TXT_observacion.setEnabled(true);
-                        lo_pnl_cab_factura.TXT_observacion.requestFocus();
-                    }
-                    break;
-            }
-            get_tipo_cambio();
-        } else {
-            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "muestra_datos_ref", "NO EXISTE PEDIDO");
-        }
-    }
-
     private void evt_f5_entidad(int op) {
         get_parametros_entidad(op);
         go_dlg_busq_entidad_parametros = new dlg_busq_entidad_parametros(null, true);
@@ -469,7 +440,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                             lo_evt_grid_pedidos.recupera_detalle_gf(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_factura.JRD_precio_igv.isSelected()));
                         }
                     }
-                    lo_pnl_cab_factura.CBX_es_guia.setEnabled(true);                    
+                    lo_pnl_cab_factura.CBX_es_guia.setEnabled(true);
                     lo_pnl_cab_factura.TXT_fecha_emision.setEnabled(true);
                     lo_pnl_cab_factura.TXT_numero_doc.setEnabled(true);
                     lo_pnl_cab_factura.TXT_observacion.setEnabled(true);

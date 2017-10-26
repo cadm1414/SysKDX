@@ -45,4 +45,20 @@ public class DAO_registro_ventas_detalle {
         }
         return resp;
     }
+    
+    public ResultSet slt_grid_facturacion_ref(String codigo_operacion) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_facturacion_ref('"+codigo_operacion+"','"+gs_periodo+"') "
+                    + "as (codigo_articulo character(12),nombre_articulo character varying(150),tara numeric,simbolo_um character varying(3),afecto_igv character(1),porcentaje numeric,bulto integer,peso_bruto numeric,peso_neto numeric,item character(3))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "slt_grid_facturacion_ref", e.getMessage());
+        }
+        return null;
+    }
 }

@@ -139,6 +139,10 @@ public class opciones_menu {
                     go_muestra_jif_ventas.muestra_jif_cierre_pedidos();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("NOTA DE CREDITO")) {
+                    go_muestra_dlg_ventas.muestra_dlg_nota_credito("07");
+                    resp = "I";
+                }
                 break;
             case "CTACOB":
                 if (dato.equalsIgnoreCase("SALDO CTA CORRIENTE")) {

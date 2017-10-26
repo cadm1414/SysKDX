@@ -104,8 +104,10 @@ import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
 import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_normal;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_val;
+import JAVA.VENTAS.GUI.dlg_busq_ref_documento;
 import JAVA.VENTAS.GUI.dlg_rpt_registro_ventas;
 import JAVA.VENTAS.GUI.jif_cierre_pedidos;
+import JAVA.VENTAS.GUI.jif_nota_credito;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
@@ -204,6 +206,7 @@ public class variables_globales {
     public static DAO_recibo_cobranza_detalle go_dao_recibo_cobranza_detalle = new DAO_recibo_cobranza_detalle();
     public static DAO_entidad_contacto go_dao_entidad_contacto = new DAO_entidad_contacto();
     public static DAO_tipo_comercio go_dao_tipo_comercio = new DAO_tipo_comercio();
+    public static DAO_tabla_ayuda go_dao_tabla_ayuda = new DAO_tabla_ayuda();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -276,6 +279,7 @@ public class variables_globales {
     public static dlg_rpt_kardex_mercaderia go_dlg_rpt_kardex_mercaderia;
     public static dlg_rpt_tarjeta_cuenta_corriente go_dlg_rpt_tarjeta_cuenta_corriente;
     public static dlg_rpt_registro_ventas go_dlg_rpt_registro_ventas;
+    public static dlg_busq_ref_documento go_dlg_busq_ref_documento;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -301,6 +305,7 @@ public class variables_globales {
     public static jif_guia_remision go_jif_guia_remision;
     public static jif_recibo_cobranza go_jif_recibo_cobranza;
     public static jif_cierre_pedidos go_jif_cierre_pedidos;
+    public static jif_nota_credito go_jif_nota_credito;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;

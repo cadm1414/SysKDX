@@ -1,9 +1,12 @@
 package JAVA.VENTAS.GUI;
 
+import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+
 public class pnl_grid_facturacion extends javax.swing.JPanel {
 
     public pnl_grid_facturacion() {
-        initComponents();        
+        initComponents();
+        go_fnc_operaciones_campos.oculta_columna(TBL_facturacion, 9);
     }
 
     @SuppressWarnings("unchecked")
@@ -19,14 +22,14 @@ public class pnl_grid_facturacion extends javax.swing.JPanel {
 
             },
             new String [] {
-                "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "D(%)", "Bulto", "P. Bruto", "P. Neto"
+                "C. Articulo", "Nombre", "Tara", "U.M.", "IGV", "D(%)", "Bulto", "P. Bruto", "P. Neto", "item"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -57,6 +60,8 @@ public class pnl_grid_facturacion extends javax.swing.JPanel {
             TBL_facturacion.getColumnModel().getColumn(7).setPreferredWidth(30);
             TBL_facturacion.getColumnModel().getColumn(8).setResizable(false);
             TBL_facturacion.getColumnModel().getColumn(8).setPreferredWidth(30);
+            TBL_facturacion.getColumnModel().getColumn(9).setResizable(false);
+            TBL_facturacion.getColumnModel().getColumn(9).setPreferredWidth(0);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

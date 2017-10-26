@@ -143,7 +143,7 @@ public class DAO_registro_ventas {
                             + "'" + ((OBJ_pgp.getValueAt(i, 17).toString().trim().equalsIgnoreCase("")) ? OBJ_ped.getCodigo_operacion() : OBJ_pgp.getValueAt(i, 17).toString().trim()) + "',"
                             + "'" + ((OBJ_pgp.getValueAt(i, 18).toString().trim().equalsIgnoreCase("")) ? OBJ_pgp.getValueAt(i, 0).toString().trim() : OBJ_pgp.getValueAt(i, 18).toString().trim()) + "',"
                             + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
-                            + "'" + precio_cigv + "')";
+                            + "'" + (((boolean) OBJ_pgp.getValueAt(i, 7))?precio_cigv:(double) OBJ_pgp.getValueAt(i, 9)) + "')";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -223,7 +223,7 @@ public class DAO_registro_ventas {
                             + "'" + ((OBJ_pgp.getValueAt(i, 17).toString().trim().equalsIgnoreCase("")) ? OBJ_ped.getCodigo_operacion() : OBJ_pgp.getValueAt(i, 17).toString().trim()) + "',"
                             + "'" + ((OBJ_pgp.getValueAt(i, 18).toString().trim().equalsIgnoreCase("")) ? OBJ_pgp.getValueAt(i, 0).toString().trim() : OBJ_pgp.getValueAt(i, 18).toString().trim()) + "',"
                             + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
-                            + "'" + precio_cigv + "')";
+                            + "'" + (((boolean) OBJ_pgp.getValueAt(i, 7))?precio_cigv:(double) OBJ_pgp.getValueAt(i, 9)) + "')";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -275,5 +275,37 @@ public class DAO_registro_ventas {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_anula_registro_ventas", e.getMessage());
         }
         return resp;
+    }
+    
+    public ResultSet SLT_grid_ref_documento(String codigo_sucursal, String fecha_ini, String fecha_fin) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_ref_documento('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + gs_periodo + "') "
+                    + "as (codigo_operacion character(16),fecha_emision date,codigo_documento character(2),numero_documento text,razon_social character varying(250))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_ref_documento", e.getMessage());
+        }
+        return null;
+    }
+    
+    public ResultSet SLT_datos_ref_nc(int op,String codigo_operacion) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_datos_ref_nc(" + op + ",'" + codigo_operacion + "','" + gs_periodo + "') "
+                    + "as (codigo_operacion character(16),serie_documento character(4),numero character(10),codigo_moneda character(3),afecto_igv character(1),codigo_igv character(4),codigo_grupo character(3),porcentaje_detraccion numeric(5,3),codigo_entidad character(6),razon_social character varying(250),numero_documento_id character varying(15),es_domiciliado character(1),tipo_documento_id character(1),direccion character varying(250),codigo_ubigeo character(6),descripcion_ubigeo character varying(100),codigo_pagador character(6),nombre_pagador character varying(250),codigo_vendedor character(4),nombre_vendedor character varying(250))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_ref_nc", e.getMessage());
+        }
+        return null;
     }
 }
