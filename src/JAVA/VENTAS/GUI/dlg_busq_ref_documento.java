@@ -101,6 +101,8 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
 
     public void retorna() {
         ls_codigo = lo_pnl_grid_busq_ref_documento.TBL_referencia.getValueAt(lo_pnl_grid_busq_ref_documento.TBL_referencia.getSelectedRow(), 0).toString();
+        gs_parametros[0] = lo_pnl_grid_busq_ref_documento.TBL_referencia.getValueAt(lo_pnl_grid_busq_ref_documento.TBL_referencia.getSelectedRow(), 2).toString();
+        gs_parametros[1] = lo_pnl_grid_busq_ref_documento.TBL_referencia.getValueAt(lo_pnl_grid_busq_ref_documento.TBL_referencia.getSelectedRow(), 1).toString();
         this.dispose();
     }
 

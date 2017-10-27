@@ -87,6 +87,22 @@ public class evt_grid_pedidos {
         }
     }
 
+    public void genera_importes(double igv_p, double total, pnl_grid_pedidos OBJ_pgp) {
+        simbolos.setDecimalSeparator('.');
+        simbolos.setGroupingSeparator(',');
+        dFormat = new DecimalFormat("#,##0.00", simbolos);
+        dFormat.format(total);
+        double afecto = go_fnc_operaciones_campos.redondea(total / igv_p, 2);
+        double igv = go_fnc_operaciones_campos.redondea(total - afecto, 2);
+
+        OBJ_pgp.LBL_total.setText(dFormat.format(total) + "");
+        OBJ_pgp.LBL_inafecto.setText(dFormat.format(0.0) + "");
+        OBJ_pgp.LBL_afecto.setText(dFormat.format(afecto) + "");
+        OBJ_pgp.LBL_igv.setText(dFormat.format(igv) + "");
+        OBJ_pgp.LBL_percepcion.setText(dFormat.format(0.0) + "");
+        OBJ_pgp.LBL_importe.setText(dFormat.format(total) + "");
+    }
+
     public void suma_importes(int afecto_igv, double igv_p, boolean es_sigv, pnl_grid_pedidos OBJ_pgp) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
         simbolos.setDecimalSeparator('.');

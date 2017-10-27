@@ -64,7 +64,7 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
                     lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getInt(7), a, 6);
                     lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getDouble(8), a, 7);
                     lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getDouble(9), a, 8);
-                    if(!gs_parametros[1].equalsIgnoreCase("")){
+                    if(gs_parametros[1].equalsIgnoreCase("")){
                         lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getString(10), a, 9);
                     }else{
                          lo_pnl_grid_facturacion.TBL_facturacion.setValueAt("", a, 9);

@@ -177,7 +177,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
         }
     }
 
-    private void get_parametros_entidad(int op) {
+    private void get_parametros_entidad() {
         gs_parametros[0] = (ls_tipo_documento.equalsIgnoreCase("01")) ? "6" : "1";
         gs_parametros[1] = "1";
         gs_parametros[2] = "1";
@@ -331,8 +331,8 @@ public class jif_factura extends javax.swing.JInternalFrame {
         gs_parametros[0] = "";
     }
 
-    private void evt_f5_entidad(int op) {
-        get_parametros_entidad(op);
+    private void evt_f5_entidad() {
+        get_parametros_entidad();
         go_dlg_busq_entidad_parametros = new dlg_busq_entidad_parametros(null, true);
         go_dlg_busq_entidad_parametros.setVisible(true);
         ls_codigo_entidad = go_dlg_busq_entidad_parametros.ls_codigo_entidad;
@@ -682,7 +682,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
             }
             if (ke.getKeyCode() == KeyEvent.VK_F5) {
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_entidad) {
-                    evt_f5_entidad(0);
+                    evt_f5_entidad();
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_vendedor) {
                     go_activa_buscador.busq_vendedor(lo_pnl_cab_factura.TXT_codigo_vendedor, lo_pnl_cab_factura.TXT_nombre_vendedor);

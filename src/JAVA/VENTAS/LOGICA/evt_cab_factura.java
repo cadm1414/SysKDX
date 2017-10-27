@@ -105,7 +105,7 @@ public class evt_cab_factura {
         OBJ_pdp.JRD_precio_igv.setSelected(go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bpe.getEs_precio_igv())));
         OBJ_pdp.TXT_codigo_entidad.setText(OBJ_bpe.getCodigo_entidad());
         OBJ_pdp.TXT_razon_social.setText(OBJ_bpe.getRazon_social());
-        OBJ_pdp.CBX_tipo_documento_id.setSelectedItem((OBJ_bpe.getTipo_documento_id().equalsIgnoreCase("6")) ? 0 : 1);
+        OBJ_pdp.CBX_tipo_documento_id.setSelectedIndex((OBJ_bpe.getTipo_documento_id().equalsIgnoreCase("6")) ? 0 : 1);
         OBJ_pdp.TXT_doc_id.setText(OBJ_bpe.getNumero_documento_id());
         OBJ_pdp.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bpe.getEs_domiciliado())));
         try {
@@ -421,9 +421,7 @@ public class evt_cab_factura {
             OBJ_bpe.setPercepcion_mn(OBJ_bpe.getPercepcion() * tipo_cambio);
             OBJ_bpe.setTotal_documento_mn(OBJ_bpe.getTotal_documento() * tipo_cambio);
             OBJ_bpe.setExonerado_mn(OBJ_bpe.getExonerado() * tipo_cambio);
-            OBJ_bpe.setImporte_detraccion_mn(OBJ_bpe.getImporte_detraccion() * tipo_cambio);
-            OBJ_bpe.setEs_guiar((OBJ_bpe.getCodigo_guiar().equalsIgnoreCase("GR00000000000000")) ? "0" : "1");
-            OBJ_bpe.setEs_pedido((OBJ_bpe.getCodigo_pedido().equalsIgnoreCase("OP00000000000000")) ? "0" : "1");
+            OBJ_bpe.setImporte_detraccion_mn(OBJ_bpe.getImporte_detraccion() * tipo_cambio);            
             OBJ_bpe.setFecha_doc_ref(OBJ_pcp.TXT_fecha_emision.getText().trim());
             OBJ_bpe.setCodigo_tipo_doc_ref("..");
             OBJ_bpe.setSerie_doc_ref("");

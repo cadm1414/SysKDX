@@ -5,6 +5,7 @@ import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.CONFIG.LOGICA.cbx_pais;
 import JAVA.CONFIG.LOGICA.cbx_rol;
+import JAVA.CONFIG.LOGICA.cbx_tabla_ayuda;
 import JAVA.CONFIG.LOGICA.cbx_tabla_sunat;
 import JAVA.CONFIG.LOGICA.cbx_tipo_comercio;
 import JAVA.CONFIG.LOGICA.cbx_tipo_documento;
@@ -45,6 +46,7 @@ public class cbx_trato_datos {
     cbx_entidad_ubigeo lo_cbx_entidad_ubigeo;
     cbx_banco lo_cbx_banco;
     cbx_tipo_comercio lo_cbx_tipo_comercio;
+    cbx_tabla_ayuda lo_cbx_tabla_ayuda;
 
     /*VALORES OPERACION
     0 = cbx_moneda
@@ -65,7 +67,8 @@ public class cbx_trato_datos {
     15 = cbx_igv
     16 = cbx_entidad_ubigeo
     17 = cbx_banco
-    18 = cnx_tipo_comercio
+    18 = cbx_tipo_comercio
+    19 = cbx_tabla_ayuda
      */
     public void recupera_valor(int op, ResultSet rs, JComboBox cbx_combo) {
         switch (op) {
@@ -259,6 +262,16 @@ public class cbx_trato_datos {
                 } catch (Exception e) {
                 }
                 break;
+            case 19:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_tabla_ayuda(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -431,6 +444,15 @@ public class cbx_trato_datos {
                 for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
                     lo_cbx_tipo_comercio = (cbx_tipo_comercio) cbx_combo.getItemAt(i);
                     codigo = lo_cbx_tipo_comercio.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 19:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_tabla_ayuda = (cbx_tabla_ayuda) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_tabla_ayuda.getID();
                     if (codigo.equalsIgnoreCase(dato.trim())) {
                         cbx_combo.setSelectedIndex(i);
                     }

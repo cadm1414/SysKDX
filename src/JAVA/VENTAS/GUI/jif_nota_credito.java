@@ -50,7 +50,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
     int li_tipo_operacion, cont = 0, li_cantidad;
     double ld_tipo_cambio, ld_porcentaje_detraccion, ld_monto_minimo;
     String ls_opcion = "M A F";
-    String ls_codigo, ls_codigo_sucursal, ls_serie, ls_tipo_documento, ls_codigo_ref, ls_codigo_articulo;
+    String ls_codigo, ls_codigo_sucursal, ls_serie, ls_tipo_documento, ls_codigo_ref, ls_codigo_articulo, ls_tipo_documento_ref, ls_fecha_ref;
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "jif_nota_credito";
 
     public jif_nota_credito() {
@@ -118,7 +118,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
     private void get_concepto() {
         lq_rs = go_dao_tabla_ayuda.SLT_cbx_tabla_ayuda("0001");
         if (lq_rs != null) {
-            go_cbx_trato_datos.recupera_valor(18, lq_rs, lo_pnl_cab_nota_credito.CBX_concepto);
+            go_cbx_trato_datos.recupera_valor(19, lq_rs, lo_pnl_cab_nota_credito.CBX_concepto);
         }
     }
 
@@ -144,6 +144,37 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
             lo_pnl_cab_nota_credito.TXT_tipo_cambio.setEnabled(false);
             lo_pnl_cab_nota_credito.TXT_tipo_cambio.setText("0.000");
         }
+    }
+
+    private void get_descripcion_registro_ventas(String codigo) {
+        try {
+            lq_rs = go_dao_registro_ventas.SLT_datos_registro_ventas(codigo);
+            if (lq_rs != null) {
+                lo_evt_cab_nota_credito.setea_recupera(lo_bean_registro_ventas, lq_rs);
+                lo_evt_cab_nota_credito.muestra_datos(lo_pnl_cab_nota_credito, lo_bean_registro_ventas, lo_pnl_grid_pedidos);
+                lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_nota_credito.CBX_moneda.getSelectedItem();
+                lo_pnl_grid_pedidos.LBL_simbolo.setText("Imp (" + lo_cbx_moneda.simbolo_moneda().trim() + ")");
+                get_descripcion_registro_ventas_detalle(codigo);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void get_descripcion_registro_ventas_detalle(String codigo) {
+        if (lo_pnl_cab_nota_credito.CBX_registra_item.getSelectedIndex() == 1) {
+            lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
+            lq_rs = go_dao_registro_ventas_detalle.SLT_datos_registro_ventas_detalle(codigo);
+            lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, Integer.parseInt(lo_bean_registro_ventas.getEs_precio_igv()), 1);
+            lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
+        }
+    }
+
+    private void genera_parametros_busq() {
+        gs_parametros[0] = ls_codigo_sucursal;
+        gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[3] = lo_pnl_cab_nota_credito.TXT_serie.getText().trim();
+        gs_parametros[4] = ls_tipo_documento;
     }
 
     private void genera_peso_neto(int fila) {
@@ -180,6 +211,8 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
     private void limpia_parametros() {
         gs_parametros[0] = "";
         gs_parametros[1] = "";
+        gs_parametros[2] = "";
+        gs_parametros[3] = "";
     }
 
     private void evt_f5_facturacion() {
@@ -220,6 +253,8 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
         go_dlg_busq_ref_documento = new dlg_busq_ref_documento(null, true);
         go_dlg_busq_ref_documento.setVisible(true);
         ls_codigo_ref = go_dlg_busq_ref_documento.ls_codigo;
+        ls_tipo_documento_ref = gs_parametros[0];
+        ls_fecha_ref = gs_parametros[1];
         if (ls_codigo_ref != null) {
             try {
                 lq_rs = go_dao_registro_ventas.SLT_datos_ref_nc(0, ls_codigo_ref);
@@ -234,6 +269,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
             ls_codigo_ref = null;
             lo_pnl_cab_nota_credito.TXT_numero_ref.requestFocus();
         }
+        limpia_parametros();
     }
 
     private void evt_nuevo() {
@@ -257,14 +293,102 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
 
     }
 
+    private void evt_buscar() {
+        li_tipo_operacion = 2;
+        genera_parametros_busq();
+        go_dlg_busq_registro_ventas = new dlg_busq_registro_ventas(null, true);
+        go_dlg_busq_registro_ventas.setVisible(true);
+        ls_codigo = go_dlg_busq_registro_ventas.ls_codigo;
+        if (ls_codigo != null) {
+            ls_codigo = ls_codigo.substring(0, 2) + ls_serie + ls_codigo.substring(3, 13);
+            get_descripcion_registro_ventas(ls_codigo);
+            lo_evt_opciones_3.activa_btn_opciones(2, lo_pnl_opciones_3, lb_valor_op);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "SELECCIONE DOCUMENTO");
+            lo_evt_cab_nota_credito.limpia_datos(lo_pnl_cab_nota_credito, ls_tipo_documento);
+            lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
+            lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+        }
+    }
+
+    private void evt_eliminar() {
+        if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR DOCUMENTO Nro " + ls_tipo_documento + " - " + lo_bean_registro_ventas.getNumero_documento() + "?") == 0) {
+            try {
+                if (go_dao_registro_ventas_detalle.DLT_registro_ventas_detalle(ls_codigo)) {
+                    if (go_dao_registro_ventas.DLT_registro_ventas(ls_codigo)) {
+                        lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                        lo_evt_cab_nota_credito.activa_campos(0, lo_pnl_cab_nota_credito, false, ls_tipo_documento);
+                        lo_evt_cab_nota_credito.limpia_datos(lo_pnl_cab_nota_credito, ls_tipo_documento);
+                        lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
+                        lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, 1);
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+
     private void evt_guardar() {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_nota_credito.CBX_moneda.getSelectedItem();
         lo_cbx_grupo_detraccion = (cbx_grupo_detraccion) lo_pnl_cab_nota_credito.CBX_codigo_detraccion.getSelectedItem();
         lo_cbx_igv = (cbx_igv) lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem();
         lo_cbx_tabla_ayuda = (cbx_tabla_ayuda) lo_pnl_cab_nota_credito.CBX_concepto.getSelectedItem();
+
         switch (li_tipo_operacion) {
             case 0:
+                ls_codigo = ls_tipo_documento + ls_serie + lo_pnl_cab_nota_credito.TXT_numero_doc.getText().trim();
+                lo_bean_registro_ventas.setCodigo_operacion(ls_codigo);
+                lo_bean_registro_ventas.setCodigo_sucursal(ls_codigo_sucursal);
+                lo_bean_registro_ventas.setCodigo_tipo_doc_ref(ls_tipo_documento_ref);
+                lo_bean_registro_ventas.setFecha_doc_ref(ls_fecha_ref);
+                if (lo_evt_cab_nota_credito.valida_campos(lo_pnl_cab_nota_credito, lo_cbx_moneda)) {
+                    switch (lo_pnl_cab_nota_credito.CBX_registra_item.getSelectedIndex()) {
+                        case 0:
+                            try {
+                                lo_evt_cab_nota_credito.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_nota_credito, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_tabla_ayuda, lo_pnl_grid_pedidos, ld_monto_minimo);
+                                if (go_dao_registro_ventas.IST_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100)) {
+                                    lo_evt_cab_nota_credito.limpia_datos(lo_pnl_cab_nota_credito, ls_tipo_documento);
+                                    lo_evt_cab_nota_credito.activa_campos(0, lo_pnl_cab_nota_credito, false, ls_tipo_documento);
+                                    lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
+                                    lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
+                                    lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                                }
+                            } catch (Exception e) {
+                            }
+                            break;
+                        case 1:
+                            try {
+                                if (lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad)) {
+                                    lo_evt_cab_nota_credito.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_nota_credito, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_tabla_ayuda, lo_pnl_grid_pedidos, ld_monto_minimo);
+                                    if (go_dao_registro_ventas.IST_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100)) {
+                                        lo_evt_cab_nota_credito.limpia_datos(lo_pnl_cab_nota_credito, ls_tipo_documento);
+                                        lo_evt_cab_nota_credito.activa_campos(0, lo_pnl_cab_nota_credito, false, ls_tipo_documento);
+                                        lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
+                                        lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
+                                        lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                                    }
+                                }
+                            } catch (Exception e) {
+                            }
+                            break;
+                    }
+                }
                 break;
+        }
+    }
+
+    private void evt_cancelar() {
+        li_tipo_operacion = 2;
+        lo_evt_cab_nota_credito.activa_campos(0, lo_pnl_cab_nota_credito, false, ls_tipo_documento);
+        lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
+        lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
+        if (ls_codigo != null) {
+            lo_evt_cab_nota_credito.muestra_datos(lo_pnl_cab_nota_credito, lo_bean_registro_ventas, lo_pnl_grid_pedidos);
+            get_descripcion_registro_ventas_detalle(ls_codigo);
+            lo_evt_opciones_3.activa_btn_opciones(2, lo_pnl_opciones_3, lb_valor_op);
+        } else {
+            lo_evt_cab_nota_credito.limpia_datos(lo_pnl_cab_nota_credito, ls_tipo_documento);
+            lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
         }
     }
 
@@ -275,16 +399,16 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 evt_nuevo();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_buscar) {
-                //evt_buscar();
+                evt_buscar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_editar) {
                 //evt_editar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
-                //evt_eliminar();
+                evt_eliminar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_guardar) {
                 evt_guardar();
@@ -310,16 +434,16 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 evt_nuevo();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F2 && lo_pnl_opciones_3.BTN_buscar.isEnabled()) {
-                //evt_buscar();
+                evt_buscar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_3.BTN_editar.isEnabled()) {
                 //evt_editar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_3.BTN_eliminar.isEnabled()) {
-                //evt_eliminar();
+                evt_eliminar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ESCAPE && lo_pnl_opciones_3.BTN_cancelar.isEnabled()) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_3.BTN_guardar.isEnabled()) {
                 evt_guardar();
@@ -351,13 +475,13 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                     evt_nuevo();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_buscar) {
-                    //evt_buscar();
+                    evt_buscar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_editar) {
                     //evt_editar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
-                    //evt_eliminar();
+                    evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_guardar) {
                     evt_guardar();
@@ -366,7 +490,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                     //evt_anular();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
-                    //evt_cancelar();
+                    evt_cancelar();
                 }
                 if (ke.getSource() == lo_pnl_cab_nota_credito.TXT_numero_doc) {
                     if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_nota_credito.TXT_numero_doc)) {
@@ -401,7 +525,8 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_cab_nota_credito.TXT_observacion || ke.getSource() == lo_pnl_cab_nota_credito.CBX_concepto) {
                     getFocusOwner().transferFocus();
                 }
-                if (ke.getSource() == lo_pnl_cab_nota_credito.TXT_total) {
+                if (ke.getSource() == lo_pnl_cab_nota_credito.TXT_total && go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_nota_credito.TXT_total)) {
+                    lo_evt_grid_pedidos.genera_importes((Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) + 100) / 100, Double.parseDouble(lo_pnl_cab_nota_credito.TXT_total.getText()), lo_pnl_grid_pedidos);
                     lo_pnl_opciones_3.BTN_guardar.requestFocus();
                 }
                 if (ke.getSource() == lo_pnl_cab_nota_credito.CBX_registra_item) {
@@ -482,8 +607,11 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
             if (li_tipo_operacion != 2) {
                 if (ie.getSource() == lo_pnl_cab_nota_credito.CBX_registra_item && li_tipo_operacion == 0) {
                     if (lo_pnl_cab_nota_credito.CBX_registra_item.getSelectedIndex() == 0) {
+                        lo_pnl_cab_nota_credito.TXT_total.setText("");
                         lo_pnl_cab_nota_credito.TXT_total.setEnabled(true);
+                        lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, 0);
                     } else {
+                        lo_pnl_cab_nota_credito.TXT_total.setText("0.00");
                         lo_pnl_cab_nota_credito.TXT_total.setEnabled(false);
                     }
 

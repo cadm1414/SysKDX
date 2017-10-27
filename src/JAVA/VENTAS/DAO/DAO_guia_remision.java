@@ -138,7 +138,7 @@ public class DAO_guia_remision {
                             + "'" + ((OBJ_pgp.getValueAt(i, 17).toString().trim().equalsIgnoreCase("")) ? OBJ_ped.getCodigo_operacion() : OBJ_pgp.getValueAt(i, 17).toString().trim()) + "',"
                             + "'" + ((OBJ_pgp.getValueAt(i, 18).toString().trim().equalsIgnoreCase("")) ? OBJ_pgp.getValueAt(i, 0).toString().trim() : OBJ_pgp.getValueAt(i, 18).toString().trim()) + "',"
                             + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
-                            + "'" + (((boolean) OBJ_pgp.getValueAt(i, 7))?precio_cigv:(double) OBJ_pgp.getValueAt(i, 9)) + "')";
+                            + (double) OBJ_pgp.getValueAt(i, 9) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -214,7 +214,7 @@ public class DAO_guia_remision {
                             + "'" + ((OBJ_pgp.getValueAt(i, 17).toString().trim().equalsIgnoreCase("")) ? OBJ_ped.getCodigo_operacion() : OBJ_pgp.getValueAt(i, 17).toString().trim()) + "',"
                             + "'" + ((OBJ_pgp.getValueAt(i, 18).toString().trim().equalsIgnoreCase("")) ? OBJ_pgp.getValueAt(i, 0).toString().trim() : OBJ_pgp.getValueAt(i, 18).toString().trim()) + "',"
                             + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
-                            + "'" + (((boolean) OBJ_pgp.getValueAt(i, 7))?precio_cigv:(double) OBJ_pgp.getValueAt(i, 9)) + "')";
+                            + (double) OBJ_pgp.getValueAt(i, 9) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {

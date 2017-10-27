@@ -88,7 +88,7 @@ public class DAO_registro_ventas {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from ist_registro_ventas('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','" + OBJ_ped.getCodigo_documento() + "','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getFecha_vencimiento() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + "," + OBJ_ped.getInafecto_mn() + "," + OBJ_ped.getBase_mn() + "," + OBJ_ped.getIgv_mn() + "," + OBJ_ped.getTotal_mn() + "," + OBJ_ped.getPercepcion_mn() + "," + OBJ_ped.getTotal_documento_mn() + "," + OBJ_ped.getExonerado_mn() + "," + OBJ_ped.getImporte_detraccion_mn() + ",'" + OBJ_ped.getEs_guiar() + "','" + OBJ_ped.getCodigo_guiar() + "','" + OBJ_ped.getEs_pedido() + "','" + OBJ_ped.getCodigo_pedido() + "','" + OBJ_ped.getFecha_doc_ref() + "','" + OBJ_ped.getCodigo_tipo_doc_ref() + "','" + OBJ_ped.getSerie_doc_ref() + "','" + OBJ_ped.getNumero_doc_ref() + "','" + OBJ_ped.getRegistra_item() + "','" + OBJ_ped.getConcepto_doc_ref() + "','" + gs_periodo + "')";
             lq_rs = lq_stm.executeQuery(SQL);
-            if (lq_rs.next()) {
+            if (lq_rs != null) {
                 for (int i = 0; i < OBJ_pgp.getRowCount(); i++) {
                     tipo_cambio = (OBJ_ped.getCodigo_moneda().equalsIgnoreCase("PEN")) ? 1 : OBJ_ped.getTipo_cambio();
                     switch (OBJ_ped.getAfecto_igv()) {
@@ -143,7 +143,7 @@ public class DAO_registro_ventas {
                             + "'" + ((OBJ_pgp.getValueAt(i, 17).toString().trim().equalsIgnoreCase("")) ? OBJ_ped.getCodigo_operacion() : OBJ_pgp.getValueAt(i, 17).toString().trim()) + "',"
                             + "'" + ((OBJ_pgp.getValueAt(i, 18).toString().trim().equalsIgnoreCase("")) ? OBJ_pgp.getValueAt(i, 0).toString().trim() : OBJ_pgp.getValueAt(i, 18).toString().trim()) + "',"
                             + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
-                            + "'" + (((boolean) OBJ_pgp.getValueAt(i, 7))?precio_cigv:(double) OBJ_pgp.getValueAt(i, 9)) + "')";
+                            + (double) OBJ_pgp.getValueAt(i, 9) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -223,7 +223,7 @@ public class DAO_registro_ventas {
                             + "'" + ((OBJ_pgp.getValueAt(i, 17).toString().trim().equalsIgnoreCase("")) ? OBJ_ped.getCodigo_operacion() : OBJ_pgp.getValueAt(i, 17).toString().trim()) + "',"
                             + "'" + ((OBJ_pgp.getValueAt(i, 18).toString().trim().equalsIgnoreCase("")) ? OBJ_pgp.getValueAt(i, 0).toString().trim() : OBJ_pgp.getValueAt(i, 18).toString().trim()) + "',"
                             + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
-                            + "'" + (((boolean) OBJ_pgp.getValueAt(i, 7))?precio_cigv:(double) OBJ_pgp.getValueAt(i, 9)) + "')";
+                            + (double) OBJ_pgp.getValueAt(i, 9) + ")";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
@@ -276,7 +276,7 @@ public class DAO_registro_ventas {
         }
         return resp;
     }
-    
+
     public ResultSet SLT_grid_ref_documento(String codigo_sucursal, String fecha_ini, String fecha_fin) {
         try {
             lq_stm = go_conexion_db.crearStatement();
@@ -292,8 +292,8 @@ public class DAO_registro_ventas {
         }
         return null;
     }
-    
-    public ResultSet SLT_datos_ref_nc(int op,String codigo_operacion) {
+
+    public ResultSet SLT_datos_ref_nc(int op, String codigo_operacion) {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_datos_ref_nc(" + op + ",'" + codigo_operacion + "','" + gs_periodo + "') "
