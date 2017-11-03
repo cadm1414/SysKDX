@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CTACOB.GUI.dlg_rpt_saldo_cta_corriente;
 import JAVA.CTACOB.GUI.dlg_rpt_tarjeta_cuenta_corriente;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
+import JAVA.VENTAS.GUI.dlg_rpt_registro_ventas;
 import java.beans.PropertyVetoException;
 
 public class muestra_dlg_ctacob {
@@ -40,5 +41,11 @@ public class muestra_dlg_ctacob {
         gi_parametros_2[0] = op;
         go_dlg_rpt_tarjeta_cuenta_corriente = new dlg_rpt_tarjeta_cuenta_corriente(null, true);
         go_dlg_rpt_tarjeta_cuenta_corriente.setVisible(true);
+    }
+
+    public void muestra_dlg_rpt_listado_cobranzas(int op) {
+        gi_parametros_2[0] = op;
+        go_dlg_rpt_registro_ventas = new dlg_rpt_registro_ventas(null, true);
+        go_dlg_rpt_registro_ventas.setVisible(true);
     }
 }

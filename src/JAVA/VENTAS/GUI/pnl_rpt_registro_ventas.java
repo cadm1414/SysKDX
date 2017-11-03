@@ -1,9 +1,14 @@
 package JAVA.VENTAS.GUI;
 
+import JAVA.ANCESTRO.LOGICA.FullSelectorListener;
+
 public class pnl_rpt_registro_ventas extends javax.swing.JPanel {
 
     public pnl_rpt_registro_ventas() {
         initComponents();
+        TXT_codigo.addFocusListener(new FullSelectorListener());  
+        TXT_fecha_ini.addFocusListener(new FullSelectorListener());   
+        TXT_fecha_fin.addFocusListener(new FullSelectorListener());
     }
 
     @SuppressWarnings("unchecked")

@@ -51,7 +51,7 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
         lo_pnl_aceptar_cancelar.BTN_aceptar.addKeyListener(KeyEvnt);
         lo_pnl_aceptar_cancelar.BTN_cancelar.addKeyListener(KeyEvnt);
         
-        lo_pnl_inicia_sesion.TXT_usuario.addFocusListener(new FullSelectorListener());        
+        lo_pnl_inicia_sesion.TXT_usuario.addFocusListener(new FullSelectorListener());
         lo_pnl_inicia_sesion.TXT_clave.addFocusListener(new FullSelectorListener());
     }
 

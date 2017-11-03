@@ -136,7 +136,7 @@ public class opciones_menu {
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("REGISTRO VENTAS")) {
-                    go_muestra_dlg_ventas.muestra_dlg_rpt_registro_ventas();
+                    go_muestra_dlg_ventas.muestra_dlg_rpt_registro_ventas(0);
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("CIERRE PEDIDOS")) {
@@ -167,6 +167,10 @@ public class opciones_menu {
                 }
                 if (dato.equalsIgnoreCase("ESTADO DE CUENTA")) {
                     go_muestra_dlg_ctacob.muestra_dlg_rpt_tarjeta_cuenta_corriente(1);
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("LISTADO COBRANZAS")) {
+                    go_muestra_dlg_ctacob.muestra_dlg_rpt_listado_cobranzas(1);
                     resp = "I";
                 }
                 break;

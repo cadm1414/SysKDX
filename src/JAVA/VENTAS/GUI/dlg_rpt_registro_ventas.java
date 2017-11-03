@@ -24,6 +24,7 @@ public class dlg_rpt_registro_ventas extends javax.swing.JDialog {
     pnl_aceptar_cancelar lo_pnl_aceptar_cancelar = new pnl_aceptar_cancelar();
     evt_aceptar_cancelar lo_evt_aceptar_cancelar = new evt_aceptar_cancelar();
     ResultSet lq_rs;
+    int op;
     String ls_codigo, ls_nombre;
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_control_pedido";
 
@@ -39,6 +40,9 @@ public class dlg_rpt_registro_ventas extends javax.swing.JDialog {
 
         this.add(lo_pnl_rpt_registro_ventas);
         this.add(lo_pnl_aceptar_cancelar);
+
+        op = gi_parametros_2[0];
+        gi_parametros_2[0] = 0;
 
         lo_pnl_rpt_registro_ventas.TXT_fecha_ini.setText(gs_dia + gs_mes + gs_periodo);
         lo_pnl_rpt_registro_ventas.TXT_fecha_fin.setText(gs_dia + gs_mes + gs_periodo);
@@ -108,7 +112,14 @@ public class dlg_rpt_registro_ventas extends javax.swing.JDialog {
         parametros.put("periodo", gs_periodo);
         parametros.put("nombre_sucursal", lo_pnl_rpt_registro_ventas.TXT_nombre.getText().trim());
         parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
-        go_muestra_reporte_ventas.reporte_pestania("rpt_registro_ventas.jasper", parametros, "REGISTRO DE VENTAS", 4);
+        switch (op) {
+            case 0:
+                go_muestra_reporte_ventas.reporte_pestania("rpt_registro_ventas.jasper", parametros, "REGISTRO DE VENTAS", 4);
+                break;
+            case 1:
+                go_muestra_reporte_ctacob.reporte_pestania("rpt_listado_cobranzas.jasper", parametros, "LISTADO COBRANZAS", 3);
+                break;
+        }
     }
 
     private void evt_f5() {
@@ -179,7 +190,7 @@ public class dlg_rpt_registro_ventas extends javax.swing.JDialog {
                         }
                     }
                 }
-                
+
                 if (ke.getSource() == lo_pnl_aceptar_cancelar.BTN_aceptar) {
                     evt_aceptar();
                 }
