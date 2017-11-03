@@ -14,11 +14,10 @@
 	<parameter name="codigo_pagador" class="java.lang.String"/>
 	<parameter name="codigo_sucursal" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_tarjeta_cuenta_corriente( $P{codigo_sucursal} , $P{codigo_pagador} , $P{fecha_ini} , $P{fecha_fin} , $P{periodo} ) as (codigo_pagador character(6),nombre_pagador character varying(250),codigo_operacion character(16),codigo_sucursal character(4),codigo_documento character(2),numero text,fecha_emision date,fecha_vencimiento date,codigo_moneda character(3),forma_pago bpchar,observacion text,_sa_inicio numeric,debe numeric,haber numeric,saldo numeric,origen numeric)]]>
+		<![CDATA[select * from rpt_estado_cuenta( $P{codigo_sucursal}  , $P{codigo_pagador} ,$P{fecha_ini}  ,$P{fecha_fin}  ,$P{periodo} ) as (codigo_pagador character(6),nombre_pagador character varying(250),codigo_sucursal character(4),codigo_documento character(2),numero text,fecha_emision date,fecha_vencimiento date,codigo_moneda character(3),forma_pago bpchar,observacion text,_sa_inicio numeric,debe numeric,haber numeric,saldo numeric,origen numeric)]]>
 	</queryString>
 	<field name="codigo_pagador" class="java.lang.String"/>
 	<field name="nombre_pagador" class="java.lang.String"/>
-	<field name="codigo_operacion" class="java.lang.String"/>
 	<field name="codigo_sucursal" class="java.lang.String"/>
 	<field name="codigo_documento" class="java.lang.String"/>
 	<field name="numero" class="java.lang.String"/>
@@ -86,11 +85,11 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="208" y="11" width="128" height="12" uuid="cfb193b3-3177-42ce-b2c9-08fdcce0d6f2"/>
+				<reportElement x="227" y="11" width="91" height="12" uuid="cfb193b3-3177-42ce-b2c9-08fdcce0d6f2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[TARJETA CUENTE CORRIENTE]]></text>
+				<text><![CDATA[ESTADO DE CUENTA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="271" y="23" width="16" height="12" uuid="ec73ab8f-e947-45b9-bb4e-f9e032844ea5"/>

@@ -5,6 +5,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.VENTAS.GUI.dlg_control_pedido;
 import JAVA.VENTAS.GUI.dlg_despacho_pedido;
 import JAVA.VENTAS.GUI.dlg_ini_serie;
+import JAVA.VENTAS.GUI.dlg_resumen_documento;
 import JAVA.VENTAS.GUI.dlg_rpt_registro_ventas;
 import java.beans.PropertyVetoException;
 
@@ -138,6 +139,11 @@ public class muestra_dlg_ventas {
             go_dlg_ini_serie = new dlg_ini_serie(null, true);
             go_dlg_ini_serie.setVisible(true);            
         }
+    }
+    
+    public void muestra_dlg_resumen_documento() {
+        go_dlg_resumen_documento = new dlg_resumen_documento(null, true);
+        go_dlg_resumen_documento.setVisible(true);
     }
     
 }

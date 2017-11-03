@@ -2,6 +2,7 @@ package JAVA.ANCESTRO.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.GUI.dlg_busq_entidad;
+import JAVA.CONFIG.GUI.dlg_busq_tipo_movimiento;
 import JAVA.CONFIG.GUI.dlg_busq_ubigeo;
 import JAVA.CONFIG.GUI.dlg_busq_vendedor;
 import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
@@ -36,7 +37,7 @@ public class activa_buscador {
             lq_rs = go_dao_ubigeo.SLT_descripcion_ubigeo_x_codigo(ls_codigo_ubigeo);
             if (lq_rs != null) {
                 descripcion.setText(lq_rs.getString(1));
-                 codigo.transferFocus();
+                codigo.transferFocus();
                 resp = true;
             } else {
                 codigo.setText("");
@@ -104,6 +105,7 @@ public class activa_buscador {
             if (lq_rs != null) {
                 codigo.setText(lq_rs.getString(1));
                 nombre.setText(lq_rs.getString(2));
+                codigo.transferFocus();
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_almacen_permiso", "USUARIO SIN PERMISOS y/o ALMACEN NO EXISTE");
                 codigo.setText("");
@@ -169,6 +171,38 @@ public class activa_buscador {
                 codigo.transferFocus();
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_vendedor", "VENDEDOR NO EXISTE y/o BLOQUEADO");
+                codigo.setText("");
+                nombre.setText("");
+                codigo.requestFocus();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public void busq_tipo_movimiento(JTextField codigo, JTextField nombre) {
+        go_dlg_busq_tipo_movimiento = new dlg_busq_tipo_movimiento(null, true);
+        go_dlg_busq_tipo_movimiento.setVisible(true);
+        String ls_codigo = go_dlg_busq_tipo_movimiento.ls_codigo_tipo_movimiento;
+        if (ls_codigo != null) {
+            codigo.setText(ls_codigo);
+            get_descripcion_tipo_movimiento(ls_codigo, codigo, nombre);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "busq_tipo_movimiento", "SELECCIONE TIPO DE MOVIMIENTO");
+            codigo.setText("");
+            nombre.setText("");
+            codigo.requestFocus();
+        }
+    }
+
+    public void get_descripcion_tipo_movimiento(String ls_codigo, JTextField codigo, JTextField nombre) {
+        try {
+            lq_rs = go_dao_tipo_movimiento.SLT_datos_tipo_movimiento(ls_codigo);
+            if (lq_rs != null) {
+                codigo.setText(lq_rs.getString(1));
+                nombre.setText(lq_rs.getString(2));
+                codigo.transferFocus();
+            } else {
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_descripcion_vendedor", "TIPO DE MOVIMIENTO NO EXISTE");
                 codigo.setText("");
                 nombre.setText("");
                 codigo.requestFocus();

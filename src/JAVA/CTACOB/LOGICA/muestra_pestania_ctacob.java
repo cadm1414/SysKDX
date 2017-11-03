@@ -2,6 +2,7 @@ package JAVA.CTACOB.LOGICA;
 
 import JAVA.ANCESTRO.LOGICA.jt_panel;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.CTACOB.REPORT.pnl_rpt_estado_cuenta;
 import JAVA.CTACOB.REPORT.pnl_rpt_saldo_cta_corriente;
 import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
 import java.awt.BorderLayout;
@@ -35,6 +36,21 @@ public class muestra_pestania_ctacob {
         go_pnl_rpt_tarjeta_cuenta_corriente.repaint();
         go_pnl_rpt_tarjeta_cuenta_corriente.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_tarjeta_cuenta_corriente);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+    
+    public void rpt_estado_cuenta(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_estado_cuenta);
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_estado_cuenta = new pnl_rpt_estado_cuenta();
+        go_pnl_rpt_estado_cuenta.removeAll();
+        go_pnl_rpt_estado_cuenta.setLayout(new BorderLayout());
+        go_pnl_rpt_estado_cuenta.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_estado_cuenta.setVisible(true);
+        go_pnl_rpt_estado_cuenta.repaint();
+        go_pnl_rpt_estado_cuenta.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_estado_cuenta);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }

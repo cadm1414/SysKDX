@@ -36,7 +36,8 @@ public class muestra_dlg_ctacob {
         }
     }
 
-    public void muestra_dlg_rpt_tarjeta_cuenta_corriente() {
+    public void muestra_dlg_rpt_tarjeta_cuenta_corriente(int op) {
+        gi_parametros_2[0] = op;
         go_dlg_rpt_tarjeta_cuenta_corriente = new dlg_rpt_tarjeta_cuenta_corriente(null, true);
         go_dlg_rpt_tarjeta_cuenta_corriente.setVisible(true);
     }

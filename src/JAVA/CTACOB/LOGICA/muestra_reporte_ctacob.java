@@ -29,6 +29,9 @@ public class muestra_reporte_ctacob {
                 case 1:
                     go_muestra_pestania_ctacob.rpt_tarjeta_cuenta_corriente(jr, nombre);
                     break;
+                case 2:
+                    go_muestra_pestania_ctacob.rpt_estado_cuenta(jr, nombre);
+                    break;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

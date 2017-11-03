@@ -100,11 +100,15 @@ import JAVA.VENTAS.GUI.jif_factura;
 import JAVA.VENTAS.GUI.jif_guia_remision;
 import JAVA.VENTAS.GUI.jif_pedido;
 import JAVA.CTACOB.GUI.jif_recibo_cobranza;
+import JAVA.CTACOB.REPORT.pnl_rpt_estado_cuenta;
 import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
 import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
+import JAVA.INVENT.GUI.dlg_rpt_producto_x_movimiento;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_normal;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_val;
+import JAVA.INVENT.REPORT.pnl_rpt_producto_x_movimiento;
 import JAVA.VENTAS.GUI.dlg_busq_ref_documento;
+import JAVA.VENTAS.GUI.dlg_resumen_documento;
 import JAVA.VENTAS.GUI.dlg_rpt_registro_ventas;
 import JAVA.VENTAS.GUI.jif_cierre_pedidos;
 import JAVA.VENTAS.GUI.jif_nota_credito;
@@ -119,6 +123,7 @@ import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
 import JAVA.VENTAS.REPORT.pnl_rpt_despacho_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_registro_ventas;
+import JAVA.VENTAS.REPORT.pnl_rpt_resumen_documento;
 
 public class variables_globales {
 
@@ -280,6 +285,8 @@ public class variables_globales {
     public static dlg_rpt_tarjeta_cuenta_corriente go_dlg_rpt_tarjeta_cuenta_corriente;
     public static dlg_rpt_registro_ventas go_dlg_rpt_registro_ventas;
     public static dlg_busq_ref_documento go_dlg_busq_ref_documento;
+    public static dlg_resumen_documento go_dlg_resumen_documento;
+    public static dlg_rpt_producto_x_movimiento go_dlg_rpt_producto_x_movimiento;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -332,5 +339,8 @@ public class variables_globales {
     public static pnl_rpt_lista_entidad go_pnl_rpt_lista_entidad;
     public static pnl_rpt_tarjeta_cuenta_corriente go_pnl_rpt_tarjeta_cuenta_corriente;
     public static pnl_rpt_registro_ventas go_pnl_rpt_registro_ventas;
+    public static pnl_rpt_estado_cuenta go_pnl_rpt_estado_cuenta;
+    public static pnl_rpt_resumen_documento go_pnl_rpt_resumen_documento;
+    public static pnl_rpt_producto_x_movimiento go_pnl_rpt_producto_x_movimiento;
     
 }

@@ -3,6 +3,7 @@ package JAVA.CTACOB.GUI;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_aceptar_cancelar;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
+import JAVA.ANCESTRO.LOGICA.FullSelectorListener;
 import JAVA.ANCESTRO.LOGICA.evt_aceptar_cancelar;
 import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
 import java.awt.Image;
@@ -24,6 +25,7 @@ public class dlg_rpt_tarjeta_cuenta_corriente extends javax.swing.JDialog {
     pnl_aceptar_cancelar lo_pnl_aceptar_cancelar = new pnl_aceptar_cancelar();
     evt_aceptar_cancelar lo_evt_aceptar_cancelar = new evt_aceptar_cancelar();
     ResultSet lq_rs;
+    int op;
     String ls_codigo, ls_nombre;
     String ls_modulo = "CTACOB", ls_capa = "GUI", ls_clase = "dlg_rpt_tarjeta_cuenta_corriente";
 
@@ -43,12 +45,15 @@ public class dlg_rpt_tarjeta_cuenta_corriente extends javax.swing.JDialog {
         lo_pnl_rpt_tarjeta_cuenta_corriente.TXT_fecha_ini.setText("01" + "01" + gs_periodo);
         lo_pnl_rpt_tarjeta_cuenta_corriente.TXT_fecha_fin.setText(gs_dia + gs_mes + gs_periodo);
 
+        op = gi_parametros_2[0];
+        gi_parametros_2[0] = 0;
         lo_pnl_rpt_tarjeta_cuenta_corriente.TXT_codigo.addKeyListener(KeyEvnt);
         lo_pnl_rpt_tarjeta_cuenta_corriente.TXT_codigo_pagador.addKeyListener(KeyEvnt);
         lo_pnl_rpt_tarjeta_cuenta_corriente.TXT_fecha_ini.addKeyListener(KeyEvnt);
         lo_pnl_rpt_tarjeta_cuenta_corriente.TXT_fecha_fin.addKeyListener(KeyEvnt);
         lo_evt_aceptar_cancelar.evento_click(lo_pnl_aceptar_cancelar, Listener);
         lo_evt_aceptar_cancelar.evento_press(lo_pnl_aceptar_cancelar, KeyEvnt);
+        
     }
 
     private void get_descripcion_sucursal(String codigo) {
@@ -112,7 +117,14 @@ public class dlg_rpt_tarjeta_cuenta_corriente extends javax.swing.JDialog {
         parametros.put("codigo_pagador", lo_pnl_rpt_tarjeta_cuenta_corriente.TXT_codigo_pagador.getText().trim());
         parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
 
-        go_muestra_reporte_ctacob.reporte_pestania("rpt_tarjeta_cuenta_corriente.jasper", parametros, "TARJETA CUENTA CORRIENTE", 1);
+        switch(op){
+            case 0:
+                go_muestra_reporte_ctacob.reporte_pestania("rpt_tarjeta_cuenta_corriente.jasper", parametros, "TARJETA CUENTA CORRIENTE", 1);
+                break;
+            case 1:
+                go_muestra_reporte_ctacob.reporte_pestania("rpt_estado_cuenta.jasper", parametros, "ESTADO DE CUENTA", 2);
+                break;
+        }    
 
     }
 

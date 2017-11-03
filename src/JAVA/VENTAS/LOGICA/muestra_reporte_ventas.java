@@ -38,6 +38,9 @@ public class muestra_reporte_ventas {
                 case 4:
                     go_muestra_pestania_ventas.rpt_registro_ventas(jr, nombre);
                     break;
+                case 5:
+                    go_muestra_pestania_ventas.rpt_resumen_documento(jr, nombre);
+                    break;
             }
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "reporte_pestania", e.getMessage());

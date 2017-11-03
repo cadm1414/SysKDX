@@ -101,6 +101,10 @@ public class opciones_menu {
                     go_muestra_dlg_invent.muestra_dlg_rpt_kardex_mercaderia();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("PRODUCTO X MOVIMIENTO")) {
+                    go_muestra_dlg_invent.muestra_dlg_rpt_producto_x_movimiento();
+                    resp = "I";
+                }
                 break;
             case "VENTAS":
                 if (dato.equalsIgnoreCase("PEDIDOS")) {
@@ -143,6 +147,10 @@ public class opciones_menu {
                     go_muestra_dlg_ventas.muestra_dlg_nota_credito("07");
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("RESUMEN X DOCUMENTO")) {
+                    go_muestra_dlg_ventas.muestra_dlg_resumen_documento();
+                    resp = "I";
+                }
                 break;
             case "CTACOB":
                 if (dato.equalsIgnoreCase("SALDO CTA CORRIENTE")) {
@@ -154,7 +162,11 @@ public class opciones_menu {
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("TARJETA CTA CORRIENTE")) {
-                    go_muestra_dlg_ctacob.muestra_dlg_rpt_tarjeta_cuenta_corriente();
+                    go_muestra_dlg_ctacob.muestra_dlg_rpt_tarjeta_cuenta_corriente(0);
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("ESTADO DE CUENTA")) {
+                    go_muestra_dlg_ctacob.muestra_dlg_rpt_tarjeta_cuenta_corriente(1);
                     resp = "I";
                 }
                 break;
