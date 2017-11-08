@@ -4,12 +4,11 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_opciones_2;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_2;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
-import static JAVA.ANCESTRO.LOGICA.variables_globales.go_cbx_trato_datos;
-import static JAVA.ANCESTRO.LOGICA.variables_globales.go_dao_tabla_sunat;
 import JAVA.CONFIG.BEAN.BEAN_entidad;
 import JAVA.CONFIG.BEAN.BEAN_entidad_contacto;
 import JAVA.CONFIG.BEAN.BEAN_entidad_direccion;
 import JAVA.CONFIG.LOGICA.cbx_pais;
+import JAVA.CONFIG.LOGICA.cbx_sector_distribucion;
 import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.CONFIG.LOGICA.cbx_tabla_sunat;
 import JAVA.CONFIG.LOGICA.cbx_tipo_comercio;
@@ -46,6 +45,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     cbx_vendedor lo_cbx_vendedor;
     cbx_pais lo_cbx_pais;
     cbx_tipo_comercio lo_cbx_tipo_comercio;
+    cbx_sector_distribucion lo_cbx_sector_distribucion;
     static boolean lb_valor_op[] = new boolean[8];
     ResultSet lq_rs;
     int li_tipo_operacion, li_tipo_operacion_d, li_tipo_operacion_c;
@@ -62,6 +62,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         get_sucursal();
         get_vendedor();
         get_tipo_comercio();
+        get_sector_distribucion();
     }
 
     private void formulario() {
@@ -122,7 +123,14 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
             go_cbx_trato_datos.recupera_valor(4, lq_rs, lo_pnl_datos_entidad.CBX_tipo_documento_id);
         }
     }
-    
+
+    private void get_sector_distribucion() {
+        lq_rs = go_dao_sector_distribucion.SLT_cbx_sector_distribucion();
+        if (lq_rs != null) {
+            go_cbx_trato_datos.recupera_valor(20, lq_rs, lo_pnl_datos_entidad.CBX_sector);
+        }
+    }
+
     private void get_tipo_comercio() {
         lq_rs = go_dao_tipo_comercio.SLT_cbx_tipo_comercio();
         if (lq_rs != null) {
@@ -237,12 +245,13 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
         lo_cbx_vendedor = (cbx_vendedor) lo_pnl_datos_entidad.CBX_vendedor.getSelectedItem();
         lo_cbx_pais = (cbx_pais) lo_pnl_datos_entidad.CBX_pais.getSelectedItem();
         lo_cbx_tipo_comercio = (cbx_tipo_comercio) lo_pnl_datos_entidad.CBX_tipo_comercio.getSelectedItem();
-        
+        lo_cbx_sector_distribucion = (cbx_sector_distribucion) lo_pnl_datos_entidad.CBX_sector.getSelectedItem();
+
         switch (li_tipo_operacion) {
             case 0:
                 if (lo_evt_datos_entidad.valida_campos(lo_pnl_datos_entidad, lo_cbx_tipo_doc_id)) {
                     try {
-                        lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal,lo_cbx_tipo_comercio);
+                        lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal, lo_cbx_tipo_comercio, lo_cbx_sector_distribucion);
                         if (go_dao_entidad.IST_entidad(lo_bean_entidad)) {
                             lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
                             lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);
@@ -255,10 +264,10 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                 }
                 break;
             case 1:
-                if (lo_evt_datos_entidad.verifica_cambios(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_sucursal, lo_cbx_vendedor,lo_cbx_tipo_comercio)) {
+                if (lo_evt_datos_entidad.verifica_cambios(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_sucursal, lo_cbx_vendedor, lo_cbx_tipo_comercio, lo_cbx_sector_distribucion)) {
                     if (lo_evt_datos_entidad.valida_campos(lo_pnl_datos_entidad, lo_cbx_tipo_doc_id)) {
                         try {
-                            lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal,lo_cbx_tipo_comercio);
+                            lo_evt_datos_entidad.setea_campos(lo_bean_entidad, lo_pnl_datos_entidad, lo_cbx_tipo_doc_id, lo_cbx_pais, lo_cbx_vendedor, lo_cbx_sucursal, lo_cbx_tipo_comercio, lo_cbx_sector_distribucion);
                             if (go_dao_entidad.UPD_entidad(lo_bean_entidad)) {
                                 lo_evt_datos_entidad.limpia_datos(lo_pnl_datos_entidad);
                                 lo_evt_datos_entidad.activa_campos(0, lo_pnl_datos_entidad, false);
@@ -425,7 +434,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                     }
                 }
                 break;
-                case 1:
+            case 1:
                 if (lo_evt_datos_contacto.verifica_cambios(lo_bean_entidad_contacto, lo_pnl_datos_contacto)) {
                     if (lo_evt_datos_contacto.valida_campos(lo_pnl_datos_contacto)) {
                         try {
@@ -634,7 +643,7 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_datos_entidad.TXT_codigo_ubigeo && go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_entidad.TXT_codigo_ubigeo)) {
                     get_descripcion_ubigeo(lo_pnl_datos_entidad.TXT_codigo_ubigeo, lo_pnl_datos_entidad.TXT_descripcion_ubigeo);
                 }
-                if (ke.getSource() == lo_pnl_datos_entidad.CBX_forma_pago || ke.getSource() == lo_pnl_datos_entidad.TXT_dias_cr || ke.getSource() == lo_pnl_datos_entidad.TXT_limite_cr || ke.getSource() == lo_pnl_datos_entidad.CBX_sucursal || ke.getSource() == lo_pnl_datos_entidad.CBX_vendedor || ke.getSource() == lo_pnl_datos_entidad.CBX_tipo_comercio || ke.getSource() == lo_pnl_datos_entidad.TXT_observacion || ke.getSource() == lo_pnl_datos_entidad.JRD_agente_percepcion || ke.getSource() == lo_pnl_datos_entidad.JRD_agente_retencion || ke.getSource() == lo_pnl_datos_entidad.JRD_entidad_excluida || ke.getSource() == lo_pnl_datos_entidad.JRD_es_domiciliado) {
+                if (ke.getSource() == lo_pnl_datos_entidad.CBX_forma_pago || ke.getSource() == lo_pnl_datos_entidad.TXT_dias_cr || ke.getSource() == lo_pnl_datos_entidad.TXT_limite_cr || ke.getSource() == lo_pnl_datos_entidad.CBX_sucursal || ke.getSource() == lo_pnl_datos_entidad.CBX_vendedor || ke.getSource() == lo_pnl_datos_entidad.CBX_tipo_comercio || ke.getSource() == lo_pnl_datos_entidad.TXT_observacion || ke.getSource() == lo_pnl_datos_entidad.JRD_agente_percepcion || ke.getSource() == lo_pnl_datos_entidad.JRD_agente_retencion || ke.getSource() == lo_pnl_datos_entidad.JRD_entidad_excluida || ke.getSource() == lo_pnl_datos_entidad.JRD_es_domiciliado || ke.getSource() == lo_pnl_datos_entidad.CBX_sector) {
                     getFocusOwner().transferFocus();
                 }
                 if (ke.getSource() == lo_pnl_datos_direccion.TXT_nombre_direccion && go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_direccion.TXT_nombre_direccion.getText().trim(), 1, 3)) {
@@ -774,15 +783,15 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TBP_entidad, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addComponent(TBP_entidad, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(118, Short.MAX_VALUE)
-                .addComponent(TBP_entidad, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addContainerGap(121, Short.MAX_VALUE)
+                .addComponent(TBP_entidad, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();

@@ -213,6 +213,7 @@ public class variables_globales {
     public static DAO_entidad_contacto go_dao_entidad_contacto = new DAO_entidad_contacto();
     public static DAO_tipo_comercio go_dao_tipo_comercio = new DAO_tipo_comercio();
     public static DAO_tabla_ayuda go_dao_tabla_ayuda = new DAO_tabla_ayuda();
+    public static DAO_sector_distribucion go_dao_sector_distribucion = new DAO_sector_distribucion();
 
     //GUI
     public static frm_principal go_frm_principal;

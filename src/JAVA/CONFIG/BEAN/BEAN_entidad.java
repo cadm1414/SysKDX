@@ -5,9 +5,17 @@ public class BEAN_entidad {
     String codigo_entidad, es_cliente, es_proveedor, es_trabajador, status, tipo_procedencia, razon_social, nombre_comercial, tipo_persona,
             tipo_documento_id, numero_documento_id, es_domiciliado, direccion, codigo_ubigeo, descripcion_ubigeo, codigo_pais, codigo_sucursal,
             tipo_comercio, codigo_vendedor, agente_percepcion, agente_retencion, entidad_excluida,
-            observacion, forma_pago, nombres, primer_apellido, segundo_apellido;
+            observacion, forma_pago, nombres, primer_apellido, segundo_apellido, codigo_sector;
     double limite_credito;
     int dias_credito;
+
+    public String getCodigo_sector() {
+        return codigo_sector;
+    }
+
+    public void setCodigo_sector(String codigo_sector) {
+        this.codigo_sector = codigo_sector;
+    }
 
     public String getCodigo_entidad() {
         return codigo_entidad;

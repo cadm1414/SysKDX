@@ -37,6 +37,7 @@ public class evt_datos_entidad {
                 OBJ_pde.JRD_agente_retencion.setEnabled(valor);
                 OBJ_pde.JRD_entidad_excluida.setEnabled(valor);
                 OBJ_pde.CBX_tipo_comercio.setEnabled(valor);
+                OBJ_pde.CBX_sector.setEnabled(valor);
                 OBJ_pde.TXT_dias_cr.setEnabled(false);
                 OBJ_pde.TXT_limite_cr.setEnabled(false);
                 OBJ_pde.TXT_razon_social.setEnabled(false);
@@ -74,6 +75,7 @@ public class evt_datos_entidad {
                     OBJ_pde.TXT_limite_cr.setEnabled(valor);
                 }
                 OBJ_pde.JRD_es_cliente.requestFocus();
+                OBJ_pde.CBX_sector.setEnabled(valor);
                 break;
         }
     }
@@ -106,6 +108,7 @@ public class evt_datos_entidad {
         OBJ_pde.JRD_entidad_excluida.setSelected(false);
         OBJ_pde.JRD_es_domiciliado.setSelected(true);
         OBJ_pde.CBX_tipo_comercio.setSelectedIndex(0);
+        OBJ_pde.CBX_sector.setSelectedIndex(0);
     }
 
     private boolean valida_numero_doc(String numero, int tipo_persona, String tipo_doc) {
@@ -194,7 +197,7 @@ public class evt_datos_entidad {
         return resp;
     }
 
-    public boolean verifica_cambios(BEAN_entidad OBJ_bal, pnl_datos_entidad OBJ_dpe, cbx_sucursal cbx_sucursal, cbx_vendedor cbx_vendedor, cbx_tipo_comercio cbx_tipo_comercio) {
+    public boolean verifica_cambios(BEAN_entidad OBJ_bal, pnl_datos_entidad OBJ_dpe, cbx_sucursal cbx_sucursal, cbx_vendedor cbx_vendedor, cbx_tipo_comercio cbx_tipo_comercio,cbx_sector_distribucion cbx_sector_distribucion) {
         boolean resp = false;
         int forma_pago = 0;
         if (OBJ_bal.getForma_pago().equalsIgnoreCase("CR")) {
@@ -208,8 +211,9 @@ public class evt_datos_entidad {
                             if (OBJ_dpe.CBX_forma_pago.getSelectedIndex() == forma_pago) {
                                 if (Integer.parseInt(OBJ_dpe.TXT_dias_cr.getText().trim()) == OBJ_bal.getDias_credito() && Double.parseDouble(OBJ_dpe.TXT_limite_cr.getText().trim().replaceAll(",", "")) == OBJ_bal.getLimite_credito()) {
                                     if (cbx_tipo_comercio.getID().equalsIgnoreCase(OBJ_bal.getTipo_comercio())) {
-                                        if (cbx_sucursal.getID().equalsIgnoreCase(OBJ_bal.getCodigo_sucursal()) && cbx_vendedor.getID().equalsIgnoreCase(OBJ_bal.getCodigo_vendedor())) {
+                                        if (cbx_sucursal.getID().equalsIgnoreCase(OBJ_bal.getCodigo_sucursal()) && cbx_vendedor.getID().equalsIgnoreCase(OBJ_bal.getCodigo_vendedor()) && cbx_sector_distribucion.getID().equalsIgnoreCase(OBJ_bal.getCodigo_sector())) {
                                             if (OBJ_dpe.JRD_agente_percepcion.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getAgente_percepcion())) && OBJ_dpe.JRD_agente_retencion.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getAgente_retencion())) && OBJ_dpe.JRD_entidad_excluida.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getEntidad_excluida())) && OBJ_dpe.JRD_es_domiciliado.isSelected() == go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getEs_domiciliado()))) {
+
                                             } else {
                                                 resp = true;
                                             }
@@ -281,6 +285,7 @@ public class evt_datos_entidad {
         OBJ_pde.JRD_agente_retencion.setSelected(go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getAgente_retencion())));
         OBJ_pde.JRD_entidad_excluida.setSelected(go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getEntidad_excluida())));
         OBJ_pde.JRD_es_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bal.getEs_domiciliado())));
+        go_cbx_trato_datos.selecciona_valor(20, OBJ_bal.getCodigo_sector(), OBJ_pde.CBX_sector);
     }
 
     public void setea_recupera(BEAN_entidad OBJ_bet, ResultSet lq_rs) {
@@ -314,16 +319,16 @@ public class evt_datos_entidad {
             OBJ_bet.setSegundo_apellido(lq_rs.getString(29));
             OBJ_bet.setDias_credito(lq_rs.getInt(17));
             OBJ_bet.setLimite_credito(lq_rs.getDouble(18));
+            OBJ_bet.setCodigo_sector(lq_rs.getString(30));
         } catch (Exception e) {
         }
     }
 
-    public void setea_campos(BEAN_entidad OBJ_bet, pnl_datos_entidad obj_pde, cbx_tabla_sunat cbx_tipo_doc, cbx_pais cbx_pais, cbx_vendedor cbx_vendedor, cbx_sucursal cbx_sucursal, cbx_tipo_comercio cbx_tipo_comercio) {
+    public void setea_campos(BEAN_entidad OBJ_bet, pnl_datos_entidad obj_pde, cbx_tabla_sunat cbx_tipo_doc, cbx_pais cbx_pais, cbx_vendedor cbx_vendedor, cbx_sucursal cbx_sucursal, cbx_tipo_comercio cbx_tipo_comercio, cbx_sector_distribucion cbx_sector_distribucion) {
         try {
             String procedencia = "", forma_pago = "";
             procedencia = (obj_pde.JRD_nacional.isSelected()) ? "0" : "1";
             forma_pago = (obj_pde.CBX_forma_pago.getSelectedIndex() == 0) ? "EF" : "CR";
-
             OBJ_bet.setCodigo_entidad(obj_pde.TXT_codigo_entidad.getText().trim());
             OBJ_bet.setEs_cliente(go_fnc_operaciones_campos.boolean_int(obj_pde.JRD_es_cliente.isSelected()) + "");
             OBJ_bet.setEs_proveedor(go_fnc_operaciones_campos.boolean_int(obj_pde.JRD_es_proveedor.isSelected()) + "");
@@ -353,6 +358,7 @@ public class evt_datos_entidad {
             OBJ_bet.setSegundo_apellido(obj_pde.TXT_sapellido.getText().trim());
             OBJ_bet.setDias_credito(Integer.parseInt(obj_pde.TXT_dias_cr.getText().trim()));
             OBJ_bet.setLimite_credito(Double.parseDouble(obj_pde.TXT_limite_cr.getText().trim().replaceAll(",", "")));
+            OBJ_bet.setCodigo_sector(cbx_sector_distribucion.getID());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -388,6 +394,7 @@ public class evt_datos_entidad {
         OBJ_pde.JRD_entidad_excluida.addKeyListener(KeyEvnt);
         OBJ_pde.JRD_es_domiciliado.addKeyListener(KeyEvnt);
         OBJ_pde.CBX_tipo_comercio.addKeyListener(KeyEvnt);
+        OBJ_pde.CBX_sector.addKeyListener(KeyEvnt);
         return KeyEvnt;
     }
 

@@ -5,6 +5,7 @@ import JAVA.CONFIG.LOGICA.cbx_sucursal;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.CONFIG.LOGICA.cbx_pais;
 import JAVA.CONFIG.LOGICA.cbx_rol;
+import JAVA.CONFIG.LOGICA.cbx_sector_distribucion;
 import JAVA.CONFIG.LOGICA.cbx_tabla_ayuda;
 import JAVA.CONFIG.LOGICA.cbx_tabla_sunat;
 import JAVA.CONFIG.LOGICA.cbx_tipo_comercio;
@@ -47,6 +48,7 @@ public class cbx_trato_datos {
     cbx_banco lo_cbx_banco;
     cbx_tipo_comercio lo_cbx_tipo_comercio;
     cbx_tabla_ayuda lo_cbx_tabla_ayuda;
+    cbx_sector_distribucion lo_cbx_sector_distribucion;
 
     /*VALORES OPERACION
     0 = cbx_moneda
@@ -69,6 +71,7 @@ public class cbx_trato_datos {
     17 = cbx_banco
     18 = cbx_tipo_comercio
     19 = cbx_tabla_ayuda
+    20 = cbx_sector_distribucion
      */
     public void recupera_valor(int op, ResultSet rs, JComboBox cbx_combo) {
         switch (op) {
@@ -272,6 +275,16 @@ public class cbx_trato_datos {
                 } catch (Exception e) {
                 }
                 break;
+            case 20:
+                try {
+                    lo_model = new DefaultComboBoxModel();
+                    do {
+                        lo_model.addElement(new cbx_sector_distribucion(rs.getString(1), rs.getString(2)));
+                    } while (rs.next());
+                    cbx_combo.setModel(lo_model);
+                } catch (Exception e) {
+                }
+                break;
         }
     }
 
@@ -453,6 +466,15 @@ public class cbx_trato_datos {
                 for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
                     lo_cbx_tabla_ayuda = (cbx_tabla_ayuda) cbx_combo.getItemAt(i);
                     codigo = lo_cbx_tabla_ayuda.getID();
+                    if (codigo.equalsIgnoreCase(dato.trim())) {
+                        cbx_combo.setSelectedIndex(i);
+                    }
+                }
+                break;
+            case 20:
+                for (int i = 0; i < cbx_combo.getModel().getSize(); i++) {
+                    lo_cbx_sector_distribucion = (cbx_sector_distribucion) cbx_combo.getItemAt(i);
+                    codigo = lo_cbx_sector_distribucion.getID();
                     if (codigo.equalsIgnoreCase(dato.trim())) {
                         cbx_combo.setSelectedIndex(i);
                     }
