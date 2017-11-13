@@ -173,6 +173,10 @@ public class opciones_menu {
                     go_muestra_dlg_ctacob.muestra_dlg_rpt_listado_cobranzas(1);
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("RC SIN RENDIR")) {
+                    go_muestra_dlg_ctacob.muestra_dlg_rpt_listado_cobranzas_sr(2);                    
+                    resp = "I";
+                }                
                 break;
         }
         return resp;

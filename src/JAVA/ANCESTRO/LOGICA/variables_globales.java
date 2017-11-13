@@ -102,6 +102,7 @@ import JAVA.VENTAS.GUI.jif_pedido;
 import JAVA.CTACOB.GUI.jif_recibo_cobranza;
 import JAVA.CTACOB.REPORT.pnl_rpt_estado_cuenta;
 import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas;
+import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas_sr;
 import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
 import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
 import JAVA.INVENT.GUI.dlg_rpt_producto_x_movimiento;
@@ -345,5 +346,6 @@ public class variables_globales {
     public static pnl_rpt_resumen_documento go_pnl_rpt_resumen_documento;
     public static pnl_rpt_producto_x_movimiento go_pnl_rpt_producto_x_movimiento;
     public static pnl_rpt_listado_cobranzas go_pnl_rpt_listado_cobranzas;
+    public static pnl_rpt_listado_cobranzas_sr go_pnl_rpt_listado_cobranzas_sr;
     
 }

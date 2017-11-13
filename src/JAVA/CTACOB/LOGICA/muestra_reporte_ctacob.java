@@ -35,6 +35,9 @@ public class muestra_reporte_ctacob {
                 case 3:
                     go_muestra_pestania_ctacob.rpt_listado_cobranzas(jr, nombre);
                     break;
+                 case 4:
+                    go_muestra_pestania_ctacob.rpt_listado_cobranzas_sr(jr, nombre);
+                    break;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

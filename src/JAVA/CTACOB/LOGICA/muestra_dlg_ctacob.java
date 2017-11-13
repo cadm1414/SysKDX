@@ -48,4 +48,10 @@ public class muestra_dlg_ctacob {
         go_dlg_rpt_registro_ventas = new dlg_rpt_registro_ventas(null, true);
         go_dlg_rpt_registro_ventas.setVisible(true);
     }
+    
+    public void muestra_dlg_rpt_listado_cobranzas_sr(int op) {
+        gi_parametros_2[0] = op;
+        go_dlg_rpt_registro_ventas = new dlg_rpt_registro_ventas(null, true);
+        go_dlg_rpt_registro_ventas.setVisible(true);
+    }
 }

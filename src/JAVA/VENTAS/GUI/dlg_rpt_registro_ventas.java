@@ -119,6 +119,9 @@ public class dlg_rpt_registro_ventas extends javax.swing.JDialog {
             case 1:
                 go_muestra_reporte_ctacob.reporte_pestania("rpt_listado_cobranzas.jasper", parametros, "LISTADO COBRANZAS", 3);
                 break;
+            case 2:
+                go_muestra_reporte_ctacob.reporte_pestania("rpt_listado_cobranzas_sr.jasper", parametros, "LISTADO COBRANZAS", 4);
+                break;
         }
     }
 

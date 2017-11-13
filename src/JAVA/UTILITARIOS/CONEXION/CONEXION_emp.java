@@ -27,7 +27,7 @@ public class CONEXION_emp {
             ls_port = lp_p.getProperty("Port_emp");
             
             Class.forName("org.postgresql.Driver");
-            lq_con = DriverManager.getConnection("jdbc:postgresql://" + ls_server + ":" + ls_port + "/" + ls_nombre, "postgres", "tigohu");
+            lq_con = DriverManager.getConnection("jdbc:postgresql://" + ls_server + ":" + ls_port + "/" + ls_nombre, "postgres", "CaDm1414");
             lq_con.setAutoCommit(false);
         } catch (IOException | ClassNotFoundException | SQLException e) {
             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "getconexion_emp", e.getMessage());
