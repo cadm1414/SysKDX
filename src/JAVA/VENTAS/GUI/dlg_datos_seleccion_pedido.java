@@ -49,6 +49,9 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         ls_item_seleccion = new String[li_item + 1];
         ls_item_seleccion[0] = "0";
 
+        lo_pnl_datos_seleccion_pedido.TXT_serie.setText(ls_serie);
+        lo_pnl_datos_seleccion_pedido.TXT_pedido.requestFocus();
+        
         gs_parametros[0] = "";
         gs_parametros[1] = "";
         gs_parametros[2] = "";
@@ -71,7 +74,8 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
     }
 
     private void genera_parametros_pedido() {
-        gs_parametros[0] = ls_codigo_sucursal;
+        ls_serie = lo_pnl_datos_seleccion_pedido.TXT_serie.getText().trim();
+        gs_parametros[0] = "%";
         gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
         gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
         gs_parametros[3] = ls_serie;

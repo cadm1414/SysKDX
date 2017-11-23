@@ -618,7 +618,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
             parametros.put("codigo_operacion", codigo);
             parametros.put("periodo", gs_periodo);
             parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
-            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_factura_" + go_bean_general.getRuc() + ".jasper", parametros);
+            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_"+((ls_tipo_documento.equalsIgnoreCase("01"))?"factura_":"boleta_")+ls_serie+"_"+ go_bean_general.getRuc() + ".jasper", parametros);
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "DOCUMENTO NO SE PUEDE IMPRIMIR");
         }

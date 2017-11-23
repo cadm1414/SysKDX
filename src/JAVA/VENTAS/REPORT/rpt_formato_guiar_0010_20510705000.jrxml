@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="598" pageHeight="824" columnWidth="573" leftMargin="5" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe6d38cc-f2a8-4b72-be57-31a2764a7620">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="codigo_operacion" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="periodo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from rpt_formato_guiar_0010_20510705000( $P{codigo_operacion},  $P{periodo} ) as (fecha_emision text,punto_partida text,documento_ref text,razon_social character varying(250),numero_documento_id character varying(15),punto_llegada text,tipo_operacion character(2),descripcion character varying(250),bulto integer,peso_neto numeric,serie character varying(30),nombre_articulo text,simbolo_unidad character varying(3),nombre_transportista character varying(250),numero_licencia character varying(15),razon_social_trans character varying(250),ruc_trans character(11),codigo_vehiculo character(6),marca character varying(30),numero_civ character varying(30))]]>
+	</queryString>
+	<field name="fecha_emision" class="java.lang.String"/>
+	<field name="punto_partida" class="java.lang.String"/>
+	<field name="documento_ref" class="java.lang.String"/>
+	<field name="razon_social" class="java.lang.String"/>
+	<field name="numero_documento_id" class="java.lang.String"/>
+	<field name="punto_llegada" class="java.lang.String"/>
+	<field name="tipo_operacion" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="bulto" class="java.lang.Integer"/>
+	<field name="peso_neto" class="java.math.BigDecimal"/>
+	<field name="serie" class="java.lang.String"/>
+	<field name="nombre_articulo" class="java.lang.String"/>
+	<field name="simbolo_unidad" class="java.lang.String"/>
+	<field name="nombre_transportista" class="java.lang.String"/>
+	<field name="numero_licencia" class="java.lang.String"/>
+	<field name="razon_social_trans" class="java.lang.String"/>
+	<field name="ruc_trans" class="java.lang.String"/>
+	<field name="codigo_vehiculo" class="java.lang.String"/>
+	<field name="marca" class="java.lang.String"/>
+	<field name="numero_civ" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="255" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="40" y="201" width="186" height="17" uuid="1b4f3932-5d83-4684-a8e2-9757258300a2"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "MERCADO VARIOS" : $F{razon_social} )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="70" y="133" width="243" height="15" uuid="ee1a0e8a-3248-4e1d-9483-bab81039810e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{punto_partida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="102" width="23" height="20" uuid="8cffa396-24b3-4eb1-87c8-9bde20f6db10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(0,2)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="102" width="26" height="20" uuid="c7c7fc0e-9fd9-487f-bba1-21df57243f3f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(2,4)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="102" width="26" height="20" uuid="b4711985-11da-4bb1-ab8b-d2c6f4455056"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(6)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="340" y="133" width="190" height="15" uuid="2bbc3ddb-1998-4cc6-b37e-306dde629d70">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{punto_llegada}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="80" y="220" width="79" height="20" uuid="636be426-bd38-4dc0-ae90-b7cc39cf3e96"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "" : $F{numero_documento_id} )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="419" y="170" width="106" height="15" uuid="2035e43f-8c50-408e-af93-1b692e2035b5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="419" y="185" width="106" height="15" uuid="210f5dc4-a8db-4bbd-98ee-e85dfc6c4ddd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo_vehiculo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="419" y="200" width="106" height="15" uuid="71644d56-b225-440e-9104-7fd0cf5532b8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_civ}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="419" y="215" width="106" height="15" uuid="6048b452-6d50-463f-b7b4-26ccb0900099"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_licencia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="222" y="220" width="80" height="20" uuid="d38c7f81-90e2-4c39-933a-78a4b9199306"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "" : $F{numero_documento_id} )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="102" width="23" height="20" uuid="f7955128-681e-4077-890e-c91035473aa8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(0,2)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="102" width="26" height="20" uuid="295c123c-fddb-4ac9-8116-67ce58ca8943"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(2,4)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="102" width="26" height="20" uuid="d2865257-0a36-47ad-8e86-6190ef51c2c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(6)]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="34" y="0" width="33" height="20" uuid="f19d1fca-bfba-4ead-ba17-fb9aab79a8f7">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bulto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="0" width="322" height="20" uuid="c43d417d-2168-4996-af55-82543ed260d7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_articulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="0" width="46" height="20" uuid="d80d37ea-44fb-4c4e-86fa-4c873ca5d6ac"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{simbolo_unidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="470" y="0" width="55" height="20" uuid="97f55cfe-3ef6-450c-a016-d8c11e7befd1"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{peso_neto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="107" splitType="Stretch">
+			<textField>
+				<reportElement x="305" y="15" width="13" height="13" uuid="1e1e5522-0ad5-46ad-a392-a19cb61e5efc"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "X" : "" )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="43" y="11" width="106" height="13" uuid="b0647f52-ca8f-4456-a223-b0a3e850cbb7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razon_social_trans}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="64" y="23" width="106" height="12" uuid="74a57098-c656-4691-bc5a-abb7d08c3d69"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial Narrow" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ruc_trans}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

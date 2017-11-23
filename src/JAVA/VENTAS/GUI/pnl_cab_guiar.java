@@ -172,7 +172,6 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel6.setText(":");
 
         CBX_tipo_op.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        CBX_tipo_op.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VENTA", "TRANSFERENCIA" }));
         CBX_tipo_op.setEnabled(false);
         CBX_tipo_op.setNextFocusableComponent(CBX_es_pedido);
 

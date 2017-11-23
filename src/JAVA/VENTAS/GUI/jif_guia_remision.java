@@ -6,6 +6,7 @@ import JAVA.ANCESTRO.LOGICA.evt_opciones_3;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import JAVA.CONFIG.GUI.dlg_busq_entidad_parametros;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
+import JAVA.CONFIG.LOGICA.cbx_tabla_ayuda;
 import JAVA.INVENT.LOGICA.cbx_entidad_ubigeo;
 import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
 import JAVA.VENTAS.BEAN.BEAN_guia_remision;
@@ -21,6 +22,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -28,6 +30,7 @@ import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRParameter;
 
 public class jif_guia_remision extends javax.swing.JInternalFrame {
 
@@ -46,6 +49,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
     cbx_grupo_detraccion lo_cbx_grupo_detraccion;
     cbx_entidad_ubigeo lo_cbx_entidad_ubigeo;
     cbx_igv lo_cbx_igv;
+    cbx_tabla_ayuda lo_cbx_tabla_ayuda;
     int li_tipo_operacion, cont = 0, li_cantidad;
     double ld_tipo_cambio, ld_porcentaje_detraccion, ld_monto_minimo;
     String ls_codigo, ls_codigo_sucursal, ls_serie, ls_codigo_vendedor, ls_nombre_vendedor, ls_codigo_articulo, ls_codigo_entidad,
@@ -62,6 +66,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
         get_moneda();
         get_igv();
         get_grupo_detraccion();
+        get_tipo_op();
         lo_pnl_grid_pedidos.TBL_pedidos.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selectNextColumnCell");
     }
 
@@ -141,6 +146,13 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                 ld_monto_minimo = lq_rs.getDouble(2);
             }
         } catch (Exception e) {
+        }
+    }
+
+    private void get_tipo_op() {
+        lq_rs = go_dao_tabla_ayuda.SLT_cbx_tabla_ayuda("0003");
+        if (lq_rs != null) {
+            go_cbx_trato_datos.recupera_valor(19, lq_rs, lo_pnl_cab_guiar.CBX_tipo_op);
         }
     }
 
@@ -526,6 +538,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_guiar.CBX_moneda.getSelectedItem();
         lo_cbx_grupo_detraccion = (cbx_grupo_detraccion) lo_pnl_cab_guiar.CBX_codigo_detraccion.getSelectedItem();
         lo_cbx_igv = (cbx_igv) lo_pnl_cab_guiar.CBX_igv.getSelectedItem();
+        lo_cbx_tabla_ayuda = (cbx_tabla_ayuda) lo_pnl_cab_guiar.CBX_tipo_op.getSelectedItem();
 
         lo_bean_guia_remision.setCodigo_sucursal(ls_codigo_sucursal);
         lo_bean_guia_remision.setCodigo_pedido(ls_codigo_pedido);
@@ -553,7 +566,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                         try {
                             ls_codigo = "09" + ls_serie + lo_pnl_cab_guiar.TXT_numero_doc.getText().trim();
                             lo_bean_guia_remision.setCodigo_operacion(ls_codigo);
-                            lo_evt_cab_guiar.setea_campos(lo_bean_guia_remision, lo_pnl_cab_guiar, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_pnl_grid_pedidos, ld_monto_minimo);
+                            lo_evt_cab_guiar.setea_campos(lo_bean_guia_remision, lo_pnl_cab_guiar, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_tabla_ayuda, lo_pnl_grid_pedidos, ld_monto_minimo);
                             if (go_dao_guia_remision.IST_guia_remision(lo_bean_guia_remision, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100)) {
                                 lo_evt_cab_guiar.limpia_datos(lo_pnl_cab_guiar);
                                 lo_evt_cab_guiar.activa_campos(0, lo_pnl_cab_guiar, false);
@@ -577,7 +590,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                     if (lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad)) {
                         if (lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad)) {
                             try {
-                                lo_evt_cab_guiar.setea_campos(lo_bean_guia_remision, lo_pnl_cab_guiar, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_pnl_grid_pedidos, ld_monto_minimo);
+                                lo_evt_cab_guiar.setea_campos(lo_bean_guia_remision, lo_pnl_cab_guiar, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_tabla_ayuda, lo_pnl_grid_pedidos, ld_monto_minimo);
                                 if (go_dao_guia_remision_detalle.DLT_guia_remision_detalle(ls_codigo)) {
                                     if (go_dao_guia_remision.UPD_guia_remision(lo_bean_guia_remision, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100)) {
                                         lo_evt_cab_guiar.limpia_datos(lo_pnl_cab_guiar);
@@ -609,7 +622,8 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("codigo_operacion", codigo);
             parametros.put("periodo", gs_periodo);
-            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_guiar_" + go_bean_general.getRuc() + ".jasper", parametros);
+            parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_guiar_" + ls_serie + "_" + go_bean_general.getRuc() + ".jasper", parametros);
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "DOCUMENTO NO SE PUEDE IMPRIMIR");
         }
@@ -955,6 +969,14 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                 if (ie.getSource() == lo_pnl_cab_guiar.JRD_precio_igv) {
                     lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
                     lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
+                }
+                if (ie.getSource() == lo_pnl_cab_guiar.CBX_tipo_op) {
+                    lo_cbx_tabla_ayuda = (cbx_tabla_ayuda) lo_pnl_cab_guiar.CBX_tipo_op.getSelectedItem();
+                    switch (lo_cbx_tabla_ayuda.getID()) {
+                        case "03":
+
+                            break;
+                    }
                 }
             }
         }

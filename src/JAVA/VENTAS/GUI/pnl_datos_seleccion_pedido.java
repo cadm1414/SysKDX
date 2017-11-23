@@ -17,6 +17,8 @@ public class pnl_datos_seleccion_pedido extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         TXT_pedido = new javax.swing.JFormattedTextField();
         JRD_todos = new javax.swing.JRadioButton();
+        TXT_serie = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TBL_detalle_pedido = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -36,11 +38,21 @@ public class pnl_datos_seleccion_pedido extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        TXT_pedido.setText("          ");
         TXT_pedido.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_pedido.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         JRD_todos.setText("Todos");
+
+        try {
+            TXT_serie.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        TXT_serie.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        TXT_serie.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        jLabel4.setText("-");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -52,10 +64,14 @@ public class pnl_datos_seleccion_pedido extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TXT_serie, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TXT_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JRD_todos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -64,7 +80,9 @@ public class pnl_datos_seleccion_pedido extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(TXT_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JRD_todos))
+                    .addComponent(JRD_todos)
+                    .addComponent(TXT_serie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(6, 6, 6))
         );
 
@@ -150,7 +168,7 @@ public class pnl_datos_seleccion_pedido extends javax.swing.JPanel {
                         .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -160,9 +178,11 @@ public class pnl_datos_seleccion_pedido extends javax.swing.JPanel {
     public javax.swing.JLabel LBL_total;
     public javax.swing.JTable TBL_detalle_pedido;
     public javax.swing.JFormattedTextField TXT_pedido;
+    public javax.swing.JFormattedTextField TXT_serie;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
