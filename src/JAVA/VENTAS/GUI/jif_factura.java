@@ -521,7 +521,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
         lo_evt_opciones_3.activa_btn_opciones(3, lo_pnl_opciones_3, lb_valor_op);
         lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, true);
         if (lo_pnl_cab_factura.CBX_es_guia.getSelectedIndex() == 0 && lo_pnl_cab_factura.CBX_es_pedido.getSelectedIndex() == 0) {
-            lo_evt_cab_factura.activa_campos(0, lo_pnl_cab_factura, true, ls_tipo_documento);
+            lo_evt_cab_factura.activa_campos(2, lo_pnl_cab_factura, true, ls_tipo_documento);
         } else {
             lo_evt_cab_factura.activa_campos(1, lo_pnl_cab_factura, true, ls_tipo_documento);
         }

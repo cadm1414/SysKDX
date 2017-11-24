@@ -45,6 +45,24 @@ public class evt_cab_factura {
                 OBJ_pcf.TXT_fecha_emision.setEnabled(valor);
                 OBJ_pcf.TXT_observacion.setEnabled(valor);
                 OBJ_pcf.TXT_fecha_emision.requestFocus();
+                break;
+            case 2:
+                OBJ_pcf.TXT_fecha_emision.setEnabled(valor);
+                OBJ_pcf.CBX_moneda.setEnabled(valor);
+                OBJ_pcf.CBX_codigo_detraccion.setEnabled((codigo_documento.equalsIgnoreCase("01")) ? valor : false);
+                OBJ_pcf.JRD_precio_igv.setEnabled(valor);
+                OBJ_pcf.TXT_codigo_entidad.setEnabled(valor);
+                OBJ_pcf.CBX_direccion.setEnabled(valor);
+                OBJ_pcf.CBX_es_guia.setEnabled(valor);
+                OBJ_pcf.CBX_es_pedido.setEnabled(valor);
+                OBJ_pcf.TXT_codigo_vendedor.setEnabled(valor);
+                OBJ_pcf.TXT_observacion.setEnabled(valor);
+                OBJ_pcf.CBX_forma_pago.setEnabled(valor);
+                OBJ_pcf.TXT_dias_credito.setEnabled(valor);
+                OBJ_pcf.TXT_tipo_cambio.setEnabled(false);
+                OBJ_pcf.TXT_codigo_pagador.setEnabled(valor);
+                OBJ_pcf.TXT_fecha_emision.requestFocus();
+                break;
         }
     }
 
@@ -421,7 +439,7 @@ public class evt_cab_factura {
             OBJ_bpe.setPercepcion_mn(OBJ_bpe.getPercepcion() * tipo_cambio);
             OBJ_bpe.setTotal_documento_mn(OBJ_bpe.getTotal_documento() * tipo_cambio);
             OBJ_bpe.setExonerado_mn(OBJ_bpe.getExonerado() * tipo_cambio);
-            OBJ_bpe.setImporte_detraccion_mn(OBJ_bpe.getImporte_detraccion() * tipo_cambio);            
+            OBJ_bpe.setImporte_detraccion_mn(OBJ_bpe.getImporte_detraccion() * tipo_cambio);
             OBJ_bpe.setFecha_doc_ref(OBJ_pcp.TXT_fecha_emision.getText().trim());
             OBJ_bpe.setCodigo_tipo_doc_ref("..");
             OBJ_bpe.setSerie_doc_ref("");

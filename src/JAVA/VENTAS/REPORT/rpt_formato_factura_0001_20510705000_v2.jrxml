@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="581" pageHeight="476" columnWidth="541" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="10" uuid="5fd79b68-e1d5-4f19-befc-2dff76fdba7f">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="581" pageHeight="453" columnWidth="541" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="10" uuid="5fd79b68-e1d5-4f19-befc-2dff76fdba7f">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -9,12 +9,6 @@
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
-	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="codigo_operacion" class="java.lang.String"/>
 	<parameter name="periodo" class="java.lang.String"/>
 	<queryString>
@@ -46,44 +40,44 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="216" splitType="Stretch">
+		<band height="191" splitType="Stretch">
 			<textField>
-				<reportElement x="40" y="155" width="207" height="13" uuid="38b58c67-5c2a-4d99-a2f5-79c91a48025d"/>
+				<reportElement x="40" y="128" width="207" height="13" uuid="38b58c67-5c2a-4d99-a2f5-79c91a48025d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="40" y="170" width="207" height="13" uuid="d7f00a81-3658-4a13-bec9-74b7b12ed4fc"/>
+				<reportElement x="40" y="143" width="207" height="13" uuid="d7f00a81-3658-4a13-bec9-74b7b12ed4fc"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="40" y="185" width="80" height="13" uuid="a1534980-2c79-4e55-b2f1-670b3a35d09c"/>
+				<reportElement x="40" y="158" width="80" height="13" uuid="a1534980-2c79-4e55-b2f1-670b3a35d09c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numero_doc_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="389" y="162" width="22" height="13" uuid="392bca98-f12e-4e2f-8676-8c9217937d73"/>
+				<reportElement x="399" y="142" width="22" height="13" uuid="392bca98-f12e-4e2f-8676-8c9217937d73"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(0,2)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="162" width="22" height="13" uuid="4f5e8533-a772-4070-ad3a-d4a69fa2f3b8"/>
+				<reportElement x="450" y="142" width="22" height="13" uuid="4f5e8533-a772-4070-ad3a-d4a69fa2f3b8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(2,4)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="492" y="163" width="22" height="13" uuid="2572dda8-611c-4d07-b897-8d5281fc4d16"/>
+				<reportElement x="500" y="143" width="22" height="13" uuid="2572dda8-611c-4d07-b897-8d5281fc4d16"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
@@ -95,14 +89,14 @@
 		<band height="17" splitType="Stretch">
 			<textField pattern="#,##0.00">
 				<reportElement x="0" y="0" width="35" height="17" uuid="ad09cb25-1ba8-41b1-a3c8-5dda7a6a3730"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{bulto}.intValue()==0)?$F{peso_neto}:$F{bulto}.doubleValue()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="50" y="0" width="360" height="17" uuid="584726a4-81cc-4f17-940f-ed276dc6fd00"/>
-				<textElement verticalAlignment="Middle">
+				<textElement verticalAlignment="Bottom">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_articulo}]]></textFieldExpression>
@@ -111,7 +105,7 @@
 				<reportElement x="480" y="0" width="51" height="17" uuid="2a27cc09-9074-40ec-92cf-4033f12f1ef6">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
@@ -121,7 +115,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
@@ -129,9 +123,9 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="77" splitType="Prevent">
+		<band height="74" splitType="Prevent">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="40" y="3" width="340" height="12" uuid="d0c6f7d8-0bcf-44b1-aca9-76a5301a2b2c">
+				<reportElement x="40" y="2" width="340" height="12" uuid="d0c6f7d8-0bcf-44b1-aca9-76a5301a2b2c">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -140,35 +134,35 @@
 				<textFieldExpression><![CDATA[$F{numero_letras}+" "+ $F{nombre_comun}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="490" y="24" width="40" height="17" uuid="464ca4cf-3bc9-43cf-bfdb-e329d3b1ea4e"/>
+				<reportElement x="490" y="23" width="40" height="17" uuid="464ca4cf-3bc9-43cf-bfdb-e329d3b1ea4e"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{igv}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="253" y="43" width="22" height="13" uuid="a133fa11-6dd3-4069-ac12-d9bbf89edd5f"/>
+				<reportElement x="253" y="42" width="22" height="13" uuid="a133fa11-6dd3-4069-ac12-d9bbf89edd5f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{forma_pago}.equalsIgnoreCase( "EF" ))?$F{fecha_emision}.substring(0,2):""]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="303" y="43" width="22" height="13" uuid="fd7da7df-21db-4eb6-b85f-b68fe479d8e0"/>
+				<reportElement x="303" y="42" width="22" height="13" uuid="fd7da7df-21db-4eb6-b85f-b68fe479d8e0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{forma_pago}.equalsIgnoreCase( "EF" ))?$F{fecha_emision}.substring(2,4):""]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="364" y="43" width="22" height="13" uuid="f9c9c7b7-01b5-44c2-9bce-4dbd527b1466"/>
+				<reportElement x="364" y="42" width="22" height="13" uuid="f9c9c7b7-01b5-44c2-9bce-4dbd527b1466"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{forma_pago}.equalsIgnoreCase( "EF" ))?$F{fecha_emision}.substring(6):""]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="490" y="44" width="40" height="17" uuid="7e370f97-605b-48e4-a15c-87516f25d56f">
+				<reportElement x="490" y="43" width="40" height="17" uuid="7e370f97-605b-48e4-a15c-87516f25d56f">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Top">
@@ -177,7 +171,7 @@
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="490" y="5" width="40" height="17" uuid="c7b14724-c087-491e-bd38-024be3a4bc5b">
+				<reportElement x="490" y="4" width="40" height="17" uuid="c7b14724-c087-491e-bd38-024be3a4bc5b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Top">
@@ -186,7 +180,7 @@
 				<textFieldExpression><![CDATA[$F{base}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="24" width="22" height="17" uuid="006997f2-e257-46df-b142-978214d13889">
+				<reportElement x="444" y="23" width="22" height="17" uuid="006997f2-e257-46df-b142-978214d13889">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Top">
