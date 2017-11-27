@@ -104,6 +104,8 @@ import JAVA.CTACOB.REPORT.pnl_rpt_estado_cuenta;
 import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas;
 import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas_sr;
 import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
+import JAVA.DISTBR.GUI.dlg_ini_serie_sector;
+import JAVA.DISTBR.LOGICA.muestra_dlg_distbr;
 import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
 import JAVA.INVENT.GUI.dlg_rpt_producto_x_movimiento;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_normal;
@@ -244,6 +246,7 @@ public class variables_globales {
     public static muestra_dlg_ctacob go_muestra_dlg_ctacob = new muestra_dlg_ctacob();
     public static muestra_reporte_ctacob go_muestra_reporte_ctacob = new muestra_reporte_ctacob();
     public static muestra_pestania_ctacob go_muestra_pestania_ctacob = new muestra_pestania_ctacob();
+    public static muestra_dlg_distbr go_muestra_dlg_distbr = new muestra_dlg_distbr();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;
@@ -290,6 +293,7 @@ public class variables_globales {
     public static dlg_busq_ref_documento go_dlg_busq_ref_documento;
     public static dlg_resumen_documento go_dlg_resumen_documento;
     public static dlg_rpt_producto_x_movimiento go_dlg_rpt_producto_x_movimiento;
+    public static dlg_ini_serie_sector go_dlg_ini_serie_sector;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -347,5 +351,5 @@ public class variables_globales {
     public static pnl_rpt_producto_x_movimiento go_pnl_rpt_producto_x_movimiento;
     public static pnl_rpt_listado_cobranzas go_pnl_rpt_listado_cobranzas;
     public static pnl_rpt_listado_cobranzas_sr go_pnl_rpt_listado_cobranzas_sr;
-    
+
 }

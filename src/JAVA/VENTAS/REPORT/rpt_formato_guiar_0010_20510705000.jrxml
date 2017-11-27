@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="598" pageHeight="824" columnWidth="573" leftMargin="5" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe6d38cc-f2a8-4b72-be57-31a2764a7620">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -46,7 +45,7 @@
 				<textElement textAlignment="Left">
 					<font fontName="Arial Narrow" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "MERCADO VARIOS" : $F{razon_social} )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "MERCADO VARIOS" : ( $F{tipo_operacion}.equalsIgnoreCase( "02" ) ? "MAIZ DEL NORTE S.R.L." : $F{razon_social} ) )]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="70" y="133" width="243" height="15" uuid="ee1a0e8a-3248-4e1d-9483-bab81039810e">
@@ -92,7 +91,7 @@
 				<textElement verticalAlignment="Top">
 					<font fontName="Arial Narrow" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "" : $F{numero_documento_id} )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "" : ( $F{tipo_operacion}.equalsIgnoreCase( "02" ) ? "20141239466" : $F{numero_documento_id} ) )]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="419" y="170" width="106" height="15" uuid="2035e43f-8c50-408e-af93-1b692e2035b5">
@@ -129,7 +128,7 @@
 				<textElement verticalAlignment="Top">
 					<font fontName="Arial Narrow" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "" : $F{numero_documento_id} )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "" : ( $F{tipo_operacion}.equalsIgnoreCase( "02" ) ? "" : $F{numero_documento_id} ) )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="270" y="102" width="23" height="20" uuid="f7955128-681e-4077-890e-c91035473aa8"/>
@@ -200,7 +199,7 @@
 				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "X" : "" )]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="43" y="11" width="106" height="13" uuid="b0647f52-ca8f-4456-a223-b0a3e850cbb7"/>
+				<reportElement x="43" y="11" width="127" height="13" uuid="b0647f52-ca8f-4456-a223-b0a3e850cbb7"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="9"/>
 				</textElement>

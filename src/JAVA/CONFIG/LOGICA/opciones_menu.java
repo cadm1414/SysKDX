@@ -178,6 +178,12 @@ public class opciones_menu {
                     resp = "I";
                 }                
                 break;
+            case "DISTBR":
+                if (dato.equalsIgnoreCase("PEDIDO REPARTO")) {
+                    go_muestra_dlg_distbr.muestra_dlg_pedido_reparto();
+                    resp = "I";
+                }
+                break;
         }
         return resp;
     }

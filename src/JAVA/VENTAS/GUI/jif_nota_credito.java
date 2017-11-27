@@ -21,12 +21,16 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRParameter;
 
 public class jif_nota_credito extends javax.swing.JInternalFrame {
 
@@ -328,6 +332,14 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
         }
     }
 
+    private void evt_editar() {
+        li_tipo_operacion = 1;
+        cont = 0;
+        lo_evt_opciones_3.activa_btn_opciones(3, lo_pnl_opciones_3, lb_valor_op);
+        lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, true);
+        lo_evt_cab_nota_credito.activa_campos(1, lo_pnl_cab_nota_credito, true, ls_tipo_documento);
+    }
+
     private void evt_guardar() {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_nota_credito.CBX_moneda.getSelectedItem();
         lo_cbx_grupo_detraccion = (cbx_grupo_detraccion) lo_pnl_cab_nota_credito.CBX_codigo_detraccion.getSelectedItem();
@@ -353,6 +365,12 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                                     lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
                                     lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
                                 }
+                                if (go_fnc_mensaje.get_respuesta(0, "¿DESEA IMPRIMIR DOCUMENTO Nro  " + ls_tipo_documento + " - " + lo_bean_registro_ventas.getNumero_documento() + "?") == 0) {
+                                    try {
+                                        evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
+                                    } catch (Exception e) {
+                                    }
+                                }
                             } catch (Exception e) {
                             }
                             break;
@@ -374,6 +392,21 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                     }
                 }
                 break;
+        }
+    }
+
+    private void evt_imprimir(String status, String codigo) {
+        if (status.equalsIgnoreCase("1")) {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("codigo_operacion", codigo);
+            parametros.put("periodo", gs_periodo);
+            parametros.put("nombre_sucursal", lo_pnl_cab_nota_credito.TXT_sucursal.getText());
+            parametros.put("empresa", go_bean_general.getRazon_social());
+            parametros.put("usuario", gs_datos_usuario);
+            parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_nc_" + go_bean_general.getRuc() + ".jasper", parametros);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "DOCUMENTO NO SE PUEDE IMPRIMIR");
         }
     }
 
@@ -402,7 +435,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 evt_buscar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_editar) {
-                //evt_editar();
+                evt_editar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
                 evt_eliminar();
@@ -417,7 +450,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 //evt_anular();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
-                //evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
+                evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
             }
         }
     };
@@ -437,7 +470,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 evt_buscar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_3.BTN_editar.isEnabled()) {
-                //evt_editar();
+                evt_editar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_3.BTN_eliminar.isEnabled()) {
                 evt_eliminar();
@@ -478,7 +511,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                     evt_buscar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_editar) {
-                    //evt_editar();
+                    evt_editar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
                     evt_eliminar();
