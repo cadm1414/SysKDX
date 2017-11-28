@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="455561aa-b281-46b4-aed6-a57407e3bad7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="455561aa-b281-46b4-aed6-a57407e3bad7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CLOUD"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="empresa" class="java.lang.String"/>
 	<parameter name="usuario" class="java.lang.String"/>
 	<parameter name="nombre_sucursal" class="java.lang.String"/>
 	<parameter name="codigo_sucursal" class="java.lang.String"/>
 	<parameter name="periodo" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_correlativo_doc('0001','2017') as (codigo_sucursal character(4), codigo_documento character(2),nombre_documento character varying(60), serie_documento character(4), numero_documento text,flag character(1))
-	]]>
+		<![CDATA[select * from rpt_correlativo_doc( $P{codigo_sucursal} , $P{periodo} ) as (codigo_sucursal character(4), codigo_documento character(2),nombre_documento character varying(60), serie_documento character(4), numero_documento text,flag character(1))]]>
 	</queryString>
 	<field name="codigo_sucursal" class="java.lang.String"/>
 	<field name="codigo_documento" class="java.lang.String"/>
@@ -73,7 +74,7 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="190" y="12" width="184" height="12" uuid="964c72d3-62fe-418a-8c25-46780aff7cd2"/>
+				<reportElement x="190" y="18" width="184" height="12" uuid="964c72d3-62fe-418a-8c25-46780aff7cd2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
