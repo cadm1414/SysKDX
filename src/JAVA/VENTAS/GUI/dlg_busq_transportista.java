@@ -27,7 +27,7 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
     }
 
     private void formulario() {
-        lo_pnl_grid_busq_transportista.setBounds(0, 0, 700, 220);
+        lo_pnl_grid_busq_transportista.setBounds(0, 0, 700, 270);
         PNL_grid.add(lo_pnl_grid_busq_transportista);
 
         TXT_dato.setDocument(new fnc_txt_mayuscula());
@@ -45,7 +45,7 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
-                    for (int x = 0; x < 4; x++) {
+                    for (int x = 0; x < 6; x++) {
                         lo_pnl_grid_busq_transportista.TBL_transportista.setValueAt(lq_rs.getString(x + 1), a, x);
                     }
                     a++;
@@ -169,7 +169,7 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
         );
         PNL_gridLayout.setVerticalGroup(
             PNL_gridLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
+            .addGap(0, 269, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,7 +181,7 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 278, Short.MAX_VALUE))
+                        .addGap(0, 338, Short.MAX_VALUE))
                     .addComponent(PNL_grid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

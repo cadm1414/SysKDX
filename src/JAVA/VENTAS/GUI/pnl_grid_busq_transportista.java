@@ -20,14 +20,14 @@ public class pnl_grid_busq_transportista extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Codigo", "Transportista", "Empresa", "Estado"
+                "Cod.", "Transportista", "Empresa", "Placa", "Vehiculo", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -38,27 +38,30 @@ public class pnl_grid_busq_transportista extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TBL_transportista.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(TBL_transportista);
         if (TBL_transportista.getColumnModel().getColumnCount() > 0) {
             TBL_transportista.getColumnModel().getColumn(0).setResizable(false);
-            TBL_transportista.getColumnModel().getColumn(0).setPreferredWidth(1);
-            TBL_transportista.getColumnModel().getColumn(1).setResizable(false);
+            TBL_transportista.getColumnModel().getColumn(0).setPreferredWidth(0);
             TBL_transportista.getColumnModel().getColumn(1).setPreferredWidth(130);
             TBL_transportista.getColumnModel().getColumn(2).setResizable(false);
             TBL_transportista.getColumnModel().getColumn(2).setPreferredWidth(130);
             TBL_transportista.getColumnModel().getColumn(3).setResizable(false);
             TBL_transportista.getColumnModel().getColumn(3).setPreferredWidth(30);
+            TBL_transportista.getColumnModel().getColumn(4).setPreferredWidth(30);
+            TBL_transportista.getColumnModel().getColumn(5).setResizable(false);
+            TBL_transportista.getColumnModel().getColumn(5).setPreferredWidth(30);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

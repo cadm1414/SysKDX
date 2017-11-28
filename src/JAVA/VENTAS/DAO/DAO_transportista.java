@@ -49,7 +49,7 @@ public class DAO_transportista {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_grid_transportista('" + estado + "') "
-                    + "as (codigo_transportista character(4),nombre_transportista character varying(250),razon_social character varying(250),estado text)";
+                    + "as (codigo_transportista character(4),nombre_transportista character varying(250),razon_social character varying(250),codigo_vehiculo character(6),marca character varying(30),estado text)";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
