@@ -104,7 +104,6 @@ import JAVA.CTACOB.REPORT.pnl_rpt_estado_cuenta;
 import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas;
 import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas_sr;
 import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
-import JAVA.DISTBR.GUI.dlg_ini_serie_sector;
 import JAVA.DISTBR.LOGICA.muestra_dlg_distbr;
 import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
 import JAVA.INVENT.GUI.dlg_rpt_producto_x_movimiento;
@@ -112,6 +111,7 @@ import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_normal;
 import JAVA.INVENT.REPORT.pnl_rpt_kardex_mercaderia_val;
 import JAVA.INVENT.REPORT.pnl_rpt_producto_x_movimiento;
 import JAVA.VENTAS.GUI.dlg_busq_ref_documento;
+import JAVA.VENTAS.GUI.dlg_ini_sucursal;
 import JAVA.VENTAS.GUI.dlg_resumen_documento;
 import JAVA.VENTAS.GUI.dlg_rpt_registro_ventas;
 import JAVA.VENTAS.GUI.jif_cierre_pedidos;
@@ -124,6 +124,7 @@ import JAVA.VENTAS.LOGICA.muestra_pestania_ventas;
 import JAVA.VENTAS.LOGICA.muestra_reporte_ventas;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
+import JAVA.VENTAS.REPORT.pnl_rpt_correlativo_doc;
 import JAVA.VENTAS.REPORT.pnl_rpt_despacho_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_registro_ventas;
@@ -293,7 +294,7 @@ public class variables_globales {
     public static dlg_busq_ref_documento go_dlg_busq_ref_documento;
     public static dlg_resumen_documento go_dlg_resumen_documento;
     public static dlg_rpt_producto_x_movimiento go_dlg_rpt_producto_x_movimiento;
-    public static dlg_ini_serie_sector go_dlg_ini_serie_sector;
+    public static dlg_ini_sucursal go_dlg_ini_sucursal;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -351,5 +352,6 @@ public class variables_globales {
     public static pnl_rpt_producto_x_movimiento go_pnl_rpt_producto_x_movimiento;
     public static pnl_rpt_listado_cobranzas go_pnl_rpt_listado_cobranzas;
     public static pnl_rpt_listado_cobranzas_sr go_pnl_rpt_listado_cobranzas_sr;
-
+    public static pnl_rpt_correlativo_doc go_pnl_rpt_correlativo_doc;
+    
 }

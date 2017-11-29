@@ -61,6 +61,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         get_moneda();
         get_igv();
         get_grupo_detraccion();
+        get_sector_distribucion();
         lo_pnl_grid_pedidos.TBL_pedidos.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selectNextColumnCell");
     }
 
@@ -121,6 +122,13 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         }
     }
 
+    private void get_sector_distribucion() {
+        lq_rs = go_dao_sector_distribucion.SLT_cbx_sector_distribucion();
+        if (lq_rs != null) {
+            go_cbx_trato_datos.recupera_valor(20, lq_rs, lo_pnl_cab_pedidos.CBX_sector);
+        }
+    }
+    
     private void get_tipo_cambio() {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_pedidos.CBX_moneda.getSelectedItem();
         lo_pnl_grid_pedidos.LBL_simbolo.setText("Imp (" + lo_cbx_moneda.simbolo_moneda().trim() + ")");

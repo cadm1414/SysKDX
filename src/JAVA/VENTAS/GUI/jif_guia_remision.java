@@ -67,12 +67,13 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
         get_igv();
         get_grupo_detraccion();
         get_tipo_op();
+        get_sector_distribucion();
         lo_pnl_grid_pedidos.TBL_pedidos.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selectNextColumnCell");
     }
 
     private void formulario() {
         lo_pnl_opciones_3.setBounds(0, 10, 1000, 120);
-        lo_pnl_cab_guiar.setBounds(12, 130, 1000, 260);
+        lo_pnl_cab_guiar.setBounds(12, 130, 1100, 260);
         lo_pnl_grid_pedidos.setBounds(13, 390, 1100, 280);
 
         this.add(lo_pnl_opciones_3);
@@ -126,6 +127,13 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
         lq_rs = go_dao_grupo_detraccion.SLT_cbx_grupo_detraccion("1");
         if (lq_rs != null) {
             go_cbx_trato_datos.recupera_valor(10, lq_rs, lo_pnl_cab_guiar.CBX_codigo_detraccion);
+        }
+    }
+    
+    private void get_sector_distribucion() {
+        lq_rs = go_dao_sector_distribucion.SLT_cbx_sector_distribucion();
+        if (lq_rs != null) {
+            go_cbx_trato_datos.recupera_valor(20, lq_rs, lo_pnl_cab_guiar.CBX_sector);
         }
     }
 

@@ -66,6 +66,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
         get_igv();
         get_moneda();
         get_grupo_detraccion();
+        get_sector_distribucion();
         lo_pnl_grid_pedidos.TBL_pedidos.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selectNextColumnCell");
     }
 
@@ -128,6 +129,13 @@ public class jif_factura extends javax.swing.JInternalFrame {
         lq_rs = go_dao_igv.SLT_cbx_igv();
         if (lq_rs != null) {
             go_cbx_trato_datos.recupera_valor(15, lq_rs, lo_pnl_cab_factura.CBX_igv);
+        }
+    }
+    
+    private void get_sector_distribucion() {
+        lq_rs = go_dao_sector_distribucion.SLT_cbx_sector_distribucion();
+        if (lq_rs != null) {
+            go_cbx_trato_datos.recupera_valor(20, lq_rs, lo_pnl_cab_factura.CBX_sector);
         }
     }
 

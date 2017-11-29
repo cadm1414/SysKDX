@@ -151,6 +151,10 @@ public class opciones_menu {
                     go_muestra_dlg_ventas.muestra_dlg_resumen_documento();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("CORRELATIVO DOCUMENTOS")) {
+                    go_muestra_dlg_ventas.muestra_dlg_ini_sucursal();
+                    resp = "I";
+                }
                 break;
             case "CTACOB":
                 if (dato.equalsIgnoreCase("SALDO CTA CORRIENTE")) {
@@ -178,11 +182,7 @@ public class opciones_menu {
                     resp = "I";
                 }                
                 break;
-            case "DISTBR":
-                if (dato.equalsIgnoreCase("PEDIDO REPARTO")) {
-                    go_muestra_dlg_distbr.muestra_dlg_pedido_reparto();
-                    resp = "I";
-                }
+            case "DISTBR":                 
                 break;
         }
         return resp;

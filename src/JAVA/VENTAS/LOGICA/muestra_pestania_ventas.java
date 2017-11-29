@@ -4,6 +4,7 @@ import JAVA.ANCESTRO.LOGICA.jt_panel;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
+import JAVA.VENTAS.REPORT.pnl_rpt_correlativo_doc;
 import JAVA.VENTAS.REPORT.pnl_rpt_despacho_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_registro_ventas;
@@ -99,6 +100,21 @@ public class muestra_pestania_ventas {
         go_pnl_rpt_resumen_documento.repaint();
         go_pnl_rpt_resumen_documento.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_resumen_documento);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+    
+    public void rpt_correlativo_doc(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_correlativo_doc);
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_correlativo_doc = new pnl_rpt_correlativo_doc();
+        go_pnl_rpt_correlativo_doc.removeAll();
+        go_pnl_rpt_correlativo_doc.setLayout(new BorderLayout());
+        go_pnl_rpt_correlativo_doc.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_correlativo_doc.setVisible(true);
+        go_pnl_rpt_correlativo_doc.repaint();
+        go_pnl_rpt_correlativo_doc.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_correlativo_doc);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }
