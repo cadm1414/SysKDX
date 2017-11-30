@@ -8,12 +8,15 @@ import JAVA.CONFIG.GUI.dlg_busq_entidad_parametros;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.INVENT.LOGICA.cbx_entidad_ubigeo;
 import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
+import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import JAVA.VENTAS.BEAN.BEAN_pedido;
 import JAVA.VENTAS.LOGICA.cbx_igv;
 import JAVA.VENTAS.LOGICA.evt_cab_pedidos;
 import JAVA.VENTAS.LOGICA.evt_grid_pedidos;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -24,7 +27,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -53,6 +58,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
     String ls_codigo, ls_codigo_sucursal, ls_serie, ls_codigo_vendedor, ls_nombre_vendedor, ls_codigo_articulo, ls_codigo_entidad;
     String ls_opcion = "M A A";
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "jif_pedido";
+    JTextField editor;
 
     public jif_pedido() {
         initComponents();
@@ -66,8 +72,8 @@ public class jif_pedido extends javax.swing.JInternalFrame {
     }
 
     private void formulario() {
-        lo_pnl_opciones_3.setBounds(0, 10, 1000, 120);
-        lo_pnl_cab_pedidos.setBounds(12, 130, 1000, 260);
+        lo_pnl_opciones_3.setBounds(0, 10, 1000, 110);
+        lo_pnl_cab_pedidos.setBounds(12, 120, 1000, 265);
         lo_pnl_grid_pedidos.setBounds(13, 390, 1100, 280);
 
         this.add(lo_pnl_opciones_3);
@@ -88,12 +94,19 @@ public class jif_pedido extends javax.swing.JInternalFrame {
 
         li_cantidad = go_dao_serie.SLT_cant_items(ls_serie, ls_codigo_sucursal, 0);
 
+        editor = (JTextField) lo_pnl_cab_pedidos.CBX_direccion.getEditor().getEditorComponent();
+        editor.addKeyListener(KeyEvnt);
+        editor.addFocusListener(FocusEvent);
+        editor.setDocument(new fnc_txt_mayuscula());
+
         lo_evt_opciones_3.evento_click(lo_pnl_opciones_3, Listener);
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
         lo_evt_cab_pedidos.evento_press(lo_pnl_cab_pedidos, KeyEvnt);
         lo_evt_cab_pedidos.evento_item(lo_pnl_cab_pedidos, ItemEvent);
+        lo_evt_cab_pedidos.evento_focus(lo_pnl_cab_pedidos, FocusEvent);
         lo_evt_grid_pedidos.evento_press(lo_pnl_grid_pedidos, KeyEvnt);
         lo_pnl_grid_pedidos.TBL_pedidos.addMouseListener(MouseEvent);
+
     }
 
     private void activa_botones() {
@@ -128,7 +141,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
             go_cbx_trato_datos.recupera_valor(20, lq_rs, lo_pnl_cab_pedidos.CBX_sector);
         }
     }
-    
+
     private void get_tipo_cambio() {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_pedidos.CBX_moneda.getSelectedItem();
         lo_pnl_grid_pedidos.LBL_simbolo.setText("Imp (" + lo_cbx_moneda.simbolo_moneda().trim() + ")");
@@ -188,7 +201,6 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_codigo_entidad.setText("");
                 lo_pnl_cab_pedidos.TXT_razon_social.setText("");
                 lo_pnl_cab_pedidos.TXT_doc_id.setText("");
-                lo_pnl_cab_pedidos.JRD_domiciliado.setSelected(false);
                 lo_pnl_cab_pedidos.CBX_direccion.removeAllItems();
                 lo_pnl_cab_pedidos.TXT_codigo_ubigeo.setText("");
                 lo_pnl_cab_pedidos.TXT_descripcion.setText("");
@@ -369,7 +381,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_observacion.setEnabled(true);
                 lo_pnl_cab_pedidos.TXT_numero_doc.setEnabled(true);
                 lo_pnl_cab_pedidos.TXT_fecha_emision.setEnabled(true);
-                lo_pnl_cab_pedidos.TXT_observacion.requestFocus();                
+                lo_pnl_cab_pedidos.TXT_observacion.requestFocus();
                 break;
             case "2":
                 go_fnc_operaciones_campos.oculta_columna(lo_pnl_grid_pedidos.TBL_pedidos, 13);
@@ -381,7 +393,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_observacion.setEnabled(true);
                 lo_pnl_cab_pedidos.TXT_numero_doc.setEnabled(true);
                 lo_pnl_cab_pedidos.TXT_fecha_emision.setEnabled(true);
-                lo_pnl_cab_pedidos.TXT_observacion.requestFocus();                
+                lo_pnl_cab_pedidos.TXT_observacion.requestFocus();
                 break;
         }
         lo_evt_opciones_3.activa_btn_opciones(1, lo_pnl_opciones_3, lb_valor_op);
@@ -418,7 +430,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         }
     }
 
-    private void evt_eliminar() {        
+    private void evt_eliminar() {
         if (go_dao_pedido_detalle.FNC_verifica_pedido_facturado(ls_codigo) == 0) {
             if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR DOCUMENTO Nro OP-" + lo_bean_pedido.getNumero_documento() + "?") == 0) {
                 try {
@@ -663,6 +675,9 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     get_porcentaje_detraccion();
                     getFocusOwner().transferFocus();
                 }
+                if (ke.getSource() == editor && go_fnc_operaciones_campos.cant_caracter(editor.getText().trim(), 1, 4)) {
+                    getFocusOwner().transferFocus();
+                }
                 if (ke.getSource() == lo_pnl_cab_pedidos.TXT_codigo_entidad && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_pedidos.TXT_codigo_entidad.getText().trim(), 4, 6)) {
                     if (li_tipo_operacion != 1) {
                         if (lo_pnl_cab_pedidos.TXT_codigo_entidad.getText().trim().equalsIgnoreCase("999999")) {
@@ -778,7 +793,6 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     lo_pnl_cab_pedidos.TXT_codigo_entidad.setText("");
                     lo_pnl_cab_pedidos.TXT_razon_social.setText("");
                     lo_pnl_cab_pedidos.TXT_doc_id.setText("");
-                    lo_pnl_cab_pedidos.JRD_domiciliado.setSelected(false);
                     lo_pnl_cab_pedidos.CBX_direccion.removeAllItems();
                     lo_pnl_cab_pedidos.TXT_codigo_ubigeo.setText("");
                     lo_pnl_cab_pedidos.TXT_descripcion.setText("");
@@ -856,6 +870,18 @@ public class jif_pedido extends javax.swing.JInternalFrame {
 
         @Override
         public void mouseExited(MouseEvent me) {
+        }
+    };
+
+    FocusListener FocusEvent = new FocusListener() {
+        @Override
+        public void focusGained(java.awt.event.FocusEvent fe) {                     
+          ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        }
+
+        @Override
+        public void focusLost(java.awt.event.FocusEvent fe) {          
+          ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         }
     };
 

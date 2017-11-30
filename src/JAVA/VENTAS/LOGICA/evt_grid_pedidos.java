@@ -202,8 +202,20 @@ public class evt_grid_pedidos {
                                     resp = true;
                                 } else {
                                     go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "PRECIO/PESO INCORRECTOS");
-                                    OBJ_pgp.TBL_pedidos.setValueAt("", i, 1);
-                                    OBJ_pgp.TBL_pedidos.changeSelection(i, 1, false, false);
+                                    OBJ_pgp.TBL_pedidos.setValueAt("", i, 2);
+                                    OBJ_pgp.TBL_pedidos.changeSelection(i, 2, false, false);
+                                    resp = false;
+                                    valida++;
+                                    break;
+                                }
+                            }
+                            if (x == 12) {
+                                if (Double.parseDouble(OBJ_pgp.TBL_pedidos.getValueAt(i, x).toString().trim()) != 0) {
+                                    resp = true;
+                                } else {
+                                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "IMPORTE TIENE QUE SER MAYOR A CERO");
+                                    OBJ_pgp.TBL_pedidos.setValueAt("", i, 2);
+                                    OBJ_pgp.TBL_pedidos.changeSelection(i, 2, false, false);
                                     resp = false;
                                     valida++;
                                     break;

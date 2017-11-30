@@ -9,6 +9,7 @@ import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.CONFIG.LOGICA.cbx_tabla_ayuda;
 import JAVA.INVENT.LOGICA.cbx_entidad_ubigeo;
 import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
+import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import JAVA.VENTAS.BEAN.BEAN_guia_remision;
 import JAVA.VENTAS.LOGICA.cbx_igv;
 import JAVA.VENTAS.LOGICA.evt_cab_guiar;
@@ -26,6 +27,7 @@ import java.util.Locale;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -58,6 +60,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
             ls_codigo_vehiculo_v2 = "", ls_marca_v2 = "", ls_civ_v2 = "", ls_codigo_direccion = "", ls_descripcion = "", ls_punto_llegada = "", ls_codigo_ubigeo_ls = "", ls_descripcion_ubigeo = "";
     String ls_opcion = "M A C";
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "jif_guia_remision";
+    JTextField editor;
 
     public jif_guia_remision() {
         initComponents();
@@ -93,7 +96,11 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
 
         modelo = (DefaultTableModel) lo_pnl_grid_pedidos.TBL_pedidos.getModel();
         modelo.addTableModelListener(TablaListener);
-
+        
+        editor = (JTextField) lo_pnl_cab_guiar.CBX_direccion.getEditor().getEditorComponent();
+        editor.addKeyListener(KeyEvnt);        
+        editor.setDocument(new fnc_txt_mayuscula());
+        
         li_cantidad = go_dao_serie.SLT_cant_items(ls_serie, ls_codigo_sucursal, 1);
         ls_item_seleccion = new String[li_cantidad];
         lo_evt_opciones_3.evento_click(lo_pnl_opciones_3, Listener);
@@ -795,6 +802,9 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                         lo_pnl_cab_guiar.TXT_doc_ref.setText(go_fnc_operaciones_campos.completa_digitos(lo_pnl_cab_guiar.TXT_doc_ref.getText().trim(), "0", 10));
                         getFocusOwner().transferFocus();
                     }
+                }
+                if (ke.getSource() == editor && go_fnc_operaciones_campos.cant_caracter(editor.getText().trim(), 1, 4)) {
+                    getFocusOwner().transferFocus();
                 }
                 if (ke.getSource() == lo_pnl_cab_guiar.TXT_codigo_entidad && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_guiar.TXT_codigo_entidad.getText().trim(), 4, 6)) {
                     if (li_tipo_operacion != 1) {

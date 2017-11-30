@@ -8,6 +8,7 @@ import JAVA.CONFIG.GUI.dlg_busq_entidad_parametros;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
 import JAVA.INVENT.LOGICA.cbx_entidad_ubigeo;
 import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
+import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import JAVA.VENTAS.BEAN.BEAN_registro_ventas;
 import JAVA.VENTAS.LOGICA.cbx_igv;
 import JAVA.VENTAS.LOGICA.evt_cab_factura;
@@ -27,6 +28,7 @@ import java.util.Locale;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -58,6 +60,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
             ls_codigo_entidad, ls_codigo_articulo, ls_codigo_pedido, ls_codigo_guiar;
     String ls_opcion;
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "jif_pedido";
+    JTextField editor;
 
     public jif_factura() {
         initComponents();
@@ -103,7 +106,10 @@ public class jif_factura extends javax.swing.JInternalFrame {
         gs_parametros[3] = "";
 
         ls_opcion = (ls_tipo_documento.equalsIgnoreCase("01")) ? "M A D" : "M A E";
-
+        editor = (JTextField) lo_pnl_cab_factura.CBX_direccion.getEditor().getEditorComponent();
+        editor.addKeyListener(KeyEvnt);        
+        editor.setDocument(new fnc_txt_mayuscula());
+        
         lo_evt_opciones_3.evento_click(lo_pnl_opciones_3, Listener);
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
         lo_evt_cab_factura.evento_press(lo_pnl_cab_factura, KeyEvnt);
@@ -790,6 +796,9 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.CBX_codigo_detraccion) {
                     get_porcentaje_detraccion();
+                    getFocusOwner().transferFocus();
+                }
+                if (ke.getSource() == editor && go_fnc_operaciones_campos.cant_caracter(editor.getText().trim(), 1, 4)) {
                     getFocusOwner().transferFocus();
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_entidad && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_factura.TXT_codigo_entidad.getText().trim(), 4, 6)) {
