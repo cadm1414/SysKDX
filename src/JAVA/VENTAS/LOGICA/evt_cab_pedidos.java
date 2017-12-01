@@ -50,6 +50,7 @@ public class evt_cab_pedidos {
                 OBJ_pcp.JRD_precio_igv.setEnabled(valor);
                 OBJ_pcp.CBX_direccion.setEnabled(valor);
                 OBJ_pcp.TXT_codigo_entidad.setEnabled(valor);
+                OBJ_pcp.TXT_codigo_pagador.setEnabled(valor);
                 OBJ_pcp.TXT_codigo_vendedor.setEnabled(valor);
                 OBJ_pcp.TXT_observacion.setEnabled(valor);
                 OBJ_pcp.TXT_tipo_cambio.setEnabled((Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText()) != 0) ? true : false);

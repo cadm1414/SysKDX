@@ -509,7 +509,7 @@ public class pnl_cab_pedidos extends javax.swing.JPanel {
 
         TXT_codigo_entidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
-            TXT_codigo_entidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("HHHHHH")));
+            TXT_codigo_entidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("A#####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -684,7 +684,7 @@ public class pnl_cab_pedidos extends javax.swing.JPanel {
 
         TXT_codigo_pagador.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
-            TXT_codigo_pagador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("HHHHHH")));
+            TXT_codigo_pagador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("A#####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
