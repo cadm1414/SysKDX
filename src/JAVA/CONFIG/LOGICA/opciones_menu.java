@@ -124,7 +124,7 @@ public class opciones_menu {
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("TIPO DE CAMBIO")) {
-                    go_muestra_jif_ventas.muestra_jif_entidad();
+                    go_muestra_jif_ventas.muestra_jif_tipo_cambio();
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("CONTROL PEDIDOS")) {
@@ -178,11 +178,19 @@ public class opciones_menu {
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("RC SIN RENDIR")) {
-                    go_muestra_dlg_ctacob.muestra_dlg_rpt_listado_cobranzas_sr(2);                    
+                    go_muestra_dlg_ctacob.muestra_dlg_rpt_listado_cobranzas_sr(2);
                     resp = "I";
-                }                
+                }
                 break;
-            case "DISTBR":                 
+            case "DISTBR":
+                if (dato.equalsIgnoreCase("PRELIMINAR REPARTO")) {
+                    go_muestra_jif_distbr.muestra_jif_preliminar();
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("PROGRAMACION REPARTO")) {
+                    go_muestra_dlg_distbr.muestra_dlg_ini_sucursal("PG");
+                    resp = "I";
+                }
                 break;
         }
         return resp;

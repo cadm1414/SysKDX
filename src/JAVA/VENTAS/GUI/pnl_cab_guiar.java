@@ -74,7 +74,6 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        TXT_codigo_entidad = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         TXT_razon_social = new javax.swing.JTextField();
         CBX_tipo_documento_id = new javax.swing.JComboBox<>();
@@ -86,6 +85,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         CBX_direccion = new javax.swing.JComboBox<>();
         jLabel61 = new javax.swing.JLabel();
         CBX_sector = new javax.swing.JComboBox<>();
+        TXT_codigo_entidad = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -95,7 +95,6 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        TXT_codigo_pagador = new javax.swing.JTextField();
         TXT_codigo_vendedor = new javax.swing.JFormattedTextField();
         CBX_forma_pago = new javax.swing.JComboBox<>();
         TXT_dias_credito = new javax.swing.JFormattedTextField();
@@ -109,6 +108,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel51 = new javax.swing.JLabel();
         jLabel60 = new javax.swing.JLabel();
         TXT_transportista = new javax.swing.JFormattedTextField();
+        TXT_codigo_pagador = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
@@ -140,10 +140,12 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel5.setText(":");
 
         TXT_sucursal.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_sucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_sucursal.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_sucursal.setEnabled(false);
         TXT_sucursal.setNextFocusableComponent(TXT_serie);
 
+        TXT_serie.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_serie.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
@@ -155,6 +157,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         TXT_serie.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_serie.setNextFocusableComponent(TXT_numero_doc);
 
+        TXT_numero_doc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_numero_doc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
         } catch (java.text.ParseException ex) {
@@ -174,6 +177,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel6.setText(":");
 
         CBX_tipo_op.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_tipo_op.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_tipo_op.setEnabled(false);
         CBX_tipo_op.setNextFocusableComponent(CBX_es_pedido);
 
@@ -195,6 +199,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel53.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel53.setText(":");
 
+        TXT_pedido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_pedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
         } catch (java.text.ParseException ex) {
@@ -213,6 +218,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel59.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel59.setText(":");
 
+        TXT_doc_ref.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_doc_ref.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
         } catch (java.text.ParseException ex) {
@@ -225,6 +231,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         TXT_doc_ref.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         TXT_doc_ref.setNextFocusableComponent(CBX_moneda);
 
+        TXT_fecha_emision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_emision.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -243,6 +250,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel13.setText(":");
 
         CBX_moneda.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_moneda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_moneda.setEnabled(false);
         CBX_moneda.setNextFocusableComponent(TXT_tipo_cambio);
 
@@ -264,6 +272,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel17.setText(":");
 
+        TXT_tipo_cambio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_tipo_cambio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.000",simbolos))));
         TXT_tipo_cambio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         TXT_tipo_cambio.setDisabledTextColor(new java.awt.Color(102, 102, 102));
@@ -273,9 +282,11 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         TXT_tipo_cambio.setNextFocusableComponent(CBX_codigo_detraccion);
 
         CBX_codigo_detraccion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_codigo_detraccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_codigo_detraccion.setEnabled(false);
         CBX_codigo_detraccion.setNextFocusableComponent(TXT_detraccion);
 
+        TXT_detraccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_detraccion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         TXT_detraccion.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         TXT_detraccion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
@@ -290,9 +301,11 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
 
         CBX_doc_ref.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_doc_ref.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FACTURA", "BOLETA" }));
+        CBX_doc_ref.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_doc_ref.setEnabled(false);
         CBX_doc_ref.setNextFocusableComponent(TXT_serie_doc_ref);
 
+        TXT_serie_doc_ref.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_serie_doc_ref.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
@@ -307,6 +320,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
 
         CBX_es_pedido.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_es_pedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        CBX_es_pedido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_es_pedido.setEnabled(false);
         CBX_es_pedido.setNextFocusableComponent(TXT_pedido);
 
@@ -316,13 +330,13 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_sucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TXT_sucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -330,20 +344,20 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TXT_serie, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_numero_doc, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TXT_numero_doc, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBX_tipo_op, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CBX_tipo_op, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel54)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBX_es_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CBX_es_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TXT_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,22 +491,21 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel31.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel31.setText(":");
 
-        TXT_codigo_entidad.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        TXT_codigo_entidad.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        TXT_codigo_entidad.setEnabled(false);
-
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/f5.png"))); // NOI18N
         jLabel32.setText(" ");
         jLabel32.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_razon_social.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_razon_social.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_razon_social.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_razon_social.setEnabled(false);
 
         CBX_tipo_documento_id.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_tipo_documento_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RUC", "DNI" }));
+        CBX_tipo_documento_id.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_tipo_documento_id.setEnabled(false);
 
+        TXT_doc_id.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_doc_id.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
         } catch (java.text.ParseException ex) {
@@ -503,6 +516,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         TXT_doc_id.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_doc_id.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
+        TXT_codigo_ubigeo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_codigo_ubigeo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######")));
         } catch (java.text.ParseException ex) {
@@ -518,6 +532,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel33.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_descripcion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_descripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_descripcion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_descripcion.setEnabled(false);
 
@@ -526,13 +541,26 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         JRD_domiciliado.setEnabled(false);
 
         CBX_direccion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_direccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_direccion.setEnabled(false);
 
         jLabel61.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel61.setText("Sector :");
 
         CBX_sector.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_sector.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_sector.setEnabled(false);
+
+        TXT_codigo_entidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        try {
+            TXT_codigo_entidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("A#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        TXT_codigo_entidad.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        TXT_codigo_entidad.setEnabled(false);
+        TXT_codigo_entidad.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        TXT_codigo_entidad.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -581,7 +609,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(TXT_doc_id, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(JRD_domiciliado, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                                .addComponent(JRD_domiciliado, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                                 .addGap(75, 75, 75))
                             .addComponent(TXT_razon_social)))
                     .addComponent(CBX_direccion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -593,9 +621,9 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(jLabel31)
-                    .addComponent(TXT_codigo_entidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXT_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXT_razon_social, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_codigo_entidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
@@ -609,15 +637,16 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                     .addComponent(jLabel29)
                     .addComponent(CBX_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel28)
-                    .addComponent(TXT_codigo_ubigeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXT_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel61)
-                        .addComponent(CBX_sector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(CBX_sector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel27)
+                        .addComponent(jLabel28)
+                        .addComponent(TXT_codigo_ubigeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXT_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
@@ -647,10 +676,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel41.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel41.setText(":");
 
-        TXT_codigo_pagador.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        TXT_codigo_pagador.setDisabledTextColor(new java.awt.Color(102, 102, 102));
-        TXT_codigo_pagador.setEnabled(false);
-
+        TXT_codigo_vendedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_codigo_vendedor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("****")));
         } catch (java.text.ParseException ex) {
@@ -663,8 +689,10 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
 
         CBX_forma_pago.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_forma_pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EFECTIVO", "CREDITO" }));
+        CBX_forma_pago.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_forma_pago.setEnabled(false);
 
+        TXT_dias_credito.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_dias_credito.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
         TXT_dias_credito.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_dias_credito.setEnabled(false);
@@ -680,10 +708,12 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel43.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_pagador.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_pagador.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_pagador.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_pagador.setEnabled(false);
 
         TXT_nombre_vendedor.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_vendedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_nombre_vendedor.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_vendedor.setEnabled(false);
 
@@ -694,6 +724,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel48.setText(":");
 
         TXT_observacion.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_observacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_observacion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_observacion.setEnabled(false);
 
@@ -703,6 +734,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel60.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel60.setText(":");
 
+        TXT_transportista.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_transportista.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
@@ -712,6 +744,17 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         TXT_transportista.setEnabled(false);
         TXT_transportista.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_transportista.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+
+        TXT_codigo_pagador.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        try {
+            TXT_codigo_pagador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("A#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        TXT_codigo_pagador.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        TXT_codigo_pagador.setEnabled(false);
+        TXT_codigo_pagador.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        TXT_codigo_pagador.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -737,7 +780,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TXT_codigo_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TXT_codigo_pagador, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -778,9 +821,9 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
                     .addComponent(jLabel35)
-                    .addComponent(TXT_codigo_pagador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXT_pagador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TXT_pagador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_codigo_pagador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
@@ -806,7 +849,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                         .addComponent(jLabel51)
                         .addComponent(jLabel60)
                         .addComponent(TXT_transportista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
@@ -837,6 +880,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
 
         CBX_status.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ANULADO", "VIGENTE" }));
+        CBX_status.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_status.setEnabled(false);
         CBX_status.setNextFocusableComponent(JRD_precio_igv);
 
@@ -848,6 +892,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
 
         CBX_afecto_igv.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_afecto_igv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        CBX_afecto_igv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_afecto_igv.setEnabled(false);
         CBX_afecto_igv.setNextFocusableComponent(JRD_precio_igv);
 
@@ -858,6 +903,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
         jLabel21.setText(":");
 
         CBX_igv.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_igv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_igv.setEnabled(false);
         CBX_igv.setNextFocusableComponent(CBX_codigo_detraccion);
 
@@ -884,22 +930,19 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel23)
                                     .addComponent(jLabel45))
+                                .addGap(6, 6, 6)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGap(61, 61, 61)
-                                        .addComponent(LBL_fecha_registro, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(CBX_status, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(CBX_status, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LBL_fecha_registro, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel50)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(6, 6, 6)
                                 .addComponent(CBX_afecto_igv, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4)
                                 .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CBX_igv, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -909,7 +952,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LBL_numero_doc)
                     .addComponent(jLabel47))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
                     .addComponent(jLabel45)
@@ -919,7 +962,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                     .addComponent(jLabel22)
                     .addComponent(jLabel23)
                     .addComponent(CBX_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel49)
                     .addComponent(jLabel50)
@@ -927,7 +970,7 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
                     .addComponent(jLabel20)
                     .addComponent(jLabel21)
                     .addComponent(CBX_igv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -948,13 +991,13 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(2, 2, 2)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -976,8 +1019,8 @@ public class pnl_cab_guiar extends javax.swing.JPanel {
     public javax.swing.JRadioButton JRD_precio_igv;
     public javax.swing.JLabel LBL_fecha_registro;
     public javax.swing.JLabel LBL_numero_doc;
-    public javax.swing.JTextField TXT_codigo_entidad;
-    public javax.swing.JTextField TXT_codigo_pagador;
+    public javax.swing.JFormattedTextField TXT_codigo_entidad;
+    public javax.swing.JFormattedTextField TXT_codigo_pagador;
     public javax.swing.JFormattedTextField TXT_codigo_ubigeo;
     public javax.swing.JFormattedTextField TXT_codigo_vendedor;
     public javax.swing.JTextField TXT_descripcion;

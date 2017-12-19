@@ -6,6 +6,7 @@ import JAVA.ANCESTRO.LOGICA.evt_opciones_3;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import JAVA.CONFIG.GUI.dlg_busq_entidad_parametros;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
+import JAVA.CONFIG.LOGICA.cbx_sector_distribucion;
 import JAVA.INVENT.LOGICA.cbx_entidad_ubigeo;
 import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
@@ -15,6 +16,7 @@ import JAVA.VENTAS.LOGICA.evt_cab_factura;
 import JAVA.VENTAS.LOGICA.evt_grid_pedidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -27,6 +29,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -53,6 +56,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
     cbx_grupo_detraccion lo_cbx_grupo_detraccion;
     cbx_entidad_ubigeo lo_cbx_entidad_ubigeo;
     cbx_igv lo_cbx_igv;
+    cbx_sector_distribucion lo_cbx_sector;
     ResultSet lq_rs;
     int li_tipo_operacion, cont = 0, li_cantidad;
     double ld_tipo_cambio, ld_porcentaje_detraccion, ld_monto_minimo;
@@ -74,8 +78,8 @@ public class jif_factura extends javax.swing.JInternalFrame {
     }
 
     private void formulario() {
-        lo_pnl_opciones_3.setBounds(0, 10, 1000, 120);
-        lo_pnl_cab_factura.setBounds(12, 130, 1100, 260);
+        lo_pnl_opciones_3.setBounds(0, 10, 1000, 110);
+        lo_pnl_cab_factura.setBounds(12, 120, 1100, 265);
         lo_pnl_grid_pedidos.setBounds(13, 390, 1100, 280);
 
         this.add(lo_pnl_opciones_3);
@@ -106,14 +110,17 @@ public class jif_factura extends javax.swing.JInternalFrame {
         gs_parametros[3] = "";
 
         ls_opcion = (ls_tipo_documento.equalsIgnoreCase("01")) ? "M A D" : "M A E";
+
         editor = (JTextField) lo_pnl_cab_factura.CBX_direccion.getEditor().getEditorComponent();
-        editor.addKeyListener(KeyEvnt);        
+        editor.addKeyListener(KeyEvnt);
+        editor.addFocusListener(FocusEvent);
         editor.setDocument(new fnc_txt_mayuscula());
-        
+
         lo_evt_opciones_3.evento_click(lo_pnl_opciones_3, Listener);
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
         lo_evt_cab_factura.evento_press(lo_pnl_cab_factura, KeyEvnt);
         lo_evt_cab_factura.evento_item(lo_pnl_cab_factura, ItemEvent);
+        lo_evt_cab_factura.evento_focus(lo_pnl_cab_factura, FocusEvent);
         lo_evt_grid_pedidos.evento_press(lo_pnl_grid_pedidos, KeyEvnt);
         lo_pnl_grid_pedidos.TBL_pedidos.addMouseListener(MouseEvent);
 
@@ -137,7 +144,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
             go_cbx_trato_datos.recupera_valor(15, lq_rs, lo_pnl_cab_factura.CBX_igv);
         }
     }
-    
+
     private void get_sector_distribucion() {
         lq_rs = go_dao_sector_distribucion.SLT_cbx_sector_distribucion();
         if (lq_rs != null) {
@@ -225,19 +232,16 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 lo_pnl_cab_factura.TXT_codigo_vendedor.setText(lq_rs.getString(5));
                 lo_pnl_cab_factura.TXT_nombre_vendedor.setText(lq_rs.getString(6));
                 lo_pnl_cab_factura.TXT_dias_credito.setText(lq_rs.getString(8));
+                go_cbx_trato_datos.selecciona_valor(20, lq_rs.getString(12), lo_pnl_cab_factura.CBX_sector);
+
                 genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText().trim(), lq_rs.getInt(8));
                 go_cbx_trato_datos.recupera_valor(16, lq_rs, lo_pnl_cab_factura.CBX_direccion);
                 lo_cbx_entidad_ubigeo = (cbx_entidad_ubigeo) lo_pnl_cab_factura.CBX_direccion.getSelectedItem();
                 lo_pnl_cab_factura.TXT_codigo_ubigeo.setText(lo_cbx_entidad_ubigeo.getID());
                 lo_pnl_cab_factura.TXT_descripcion.setText(lo_cbx_entidad_ubigeo.descripcion());
-                if (!lo_pnl_cab_factura.JRD_domiciliado.isSelected()) {
-                    lo_pnl_cab_factura.CBX_afecto_igv.setSelectedIndex(0);
-                } else {
-                    lo_pnl_cab_factura.CBX_afecto_igv.setSelectedIndex(1);
-                }
+                lo_pnl_cab_factura.CBX_afecto_igv.setSelectedIndex((!lo_pnl_cab_factura.JRD_domiciliado.isSelected()) ? 0 : 1);
                 get_forma_pago(lo_pnl_cab_factura.TXT_codigo_pagador.getText().trim());
                 getFocusOwner().transferFocus();
-
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "ENTIDAD NO EXISTE y/o NO HABILITADO");
                 lo_pnl_cab_factura.TXT_codigo_entidad.setText("");
@@ -347,6 +351,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
 
     private void evt_f5_entidad() {
         get_parametros_entidad();
+        activa_facturacion(false);
         go_dlg_busq_entidad_parametros = new dlg_busq_entidad_parametros(null, true);
         go_dlg_busq_entidad_parametros.setVisible(true);
         ls_codigo_entidad = go_dlg_busq_entidad_parametros.ls_codigo_entidad;
@@ -463,7 +468,6 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 }
             } catch (Exception e) {
             }
-
         }
     }
 
@@ -549,6 +553,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_factura.CBX_moneda.getSelectedItem();
         lo_cbx_grupo_detraccion = (cbx_grupo_detraccion) lo_pnl_cab_factura.CBX_codigo_detraccion.getSelectedItem();
         lo_cbx_igv = (cbx_igv) lo_pnl_cab_factura.CBX_igv.getSelectedItem();
+        lo_cbx_sector = (cbx_sector_distribucion) lo_pnl_cab_factura.CBX_sector.getSelectedItem();
         switch (li_tipo_operacion) {
             case 0:
                 if (lo_evt_cab_factura.valida_campos(lo_pnl_cab_factura, lo_cbx_moneda)) {
@@ -560,7 +565,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                             lo_bean_registro_ventas.setCodigo_guiar(ls_codigo_guiar);
                             lo_bean_registro_ventas.setCodigo_pedido(ls_codigo_pedido);
                             genera_fecha_vencimiento(lo_pnl_cab_factura.TXT_fecha_emision.getText(), Integer.parseInt(lo_pnl_cab_factura.TXT_dias_credito.getText()));
-                            lo_evt_cab_factura.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_factura, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_pnl_grid_pedidos, ld_monto_minimo);
+                            lo_evt_cab_factura.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_factura, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_sector, lo_pnl_grid_pedidos, ld_monto_minimo);
                             if (go_dao_registro_ventas.IST_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100)) {
                                 lo_evt_cab_factura.limpia_datos(lo_pnl_cab_factura, ls_tipo_documento);
                                 lo_evt_cab_factura.activa_campos(0, lo_pnl_cab_factura, false, ls_tipo_documento);
@@ -580,11 +585,11 @@ public class jif_factura extends javax.swing.JInternalFrame {
                 }
                 break;
             case 1:
-                if (lo_evt_cab_factura.verifica_cambios(lo_bean_registro_ventas, lo_pnl_cab_factura, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv) || cont != 0) {
+                if (lo_evt_cab_factura.verifica_cambios(lo_bean_registro_ventas, lo_pnl_cab_factura, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_sector) || cont != 0) {
                     if (lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad)) {
                         if (lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad)) {
                             try {
-                                lo_evt_cab_factura.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_factura, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_pnl_grid_pedidos, ld_monto_minimo);
+                                lo_evt_cab_factura.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_factura, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_sector, lo_pnl_grid_pedidos, ld_monto_minimo);
                                 if (go_dao_registro_ventas_detalle.DLT_registro_ventas_detalle(ls_codigo)) {
                                     if (go_dao_registro_ventas.UPD_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_factura.CBX_igv.getSelectedItem().toString()) / 100)) {
                                         lo_evt_cab_factura.limpia_datos(lo_pnl_cab_factura, ls_tipo_documento);
@@ -632,7 +637,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
             parametros.put("codigo_operacion", codigo);
             parametros.put("periodo", gs_periodo);
             parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
-            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_"+((ls_tipo_documento.equalsIgnoreCase("01"))?"factura_":"boleta_")+ls_serie+"_"+ go_bean_general.getRuc() + ".jasper", parametros);
+            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_" + ((ls_tipo_documento.equalsIgnoreCase("01")) ? "factura_" : "boleta_") + ls_serie + "_" + go_bean_general.getRuc() + ".jasper", parametros);
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "DOCUMENTO NO SE PUEDE IMPRIMIR");
         }
@@ -785,6 +790,9 @@ public class jif_factura extends javax.swing.JInternalFrame {
                         getFocusOwner().transferFocus();
                     }
                 }
+                if (ke.getSource() == lo_pnl_cab_factura.CBX_sector) {
+                    getFocusOwner().transferFocus();
+                }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_pedido && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_factura.TXT_pedido.getText().trim(), 4, 10)) {
                     getFocusOwner().transferFocus();
                 }
@@ -838,7 +846,7 @@ public class jif_factura extends javax.swing.JInternalFrame {
                     go_activa_buscador.get_descripcion_entidad(lo_pnl_cab_factura.TXT_codigo_pagador.getText().trim(), lo_pnl_cab_factura.TXT_codigo_pagador, lo_pnl_cab_factura.TXT_pagador);
                     get_forma_pago(lo_pnl_cab_factura.TXT_codigo_pagador.getText());
                 }
-                if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_vendedor && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_factura.TXT_codigo_vendedor.getText(), 4, 4)) {
+                if (ke.getSource() == lo_pnl_cab_factura.TXT_codigo_vendedor && go_fnc_operaciones_campos.cant_caracter(lo_pnl_cab_factura.TXT_codigo_vendedor.getText().trim(), 1, 4)) {
                     go_activa_buscador.get_descripcion_vendedor(lo_pnl_cab_factura.TXT_codigo_vendedor.getText().trim(), lo_pnl_cab_factura.TXT_codigo_vendedor, lo_pnl_cab_factura.TXT_nombre_vendedor);
                 }
                 if (ke.getSource() == lo_pnl_cab_factura.TXT_dias_credito && go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_factura.TXT_dias_credito)) {
@@ -1025,6 +1033,18 @@ public class jif_factura extends javax.swing.JInternalFrame {
 
         @Override
         public void mouseExited(MouseEvent me) {
+        }
+    };
+
+    FocusListener FocusEvent = new FocusListener() {
+        @Override
+        public void focusGained(java.awt.event.FocusEvent fe) {
+            ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        }
+
+        @Override
+        public void focusLost(java.awt.event.FocusEvent fe) {
+            ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         }
     };
 

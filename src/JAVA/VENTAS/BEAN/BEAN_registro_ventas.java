@@ -6,13 +6,21 @@ public class BEAN_registro_ventas {
             codigo_moneda, afecto_igv, codigo_igv, codigo_grupo, status, es_facturado, es_precio_igv, codigo_entidad, razon_social, tipo_documento_id,
             numero_documento_id, direccion, codigo_ubigeo, descripcion_ubigeo, codigo_pagador, nombre_pagador, codigo_vendedor, nombre_vendedor, forma_pago,
             observacion, es_domiciliado, fecha_registro, fecha_vencimiento, es_guiar, codigo_guiar, es_pedido, codigo_pedido, fecha_doc_ref, codigo_tipo_doc_ref,
-            serie_doc_ref, numero_doc_ref, registra_item, concepto_doc_ref;
+            serie_doc_ref, numero_doc_ref, registra_item, concepto_doc_ref, codigo_sector;
     int dias_credito;
     double tipo_cambio, porcentaje_detraccion, inafecto, base, igv, total, percepcion, total_documento, exonerado,
             importe_detraccion, inafecto_mn, base_mn, igv_mn, total_mn, percepcion_mn, total_documento_mn, exonerado_mn, importe_detraccion_mn;
 
     public String getCodigo_operacion() {
         return codigo_operacion;
+    }
+
+    public String getCodigo_sector() {
+        return codigo_sector;
+    }
+
+    public void setCodigo_sector(String codigo_sector) {
+        this.codigo_sector = codigo_sector;
     }
 
     public void setCodigo_operacion(String codigo_operacion) {

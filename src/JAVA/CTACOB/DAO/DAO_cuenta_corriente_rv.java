@@ -25,4 +25,21 @@ public class DAO_cuenta_corriente_rv {
         }
         return null;
     }
+
+    public String SLT_codigo_operacion_nc(String codigo_documento, String serie_documento, String numero_documento) {
+        String resp = "";
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_codigo_operacion_nc('" + codigo_documento + "','" + serie_documento + "','" + numero_documento + "','" + gs_periodo + "') "
+                    + "as (codigo_operacion character(16))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                resp = lq_rs.getString(1);
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_codigo_operacion_nc", e.getMessage());
+        }
+        return resp;
+    }
 }

@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_aceptar_cancelar;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import JAVA.ANCESTRO.LOGICA.evt_aceptar_cancelar;
+import JAVA.DISTBR.GUI.jif_programacion;
 import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -100,6 +101,14 @@ public class dlg_ini_sucursal extends javax.swing.JDialog {
         switch (op) {
             case 0:
                 go_muestra_reporte_ventas.reporte_pestania("rpt_correlativo_doc.jasper", parametros, "CORRELATIVO DOCUMENTOS", 6);
+                break;
+            case 1:
+                gs_parametros[0] = lo_pnl_ini_sucursal.TXT_codigo.getText().trim();
+                gs_parametros[1] = lo_pnl_ini_sucursal.TXT_nombre.getText().trim();
+                
+                go_jif_programacion = new jif_programacion();
+                go_frm_principal.JDP_principal.add(go_jif_programacion);
+                go_jif_programacion.show();
                 break;
         }
     }

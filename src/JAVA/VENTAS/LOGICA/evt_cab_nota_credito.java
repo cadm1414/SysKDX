@@ -7,6 +7,7 @@ import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
 import JAVA.VENTAS.BEAN.BEAN_registro_ventas;
 import JAVA.VENTAS.GUI.pnl_cab_nota_credito;
 import JAVA.VENTAS.GUI.pnl_grid_pedidos;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
@@ -204,6 +205,65 @@ public class evt_cab_nota_credito {
         return resp;
     }
 
+    public boolean verifica_cambios(BEAN_registro_ventas OBJ_bpe, pnl_cab_nota_credito OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv) {
+        boolean resp = false;
+        if (OBJ_bpe.getFecha_emision().equalsIgnoreCase(OBJ_pcp.TXT_fecha_emision.getText().trim())) {
+            if (OBJ_bpe.getCodigo_moneda().equalsIgnoreCase(cbx_moneda.getID())) {
+                if (OBJ_bpe.getTipo_cambio() == Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText().trim())) {
+                    if (Integer.parseInt(OBJ_bpe.getAfecto_igv()) == OBJ_pcp.CBX_afecto_igv.getSelectedIndex()) {
+                        if (OBJ_bpe.getCodigo_grupo().equalsIgnoreCase(cbx_grupo_detraccion.getID())) {
+                            if (go_fnc_operaciones_campos.int_boolean(Integer.parseInt(OBJ_bpe.getEs_precio_igv())) == OBJ_pcp.JRD_precio_igv.isSelected()) {
+                                if (OBJ_bpe.getCodigo_entidad().equalsIgnoreCase(OBJ_pcp.TXT_codigo_entidad.getText().trim())) {
+                                    if (OBJ_bpe.getRazon_social().equalsIgnoreCase(OBJ_pcp.TXT_razon_social.getText().trim())) {
+                                        if (OBJ_bpe.getNumero_documento_id().equalsIgnoreCase(OBJ_pcp.TXT_doc_id.getText().trim())) {
+                                            if (OBJ_bpe.getDireccion().equalsIgnoreCase(OBJ_pcp.CBX_direccion.getSelectedItem().toString().trim())) {
+                                                if (OBJ_bpe.getCodigo_ubigeo().equalsIgnoreCase(OBJ_pcp.TXT_codigo_ubigeo.getText().trim())) {
+                                                    if (OBJ_bpe.getCodigo_vendedor().equalsIgnoreCase(OBJ_pcp.TXT_codigo_vendedor.getText().trim())) {
+                                                        if (OBJ_bpe.getObservacion().equalsIgnoreCase(OBJ_pcp.TXT_observacion.getText().trim())) {
+                                                            
+                                                        } else {
+                                                            resp = true;
+                                                        }
+                                                    } else {
+                                                        resp = true;
+                                                    }
+                                                } else {
+                                                    resp = true;
+                                                }
+                                            } else {
+                                                resp = true;
+                                            }
+                                        } else {
+                                            resp = true;
+                                        }
+                                    } else {
+                                        resp = true;
+                                    }
+                                } else {
+                                    resp = true;
+                                }
+                            } else {
+                                resp = true;
+                            }
+                        } else {
+                            resp = true;
+                        }
+                    } else {
+                        resp = true;
+                    }
+                } else {
+                    resp = true;
+                }
+            } else {
+                resp = true;
+            }
+
+        } else {
+            resp = true;
+        }
+        return resp;
+    }
+
     public void setea_campos(BEAN_registro_ventas OBJ_bpe, pnl_cab_nota_credito OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, cbx_tabla_ayuda cbx_tabla_ayuda, pnl_grid_pedidos OBJ_pgp, double monto_min) {
         try {
             double tipo_cambio = (cbx_moneda.getID().equalsIgnoreCase("PEN")) ? 1 : Double.parseDouble(OBJ_pcp.TXT_tipo_cambio.getText());
@@ -262,6 +322,7 @@ public class evt_cab_nota_credito {
             OBJ_bpe.setNumero_doc_ref(OBJ_pcp.TXT_numero_ref.getText().trim());
             OBJ_bpe.setRegistra_item(OBJ_pcp.CBX_registra_item.getSelectedIndex() + "");
             OBJ_bpe.setConcepto_doc_ref(cbx_tabla_ayuda.getID());
+            OBJ_bpe.setCodigo_sector("999999");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -416,5 +477,27 @@ public class evt_cab_nota_credito {
         OBJ_pcf.CBX_registra_item.addItemListener(ItemEvent);
         OBJ_pcf.CBX_concepto.addItemListener(ItemEvent);
         return ItemEvent;
+    }
+    
+    public FocusListener evento_focus(pnl_cab_nota_credito OBJ_pcp, FocusListener FocusEvent) {
+        OBJ_pcp.TXT_numero_doc.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_fecha_emision.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_moneda.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_tipo_cambio.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_codigo_detraccion.addFocusListener(FocusEvent);
+        OBJ_pcp.JRD_precio_igv.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_codigo_entidad.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_direccion.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_codigo_vendedor.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_observacion.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_codigo_pagador.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_razon_social.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_doc_id.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_codigo_ubigeo.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_numero_ref.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_concepto.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_registra_item.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_total.addFocusListener(FocusEvent);
+        return FocusEvent;
     }
 }

@@ -2,11 +2,13 @@ package JAVA.VENTAS.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
+import JAVA.CONFIG.LOGICA.cbx_sector_distribucion;
 import JAVA.CONFIG.LOGICA.cbx_tabla_ayuda;
 import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
 import JAVA.VENTAS.BEAN.BEAN_guia_remision;
 import JAVA.VENTAS.GUI.pnl_cab_guiar;
 import JAVA.VENTAS.GUI.pnl_grid_pedidos;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;
@@ -38,10 +40,11 @@ public class evt_cab_guiar {
                 OBJ_pcp.CBX_forma_pago.setEnabled(valor);
                 OBJ_pcp.TXT_dias_credito.setEnabled(valor);
                 OBJ_pcp.TXT_tipo_cambio.setEnabled(false);
-                OBJ_pcp.CBX_tipo_op.setEnabled(true);
-                OBJ_pcp.TXT_pedido.setEnabled(valor);
+                OBJ_pcp.TXT_pedido.setEnabled(false);
+                OBJ_pcp.CBX_tipo_op.setEnabled(valor);
                 OBJ_pcp.TXT_serie_doc_ref.setEnabled(valor);
                 OBJ_pcp.TXT_doc_ref.setEnabled(valor);
+                OBJ_pcp.CBX_sector.setEnabled(valor);
                 OBJ_pcp.TXT_codigo_pagador.setEnabled(valor);
                 OBJ_pcp.TXT_numero_doc.requestFocus();
                 break;
@@ -62,6 +65,7 @@ public class evt_cab_guiar {
                 OBJ_pcp.TXT_pedido.setEnabled(valor);
                 OBJ_pcp.TXT_serie_doc_ref.setEnabled(valor);
                 OBJ_pcp.TXT_doc_ref.setEnabled(valor);
+                OBJ_pcp.CBX_sector.setEnabled(valor);
                 OBJ_pcp.TXT_fecha_emision.requestFocus();
                 break;
             case 2:
@@ -84,7 +88,8 @@ public class evt_cab_guiar {
         OBJ_pcp.CBX_moneda.setSelectedIndex(0);
         go_cbx_trato_datos.selecciona_valor(19, "01", OBJ_pcp.CBX_tipo_op);
         OBJ_pcp.TXT_tipo_cambio.setText("0.000");
-        OBJ_pcp.TXT_pedido.setText("");
+        OBJ_pcp.CBX_es_pedido.setSelectedIndex(0);
+        OBJ_pcp.TXT_pedido.setText("0000000000");
         OBJ_pcp.TXT_serie_doc_ref.setText("");
         OBJ_pcp.TXT_doc_ref.setText("");
         OBJ_pcp.TXT_transportista.setText("");
@@ -107,6 +112,7 @@ public class evt_cab_guiar {
         OBJ_pcp.TXT_observacion.setText("");
         OBJ_pcp.CBX_status.setSelectedIndex(1);
         OBJ_pcp.LBL_fecha_registro.setText("");
+        go_cbx_trato_datos.selecciona_valor(20, "999999", OBJ_pcp.CBX_sector);
         OBJ_pcp.JRD_domiciliado.setSelected(true);
         OBJ_pcp.JRD_precio_igv.setSelected(false);
     }
@@ -115,8 +121,7 @@ public class evt_cab_guiar {
         simbolos.setDecimalSeparator('.');
         simbolos.setGroupingSeparator(',');
         dFormat = new DecimalFormat("#,##0.00", simbolos);
-        try {
-            OBJ_pnf.CBX_tipo_op.setSelectedIndex(0);
+        try {            
             OBJ_pnf.TXT_pedido.setText(codigo.substring(6));
             OBJ_pnf.CBX_doc_ref.setSelectedIndex((rs.getString(12).equalsIgnoreCase("6")) ? 0 : 1);
             go_cbx_trato_datos.selecciona_valor(0, rs.getString(3), OBJ_pnf.CBX_moneda);
@@ -128,6 +133,7 @@ public class evt_cab_guiar {
             OBJ_pnf.TXT_razon_social.setText(rs.getString(9));
             OBJ_pnf.TXT_doc_id.setText(rs.getString(10));
             OBJ_pnf.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(rs.getInt(11)));
+            
             try {
                 if (!OBJ_pnf.TXT_codigo_entidad.getText().equalsIgnoreCase("999999")) {
                     ResultSet rs_a = go_dao_entidad.SLT_datos_entidad_x_facturacion(rs.getString(8), rs.getString(12));
@@ -154,6 +160,7 @@ public class evt_cab_guiar {
             OBJ_pgp.LBL_percepcion.setText(dFormat.format(rs.getDouble(26)) + "");
             OBJ_pgp.LBL_importe.setText(dFormat.format(rs.getDouble(27)) + "");
             OBJ_pnf.JRD_precio_igv.setSelected(go_fnc_operaciones_campos.int_boolean(rs.getInt(28)));
+            go_cbx_trato_datos.selecciona_valor(20, rs.getString(29), OBJ_pnf.CBX_sector);
         } catch (Exception e) {
         }
 
@@ -265,7 +272,7 @@ public class evt_cab_guiar {
         return resp;
     }
 
-    public void setea_campos(BEAN_guia_remision OBJ_bpe, pnl_cab_guiar OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, cbx_tabla_ayuda cbx_tabla_ayuda, pnl_grid_pedidos OBJ_pgp, double monto_min) {
+    public void setea_campos(BEAN_guia_remision OBJ_bpe, pnl_cab_guiar OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, cbx_tabla_ayuda cbx_tabla_ayuda, cbx_sector_distribucion cbx_sector, pnl_grid_pedidos OBJ_pgp, double monto_min) {
         try {
             OBJ_bpe.setPeriodo(gs_periodo);
             OBJ_bpe.setMes(OBJ_pcp.TXT_fecha_emision.getText().trim().substring(3, 5));
@@ -294,6 +301,7 @@ public class evt_cab_guiar {
             OBJ_bpe.setDireccion(OBJ_pcp.CBX_direccion.getSelectedItem().toString().toUpperCase());
             OBJ_bpe.setCodigo_ubigeo(OBJ_pcp.TXT_codigo_ubigeo.getText().trim());
             OBJ_bpe.setDescripcion_ubigeo(OBJ_pcp.TXT_descripcion.getText().trim());
+            OBJ_bpe.setCodigo_sector(cbx_sector.getID());
             OBJ_bpe.setCodigo_pagador(OBJ_pcp.TXT_codigo_pagador.getText().trim());
             OBJ_bpe.setNombre_pagador(OBJ_pcp.TXT_pagador.getText().trim());
             OBJ_bpe.setCodigo_vendedor(OBJ_pcp.TXT_codigo_vendedor.getText().trim());
@@ -349,6 +357,7 @@ public class evt_cab_guiar {
             OBJ_bpe.setDireccion(lq_rs.getString(29));
             OBJ_bpe.setCodigo_ubigeo(lq_rs.getString(30));
             OBJ_bpe.setDescripcion_ubigeo(lq_rs.getString(31));
+            OBJ_bpe.setCodigo_sector(lq_rs.getString(64));
             OBJ_bpe.setCodigo_pagador(lq_rs.getString(32));
             OBJ_bpe.setNombre_pagador(lq_rs.getString(33));
             OBJ_bpe.setCodigo_vendedor(lq_rs.getString(34));
@@ -423,6 +432,7 @@ public class evt_cab_guiar {
             }
         } catch (Exception e) {
         }
+        go_cbx_trato_datos.selecciona_valor(20, OBJ_bpe.getCodigo_sector(), OBJ_pdp.CBX_sector);
         OBJ_pdp.TXT_codigo_ubigeo.setText(OBJ_bpe.getCodigo_ubigeo());
         OBJ_pdp.TXT_descripcion.setText(OBJ_bpe.getDescripcion_ubigeo());
         OBJ_pdp.TXT_codigo_pagador.setText(OBJ_bpe.getCodigo_pagador());
@@ -441,7 +451,7 @@ public class evt_cab_guiar {
         OBJ_pgp.LBL_importe.setText(dFormat.format(OBJ_bpe.getTotal_documento()) + "");
     }
 
-    public boolean verifica_cambios(BEAN_guia_remision OBJ_bpe, pnl_cab_guiar OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv) {
+    public boolean verifica_cambios(BEAN_guia_remision OBJ_bpe, pnl_cab_guiar OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, cbx_sector_distribucion cbx_sector) {
         boolean resp = false;
         if (OBJ_bpe.getFecha_emision().equalsIgnoreCase(OBJ_pcp.TXT_fecha_emision.getText().trim())) {
             if (((OBJ_bpe.getCodigo_documento_ref().equalsIgnoreCase("01")) ? 0 : 1) == OBJ_pcp.CBX_doc_ref.getSelectedIndex()) {
@@ -463,7 +473,11 @@ public class evt_cab_guiar {
                                                                             if (OBJ_bpe.getSerie_documento_ref().equalsIgnoreCase(OBJ_pcp.TXT_serie_doc_ref.getText().trim())) {
                                                                                 if (OBJ_bpe.getNumero_documento_ref().equalsIgnoreCase(OBJ_pcp.TXT_doc_ref.getText().trim())) {
                                                                                     if (OBJ_bpe.getCodigo_transportista().equalsIgnoreCase(OBJ_pcp.TXT_transportista.getText().trim())) {
+                                                                                        if (OBJ_bpe.getCodigo_sector().equalsIgnoreCase(cbx_sector.getID())) {
 
+                                                                                        } else {
+                                                                                            resp = true;
+                                                                                        }
                                                                                     } else {
                                                                                         resp = true;
                                                                                     }
@@ -551,6 +565,7 @@ public class evt_cab_guiar {
         OBJ_pcp.TXT_doc_id.addKeyListener(KeyEvnt);
         OBJ_pcp.TXT_codigo_ubigeo.addKeyListener(KeyEvnt);
         OBJ_pcp.CBX_es_pedido.addKeyListener(KeyEvnt);
+        OBJ_pcp.CBX_sector.addKeyListener(KeyEvnt);
         return KeyEvnt;
     }
 
@@ -564,5 +579,33 @@ public class evt_cab_guiar {
         OBJ_pcp.CBX_es_pedido.addItemListener(ItemEvent);
         OBJ_pcp.CBX_tipo_op.addItemListener(ItemEvent);
         return ItemEvent;
+    }
+
+    public FocusListener evento_focus(pnl_cab_guiar OBJ_pcp, FocusListener FocusEvent) {
+        OBJ_pcp.TXT_numero_doc.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_fecha_emision.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_doc_ref.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_moneda.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_tipo_cambio.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_codigo_detraccion.addFocusListener(FocusEvent);
+        OBJ_pcp.JRD_precio_igv.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_codigo_entidad.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_direccion.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_codigo_vendedor.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_forma_pago.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_observacion.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_dias_credito.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_codigo_pagador.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_razon_social.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_doc_id.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_codigo_ubigeo.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_sector.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_tipo_op.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_es_pedido.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_serie_doc_ref.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_doc_ref.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_transportista.addFocusListener(FocusEvent);
+        OBJ_pcp.TXT_pedido.addFocusListener(FocusEvent);
+        return FocusEvent;
     }
 }

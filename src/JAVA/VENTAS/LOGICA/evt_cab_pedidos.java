@@ -2,6 +2,7 @@ package JAVA.VENTAS.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.LOGICA.cbx_moneda;
+import JAVA.CONFIG.LOGICA.cbx_sector_distribucion;
 import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
 import JAVA.VENTAS.BEAN.BEAN_pedido;
 import JAVA.VENTAS.GUI.pnl_cab_pedidos;
@@ -39,6 +40,7 @@ public class evt_cab_pedidos {
                 OBJ_pcp.TXT_razon_social.setEnabled(valor);
                 OBJ_pcp.TXT_doc_id.setEnabled(valor);
                 OBJ_pcp.TXT_codigo_ubigeo.setEnabled(valor);
+                OBJ_pcp.CBX_sector.setEnabled(valor);
                 OBJ_pcp.TXT_tipo_cambio.setEnabled(false);
                 OBJ_pcp.TXT_numero_doc.requestFocus();
                 break;
@@ -59,8 +61,9 @@ public class evt_cab_pedidos {
                     OBJ_pcp.CBX_forma_pago.setEnabled(valor);
                     OBJ_pcp.TXT_dias_credito.setEnabled(valor);
                 }
-
+                OBJ_pcp.CBX_sector.setEnabled(valor);
                 OBJ_pcp.TXT_fecha_emision.requestFocus();
+
                 break;
         }
     }
@@ -91,6 +94,7 @@ public class evt_cab_pedidos {
         OBJ_pcp.TXT_observacion.setText("");
         OBJ_pcp.CBX_status.setSelectedIndex(1);
         OBJ_pcp.LBL_fecha_registro.setText("");
+        go_cbx_trato_datos.selecciona_valor(20, "999999", OBJ_pcp.CBX_sector);
         OBJ_pcp.JRD_domiciliado.setSelected(true);
         OBJ_pcp.JRD_precio_igv.setSelected(false);
     }
@@ -184,7 +188,7 @@ public class evt_cab_pedidos {
         return resp;
     }
 
-    public void setea_campos(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, pnl_grid_pedidos OBJ_pgp, double monto_min) {
+    public void setea_campos(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, cbx_sector_distribucion cbx_sector, pnl_grid_pedidos OBJ_pgp, double monto_min) {
         try {
             OBJ_bpe.setPeriodo(gs_periodo);
             OBJ_bpe.setMes(OBJ_pcp.TXT_fecha_emision.getText().trim().substring(3, 5));
@@ -209,6 +213,7 @@ public class evt_cab_pedidos {
             OBJ_bpe.setDireccion(OBJ_pcp.CBX_direccion.getSelectedItem().toString().toUpperCase());
             OBJ_bpe.setCodigo_ubigeo(OBJ_pcp.TXT_codigo_ubigeo.getText().trim());
             OBJ_bpe.setDescripcion_ubigeo(OBJ_pcp.TXT_descripcion.getText().trim());
+            OBJ_bpe.setCodigo_sector(cbx_sector.getID());
             OBJ_bpe.setCodigo_pagador(OBJ_pcp.TXT_codigo_pagador.getText().trim());
             OBJ_bpe.setNombre_pagador(OBJ_pcp.TXT_pagador.getText().trim());
             OBJ_bpe.setCodigo_vendedor(OBJ_pcp.TXT_codigo_vendedor.getText().trim());
@@ -275,6 +280,7 @@ public class evt_cab_pedidos {
             OBJ_bpe.setTotal_documento(lq_rs.getDouble(40));
             OBJ_bpe.setExonerado(lq_rs.getDouble(41));
             OBJ_bpe.setImporte_detraccion(lq_rs.getDouble(42));
+            OBJ_bpe.setCodigo_sector(lq_rs.getString(43));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -312,6 +318,7 @@ public class evt_cab_pedidos {
             }
         } catch (Exception e) {
         }
+        go_cbx_trato_datos.selecciona_valor(20, OBJ_bpe.getCodigo_sector(), OBJ_pdp.CBX_sector);
         OBJ_pdp.TXT_codigo_ubigeo.setText(OBJ_bpe.getCodigo_ubigeo());
         OBJ_pdp.TXT_descripcion.setText(OBJ_bpe.getDescripcion_ubigeo());
         OBJ_pdp.TXT_codigo_pagador.setText(OBJ_bpe.getCodigo_pagador());
@@ -329,7 +336,7 @@ public class evt_cab_pedidos {
         OBJ_pgp.LBL_importe.setText(dFormat.format(OBJ_bpe.getTotal_documento()) + "");
     }
 
-    public boolean verifica_cambios(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv) {
+    public boolean verifica_cambios(BEAN_pedido OBJ_bpe, pnl_cab_pedidos OBJ_pcp, cbx_grupo_detraccion cbx_grupo_detraccion, cbx_moneda cbx_moneda, cbx_igv cbx_igv, cbx_sector_distribucion cbx_sector) {
         boolean resp = false;
         if (OBJ_bpe.getFecha_emision().equalsIgnoreCase(OBJ_pcp.TXT_fecha_emision.getText().trim())) {
             if (((OBJ_bpe.getCodigo_documento_ref().equalsIgnoreCase("01")) ? 0 : 1) == OBJ_pcp.CBX_doc_ref.getSelectedIndex()) {
@@ -347,7 +354,11 @@ public class evt_cab_pedidos {
                                                             if (OBJ_bpe.getDias_credito() == Integer.parseInt(OBJ_pcp.TXT_dias_credito.getText().trim())) {
                                                                 if (OBJ_bpe.getObservacion().equalsIgnoreCase(OBJ_pcp.TXT_observacion.getText().trim())) {
                                                                     if (((OBJ_bpe.getForma_pago().equalsIgnoreCase("EF")) ? 0 : 1) == OBJ_pcp.CBX_forma_pago.getSelectedIndex()) {
-
+                                                                        if(OBJ_bpe.getCodigo_sector().equalsIgnoreCase(cbx_sector.getID())){
+                                                                            
+                                                                        }else{
+                                                                            resp = true;
+                                                                        }
                                                                     } else {
                                                                         resp = true;
                                                                     }
@@ -417,6 +428,7 @@ public class evt_cab_pedidos {
         OBJ_pcp.TXT_razon_social.addKeyListener(KeyEvnt);
         OBJ_pcp.TXT_doc_id.addKeyListener(KeyEvnt);
         OBJ_pcp.TXT_codigo_ubigeo.addKeyListener(KeyEvnt);
+        OBJ_pcp.CBX_sector.addKeyListener(KeyEvnt);
         return KeyEvnt;
     }
 
@@ -448,6 +460,7 @@ public class evt_cab_pedidos {
         OBJ_pcp.TXT_razon_social.addFocusListener(FocusEvent);
         OBJ_pcp.TXT_doc_id.addFocusListener(FocusEvent);
         OBJ_pcp.TXT_codigo_ubigeo.addFocusListener(FocusEvent);
+        OBJ_pcp.CBX_sector.addFocusListener(FocusEvent);
         return FocusEvent;
     }
 }

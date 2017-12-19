@@ -13,6 +13,7 @@ import JAVA.VENTAS.LOGICA.evt_cab_nota_credito;
 import JAVA.VENTAS.LOGICA.evt_grid_pedidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
@@ -69,8 +71,8 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
     }
 
     private void formulario() {
-        lo_pnl_opciones_3.setBounds(0, 10, 1000, 120);
-        lo_pnl_cab_nota_credito.setBounds(12, 130, 1100, 260);
+        lo_pnl_opciones_3.setBounds(0, 10, 1000, 110);
+        lo_pnl_cab_nota_credito.setBounds(12, 120, 1100, 265);
         lo_pnl_grid_pedidos.setBounds(13, 390, 1100, 280);
 
         this.add(lo_pnl_opciones_3);
@@ -85,10 +87,14 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
 
         li_cantidad = go_dao_serie.SLT_cant_items(ls_serie, ls_codigo_sucursal, (ls_tipo_documento.equalsIgnoreCase("07")) ? 4 : 5);
 
+        modelo = (DefaultTableModel) lo_pnl_grid_pedidos.TBL_pedidos.getModel();
+        modelo.addTableModelListener(TablaListener);
+        
         lo_evt_opciones_3.evento_click(lo_pnl_opciones_3, Listener);
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
         lo_evt_cab_nota_credito.evento_press(lo_pnl_cab_nota_credito, KeyEvnt);
         lo_evt_cab_nota_credito.evento_item(lo_pnl_cab_nota_credito, ItemEvent);
+        lo_evt_cab_nota_credito.evento_focus(lo_pnl_cab_nota_credito, FocusEvent);
         lo_evt_grid_pedidos.evento_press(lo_pnl_grid_pedidos, KeyEvnt);
         lo_pnl_grid_pedidos.TBL_pedidos.addMouseListener(MouseEvent);
     }
@@ -158,6 +164,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 lo_evt_cab_nota_credito.muestra_datos(lo_pnl_cab_nota_credito, lo_bean_registro_ventas, lo_pnl_grid_pedidos);
                 lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_nota_credito.CBX_moneda.getSelectedItem();
                 lo_pnl_grid_pedidos.LBL_simbolo.setText("Imp (" + lo_cbx_moneda.simbolo_moneda().trim() + ")");
+                ls_codigo_ref = go_dao_cuenta_corriente_rv.SLT_codigo_operacion_nc(lo_bean_registro_ventas.getCodigo_tipo_doc_ref(), lo_bean_registro_ventas.getSerie_doc_ref(), lo_bean_registro_ventas.getNumero_doc_ref());
                 get_descripcion_registro_ventas_detalle(codigo);
             }
         } catch (Exception e) {
@@ -341,10 +348,20 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
     }
 
     private void evt_guardar() {
+        boolean resp = false;
         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_nota_credito.CBX_moneda.getSelectedItem();
         lo_cbx_grupo_detraccion = (cbx_grupo_detraccion) lo_pnl_cab_nota_credito.CBX_codigo_detraccion.getSelectedItem();
         lo_cbx_igv = (cbx_igv) lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem();
         lo_cbx_tabla_ayuda = (cbx_tabla_ayuda) lo_pnl_cab_nota_credito.CBX_concepto.getSelectedItem();
+
+        switch (lo_pnl_cab_nota_credito.CBX_registra_item.getSelectedIndex()) {
+            case 0:
+                resp = true;
+                break;
+            case 1:
+                resp = lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad);
+                break;
+        }
 
         switch (li_tipo_operacion) {
             case 0:
@@ -354,31 +371,35 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 lo_bean_registro_ventas.setCodigo_tipo_doc_ref(ls_tipo_documento_ref);
                 lo_bean_registro_ventas.setFecha_doc_ref(ls_fecha_ref);
                 if (lo_evt_cab_nota_credito.valida_campos(lo_pnl_cab_nota_credito, lo_cbx_moneda)) {
-                    switch (lo_pnl_cab_nota_credito.CBX_registra_item.getSelectedIndex()) {
-                        case 0:
+                    try {
+                        if (resp) {
+                            lo_evt_cab_nota_credito.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_nota_credito, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_tabla_ayuda, lo_pnl_grid_pedidos, ld_monto_minimo);
+                            if (go_dao_registro_ventas.IST_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100)) {
+                                lo_evt_cab_nota_credito.limpia_datos(lo_pnl_cab_nota_credito, ls_tipo_documento);
+                                lo_evt_cab_nota_credito.activa_campos(0, lo_pnl_cab_nota_credito, false, ls_tipo_documento);
+                                lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
+                                lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
+                                lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                            }
+                            if (go_fnc_mensaje.get_respuesta(0, "¿DESEA IMPRIMIR DOCUMENTO Nro  " + ls_tipo_documento + " - " + lo_bean_registro_ventas.getNumero_documento() + "?") == 0) {
+                                try {
+                                    evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
+                                } catch (Exception e) {
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                    }                    
+                }
+                break;
+            case 1:
+                if (lo_evt_cab_nota_credito.verifica_cambios(lo_bean_registro_ventas, lo_pnl_cab_nota_credito, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv) || cont != 0) {
+                    if (resp) {
+                        if (lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad)) {
                             try {
                                 lo_evt_cab_nota_credito.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_nota_credito, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_tabla_ayuda, lo_pnl_grid_pedidos, ld_monto_minimo);
-                                if (go_dao_registro_ventas.IST_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100)) {
-                                    lo_evt_cab_nota_credito.limpia_datos(lo_pnl_cab_nota_credito, ls_tipo_documento);
-                                    lo_evt_cab_nota_credito.activa_campos(0, lo_pnl_cab_nota_credito, false, ls_tipo_documento);
-                                    lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
-                                    lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, false);
-                                    lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
-                                }
-                                if (go_fnc_mensaje.get_respuesta(0, "¿DESEA IMPRIMIR DOCUMENTO Nro  " + ls_tipo_documento + " - " + lo_bean_registro_ventas.getNumero_documento() + "?") == 0) {
-                                    try {
-                                        evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
-                                    } catch (Exception e) {
-                                    }
-                                }
-                            } catch (Exception e) {
-                            }
-                            break;
-                        case 1:
-                            try {
-                                if (lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad)) {
-                                    lo_evt_cab_nota_credito.setea_campos(lo_bean_registro_ventas, lo_pnl_cab_nota_credito, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_tabla_ayuda, lo_pnl_grid_pedidos, ld_monto_minimo);
-                                    if (go_dao_registro_ventas.IST_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100)) {
+                                if (go_dao_registro_ventas_detalle.DLT_registro_ventas_detalle(ls_codigo)) {
+                                    if (go_dao_registro_ventas.UPD_registro_ventas(lo_bean_registro_ventas, lo_pnl_grid_pedidos.TBL_pedidos, Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100)) {
                                         lo_evt_cab_nota_credito.limpia_datos(lo_pnl_cab_nota_credito, ls_tipo_documento);
                                         lo_evt_cab_nota_credito.activa_campos(0, lo_pnl_cab_nota_credito, false, ls_tipo_documento);
                                         lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
@@ -388,8 +409,10 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                                 }
                             } catch (Exception e) {
                             }
-                            break;
+                        }
                     }
+                } else {
+                    go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_guardar", "NO SE A REALIZADO CAMBIOS");
                 }
                 break;
         }
@@ -688,6 +711,18 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
 
         @Override
         public void mouseExited(MouseEvent me) {
+        }
+    };
+    
+    FocusListener FocusEvent = new FocusListener() {
+        @Override
+        public void focusGained(java.awt.event.FocusEvent fe) {
+            ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        }
+
+        @Override
+        public void focusLost(java.awt.event.FocusEvent fe) {
+            ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         }
     };
 

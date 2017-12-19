@@ -5,12 +5,20 @@ public class BEAN_guia_remision {
     String codigo_operacion, codigo_sucursal, periodo, mes, codigo_documento, serie_documento, numero_documento, fecha_emision, codigo_documento_ref, serie_documento_ref, numero_documento_ref,
             codigo_moneda, afecto_igv, codigo_igv, codigo_grupo, status, es_facturado, es_precio_igv, codigo_entidad, razon_social, tipo_documento_id, es_pedido,
             numero_documento_id, direccion, codigo_ubigeo, descripcion_ubigeo, codigo_pagador, nombre_pagador, codigo_vendedor, nombre_vendedor, forma_pago, codigo_pedido,
-            observacion, es_domiciliado, fecha_registro, codigo_transportista, nombre_transportista, numero_licencia, razon_social_trans, ruc_trans,tipo_operacion,
-            codigo_vehiculo, marca, numero_civ, codigo_vehiculo_2, marca_2, numero_civ_2, codigo_direccion_pl, nombre_direccion_pl, punto_llegada, codigo_ubigeo_pl, descripcion_ubigeo_pl;
+            observacion, es_domiciliado, fecha_registro, codigo_transportista, nombre_transportista, numero_licencia, razon_social_trans, ruc_trans, tipo_operacion,
+            codigo_vehiculo, marca, numero_civ, codigo_vehiculo_2, marca_2, numero_civ_2, codigo_direccion_pl, nombre_direccion_pl, punto_llegada, codigo_ubigeo_pl, descripcion_ubigeo_pl, codigo_sector;
 
     int dias_credito;
     double tipo_cambio, porcentaje_detraccion, inafecto, base, igv, total, percepcion, total_documento, exonerado,
             importe_detraccion;
+
+    public String getCodigo_sector() {
+        return codigo_sector;
+    }
+
+    public void setCodigo_sector(String codigo_sector) {
+        this.codigo_sector = codigo_sector;
+    }
 
     public String getTipo_operacion() {
         return tipo_operacion;

@@ -2,12 +2,13 @@ package JAVA.VENTAS.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.VENTAS.GUI.jif_cierre_pedidos;
+import JAVA.DISTBR.GUI.jif_preliminar;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import java.beans.PropertyVetoException;
 
 public class muestra_jif_ventas {
 
-    public void muestra_jif_entidad() throws PropertyVetoException {
+    public void muestra_jif_tipo_cambio() throws PropertyVetoException {
         if (go_jif_tipo_cambio != null) {
             if (go_jif_tipo_cambio.isClosed()) {
                 go_jif_tipo_cambio = new jif_tipo_cambio();
@@ -27,7 +28,7 @@ public class muestra_jif_ventas {
             go_jif_tipo_cambio.show();
         }
     }
-    
+
     public void muestra_jif_cierre_pedidos() throws PropertyVetoException {
         if (go_jif_cierre_pedidos != null) {
             if (go_jif_cierre_pedidos.isClosed()) {
@@ -48,4 +49,5 @@ public class muestra_jif_ventas {
             go_jif_cierre_pedidos.show();
         }
     }
+    
 }

@@ -176,8 +176,8 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
                             gi_id_rol = lq_rs.getInt(5);
                             gs_nombre_rol = lq_rs.getString(7);
                             gs_tipo_comercio = lq_rs.getString(8);
-                            gs_entidad_usuario = lq_rs.getString(9);
-                            gs_vendedor_usuario = lq_rs.getString(10);
+                            gs_entidad_usuario = lq_rs.getString(9).trim();
+                            gs_vendedor_usuario = lq_rs.getString(10).trim();
 
                             go_frm_principal = new frm_principal();
                             go_frm_principal.setVisible(true);
