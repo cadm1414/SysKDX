@@ -210,7 +210,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                         lo_evt_grid_programacion.agrega_fila(lo_pnl_grid_programacion, -1);
                     } else {
                         lo_pnl_grid_programacion.TBL_programacion.requestFocus();
-                        lo_pnl_grid_programacion.TBL_programacion.changeSelection(0, 1, false, false);
+                        lo_pnl_grid_programacion.TBL_programacion.changeSelection(0, 2, false, false);
                     }
                 }
             }
@@ -218,7 +218,9 @@ public class jif_programacion extends javax.swing.JInternalFrame {
 
         @Override
         public void keyReleased(KeyEvent ke) {
-
+            if (ke.getSource() == lo_pnl_datos_programacion.TXT_numero) {
+                lo_pnl_datos_programacion.LBL_numero_doc.setText(lo_pnl_datos_programacion.TXT_numero.getText());
+            }
         }
 
     };
@@ -233,6 +235,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                 if (value instanceof JButton) {
                     if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ITEM " + go_fnc_operaciones_campos.completa_digitos((fila + 1) + "", "0", 3) + "?") == 0) {
                         lo_evt_grid_programacion.elimina_fila(lo_pnl_grid_programacion, fila);
+                        lo_evt_grid_programacion.genera_item(lo_pnl_grid_programacion);
                     }
                 }
             }

@@ -37,13 +37,22 @@ public class evt_grid_programacion {
         int fila = OBJ_pgp.TBL_programacion.getRowCount();
 
         if (fila == (fila_s + 1)) {
-            //String item = go_fnc_operaciones_campos.completa_digitos(fila + 1 + "", "0", 3);
-            modelo.addRow(new Object[]{"", "", "", "", "", "", "", "", "", "", genera_btn_eliminar()});
-            OBJ_pgp.TBL_programacion.changeSelection(fila, 1, false, false);
+            String item = go_fnc_operaciones_campos.completa_digitos(fila + 1 + "", "0", 3);
+            modelo.addRow(new Object[]{"", item,"", "", "", "", "", "", "", "", "", genera_btn_eliminar()});
+            OBJ_pgp.TBL_programacion.changeSelection(fila, 2, false, false);
             //OBJ_pgp.TBL_pedidos.editCellAt(fila, 1);
         } else {
-            OBJ_pgp.TBL_programacion.changeSelection(fila_s + 1, 1, false, false);
+            OBJ_pgp.TBL_programacion.changeSelection(fila_s + 1, 2, false, false);
             //OBJ_pgp.TBL_pedidos.editCellAt(fila_s + 1, 1);
+        }
+    }
+    
+    public void genera_item(pnl_grid_programacion OBJ_pgp) {
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_programacion.getModel();
+        for (int x = 0; x < OBJ_pgp.TBL_programacion.getRowCount(); x++) {
+            if (Integer.parseInt(modelo.getValueAt(x, 0).toString()) < 600) {
+                modelo.setValueAt(go_fnc_operaciones_campos.completa_digitos((x + 1) + "", "0", 3), x, 0);
+            }
         }
     }
     

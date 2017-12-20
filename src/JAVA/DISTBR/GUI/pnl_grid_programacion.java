@@ -7,8 +7,8 @@ public class pnl_grid_programacion extends javax.swing.JPanel {
     public pnl_grid_programacion() {
         initComponents();
         go_fnc_operaciones_campos.oculta_columna(TBL_programacion, 0);
-        go_fnc_operaciones_campos.oculta_columna(TBL_programacion, 3);
         go_fnc_operaciones_campos.oculta_columna(TBL_programacion, 4);
+        go_fnc_operaciones_campos.oculta_columna(TBL_programacion, 5);
     }
 
   
@@ -25,14 +25,14 @@ public class pnl_grid_programacion extends javax.swing.JPanel {
 
             },
             new String [] {
-                "codigo_operacion", "Sucursal", "F. Emision", "codigo_documento", "serie_documento", "Numero", "Razon Social", "F.P.", "Vendedor", "Sector", ""
+                "codigo_operacion", "Item", "Sucursal", "F. Emision", "codigo_documento", "serie_documento", "Numero", "Razon Social", "F.P.", "Vendedor", "Sector", ""
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -52,20 +52,22 @@ public class pnl_grid_programacion extends javax.swing.JPanel {
             TBL_programacion.getColumnModel().getColumn(1).setResizable(false);
             TBL_programacion.getColumnModel().getColumn(1).setPreferredWidth(15);
             TBL_programacion.getColumnModel().getColumn(2).setResizable(false);
-            TBL_programacion.getColumnModel().getColumn(2).setPreferredWidth(35);
+            TBL_programacion.getColumnModel().getColumn(2).setPreferredWidth(15);
             TBL_programacion.getColumnModel().getColumn(3).setResizable(false);
-            TBL_programacion.getColumnModel().getColumn(3).setPreferredWidth(0);
+            TBL_programacion.getColumnModel().getColumn(3).setPreferredWidth(35);
             TBL_programacion.getColumnModel().getColumn(4).setResizable(false);
             TBL_programacion.getColumnModel().getColumn(4).setPreferredWidth(0);
             TBL_programacion.getColumnModel().getColumn(5).setResizable(false);
-            TBL_programacion.getColumnModel().getColumn(5).setPreferredWidth(50);
-            TBL_programacion.getColumnModel().getColumn(6).setPreferredWidth(200);
-            TBL_programacion.getColumnModel().getColumn(7).setResizable(false);
-            TBL_programacion.getColumnModel().getColumn(7).setPreferredWidth(5);
-            TBL_programacion.getColumnModel().getColumn(8).setPreferredWidth(150);
-            TBL_programacion.getColumnModel().getColumn(9).setPreferredWidth(80);
-            TBL_programacion.getColumnModel().getColumn(10).setResizable(false);
-            TBL_programacion.getColumnModel().getColumn(10).setPreferredWidth(10);
+            TBL_programacion.getColumnModel().getColumn(5).setPreferredWidth(0);
+            TBL_programacion.getColumnModel().getColumn(6).setResizable(false);
+            TBL_programacion.getColumnModel().getColumn(6).setPreferredWidth(50);
+            TBL_programacion.getColumnModel().getColumn(7).setPreferredWidth(200);
+            TBL_programacion.getColumnModel().getColumn(8).setResizable(false);
+            TBL_programacion.getColumnModel().getColumn(8).setPreferredWidth(5);
+            TBL_programacion.getColumnModel().getColumn(9).setPreferredWidth(150);
+            TBL_programacion.getColumnModel().getColumn(10).setPreferredWidth(80);
+            TBL_programacion.getColumnModel().getColumn(11).setResizable(false);
+            TBL_programacion.getColumnModel().getColumn(11).setPreferredWidth(10);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
