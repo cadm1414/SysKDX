@@ -121,15 +121,11 @@ public class frm_principal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         LST_modulo = new javax.swing.JList<>();
         JDP_principal = new javax.swing.JDesktopPane();
-        jPanel2 = new javax.swing.JPanel();
-        LBL_rol = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        LBL_periodo = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        LBL_usuario = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        LBL_razon_social = new javax.swing.JLabel();
         TBP_contenedor = new javax.swing.JTabbedPane();
+        LBL_usuario = new javax.swing.JLabel();
+        LBL_periodo = new javax.swing.JLabel();
+        LBL_razon_social = new javax.swing.JLabel();
+        LBL_rol = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -189,99 +185,41 @@ public class frm_principal extends javax.swing.JFrame {
 
         JDP_principal.setBackground(new java.awt.Color(240, 240, 240));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ROL", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
-
-        LBL_rol.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        LBL_rol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LBL_rol.setText(" ");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LBL_rol, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(LBL_rol)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PERIODO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
-
-        LBL_periodo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        LBL_periodo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LBL_periodo.setText(" ");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LBL_periodo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(LBL_periodo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "USUARIO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
-
-        LBL_usuario.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        LBL_usuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LBL_usuario.setText(" ");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LBL_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(LBL_usuario)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "EMPRESA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
-
-        LBL_razon_social.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        LBL_razon_social.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LBL_razon_social.setText("  ");
-        LBL_razon_social.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LBL_razon_social, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(LBL_razon_social)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
         TBP_contenedor.setForeground(new java.awt.Color(0, 153, 153));
 
-        JDP_principal.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        JDP_principal.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        JDP_principal.setLayer(jPanel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        JDP_principal.setLayer(jPanel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        LBL_usuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        LBL_usuario.setForeground(new java.awt.Color(0, 153, 153));
+        LBL_usuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LBL_usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/usuario.png"))); // NOI18N
+        LBL_usuario.setText(" ");
+        LBL_usuario.setToolTipText("USUARIO");
+
+        LBL_periodo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        LBL_periodo.setForeground(new java.awt.Color(0, 153, 153));
+        LBL_periodo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LBL_periodo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/calendario.png"))); // NOI18N
+        LBL_periodo.setText(" ");
+        LBL_periodo.setToolTipText("PERIODO");
+
+        LBL_razon_social.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        LBL_razon_social.setForeground(new java.awt.Color(0, 153, 153));
+        LBL_razon_social.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LBL_razon_social.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/empresa.png"))); // NOI18N
+        LBL_razon_social.setText("  ");
+        LBL_razon_social.setToolTipText("EMPRESA");
+
+        LBL_rol.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        LBL_rol.setForeground(new java.awt.Color(0, 153, 153));
+        LBL_rol.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LBL_rol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/rol_use.png"))); // NOI18N
+        LBL_rol.setText(" ");
+        LBL_rol.setToolTipText("ROL");
+
         JDP_principal.setLayer(TBP_contenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JDP_principal.setLayer(LBL_usuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JDP_principal.setLayer(LBL_periodo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JDP_principal.setLayer(LBL_razon_social, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JDP_principal.setLayer(LBL_rol, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout JDP_principalLayout = new javax.swing.GroupLayout(JDP_principal);
         JDP_principal.setLayout(JDP_principalLayout);
@@ -292,26 +230,26 @@ public class frm_principal extends javax.swing.JFrame {
                 .addGroup(JDP_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TBP_contenedor)
                     .addGroup(JDP_principalLayout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LBL_periodo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LBL_razon_social, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                        .addGap(110, 110, 110)
+                        .addComponent(LBL_usuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 280, Short.MAX_VALUE)))
+                        .addComponent(LBL_rol)))
                 .addContainerGap())
         );
         JDP_principalLayout.setVerticalGroup(
             JDP_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JDP_principalLayout.createSequentialGroup()
-                .addGroup(JDP_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TBP_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
+                .addGap(11, 11, 11)
+                .addGroup(JDP_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LBL_usuario)
+                    .addComponent(LBL_periodo)
+                    .addComponent(LBL_rol)
+                    .addComponent(LBL_razon_social))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TBP_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
                 .addGap(36, 36, 36))
         );
 
@@ -379,10 +317,6 @@ public class frm_principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;

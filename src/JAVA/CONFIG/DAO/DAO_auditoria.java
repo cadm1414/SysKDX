@@ -32,7 +32,8 @@ public class DAO_auditoria {
         String correlativo = FNC_correlativo_auditoria();
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "insert into auditoria_" + gs_periodo + " values('" + gs_periodo + gs_mes + "','" + correlativo + "'," + gi_id_usuario + ",'" + gs_direccion_ip + "',now(),'" + gs_nombre_usuario + "','" + gs_nombre_pc + "','" + gs_direccion_mac + "','" + dato + "',$$" + sql.replace("$$", "") + "$$,'" + tipo_operacion + "','" + modulo + "','" + tabla + "')";
+            String SQL = "insert into auditoria_" + gs_periodo + " values('" + gs_periodo + gs_mes + "','" + correlativo + "'," + gi_id_usuario + ",'" + gs_direccion_ip + "',now(),'" + gs_nombre_usuario + "','" + gs_nombre_pc + "','" + gs_direccion_mac + "',$$" + dato + "$$,$$" + sql.replace("$$", "") + "$$,'" + tipo_operacion + "','" + modulo + "','" + tabla + "')";
+           
             int rs = lq_stm.executeUpdate(SQL);
             if (rs == 1) {
                 lq_stm.getConnection().commit();

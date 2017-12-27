@@ -13,6 +13,7 @@ public class evt_datos_preliminar {
     ResultSet lq_rs;
 
     public void limpia_tabla(pnl_datos_preliminar OBJ_pgp) {
+        OBJ_pgp.LBL_contador.setText("0");
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedido.getModel();
         for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
             modelo.removeRow(i);
@@ -40,17 +41,15 @@ public class evt_datos_preliminar {
                 } while (lq_rs.next());
             }
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
     }
 
     public void selecciona_todo(boolean valor, pnl_datos_preliminar OBJ_pgp) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedido.getModel();
-
         for (int i = 0; i < modelo.getRowCount(); i++) {
             OBJ_pgp.TBL_pedido.setValueAt(valor, i, 8);
         }
-
     }
 
     public void cuenta_seleccion(pnl_datos_preliminar OBJ_pgp) {
@@ -67,25 +66,27 @@ public class evt_datos_preliminar {
     public String genera_codigo(pnl_datos_preliminar OBJ_pgp) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedido.getModel();
         String codigo = "";
+        int cont = Integer.parseInt(OBJ_pgp.LBL_contador.getText());
         for (int i = 0; i < modelo.getRowCount(); i++) {
             if ((boolean) OBJ_pgp.TBL_pedido.getValueAt(i, 8)) {
                 codigo = codigo + "'" + OBJ_pgp.TBL_pedido.getValueAt(i, 0).toString() + "'";
-                if ((i + 1) < modelo.getRowCount()) {
-                    codigo = codigo +",";
+                if (cont != 1) {
+                    codigo = codigo + ",";
                 }
+                cont--;
             }
         }
         return codigo;
     }
-    
+
     public String genera_pedidos(pnl_datos_preliminar OBJ_pgp) {
-         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedido.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedido.getModel();
         String codigo = "";
         for (int i = 0; i < modelo.getRowCount(); i++) {
             if ((boolean) OBJ_pgp.TBL_pedido.getValueAt(i, 8)) {
-                codigo = codigo + OBJ_pgp.TBL_pedido.getValueAt(i, 3).toString() ;
+                codigo = codigo + OBJ_pgp.TBL_pedido.getValueAt(i, 3).toString();
                 if ((i + 1) < modelo.getRowCount()) {
-                    codigo = codigo +",";
+                    codigo = codigo + ",";
                 }
             }
         }

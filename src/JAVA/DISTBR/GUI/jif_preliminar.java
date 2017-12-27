@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.swing.JTextField;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRParameter;
 
 public class jif_preliminar extends javax.swing.JInternalFrame {
@@ -21,10 +24,12 @@ public class jif_preliminar extends javax.swing.JInternalFrame {
     pnl_datos_preliminar lo_pnl_datos_preliminar = new pnl_datos_preliminar();
     evt_datos_preliminar lo_evt_datos_preliminar = new evt_datos_preliminar();
     ResultSet lq_rs;
+    DefaultTableModel modelo;
     cbx_vendedor lo_cbx_vendedor;
     cbx_sector_distribucion lo_cbx_sector;
     String ls_codigo_vendedor, ls_codigo_sector, ls_codigo, ls_pedidos;
     String ls_modulo = "DISTBR", ls_capa = "GUI", ls_clase = "jif_preliminar";
+    int li_cont = 1;
 
     public jif_preliminar() {
         initComponents();
@@ -37,6 +42,9 @@ public class jif_preliminar extends javax.swing.JInternalFrame {
 
         get_cbx_codigo(lo_pnl_datos_preliminar.CBX_tipo_busqueda.getSelectedIndex());
         get_detalle();
+
+        modelo = (DefaultTableModel) lo_pnl_datos_preliminar.TBL_pedido.getModel();
+        modelo.addTableModelListener(TablaListener);
 
         lo_pnl_datos_preliminar.TXT_fecha_reparto.setText(gs_dia + gs_mes + gs_periodo);
 
@@ -83,7 +91,8 @@ public class jif_preliminar extends javax.swing.JInternalFrame {
                 ls_codigo_vendedor = "%";
                 break;
         }
-        lo_pnl_datos_preliminar.JRD_todos.setSelected(false);
+        
+        lo_pnl_datos_preliminar.JRD_todos.setSelected(false);        
         lo_evt_datos_preliminar.limpia_tabla(lo_pnl_datos_preliminar);
         lo_evt_datos_preliminar.recupera_detalle(ls_codigo_vendedor, ls_codigo_sector, lo_pnl_datos_preliminar);
     }
@@ -117,6 +126,13 @@ public class jif_preliminar extends javax.swing.JInternalFrame {
                 parametros.put("fecha_reparto", lo_pnl_datos_preliminar.TXT_fecha_reparto.getText().trim());
                 parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
                 go_evt_imprime_doc_distbr.imprime_documentos(0, "rpt_despacho_preliminar.jasper", parametros);
+                if (go_fnc_mensaje.get_respuesta(0, "¿DESEA GENERAR BOLETAS DE LOS PEDIDOS SELECCIONADOS?") == 0) {
+                    try {
+                        go_dao_registro_ventas.FNC_genera_rv_masivo(ls_codigo, lo_pnl_datos_preliminar.TXT_fecha_reparto.getText().trim());
+                    } catch (Exception e) {                        
+                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "evt_imprimir", e.getMessage());
+                    }
+                }
             } else {
                 lo_pnl_datos_preliminar.JRD_todos.requestFocus();
                 go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "SELECCIONE AL MENOS UN PEDIDO");
@@ -168,6 +184,7 @@ public class jif_preliminar extends javax.swing.JInternalFrame {
     ItemListener ItemEvent = new ItemListener() {
         @Override
         public void itemStateChanged(java.awt.event.ItemEvent ie) {
+            li_cont = 0;
             if (ie.getSource() == lo_pnl_datos_preliminar.CBX_tipo_busqueda) {
                 lo_evt_datos_preliminar.limpia_tabla(lo_pnl_datos_preliminar);
                 get_cbx_codigo(lo_pnl_datos_preliminar.CBX_tipo_busqueda.getSelectedIndex());
@@ -183,6 +200,16 @@ public class jif_preliminar extends javax.swing.JInternalFrame {
                 } else {
                     lo_evt_datos_preliminar.selecciona_todo(false, lo_pnl_datos_preliminar);
                 }
+                lo_evt_datos_preliminar.cuenta_seleccion(lo_pnl_datos_preliminar);
+            }
+            li_cont = 1;
+        }
+    };
+
+    TableModelListener TablaListener = new TableModelListener() {
+        @Override
+        public void tableChanged(TableModelEvent tme) {
+            if (tme.getType() == TableModelEvent.UPDATE && li_cont != 0) {
                 lo_evt_datos_preliminar.cuenta_seleccion(lo_pnl_datos_preliminar);
             }
         }
