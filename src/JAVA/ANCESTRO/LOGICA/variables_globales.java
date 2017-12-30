@@ -105,6 +105,9 @@ import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas;
 import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas_sr;
 import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
 import JAVA.DISTBR.DAO.DAO_programacion;
+import JAVA.DISTBR.DAO.DAO_programacion_detalle;
+import JAVA.DISTBR.GUI.dlg_busq_doc;
+import JAVA.DISTBR.GUI.dlg_busq_programacion;
 import JAVA.DISTBR.LOGICA.muestra_dlg_distbr;
 import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
 import JAVA.INVENT.GUI.dlg_rpt_producto_x_movimiento;
@@ -224,6 +227,7 @@ public class variables_globales {
     public static DAO_tabla_ayuda go_dao_tabla_ayuda = new DAO_tabla_ayuda();
     public static DAO_sector_distribucion go_dao_sector_distribucion = new DAO_sector_distribucion();
     public static DAO_programacion go_dao_programacion = new DAO_programacion();
+    public static DAO_programacion_detalle go_dao_programacion_detalle = new DAO_programacion_detalle();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -303,6 +307,8 @@ public class variables_globales {
     public static dlg_resumen_documento go_dlg_resumen_documento;
     public static dlg_rpt_producto_x_movimiento go_dlg_rpt_producto_x_movimiento;
     public static dlg_ini_sucursal go_dlg_ini_sucursal;
+    public static dlg_busq_doc go_dlg_busq_doc;
+    public static dlg_busq_programacion go_dlg_busq_programacion;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

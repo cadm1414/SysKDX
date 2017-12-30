@@ -3,12 +3,12 @@ package JAVA.VENTAS.GUI;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 
 public class pnl_cierre_pedidos extends javax.swing.JPanel {
-    
+
     public pnl_cierre_pedidos() {
         initComponents();
-        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_pedidos, 0, 0);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

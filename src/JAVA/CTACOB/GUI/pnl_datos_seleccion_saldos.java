@@ -6,8 +6,8 @@ public class pnl_datos_seleccion_saldos extends javax.swing.JPanel {
 
     public pnl_datos_seleccion_saldos() {
         initComponents();
-        go_fnc_operaciones_campos.oculta_columna(TBL_detalle_saldos, 0);
-        go_fnc_operaciones_campos.oculta_columna(TBL_detalle_saldos, 1);
+        go_fnc_operaciones_campos.ancho_columna(TBL_detalle_saldos, 0,0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_detalle_saldos, 1,0);
     }
 
     @SuppressWarnings("unchecked")

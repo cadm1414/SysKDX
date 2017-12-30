@@ -6,12 +6,11 @@ public class pnl_grid_programacion extends javax.swing.JPanel {
 
     public pnl_grid_programacion() {
         initComponents();
-        go_fnc_operaciones_campos.oculta_columna(TBL_programacion, 0);
-        go_fnc_operaciones_campos.oculta_columna(TBL_programacion, 4);
-        go_fnc_operaciones_campos.oculta_columna(TBL_programacion, 5);
+        go_fnc_operaciones_campos.ancho_columna(TBL_programacion, 0, 0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_programacion, 4, 0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_programacion, 5, 0);
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

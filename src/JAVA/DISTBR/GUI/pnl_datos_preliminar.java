@@ -7,7 +7,7 @@ public class pnl_datos_preliminar extends javax.swing.JPanel {
 
     public pnl_datos_preliminar() {
         initComponents();
-        go_fnc_operaciones_campos.oculta_columna(TBL_pedido, 0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_pedido, 0,0);
         TXT_fecha_reparto.addFocusListener(new FullSelectorListener());
     }
 

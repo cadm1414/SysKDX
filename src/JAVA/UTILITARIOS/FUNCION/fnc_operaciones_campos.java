@@ -197,11 +197,11 @@ public class fnc_operaciones_campos {
         return sb.toString();
     }
 
-    public void oculta_columna(JTable tabla, int posicion) {
+    public void ancho_columna(JTable tabla, int posicion,int valor) {
         TableColumn columna = tabla.getColumnModel().getColumn(posicion );
-        columna.setMaxWidth(0);
-        columna.setMinWidth(0);
-        columna.setPreferredWidth(0);
+        columna.setMaxWidth(valor);
+        columna.setMinWidth(valor);
+        columna.setPreferredWidth(valor);
         tabla.doLayout();
     }
 

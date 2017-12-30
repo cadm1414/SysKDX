@@ -189,7 +189,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_nombre_vendedor.setText(lq_rs.getString(6));
                 lo_pnl_cab_pedidos.TXT_dias_credito.setText(lq_rs.getString(8));
                 go_cbx_trato_datos.selecciona_valor(20, lq_rs.getString(12), lo_pnl_cab_pedidos.CBX_sector);
-                
+
                 go_cbx_trato_datos.recupera_valor(16, lq_rs, lo_pnl_cab_pedidos.CBX_direccion);
                 lo_cbx_entidad_ubigeo = (cbx_entidad_ubigeo) lo_pnl_cab_pedidos.CBX_direccion.getSelectedItem();
                 lo_pnl_cab_pedidos.TXT_codigo_ubigeo.setText(lo_cbx_entidad_ubigeo.getID());
@@ -374,7 +374,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_evt_cab_pedidos.activa_campos(0, lo_pnl_cab_pedidos, true);
                 break;
             case "1":
-                go_fnc_operaciones_campos.oculta_columna(lo_pnl_grid_pedidos.TBL_pedidos, 13);
+                go_fnc_operaciones_campos.ancho_columna(lo_pnl_grid_pedidos.TBL_pedidos, 13, 0);
                 lo_pnl_grid_pedidos.LBL_utilidad_p.setVisible(false);
                 lo_pnl_cab_pedidos.CBX_doc_ref.setSelectedIndex(1);
                 get_descripcion_entidad(gs_entidad_usuario);
@@ -386,7 +386,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_observacion.requestFocus();
                 break;
             case "2":
-                go_fnc_operaciones_campos.oculta_columna(lo_pnl_grid_pedidos.TBL_pedidos, 13);
+                go_fnc_operaciones_campos.ancho_columna(lo_pnl_grid_pedidos.TBL_pedidos, 13, 0);
                 lo_pnl_grid_pedidos.LBL_utilidad_p.setVisible(false);
                 lo_pnl_cab_pedidos.CBX_doc_ref.setSelectedIndex(1);
                 get_descripcion_entidad(gs_entidad_usuario);
@@ -498,7 +498,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 }
                 break;
             case 1:
-                if (lo_evt_cab_pedidos.verifica_cambios(lo_bean_pedido, lo_pnl_cab_pedidos, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv,lo_cbx_sector) || cont != 0) {
+                if (lo_evt_cab_pedidos.verifica_cambios(lo_bean_pedido, lo_pnl_cab_pedidos, lo_cbx_grupo_detraccion, lo_cbx_moneda, lo_cbx_igv, lo_cbx_sector) || cont != 0) {
                     if (lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad)) {
                         if (lo_evt_grid_pedidos.valida_campos(lo_pnl_grid_pedidos, li_cantidad)) {
                             try {

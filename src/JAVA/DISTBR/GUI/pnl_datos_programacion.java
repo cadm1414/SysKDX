@@ -1,9 +1,12 @@
 package JAVA.DISTBR.GUI;
 
+import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
+
 public class pnl_datos_programacion extends javax.swing.JPanel {
 
     public pnl_datos_programacion() {
         initComponents();
+        TXT_observacion.setDocument(new fnc_txt_mayuscula());
     }
 
     @SuppressWarnings("unchecked")

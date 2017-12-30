@@ -8,8 +8,8 @@ public class pnl_grid_recibo_cobranza extends javax.swing.JPanel {
 
     public pnl_grid_recibo_cobranza() {
         initComponents();
-        go_fnc_operaciones_campos.oculta_columna(TBL_cobranza, 0);
-        go_fnc_operaciones_campos.oculta_columna(TBL_cobranza, 1);
+        go_fnc_operaciones_campos.ancho_columna(TBL_cobranza, 0,0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_cobranza, 1,0);
     }
 
      @SuppressWarnings("unchecked")

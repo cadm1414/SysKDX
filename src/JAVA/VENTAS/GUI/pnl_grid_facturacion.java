@@ -6,7 +6,7 @@ public class pnl_grid_facturacion extends javax.swing.JPanel {
 
     public pnl_grid_facturacion() {
         initComponents();
-        go_fnc_operaciones_campos.oculta_columna(TBL_facturacion, 9);
+        go_fnc_operaciones_campos.ancho_columna(TBL_facturacion, 9, 0);
     }
 
     @SuppressWarnings("unchecked")

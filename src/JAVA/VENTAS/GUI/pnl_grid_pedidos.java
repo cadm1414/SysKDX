@@ -1,16 +1,17 @@
 package JAVA.VENTAS.GUI;
+
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
-import java.awt.Component; 
+import java.awt.Component;
 import javax.swing.text.JTextComponent;
 
 public class pnl_grid_pedidos extends javax.swing.JPanel {
-          
+
     public pnl_grid_pedidos() {
-        initComponents();        
-        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 15);
-        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 16);
-        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 17);
-        go_fnc_operaciones_campos.oculta_columna(TBL_pedidos, 18);
+        initComponents();
+        go_fnc_operaciones_campos.ancho_columna(TBL_pedidos, 15, 0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_pedidos, 16, 0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_pedidos, 17, 0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_pedidos, 18, 0);
     }
 
     @SuppressWarnings("unchecked")

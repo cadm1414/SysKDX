@@ -328,4 +328,22 @@ public class DAO_registro_ventas {
         }
         return resp;
     }
+    
+    public ResultSet SLT_datos_doc(String codigo_sucursal) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_datos_doc('"+codigo_sucursal+"','" + gs_periodo + "') "
+                    + "as (codigo_operacion character(16),codigo_sucursal character(4),fecha_emision date,codigo_documento character(2),serie_documento character(4),numero_documento character(10),nombre_pagador character varying(250),forma_pago character(2),nombre_vendedor character varying(250),sector character varying(250))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_doc", e.getMessage());
+        }
+        return null;
+    }
+    
+    
 }

@@ -6,7 +6,7 @@ public class pnl_grid_busq_ref_documento extends javax.swing.JPanel {
 
     public pnl_grid_busq_ref_documento() {
         initComponents();
-        go_fnc_operaciones_campos.oculta_columna(TBL_referencia, 0);
+        go_fnc_operaciones_campos.ancho_columna(TBL_referencia, 0, 0);
     }
 
     @SuppressWarnings("unchecked")
