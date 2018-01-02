@@ -15,7 +15,7 @@ public class DAO_periodo_empresa {
     public ResultSet SLT_datos_x_empresa(BEAN_periodo_empresa OBJ_bpe) {
         try {
             lq_stm = go_conexion_emp.crearStatement();
-            lq_rs = lq_stm.executeQuery("SELECT * FROM periodo_empresa WHERE codigo_empresa = " + OBJ_bpe.getCodigo_empresa() + " ORDER BY anio");
+            lq_rs = lq_stm.executeQuery("SELECT * FROM periodo_empresa WHERE codigo_empresa = " + OBJ_bpe.getCodigo_empresa() + " ORDER BY anio DESC");
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {
                 return lq_rs;

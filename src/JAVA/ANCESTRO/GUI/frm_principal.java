@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class frm_principal extends javax.swing.JFrame {
-
+    
     HashMap<String, Icon> ls_elementos = new HashMap<String, Icon>();
     HashMap<String, String> ls_tooltip = new HashMap<String, String>();
     jtr_menu_opciones lo_jtr_menu_opciones = new jtr_menu_opciones();
@@ -31,7 +31,7 @@ public class frm_principal extends javax.swing.JFrame {
     boolean resp;
     String ls_nodo;
     String ls_modulo = "ANCESTRO", ls_capa = "GUI", ls_clase = "frm_principal";
-
+    
     public frm_principal() throws UnknownHostException, SocketException {
         initComponents();
         datos_pantalla();
@@ -40,17 +40,18 @@ public class frm_principal extends javax.swing.JFrame {
         registra_auditoria("INICIO DE SESION");
         this.setExtendedState(this.MAXIMIZED_BOTH);
     }
-
+    
     private void datos_pantalla() {
         LBL_rol.setText(gs_nombre_rol);
         LBL_periodo.setText(gs_periodo);
         LBL_usuario.setText(gs_nombre_usuario);
+        LBL_usuario.setToolTipText(gs_datos_usuario);
         go_dao_general.SLT_datos();
         LBL_razon_social.setText(go_bean_general.getRazon_social());
         gs_mes = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.MONTH) + 1) + "", "0", 2);
         gs_dia = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.DAY_OF_MONTH)) + "", "0", 2);
     }
-
+    
     private void datos_pc() throws UnknownHostException, SocketException {
         try {
             InetAddress address = InetAddress.getLocalHost();
@@ -61,19 +62,19 @@ public class frm_principal extends javax.swing.JFrame {
             gs_direccion_mac = go_fnc_operaciones_campos.get_mac(mac);
         } catch (Exception e) {
             gs_direccion_mac = "00-00-00-00-00-00";
-            gs_nombre_pc ="SIN CONECCION";
+            gs_nombre_pc = "SIN CONECCION";
             gs_direccion_ip = "255.255.255.255";
         }
-
+        
     }
-
+    
     private void registra_auditoria(String dato) {
         try {
             go_dao_auditoria.IST_auditoria(dato, "", "CONFIG", "0", "0013");
         } catch (Exception e) {
         }
     }
-
+    
     private void lista_modulo() {
         try {
             resp = go_dao_rol_menu.SLT_rol_menu_x_idrol();
@@ -90,7 +91,7 @@ public class frm_principal extends javax.swing.JFrame {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "lista_modulo", e.getMessage());
         }
     }
-
+    
     private void evt_opciones_menu() {
         try {
             nodoSeleccionado = (DefaultMutableTreeNode) JTR_menu_opciones.getLastSelectedPathComponent();
@@ -101,14 +102,14 @@ public class frm_principal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-
+    
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(IMAGES_ruta_ancestro.class.getResource("imagen_inicio.png"));
         return retValue;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -129,6 +130,7 @@ public class frm_principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("System");
@@ -243,11 +245,12 @@ public class frm_principal extends javax.swing.JFrame {
             JDP_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JDP_principalLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(JDP_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LBL_usuario)
-                    .addComponent(LBL_periodo)
-                    .addComponent(LBL_rol)
-                    .addComponent(LBL_razon_social))
+                .addGroup(JDP_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LBL_periodo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(JDP_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(LBL_usuario)
+                        .addComponent(LBL_rol)
+                        .addComponent(LBL_razon_social)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TBP_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
                 .addGap(36, 36, 36))
@@ -258,7 +261,16 @@ public class frm_principal extends javax.swing.JFrame {
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Utilitarios");
+
+        jMenuItem1.setText("Cambiar Periodo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -299,9 +311,14 @@ public class frm_principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        go_dlg_periodo = new dlg_periodo(null, true);
+        go_dlg_periodo.setVisible(true);
+        LBL_periodo.setText(gs_periodo);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    
     public static void main(String args[]) throws UnknownHostException, SocketException {
         new frm_principal().setVisible(true);
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -316,6 +333,7 @@ public class frm_principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

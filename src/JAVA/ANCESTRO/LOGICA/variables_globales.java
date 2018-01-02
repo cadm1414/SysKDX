@@ -4,6 +4,7 @@ import JAVA.CONFIG.LOGICA.muestra_reporte_config;
 import JAVA.CONFIG.LOGICA.muestra_pestania_config;
 import JAVA.CONFIG.LOGICA.muestra_jif_config;
 import JAVA.ANCESTRO.DAO.*;
+import JAVA.ANCESTRO.GUI.dlg_periodo;
 import JAVA.CONFIG.GUI.frm_datos_rol_menu;
 import JAVA.ANCESTRO.GUI.frm_principal;
 import JAVA.CONFIG.BEAN.BEAN_general;
@@ -309,6 +310,7 @@ public class variables_globales {
     public static dlg_ini_sucursal go_dlg_ini_sucursal;
     public static dlg_busq_doc go_dlg_busq_doc;
     public static dlg_busq_programacion go_dlg_busq_programacion;
+    public static dlg_periodo go_dlg_periodo;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
