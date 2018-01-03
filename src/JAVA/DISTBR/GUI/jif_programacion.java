@@ -16,6 +16,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JTable;
@@ -23,6 +26,7 @@ import javax.swing.KeyStroke;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRParameter;
 
 public class jif_programacion extends javax.swing.JInternalFrame {
 
@@ -96,7 +100,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                 lo_pnl_datos_programacion.TXT_codigo_vehiculo_v2.setText(lq_rs.getString(9));
                 lo_pnl_datos_programacion.TXT_marca_v2.setText(lq_rs.getString(10));
                 lo_pnl_datos_programacion.TXT_civ_v2.setText(lq_rs.getString(11));
-                getFocusOwner().transferFocus();
+                lo_pnl_datos_programacion.TXT_fecha_preventa.requestFocus();
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_transportista", "TRANSPORTISTA NO EXISTE");
                 lo_pnl_datos_programacion.TXT_codigo_transportista.requestFocus();
@@ -260,6 +264,12 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                                 lo_evt_grid_programacion.activa_campos(0, lo_pnl_grid_programacion, false);
                                 lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
                             }
+                            if (go_fnc_mensaje.get_respuesta(0, "¿DESEA IMPRIMIR DOCUMENTO Nro  PR - " + lo_bean_programacion.getNumero_documento() + "?") == 0) {
+                                try {
+                                    evt_imprimir(lo_bean_programacion.getStatus(), lo_bean_programacion.getCodigo_programacion());
+                                } catch (Exception e) {
+                                }
+                            }
                         } catch (Exception e) {
                         }
                     }
@@ -282,6 +292,21 @@ public class jif_programacion extends javax.swing.JInternalFrame {
         } else {
             lo_evt_datos_programacion.limpia_datos(lo_pnl_datos_programacion);
             lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+        }
+    }
+    
+    private void evt_imprimir(String status, String codigo) {
+        if (status.equalsIgnoreCase("1")) {
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("sucursal", lo_pnl_datos_programacion.TXT_sucursal.getText().trim());
+            parametros.put("usuario", gs_datos_usuario);
+            parametros.put("empresa", go_bean_general.getNombre_reporte());
+            parametros.put("codigo", codigo);
+            parametros.put("periodo", gs_periodo);
+            parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+            go_evt_imprime_doc_distbr.imprime_documentos(0, "rpt_programacion_reparto.jasper", parametros);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "DOCUMENTO NO SE PUEDE IMPRIMIR");
         }
     }
 
@@ -310,7 +335,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                 //evt_anular();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
-                //evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
+                evt_imprimir(lo_bean_programacion.getStatus(), lo_bean_programacion.getCodigo_programacion());
             }
         }
     };
@@ -372,7 +397,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                     evt_cancelar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
-                    //   evt_imprimir(lo_bean_registro_ventas.getStatus(), lo_bean_registro_ventas.getCodigo_operacion());
+                       evt_imprimir(lo_bean_programacion.getStatus(), lo_bean_programacion.getCodigo_programacion());
                 }
                 if (ke.getSource() == lo_pnl_datos_programacion.TXT_numero) {
                     if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_programacion.TXT_numero)) {
@@ -394,7 +419,14 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                         go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO");
                     }
                 }
-
+                if (ke.getSource() == lo_pnl_datos_programacion.TXT_fecha_preventa && !lo_pnl_datos_programacion.TXT_fecha_preventa.getText().trim().equalsIgnoreCase("/  /")) {
+                    if (go_fnc_operaciones_campos.valida_fecha(lo_pnl_datos_programacion.TXT_fecha_preventa.getText())) {
+                        lo_pnl_datos_programacion.TXT_observacion.requestFocus();
+                    } else {
+                        lo_pnl_datos_programacion.TXT_fecha_preventa.setText("");
+                        go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "FORMATO DE FECHA INVALIDO");
+                    }
+                }
                 if (ke.getSource() == lo_pnl_datos_programacion.TXT_codigo_transportista && go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_programacion.TXT_codigo_transportista)) {
                     lo_pnl_datos_programacion.TXT_codigo_transportista.setText(go_fnc_operaciones_campos.completa_digitos(lo_pnl_datos_programacion.TXT_codigo_transportista.getText().trim(), "0", 4));
                     get_transportista(lo_pnl_datos_programacion.TXT_codigo_transportista.getText().trim());

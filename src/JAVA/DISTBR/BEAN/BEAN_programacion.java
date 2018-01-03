@@ -4,7 +4,7 @@ public class BEAN_programacion {
 
     String codigo_programacion, codigo_sucursal, numero_documento, fecha_reparto, fecha_registro, codigo_transportista, nombre_transportista, numero_licencia,
             razon_social_trans, ruc_trans, codigo_vehiculo, marca, numero_civ, codigo_vehiculo_2, marca_2, numero_civ_2, es_liquidado, status,
-            observacion;
+            observacion, fecha_preventa;
 
     public String getCodigo_programacion() {
         return codigo_programacion;
@@ -157,6 +157,13 @@ public class BEAN_programacion {
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
-    
-    
+
+    public String getFecha_preventa() {
+        return fecha_preventa;
+    }
+
+    public void setFecha_preventa(String fecha_preventa) {
+        this.fecha_preventa = fecha_preventa;
+    }
+
 }

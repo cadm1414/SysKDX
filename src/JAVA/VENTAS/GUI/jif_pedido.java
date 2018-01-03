@@ -179,15 +179,21 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         try {
             lq_rs = go_dao_entidad.SLT_datos_entidad_x_facturacion(codigo, dato);
             if (lq_rs != null) {
+                
+                if (!gs_tipo_comercio.equalsIgnoreCase("4")) {
+                    lo_pnl_cab_pedidos.TXT_codigo_pagador.setText(lq_rs.getString(1));
+                    lo_pnl_cab_pedidos.TXT_pagador.setText(lq_rs.getString(2));
+                    
+                    lo_pnl_cab_pedidos.TXT_codigo_vendedor.setText(lq_rs.getString(5));
+                    lo_pnl_cab_pedidos.TXT_nombre_vendedor.setText(lq_rs.getString(6));
+                    lo_pnl_cab_pedidos.TXT_dias_credito.setText(lq_rs.getString(8));
+                }
+                
                 lo_pnl_cab_pedidos.TXT_codigo_entidad.setText(lq_rs.getString(1));
                 lo_pnl_cab_pedidos.TXT_razon_social.setText(lq_rs.getString(2));
                 lo_pnl_cab_pedidos.TXT_doc_id.setText(lq_rs.getString(3));
                 lo_pnl_cab_pedidos.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(lq_rs.getInt(4)));
-                lo_pnl_cab_pedidos.TXT_codigo_pagador.setText(lq_rs.getString(1));
-                lo_pnl_cab_pedidos.TXT_pagador.setText(lq_rs.getString(2));
-                lo_pnl_cab_pedidos.TXT_codigo_vendedor.setText(lq_rs.getString(5));
-                lo_pnl_cab_pedidos.TXT_nombre_vendedor.setText(lq_rs.getString(6));
-                lo_pnl_cab_pedidos.TXT_dias_credito.setText(lq_rs.getString(8));
+
                 go_cbx_trato_datos.selecciona_valor(20, lq_rs.getString(12), lo_pnl_cab_pedidos.CBX_sector);
 
                 go_cbx_trato_datos.recupera_valor(16, lq_rs, lo_pnl_cab_pedidos.CBX_direccion);
@@ -195,7 +201,9 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_codigo_ubigeo.setText(lo_cbx_entidad_ubigeo.getID());
                 lo_pnl_cab_pedidos.TXT_descripcion.setText(lo_cbx_entidad_ubigeo.descripcion());
                 lo_pnl_cab_pedidos.CBX_afecto_igv.setSelectedIndex((!lo_pnl_cab_pedidos.JRD_domiciliado.isSelected()) ? 0 : 1);
+
                 get_forma_pago(lo_pnl_cab_pedidos.TXT_codigo_pagador.getText().trim());
+
                 getFocusOwner().transferFocus();
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "ENTIDAD NO EXISTE y/o NO HABILITADO");
@@ -261,6 +269,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         lo_pnl_cab_pedidos.TXT_doc_id.setEnabled(valor);
         lo_pnl_cab_pedidos.TXT_doc_id.setEnabled(valor);
         lo_pnl_cab_pedidos.CBX_direccion.setEditable(valor);
+        lo_pnl_cab_pedidos.CBX_direccion.setEnabled(valor);
         lo_pnl_cab_pedidos.TXT_codigo_ubigeo.setEnabled(valor);
 
         lo_pnl_cab_pedidos.TXT_razon_social.setText("");
@@ -272,6 +281,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         try {
             lo_pnl_cab_pedidos.CBX_direccion.removeAllItems();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -396,6 +406,25 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_numero_doc.setEnabled(true);
                 lo_pnl_cab_pedidos.TXT_fecha_emision.setEnabled(true);
                 lo_pnl_cab_pedidos.TXT_observacion.requestFocus();
+                break;
+            case "3":
+                go_fnc_operaciones_campos.ancho_columna(lo_pnl_grid_pedidos.TBL_pedidos, 13, 0);
+                break;
+            case "4":
+                go_activa_buscador.get_descripcion_vendedor(gs_vendedor_usuario, lo_pnl_cab_pedidos.TXT_codigo_vendedor, lo_pnl_cab_pedidos.TXT_nombre_vendedor);
+                go_fnc_operaciones_campos.ancho_columna(lo_pnl_grid_pedidos.TBL_pedidos, 13, 0);
+                lo_pnl_cab_pedidos.TXT_codigo_vendedor.setEnabled(false);
+                lo_pnl_grid_pedidos.LBL_utilidad_p.setVisible(false);
+                lo_pnl_cab_pedidos.TXT_observacion.setEnabled(true);
+                lo_pnl_cab_pedidos.TXT_numero_doc.setEnabled(true);
+                lo_pnl_cab_pedidos.TXT_fecha_emision.setEnabled(true);
+                lo_pnl_cab_pedidos.CBX_doc_ref.setEnabled(true);
+                lo_pnl_cab_pedidos.TXT_codigo_entidad.setEnabled(true);
+                lo_pnl_cab_pedidos.CBX_sector.setEnabled(true);
+                lo_pnl_cab_pedidos.TXT_codigo_pagador.setText(gs_entidad_usuario);                
+                go_activa_buscador.get_descripcion_entidad(gs_entidad_usuario, lo_pnl_cab_pedidos.TXT_codigo_pagador, lo_pnl_cab_pedidos.TXT_pagador);
+                get_forma_pago(gs_entidad_usuario);
+                lo_pnl_cab_pedidos.TXT_numero_doc.requestFocus();
                 break;
         }
         lo_evt_opciones_3.activa_btn_opciones(1, lo_pnl_opciones_3, lb_valor_op);
@@ -696,9 +725,11 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     if (li_tipo_operacion != 1) {
                         if (lo_pnl_cab_pedidos.TXT_codigo_entidad.getText().trim().equalsIgnoreCase("999999")) {
                             activa_facturacion(true);
-                            lo_pnl_cab_pedidos.TXT_codigo_pagador.setText("999999");
-                            lo_pnl_cab_pedidos.TXT_pagador.setText("...");
-                            get_forma_pago("999999");
+                            if (!gs_tipo_comercio.equalsIgnoreCase("4")) {
+                                lo_pnl_cab_pedidos.TXT_codigo_pagador.setText("999999");
+                                lo_pnl_cab_pedidos.TXT_pagador.setText("...");
+                                get_forma_pago("999999");
+                            }
                             lo_pnl_cab_pedidos.TXT_razon_social.requestFocus();
                         } else {
                             activa_facturacion(false);

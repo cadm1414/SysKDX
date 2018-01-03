@@ -37,7 +37,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                     resp = true;
                     break;
                     case 9:
-                    resp = (gs_tipo_comercio.equalsIgnoreCase("0") || gs_tipo_comercio.equalsIgnoreCase("3") )?true:false;
+                    resp = (gs_tipo_comercio.equalsIgnoreCase("0") || gs_tipo_comercio.equalsIgnoreCase("3") || gs_tipo_comercio.equalsIgnoreCase("4"))?true:false;
                     break;
                     case 11:
                     resp = (Double.parseDouble(this.getValueAt(row, 15).toString())>0 && Double.parseDouble(this.getValueAt(row, 2).toString())>0)?false:true;
