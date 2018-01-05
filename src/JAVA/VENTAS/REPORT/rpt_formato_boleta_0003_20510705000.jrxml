@@ -18,7 +18,7 @@
 	<parameter name="codigo_operacion" class="java.lang.String"/>
 	<parameter name="periodo" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_formato_boleta_0001_20510705000( $P{codigo_operacion} , $P{periodo} ) as (numero text,fecha_emision text,codigo_entidad character(6),razon_social character varying(250),numero_doc_id character varying(15),direccion character varying(250),ubigeo character varying(100),codigo_guiar character(16),fecha_vence date,base numeric,igv numeric,total numeric,forma_pago character(2),nombre_articulo text,monto_igv integer,bulto integer,peso_neto numeric,precio numeric,importe numeric,nombre_comun character varying(60),simbolo_moneda character(4),numero_letras unknown )]]>
+		<![CDATA[select * from rpt_formato_boleta_0001_20510705000( $P{codigo_operacion} , $P{periodo} ) as (numero text,fecha_emision text,codigo_entidad character(6),razon_social character varying(250),numero_doc_id character varying(15),direccion character varying(250),ubigeo character varying(100),codigo_guiar character(16),fecha_vence date,base numeric,igv numeric,total numeric,forma_pago character(2),nombre_articulo text,monto_igv integer,bulto integer,peso_neto numeric,precio numeric,importe numeric,nombre_comun character varying(60),simbolo_moneda character(4),numero_letras text )]]>
 	</queryString>
 	<field name="numero" class="java.lang.String"/>
 	<field name="fecha_emision" class="java.lang.String"/>

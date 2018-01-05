@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="467" pageHeight="396" columnWidth="437" leftMargin="10" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9e2ae1f-eb58-4d49-b9b7-1a0e35faf8e9">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="467" pageHeight="425" columnWidth="437" leftMargin="10" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9e2ae1f-eb58-4d49-b9b7-1a0e35faf8e9">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CLOUD"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -9,10 +9,16 @@
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="codigo_operacion" class="java.lang.String"/>
 	<parameter name="periodo" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_formato_boleta_0001_20510705000( $P{codigo_operacion} , $P{periodo} ) as (numero text,fecha_emision text,codigo_entidad character(6),razon_social character varying(250),numero_doc_id character varying(15),direccion character varying(250),ubigeo character varying(100),codigo_guiar character(16),fecha_vence date,base numeric,igv numeric,total numeric,forma_pago character(2),nombre_articulo text,monto_igv integer,bulto integer,peso_neto numeric,precio numeric,importe numeric,nombre_comun character varying(60),simbolo_moneda character(4),numero_letras unknown )]]>
+		<![CDATA[select * from rpt_formato_boleta_0001_20510705000( $P{codigo_operacion} , $P{periodo} ) as (numero text,fecha_emision text,codigo_entidad character(6),razon_social character varying(250),numero_doc_id character varying(15),direccion character varying(250),ubigeo character varying(100),codigo_guiar character(16),fecha_vence date,base numeric,igv numeric,total numeric,forma_pago character(2),nombre_articulo text,monto_igv integer,bulto integer,peso_neto numeric,precio numeric,importe numeric,nombre_comun character varying(60),simbolo_moneda character(4),numero_letras text )]]>
 	</queryString>
 	<field name="numero" class="java.lang.String"/>
 	<field name="fecha_emision" class="java.lang.String"/>
@@ -142,7 +148,7 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="139" splitType="Stretch">
+		<band height="166" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="280" height="10" uuid="80e16ba9-6e40-4760-9480-7dfaef43ac91">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>

@@ -15,22 +15,18 @@
 	<parameter name="cantidad_pedidos" class="java.lang.String"/>
 	<parameter name="fecha_reparto" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_preliminar( $P{codigo_operacion} , $P{periodo} ) as (nombre_producto character varying(60),numero_documento character(10),fecha_emision date,codigo_entidad character(6),razon_social character varying(250),codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),observacion text,bulto integer,peso_bruto numeric,peso_neto numeric,sector character varying(250),nombre_vendedor character varying(250))]]>
+		<![CDATA[select * from rpt_preliminar( $P{codigo_operacion} , $P{periodo} ) as (documento text,nombre_producto character varying(60),sector text,nombre_vendedor text,codigo_articulo character(12),nombre_articulo character varying(150),simbolo_unidad character varying(3),bulto bigint,peso_bruto numeric,peso_neto numeric)	]]>
 	</queryString>
+	<field name="documento" class="java.lang.String"/>
 	<field name="nombre_producto" class="java.lang.String"/>
-	<field name="numero_documento" class="java.lang.String"/>
-	<field name="fecha_emision" class="java.sql.Date"/>
-	<field name="codigo_entidad" class="java.lang.String"/>
-	<field name="razon_social" class="java.lang.String"/>
+	<field name="sector" class="java.lang.String"/>
+	<field name="nombre_vendedor" class="java.lang.String"/>
 	<field name="codigo_articulo" class="java.lang.String"/>
 	<field name="nombre_articulo" class="java.lang.String"/>
 	<field name="simbolo_unidad" class="java.lang.String"/>
-	<field name="observacion" class="java.lang.String"/>
-	<field name="bulto" class="java.lang.Integer"/>
+	<field name="bulto" class="java.lang.Long"/>
 	<field name="peso_bruto" class="java.math.BigDecimal"/>
 	<field name="peso_neto" class="java.math.BigDecimal"/>
-	<field name="sector" class="java.lang.String"/>
-	<field name="nombre_vendedor" class="java.lang.String"/>
 	<variable name="suma_kilos" class="java.math.BigDecimal" resetType="Group" resetGroup="documento" calculation="Sum">
 		<variableExpression><![CDATA[($F{simbolo_unidad}.equalsIgnoreCase( "KG" ))?$F{peso_neto}:0.0]]></variableExpression>
 	</variable>

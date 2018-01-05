@@ -59,6 +59,9 @@ public class dlg_ini_serie extends javax.swing.JDialog {
                 do {
                     lo_pnl_ini_serie.CBX_serie.addItem(lq_rs.getString(1));
                 } while (lq_rs.next());
+                if(!gs_tipo_comercio.equalsIgnoreCase("3")){
+                    lo_pnl_ini_serie.CBX_serie.setSelectedItem("9999");
+                }
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "get_serie", "SUCURSAL NO CUENTA CON SERIE");
                 limpia_datos();

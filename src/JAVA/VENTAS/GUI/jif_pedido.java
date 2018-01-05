@@ -421,7 +421,8 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.CBX_doc_ref.setEnabled(true);
                 lo_pnl_cab_pedidos.TXT_codigo_entidad.setEnabled(true);
                 lo_pnl_cab_pedidos.CBX_sector.setEnabled(true);
-                lo_pnl_cab_pedidos.TXT_codigo_pagador.setText(gs_entidad_usuario);                
+                lo_pnl_cab_pedidos.TXT_codigo_pagador.setText(gs_entidad_usuario);   
+                 lo_pnl_cab_pedidos.CBX_doc_ref.setSelectedIndex(1);
                 go_activa_buscador.get_descripcion_entidad(gs_entidad_usuario, lo_pnl_cab_pedidos.TXT_codigo_pagador, lo_pnl_cab_pedidos.TXT_pagador);
                 get_forma_pago(gs_entidad_usuario);
                 lo_pnl_cab_pedidos.TXT_numero_doc.requestFocus();

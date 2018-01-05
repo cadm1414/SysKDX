@@ -72,7 +72,7 @@ public class evt_cab_pedidos {
         OBJ_pcp.LBL_numero_doc.setText("0000000000");
         OBJ_pcp.TXT_numero_doc.setText("");
         OBJ_pcp.TXT_fecha_emision.setText(gs_dia + gs_mes + gs_periodo);
-        OBJ_pcp.CBX_doc_ref.setSelectedIndex(1);
+        OBJ_pcp.CBX_doc_ref.setSelectedIndex(0);
         OBJ_pcp.CBX_moneda.setSelectedIndex(0);
         OBJ_pcp.TXT_tipo_cambio.setText("0.000");
         OBJ_pcp.CBX_afecto_igv.setSelectedIndex(1);
