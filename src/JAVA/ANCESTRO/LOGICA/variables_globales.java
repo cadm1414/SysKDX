@@ -123,7 +123,7 @@ import JAVA.VENTAS.GUI.jif_cierre_pedidos;
 import JAVA.VENTAS.GUI.jif_nota_credito;
 import JAVA.DISTBR.GUI.jif_preliminar;
 import JAVA.DISTBR.GUI.jif_programacion;
-import JAVA.DISTBR.LOGICA.muestra_reporte_distbr;
+import JAVA.DISTBR.LOGICA.evt_imprime_doc_distbr;
 import JAVA.DISTBR.LOGICA.muestra_jif_distbr;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
@@ -260,7 +260,7 @@ public class variables_globales {
     public static muestra_pestania_ctacob go_muestra_pestania_ctacob = new muestra_pestania_ctacob();
     public static muestra_dlg_distbr go_muestra_dlg_distbr = new muestra_dlg_distbr();
     public static muestra_jif_distbr go_muestra_jif_distbr = new muestra_jif_distbr();
-    public static muestra_reporte_distbr go_muestra_reporte_distbr = new muestra_reporte_distbr();
+    public static evt_imprime_doc_distbr go_evt_imprime_doc_distbr = new evt_imprime_doc_distbr();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;

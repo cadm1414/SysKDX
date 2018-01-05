@@ -304,7 +304,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
             parametros.put("codigo", codigo);
             parametros.put("periodo", gs_periodo);
             parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
-            go_muestra_reporte_distbr.imprime_documentos(0, "rpt_programacion_reparto.jasper", parametros);
+            go_evt_imprime_doc_distbr.imprime_documentos(0, "rpt_programacion_reparto.jasper", parametros);
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "DOCUMENTO NO SE PUEDE IMPRIMIR");
         }

@@ -91,8 +91,8 @@ public class jif_preliminar extends javax.swing.JInternalFrame {
                 ls_codigo_vendedor = "%";
                 break;
         }
-        
-        lo_pnl_datos_preliminar.JRD_todos.setSelected(false);        
+
+        lo_pnl_datos_preliminar.JRD_todos.setSelected(false);
         lo_evt_datos_preliminar.limpia_tabla(lo_pnl_datos_preliminar);
         lo_evt_datos_preliminar.recupera_detalle(ls_codigo_vendedor, ls_codigo_sector, lo_pnl_datos_preliminar);
     }
@@ -125,11 +125,11 @@ public class jif_preliminar extends javax.swing.JInternalFrame {
                 parametros.put("cantidad_pedidos", lo_pnl_datos_preliminar.LBL_contador.getText().trim());
                 parametros.put("fecha_reparto", lo_pnl_datos_preliminar.TXT_fecha_reparto.getText().trim());
                 parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
-                go_muestra_reporte_distbr.imprime_documentos(0, "rpt_despacho_preliminar.jasper", parametros);
+                go_evt_imprime_doc_distbr.imprime_documentos(0, "rpt_despacho_preliminar.jasper", parametros);
                 if (go_fnc_mensaje.get_respuesta(0, "¿DESEA GENERAR BOLETAS DE LOS PEDIDOS SELECCIONADOS?") == 0) {
                     try {
                         go_dao_registro_ventas.FNC_genera_rv_masivo(ls_codigo, lo_pnl_datos_preliminar.TXT_fecha_reparto.getText().trim());
-                    } catch (Exception e) {                        
+                    } catch (Exception e) {
                         go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "evt_imprimir", e.getMessage());
                     }
                 }

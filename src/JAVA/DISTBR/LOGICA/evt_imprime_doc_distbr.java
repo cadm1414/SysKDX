@@ -11,7 +11,7 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-public class muestra_reporte_distbr {
+public class evt_imprime_doc_distbr {
 
     JasperReport jasperReport;
     JasperPrint jasperPrint;
