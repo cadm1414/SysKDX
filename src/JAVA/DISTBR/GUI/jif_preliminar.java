@@ -125,7 +125,7 @@ public class jif_preliminar extends javax.swing.JInternalFrame {
                 parametros.put("cantidad_pedidos", lo_pnl_datos_preliminar.LBL_contador.getText().trim());
                 parametros.put("fecha_reparto", lo_pnl_datos_preliminar.TXT_fecha_reparto.getText().trim());
                 parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
-                go_evt_imprime_doc_distbr.imprime_documentos(0, "rpt_despacho_preliminar.jasper", parametros);
+                go_muestra_reporte_distbr.imprime_documentos(0, "rpt_despacho_preliminar.jasper", parametros);
                 if (go_fnc_mensaje.get_respuesta(0, "¿DESEA GENERAR BOLETAS DE LOS PEDIDOS SELECCIONADOS?") == 0) {
                     try {
                         go_dao_registro_ventas.FNC_genera_rv_masivo(ls_codigo, lo_pnl_datos_preliminar.TXT_fecha_reparto.getText().trim());

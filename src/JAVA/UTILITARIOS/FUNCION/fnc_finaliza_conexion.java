@@ -11,6 +11,7 @@ public class fnc_finaliza_conexion {
             //stm.close();   
             con.close();                     
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

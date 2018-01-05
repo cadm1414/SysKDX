@@ -38,8 +38,7 @@ public class CONEXION_db {
 
     public Statement crearStatement() {
         try {
-            getConexion_db();
-            lq_stm = lq_con.createStatement();
+            lq_stm = getConexion_db().createStatement();
         } catch (SQLException e) {
         }
         return lq_stm;

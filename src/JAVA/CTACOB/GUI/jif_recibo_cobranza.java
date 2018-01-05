@@ -185,10 +185,10 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
     }
 
     private void evt_nuevo() {
-        ls_codigo = null;
-        get_tipo_cambio();
+        ls_codigo = null;        
         lo_evt_cab_recibo_cobranza.limpia_datos(lo_pnl_cab_recibo_cobranza);
         lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
+        get_tipo_cambio();
         li_tipo_operacion = 0;
         try {
             lq_rs = go_dao_recibo_cobranza.FNC_correlativo_recibo_cobranza("RC", ls_serie, ls_codigo_sucursal);

@@ -3,6 +3,7 @@ package JAVA.INVENT.LOGICA;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.INVENT.REPORT.ruta_invent_report;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.Map;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -14,13 +15,16 @@ public class muestra_reporte_invent {
 
     JasperReport jr = null;
     URL path;
+    Connection lq_con;
     String ls_modulo = "INVENT", ls_capa = "LOGICA", ls_clase = "muestra_reporte_invent";
 
     public void reporte_pestania(String reporte, Map<String, Object> parametro, String nombre, int op) {
         try {
+            lq_con = go_conexion_db.getConexion_db();
             path = ruta_invent_report.class.getResource(reporte);
             jr = (JasperReport) JRLoader.loadObject(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, parametro, go_conexion_db.getConexion_db());
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametro, lq_con);
+            lq_con.close();
             JRViewer jr = new JRViewer(jp);
             switch (op) {
                 case 0:
@@ -47,13 +51,13 @@ public class muestra_reporte_invent {
                 case 7:
                     go_muestra_pestania_invent.rpt_stock_simplificado(jr, nombre);
                     break;
-                case 8 :
+                case 8:
                     go_muestra_pestania_invent.rpt_kardex_mercaderia_normal(jr, nombre);
                     break;
-                case 9 :
+                case 9:
                     go_muestra_pestania_invent.rpt_kardex_mercaderia_val(jr, nombre);
                     break;
-                case 10 :
+                case 10:
                     go_muestra_pestania_invent.rpt_producto_x_movimiento(jr, nombre);
                     break;
             }

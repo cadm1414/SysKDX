@@ -77,7 +77,7 @@ public class DAO_rol_menu {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_status_op_x_idrol(" + id_rol + ") "
-                    + "as (id_rol integer,nombre character varying(30),status_activo character(1),codigo_modulo character(6),codigo_opcion character varying(30),dato unknown ,status_nuevo character(1),status_buscar character(1),status_editar character(1),status_eliminar character(1),status_anular character(1),status_guardar  character(1),status_imprimir character(1),status_reporte character(1))";
+                    + "as (id_rol integer,nombre character varying(30),status_activo character(1),codigo_modulo character(6),codigo_opcion character varying(30),dato text ,status_nuevo character(1),status_buscar character(1),status_editar character(1),status_eliminar character(1),status_anular character(1),status_guardar  character(1),status_imprimir character(1),status_reporte character(1))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {

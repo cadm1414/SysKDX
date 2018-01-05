@@ -3,6 +3,7 @@ package JAVA.CONFIG.LOGICA;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.REPORT.ruta_config_report;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.Map;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -15,13 +16,16 @@ public class muestra_reporte_config {
 
     JasperReport jr = null;
     URL path;
+    Connection lq_con;
     String ls_modulo = "CONFIG", ls_capa = "LOGICA", ls_clase = "muestra_reporte_config";
 
     public void reporte_frame(String reporte, Map<String, Object> parametro) {
         try {
+            lq_con = go_conexion_db.getConexion_db();
             path = ruta_config_report.class.getResource(reporte);
             jr = (JasperReport) JRLoader.loadObject(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, parametro, go_conexion_db.getConexion_db());
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametro, lq_con);
+            lq_con.close();
             JasperViewer.viewReport(jp, false);
 
         } catch (Exception e) {
@@ -40,7 +44,7 @@ public class muestra_reporte_config {
                     go_muestra_pestania.rpt_lista_usuario(jr, nombre);
                     break;
                 case 1:
-                    go_muestra_pestania.rpt_lista_sucursal(jr,nombre);
+                    go_muestra_pestania.rpt_lista_sucursal(jr, nombre);
                     break;
                 case 2:
                     go_muestra_pestania.rpt_lista_almacen(jr, nombre);

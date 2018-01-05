@@ -25,7 +25,7 @@ public class CONEXION_emp {
             ls_server = lp_p.getProperty("Server_emp");
             ls_nombre = lp_p.getProperty("Nombre_emp");
             ls_port = lp_p.getProperty("Port_emp");
-            
+
             Class.forName("org.postgresql.Driver");
             lq_con = DriverManager.getConnection("jdbc:postgresql://" + ls_server + ":" + ls_port + "/" + ls_nombre, "postgres", "CaDm1414");
             lq_con.setAutoCommit(false);
@@ -38,8 +38,7 @@ public class CONEXION_emp {
 
     public Statement crearStatement() {
         try {
-            getConexion_emp();
-            lq_stm = lq_con.createStatement();
+            lq_stm = getConexion_emp().createStatement();
         } catch (SQLException e) {
         }
         return lq_stm;
