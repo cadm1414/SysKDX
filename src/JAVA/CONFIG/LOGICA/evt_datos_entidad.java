@@ -88,6 +88,7 @@ public class evt_datos_entidad {
         OBJ_pde.TXT_codigo_entidad.setText("");
         OBJ_pde.CBX_estado.setSelectedIndex(1);
         OBJ_pde.CBX_tipo_persona.setSelectedIndex(0);
+        go_cbx_trato_datos.selecciona_valor(4, "1", OBJ_pde.CBX_tipo_documento_id);
         OBJ_pde.TXT_numero_doc_id.setText("");
         OBJ_pde.TXT_papellido.setText("");
         OBJ_pde.TXT_sapellido.setText("");

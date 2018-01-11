@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_aceptar_cancelar;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import JAVA.ANCESTRO.LOGICA.evt_aceptar_cancelar;
+import JAVA.DISTBR.GUI.dlg_busq_programacion;
 import JAVA.VENTAS.LOGICA.formato_grid_pedido;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -25,7 +26,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
     ResultSet lq_rs;
     int cont = 0, li_tipo_operacion, li_item;
     DefaultTableModel modelo;
-    String ls_codigo_pedido, ls_espedido, ls_serie, ls_codigo_sucursal, ls_codigo_documento;
+    String ls_codigo_pedido, ls_espedido, ls_serie, ls_codigo_sucursal, ls_codigo_documento, ls_tipo_guia;
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_datos_seleccion_pedido";
     public String ls_item_seleccion[];
 
@@ -45,16 +46,18 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         ls_serie = gs_parametros[0];
         ls_codigo_sucursal = gs_parametros[1];
         ls_codigo_documento = gs_parametros[2];
+        ls_tipo_guia = gs_parametros[3];
         li_item = gi_parametros_2[0];
         ls_item_seleccion = new String[li_item + 1];
         ls_item_seleccion[0] = "0";
 
         lo_pnl_datos_seleccion_pedido.TXT_serie.setText(ls_serie);
         lo_pnl_datos_seleccion_pedido.TXT_pedido.requestFocus();
-        
+
         gs_parametros[0] = "";
         gs_parametros[1] = "";
         gs_parametros[2] = "";
+        gs_parametros[3] = "";
         gi_parametros_2[0] = 0;
 
         modelo = (DefaultTableModel) lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getModel();
@@ -81,6 +84,12 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         gs_parametros[3] = ls_serie;
         gs_parametros[4] = "0";
         gs_parametros[5] = ls_codigo_documento;
+    }
+
+    private void genera_parametros_pr() {
+        gs_parametros[0] = lo_pnl_datos_seleccion_pedido.TXT_serie.getText().trim();
+        gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
     }
 
     private void cuenta_seleccion() {
@@ -149,6 +158,38 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         }
     }
 
+    private void muestra_datos_ref_pr(String codigo) {
+        int a = 0;
+        limpia_tabla();
+        lo_pnl_datos_seleccion_pedido.LBL_total.setText("0");
+        lo_pnl_datos_seleccion_pedido.JRD_todos.setSelected(false);
+        lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setDefaultRenderer(Double.class, new formato_grid_pedido());
+        try {
+            lq_rs = go_dao_programacion_detalle.SLT_grid_programacion_gui(codigo);
+            if (lq_rs != null) {
+                li_tipo_operacion = 1;
+                lo_pnl_datos_seleccion_pedido.TXT_pedido.setText(codigo.substring(6));
+                do {
+                    modelo.addRow(new Object[]{"", "", "", null, null, null, false});
+                    lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setValueAt(lq_rs.getString(1), a, 0);
+                    lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setValueAt(lq_rs.getString(2), a, 1);
+                    lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setValueAt(lq_rs.getString(3), a, 2);
+                    lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setValueAt(lq_rs.getInt(4), a, 3);
+                    lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setValueAt(lq_rs.getDouble(5), a, 4);
+                    lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setValueAt(lq_rs.getDouble(6), a, 5);
+                    lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.setValueAt(false, a, 6);
+                    a++;
+                } while (lq_rs.next());
+            } else {
+                go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "muestra_datos_ref_pr", "PEDIDO NO EXISTE y/o ES FACTURADO");
+                ls_item_seleccion[0] = "0";
+                lo_pnl_datos_seleccion_pedido.TXT_pedido.setText("");
+                lo_pnl_datos_seleccion_pedido.TXT_pedido.requestFocus();
+            }
+        } catch (Exception e) {
+        }
+    }
+
     private void evt_f5_pedido() {
         genera_parametros_pedido();
         go_dlg_busq_pedido = new dlg_busq_pedido(null, true);
@@ -161,6 +202,16 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         }
     }
 
+    private void evt_f5_programacion() {
+        genera_parametros_pr();
+        go_dlg_busq_programacion = new dlg_busq_programacion(null, true);
+        go_dlg_busq_programacion.setVisible(true);
+        ls_codigo_pedido = go_dlg_busq_programacion.ls_codigo;
+        if (ls_codigo_pedido != null) {
+            muestra_datos_ref_pr(ls_codigo_pedido);
+        }
+    }
+
     private void evt_aceptar() {
         int a = 0;
         ls_item_seleccion[0] = ls_codigo_pedido;
@@ -169,9 +220,9 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
             for (int i = 0; i < modelo.getRowCount(); i++) {
                 if ((boolean) lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 6)) {
                     if (a == 0) {
-                        ls_item_seleccion[1] = ls_item_seleccion[1] + "'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 0).toString() + "'";
+                        ls_item_seleccion[1] = ls_item_seleccion[1] + "'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, (ls_tipo_guia.equalsIgnoreCase("05"))?1:0).toString() + "'";
                     } else {
-                        ls_item_seleccion[1] = ls_item_seleccion[1] + ",'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 0).toString() + "'";
+                        ls_item_seleccion[1] = ls_item_seleccion[1] + ",'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, (ls_tipo_guia.equalsIgnoreCase("05"))?1:0).toString() + "'";
                     }
                     a++;
                 }
@@ -205,7 +256,11 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_F5) {
                 if (ke.getSource() == lo_pnl_datos_seleccion_pedido.TXT_pedido) {
-                    evt_f5_pedido();
+                    if (!ls_tipo_guia.equalsIgnoreCase("05")) {
+                        evt_f5_pedido();
+                    } else {
+                        evt_f5_programacion();
+                    }
                 }
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {

@@ -438,9 +438,11 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
     }
 
     private void evt_f5_seleccion_pedido() {
+        lo_cbx_tabla_ayuda = (cbx_tabla_ayuda) lo_pnl_cab_guiar.CBX_tipo_op.getSelectedItem();
         gs_parametros[0] = ls_serie;
         gs_parametros[1] = ls_codigo_sucursal;
         gs_parametros[2] = "%";
+        gs_parametros[3] = lo_cbx_tabla_ayuda.getID();
         gi_parametros_2[0] = li_cantidad;
         ls_item_seleccion[0] = "0";
         ls_codigo_pedido = "";
@@ -471,6 +473,35 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                     lo_pnl_cab_guiar.TXT_transportista.setEnabled(true);
                     lo_pnl_cab_guiar.TXT_dias_credito.setEnabled(false);
                     lo_pnl_cab_guiar.TXT_serie_doc_ref.requestFocus();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void evt_f5_seleccion_pr() {
+        lo_cbx_tabla_ayuda = (cbx_tabla_ayuda) lo_pnl_cab_guiar.CBX_tipo_op.getSelectedItem();
+        gs_parametros[0] = ls_serie;
+        gs_parametros[1] = ls_codigo_sucursal;
+        gs_parametros[2] = "%";
+        gs_parametros[3] = lo_cbx_tabla_ayuda.getID();
+        gi_parametros_2[0] = li_cantidad;
+        ls_item_seleccion[0] = "0";
+        ls_codigo_pedido = "";
+        go_dlg_datos_seleccion_pedido = new dlg_datos_seleccion_pedido(null, true);
+        go_dlg_datos_seleccion_pedido.setVisible(true);
+        ls_item_seleccion = go_dlg_datos_seleccion_pedido.ls_item_seleccion;
+        if (!ls_item_seleccion[0].equalsIgnoreCase("0")) {
+            lo_pnl_cab_guiar.TXT_pedido.setText(ls_item_seleccion[0].substring(6));
+            try {
+                lq_rs = go_dao_programacion_detalle.SLT_datos_pr_detalle_x_item(ls_item_seleccion[0], ls_item_seleccion[1]);
+                if (lq_rs != null) {
+                    lo_evt_grid_pedidos.recupera_detalle_pr(lq_rs, lo_pnl_grid_pedidos);
+                    for (int i = 0; i < lo_pnl_grid_pedidos.TBL_pedidos.getRowCount(); i++) {
+                        genera_importe(i);
+                    }
+                    lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -733,7 +764,12 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                     evt_f5_transportista();
                 }
                 if (ke.getSource() == lo_pnl_cab_guiar.TXT_pedido) {
-                    evt_f5_seleccion_pedido();
+                    lo_cbx_tabla_ayuda = (cbx_tabla_ayuda) lo_pnl_cab_guiar.CBX_tipo_op.getSelectedItem();
+                    if (!lo_cbx_tabla_ayuda.getID().equalsIgnoreCase("05")) {
+                        evt_f5_seleccion_pedido();
+                    } else {
+                        evt_f5_seleccion_pr();
+                    }
                 }
                 if (ke.getSource() == lo_pnl_cab_guiar.TXT_codigo_vendedor) {
                     go_activa_buscador.busq_vendedor(lo_pnl_cab_guiar.TXT_codigo_vendedor, lo_pnl_cab_guiar.TXT_nombre_vendedor);

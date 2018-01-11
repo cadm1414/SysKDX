@@ -146,6 +146,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
         gs_parametros[0] = ls_codigo_sucursal;
         gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
         gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[3] = "%";
     }
 
     private void evt_f5_transportista() {
@@ -294,7 +295,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
             lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
         }
     }
-    
+
     private void evt_imprimir(String status, String codigo) {
         if (status.equalsIgnoreCase("1")) {
             Map<String, Object> parametros = new HashMap<>();
@@ -397,7 +398,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                     evt_cancelar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
-                       evt_imprimir(lo_bean_programacion.getStatus(), lo_bean_programacion.getCodigo_programacion());
+                    evt_imprimir(lo_bean_programacion.getStatus(), lo_bean_programacion.getCodigo_programacion());
                 }
                 if (ke.getSource() == lo_pnl_datos_programacion.TXT_numero) {
                     if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_datos_programacion.TXT_numero)) {
@@ -532,7 +533,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 613, Short.MAX_VALUE)
+            .addGap(0, 618, Short.MAX_VALUE)
         );
 
         pack();

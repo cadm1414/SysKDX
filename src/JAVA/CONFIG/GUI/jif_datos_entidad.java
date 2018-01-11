@@ -240,6 +240,10 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
     }
 
     private void evt_guardar() {
+        if (li_tipo_operacion == 0) {
+            genera_codigo_entidad(lo_pnl_datos_entidad.TXT_razon_social.getText().trim());
+        }
+
         lo_cbx_tipo_doc_id = (cbx_tabla_sunat) lo_pnl_datos_entidad.CBX_tipo_documento_id.getSelectedItem();
         lo_cbx_sucursal = (cbx_sucursal) lo_pnl_datos_entidad.CBX_sucursal.getSelectedItem();
         lo_cbx_vendedor = (cbx_vendedor) lo_pnl_datos_entidad.CBX_vendedor.getSelectedItem();
@@ -609,10 +613,6 @@ public class jif_datos_entidad extends javax.swing.JInternalFrame {
                     }
                 }
                 if (ke.getSource() == lo_pnl_datos_entidad.TXT_papellido) {
-                    if (li_tipo_operacion == 0) {
-                        genera_codigo_entidad(lo_pnl_datos_entidad.TXT_razon_social.getText().trim());
-                    }
-
                     if (go_fnc_operaciones_campos.cant_caracter(lo_pnl_datos_entidad.TXT_papellido.getText().trim(), 1, 3)) {
                         getFocusOwner().transferFocus();
                     }

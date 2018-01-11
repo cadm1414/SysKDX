@@ -22,7 +22,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
         TBL_pedidos = new javax.swing.JTable(){
             public void changeSelection(int row, int column, boolean toggle,boolean extend){
                 super.changeSelection(row, column, toggle, extend);
-                if (editCellAt(row, column) && column != 1){
+                if (editCellAt(row, column) && column !=1){
                     Component editor = getEditorComponent();
                     editor.requestFocusInWindow();
                     ((JTextComponent)editor).selectAll();
@@ -33,6 +33,7 @@ public class pnl_grid_pedidos extends javax.swing.JPanel {
                 switch(column){
                     case 1:
                     resp = true;
+                    break;
                     case 2:
                     resp = true;
                     break;

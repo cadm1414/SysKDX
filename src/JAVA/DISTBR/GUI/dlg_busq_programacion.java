@@ -18,7 +18,7 @@ public class dlg_busq_programacion extends javax.swing.JDialog {
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
     public String ls_codigo;
-    String ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_es_facturado, ls_codigo_doc_ref;
+    String ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_es_facturado, ls_codigo_doc_ref, ls_es_liquidado;
     String ls_modulo = "DISTBR", ls_capa = "GUI", ls_clase = "dlg_busq_programacion";
 
     public dlg_busq_programacion(java.awt.Frame parent, boolean modal) {
@@ -33,10 +33,12 @@ public class dlg_busq_programacion extends javax.swing.JDialog {
         ls_codigo_sucursal = gs_parametros[0];
         ls_fecha_ini = gs_parametros[1];
         ls_fecha_fin = gs_parametros[2];
+        ls_es_liquidado = gs_parametros[3];
 
         gs_parametros[0] = "";
         gs_parametros[1] = "";
         gs_parametros[2] = "";
+        gs_parametros[3] = "";
 
         TXT_fecha_ini.setText(ls_fecha_ini);
         TXT_fecha_fin.setText(ls_fecha_fin);
@@ -59,7 +61,7 @@ public class dlg_busq_programacion extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_programacion.TBL_programacion.getModel();
         try {
-            lq_rs = go_dao_programacion.SLT_grid_programacion(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin);
+            lq_rs = go_dao_programacion.SLT_grid_programacion(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_es_liquidado);
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});

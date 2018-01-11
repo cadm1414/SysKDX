@@ -29,10 +29,10 @@ public class DAO_programacion {
         return null;
     }
 
-    public ResultSet SLT_grid_programacion(String codigo_sucursal, String fecha_ini, String fecha_fin) {
+    public ResultSet SLT_grid_programacion(String codigo_sucursal, String fecha_ini, String fecha_fin, String es_liquidado) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_grid_programacion('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + gs_periodo + "') "
+            String SQL = "select * from slt_grid_programacion('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','"+es_liquidado+"','" + gs_periodo + "') "
                     + "as (codigo_programacion character(16),fecha date,numero character(10),liquidado text)";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
@@ -79,13 +79,13 @@ public class DAO_programacion {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_programacion", e.getMessage());
         }
         return resp;
-    }    
-    
+    }
+
     public boolean IST_programacion(BEAN_programacion OBJ_ped, JTable OBJ_pgp) throws SQLException {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from ist_programacion('" + OBJ_ped.getCodigo_programacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_reparto() + "','" + OBJ_ped.getCodigo_transportista() + "','" + OBJ_ped.getNombre_transportista() + "','" + OBJ_ped.getNumero_licencia() + "','" + OBJ_ped.getRazon_social_trans() + "','" + OBJ_ped.getRuc_trans() + "','" + OBJ_ped.getCodigo_vehiculo() + "','" + OBJ_ped.getMarca() + "','" + OBJ_ped.getNumero_civ() + "','" + OBJ_ped.getCodigo_vehiculo_2() + "','" + OBJ_ped.getMarca_2() + "','" + OBJ_ped.getNumero_civ_2() + "','" + OBJ_ped.getEs_liquidado() + "','" + OBJ_ped.getStatus() + "','" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getFecha_preventa()+ "','" + gs_periodo + "')";
+            String SQL = "select * from ist_programacion('" + OBJ_ped.getCodigo_programacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_reparto() + "','" + OBJ_ped.getCodigo_transportista() + "','" + OBJ_ped.getNombre_transportista() + "','" + OBJ_ped.getNumero_licencia() + "','" + OBJ_ped.getRazon_social_trans() + "','" + OBJ_ped.getRuc_trans() + "','" + OBJ_ped.getCodigo_vehiculo() + "','" + OBJ_ped.getMarca() + "','" + OBJ_ped.getNumero_civ() + "','" + OBJ_ped.getCodigo_vehiculo_2() + "','" + OBJ_ped.getMarca_2() + "','" + OBJ_ped.getNumero_civ_2() + "','" + OBJ_ped.getEs_liquidado() + "','" + OBJ_ped.getStatus() + "','" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getFecha_preventa() + "','" + gs_periodo + "')";
 
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {

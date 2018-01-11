@@ -46,4 +46,36 @@ public class DAO_programacion_detalle {
         return resp;
     }
 
+    public ResultSet SLT_grid_programacion_gui(String codigo_operacion) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_programacion_gui('" + codigo_operacion + "','" + gs_periodo + "') "
+                    + "as (item text,codigo_articulo character(12),nombre_articulo character varying(150),bulto bigint,peso_bruto numeric,peso_neto numeric)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_programacion_gui", e.getMessage());
+        }
+        return null;
+    }
+    
+    public ResultSet SLT_datos_pr_detalle_x_item(String codigo_operacion, String items) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_datos_pr_detalle_x_item('" + codigo_operacion + "',$$" + items + "$$,'" + gs_periodo + "') "
+                    + "as (item text,es_presentacion character(1),bulto bigint,codigo_articulo character(12),nombre_articulo character varying(150),tara numeric(6,3),simbolo_unidad character varying(3),afecto_igv character(1),porcentaje_percepcion numeric(5,3),precio_cigv numeric,peso_bruto numeric,peso_neto numeric,presentacion numeric,precio_min numeric,codigo_op_ref character(16),item_ref text)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "slt_datos_pr_detalle_x_item", e.getMessage());
+        }
+        return null;
+    }
+
 }

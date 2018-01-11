@@ -2,6 +2,7 @@ package JAVA.VENTAS.LOGICA;
 
 import JAVA.ANCESTRO.LOGICA.jt_panel;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.VENTAS.GUI.pnl_rpt_ventas_x_vendedor;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
 import JAVA.VENTAS.REPORT.pnl_rpt_correlativo_doc;
@@ -73,7 +74,7 @@ public class muestra_pestania_ventas {
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }
-    
+
     public void rpt_registro_ventas(JRViewer jr, String nombre) {
         go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_registro_ventas);
         jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
@@ -88,7 +89,7 @@ public class muestra_pestania_ventas {
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }
-    
+
     public void rpt_resumen_documento(JRViewer jr, String nombre) {
         go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_resumen_documento);
         jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
@@ -103,7 +104,7 @@ public class muestra_pestania_ventas {
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }
-    
+
     public void rpt_correlativo_doc(JRViewer jr, String nombre) {
         go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_correlativo_doc);
         jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
@@ -115,6 +116,21 @@ public class muestra_pestania_ventas {
         go_pnl_rpt_correlativo_doc.repaint();
         go_pnl_rpt_correlativo_doc.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_correlativo_doc);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+
+    public void rpt_ventas_x_vendedor(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_ventas_x_vendedor);
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_ventas_x_vendedor = new pnl_rpt_ventas_x_vendedor();
+        go_pnl_rpt_ventas_x_vendedor.removeAll();
+        go_pnl_rpt_ventas_x_vendedor.setLayout(new BorderLayout());
+        go_pnl_rpt_ventas_x_vendedor.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_ventas_x_vendedor.setVisible(true);
+        go_pnl_rpt_ventas_x_vendedor.repaint();
+        go_pnl_rpt_ventas_x_vendedor.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_ventas_x_vendedor);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }

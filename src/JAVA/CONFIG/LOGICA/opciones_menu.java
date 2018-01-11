@@ -155,6 +155,10 @@ public class opciones_menu {
                     go_muestra_dlg_ventas.muestra_dlg_ini_sucursal();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("PEDIDOS X VENDEDOR")) {
+                    go_muestra_dlg_ventas.muestra_dlg_rpt_ventas_x_vendedor();
+                    resp = "I";
+                }
                 break;
             case "CTACOB":
                 if (dato.equalsIgnoreCase("SALDO CTA CORRIENTE")) {
@@ -188,7 +192,11 @@ public class opciones_menu {
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("PROGRAMACION REPARTO")) {
-                    go_muestra_dlg_distbr.muestra_dlg_ini_sucursal("PG");
+                    go_muestra_dlg_distbr.muestra_dlg_programacion("PG", 1);
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("LIQUIDACION")) {
+                    go_muestra_dlg_distbr.muestra_dlg_liquidacion("LQ", 2);
                     resp = "I";
                 }
                 break;

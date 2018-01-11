@@ -352,6 +352,40 @@ public class evt_grid_pedidos {
         }
     }
 
+    public void recupera_detalle_pr(ResultSet rs, pnl_grid_pedidos OBJ_pgp) {
+        int a = 0;
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
+        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
+        if (rs != null) {
+            try {
+                do {
+                    modelo.addRow(new Object[]{null, null, null, "", "", null, "", false, null, null, null, null, null, null, genera_btn_eliminar(), 1});
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(1), a, 0);
+                    OBJ_pgp.TBL_pedidos.setValueAt(go_fnc_operaciones_campos.int_boolean(rs.getInt(2)), a, 1);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getInt(3), a, 2);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(4), a, 3);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(5), a, 4);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(6), a, 5);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(7), a, 6);
+                    OBJ_pgp.TBL_pedidos.setValueAt(go_fnc_operaciones_campos.int_boolean(rs.getInt(8)), a, 7);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(9), a, 8);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(10), a, 9);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(11), a, 10);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(12), a, 11);
+                    OBJ_pgp.TBL_pedidos.setValueAt(0.00, a, 13);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(13), a, 15);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getDouble(14), a, 16);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(15), a, 17);
+                    OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(16), a, 18);
+                    a++;
+                } while (rs.next());                
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     public KeyListener evento_press(pnl_grid_pedidos OBJ_pgp, KeyListener KeyEvnt) {
         OBJ_pgp.TBL_pedidos.addKeyListener(KeyEvnt);
         return KeyEvnt;

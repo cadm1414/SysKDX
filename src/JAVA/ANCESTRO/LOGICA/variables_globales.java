@@ -105,10 +105,12 @@ import JAVA.CTACOB.REPORT.pnl_rpt_estado_cuenta;
 import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas;
 import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas_sr;
 import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
+import JAVA.DISTBR.DAO.DAO_liquidacion;
 import JAVA.DISTBR.DAO.DAO_programacion;
 import JAVA.DISTBR.DAO.DAO_programacion_detalle;
 import JAVA.DISTBR.GUI.dlg_busq_doc;
 import JAVA.DISTBR.GUI.dlg_busq_programacion;
+import JAVA.DISTBR.GUI.jif_liquidacion;
 import JAVA.DISTBR.LOGICA.muestra_dlg_distbr;
 import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
 import JAVA.INVENT.GUI.dlg_rpt_producto_x_movimiento;
@@ -125,7 +127,9 @@ import JAVA.DISTBR.GUI.jif_preliminar;
 import JAVA.DISTBR.GUI.jif_programacion;
 import JAVA.DISTBR.LOGICA.evt_imprime_doc_distbr;
 import JAVA.DISTBR.LOGICA.muestra_jif_distbr;
+import JAVA.VENTAS.GUI.dlg_rpt_ventas_x_vendedor;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
+import JAVA.VENTAS.GUI.pnl_rpt_ventas_x_vendedor;
 import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
 import JAVA.VENTAS.LOGICA.muestra_dlg_ventas;
 import JAVA.VENTAS.LOGICA.muestra_jif_ventas;
@@ -229,6 +233,7 @@ public class variables_globales {
     public static DAO_sector_distribucion go_dao_sector_distribucion = new DAO_sector_distribucion();
     public static DAO_programacion go_dao_programacion = new DAO_programacion();
     public static DAO_programacion_detalle go_dao_programacion_detalle = new DAO_programacion_detalle();
+    public static DAO_liquidacion go_dao_liquidacion = new DAO_liquidacion();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -311,6 +316,7 @@ public class variables_globales {
     public static dlg_busq_doc go_dlg_busq_doc;
     public static dlg_busq_programacion go_dlg_busq_programacion;
     public static dlg_periodo go_dlg_periodo;
+    public static dlg_rpt_ventas_x_vendedor go_dlg_rpt_ventas_x_vendedor;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -339,6 +345,7 @@ public class variables_globales {
     public static jif_nota_credito go_jif_nota_credito;
     public static jif_preliminar go_jif_preliminar;
     public static jif_programacion go_jif_programacion;
+    public static jif_liquidacion go_jif_liquidacion;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;
@@ -371,5 +378,6 @@ public class variables_globales {
     public static pnl_rpt_listado_cobranzas go_pnl_rpt_listado_cobranzas;
     public static pnl_rpt_listado_cobranzas_sr go_pnl_rpt_listado_cobranzas_sr;
     public static pnl_rpt_correlativo_doc go_pnl_rpt_correlativo_doc;
+    public static pnl_rpt_ventas_x_vendedor go_pnl_rpt_ventas_x_vendedor;
 
 }
