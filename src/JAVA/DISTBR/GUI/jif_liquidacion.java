@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_opciones_3;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_3;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
+import JAVA.DISTBR.BEAN.BEAN_liquidacion;
 import JAVA.DISTBR.LOGICA.evt_cab_liquidacion;
 import JAVA.DISTBR.LOGICA.evt_grid_liquidacion;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
     evt_cab_liquidacion lo_evt_cab_liquidacion = new evt_cab_liquidacion();
     pnl_grid_liquidacion lo_pnl_grid_liquidacion = new pnl_grid_liquidacion();
     evt_grid_liquidacion lo_evt_grid_liquidacion = new evt_grid_liquidacion();
+    BEAN_liquidacion lo_bean_liquidacion = new BEAN_liquidacion();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
     static boolean lb_valor_op[] = new boolean[8];
     ResultSet lq_rs;
@@ -49,7 +51,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
     private void formulario() {
         lo_pnl_opciones_3.setBounds(0, 10, 1000, 110);
         lo_pnl_cab_liquidacion.setBounds(12, 120, 1100, 135);
-        lo_pnl_grid_liquidacion.setBounds(13, 255, 1100, 280);
+        lo_pnl_grid_liquidacion.setBounds(13, 255, 1100, 350);
 
         this.add(lo_pnl_opciones_3);
         this.add(lo_pnl_cab_liquidacion);
@@ -78,6 +80,14 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
         lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
     }
 
+    private void genera_importe(int fila) {
+        try {
+            double importe = (double) lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(fila, 5) - (double) lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(fila, 8) - (double) lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(fila, 9);
+            lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(importe, fila, 10);
+        } catch (Exception e) {
+        }
+    }
+
     private void genera_parametros_busq_pr() {
         gs_parametros[0] = ls_codigo_sucursal;
         gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
@@ -86,13 +96,32 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
     }
 
     private void evt_f5_pr() {
-        li_tipo_operacion = 2;
         genera_parametros_busq_pr();
         go_dlg_busq_programacion = new dlg_busq_programacion(null, true);
         go_dlg_busq_programacion.setVisible(true);
         ls_codigo_programacion = go_dlg_busq_programacion.ls_codigo;
         if (ls_codigo_programacion != null) {
             lo_pnl_cab_liquidacion.TXT_programacion.setText(ls_codigo_programacion.substring(6));
+            try {
+                lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion);
+                lq_rs = go_dao_programacion.SLT_grid_datos_pr(ls_codigo_programacion);
+                if (lq_rs != null) {
+                    int a = 0;
+                    do {
+                        lo_evt_grid_liquidacion.agrega_fila(lo_pnl_grid_liquidacion, a - 1);
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(lq_rs.getString(1), a, 0);
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(lq_rs.getString(2), a, 2);
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(lq_rs.getString(3), a, 3);
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(lq_rs.getString(4), a, 4);
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(lq_rs.getDouble(5), a, 5);
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(lq_rs.getDouble(5), a, 8);
+                        a++;
+                    } while (lq_rs.next());
+                    lo_pnl_grid_liquidacion.TBL_liquidacion.requestFocus();
+                    lo_pnl_grid_liquidacion.TBL_liquidacion.changeSelection(0, 8, false, false);
+                }
+            } catch (Exception e) {
+            }
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "SELECCIONE DOCUMENTO");
         }
@@ -118,6 +147,32 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
         lo_evt_grid_liquidacion.activa_campos(0, lo_pnl_grid_liquidacion, true);
     }
 
+    private void evt_guardar() {
+        switch (li_tipo_operacion) {
+            case 0:
+                if (lo_evt_cab_liquidacion.valida_campos(lo_pnl_cab_liquidacion)) {
+                    if (lo_evt_grid_liquidacion.valida_campos(lo_pnl_grid_liquidacion)) {
+                        try {
+                            ls_codigo = "LQ" + ls_serie + lo_pnl_cab_liquidacion.TXT_numero.getText().trim();
+                            lo_bean_liquidacion.setCodigo_operacion(ls_codigo);
+                            lo_bean_liquidacion.setCodigo_sucursal(ls_codigo_sucursal);
+                            lo_bean_liquidacion.setCodigo_programacion(ls_codigo_programacion);
+                            lo_evt_cab_liquidacion.setea_campos(lo_bean_liquidacion, lo_pnl_cab_liquidacion, lo_pnl_grid_liquidacion);
+                            if (go_dao_liquidacion.IST_liquidacion(lo_bean_liquidacion, lo_pnl_grid_liquidacion.TBL_liquidacion)) {
+                                lo_evt_cab_liquidacion.limpia_datos(lo_pnl_cab_liquidacion);
+                                lo_evt_cab_liquidacion.activa_campos(0, lo_pnl_cab_liquidacion, false);
+                                lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion);
+                                lo_evt_grid_liquidacion.activa_campos(0, lo_pnl_grid_liquidacion, false);
+                                lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -137,7 +192,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
                 //evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_guardar) {
-                // evt_guardar();
+                evt_guardar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_anular) {
                 //evt_anular();
@@ -172,7 +227,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
                 //evt_cancelar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_3.BTN_guardar.isEnabled()) {
-                //evt_guardar();
+                evt_guardar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F5) {
                 if (ke.getSource() == lo_pnl_cab_liquidacion.TXT_programacion) {
@@ -193,7 +248,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
                     //evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_guardar) {
-                    // evt_guardar();
+                    evt_guardar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_anular) {
                     //   evt_anular();
@@ -241,7 +296,22 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
 
         @Override
         public void keyReleased(KeyEvent ke) {
-
+            if (ke.getSource() == lo_pnl_cab_liquidacion.TXT_numero) {
+                lo_pnl_cab_liquidacion.LBL_numero_doc.setText(lo_pnl_cab_liquidacion.TXT_numero.getText());
+            }
+            if (ke.getSource() == lo_pnl_grid_liquidacion.TBL_liquidacion) {
+                int fila = lo_pnl_grid_liquidacion.TBL_liquidacion.getSelectedRow();
+                lo_evt_grid_liquidacion.suma_importes(lo_pnl_grid_liquidacion);
+                genera_importe(fila);
+            }
+            if (lo_pnl_grid_liquidacion.TBL_liquidacion.getSelectedColumn() == 10) {
+                int fila = lo_pnl_grid_liquidacion.TBL_liquidacion.getSelectedRow();
+                if (fila < lo_pnl_grid_liquidacion.TBL_liquidacion.getRowCount()) {
+                    lo_pnl_grid_liquidacion.TBL_liquidacion.changeSelection(fila + 1, 8, false, false);
+                } else {
+                    lo_pnl_grid_liquidacion.TBL_liquidacion.changeSelection(fila - 1, 8, false, false);
+                }
+            }
         }
     };
 
@@ -257,6 +327,14 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
                         lo_evt_grid_liquidacion.elimina_fila(lo_pnl_grid_liquidacion, fila);
                         lo_evt_grid_liquidacion.genera_item(lo_pnl_grid_liquidacion);
                     }
+                }
+                if (columna == 6) {
+                    if ((boolean) lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(fila, 6)) {
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(Double.parseDouble(lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(fila, 5).toString()), fila, 8);
+                    } else {
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(0.00, fila, 8);
+                    }
+                    genera_importe(fila);
                 }
             }
         }
@@ -317,7 +395,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
+            .addGap(0, 573, Short.MAX_VALUE)
         );
 
         pack();

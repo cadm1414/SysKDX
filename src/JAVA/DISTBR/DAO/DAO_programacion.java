@@ -118,4 +118,20 @@ public class DAO_programacion {
         }
         return resp;
     }
+    
+    public ResultSet SLT_grid_datos_pr(String codigo_programacion) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_datos_pr('" + codigo_programacion + "','" + gs_periodo + "') "
+                    + "as (codigo_programacion character(16),codigo_operacion character(16),numero_documento character(10),razon_social character varying(250),total_documento numeric)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_datos_pr", e.getMessage());
+        }
+        return null;
+    }
 }

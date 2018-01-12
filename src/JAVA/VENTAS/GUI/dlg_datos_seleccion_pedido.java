@@ -90,6 +90,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         gs_parametros[0] = lo_pnl_datos_seleccion_pedido.TXT_serie.getText().trim();
         gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
         gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[3] = "%";
     }
 
     private void cuenta_seleccion() {
@@ -220,9 +221,9 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
             for (int i = 0; i < modelo.getRowCount(); i++) {
                 if ((boolean) lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, 6)) {
                     if (a == 0) {
-                        ls_item_seleccion[1] = ls_item_seleccion[1] + "'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, (ls_tipo_guia.equalsIgnoreCase("05"))?1:0).toString() + "'";
+                        ls_item_seleccion[1] = ls_item_seleccion[1] + "'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, (ls_tipo_guia.equalsIgnoreCase("05")) ? 1 : 0).toString() + "'";
                     } else {
-                        ls_item_seleccion[1] = ls_item_seleccion[1] + ",'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, (ls_tipo_guia.equalsIgnoreCase("05"))?1:0).toString() + "'";
+                        ls_item_seleccion[1] = ls_item_seleccion[1] + ",'" + lo_pnl_datos_seleccion_pedido.TBL_detalle_pedido.getValueAt(i, (ls_tipo_guia.equalsIgnoreCase("05")) ? 1 : 0).toString() + "'";
                     }
                     a++;
                 }
