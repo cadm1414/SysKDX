@@ -61,6 +61,7 @@ public class pnl_grid_liquidacion extends javax.swing.JPanel {
             }
         });
         TBL_liquidacion.setColumnSelectionAllowed(true);
+        TBL_liquidacion.setEnabled(false);
         TBL_liquidacion.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TBL_liquidacion);
         if (TBL_liquidacion.getColumnModel().getColumnCount() > 0) {

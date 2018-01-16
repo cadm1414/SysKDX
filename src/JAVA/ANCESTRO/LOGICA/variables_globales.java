@@ -106,9 +106,11 @@ import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas;
 import JAVA.CTACOB.REPORT.pnl_rpt_listado_cobranzas_sr;
 import JAVA.CTACOB.REPORT.pnl_rpt_tarjeta_cuenta_corriente;
 import JAVA.DISTBR.DAO.DAO_liquidacion;
+import JAVA.DISTBR.DAO.DAO_liquidacion_detalle;
 import JAVA.DISTBR.DAO.DAO_programacion;
 import JAVA.DISTBR.DAO.DAO_programacion_detalle;
 import JAVA.DISTBR.GUI.dlg_busq_doc;
+import JAVA.DISTBR.GUI.dlg_busq_liquidacion;
 import JAVA.DISTBR.GUI.dlg_busq_programacion;
 import JAVA.DISTBR.GUI.jif_liquidacion;
 import JAVA.DISTBR.LOGICA.muestra_dlg_distbr;
@@ -234,6 +236,7 @@ public class variables_globales {
     public static DAO_programacion go_dao_programacion = new DAO_programacion();
     public static DAO_programacion_detalle go_dao_programacion_detalle = new DAO_programacion_detalle();
     public static DAO_liquidacion go_dao_liquidacion = new DAO_liquidacion();
+    public static DAO_liquidacion_detalle go_dao_liquidacion_detalle = new DAO_liquidacion_detalle();
 
     //GUI
     public static frm_principal go_frm_principal;
@@ -317,6 +320,7 @@ public class variables_globales {
     public static dlg_busq_programacion go_dlg_busq_programacion;
     public static dlg_periodo go_dlg_periodo;
     public static dlg_rpt_ventas_x_vendedor go_dlg_rpt_ventas_x_vendedor;
+    public static dlg_busq_liquidacion go_dlg_busq_liquidacion;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

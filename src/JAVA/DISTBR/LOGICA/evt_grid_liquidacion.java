@@ -5,6 +5,7 @@ import JAVA.CTACOB.LOGICA.formato_grid_recibo_cobranza;
 import JAVA.DISTBR.GUI.pnl_grid_liquidacion;
 import JAVA.INVENT.LOGICA.formato_grid_saldos_iniciales;
 import java.awt.event.KeyListener;
+import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.JButton;
@@ -68,13 +69,18 @@ public class evt_grid_liquidacion {
 
     }
 
-    public void limpia_tabla(pnl_grid_liquidacion OBJ_pgp) {
+    public void limpia_tabla(pnl_grid_liquidacion OBJ_pgp, int op) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_liquidacion.getModel();
         for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
             modelo.removeRow(i);
         }
+        if (op != 2) {
+            OBJ_pgp.LBL_desc.setText("0.00");
+            OBJ_pgp.LBL_cr.setText("0.00");
+            OBJ_pgp.LBL_ef.setText("0.00");
+        }
     }
-    
+
     public boolean valida_campos(pnl_grid_liquidacion OBJ_pgp) {
         boolean resp = false;
         int valida = 0;
@@ -100,6 +106,32 @@ public class evt_grid_liquidacion {
             agrega_fila(OBJ_pgp, -1);
         }
         return resp;
+    }
+
+    public void recupera_detalle(ResultSet rs, pnl_grid_liquidacion OBJ_pgp) {
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_liquidacion.getModel();
+        OBJ_pgp.TBL_liquidacion.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        int a = 0;
+        if (rs != null) {
+            try {
+                do {
+                    modelo.addRow(new Object[]{"", "", "", "", "", null, "", "", null, null, null, genera_btn_eliminar()});
+                    OBJ_pgp.TBL_liquidacion.setValueAt(rs.getString(1), a, 0);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(rs.getString(2), a, 1);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(rs.getString(3), a, 2);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(rs.getString(4), a, 3);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(rs.getString(5), a, 4);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(rs.getDouble(6), a, 5);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(go_fnc_operaciones_campos.int_boolean(rs.getInt(7)), a, 6);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(go_fnc_operaciones_campos.int_boolean(rs.getInt(8)), a, 7);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(rs.getDouble(9), a, 8);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(rs.getDouble(10), a, 9);
+                    OBJ_pgp.TBL_liquidacion.setValueAt(rs.getDouble(11), a, 10);
+                    a++;
+                } while (rs.next());
+            } catch (Exception e) {
+            }
+        }
     }
 
     public void genera_item(pnl_grid_liquidacion OBJ_pgp) {

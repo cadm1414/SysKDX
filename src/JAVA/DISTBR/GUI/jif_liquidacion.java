@@ -80,6 +80,24 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
         lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
     }
 
+    private void get_descripcion_liquidacion(String codigo) {
+        try {
+            lq_rs = go_dao_liquidacion.SLT_datos_liquidacion(codigo);
+            if (lq_rs != null) {
+                lo_evt_cab_liquidacion.setea_recupera(lo_bean_liquidacion, lq_rs);
+                lo_evt_cab_liquidacion.muestra_datos(lo_pnl_cab_liquidacion, lo_bean_liquidacion, lo_pnl_grid_liquidacion);
+                get_descripcion_liquidacion_detalle(codigo);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void get_descripcion_liquidacion_detalle(String codigo) {
+        lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion, li_tipo_operacion);
+        lq_rs = go_dao_liquidacion_detalle.SLT_datos_liquidacion_detalle(codigo);
+        lo_evt_grid_liquidacion.recupera_detalle(lq_rs, lo_pnl_grid_liquidacion);
+    }
+
     private void genera_importe(int fila) {
         try {
             double importe = (double) lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(fila, 5) - (double) lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(fila, 8) - (double) lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(fila, 9);
@@ -95,6 +113,13 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
         gs_parametros[3] = "0";
     }
 
+    private void genera_parametros_busq() {
+        gs_parametros[0] = ls_codigo_sucursal;
+        gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[3] = "%";
+    }
+
     private void evt_f5_pr() {
         genera_parametros_busq_pr();
         go_dlg_busq_programacion = new dlg_busq_programacion(null, true);
@@ -103,7 +128,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
         if (ls_codigo_programacion != null) {
             lo_pnl_cab_liquidacion.TXT_programacion.setText(ls_codigo_programacion.substring(6));
             try {
-                lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion);
+                lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion, li_tipo_operacion);
                 lq_rs = go_dao_programacion.SLT_grid_datos_pr(ls_codigo_programacion);
                 if (lq_rs != null) {
                     int a = 0;
@@ -130,7 +155,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
     private void evt_nuevo() {
         ls_codigo = null;
         lo_evt_cab_liquidacion.limpia_datos(lo_pnl_cab_liquidacion);
-        lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion);
+        lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion, li_tipo_operacion);
         li_tipo_operacion = 0;
 
         try {
@@ -147,6 +172,44 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
         lo_evt_grid_liquidacion.activa_campos(0, lo_pnl_grid_liquidacion, true);
     }
 
+    private void evt_buscar() {
+        li_tipo_operacion = 2;
+        genera_parametros_busq();
+        go_dlg_busq_liquidacion = new dlg_busq_liquidacion(null, true);
+        go_dlg_busq_liquidacion.setVisible(true);
+        ls_codigo = go_dlg_busq_liquidacion.ls_codigo;
+        if (ls_codigo != null) {
+            get_descripcion_liquidacion(ls_codigo);
+            lo_evt_opciones_3.activa_btn_opciones(2, lo_pnl_opciones_3, lb_valor_op);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_buscar", "SELECCIONE DOCUMENTO");
+            lo_evt_cab_liquidacion.limpia_datos(lo_pnl_cab_liquidacion);
+            lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion, li_tipo_operacion);
+            lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+        }
+    }
+
+    private void evt_eliminar() {
+        //if (go_dao_pedido.FNC_verifica_pedido_facturado(ls_codigo).equalsIgnoreCase("0")) {
+        if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR DOCUMENTO Nro LQ - " + lo_bean_liquidacion.getNumero_documento() + "?") == 0) {
+            try {
+                if (go_dao_liquidacion_detalle.DLT_liquidacion_detalle(ls_codigo)) {
+                    if (go_dao_liquidacion.DLT_liquidacion(ls_codigo)) {
+                        lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                        lo_evt_cab_liquidacion.activa_campos(0, lo_pnl_cab_liquidacion, false);
+                        lo_evt_cab_liquidacion.limpia_datos(lo_pnl_cab_liquidacion);
+                        lo_evt_grid_liquidacion.activa_campos(0, lo_pnl_grid_liquidacion, false);
+                        lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion, 0);
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+//        } else {
+//            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_eliminar", "PEDIDO FACTURADO");
+//        }
+    }
+
     private void evt_guardar() {
         switch (li_tipo_operacion) {
             case 0:
@@ -161,7 +224,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
                             if (go_dao_liquidacion.IST_liquidacion(lo_bean_liquidacion, lo_pnl_grid_liquidacion.TBL_liquidacion)) {
                                 lo_evt_cab_liquidacion.limpia_datos(lo_pnl_cab_liquidacion);
                                 lo_evt_cab_liquidacion.activa_campos(0, lo_pnl_cab_liquidacion, false);
-                                lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion);
+                                lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion, li_tipo_operacion);
                                 lo_evt_grid_liquidacion.activa_campos(0, lo_pnl_grid_liquidacion, false);
                                 lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
                             }
@@ -173,6 +236,21 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
         }
     }
 
+    private void evt_cancelar() {
+        li_tipo_operacion = 2;
+        lo_evt_cab_liquidacion.activa_campos(0, lo_pnl_cab_liquidacion, false);
+        lo_evt_grid_liquidacion.activa_campos(0, lo_pnl_grid_liquidacion, false);
+        lo_evt_grid_liquidacion.limpia_tabla(lo_pnl_grid_liquidacion, li_tipo_operacion);
+        if (ls_codigo != null) {
+            lo_evt_cab_liquidacion.muestra_datos(lo_pnl_cab_liquidacion, lo_bean_liquidacion, lo_pnl_grid_liquidacion);
+            get_descripcion_liquidacion_detalle(ls_codigo);
+            lo_evt_opciones_3.activa_btn_opciones(2, lo_pnl_opciones_3, lb_valor_op);
+        } else {
+            lo_evt_cab_liquidacion.limpia_datos(lo_pnl_cab_liquidacion);
+            lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+        }
+    }
+
     ActionListener Listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -180,16 +258,16 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
                 evt_nuevo();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_buscar) {
-                // evt_buscar();
+                evt_buscar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_editar) {
                 //evt_editar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
-                // evt_eliminar();
+                evt_eliminar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_guardar) {
                 evt_guardar();
@@ -215,16 +293,16 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
                 evt_nuevo();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F2 && lo_pnl_opciones_3.BTN_buscar.isEnabled()) {
-                // evt_buscar();
+                evt_buscar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_3.BTN_editar.isEnabled()) {
                 //evt_editar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_3.BTN_eliminar.isEnabled()) {
-                //evt_eliminar();
+                evt_eliminar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_ESCAPE && lo_pnl_opciones_3.BTN_cancelar.isEnabled()) {
-                //evt_cancelar();
+                evt_cancelar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F6 && lo_pnl_opciones_3.BTN_guardar.isEnabled()) {
                 evt_guardar();
@@ -239,13 +317,13 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
                     evt_nuevo();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_buscar) {
-                    //evt_buscar();
+                    evt_buscar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_editar) {
                     //   evt_editar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
-                    //evt_eliminar();
+                    evt_eliminar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_guardar) {
                     evt_guardar();
@@ -254,7 +332,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
                     //   evt_anular();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
-                    //evt_cancelar();
+                    evt_cancelar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_imprimir) {
                     //evt_imprimir(lo_bean_programacion.getStatus(), lo_bean_programacion.getCodigo_programacion());

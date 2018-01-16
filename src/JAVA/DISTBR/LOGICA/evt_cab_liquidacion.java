@@ -4,9 +4,9 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.DISTBR.BEAN.BEAN_liquidacion;
 import JAVA.DISTBR.GUI.pnl_cab_liquidacion;
 import JAVA.DISTBR.GUI.pnl_grid_liquidacion;
-import JAVA.DISTBR.GUI.pnl_grid_programacion;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyListener;
+import java.sql.ResultSet;
 
 public class evt_cab_liquidacion {
 
@@ -66,7 +66,6 @@ public class evt_cab_liquidacion {
 
     public void setea_campos(BEAN_liquidacion OBJ_bpe, pnl_cab_liquidacion OBJ_pcp, pnl_grid_liquidacion OBJ_pgp) {
         try {
-
             OBJ_bpe.setNumero_documento(OBJ_pcp.TXT_numero.getText().trim());
             OBJ_bpe.setFecha_emision(OBJ_pcp.TXT_fecha_emision.getText().trim());
             OBJ_bpe.setObservacion(OBJ_pcp.TXT_observacion.getText().trim());
@@ -76,6 +75,37 @@ public class evt_cab_liquidacion {
             OBJ_bpe.setTotal_efectivo(Double.parseDouble(OBJ_pgp.LBL_ef.getText().replaceAll(",", "")));
         } catch (Exception e) {
         }
+    }
+
+    public void setea_recupera(BEAN_liquidacion OBJ_bpe, ResultSet lq_rs) {
+        try {
+            OBJ_bpe.setCodigo_operacion(lq_rs.getString(1));
+            OBJ_bpe.setCodigo_sucursal(lq_rs.getString(2));
+            OBJ_bpe.setFecha_emision(go_fnc_operaciones_campos.recupera_fecha_formato((lq_rs.getString(3))));
+            OBJ_bpe.setFecha_registro(go_fnc_operaciones_campos.recupera_fecha_formato(lq_rs.getString(4).substring(0, 10)) + " " + lq_rs.getString(4).substring(11));
+            OBJ_bpe.setNumero_documento(lq_rs.getString(5));
+            OBJ_bpe.setCodigo_programacion(lq_rs.getString(6));
+            OBJ_bpe.setObservacion(lq_rs.getString(7));
+            OBJ_bpe.setStatus(lq_rs.getString(8));
+            OBJ_bpe.setDescuento(lq_rs.getDouble(9));
+            OBJ_bpe.setTotal_credito(lq_rs.getDouble(10));
+            OBJ_bpe.setTotal_efectivo(lq_rs.getDouble(11));
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void muestra_datos(pnl_cab_liquidacion OBJ_pdp, BEAN_liquidacion OBJ_bpe, pnl_grid_liquidacion obj_glq) {
+        OBJ_pdp.TXT_numero.setText(OBJ_bpe.getNumero_documento());
+        OBJ_pdp.LBL_numero_doc.setText(OBJ_bpe.getNumero_documento());
+        OBJ_pdp.TXT_fecha_emision.setText(OBJ_bpe.getFecha_emision());
+        OBJ_pdp.LBL_fecha_registro.setText(OBJ_bpe.getFecha_registro());
+        OBJ_pdp.TXT_programacion.setText(OBJ_bpe.getCodigo_programacion().substring(6));
+        OBJ_pdp.TXT_observacion.setText(OBJ_bpe.getObservacion());
+        OBJ_pdp.CBX_estado.setSelectedIndex(Integer.parseInt(OBJ_bpe.getStatus()));
+        obj_glq.LBL_desc.setText(OBJ_bpe.getDescuento() + "");
+        obj_glq.LBL_cr.setText(OBJ_bpe.getTotal_credito() + "");
+        obj_glq.LBL_ef.setText(OBJ_bpe.getTotal_efectivo() + "");
     }
 
     public KeyListener evento_press(pnl_cab_liquidacion OBJ_pcp, KeyListener KeyEvnt) {

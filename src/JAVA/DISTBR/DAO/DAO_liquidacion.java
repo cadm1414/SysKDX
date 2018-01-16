@@ -29,6 +29,58 @@ public class DAO_liquidacion {
         return null;
     }
 
+    public ResultSet SLT_grid_liquidacion(String codigo_sucursal, String fecha_ini, String fecha_fin, String estado) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_liquidacion('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + estado + "','" + gs_periodo + "') "
+                    + "as (codigo_liquidacion character(16),fecha date,numero character(10),estado text)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_liquidacion", e.getMessage());
+        }
+        return null;
+    }
+
+    public ResultSet SLT_datos_liquidacion(String codigo_operacion) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_datos_liquidacion('" + codigo_operacion + "','" + gs_periodo + "') "
+                    + "as (codigo_operacion character(16) ,    codigo_sucursal character(4) ,     fecha_reparto date,    fecha_registro timestamp with time zone ,  numero_documento character(10) ,   codigo_programacion character(16),    observacion text ,     status character(1) , descuento numeric,total_credito numeric,total_efectivo numeric,periodo character(4))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_liquidacion", e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean DLT_liquidacion(String codigo_operacion) throws SQLException {
+        boolean resp = false;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from dlt_liquidacion('" + codigo_operacion + "','" + gs_periodo + "')";
+            lq_rs = lq_stm.executeQuery(SQL);
+            if (lq_rs.next()) {
+                lq_stm.getConnection().commit();
+                go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "DLT_liquidacion", "SE ACTUALIZO BASE DE DATOS");
+                resp = true;
+                go_dao_auditoria.IST_auditoria(codigo_operacion, SQL, ls_modulo, "3", "0052");
+            }
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+        } catch (Exception e) {
+            lq_stm.getConnection().rollback();
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "DLT_liquidacion", e.getMessage());
+        }
+        return resp;
+    }
+
     public boolean IST_liquidacion(BEAN_liquidacion OBJ_ped, JTable OBJ_pgp) throws SQLException {
         boolean resp = false;
         try {
@@ -45,12 +97,12 @@ public class DAO_liquidacion {
                             + "'" + OBJ_pgp.getValueAt(i, 3).toString().trim() + "',"
                             + "'" + OBJ_pgp.getValueAt(i, 4).toString().trim() + "',"
                             + OBJ_pgp.getValueAt(i, 5).toString().trim() + ","
-                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean)OBJ_pgp.getValueAt(i, 6)) + "',"
-                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean)OBJ_pgp.getValueAt(i, 7)) + "',"
+                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 6)) + "',"
+                            + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 7)) + "',"
                             + OBJ_pgp.getValueAt(i, 8).toString().trim() + ","
                             + OBJ_pgp.getValueAt(i, 9).toString().trim() + ","
                             + OBJ_pgp.getValueAt(i, 10).toString().trim() + ","
-                            + "'" + gs_periodo + "')";                   
+                            + "'" + gs_periodo + "')";
                     lq_rs = lq_stm.executeQuery(SQL2);
                 }
                 if (lq_rs.next()) {
