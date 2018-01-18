@@ -179,16 +179,16 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         try {
             lq_rs = go_dao_entidad.SLT_datos_entidad_x_facturacion(codigo, dato);
             if (lq_rs != null) {
-                
+
                 if (!gs_tipo_comercio.equalsIgnoreCase("4")) {
                     lo_pnl_cab_pedidos.TXT_codigo_pagador.setText(lq_rs.getString(1));
                     lo_pnl_cab_pedidos.TXT_pagador.setText(lq_rs.getString(2));
-                    
+
                     lo_pnl_cab_pedidos.TXT_codigo_vendedor.setText(lq_rs.getString(5));
                     lo_pnl_cab_pedidos.TXT_nombre_vendedor.setText(lq_rs.getString(6));
                     lo_pnl_cab_pedidos.TXT_dias_credito.setText(lq_rs.getString(8));
                 }
-                
+
                 lo_pnl_cab_pedidos.TXT_codigo_entidad.setText(lq_rs.getString(1));
                 lo_pnl_cab_pedidos.TXT_razon_social.setText(lq_rs.getString(2));
                 lo_pnl_cab_pedidos.TXT_doc_id.setText(lq_rs.getString(3));
@@ -409,6 +409,8 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 break;
             case "3":
                 go_fnc_operaciones_campos.ancho_columna(lo_pnl_grid_pedidos.TBL_pedidos, 13, 0);
+                lo_evt_cab_pedidos.activa_campos(0, lo_pnl_cab_pedidos, true);
+                lo_pnl_grid_pedidos.LBL_utilidad_p.setVisible(false);
                 break;
             case "4":
                 go_activa_buscador.get_descripcion_vendedor(gs_vendedor_usuario, lo_pnl_cab_pedidos.TXT_codigo_vendedor, lo_pnl_cab_pedidos.TXT_nombre_vendedor);
@@ -421,8 +423,8 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.CBX_doc_ref.setEnabled(true);
                 lo_pnl_cab_pedidos.TXT_codigo_entidad.setEnabled(true);
                 lo_pnl_cab_pedidos.CBX_sector.setEnabled(true);
-                lo_pnl_cab_pedidos.TXT_codigo_pagador.setText(gs_entidad_usuario);   
-                 lo_pnl_cab_pedidos.CBX_doc_ref.setSelectedIndex(1);
+                lo_pnl_cab_pedidos.TXT_codigo_pagador.setText(gs_entidad_usuario);
+                lo_pnl_cab_pedidos.CBX_doc_ref.setSelectedIndex(1);
                 go_activa_buscador.get_descripcion_entidad(gs_entidad_usuario, lo_pnl_cab_pedidos.TXT_codigo_pagador, lo_pnl_cab_pedidos.TXT_pagador);
                 get_forma_pago(gs_entidad_usuario);
                 lo_pnl_cab_pedidos.TXT_numero_doc.requestFocus();
@@ -577,7 +579,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
             parametros.put("empresa", go_bean_general.getRazon_social());
             parametros.put("usuario", gs_datos_usuario);
             parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
-            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_pedido_" + go_bean_general.getRuc() + ".jasper", parametros);
+            go_evt_imprime_doc_ventas.imprime_documentos(0, "rpt_formato_pedido_" + ls_serie + "_" + go_bean_general.getRuc() + ".jasper", parametros);
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_imprimir", "DOCUMENTO NO SE PUEDE IMPRIMIR");
         }
