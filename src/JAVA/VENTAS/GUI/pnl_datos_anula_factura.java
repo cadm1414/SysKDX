@@ -1,6 +1,7 @@
 
 package JAVA.VENTAS.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 
 public class pnl_datos_anula_factura extends javax.swing.JPanel {
@@ -8,6 +9,10 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
     public pnl_datos_anula_factura() {
         initComponents();
         TXT_motivo.setDocument(new fnc_txt_mayuscula());
+        
+        TXT_numero_doc.addFocusListener(new evt_focus_component());
+        TXT_fecha_emision.addFocusListener(new evt_focus_component());
+        TXT_motivo.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")
@@ -65,12 +70,15 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
         jLabel10.setText(":");
 
         TXT_sucursal.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_sucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_sucursal.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_sucursal.setEnabled(false);
 
         CBX_tipo_doc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_tipo_doc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_tipo_doc.setEnabled(false);
 
+        TXT_serie.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_serie.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
@@ -81,6 +89,7 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
         TXT_serie.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_serie.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
+        TXT_numero_doc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_numero_doc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
         } catch (java.text.ParseException ex) {
@@ -90,6 +99,7 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
         TXT_numero_doc.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_numero_doc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
+        TXT_fecha_emision.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_emision.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -100,6 +110,7 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
         TXT_fecha_emision.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         TXT_motivo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_motivo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_motivo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -187,7 +198,7 @@ public class pnl_datos_anula_factura extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 102, Short.MAX_VALUE))
+                .addGap(0, 118, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

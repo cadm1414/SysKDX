@@ -275,7 +275,7 @@
 				<textFieldExpression><![CDATA[$F{codigo_entidad}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement x="84" y="60" width="168" height="12" uuid="3ecdc4ca-050d-407f-be4c-fee1a654d674"/>
+				<reportElement x="84" y="60" width="276" height="12" uuid="3ecdc4ca-050d-407f-be4c-fee1a654d674"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>

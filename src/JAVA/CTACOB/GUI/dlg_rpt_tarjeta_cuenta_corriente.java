@@ -3,7 +3,7 @@ package JAVA.CTACOB.GUI;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_aceptar_cancelar;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
-import JAVA.ANCESTRO.LOGICA.FullSelectorListener;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import JAVA.ANCESTRO.LOGICA.evt_aceptar_cancelar;
 import JAVA.INVENT.GUI.dlg_almacen_x_permiso;
 import java.awt.Image;

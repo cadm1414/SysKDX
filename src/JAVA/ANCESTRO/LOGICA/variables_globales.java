@@ -12,6 +12,7 @@ import JAVA.CONFIG.DAO.*;
 import JAVA.CONFIG.GUI.dlg_busq_almacen;
 import JAVA.CONFIG.GUI.dlg_busq_entidad;
 import JAVA.CONFIG.GUI.dlg_busq_entidad_parametros;
+import JAVA.CONFIG.GUI.dlg_busq_entidad_pr;
 import JAVA.CONFIG.GUI.dlg_busq_rol;
 import JAVA.CONFIG.GUI.dlg_busq_sucursal;
 import JAVA.CONFIG.GUI.dlg_busq_tipo_movimiento;
@@ -112,6 +113,7 @@ import JAVA.DISTBR.DAO.DAO_programacion_detalle;
 import JAVA.DISTBR.GUI.dlg_busq_doc;
 import JAVA.DISTBR.GUI.dlg_busq_liquidacion;
 import JAVA.DISTBR.GUI.dlg_busq_programacion;
+import JAVA.DISTBR.GUI.dlg_resumen_liquidacion;
 import JAVA.DISTBR.GUI.jif_liquidacion;
 import JAVA.DISTBR.LOGICA.muestra_dlg_distbr;
 import JAVA.INVENT.GUI.dlg_rpt_kardex_mercaderia;
@@ -129,6 +131,10 @@ import JAVA.DISTBR.GUI.jif_preliminar;
 import JAVA.DISTBR.GUI.jif_programacion;
 import JAVA.DISTBR.LOGICA.evt_imprime_doc_distbr;
 import JAVA.DISTBR.LOGICA.muestra_jif_distbr;
+import JAVA.DISTBR.LOGICA.muestra_pestania_distbr;
+import JAVA.DISTBR.LOGICA.muestra_reporte_distbr;
+import JAVA.DISTBR.REPORT.pnl_rpt_resumen_liquidacion;
+import JAVA.VENTAS.GUI.dlg_busq_facturacion_pr;
 import JAVA.VENTAS.GUI.dlg_rpt_ventas_x_vendedor;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.GUI.pnl_rpt_ventas_x_vendedor;
@@ -142,6 +148,7 @@ import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
 import JAVA.VENTAS.REPORT.pnl_rpt_correlativo_doc;
 import JAVA.VENTAS.REPORT.pnl_rpt_despacho_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
+import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_precios;
 import JAVA.VENTAS.REPORT.pnl_rpt_registro_ventas;
 import JAVA.VENTAS.REPORT.pnl_rpt_resumen_documento;
 
@@ -269,6 +276,8 @@ public class variables_globales {
     public static muestra_dlg_distbr go_muestra_dlg_distbr = new muestra_dlg_distbr();
     public static muestra_jif_distbr go_muestra_jif_distbr = new muestra_jif_distbr();
     public static evt_imprime_doc_distbr go_evt_imprime_doc_distbr = new evt_imprime_doc_distbr();
+    public static muestra_reporte_distbr go_muestra_reporte_distbr = new muestra_reporte_distbr();
+    public static muestra_pestania_distbr go_muestra_pestania_distbr = new muestra_pestania_distbr();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;
@@ -321,6 +330,9 @@ public class variables_globales {
     public static dlg_periodo go_dlg_periodo;
     public static dlg_rpt_ventas_x_vendedor go_dlg_rpt_ventas_x_vendedor;
     public static dlg_busq_liquidacion go_dlg_busq_liquidacion;
+    public static dlg_busq_entidad_pr go_dlg_busq_entidad_pr;
+    public static dlg_busq_facturacion_pr go_dlg_busq_facturacion_pr;
+    public static dlg_resumen_liquidacion go_dlg_resumen_liquidacion;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;
@@ -383,5 +395,6 @@ public class variables_globales {
     public static pnl_rpt_listado_cobranzas_sr go_pnl_rpt_listado_cobranzas_sr;
     public static pnl_rpt_correlativo_doc go_pnl_rpt_correlativo_doc;
     public static pnl_rpt_ventas_x_vendedor go_pnl_rpt_ventas_x_vendedor;
-
+    public static pnl_rpt_resumen_liquidacion go_pnl_rpt_resumen_liquidacion;
+    public static pnl_rpt_diferencia_precios go_pnl_rpt_diferencia_precios;
 }

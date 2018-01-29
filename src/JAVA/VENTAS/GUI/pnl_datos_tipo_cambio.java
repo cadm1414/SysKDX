@@ -1,5 +1,6 @@
 package JAVA.VENTAS.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import java.awt.Component;
 import javax.swing.text.JTextComponent;
 
@@ -7,6 +8,9 @@ public class pnl_datos_tipo_cambio extends javax.swing.JPanel {
 
     public pnl_datos_tipo_cambio() {
         initComponents();
+        
+        CBX_mes.addFocusListener(new evt_focus_component());
+        CBX_moneda.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")
@@ -40,6 +44,7 @@ public class pnl_datos_tipo_cambio extends javax.swing.JPanel {
 
         CBX_mes.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE" }));
+        CBX_mes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_mes.setEnabled(false);
         CBX_mes.setNextFocusableComponent(CBX_mes);
 
@@ -53,6 +58,7 @@ public class pnl_datos_tipo_cambio extends javax.swing.JPanel {
         jLabel6.setText(":");
 
         CBX_moneda.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_moneda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_moneda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         CBX_moneda.setEnabled(false);
         CBX_moneda.setNextFocusableComponent(CBX_mes);

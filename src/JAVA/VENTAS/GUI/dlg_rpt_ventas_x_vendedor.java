@@ -21,7 +21,8 @@ public class dlg_rpt_ventas_x_vendedor extends javax.swing.JDialog {
     pnl_aceptar_cancelar lo_pnl_aceptar_cancelar = new pnl_aceptar_cancelar();
     evt_aceptar_cancelar lo_evt_aceptar_cancelar = new evt_aceptar_cancelar();
     ResultSet lq_rs;
-    String ls_codigo;
+    int op;
+    String ls_codigo;      
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_rpt_ventas_x_vendedor";
 
     public dlg_rpt_ventas_x_vendedor(java.awt.Frame parent, boolean modal) {
@@ -37,6 +38,9 @@ public class dlg_rpt_ventas_x_vendedor extends javax.swing.JDialog {
 
         this.add(lo_pnl_rpt_ventas_x_vendedor);
         this.add(lo_pnl_aceptar_cancelar);
+        
+        op = gi_parametros_2[0];
+        gi_parametros_2[0] = 0;
 
         lo_pnl_rpt_ventas_x_vendedor.TXT_fecha_ini.setText(gs_dia + gs_mes + gs_periodo);
         lo_pnl_rpt_ventas_x_vendedor.TXT_fecha_fin.setText(gs_dia + gs_mes + gs_periodo);
@@ -119,7 +123,7 @@ public class dlg_rpt_ventas_x_vendedor extends javax.swing.JDialog {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("empresa", go_bean_general.getNombre_reporte());
         parametros.put("usuario", gs_datos_usuario);
-        parametros.put("nombre_almacen", lo_pnl_rpt_ventas_x_vendedor.TXT_nombre.getText().trim());
+        parametros.put("nombre_sucursal", lo_pnl_rpt_ventas_x_vendedor.TXT_nombre.getText().trim());
         parametros.put("nombre_vendedor", lo_pnl_rpt_ventas_x_vendedor.TXT_nombre_vendedor.getText().trim());
         parametros.put("codigo_sucursal", lo_pnl_rpt_ventas_x_vendedor.TXT_codigo.getText());
         parametros.put("codigo_vendedor", lo_pnl_rpt_ventas_x_vendedor.TXT_codigo_vendedor.getText());
@@ -128,7 +132,15 @@ public class dlg_rpt_ventas_x_vendedor extends javax.swing.JDialog {
         parametros.put("periodo", gs_periodo);
         parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
 
-        go_muestra_reporte_ventas.reporte_pestania("rpt_pedido_x_vendedor.jasper", parametros, "VENTAS x VENDEDOR", 7);
+        switch(op){
+            case 0:
+                go_muestra_reporte_ventas.reporte_pestania("rpt_pedido_x_vendedor.jasper", parametros, "VENTAS x VENDEDOR", 7);
+                break;
+            case 1:
+                go_muestra_reporte_ventas.reporte_pestania("rpt_diferencia_precios.jasper", parametros, "DIFERENCIA PRECIOS", 8);
+                break;
+        }
+        
 
     }
 

@@ -163,5 +163,21 @@ public class DAO_entidad {
         }
         return null;
     }
+    
+    public ResultSet SLT_grid_entidad_pr(String codigo_pr, String codigo_entidad) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_grid_entidad_pr('" + codigo_pr + "','" + codigo_entidad + "','" + gs_periodo+"') "
+                    + "as (codigo_entidad character(6),razon_social character varying(250),codigo_vendedor character(4),nombre_vendedor character varying(250),numero_doc character varying(15),direccion character varying(250),codigo_ubigeo character(6),descriocion character varying(100))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_grid_entidad_pr", e.getMessage());
+        }
+        return null;
+    }
 
 }

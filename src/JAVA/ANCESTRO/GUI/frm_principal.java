@@ -1,6 +1,7 @@
 package JAVA.ANCESTRO.GUI;
 
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
+import JAVA.ANCESTRO.LOGICA.reloj;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.DAO.DAO_auditoria;
 import JAVA.CONFIG.LOGICA.jtr_menu_opciones;
@@ -20,18 +21,19 @@ import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class frm_principal extends javax.swing.JFrame {
-    
+
     HashMap<String, Icon> ls_elementos = new HashMap<String, Icon>();
     HashMap<String, String> ls_tooltip = new HashMap<String, String>();
     jtr_menu_opciones lo_jtr_menu_opciones = new jtr_menu_opciones();
     opciones_menu lo_opciones_menu = new opciones_menu();
     DefaultMutableTreeNode nodoSeleccionado;
     Calendar fecha = Calendar.getInstance();
+    reloj lo_reloj;
     ResultSet lq_rs = null;
     boolean resp;
     String ls_nodo;
     String ls_modulo = "ANCESTRO", ls_capa = "GUI", ls_clase = "frm_principal";
-    
+
     public frm_principal() throws UnknownHostException, SocketException {
         initComponents();
         datos_pantalla();
@@ -39,8 +41,14 @@ public class frm_principal extends javax.swing.JFrame {
         datos_pc();
         registra_auditoria("INICIO DE SESION");
         this.setExtendedState(this.MAXIMIZED_BOTH);
+
+        try {
+            lo_reloj = new reloj();
+            lo_reloj.start();
+        } catch (Exception e) {
+        }
     }
-    
+
     private void datos_pantalla() {
         LBL_rol.setText(gs_nombre_rol);
         LBL_periodo.setText(gs_periodo);
@@ -51,7 +59,7 @@ public class frm_principal extends javax.swing.JFrame {
         gs_mes = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.MONTH) + 1) + "", "0", 2);
         gs_dia = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.DAY_OF_MONTH)) + "", "0", 2);
     }
-    
+
     private void datos_pc() throws UnknownHostException, SocketException {
         try {
             InetAddress address = InetAddress.getLocalHost();
@@ -65,16 +73,16 @@ public class frm_principal extends javax.swing.JFrame {
             gs_nombre_pc = "SIN CONECCION";
             gs_direccion_ip = "255.255.255.255";
         }
-        
+
     }
-    
+
     private void registra_auditoria(String dato) {
         try {
             go_dao_auditoria.IST_auditoria(dato, "", "CONFIG", "0", "0013");
         } catch (Exception e) {
         }
     }
-    
+
     private void lista_modulo() {
         try {
             resp = go_dao_rol_menu.SLT_rol_menu_x_idrol();
@@ -91,7 +99,7 @@ public class frm_principal extends javax.swing.JFrame {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "lista_modulo", e.getMessage());
         }
     }
-    
+
     private void evt_opciones_menu() {
         try {
             nodoSeleccionado = (DefaultMutableTreeNode) JTR_menu_opciones.getLastSelectedPathComponent();
@@ -102,14 +110,20 @@ public class frm_principal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-    
+
+    private void evt_periodo() {
+        go_dlg_periodo = new dlg_periodo(null, true);
+        go_dlg_periodo.setVisible(true);
+        LBL_periodo.setText(gs_periodo);
+    }
+
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(IMAGES_ruta_ancestro.class.getResource("imagen_inicio.png"));
         return retValue;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -127,10 +141,11 @@ public class frm_principal extends javax.swing.JFrame {
         LBL_periodo = new javax.swing.JLabel();
         LBL_razon_social = new javax.swing.JLabel();
         LBL_rol = new javax.swing.JLabel();
+        LBL_hora = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        JIM_periodo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("System");
@@ -202,6 +217,11 @@ public class frm_principal extends javax.swing.JFrame {
         LBL_periodo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/JAVA/ANCESTRO/IMAGES/calendario.png"))); // NOI18N
         LBL_periodo.setText(" ");
         LBL_periodo.setToolTipText("PERIODO");
+        LBL_periodo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LBL_periodoMouseClicked(evt);
+            }
+        });
 
         LBL_razon_social.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         LBL_razon_social.setForeground(new java.awt.Color(0, 153, 153));
@@ -217,11 +237,15 @@ public class frm_principal extends javax.swing.JFrame {
         LBL_rol.setText(" ");
         LBL_rol.setToolTipText("ROL");
 
+        LBL_hora.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        LBL_hora.setText("HORA: ");
+
         JDP_principal.setLayer(TBP_contenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
         JDP_principal.setLayer(LBL_usuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         JDP_principal.setLayer(LBL_periodo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         JDP_principal.setLayer(LBL_razon_social, javax.swing.JLayeredPane.DEFAULT_LAYER);
         JDP_principal.setLayer(LBL_rol, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JDP_principal.setLayer(LBL_hora, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout JDP_principalLayout = new javax.swing.GroupLayout(JDP_principal);
         JDP_principal.setLayout(JDP_principalLayout);
@@ -238,7 +262,10 @@ public class frm_principal extends javax.swing.JFrame {
                         .addGap(110, 110, 110)
                         .addComponent(LBL_usuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LBL_rol)))
+                        .addComponent(LBL_rol))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JDP_principalLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(LBL_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         JDP_principalLayout.setVerticalGroup(
@@ -252,8 +279,10 @@ public class frm_principal extends javax.swing.JFrame {
                         .addComponent(LBL_rol)
                         .addComponent(LBL_razon_social)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TBP_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
-                .addGap(36, 36, 36))
+                .addComponent(TBP_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LBL_hora)
+                .addGap(16, 16, 16))
         );
 
         jSplitPane1.setRightComponent(JDP_principal);
@@ -263,13 +292,13 @@ public class frm_principal extends javax.swing.JFrame {
 
         jMenu2.setText("Utilitarios");
 
-        jMenuItem1.setText("Cambiar Periodo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        JIM_periodo.setText("Cambiar Periodo");
+        JIM_periodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                JIM_periodoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu2.add(JIM_periodo);
 
         jMenuBar1.add(jMenu2);
 
@@ -311,19 +340,23 @@ public class frm_principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        go_dlg_periodo = new dlg_periodo(null, true);
-        go_dlg_periodo.setVisible(true);
-        LBL_periodo.setText(gs_periodo);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
+    private void JIM_periodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JIM_periodoActionPerformed
+        evt_periodo();
+    }//GEN-LAST:event_JIM_periodoActionPerformed
+
+    private void LBL_periodoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LBL_periodoMouseClicked
+        evt_periodo();
+    }//GEN-LAST:event_LBL_periodoMouseClicked
+
     public static void main(String args[]) throws UnknownHostException, SocketException {
         new frm_principal().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDesktopPane JDP_principal;
+    private javax.swing.JMenuItem JIM_periodo;
     private javax.swing.JTree JTR_menu_opciones;
+    public javax.swing.JLabel LBL_hora;
     private javax.swing.JLabel LBL_periodo;
     private javax.swing.JLabel LBL_razon_social;
     private javax.swing.JLabel LBL_rol;
@@ -333,7 +366,6 @@ public class frm_principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

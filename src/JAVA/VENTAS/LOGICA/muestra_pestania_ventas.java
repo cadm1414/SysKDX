@@ -8,6 +8,7 @@ import JAVA.VENTAS.REPORT.pnl_rpt_control_pedido_pendiente;
 import JAVA.VENTAS.REPORT.pnl_rpt_correlativo_doc;
 import JAVA.VENTAS.REPORT.pnl_rpt_despacho_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
+import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_precios;
 import JAVA.VENTAS.REPORT.pnl_rpt_registro_ventas;
 import JAVA.VENTAS.REPORT.pnl_rpt_resumen_documento;
 import java.awt.BorderLayout;
@@ -131,6 +132,21 @@ public class muestra_pestania_ventas {
         go_pnl_rpt_ventas_x_vendedor.repaint();
         go_pnl_rpt_ventas_x_vendedor.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_ventas_x_vendedor);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+
+    public void rpt_diferencia_precios(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_diferencia_precios);
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_diferencia_precios = new pnl_rpt_diferencia_precios();
+        go_pnl_rpt_diferencia_precios.removeAll();
+        go_pnl_rpt_diferencia_precios.setLayout(new BorderLayout());
+        go_pnl_rpt_diferencia_precios.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_diferencia_precios.setVisible(true);
+        go_pnl_rpt_diferencia_precios.repaint();
+        go_pnl_rpt_diferencia_precios.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_diferencia_precios);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }

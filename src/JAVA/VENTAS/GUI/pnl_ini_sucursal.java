@@ -1,12 +1,12 @@
 package JAVA.VENTAS.GUI;
 
-import JAVA.ANCESTRO.LOGICA.FullSelectorListener;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 
 public class pnl_ini_sucursal extends javax.swing.JPanel {
 
     public pnl_ini_sucursal() {
         initComponents();
-        TXT_codigo.addFocusListener(new FullSelectorListener());  
+        TXT_codigo.addFocusListener(new evt_focus_component());          
     }
 
     @SuppressWarnings("unchecked")
@@ -28,6 +28,7 @@ public class pnl_ini_sucursal extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");
 
+        TXT_codigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_codigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
@@ -41,6 +42,7 @@ public class pnl_ini_sucursal extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_nombre.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_nombre.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre.setEnabled(false);
 

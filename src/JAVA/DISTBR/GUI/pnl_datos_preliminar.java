@@ -1,6 +1,6 @@
 package JAVA.DISTBR.GUI;
 
-import JAVA.ANCESTRO.LOGICA.FullSelectorListener;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 
 public class pnl_datos_preliminar extends javax.swing.JPanel {
@@ -8,7 +8,7 @@ public class pnl_datos_preliminar extends javax.swing.JPanel {
     public pnl_datos_preliminar() {
         initComponents();
         go_fnc_operaciones_campos.ancho_columna(TBL_pedido, 0,0);
-        TXT_fecha_reparto.addFocusListener(new FullSelectorListener());
+        TXT_fecha_reparto.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")

@@ -216,6 +216,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
         go_dlg_busq_programacion = new dlg_busq_programacion(null, true);
         go_dlg_busq_programacion.setVisible(true);
         ls_codigo = go_dlg_busq_programacion.ls_codigo;
+        gs_parametros[0] = "";
         if (ls_codigo != null) {
             get_descripcion_programacion(ls_codigo);
             lo_evt_opciones_3.activa_btn_opciones(2, lo_pnl_opciones_3, lb_valor_op);

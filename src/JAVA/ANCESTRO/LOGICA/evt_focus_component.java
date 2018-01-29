@@ -1,13 +1,15 @@
 package JAVA.ANCESTRO.LOGICA;
 
-public class FullSelectorListener extends java.awt.event.FocusAdapter {
+import javax.swing.JComponent;
 
-    public FullSelectorListener() {
+public class evt_focus_component extends java.awt.event.FocusAdapter {
+
+    public evt_focus_component() {
     }
 
     @Override
     public void focusLost(java.awt.event.FocusEvent evt) {
-
+        ((JComponent) evt.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
     }
 
     @Override
@@ -18,5 +20,6 @@ public class FullSelectorListener extends java.awt.event.FocusAdapter {
             txt.setSelectionStart(0);
             txt.setSelectionEnd(txt.getText().length());
         }
+        ((JComponent) evt.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
     }
 }

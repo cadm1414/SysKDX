@@ -156,7 +156,11 @@ public class opciones_menu {
                     resp = "I";
                 }
                 if (dato.equalsIgnoreCase("PEDIDOS X VENDEDOR")) {
-                    go_muestra_dlg_ventas.muestra_dlg_rpt_ventas_x_vendedor();
+                    go_muestra_dlg_ventas.muestra_dlg_rpt_ventas_x_vendedor(0);
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("DIFERENCIA PRECIOS")) {
+                    go_muestra_dlg_ventas.muestra_dlg_rpt_ventas_x_vendedor(1);
                     resp = "I";
                 }
                 break;
@@ -197,6 +201,10 @@ public class opciones_menu {
                 }
                 if (dato.equalsIgnoreCase("LIQUIDACION")) {
                     go_muestra_dlg_distbr.muestra_dlg_liquidacion("LQ", 2);
+                    resp = "I";
+                }
+                if (dato.equalsIgnoreCase("RESUMEN LIQUIDACION")) {
+                    go_muestra_dlg_distbr.muestra_dlg_resumen_liquidacion();
                     resp = "I";
                 }
                 break;

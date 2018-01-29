@@ -208,6 +208,7 @@ public class dlg_datos_seleccion_pedido extends javax.swing.JDialog {
         go_dlg_busq_programacion = new dlg_busq_programacion(null, true);
         go_dlg_busq_programacion.setVisible(true);
         ls_codigo_pedido = go_dlg_busq_programacion.ls_codigo;
+        gs_parametros[0] = "";
         if (ls_codigo_pedido != null) {
             muestra_datos_ref_pr(ls_codigo_pedido);
         }

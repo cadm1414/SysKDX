@@ -101,6 +101,7 @@ public class dlg_busq_programacion extends javax.swing.JDialog {
 
     public void retorna() {
         ls_codigo = lo_pnl_grid_busq_programacion.TBL_programacion.getValueAt(lo_pnl_grid_busq_programacion.TBL_programacion.getSelectedRow(), 0).toString();
+        gs_parametros[0] = lo_pnl_grid_busq_programacion.TBL_programacion.getValueAt(lo_pnl_grid_busq_programacion.TBL_programacion.getSelectedRow(), 1).toString();
         this.dispose();
     }
 
@@ -152,7 +153,7 @@ public class dlg_busq_programacion extends javax.swing.JDialog {
         @Override
         public void keyReleased(KeyEvent ke) {
             if (ke.getSource() == TXT_dato) {
-                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_programacion.TBL_programacion, TXT_dato.getText(), 1);
+                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_programacion.TBL_programacion, TXT_dato.getText(), 2);
             }
         }
 

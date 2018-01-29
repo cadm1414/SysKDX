@@ -2,7 +2,7 @@ package JAVA.ANCESTRO.GUI;
 
 import JAVA.ANCESTRO.BEAN.BEAN_periodo_empresa;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
-import JAVA.ANCESTRO.LOGICA.FullSelectorListener;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import JAVA.ANCESTRO.LOGICA.cbx_empresa;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.CONFIG.BEAN.BEAN_usuario;
@@ -51,8 +51,9 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
         lo_pnl_aceptar_cancelar.BTN_aceptar.addKeyListener(KeyEvnt);
         lo_pnl_aceptar_cancelar.BTN_cancelar.addKeyListener(KeyEvnt);
         
-        lo_pnl_inicia_sesion.TXT_usuario.addFocusListener(new FullSelectorListener());
-        lo_pnl_inicia_sesion.TXT_clave.addFocusListener(new FullSelectorListener());
+        lo_pnl_inicia_sesion.TXT_usuario.addFocusListener(new evt_focus_component());
+        lo_pnl_inicia_sesion.TXT_clave.addFocusListener(new evt_focus_component());
+        lo_pnl_inicia_sesion.TXT_usuario.requestFocus();
     }
 
     private void get_empresa() {

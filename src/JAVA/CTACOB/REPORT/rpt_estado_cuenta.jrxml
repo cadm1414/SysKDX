@@ -183,7 +183,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField pattern="000">
-				<reportElement x="75" y="60" width="203" height="12" uuid="556e2c6a-eb9b-473d-a412-a76514f797ba"/>
+				<reportElement x="75" y="60" width="387" height="12" uuid="556e2c6a-eb9b-473d-a412-a76514f797ba"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>

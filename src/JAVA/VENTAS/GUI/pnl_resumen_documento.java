@@ -1,9 +1,16 @@
 package JAVA.VENTAS.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
+
 public class pnl_resumen_documento extends javax.swing.JPanel {
 
     public pnl_resumen_documento() {
         initComponents();
+        
+        TXT_codigo.addFocusListener(new evt_focus_component());
+        TXT_pedido.addFocusListener(new evt_focus_component());
+        CBX_serie.addFocusListener(new evt_focus_component());
+        CBX_tipo_doc.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +41,7 @@ public class pnl_resumen_documento extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");
 
+        TXT_codigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_codigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
@@ -47,6 +55,7 @@ public class pnl_resumen_documento extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_nombre.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_nombre.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre.setEnabled(false);
 
@@ -56,6 +65,7 @@ public class pnl_resumen_documento extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel4.setText(":");
 
+        TXT_pedido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_pedido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
         } catch (java.text.ParseException ex) {
@@ -71,6 +81,7 @@ public class pnl_resumen_documento extends javax.swing.JPanel {
         jLabel6.setText(":");
 
         CBX_serie.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_serie.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel7.setText("T. Doc.");
@@ -81,6 +92,7 @@ public class pnl_resumen_documento extends javax.swing.JPanel {
         CBX_tipo_doc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_tipo_doc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FACTURA", "BOLETA" }));
         CBX_tipo_doc.setSelectedIndex(1);
+        CBX_tipo_doc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

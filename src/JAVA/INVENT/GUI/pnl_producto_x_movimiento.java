@@ -1,15 +1,15 @@
 package JAVA.INVENT.GUI;
 
-import JAVA.ANCESTRO.LOGICA.FullSelectorListener;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 
 public class pnl_producto_x_movimiento extends javax.swing.JPanel {
 
     public pnl_producto_x_movimiento() {
         initComponents();
-        TXT_codigo.addFocusListener(new FullSelectorListener());        
-        TXT_codigo_mov.addFocusListener(new FullSelectorListener());
-        TXT_fecha_ini.addFocusListener(new FullSelectorListener());
-        TXT_fecha_fin.addFocusListener(new FullSelectorListener());
+        TXT_codigo.addFocusListener(new evt_focus_component());        
+        TXT_codigo_mov.addFocusListener(new evt_focus_component());
+        TXT_fecha_ini.addFocusListener(new evt_focus_component());
+        TXT_fecha_fin.addFocusListener(new evt_focus_component());
     }
 
 

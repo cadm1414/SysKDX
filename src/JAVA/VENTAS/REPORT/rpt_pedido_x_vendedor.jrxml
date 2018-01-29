@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a785dab-3f2a-4701-a1de-319dffb582d3">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CLOUD"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -8,7 +7,7 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="empresa" class="java.lang.String"/>
 	<parameter name="usuario" class="java.lang.String"/>
-	<parameter name="nombre_almacen" class="java.lang.String"/>
+	<parameter name="nombre_sucursal" class="java.lang.String"/>
 	<parameter name="nombre_vendedor" class="java.lang.String"/>
 	<parameter name="codigo_sucursal" class="java.lang.String"/>
 	<parameter name="codigo_vendedor" class="java.lang.String"/>
@@ -135,7 +134,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{nombre_almacen}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{nombre_sucursal}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="462" y="14" width="80" height="12" uuid="66970562-f7d2-41f0-8958-696b49cd6751"/>

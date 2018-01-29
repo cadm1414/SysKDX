@@ -153,7 +153,14 @@ public class muestra_dlg_ventas {
         go_dlg_ini_sucursal.setVisible(true);
     }
 
-    public void muestra_dlg_rpt_ventas_x_vendedor() {
+    public void muestra_dlg_rpt_ventas_x_vendedor(int op) {
+        gi_parametros_2[0] = op;
+        go_dlg_rpt_ventas_x_vendedor = new dlg_rpt_ventas_x_vendedor(null, true);
+        go_dlg_rpt_ventas_x_vendedor.setVisible(true);        
+    }
+    
+    public void muestra_dlg_rpt_diferencia_precios(int op) {
+        gi_parametros_2[0] = op;
         go_dlg_rpt_ventas_x_vendedor = new dlg_rpt_ventas_x_vendedor(null, true);
         go_dlg_rpt_ventas_x_vendedor.setVisible(true);
     }

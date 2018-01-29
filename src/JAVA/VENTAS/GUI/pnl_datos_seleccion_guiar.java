@@ -1,5 +1,6 @@
 package JAVA.VENTAS.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 
 public class pnl_datos_seleccion_guiar extends javax.swing.JPanel {
@@ -7,6 +8,9 @@ public class pnl_datos_seleccion_guiar extends javax.swing.JPanel {
     public pnl_datos_seleccion_guiar() {
         initComponents();
         go_fnc_operaciones_campos.ancho_columna(TBL_detalle_guiar, 0, 0);
+
+        TXT_guia.addFocusListener(new evt_focus_component());
+        TXT_serie_guia.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")
@@ -36,6 +40,7 @@ public class pnl_datos_seleccion_guiar extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");
 
+        TXT_guia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_guia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
         } catch (java.text.ParseException ex) {
@@ -46,6 +51,7 @@ public class pnl_datos_seleccion_guiar extends javax.swing.JPanel {
 
         JRD_todos.setText("Todos");
 
+        TXT_serie_guia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_serie_guia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
