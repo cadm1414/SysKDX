@@ -134,4 +134,21 @@ public class DAO_programacion {
         }
         return null;
     }
+    
+    public int FNC_verifica_programacion_liquidacion(String codigo_operacion) {
+        int resp = 0;
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from fnc_verifica_programacion_liquidacion('" + codigo_operacion + "','" + gs_periodo + "') "
+                    + "as (es_liquidado integer)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                resp = lq_rs.getInt(1);
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "FNC_verifica_pedido_facturado", e.getMessage());
+        }
+        return resp;
+    }
 }

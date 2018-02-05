@@ -163,6 +163,10 @@ public class opciones_menu {
                     go_muestra_dlg_ventas.muestra_dlg_rpt_ventas_x_vendedor(1);
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("VENTAS X FORMA PAGO")) {
+                    go_muestra_dlg_ventas.muestra_dlg_rpt_ventas_forma_pago(0);
+                    resp = "I";
+                }
                 break;
             case "CTACOB":
                 if (dato.equalsIgnoreCase("SALDO CTA CORRIENTE")) {

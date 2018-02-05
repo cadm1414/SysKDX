@@ -49,7 +49,7 @@ public class DAO_recibo_cobranza {
         try {
             lq_stm = go_conexion_db.crearStatement();
             String SQL = "select * from slt_datos_recibo_cobranza('" + codigo_operacion + "','" + gs_periodo + "') "
-                    + "as (codigo_operacion character(16),codigo_sucursal character(4),codigo_documento character(2),serie_documento character(4),numero_documento character(10), fecha_emision date,fecha_registro timestamp with time zone,codigo_pagador character(6),nombre_pagador character varying(250),codigo_moneda character(3),tipo_cambio numeric,forma_pago character(1),codigo_banco character(4),numero_operacion character(12),fecha_comprobante date,observacion text,es_rendido character(1),status character(1),monto numeric,monto_mn numeric)";
+                    + "as (codigo_operacion character(16),codigo_sucursal character(4),codigo_documento character(2),serie_documento character(4),numero_documento character(10), fecha_emision date,fecha_registro timestamp with time zone,codigo_pagador character(6),nombre_pagador character varying(250),codigo_moneda character(3),tipo_cambio numeric,forma_pago character(1),codigo_banco character(4),numero_operacion character(16),fecha_comprobante date,observacion text,es_rendido character(1),status character(1),monto numeric,monto_mn numeric)";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
             if (lq_rs.next()) {

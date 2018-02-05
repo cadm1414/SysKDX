@@ -52,7 +52,10 @@ public class muestra_reporte_ventas {
                     go_muestra_pestania_ventas.rpt_ventas_x_vendedor(jr, nombre);
                     break;
                 case 8:
-                    go_muestra_pestania_ventas.rpt_diferencia_precios(jr, nombre);                    
+                    go_muestra_pestania_ventas.rpt_diferencia_precios(jr, nombre);
+                    break;
+                case 9:
+                    go_muestra_pestania_ventas.rpt_ventas_forma_pago(jr, nombre);
                     break;
             }
         } catch (Exception e) {

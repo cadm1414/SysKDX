@@ -7,6 +7,7 @@ import JAVA.VENTAS.GUI.dlg_ini_serie;
 import JAVA.VENTAS.GUI.dlg_ini_sucursal;
 import JAVA.VENTAS.GUI.dlg_resumen_documento;
 import JAVA.VENTAS.GUI.dlg_rpt_registro_ventas;
+import JAVA.VENTAS.GUI.dlg_rpt_ventas_forma_pago;
 import JAVA.VENTAS.GUI.dlg_rpt_ventas_x_vendedor;
 import java.beans.PropertyVetoException;
 
@@ -163,6 +164,12 @@ public class muestra_dlg_ventas {
         gi_parametros_2[0] = op;
         go_dlg_rpt_ventas_x_vendedor = new dlg_rpt_ventas_x_vendedor(null, true);
         go_dlg_rpt_ventas_x_vendedor.setVisible(true);
+    }
+    
+    public void muestra_dlg_rpt_ventas_forma_pago(int op) {
+        gi_parametros_2[0] = op;
+        go_dlg_rpt_ventas_forma_pago = new dlg_rpt_ventas_forma_pago(null, true);
+        go_dlg_rpt_ventas_forma_pago.setVisible(true);
     }
 
 }

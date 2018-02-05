@@ -237,7 +237,7 @@ public class frm_principal extends javax.swing.JFrame {
         LBL_rol.setText(" ");
         LBL_rol.setToolTipText("ROL");
 
-        LBL_hora.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        LBL_hora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         LBL_hora.setText("HORA: ");
 
         JDP_principal.setLayer(TBP_contenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -265,7 +265,7 @@ public class frm_principal extends javax.swing.JFrame {
                         .addComponent(LBL_rol))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JDP_principalLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(LBL_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LBL_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         JDP_principalLayout.setVerticalGroup(
@@ -281,8 +281,8 @@ public class frm_principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TBP_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LBL_hora)
-                .addGap(16, 16, 16))
+                .addComponent(LBL_hora, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jSplitPane1.setRightComponent(JDP_principal);

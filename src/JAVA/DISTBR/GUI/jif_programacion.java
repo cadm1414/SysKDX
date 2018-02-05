@@ -167,10 +167,10 @@ public class jif_programacion extends javax.swing.JInternalFrame {
         go_dlg_busq_doc = new dlg_busq_doc(null, true);
         go_dlg_busq_doc.setVisible(true);
         modelo_retorna = go_dlg_busq_doc.lm_modelo;
-
+       
         if (modelo_retorna.getRowCount() > 0) {
-
-            for (int x = 0; x < modelo_retorna.getRowCount(); x++) {
+            int a = (lo_pnl_grid_programacion.TBL_programacion.getRowCount()==1)?0:lo_pnl_grid_programacion.TBL_programacion.getRowCount();
+            for (int x = a; x < modelo_retorna.getRowCount(); x++) {
                 lo_pnl_grid_programacion.TBL_programacion.setValueAt(modelo_retorna.getValueAt(x, 0), x, 0);
                 lo_pnl_grid_programacion.TBL_programacion.setValueAt(modelo_retorna.getValueAt(x, 1), x, 1);
                 lo_pnl_grid_programacion.TBL_programacion.setValueAt(modelo_retorna.getValueAt(x, 2), x, 2);
@@ -228,25 +228,37 @@ public class jif_programacion extends javax.swing.JInternalFrame {
         }
     }
 
-    private void evt_eliminar() {
-        //if (go_dao_pedido.FNC_verifica_pedido_facturado(ls_codigo).equalsIgnoreCase("0")) {
-        if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR DOCUMENTO Nro PR - " + lo_bean_programacion.getNumero_documento() + "?") == 0) {
-            try {
-                if (go_dao_programacion_detalle.DLT_programacion_detalle(ls_codigo)) {
-                    if (go_dao_programacion.DLT_programacion(ls_codigo)) {
-                        lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
-                        lo_evt_datos_programacion.activa_campos(0, lo_pnl_datos_programacion, false);
-                        lo_evt_datos_programacion.limpia_datos(lo_pnl_datos_programacion);
-                        lo_evt_grid_programacion.activa_campos(0, lo_pnl_grid_programacion, false);
-                        lo_evt_grid_programacion.limpia_tabla(lo_pnl_grid_programacion);
-                    }
-                }
-            } catch (Exception e) {
-            }
+    private void evt_editar() {
+        if (go_dao_programacion.FNC_verifica_programacion_liquidacion(ls_codigo) == 0) {
+            li_tipo_operacion = 1;
+            cont = 0;
+            lo_evt_opciones_3.activa_btn_opciones(3, lo_pnl_opciones_3, lb_valor_op);
+            lo_evt_grid_programacion.activa_campos(0, lo_pnl_grid_programacion, true);
+            lo_evt_datos_programacion.activa_campos(1, lo_pnl_datos_programacion, true);
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_editar", "PROGRAMACION SE ENCUENTRA LIQUIDADA");
         }
-//        } else {
-//            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_eliminar", "PEDIDO FACTURADO");
-//        }
+    }
+
+    private void evt_eliminar() {
+        if (go_dao_programacion.FNC_verifica_programacion_liquidacion(ls_codigo) == 0) {
+            if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR DOCUMENTO Nro PR - " + lo_bean_programacion.getNumero_documento() + "?") == 0) {
+                try {
+                    if (go_dao_programacion_detalle.DLT_programacion_detalle(ls_codigo)) {
+                        if (go_dao_programacion.DLT_programacion(ls_codigo)) {
+                            lo_evt_opciones_3.activa_btn_opciones(0, lo_pnl_opciones_3, lb_valor_op);
+                            lo_evt_datos_programacion.activa_campos(0, lo_pnl_datos_programacion, false);
+                            lo_evt_datos_programacion.limpia_datos(lo_pnl_datos_programacion);
+                            lo_evt_grid_programacion.activa_campos(0, lo_pnl_grid_programacion, false);
+                            lo_evt_grid_programacion.limpia_tabla(lo_pnl_grid_programacion);
+                        }
+                    }
+                } catch (Exception e) {
+                }
+            }
+        } else {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_editar", "PROGRAMACION SE ENCUENTRA LIQUIDADA");
+        }
     }
 
     private void evt_guardar() {
@@ -322,7 +334,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                 evt_buscar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_editar) {
-                //evt_editar();
+                evt_editar();
             }
             if (ae.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
                 evt_eliminar();
@@ -357,7 +369,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                 evt_buscar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F3 && lo_pnl_opciones_3.BTN_editar.isEnabled()) {
-                //evt_editar();
+                evt_editar();
             }
             if (ke.getKeyCode() == KeyEvent.VK_F4 && lo_pnl_opciones_3.BTN_eliminar.isEnabled()) {
                 evt_eliminar();
@@ -375,6 +387,9 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                 if (ke.getSource() == lo_pnl_grid_programacion.TBL_programacion && lo_pnl_grid_programacion.TBL_programacion.getSelectedColumn() == 2) {
                     evt_f5_doc();
                 }
+                if (ke.getSource() == lo_pnl_grid_programacion.TBL_programacion && li_tipo_operacion == 1) {
+                    evt_f5_doc();
+                }
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_nuevo) {
@@ -384,7 +399,7 @@ public class jif_programacion extends javax.swing.JInternalFrame {
                     evt_buscar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_editar) {
-                    //   evt_editar();
+                    evt_editar();
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_eliminar) {
                     evt_eliminar();

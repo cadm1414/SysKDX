@@ -21,6 +21,12 @@ public class evt_datos_programacion {
                 OBJ_pcp.TXT_fecha_preventa.setEnabled(valor);
                 OBJ_pcp.TXT_numero.requestFocus();
                 break;
+            case 1:
+                OBJ_pcp.TXT_fecha_reparto.setEnabled(valor);
+                OBJ_pcp.TXT_observacion.setEnabled(valor);
+                OBJ_pcp.TXT_fecha_preventa.setEnabled(valor);
+                OBJ_pcp.TXT_fecha_reparto.requestFocus();
+                break;
         }
     }
 
@@ -124,7 +130,7 @@ public class evt_datos_programacion {
             OBJ_bpe.setNumero_civ_2(lq_rs.getString(16));
             OBJ_bpe.setEs_liquidado(lq_rs.getString(17));
             OBJ_bpe.setStatus(lq_rs.getString(18));
-            OBJ_bpe.setObservacion(lq_rs.getString(19));            
+            OBJ_bpe.setObservacion(lq_rs.getString(19));
             OBJ_bpe.setFecha_preventa(go_fnc_operaciones_campos.recupera_fecha_formato((lq_rs.getString(20))));
         } catch (Exception e) {
         }

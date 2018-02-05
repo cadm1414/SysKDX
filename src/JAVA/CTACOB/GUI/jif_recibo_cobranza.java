@@ -9,6 +9,7 @@ import JAVA.CTACOB.BEAN.BEAN_recibo_cobranza;
 import JAVA.CTACOB.LOGICA.cbx_banco;
 import JAVA.CTACOB.LOGICA.evt_cab_recibo_cobranza;
 import JAVA.CTACOB.LOGICA.evt_grid_recibo_cobranza;
+import JAVA.DISTBR.GUI.dlg_busq_programacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
@@ -41,7 +42,7 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
     cbx_banco lo_cbx_banco;
     int li_tipo_operacion, li_cantidad, cont = 0;
     double ld_tipo_cambio;
-    String ls_codigo_sucursal, ls_serie, ls_codigo;
+    String ls_codigo_sucursal, ls_serie, ls_codigo,ls_codigo_pr,ls_fecha_ref;
     String ls_opcion = "M A A";
     String ls_modulo = "CTACOB", ls_capa = "GUI", ls_clase = "jif_recibo_cobranza";
 
@@ -146,6 +147,13 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
         gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
         gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
     }
+    
+    private void genera_parametros_busq_pr() {
+        gs_parametros[0] = ls_codigo_sucursal;
+        gs_parametros[1] = "01/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
+        gs_parametros[3] = "%";
+    }
 
     private void evt_f5_entidad() {
         go_activa_buscador.busq_entidad(lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador, lo_pnl_cab_recibo_cobranza.TXT_nombre_pagador);
@@ -183,9 +191,22 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
             lo_pnl_cab_recibo_cobranza.TXT_codigo_pagador.requestFocus();
         }
     }
+    
+    private void evt_f5_pr() {
+        genera_parametros_busq_pr();
+        go_dlg_busq_programacion = new dlg_busq_programacion(null, true);
+        go_dlg_busq_programacion.setVisible(true);
+        ls_codigo_pr = go_dlg_busq_programacion.ls_codigo;
+        ls_fecha_ref =  gs_parametros[0];
+        if (ls_codigo_pr != null) {
+            lo_pnl_cab_recibo_cobranza.TXT_numero_op.setText(ls_codigo_pr);
+            lo_pnl_cab_recibo_cobranza.TXT_fecha_op.setText(ls_fecha_ref);            
+        }
+        gs_parametros[0] = "";
+    }
 
     private void evt_nuevo() {
-        ls_codigo = null;        
+        ls_codigo = null;
         lo_evt_cab_recibo_cobranza.limpia_datos(lo_pnl_cab_recibo_cobranza);
         lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
         get_tipo_cambio();
@@ -276,8 +297,8 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                         if (lo_evt_grid_recibo_cobranza.valida_campos(lo_pnl_grid_recibo_cobranza, li_cantidad)) {
                             try {
                                 lo_evt_cab_recibo_cobranza.setea_campos(lo_bean_recibo_cobranza, lo_pnl_cab_recibo_cobranza, lo_cbx_moneda, lo_cbx_banco, lo_pnl_grid_recibo_cobranza);
-                                if(go_dao_recibo_cobranza_detalle.DLT_recibo_cobranza_detalle(ls_codigo)){
-                                    if(go_dao_recibo_cobranza.UPD_recibo_cobranza(lo_bean_recibo_cobranza, lo_pnl_grid_recibo_cobranza.TBL_cobranza)){
+                                if (go_dao_recibo_cobranza_detalle.DLT_recibo_cobranza_detalle(ls_codigo)) {
+                                    if (go_dao_recibo_cobranza.UPD_recibo_cobranza(lo_bean_recibo_cobranza, lo_pnl_grid_recibo_cobranza.TBL_cobranza)) {
                                         lo_evt_cab_recibo_cobranza.limpia_datos(lo_pnl_cab_recibo_cobranza);
                                         lo_evt_cab_recibo_cobranza.activa_campos(0, lo_pnl_cab_recibo_cobranza, false);
                                         lo_evt_grid_recibo_cobranza.limpia_tabla(lo_pnl_grid_recibo_cobranza, li_tipo_operacion);
@@ -370,6 +391,9 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_grid_recibo_cobranza.TBL_cobranza && lo_pnl_grid_recibo_cobranza.TBL_cobranza.getSelectedColumn() == 3) {
                     evt_f5_saldos();
+                }
+                if(ke.getSource() == lo_pnl_cab_recibo_cobranza.TXT_numero_op && lo_pnl_cab_recibo_cobranza.CBX_forma_pago.getSelectedIndex()==3){
+                    evt_f5_pr();
                 }
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -494,16 +518,24 @@ public class jif_recibo_cobranza extends javax.swing.JInternalFrame {
                     get_tipo_cambio();
                 }
                 if (ie.getSource() == lo_pnl_cab_recibo_cobranza.CBX_forma_pago) {
-                    if (lo_pnl_cab_recibo_cobranza.CBX_forma_pago.getSelectedIndex() != 0) {
-                        lo_pnl_cab_recibo_cobranza.CBX_banco.setEnabled(true);
-                        lo_pnl_cab_recibo_cobranza.TXT_numero_op.setEnabled(true);
-                        lo_pnl_cab_recibo_cobranza.TXT_fecha_op.setEnabled(true);
-                        lo_pnl_cab_recibo_cobranza.TXT_numero_op.setText("");
-                    } else {
-                        lo_pnl_cab_recibo_cobranza.CBX_banco.setEnabled(false);
-                        lo_pnl_cab_recibo_cobranza.TXT_numero_op.setEnabled(false);
-                        lo_pnl_cab_recibo_cobranza.TXT_fecha_op.setEnabled(false);
-                        lo_pnl_cab_recibo_cobranza.TXT_numero_op.setText("000000000000");
+                    switch (lo_pnl_cab_recibo_cobranza.CBX_forma_pago.getSelectedIndex()) {
+                        case 0:
+                            lo_pnl_cab_recibo_cobranza.CBX_banco.setEnabled(false);
+                            lo_pnl_cab_recibo_cobranza.TXT_numero_op.setEnabled(false);
+                            lo_pnl_cab_recibo_cobranza.TXT_fecha_op.setEnabled(false);
+                            lo_pnl_cab_recibo_cobranza.TXT_numero_op.setText("0000000000000000");
+                            break;
+                        case 3:
+                            lo_pnl_cab_recibo_cobranza.CBX_banco.setEnabled(false);
+                            lo_pnl_cab_recibo_cobranza.TXT_numero_op.setEnabled(true);
+                            lo_pnl_cab_recibo_cobranza.TXT_fecha_op.setEnabled(true);
+                            lo_pnl_cab_recibo_cobranza.TXT_numero_op.setText("");
+                            break;
+                        default:
+                            lo_pnl_cab_recibo_cobranza.CBX_banco.setEnabled(true);
+                            lo_pnl_cab_recibo_cobranza.TXT_numero_op.setEnabled(true);
+                            lo_pnl_cab_recibo_cobranza.TXT_fecha_op.setEnabled(true);
+                            lo_pnl_cab_recibo_cobranza.TXT_numero_op.setText("");
                     }
                 }
             }

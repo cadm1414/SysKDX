@@ -493,6 +493,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
         go_dlg_datos_seleccion_pedido.setVisible(true);
         ls_item_seleccion = go_dlg_datos_seleccion_pedido.ls_item_seleccion;
         if (!ls_item_seleccion[0].equalsIgnoreCase("0")) {
+            ls_codigo_pedido = ls_item_seleccion[0];
             lo_pnl_cab_guiar.TXT_pedido.setText(ls_item_seleccion[0].substring(6));
             try {
                 lq_rs = go_dao_programacion_detalle.SLT_datos_pr_detalle_x_item(ls_item_seleccion[0], ls_item_seleccion[1]);

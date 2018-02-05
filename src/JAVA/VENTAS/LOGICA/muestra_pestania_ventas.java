@@ -11,6 +11,7 @@ import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_pedido;
 import JAVA.VENTAS.REPORT.pnl_rpt_diferencia_precios;
 import JAVA.VENTAS.REPORT.pnl_rpt_registro_ventas;
 import JAVA.VENTAS.REPORT.pnl_rpt_resumen_documento;
+import JAVA.VENTAS.REPORT.pnl_rpt_ventas_formas_pago;
 import java.awt.BorderLayout;
 import net.sf.jasperreports.view.JRViewer;
 
@@ -147,6 +148,21 @@ public class muestra_pestania_ventas {
         go_pnl_rpt_diferencia_precios.repaint();
         go_pnl_rpt_diferencia_precios.revalidate();
         go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_diferencia_precios);
+        go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
+        go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
+    }
+
+    public void rpt_ventas_forma_pago(JRViewer jr, String nombre) {
+        go_frm_principal.TBP_contenedor.remove(go_pnl_rpt_ventas_formas_pago);
+        jt_panel lo_jt_panel = new jt_panel(go_frm_principal.TBP_contenedor, 0);
+        go_pnl_rpt_ventas_formas_pago = new pnl_rpt_ventas_formas_pago();
+        go_pnl_rpt_ventas_formas_pago.removeAll();
+        go_pnl_rpt_ventas_formas_pago.setLayout(new BorderLayout());
+        go_pnl_rpt_ventas_formas_pago.add(jr, BorderLayout.CENTER);
+        go_pnl_rpt_ventas_formas_pago.setVisible(true);
+        go_pnl_rpt_ventas_formas_pago.repaint();
+        go_pnl_rpt_ventas_formas_pago.revalidate();
+        go_frm_principal.TBP_contenedor.addTab(nombre, go_pnl_rpt_ventas_formas_pago);
         go_frm_principal.TBP_contenedor.setSelectedIndex(go_frm_principal.TBP_contenedor.getTabCount() - 1);
         go_frm_principal.TBP_contenedor.setTabComponentAt(go_frm_principal.TBP_contenedor.getTabCount() - 1, lo_jt_panel);
     }

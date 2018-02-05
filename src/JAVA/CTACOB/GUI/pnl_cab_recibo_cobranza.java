@@ -350,7 +350,7 @@ public class pnl_cab_recibo_cobranza extends javax.swing.JPanel {
 
         TXT_numero_op.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
-            TXT_numero_op.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("############")));
+            TXT_numero_op.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("AA##############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

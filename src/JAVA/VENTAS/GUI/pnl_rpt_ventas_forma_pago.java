@@ -2,13 +2,14 @@ package JAVA.VENTAS.GUI;
 
 import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 
-public class pnl_rpt_registro_ventas extends javax.swing.JPanel {
+public class pnl_rpt_ventas_forma_pago extends javax.swing.JPanel {
 
-    public pnl_rpt_registro_ventas() {
+    public pnl_rpt_ventas_forma_pago() {
         initComponents();
-        TXT_codigo.addFocusListener(new evt_focus_component());  
-        TXT_fecha_ini.addFocusListener(new evt_focus_component());   
+        TXT_codigo.addFocusListener(new evt_focus_component());
+        TXT_fecha_ini.addFocusListener(new evt_focus_component());
         TXT_fecha_fin.addFocusListener(new evt_focus_component());
+        CBX_forma_pago.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")
@@ -27,6 +28,9 @@ public class pnl_rpt_registro_ventas extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         TXT_fecha_fin = new javax.swing.JFormattedTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        CBX_forma_pago = new javax.swing.JComboBox<>();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
 
@@ -55,7 +59,7 @@ public class pnl_rpt_registro_ventas extends javax.swing.JPanel {
         TXT_nombre.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        jLabel3.setText("F. Inicial");
+        jLabel3.setText("F. Pago");
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel4.setText(":");
@@ -84,6 +88,16 @@ public class pnl_rpt_registro_ventas extends javax.swing.JPanel {
         TXT_fecha_fin.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_fecha_fin.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        jLabel7.setText("F. Inicial");
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        jLabel8.setText(":");
+
+        CBX_forma_pago.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_forma_pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EFECTIVO", "CREDITO" }));
+        CBX_forma_pago.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -102,13 +116,21 @@ public class pnl_rpt_registro_ventas extends javax.swing.JPanel {
                         .addGap(4, 4, 4)
                         .addComponent(TXT_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel4)
-                        .addGap(4, 4, 4)
-                        .addComponent(TXT_fecha_ini, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel4)
+                                .addGap(4, 4, 4)
+                                .addComponent(CBX_forma_pago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel8)
+                                .addGap(4, 4, 4)
+                                .addComponent(TXT_fecha_ini, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(4, 4, 4)
                         .addComponent(jLabel6)
                         .addGap(4, 4, 4)
@@ -129,10 +151,16 @@ public class pnl_rpt_registro_ventas extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(TXT_fecha_ini, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(TXT_fecha_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBX_forma_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TXT_fecha_ini, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(TXT_fecha_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(6, 6, 6))
         );
 
@@ -148,12 +176,13 @@ public class pnl_rpt_registro_ventas extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 216, Short.MAX_VALUE))
+                .addGap(0, 195, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JComboBox<String> CBX_forma_pago;
     public javax.swing.JFormattedTextField TXT_codigo;
     public javax.swing.JFormattedTextField TXT_fecha_fin;
     public javax.swing.JFormattedTextField TXT_fecha_ini;
@@ -165,6 +194,8 @@ public class pnl_rpt_registro_ventas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
