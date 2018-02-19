@@ -1,5 +1,6 @@
 package JAVA.CONFIG.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 
 public class pnl_datos_usuario_permisos extends javax.swing.JPanel {
@@ -7,6 +8,7 @@ public class pnl_datos_usuario_permisos extends javax.swing.JPanel {
     public pnl_datos_usuario_permisos() {
         initComponents();
         TXT_usuario.setDocument(new fnc_txt_mayuscula());
+        TXT_id_usuario.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")
@@ -37,13 +39,19 @@ public class pnl_datos_usuario_permisos extends javax.swing.JPanel {
         jLabel28.setText(" ");
         jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        TXT_id_usuario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("####"))));
+        TXT_id_usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        try {
+            TXT_id_usuario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         TXT_id_usuario.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_id_usuario.setEnabled(false);
         TXT_id_usuario.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
         TXT_id_usuario.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
 
         TXT_usuario.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_usuario.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_usuario.setEnabled(false);
 
@@ -52,29 +60,29 @@ public class pnl_datos_usuario_permisos extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
                 .addComponent(TXT_id_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel28)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TXT_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(4, 4, 4)
+                .addComponent(TXT_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel28)
                     .addComponent(TXT_id_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXT_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -89,7 +97,7 @@ public class pnl_datos_usuario_permisos extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

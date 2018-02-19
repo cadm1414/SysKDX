@@ -1,5 +1,6 @@
 package JAVA.CONFIG.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 
 public class pnl_datos_rol_menu extends javax.swing.JPanel {
@@ -7,6 +8,7 @@ public class pnl_datos_rol_menu extends javax.swing.JPanel {
     public pnl_datos_rol_menu() {
         initComponents();
         TXT_nombre_rol.setDocument(new fnc_txt_mayuscula());
+        TXT_nombre_rol.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")
@@ -23,6 +25,7 @@ public class pnl_datos_rol_menu extends javax.swing.JPanel {
         jLabel1.setText("Nombre Rol :");
 
         TXT_nombre_rol.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_rol.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_nombre_rol.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_rol.setEnabled(false);
 

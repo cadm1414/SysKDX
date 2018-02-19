@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="581" pageHeight="476" columnWidth="541" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="10" uuid="5fd79b68-e1d5-4f19-befc-2dff76fdba7f">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
@@ -47,19 +46,19 @@
 	</background>
 	<pageHeader>
 		<band height="216" splitType="Stretch">
-			<textField>
-				<reportElement x="40" y="155" width="207" height="13" uuid="38b58c67-5c2a-4d99-a2f5-79c91a48025d"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="40" y="155" width="285" height="13" uuid="38b58c67-5c2a-4d99-a2f5-79c91a48025d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="40" y="170" width="207" height="13" uuid="d7f00a81-3658-4a13-bec9-74b7b12ed4fc"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="40" y="170" width="285" height="13" uuid="d7f00a81-3658-4a13-bec9-74b7b12ed4fc"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Courier New" size="9" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{direccion}+" "+$F{ubigeo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="40" y="185" width="80" height="13" uuid="a1534980-2c79-4e55-b2f1-670b3a35d09c"/>

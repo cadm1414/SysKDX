@@ -13,9 +13,10 @@
 	<parameter name="nombre_sucursal" class="java.lang.String"/>
 	<parameter name="nombre_vendedor" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_diferencia_precios( $P{codigo_vendedor},  $P{fecha_ini} , $P{fecha_fin} , $P{codigo_sucursal},  $P{periodo} ) as (codigo_producto character(4),nombre_producto character varying(60),codigo_articulo character(12),nombre_articulo character varying(150),cantidad numeric,precio_venta numeric,precio_lista numeric,importe_venta numeric,importe_lista numeric,diferencia numeric)
-where diferencia <> 0]]>
+		<![CDATA[select * from rpt_diferencia_precios( $P{codigo_vendedor},  $P{fecha_ini} , $P{fecha_fin} , $P{codigo_sucursal},  $P{periodo} ) as (codigo_operacion character(16),codigo_producto character(4),nombre_producto character varying(60),codigo_articulo character(12),nombre_articulo character varying(150),cantidad numeric,precio_venta numeric,precio_lista numeric,importe_venta numeric,importe_lista numeric,diferencia numeric)
+where diferencia <> 0 and round(precio_venta,2) <> 0]]>
 	</queryString>
+	<field name="codigo_operacion" class="java.lang.String"/>
 	<field name="codigo_producto" class="java.lang.String"/>
 	<field name="nombre_producto" class="java.lang.String"/>
 	<field name="codigo_articulo" class="java.lang.String"/>
@@ -256,7 +257,8 @@ where diferencia <> 0]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[COD. ARTICULO]]></text>
+				<text><![CDATA[Numero Doc.
+]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="56" y="2" width="224" height="20" uuid="dc4d0732-f6a3-4036-82e5-f62a269f8498"/>
@@ -316,7 +318,7 @@ where diferencia <> 0]]>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{codigo_articulo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{codigo_operacion}.substring( 2,5)+"-"+$F{codigo_operacion}.substring( 8 )]]></textFieldExpression>
 			</textField>
 			<textField pattern="000">
 				<reportElement x="56" y="0" width="224" height="12" uuid="a400d1af-0a95-446c-a8bc-557368202c53"/>

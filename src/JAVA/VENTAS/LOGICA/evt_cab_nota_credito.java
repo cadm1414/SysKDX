@@ -34,6 +34,7 @@ public class evt_cab_nota_credito {
                 OBJ_pcf.TXT_tipo_cambio.setEnabled(false);
                 OBJ_pcf.CBX_concepto.setEnabled(valor);
                 OBJ_pcf.CBX_direccion.setEnabled(valor);
+                OBJ_pcf.TXT_codigo_vendedor.setEnabled(valor);
                 OBJ_pcf.CBX_registra_item.setEnabled(valor);
                 OBJ_pcf.TXT_numero_doc.requestFocus();
                 break;

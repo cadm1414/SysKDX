@@ -5,6 +5,7 @@ import JAVA.ANCESTRO.GUI.pnl_opciones_3;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_3;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import JAVA.CONFIG.GUI.dlg_tipo_movimiento_parametros;
+import JAVA.CONFIG.LOGICA.cbx_almacen;
 import JAVA.CONFIG.LOGICA.cbx_tipo_documento;
 import JAVA.INVENT.BEAN.BEAN_kardex;
 import JAVA.INVENT.LOGICA.evt_cab_guia_ingreso;
@@ -33,6 +34,7 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
     evt_grid_guia_ingreso lo_evt_grid_guia_ingreso = new evt_grid_guia_ingreso();
     recupera_valor_op lo_recupera_valor_op = new recupera_valor_op();
     cbx_tipo_documento lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref;
+    cbx_almacen lo_cbx_almacen;
     BEAN_kardex lo_bean_kardex = new BEAN_kardex();
     static boolean lb_valor_op[] = new boolean[8];
     DefaultTableModel modelo;
@@ -48,13 +50,14 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
         activa_botones();
         get_tipo_documento();
         get_tipo_documento_ref();
+        get_almacen_origen();
         lo_pnl_grid_guia_ingreso.TBL_guia_ingreso.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "selectNextColumnCell");
     }
 
     private void formulario() {
-        lo_pnl_opciones_3.setBounds(0, 10, 1000, 120);
-        lo_pnl_cab_guia_ingreso.setBounds(12, 130, 700, 210);
-        lo_pnl_grid_guia_ingreso.setBounds(15, 345, 1000, 500);
+        lo_pnl_opciones_3.setBounds(0, 10, 1000, 112);
+        lo_pnl_cab_guia_ingreso.setBounds(12, 120, 700, 205);
+        lo_pnl_grid_guia_ingreso.setBounds(14, 325, 1000, 500);
 
         this.add(lo_pnl_opciones_3);
         this.add(lo_pnl_cab_guia_ingreso);
@@ -96,9 +99,16 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
         go_cbx_trato_datos.selecciona_valor(12, "01", lo_pnl_cab_guia_ingreso.CBX_tipo_doc_ref);
     }
 
+    private void get_almacen_origen() {
+        lq_rs = go_dao_almacen.SLT_cbx_almacen("%");
+        if (lq_rs != null) {
+            go_cbx_trato_datos.recupera_valor(3, lq_rs, lo_pnl_cab_guia_ingreso.CBX_almacen);
+        }
+    }
+
     private void get_descripcion_tipo_movimiento(String codigo) {
         try {
-            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros("1", "0", "%", "1", "1", codigo);
+            lq_rs = go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros("1", "%", "%", "1", "1", codigo);
             if (lq_rs != null) {
                 lo_pnl_cab_guia_ingreso.TXT_codigo_movimiento.setText(lq_rs.getString(1));
                 lo_pnl_cab_guia_ingreso.TXT_nombre_movimiento.setText(lq_rs.getString(2));
@@ -155,12 +165,12 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
         gs_parametros[2] = gs_dia + "/" + gs_mes + "/" + gs_periodo;
         gs_parametros[3] = "%";
         gs_parametros[4] = "1";
-        gs_parametros[5] = "0";
+        gs_parametros[5] = "%";
     }
 
     private void evt_f5_tipo_movimiento() {
         gs_parametros[0] = "1";
-        gs_parametros[1] = "0";
+        gs_parametros[1] = "%";
         gs_parametros[2] = "%";
         gs_parametros[3] = "1";
         gs_parametros[4] = "1";
@@ -239,6 +249,7 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
     private void evt_guardar() {
         lo_cbx_tipo_documento = (cbx_tipo_documento) lo_pnl_cab_guia_ingreso.CBX_tipo_doc.getSelectedItem();
         lo_cbx_tipo_documento_ref = (cbx_tipo_documento) lo_pnl_cab_guia_ingreso.CBX_tipo_doc_ref.getSelectedItem();
+        lo_cbx_almacen = (cbx_almacen) lo_pnl_cab_guia_ingreso.CBX_almacen.getSelectedItem();
         //elimina_ult_fila();
         /*
         NUEVO = 0
@@ -247,14 +258,14 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
 
         switch (li_tipo_operacion) {
             case 0:
-                if (lo_evt_cab_guia_ingreso.valida_campos(lo_pnl_cab_guia_ingreso, ls_codigo_almacen,li_tipo_operacion)) {
+                if (lo_evt_cab_guia_ingreso.valida_campos(lo_pnl_cab_guia_ingreso, ls_codigo_almacen, li_tipo_operacion, lo_cbx_almacen)) {
                     if (lo_evt_grid_guia_ingreso.valida_campos(lo_pnl_grid_guia_ingreso, lo_pnl_cab_guia_ingreso.TXT_lote.getText().trim())) {
                         try {
                             ls_codigo = lo_cbx_tipo_documento.getID() + ls_codigo_almacen + lo_pnl_cab_guia_ingreso.TXT_numero.getText().trim();
                             lo_bean_kardex.setCodigo_operacion(ls_codigo);
                             lo_bean_kardex.setCodigo_almacen(ls_codigo_almacen);
                             lo_bean_kardex.setSerie_documento(ls_codigo_almacen);
-                            lo_evt_cab_guia_ingreso.setea_campos(lo_bean_kardex, lo_pnl_cab_guia_ingreso, lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref);
+                            lo_evt_cab_guia_ingreso.setea_campos(lo_bean_kardex, lo_pnl_cab_guia_ingreso, lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref, lo_cbx_almacen);
                             if (go_dao_kardex.IST_kardex(lo_bean_kardex, lo_pnl_grid_guia_ingreso.TBL_guia_ingreso)) {
                                 lo_evt_cab_guia_ingreso.limpia_datos(lo_pnl_cab_guia_ingreso);
                                 lo_evt_cab_guia_ingreso.activa_campos(0, lo_pnl_cab_guia_ingreso, false);
@@ -269,10 +280,10 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
                 break;
             case 1:
                 if (lo_evt_cab_guia_ingreso.verifica_cambios(lo_bean_kardex, lo_pnl_cab_guia_ingreso, lo_cbx_tipo_documento_ref) || cont != 0) {
-                    if (lo_evt_cab_guia_ingreso.valida_campos(lo_pnl_cab_guia_ingreso,ls_codigo_almacen,li_tipo_operacion)) {
-                        if (lo_evt_grid_guia_ingreso.valida_campos(lo_pnl_grid_guia_ingreso,lo_pnl_cab_guia_ingreso.TXT_lote.getText().trim())) {
+                    if (lo_evt_cab_guia_ingreso.valida_campos(lo_pnl_cab_guia_ingreso, ls_codigo_almacen, li_tipo_operacion, lo_cbx_almacen)) {
+                        if (lo_evt_grid_guia_ingreso.valida_campos(lo_pnl_grid_guia_ingreso, lo_pnl_cab_guia_ingreso.TXT_lote.getText().trim())) {
                             try {
-                                lo_evt_cab_guia_ingreso.setea_campos(lo_bean_kardex, lo_pnl_cab_guia_ingreso, lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref);
+                                lo_evt_cab_guia_ingreso.setea_campos(lo_bean_kardex, lo_pnl_cab_guia_ingreso, lo_cbx_tipo_documento, lo_cbx_tipo_documento_ref, lo_cbx_almacen);
                                 if (go_dao_kardex_detalle.DLT_kardex_detalle(ls_codigo)) {
                                     if (go_dao_kardex.UPD_kardex(lo_bean_kardex, lo_pnl_grid_guia_ingreso.TBL_guia_ingreso)) {
                                         lo_evt_cab_guia_ingreso.limpia_datos(lo_pnl_cab_guia_ingreso);
@@ -409,7 +420,7 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
                 }
                 if (ke.getSource() == lo_pnl_opciones_3.BTN_cancelar) {
                     evt_cancelar();
-                    
+
                 }
                 if (ke.getSource() == lo_pnl_cab_guia_ingreso.TXT_codigo_movimiento && go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_guia_ingreso.TXT_codigo_movimiento)) {
                     lo_pnl_cab_guia_ingreso.TXT_codigo_movimiento.setText(go_fnc_operaciones_campos.completa_digitos(lo_pnl_cab_guia_ingreso.TXT_codigo_movimiento.getText().trim(), "0", 2));
@@ -459,13 +470,16 @@ public class jif_guia_ingreso extends javax.swing.JInternalFrame {
                     if (go_fnc_operaciones_campos.campo_blanco(lo_pnl_cab_guia_ingreso.TXT_lote)) {
                         lo_pnl_cab_guia_ingreso.TXT_lote.setText(go_fnc_operaciones_campos.completa_digitos(lo_pnl_cab_guia_ingreso.TXT_lote.getText().trim(), "0", 6));
                         if (go_dao_kardex_detalle.FNC_verifica_lote(ls_codigo_almacen, lo_pnl_cab_guia_ingreso.TXT_lote.getText().trim()) == 0 || li_tipo_operacion == 1) {
-                            lo_pnl_cab_guia_ingreso.TXT_observacion.requestFocus();
+                            lo_pnl_cab_guia_ingreso.CBX_almacen.requestFocus();
                         } else {
                             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "LOTE REGISTRADO");
                             lo_pnl_cab_guia_ingreso.TXT_lote.setText("");
                         }
                         lo_evt_grid_guia_ingreso.actualiza_lote(lo_pnl_grid_guia_ingreso, lo_pnl_cab_guia_ingreso.TXT_lote.getText().trim());
                     }
+                }
+                if (ke.getSource() == lo_pnl_cab_guia_ingreso.CBX_almacen) {
+                    getFocusOwner().transferFocus();
                 }
                 if (ke.getSource() == lo_pnl_cab_guia_ingreso.TXT_observacion) {
                     if (lo_pnl_grid_guia_ingreso.TBL_guia_ingreso.getRowCount() == 0) {

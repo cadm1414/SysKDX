@@ -1,6 +1,7 @@
 package JAVA.INVENT.LOGICA;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import JAVA.CONFIG.LOGICA.cbx_almacen;
 import JAVA.CONFIG.LOGICA.cbx_tipo_documento;
 import JAVA.INVENT.BEAN.BEAN_kardex;
 import JAVA.INVENT.GUI.pnl_cab_guia_salida;
@@ -78,13 +79,14 @@ public class evt_cab_guia_salida {
         OBJ_pds.TXT_observacion.setText(OBJ_bka.getObservacion());
         OBJ_pds.LBL_numero_doc.setText(OBJ_bka.getNumero_documento());
         OBJ_pds.LBL_fecha_registro.setText(OBJ_bka.getFecha_registro());
+        go_cbx_trato_datos.selecciona_valor(3, OBJ_bka.getCodigo_almacen(), OBJ_pds.CBX_almacen);
     }
 
     public boolean valida_campos(pnl_cab_guia_salida OBJ_pcs) {
         boolean resp = false;
         if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcs.TXT_codigo_movimiento)) {
             OBJ_pcs.TXT_codigo_movimiento.setText(go_fnc_operaciones_campos.completa_digitos(OBJ_pcs.TXT_codigo_movimiento.getText().trim(), "0", 2));
-            if (go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros("0", "0", "%", "1", "1", OBJ_pcs.TXT_codigo_movimiento.getText()) != null) {
+            if (go_dao_tipo_movimiento.SLT_grid_tipo_movimiento_parametros("0", "%", "%", "1", "1", OBJ_pcs.TXT_codigo_movimiento.getText()) != null) {
                 if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcs.TXT_numero)) {
                     OBJ_pcs.TXT_numero.setText(go_fnc_operaciones_campos.completa_digitos(OBJ_pcs.TXT_numero.getText().trim(), "0", 10));
                     OBJ_pcs.LBL_numero_doc.setText(OBJ_pcs.TXT_numero.getText());
@@ -117,7 +119,7 @@ public class evt_cab_guia_salida {
         return resp;
     }
 
-    public void setea_campos(BEAN_kardex OBJ_kar, pnl_cab_guia_salida OBJ_pcs, cbx_tipo_documento cbx_documento, cbx_tipo_documento cbx_documento_ref) {
+    public void setea_campos(BEAN_kardex OBJ_kar, pnl_cab_guia_salida OBJ_pcs, cbx_tipo_documento cbx_documento, cbx_tipo_documento cbx_documento_ref, cbx_almacen cbx_almacen) {
         try {
             OBJ_kar.setFecha_emision(go_fnc_operaciones_campos.get_campo_str(OBJ_pcs.TXT_fecha_emision));
             OBJ_kar.setCodigo_movimiento(go_fnc_operaciones_campos.get_campo_str(OBJ_pcs.TXT_codigo_movimiento));
@@ -127,8 +129,8 @@ public class evt_cab_guia_salida {
             OBJ_kar.setSerie_documento_ref("");
             OBJ_kar.setNumero_documento_ref(go_fnc_operaciones_campos.get_campo_str(OBJ_pcs.TXT_numero_ref));
             OBJ_kar.setTipo_movimiento("0");
-            OBJ_kar.setEs_transferencia("0");
-            OBJ_kar.setCodigo_almacen_origen("");
+            OBJ_kar.setEs_transferencia((cbx_almacen.getID().equalsIgnoreCase("....")) ? "0" : "1");
+            OBJ_kar.setCodigo_almacen_origen(cbx_almacen.getID());
             OBJ_kar.setObservacion(go_fnc_operaciones_campos.get_campo_str(OBJ_pcs.TXT_observacion));
             OBJ_kar.setStatus("1");
             OBJ_kar.setLote_ref("");

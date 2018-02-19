@@ -67,6 +67,7 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
                 lo_pnl_inicia_sesion.CBX_empresa.setModel(lo_model_empresa);
                 get_anio();
             } catch (Exception e) {
+                go_fnc_cierra_sistema.cierra_sistema();
             }
         }
     }
@@ -207,6 +208,7 @@ public class frm_inicia_sesion extends javax.swing.JFrame {
 
                 } catch (Exception e) {
                     go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "evt_aceptar", e.getMessage());
+                    go_fnc_cierra_sistema.cierra_sistema();
                 }
 
             } else {

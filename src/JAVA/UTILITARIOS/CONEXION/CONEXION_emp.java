@@ -31,7 +31,6 @@ public class CONEXION_emp {
             lq_con.setAutoCommit(false);
         } catch (IOException | ClassNotFoundException | SQLException e) {
             go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "getconexion_emp", e.getMessage());
-            go_fnc_cierra_sistema.cierra_sistema();
         }
         return lq_con;
     }

@@ -52,9 +52,9 @@ public class jif_saldos_iniciales extends javax.swing.JInternalFrame {
     }
 
     private void formulario() {
-        lo_pnl_opciones_3.setBounds(0, 10, 1000, 120);
-        lo_pnl_cab_saldos_iniciales.setBounds(12, 130, 700, 210);
-        lo_pnl_grid_saldos_iniciales.setBounds(15, 345, 1000, 500);
+        lo_pnl_opciones_3.setBounds(0, 10, 1000, 112);
+        lo_pnl_cab_saldos_iniciales.setBounds(12, 120, 700, 180);
+        lo_pnl_grid_saldos_iniciales.setBounds(14, 300, 1000, 500);
 
         this.add(lo_pnl_opciones_3);
         this.add(lo_pnl_cab_saldos_iniciales);
