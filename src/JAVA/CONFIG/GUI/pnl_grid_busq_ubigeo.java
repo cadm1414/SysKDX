@@ -1,9 +1,19 @@
 package JAVA.CONFIG.GUI;
+
+import JAVA.ANCESTRO.LOGICA.evt_previous_focus;
+import javax.swing.ActionMap;
+
 public class pnl_grid_busq_ubigeo extends javax.swing.JPanel {
+
+    ActionMap am;
 
     public pnl_grid_busq_ubigeo() {
         initComponents();
+
+        am = TBL_ubigeo.getActionMap();
+        am.put("selectPreviousColumnCell", new evt_previous_focus());
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

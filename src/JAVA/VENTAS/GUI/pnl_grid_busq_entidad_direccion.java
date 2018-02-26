@@ -1,10 +1,16 @@
 package JAVA.VENTAS.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_previous_focus;
+import javax.swing.ActionMap;
 
 public class pnl_grid_busq_entidad_direccion extends javax.swing.JPanel {
 
+    ActionMap am;
+
     public pnl_grid_busq_entidad_direccion() {
         initComponents();
+        am = TBL_direccion.getActionMap();
+        am.put("selectPreviousColumnCell", new evt_previous_focus());
     }
 
     @SuppressWarnings("unchecked")

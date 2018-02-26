@@ -26,6 +26,7 @@ public class evt_grid_pedidos {
     }
 
     public void limpia_tabla(pnl_grid_pedidos OBJ_pgp, int op) {
+        OBJ_pgp.LBL_aviso.setText("");
         if (op != 2) {
             OBJ_pgp.LBL_total.setText("0.00");
             OBJ_pgp.LBL_inafecto.setText("0.00");
@@ -103,7 +104,7 @@ public class evt_grid_pedidos {
         OBJ_pgp.LBL_importe.setText(dFormat.format(total) + "");
     }
 
-    public void suma_importes(int afecto_igv, double igv_p, boolean es_sigv, pnl_grid_pedidos OBJ_pgp) {
+    public void suma_importes(int afecto_igv, double igv_p, boolean es_sigv, pnl_grid_pedidos OBJ_pgp, String codigo_td) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
         simbolos.setDecimalSeparator('.');
         simbolos.setGroupingSeparator(',');
@@ -151,6 +152,12 @@ public class evt_grid_pedidos {
             OBJ_pgp.LBL_igv.setText(dFormat.format(igv_s) + "");
             OBJ_pgp.LBL_percepcion.setText(dFormat.format(percepcion_s) + "");
             OBJ_pgp.LBL_importe.setText(dFormat.format(importe) + "");
+
+            if (codigo_td.equalsIgnoreCase("03") && importe >= 700) {
+                OBJ_pgp.LBL_aviso.setText("MONTO MAYOR A 700 INGRESAR NOMBRE COMPLETO y DNI");
+            } else {
+                OBJ_pgp.LBL_aviso.setText("");
+            }
         } catch (Exception e) {
         }
     }
@@ -379,7 +386,7 @@ public class evt_grid_pedidos {
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(15), a, 17);
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(16), a, 18);
                     a++;
-                } while (rs.next());                
+                } while (rs.next());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

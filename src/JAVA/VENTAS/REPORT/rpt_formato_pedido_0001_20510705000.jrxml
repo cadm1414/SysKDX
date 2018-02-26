@@ -44,44 +44,44 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="113" splitType="Stretch">
+		<band height="120" splitType="Stretch">
 			<textField>
-				<reportElement x="40" y="68" width="207" height="13" uuid="53602a5d-f4dc-4169-b310-2bea5f80cb4b"/>
+				<reportElement x="40" y="77" width="207" height="13" uuid="53602a5d-f4dc-4169-b310-2bea5f80cb4b"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="40" y="81" width="207" height="13" uuid="b7e18bbb-e0be-4752-827a-ac63e8c0e1ac"/>
+				<reportElement x="40" y="90" width="207" height="13" uuid="b7e18bbb-e0be-4752-827a-ac63e8c0e1ac"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="80" width="50" height="13" uuid="388d5fcf-ae06-498e-9191-c3f35ceafad0"/>
+				<reportElement x="260" y="90" width="50" height="13" uuid="388d5fcf-ae06-498e-9191-c3f35ceafad0"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numero_doc_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="316" y="80" width="22" height="13" uuid="b509423c-1c6b-4e17-92fd-6c51804e9edc"/>
+				<reportElement x="316" y="94" width="22" height="13" uuid="b509423c-1c6b-4e17-92fd-6c51804e9edc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(0,2)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="342" y="80" width="22" height="13" uuid="61f9152f-903f-4662-ad82-322c6ab8f6e6"/>
+				<reportElement x="342" y="94" width="22" height="13" uuid="61f9152f-903f-4662-ad82-322c6ab8f6e6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_emision}.substring(2,4)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="368" y="80" width="22" height="13" uuid="2211aa02-1ac6-4884-89f2-731335582f70"/>
+				<reportElement x="368" y="94" width="22" height="13" uuid="2211aa02-1ac6-4884-89f2-731335582f70"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="9" isBold="false"/>
 				</textElement>
@@ -136,7 +136,7 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="125" splitType="Stretch">
+		<band height="118" splitType="Stretch">
 			<textField>
 				<reportElement x="80" y="16" width="280" height="12" uuid="80e16ba9-6e40-4760-9480-7dfaef43ac91"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">

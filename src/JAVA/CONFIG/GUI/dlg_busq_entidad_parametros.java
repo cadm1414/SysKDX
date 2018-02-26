@@ -1,6 +1,7 @@
 package JAVA.CONFIG.GUI;
 
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.awt.Image;
@@ -24,6 +25,9 @@ public class dlg_busq_entidad_parametros extends javax.swing.JDialog {
         initComponents();
         formulario();
         datos_tabla();
+        
+        TXT_dato.addFocusListener(new evt_focus_component());
+        CBX_columna.addFocusListener(new evt_focus_component());
     }
 
     private void formulario() {
@@ -152,11 +156,13 @@ public class dlg_busq_entidad_parametros extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
 
         TXT_dato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_dato.setNextFocusableComponent(CBX_columna);
 
         CBX_columna.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_columna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CODIGO", "RAZON SOCIAL", "DOCUMENTO" }));
         CBX_columna.setSelectedIndex(1);
+        CBX_columna.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         CBX_columna.setNextFocusableComponent(TXT_dato);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

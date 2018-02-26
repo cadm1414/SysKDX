@@ -794,7 +794,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 genera_peso_bruto(fila);
                 genera_peso_neto(fila);
                 genera_importe(fila);
-                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,(lo_pnl_cab_pedidos.CBX_tipo_documento_id.getSelectedIndex() == 0) ? "01" : "03");
                 lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
 
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 3) {
@@ -874,7 +874,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     }
                 }
                 if (ie.getSource() == lo_pnl_cab_pedidos.JRD_precio_igv) {
-                    lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                    lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,(lo_pnl_cab_pedidos.CBX_tipo_documento_id.getSelectedIndex() == 0) ? "01" : "03");
                     lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                 }
                 if (ie.getSource() == lo_pnl_cab_pedidos.CBX_forma_pago) {
@@ -900,7 +900,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ITEM " + go_fnc_operaciones_campos.completa_digitos((fila + 1) + "", "0", 3) + "?") == 0) {
                         lo_evt_grid_pedidos.elimina_fila(lo_pnl_grid_pedidos, fila);
                         lo_evt_grid_pedidos.genera_item(lo_pnl_grid_pedidos);
-                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_pedidos.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_pedidos.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,(lo_pnl_cab_pedidos.CBX_tipo_documento_id.getSelectedIndex() == 0) ? "01" : "03");
                         lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     }
                 }

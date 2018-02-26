@@ -1,15 +1,22 @@
 package JAVA.DISTBR.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_previous_focus;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import java.awt.Component;
+import javax.swing.ActionMap;
 import javax.swing.text.JTextComponent;
 
 public class pnl_grid_liquidacion extends javax.swing.JPanel {
+
+    ActionMap am;
 
     public pnl_grid_liquidacion() {
         initComponents();
         go_fnc_operaciones_campos.ancho_columna(TBL_liquidacion, 0, 0);
         go_fnc_operaciones_campos.ancho_columna(TBL_liquidacion, 2, 0);
+
+        am = TBL_liquidacion.getActionMap();
+        am.put("selectPreviousColumnCell", new evt_previous_focus());
     }
 
     @SuppressWarnings("unchecked")

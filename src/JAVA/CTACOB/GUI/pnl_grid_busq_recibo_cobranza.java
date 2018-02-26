@@ -1,12 +1,19 @@
 package JAVA.CTACOB.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_previous_focus;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
+import javax.swing.ActionMap;
 
 public class pnl_grid_busq_recibo_cobranza extends javax.swing.JPanel {
+
+    ActionMap am;
 
     public pnl_grid_busq_recibo_cobranza() {
         initComponents();
         go_fnc_operaciones_campos.ancho_columna(TBL_recibo_cobranza, 3, 0);
+
+        am = TBL_recibo_cobranza.getActionMap();
+        am.put("selectPreviousColumnCell", new evt_previous_focus());
     }
 
     @SuppressWarnings("unchecked")

@@ -1,6 +1,7 @@
 package JAVA.VENTAS.GUI;
 
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.awt.Image;
@@ -13,30 +14,32 @@ import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
 public class dlg_busq_transportista extends javax.swing.JDialog {
-
+    
     pnl_grid_busq_transportista lo_pnl_grid_busq_transportista = new pnl_grid_busq_transportista();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
     public String ls_codigo_transportista;
-
+    
     public dlg_busq_transportista(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         formulario();
         datos_tabla();
+        
+        TXT_dato.addFocusListener(new evt_focus_component());
     }
-
+    
     private void formulario() {
         lo_pnl_grid_busq_transportista.setBounds(0, 0, 700, 270);
         PNL_grid.add(lo_pnl_grid_busq_transportista);
-
+        
         TXT_dato.setDocument(new fnc_txt_mayuscula());
-
+        
         lo_pnl_grid_busq_transportista.TBL_transportista.addMouseListener(MouseEvnt);
         lo_pnl_grid_busq_transportista.TBL_transportista.addKeyListener(KeyEvnt);
         TXT_dato.addKeyListener(KeyEvnt);
     }
-
+    
     private void datos_tabla() {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_transportista.TBL_transportista.getModel();
@@ -54,18 +57,18 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }
-
+    
     public void retorna() {
         ls_codigo_transportista = lo_pnl_grid_busq_transportista.TBL_transportista.getValueAt(lo_pnl_grid_busq_transportista.TBL_transportista.getSelectedRow(), 0).toString();
         this.dispose();
     }
-
+    
     KeyListener KeyEvnt = new KeyListener() {
         @Override
         public void keyTyped(KeyEvent ke) {
-
+            
         }
-
+        
         @Override
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -85,16 +88,16 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
                 dispose();
             }
         }
-
+        
         @Override
         public void keyReleased(KeyEvent ke) {
             if (ke.getSource() == TXT_dato) {
                 go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_transportista.TBL_transportista, TXT_dato.getText(), 1);
             }
         }
-
+        
     };
-
+    
     MouseListener MouseEvnt = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent me) {
@@ -102,29 +105,29 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
                 retorna();
             }
         }
-
+        
         @Override
         public void mousePressed(MouseEvent me) {
-
+            
         }
-
+        
         @Override
         public void mouseReleased(MouseEvent me) {
-
+            
         }
-
+        
         @Override
         public void mouseEntered(MouseEvent me) {
-
+            
         }
-
+        
         @Override
         public void mouseExited(MouseEvent me) {
-
+            
         }
-
+        
     };
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -142,6 +145,7 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
 
         TXT_dato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_dato.setNextFocusableComponent(TXT_dato);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -158,7 +162,7 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(TXT_dato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PNL_gridLayout = new javax.swing.GroupLayout(PNL_grid);
@@ -213,7 +217,7 @@ public class dlg_busq_transportista extends javax.swing.JDialog {
             }
         });
     }
-
+    
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));

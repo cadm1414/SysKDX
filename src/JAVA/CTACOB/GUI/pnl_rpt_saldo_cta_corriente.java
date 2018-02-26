@@ -1,5 +1,7 @@
 package JAVA.CTACOB.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
+import JAVA.ANCESTRO.LOGICA.evt_focus_fecha;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 
 public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
@@ -7,6 +9,14 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
     public pnl_rpt_saldo_cta_corriente() {
         initComponents();
         TXT_codigo_vc.setDocument(new fnc_txt_mayuscula());
+
+        TXT_codigo.addFocusListener(new evt_focus_component());
+        TXT_codigo_vc.addFocusListener(new evt_focus_component());
+        TXT_fecha_fin.addFocusListener(new evt_focus_fecha());
+        TXT_fecha_ini.addFocusListener(new evt_focus_fecha());
+
+        CBX_filtro.addFocusListener(new evt_focus_component());
+        CBX_tipo.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")
@@ -43,6 +53,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");
 
+        TXT_codigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_codigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
@@ -56,6 +67,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_nombre.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_nombre.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre.setEnabled(false);
 
@@ -67,6 +79,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
 
         CBX_filtro.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GENERAL", "CLIENTE", "VENDEDOR" }));
+        CBX_filtro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel5.setText("Tipo");
@@ -76,6 +89,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
 
         CBX_tipo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NORMAL", "VENCIDOS" }));
+        CBX_tipo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel7.setText("F. Inicial");
@@ -83,6 +97,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel8.setText(":");
 
+        TXT_fecha_ini.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_ini.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -98,6 +113,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel10.setText(":");
 
+        TXT_fecha_fin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_fin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -111,10 +127,12 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
         jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_nombre_vc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_vc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_nombre_vc.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_vc.setEnabled(false);
 
         TXT_codigo_vc.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_codigo_vc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_codigo_vc.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -213,7 +231,7 @@ public class pnl_rpt_saldo_cta_corriente extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

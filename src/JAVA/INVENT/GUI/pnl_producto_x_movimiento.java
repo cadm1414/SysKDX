@@ -1,6 +1,7 @@
 package JAVA.INVENT.GUI;
 
 import JAVA.ANCESTRO.LOGICA.evt_focus_component;
+import JAVA.ANCESTRO.LOGICA.evt_focus_fecha;
 
 public class pnl_producto_x_movimiento extends javax.swing.JPanel {
 
@@ -8,8 +9,8 @@ public class pnl_producto_x_movimiento extends javax.swing.JPanel {
         initComponents();
         TXT_codigo.addFocusListener(new evt_focus_component());        
         TXT_codigo_mov.addFocusListener(new evt_focus_component());
-        TXT_fecha_ini.addFocusListener(new evt_focus_component());
-        TXT_fecha_fin.addFocusListener(new evt_focus_component());
+        TXT_fecha_ini.addFocusListener(new evt_focus_fecha());
+        TXT_fecha_fin.addFocusListener(new evt_focus_fecha());
     }
 
 
@@ -43,6 +44,7 @@ public class pnl_producto_x_movimiento extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");
 
+        TXT_codigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_codigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
@@ -56,6 +58,7 @@ public class pnl_producto_x_movimiento extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_nombre.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_nombre.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre.setEnabled(false);
 
@@ -65,6 +68,7 @@ public class pnl_producto_x_movimiento extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel4.setText(":");
 
+        TXT_codigo_mov.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_codigo_mov.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
         } catch (java.text.ParseException ex) {
@@ -78,6 +82,7 @@ public class pnl_producto_x_movimiento extends javax.swing.JPanel {
         jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_nombre_mov.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre_mov.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_nombre_mov.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre_mov.setEnabled(false);
 
@@ -87,6 +92,7 @@ public class pnl_producto_x_movimiento extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel8.setText(":");
 
+        TXT_fecha_ini.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_ini.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -101,6 +107,7 @@ public class pnl_producto_x_movimiento extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel10.setText(":");
 
+        TXT_fecha_fin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_fin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -190,7 +197,7 @@ public class pnl_producto_x_movimiento extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 187, Short.MAX_VALUE))
+                .addGap(0, 191, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

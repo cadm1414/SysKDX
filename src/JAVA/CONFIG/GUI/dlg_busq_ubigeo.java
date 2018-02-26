@@ -1,6 +1,7 @@
 package JAVA.CONFIG.GUI;
 
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
@@ -24,6 +25,8 @@ public class dlg_busq_ubigeo extends javax.swing.JDialog {
         initComponents();
         formulario();
         datos_tabla();
+        
+        TXT_dato.addFocusListener(new evt_focus_component());
     }
 
     private void formulario() {
@@ -138,6 +141,7 @@ public class dlg_busq_ubigeo extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DATO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 153, 153))); // NOI18N
 
         TXT_dato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_dato.setNextFocusableComponent(TXT_dato);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -165,7 +169,7 @@ public class dlg_busq_ubigeo extends javax.swing.JDialog {
         );
         PNL_gridLayout.setVerticalGroup(
             PNL_gridLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 172, Short.MAX_VALUE)
+            .addGap(0, 176, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

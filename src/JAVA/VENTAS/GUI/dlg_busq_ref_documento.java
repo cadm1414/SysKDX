@@ -2,6 +2,8 @@ package JAVA.VENTAS.GUI;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
+import JAVA.ANCESTRO.LOGICA.evt_focus_fecha;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -27,6 +29,11 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         formulario();
         get_parametros();
         datos_tabla();
+
+        TXT_dato.addFocusListener(new evt_focus_component());
+        TXT_fecha_fin.addFocusListener(new evt_focus_fecha());
+        TXT_fecha_ini.addFocusListener(new evt_focus_fecha());
+        CBX_tipo.addFocusListener(new evt_focus_component());
     }
 
     private void get_parametros() {
@@ -154,7 +161,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         @Override
         public void keyReleased(KeyEvent ke) {
             if (ke.getSource() == TXT_dato) {
-                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_ref_documento.TBL_referencia, TXT_dato.getText(), CBX_tipo.getSelectedIndex()+3);
+                go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_busq_ref_documento.TBL_referencia, TXT_dato.getText(), CBX_tipo.getSelectedIndex() + 3);
             }
         }
 
@@ -216,6 +223,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
 
         TXT_dato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel1.setText("Dato");
@@ -229,6 +237,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel4.setText(":");
 
+        TXT_fecha_ini.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_ini.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -243,6 +252,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel6.setText(":");
 
+        TXT_fecha_fin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_fin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -253,6 +263,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
 
         CBX_tipo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DOCUMENTO", "RAZON SOCIAL" }));
+        CBX_tipo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

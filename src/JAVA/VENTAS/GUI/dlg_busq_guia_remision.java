@@ -1,6 +1,7 @@
 package JAVA.VENTAS.GUI;
 
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.awt.Image;
@@ -27,6 +28,10 @@ public class dlg_busq_guia_remision extends javax.swing.JDialog {
         formulario();
         get_parametros();
         datos_tabla();
+
+        TXT_dato.addFocusListener(new evt_focus_component());
+        TXT_fecha_fin.addFocusListener(new evt_focus_component());
+        TXT_fecha_ini.addFocusListener(new evt_focus_component());
     }
 
     private void get_parametros() {
@@ -217,6 +222,7 @@ public class dlg_busq_guia_remision extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
 
         TXT_dato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_dato.setNextFocusableComponent(TXT_fecha_ini);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
@@ -231,6 +237,7 @@ public class dlg_busq_guia_remision extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel4.setText(":");
 
+        TXT_fecha_ini.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_ini.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -245,6 +252,7 @@ public class dlg_busq_guia_remision extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel6.setText(":");
 
+        TXT_fecha_fin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_fin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -295,7 +303,7 @@ public class dlg_busq_guia_remision extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(TXT_dato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PNL_gridLayout = new javax.swing.GroupLayout(PNL_grid);

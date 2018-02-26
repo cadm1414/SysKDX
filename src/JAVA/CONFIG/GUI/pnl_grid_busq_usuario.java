@@ -1,9 +1,16 @@
 package JAVA.CONFIG.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_previous_focus;
+import javax.swing.ActionMap;
+
 public class pnl_grid_busq_usuario extends javax.swing.JPanel {
+
+    ActionMap am;
 
     public pnl_grid_busq_usuario() {
         initComponents();
+        am = TBL_usuario.getActionMap();
+        am.put("selectPreviousColumnCell", new evt_previous_focus());
     }
 
     @SuppressWarnings("unchecked")

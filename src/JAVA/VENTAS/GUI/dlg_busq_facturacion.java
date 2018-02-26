@@ -1,6 +1,7 @@
 package JAVA.VENTAS.GUI;
 
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.awt.Image;
@@ -13,45 +14,47 @@ import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
 public class dlg_busq_facturacion extends javax.swing.JDialog {
-
+    
     pnl_grid_facturacion lo_pnl_grid_facturacion = new pnl_grid_facturacion();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
     public String ls_codigo_articulo, ls_oc, ls_periodo_produccion;
-
+    
     public dlg_busq_facturacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         formulario();
         datos_tabla();
+        
+        TXT_dato.addFocusListener(new evt_focus_component());
     }
     
-    private void limpia_parametros(){
+    private void limpia_parametros() {
         gs_parametros[0] = "";
         gs_parametros[1] = "";
         gs_parametros[2] = "";
     }
-
+    
     private void formulario() {
         lo_pnl_grid_facturacion.setBounds(0, 0, 800, 220);
         PNL_grid.add(lo_pnl_grid_facturacion);
-
+        
         TXT_dato.setDocument(new fnc_txt_mayuscula());
-
+        
         lo_pnl_grid_facturacion.TBL_facturacion.addMouseListener(MouseEvnt);
         lo_pnl_grid_facturacion.TBL_facturacion.addKeyListener(KeyEvnt);
         TXT_dato.addKeyListener(KeyEvnt);
     }
-
+    
     private void datos_tabla() {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_facturacion.TBL_facturacion.getModel();
         try {
-            if(!gs_parametros[1].equalsIgnoreCase("")){
-                lq_rs = go_dao_kardex_detalle.slt_grid_facturacion(gs_parametros[0],gs_parametros[1], gs_parametros[2]);
-            }else{
+            if (!gs_parametros[1].equalsIgnoreCase("")) {
+                lq_rs = go_dao_kardex_detalle.slt_grid_facturacion(gs_parametros[0], gs_parametros[1], gs_parametros[2]);
+            } else {
                 lq_rs = go_dao_registro_ventas_detalle.slt_grid_facturacion_ref(gs_parametros[0]);
-            }                
+            }            
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
@@ -64,10 +67,10 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
                     lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getInt(7), a, 6);
                     lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getDouble(8), a, 7);
                     lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getDouble(9), a, 8);
-                    if(gs_parametros[1].equalsIgnoreCase("")){
+                    if (gs_parametros[1].equalsIgnoreCase("")) {
                         lo_pnl_grid_facturacion.TBL_facturacion.setValueAt(lq_rs.getString(10), a, 9);
-                    }else{
-                         lo_pnl_grid_facturacion.TBL_facturacion.setValueAt("", a, 9);
+                    } else {
+                        lo_pnl_grid_facturacion.TBL_facturacion.setValueAt("", a, 9);
                     }
                     a++;
                 } while (lq_rs.next());
@@ -76,19 +79,19 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }
-
+    
     public void retorna() {
-        gs_parametros[0] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 0).toString(); 
-        gs_parametros[1] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 9).toString(); 
+        gs_parametros[0] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 0).toString();        
+        gs_parametros[1] = lo_pnl_grid_facturacion.TBL_facturacion.getValueAt(lo_pnl_grid_facturacion.TBL_facturacion.getSelectedRow(), 9).toString();        
         this.dispose();
     }
-
+    
     KeyListener KeyEvnt = new KeyListener() {
         @Override
         public void keyTyped(KeyEvent ke) {
-
+            
         }
-
+        
         @Override
         public void keyPressed(KeyEvent ke) {
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -108,16 +111,16 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
                 dispose();
             }
         }
-
+        
         @Override
         public void keyReleased(KeyEvent ke) {
             if (ke.getSource() == TXT_dato) {
                 go_fnc_filtrar_tablas.filtro(lm_modelo, lo_pnl_grid_facturacion.TBL_facturacion, TXT_dato.getText(), 1);
             }
         }
-
+        
     };
-
+    
     MouseListener MouseEvnt = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent me) {
@@ -125,29 +128,29 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
                 retorna();
             }
         }
-
+        
         @Override
         public void mousePressed(MouseEvent me) {
-
+            
         }
-
+        
         @Override
         public void mouseReleased(MouseEvent me) {
-
+            
         }
-
+        
         @Override
         public void mouseEntered(MouseEvent me) {
-
+            
         }
-
+        
         @Override
         public void mouseExited(MouseEvent me) {
-
+            
         }
-
+        
     };
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -165,6 +168,7 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
 
         TXT_dato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_dato.setNextFocusableComponent(TXT_dato);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -181,7 +185,7 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(TXT_dato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PNL_gridLayout = new javax.swing.GroupLayout(PNL_grid);
@@ -236,7 +240,7 @@ public class dlg_busq_facturacion extends javax.swing.JDialog {
             }
         });
     }
-
+    
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(IMAGES_ruta_ancestro.class.getResource("buscar_d.png"));

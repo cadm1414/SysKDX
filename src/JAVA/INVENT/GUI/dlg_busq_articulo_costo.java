@@ -1,6 +1,7 @@
 package JAVA.INVENT.GUI;
 
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.awt.Image;
@@ -24,10 +25,13 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
         initComponents();
         formulario();
         datos_tabla();
+
+        TXT_dato.addFocusListener(new evt_focus_component());
+
     }
 
     private void formulario() {
-        lo_pnl_grid_busq_articulo_costo.setBounds(0, 0, 600, 220);
+        lo_pnl_grid_busq_articulo_costo.setBounds(0, 0, 750, 220);
         PNL_grid.add(lo_pnl_grid_busq_articulo_costo);
 
         TXT_dato.setDocument(new fnc_txt_mayuscula());
@@ -144,6 +148,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(202, 63));
 
         TXT_dato.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_dato.setNextFocusableComponent(TXT_dato);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -160,7 +165,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(TXT_dato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PNL_gridLayout = new javax.swing.GroupLayout(PNL_grid);
@@ -183,7 +188,7 @@ public class dlg_busq_articulo_costo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 377, Short.MAX_VALUE))
+                        .addGap(0, 478, Short.MAX_VALUE))
                     .addComponent(PNL_grid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

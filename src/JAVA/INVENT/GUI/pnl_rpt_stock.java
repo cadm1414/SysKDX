@@ -1,10 +1,15 @@
 
 package JAVA.INVENT.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
+import JAVA.ANCESTRO.LOGICA.evt_focus_fecha;
+
 public class pnl_rpt_stock extends javax.swing.JPanel {
 
     public pnl_rpt_stock() {
         initComponents();
+        TXT_codigo.addFocusListener(new evt_focus_component());
+        TXT_fecha_fin.addFocusListener(new evt_focus_fecha());
     }
 
     @SuppressWarnings("unchecked")
@@ -32,6 +37,7 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel2.setText(":");
 
+        TXT_codigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_codigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
@@ -45,6 +51,7 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
         jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         TXT_nombre.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        TXT_nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         TXT_nombre.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_nombre.setEnabled(false);
 
@@ -56,6 +63,7 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
 
         CBX_tipo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         CBX_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SIMPLIFICADO", "FUTURO", "DETALLADO", "VALORIZADO" }));
+        CBX_tipo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel5.setText("Fecha");
@@ -63,6 +71,7 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel6.setText(":");
 
+        TXT_fecha_fin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         try {
             TXT_fecha_fin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -138,7 +147,7 @@ public class pnl_rpt_stock extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addGap(0, 27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

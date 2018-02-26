@@ -21,7 +21,7 @@ public class evt_cab_guia_ingreso {
                 OBJ_pdc.TXT_numero.setEnabled(valor);
                 OBJ_pdc.TXT_numero_ref.setEnabled(valor);
                 OBJ_pdc.TXT_fecha_emision.setEnabled(valor);
-                OBJ_pdc.TXT_lote.setEnabled(valor);
+                //OBJ_pdc.TXT_lote.setEnabled(valor);
                 OBJ_pdc.TXT_observacion.setEnabled(valor);
                 OBJ_pdc.CBX_almacen.setEnabled(valor);
                 OBJ_pdc.TXT_codigo_movimiento.requestFocus();
@@ -29,7 +29,7 @@ public class evt_cab_guia_ingreso {
             case 1:
                 OBJ_pdc.TXT_codigo_movimiento.setEnabled(valor);
                 OBJ_pdc.TXT_serie_ref.setEnabled(valor);
-                OBJ_pdc.TXT_lote.setEnabled(valor);
+                //OBJ_pdc.TXT_lote.setEnabled(valor);
                 OBJ_pdc.CBX_tipo_doc_ref.setEnabled(valor);
                 OBJ_pdc.TXT_numero_ref.setEnabled(valor);
                 OBJ_pdc.TXT_fecha_emision.setEnabled(valor);
@@ -47,7 +47,7 @@ public class evt_cab_guia_ingreso {
         OBJ_pdc.TXT_fecha_emision.setText(gs_dia + gs_mes + gs_periodo);
         OBJ_pdc.TXT_observacion.setText("");
         OBJ_pdc.TXT_serie_ref.setText("");
-        OBJ_pdc.TXT_lote.setText("");
+        OBJ_pdc.TXT_lote.setText("000000");
         OBJ_pdc.TXT_codigo_movimiento.setText("");
         OBJ_pdc.TXT_nombre_movimiento.setText("");
         OBJ_pdc.CBX_estado.setSelectedIndex(1);
@@ -122,13 +122,13 @@ public class evt_cab_guia_ingreso {
                                 OBJ_pcs.TXT_numero_ref.setText(go_fnc_operaciones_campos.completa_digitos(OBJ_pcs.TXT_numero_ref.getText().trim(), "0", 10));
                                 if (go_fnc_operaciones_campos.valida_fecha(OBJ_pcs.TXT_fecha_emision.getText())) {
                                     if (go_fnc_operaciones_campos.campo_blanco(OBJ_pcs.TXT_lote)) {
-                                        OBJ_pcs.TXT_lote.setText(go_fnc_operaciones_campos.completa_digitos(OBJ_pcs.TXT_lote.getText().trim(), "0", 6));
-                                        if (go_dao_kardex_detalle.FNC_verifica_lote(codigo_almacen, OBJ_pcs.TXT_lote.getText().trim()) == 0 || op == 1) {
+//                                        OBJ_pcs.TXT_lote.setText(go_fnc_operaciones_campos.completa_digitos(OBJ_pcs.TXT_lote.getText().trim(), "0", 6));
+//                                        if (go_dao_kardex_detalle.FNC_verifica_lote(codigo_almacen, OBJ_pcs.TXT_lote.getText().trim()) == 0 || op == 1) {
                                             resp = true;
-                                        } else {
-                                            go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "LOTE REGISTRADO");
-                                            OBJ_pcs.TXT_lote.setText("");
-                                        }
+//                                        } else {
+//                                            go_fnc_mensaje.GET_mensaje(0, ls_modulo, ls_capa, ls_clase, "keyPressed", "LOTE REGISTRADO");
+//                                            OBJ_pcs.TXT_lote.setText("");
+//                                        }
                                     } else {
                                         go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "INGRESE LOTE");
                                     }

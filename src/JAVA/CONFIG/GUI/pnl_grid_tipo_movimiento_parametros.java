@@ -1,11 +1,16 @@
 package JAVA.CONFIG.GUI;
 
-import JAVA.INVENT.GUI.*;
+import JAVA.ANCESTRO.LOGICA.evt_previous_focus;
+import javax.swing.ActionMap;
 
 public class pnl_grid_tipo_movimiento_parametros extends javax.swing.JPanel {
 
+    ActionMap am;
+
     public pnl_grid_tipo_movimiento_parametros() {
         initComponents();
+        am = TBL_tipo_movimiento.getActionMap();
+        am.put("selectPreviousColumnCell", new evt_previous_focus());
     }
 
     @SuppressWarnings("unchecked")

@@ -719,7 +719,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 genera_peso_neto(fila);
                 genera_peso_bruto(fila);
                 genera_importe(fila);
-                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_nota_credito.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_nota_credito.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_nota_credito.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_nota_credito.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,"");
                 lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
 
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 3) {
@@ -795,7 +795,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                     if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ITEM " + go_fnc_operaciones_campos.completa_digitos((fila + 1) + "", "0", 3) + "?") == 0) {
                         lo_evt_grid_pedidos.elimina_fila(lo_pnl_grid_pedidos, fila);
                         lo_evt_grid_pedidos.genera_item(lo_pnl_grid_pedidos);
-                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_nota_credito.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_nota_credito.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos);
+                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_nota_credito.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_nota_credito.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,"");
                         lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     }
                 }

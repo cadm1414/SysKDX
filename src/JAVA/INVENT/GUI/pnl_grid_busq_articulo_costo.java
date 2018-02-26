@@ -1,9 +1,17 @@
 package JAVA.INVENT.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_previous_focus;
+import javax.swing.ActionMap;
+
 public class pnl_grid_busq_articulo_costo extends javax.swing.JPanel {
+
+    ActionMap am;
 
     public pnl_grid_busq_articulo_costo() {
         initComponents();
+
+        am = TBL_articulo_costo.getActionMap();
+        am.put("selectPreviousColumnCell", new evt_previous_focus());
     }
 
     @SuppressWarnings("unchecked")
@@ -41,8 +49,7 @@ public class pnl_grid_busq_articulo_costo extends javax.swing.JPanel {
         if (TBL_articulo_costo.getColumnModel().getColumnCount() > 0) {
             TBL_articulo_costo.getColumnModel().getColumn(0).setResizable(false);
             TBL_articulo_costo.getColumnModel().getColumn(0).setPreferredWidth(50);
-            TBL_articulo_costo.getColumnModel().getColumn(1).setResizable(false);
-            TBL_articulo_costo.getColumnModel().getColumn(1).setPreferredWidth(220);
+            TBL_articulo_costo.getColumnModel().getColumn(1).setPreferredWidth(300);
             TBL_articulo_costo.getColumnModel().getColumn(2).setResizable(false);
             TBL_articulo_costo.getColumnModel().getColumn(2).setPreferredWidth(10);
             TBL_articulo_costo.getColumnModel().getColumn(3).setResizable(false);
@@ -58,7 +65,7 @@ public class pnl_grid_busq_articulo_costo extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

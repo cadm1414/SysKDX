@@ -1,12 +1,19 @@
 package JAVA.INVENT.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_previous_focus;
 import java.awt.Component;
+import javax.swing.ActionMap;
 import javax.swing.text.JTextComponent;
 
 public class pnl_grid_saldos_iniciales extends javax.swing.JPanel {
 
+    ActionMap am;
+
     public pnl_grid_saldos_iniciales() {
         initComponents();
+
+        am = TBL_saldos_iniciales.getActionMap();
+        am.put("selectPreviousColumnCell", new evt_previous_focus());
     }
 
     @SuppressWarnings("unchecked")
@@ -60,7 +67,6 @@ public class pnl_grid_saldos_iniciales extends javax.swing.JPanel {
             TBL_saldos_iniciales.getColumnModel().getColumn(1).setPreferredWidth(15);
             TBL_saldos_iniciales.getColumnModel().getColumn(2).setResizable(false);
             TBL_saldos_iniciales.getColumnModel().getColumn(2).setPreferredWidth(40);
-            TBL_saldos_iniciales.getColumnModel().getColumn(3).setResizable(false);
             TBL_saldos_iniciales.getColumnModel().getColumn(3).setPreferredWidth(210);
             TBL_saldos_iniciales.getColumnModel().getColumn(4).setResizable(false);
             TBL_saldos_iniciales.getColumnModel().getColumn(4).setPreferredWidth(5);
