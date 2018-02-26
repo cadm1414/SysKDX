@@ -121,7 +121,7 @@ public class evt_cab_guiar {
         simbolos.setDecimalSeparator('.');
         simbolos.setGroupingSeparator(',');
         dFormat = new DecimalFormat("#,##0.00", simbolos);
-        try {            
+        try {
             OBJ_pnf.TXT_pedido.setText(codigo.substring(6));
             OBJ_pnf.CBX_doc_ref.setSelectedIndex((rs.getString(12).equalsIgnoreCase("6")) ? 0 : 1);
             go_cbx_trato_datos.selecciona_valor(0, rs.getString(3), OBJ_pnf.CBX_moneda);
@@ -133,7 +133,7 @@ public class evt_cab_guiar {
             OBJ_pnf.TXT_razon_social.setText(rs.getString(9));
             OBJ_pnf.TXT_doc_id.setText(rs.getString(10));
             OBJ_pnf.JRD_domiciliado.setSelected(go_fnc_operaciones_campos.int_boolean(rs.getInt(11)));
-            
+
             try {
                 if (!OBJ_pnf.TXT_codigo_entidad.getText().equalsIgnoreCase("999999")) {
                     ResultSet rs_a = go_dao_entidad.SLT_datos_entidad_x_facturacion(rs.getString(8), rs.getString(12));
@@ -581,31 +581,4 @@ public class evt_cab_guiar {
         return ItemEvent;
     }
 
-    public FocusListener evento_focus(pnl_cab_guiar OBJ_pcp, FocusListener FocusEvent) {
-        OBJ_pcp.TXT_numero_doc.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_fecha_emision.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_doc_ref.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_moneda.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_tipo_cambio.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_codigo_detraccion.addFocusListener(FocusEvent);
-        OBJ_pcp.JRD_precio_igv.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_entidad.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_direccion.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_vendedor.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_forma_pago.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_observacion.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_dias_credito.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_pagador.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_razon_social.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_doc_id.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_ubigeo.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_sector.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_tipo_op.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_es_pedido.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_serie_doc_ref.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_doc_ref.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_transportista.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_pedido.addFocusListener(FocusEvent);
-        return FocusEvent;
-    }
 }

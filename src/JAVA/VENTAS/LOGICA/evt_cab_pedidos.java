@@ -354,9 +354,9 @@ public class evt_cab_pedidos {
                                                             if (OBJ_bpe.getDias_credito() == Integer.parseInt(OBJ_pcp.TXT_dias_credito.getText().trim())) {
                                                                 if (OBJ_bpe.getObservacion().equalsIgnoreCase(OBJ_pcp.TXT_observacion.getText().trim())) {
                                                                     if (((OBJ_bpe.getForma_pago().equalsIgnoreCase("EF")) ? 0 : 1) == OBJ_pcp.CBX_forma_pago.getSelectedIndex()) {
-                                                                        if(OBJ_bpe.getCodigo_sector().equalsIgnoreCase(cbx_sector.getID())){
-                                                                            
-                                                                        }else{
+                                                                        if (OBJ_bpe.getCodigo_sector().equalsIgnoreCase(cbx_sector.getID())) {
+
+                                                                        } else {
                                                                             resp = true;
                                                                         }
                                                                     } else {
@@ -442,25 +442,4 @@ public class evt_cab_pedidos {
         return ItemEvent;
     }
 
-    public FocusListener evento_focus(pnl_cab_pedidos OBJ_pcp, FocusListener FocusEvent) {
-        OBJ_pcp.TXT_numero_doc.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_fecha_emision.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_doc_ref.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_moneda.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_tipo_cambio.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_codigo_detraccion.addFocusListener(FocusEvent);
-        OBJ_pcp.JRD_precio_igv.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_entidad.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_direccion.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_vendedor.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_forma_pago.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_observacion.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_dias_credito.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_pagador.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_razon_social.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_doc_id.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_ubigeo.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_sector.addFocusListener(FocusEvent);
-        return FocusEvent;
-    }
 }

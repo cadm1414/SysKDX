@@ -1,5 +1,6 @@
 package JAVA.INVENT.LOGICA;
 
+import JAVA.ANCESTRO.LOGICA.formato_grid_decimal2;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.INVENT.GUI.pnl_grid_guia_salida;
 import java.awt.event.KeyListener;
@@ -35,8 +36,7 @@ public class evt_grid_guia_salida {
 
     public void agrega_fila(pnl_grid_guia_salida OBJ_pgs, int fila_s) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_guia_salida.getModel();
-        OBJ_pgs.TBL_guia_salida.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-        
+
         int fila = OBJ_pgs.TBL_guia_salida.getRowCount();
 
         if (fila == (fila_s + 1)) {
@@ -48,7 +48,8 @@ public class evt_grid_guia_salida {
             OBJ_pgs.TBL_guia_salida.changeSelection(fila_s + 1, 1, false, false);
             OBJ_pgs.TBL_guia_salida.editCellAt(fila_s + 1, 1);
         }
-
+        OBJ_pgs.TBL_guia_salida.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        OBJ_pgs.TBL_guia_salida.setDefaultRenderer(Double.class, new formato_grid_decimal2());
     }
 
     public void recupera_detalle(pnl_grid_guia_salida OBJ_pgs, String codigo) {
@@ -74,6 +75,7 @@ public class evt_grid_guia_salida {
                     a++;
                 } while (lq_rs.next());
                 OBJ_pgs.TBL_guia_salida.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+                OBJ_pgs.TBL_guia_salida.setDefaultRenderer(Double.class, new formato_grid_decimal2());
             } catch (Exception e) {
                 System.out.println(e);
             }

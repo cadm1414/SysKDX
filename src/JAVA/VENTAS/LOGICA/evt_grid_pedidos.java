@@ -50,8 +50,6 @@ public class evt_grid_pedidos {
 
     public void agrega_fila(pnl_grid_pedidos OBJ_pgp, int fila_s, int cantidad) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
         int fila = OBJ_pgp.TBL_pedidos.getRowCount();
         //boolean es_presentacion = (gs_tipo_comercio.equalsIgnoreCase("0")) ? false : true;
         if (fila == (fila_s + 1)) {
@@ -67,7 +65,8 @@ public class evt_grid_pedidos {
             OBJ_pgp.TBL_pedidos.changeSelection(fila_s + 1, 1, false, false);
             //OBJ_pgp.TBL_pedidos.editCellAt(fila_s + 1, 1);
         }
-
+        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
     }
 
     public void calculo_utilidad(pnl_grid_pedidos OBJ_pgp) {
@@ -258,8 +257,6 @@ public class evt_grid_pedidos {
     public void recupera_detalle(ResultSet rs, pnl_grid_pedidos OBJ_pgp, int es_precio_igv, int op) {
         int a = 0;
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
         if (rs != null) {
             try {
                 do {
@@ -303,6 +300,8 @@ public class evt_grid_pedidos {
 
                     a++;
                 } while (rs.next());
+                OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+                OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -311,8 +310,6 @@ public class evt_grid_pedidos {
 
     public void recupera_detalle_gf(ResultSet rs, pnl_grid_pedidos OBJ_pgp, int es_precio_igv) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
         int a = modelo.getRowCount();
         if (rs != null) {
             try {
@@ -353,6 +350,8 @@ public class evt_grid_pedidos {
                     a++;
 
                 } while (rs.next());
+                OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+                OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -362,8 +361,6 @@ public class evt_grid_pedidos {
     public void recupera_detalle_pr(ResultSet rs, pnl_grid_pedidos OBJ_pgp) {
         int a = 0;
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgp.TBL_pedidos.getModel();
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-        OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
         if (rs != null) {
             try {
                 do {
@@ -387,6 +384,8 @@ public class evt_grid_pedidos {
                     OBJ_pgp.TBL_pedidos.setValueAt(rs.getString(16), a, 18);
                     a++;
                 } while (rs.next());
+                OBJ_pgp.TBL_pedidos.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+                OBJ_pgp.TBL_pedidos.setDefaultRenderer(Double.class, new formato_grid_pedido());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

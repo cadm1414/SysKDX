@@ -1,5 +1,6 @@
-package JAVA.VENTAS.LOGICA;
+package JAVA.ANCESTRO.LOGICA;
 
+import JAVA.VENTAS.LOGICA.*;
 import java.awt.Component;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -8,7 +9,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class formato_grid_pedido extends DefaultTableCellRenderer {
+public class formato_grid_decimal2 extends DefaultTableCellRenderer {
 
     public static DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
 
@@ -22,33 +23,7 @@ public class formato_grid_pedido extends DefaultTableCellRenderer {
         simbolos.setDecimalSeparator('.');
         simbolos.setGroupingSeparator(',');
         DecimalFormat dFormat = null;
-
-        switch (column) {
-            case 5:
-                dFormat = new DecimalFormat("#,##0.00", simbolos);
-                break;
-            case 8:
-                dFormat = new DecimalFormat("#,##0.00", simbolos);
-                break;
-            case 9:
-                dFormat = new DecimalFormat("#,##0.00000", simbolos);
-                break;
-            case 10:
-                dFormat = new DecimalFormat("#,##0.00", simbolos);
-                break;
-            case 11:
-                dFormat = new DecimalFormat("#,##0.00", simbolos);
-                break;
-            case 12:
-                dFormat = new DecimalFormat("#,##0.00", simbolos);
-                break;
-            case 13:
-                dFormat = new DecimalFormat("#,##0", simbolos);
-                break;
-            case 16:
-                dFormat = new DecimalFormat("#,##0.00000", simbolos);
-                break;
-        }
+        dFormat = new DecimalFormat("#,##0.00", simbolos);
         try {
             Double d = (Double) value;
             s = dFormat.format(d);

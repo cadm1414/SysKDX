@@ -97,7 +97,6 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
         lo_evt_cab_nota_credito.evento_press(lo_pnl_cab_nota_credito, KeyEvnt);
         lo_evt_cab_nota_credito.evento_item(lo_pnl_cab_nota_credito, ItemEvent);
-        lo_evt_cab_nota_credito.evento_focus(lo_pnl_cab_nota_credito, FocusEvent);
         lo_evt_grid_pedidos.evento_press(lo_pnl_grid_pedidos, KeyEvnt);
         lo_pnl_grid_pedidos.TBL_pedidos.addMouseListener(MouseEvent);
     }
@@ -338,7 +337,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
         go_dlg_busq_programacion = new dlg_busq_programacion(null, true);
         go_dlg_busq_programacion.setVisible(true);
         ls_codigo_ref = go_dlg_busq_programacion.ls_codigo;
-        ls_fecha_ref =  gs_parametros[0];
+        ls_fecha_ref = gs_parametros[0];
         if (ls_codigo_ref != null) {
             lo_pnl_cab_nota_credito.TXT_numero_ref.setText(ls_codigo_ref.substring(6));
             lo_pnl_cab_nota_credito.TXT_serie_ref.setText(ls_codigo_ref.substring(2, 6));
@@ -719,7 +718,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                 genera_peso_neto(fila);
                 genera_peso_bruto(fila);
                 genera_importe(fila);
-                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_nota_credito.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_nota_credito.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,"");
+                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_nota_credito.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_nota_credito.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos, "");
                 lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
 
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 3) {
@@ -795,7 +794,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
                     if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ITEM " + go_fnc_operaciones_campos.completa_digitos((fila + 1) + "", "0", 3) + "?") == 0) {
                         lo_evt_grid_pedidos.elimina_fila(lo_pnl_grid_pedidos, fila);
                         lo_evt_grid_pedidos.genera_item(lo_pnl_grid_pedidos);
-                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_nota_credito.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_nota_credito.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,"");
+                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_nota_credito.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_nota_credito.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_nota_credito.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos, "");
                         lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     }
                 }
@@ -819,18 +818,6 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
 
         @Override
         public void mouseExited(MouseEvent me) {
-        }
-    };
-
-    FocusListener FocusEvent = new FocusListener() {
-        @Override
-        public void focusGained(java.awt.event.FocusEvent fe) {
-            ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-        }
-
-        @Override
-        public void focusLost(java.awt.event.FocusEvent fe) {
-            ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         }
     };
 

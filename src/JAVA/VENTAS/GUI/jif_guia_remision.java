@@ -2,6 +2,7 @@ package JAVA.VENTAS.GUI;
 
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.GUI.pnl_opciones_3;
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
 import JAVA.ANCESTRO.LOGICA.evt_opciones_3;
 import JAVA.ANCESTRO.LOGICA.recupera_valor_op;
 import JAVA.CONFIG.GUI.dlg_busq_entidad_parametros;
@@ -103,7 +104,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
 
         editor = (JTextField) lo_pnl_cab_guiar.CBX_direccion.getEditor().getEditorComponent();
         editor.addKeyListener(KeyEvnt);
-        editor.addFocusListener(FocusEvent);
+        editor.addFocusListener(new evt_focus_component());
         editor.setDocument(new fnc_txt_mayuscula());
 
         li_cantidad = go_dao_serie.SLT_cant_items(ls_serie, ls_codigo_sucursal, 1);
@@ -112,7 +113,6 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
         lo_evt_opciones_3.evento_press(lo_pnl_opciones_3, KeyEvnt);
         lo_evt_cab_guiar.evento_press(lo_pnl_cab_guiar, KeyEvnt);
         lo_evt_cab_guiar.evento_item(lo_pnl_cab_guiar, ItemEvent);
-        lo_evt_cab_guiar.evento_focus(lo_pnl_cab_guiar, FocusEvent);
         lo_evt_grid_pedidos.evento_press(lo_pnl_grid_pedidos, KeyEvnt);
         lo_pnl_grid_pedidos.TBL_pedidos.addMouseListener(MouseEvent);
     }
@@ -460,7 +460,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                     lq_rs = go_dao_pedido_detalle.SLT_datos_pedido_detalle_x_item(ls_item_seleccion[0], ls_item_seleccion[1]);
                     if (lq_rs != null) {
                         lo_evt_grid_pedidos.recupera_detalle(lq_rs, lo_pnl_grid_pedidos, go_fnc_operaciones_campos.boolean_int(lo_pnl_cab_guiar.JRD_precio_igv.isSelected()), 1);
-                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,"");
+                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos, "");
                         lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     }
                     lo_pnl_cab_guiar.CBX_tipo_op.setEnabled(true);
@@ -502,7 +502,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                     for (int i = 0; i < lo_pnl_grid_pedidos.TBL_pedidos.getRowCount(); i++) {
                         genera_importe(i);
                     }
-                    lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,"");
+                    lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos, "");
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -933,7 +933,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                 genera_peso_neto(fila);
                 genera_peso_bruto(fila);
                 genera_importe(fila);
-                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,"");
+                lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos, "");
                 lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
 
                 if (lo_pnl_grid_pedidos.TBL_pedidos.getSelectedColumn() == 3) {
@@ -1035,7 +1035,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                     }
                 }
                 if (ie.getSource() == lo_pnl_cab_guiar.JRD_precio_igv) {
-                    lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,"");
+                    lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos, "");
                     lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                 }
                 if (ie.getSource() == lo_pnl_cab_guiar.CBX_tipo_op) {
@@ -1061,7 +1061,7 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
                     if (go_fnc_mensaje.get_respuesta(0, "¿DESEA ELIMINAR ITEM " + go_fnc_operaciones_campos.completa_digitos((fila + 1) + "", "0", 3) + "?") == 0) {
                         lo_evt_grid_pedidos.elimina_fila(lo_pnl_grid_pedidos, fila);
                         lo_evt_grid_pedidos.genera_item(lo_pnl_grid_pedidos);
-                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos,"");
+                        lo_evt_grid_pedidos.suma_importes(lo_pnl_cab_guiar.CBX_afecto_igv.getSelectedIndex(), Double.parseDouble(lo_pnl_cab_guiar.CBX_igv.getSelectedItem().toString()) / 100, lo_pnl_cab_guiar.JRD_precio_igv.isSelected(), lo_pnl_grid_pedidos, "");
                         lo_evt_grid_pedidos.calculo_utilidad(lo_pnl_grid_pedidos);
                     }
                 }
@@ -1085,18 +1085,6 @@ public class jif_guia_remision extends javax.swing.JInternalFrame {
 
         @Override
         public void mouseExited(MouseEvent me) {
-        }
-    };
-
-    FocusListener FocusEvent = new FocusListener() {
-        @Override
-        public void focusGained(java.awt.event.FocusEvent fe) {
-            ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-        }
-
-        @Override
-        public void focusLost(java.awt.event.FocusEvent fe) {
-            ((JComponent) fe.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         }
     };
 

@@ -2,6 +2,7 @@
 package JAVA.INVENT.GUI;
 
 import JAVA.ANCESTRO.LOGICA.evt_focus_component;
+import JAVA.ANCESTRO.LOGICA.evt_focus_fecha;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 
 public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
@@ -12,7 +13,7 @@ public class pnl_cab_guia_ingreso extends javax.swing.JPanel {
         TXT_observacion.setDocument(new fnc_txt_mayuscula());
         TXT_numero.addFocusListener(new evt_focus_component());
         TXT_codigo_movimiento.addFocusListener(new evt_focus_component());
-        TXT_fecha_emision.addFocusListener(new evt_focus_component());
+        TXT_fecha_emision.addFocusListener(new evt_focus_fecha());
         TXT_numero_ref.addFocusListener(new evt_focus_component());
         TXT_observacion.addFocusListener(new evt_focus_component());
         CBX_tipo_doc.addFocusListener(new evt_focus_component());

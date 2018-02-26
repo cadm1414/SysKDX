@@ -478,27 +478,6 @@ public class evt_cab_nota_credito {
         OBJ_pcf.CBX_registra_item.addItemListener(ItemEvent);
         OBJ_pcf.CBX_concepto.addItemListener(ItemEvent);
         return ItemEvent;
-    }
+    }    
     
-    public FocusListener evento_focus(pnl_cab_nota_credito OBJ_pcp, FocusListener FocusEvent) {
-        OBJ_pcp.TXT_numero_doc.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_fecha_emision.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_moneda.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_tipo_cambio.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_codigo_detraccion.addFocusListener(FocusEvent);
-        OBJ_pcp.JRD_precio_igv.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_entidad.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_direccion.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_vendedor.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_observacion.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_pagador.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_razon_social.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_doc_id.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_ubigeo.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_numero_ref.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_concepto.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_registra_item.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_total.addFocusListener(FocusEvent);
-        return FocusEvent;
-    }
 }

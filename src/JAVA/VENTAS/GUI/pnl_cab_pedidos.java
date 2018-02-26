@@ -1,5 +1,7 @@
 package JAVA.VENTAS.GUI;
 
+import JAVA.ANCESTRO.LOGICA.evt_focus_component;
+import JAVA.ANCESTRO.LOGICA.evt_focus_fecha;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.text.DecimalFormatSymbols;
 
@@ -21,6 +23,25 @@ public class pnl_cab_pedidos extends javax.swing.JPanel {
         TXT_pagador.setDocument(new fnc_txt_mayuscula());
         TXT_nombre_vendedor.setDocument(new fnc_txt_mayuscula());
         TXT_observacion.setDocument(new fnc_txt_mayuscula());
+        
+        TXT_numero_doc.addFocusListener(new evt_focus_component());
+        TXT_fecha_emision.addFocusListener(new evt_focus_fecha());
+        CBX_doc_ref.addFocusListener(new evt_focus_component());
+        CBX_moneda.addFocusListener(new evt_focus_component());
+        TXT_tipo_cambio.addFocusListener(new evt_focus_component());
+        CBX_codigo_detraccion.addFocusListener(new evt_focus_component());
+        JRD_precio_igv.addFocusListener(new evt_focus_component());
+        TXT_codigo_entidad.addFocusListener(new evt_focus_component());
+        CBX_direccion.addFocusListener(new evt_focus_component());
+        TXT_codigo_vendedor.addFocusListener(new evt_focus_component());
+        CBX_forma_pago.addFocusListener(new evt_focus_component());
+        TXT_observacion.addFocusListener(new evt_focus_component());
+        TXT_dias_credito.addFocusListener(new evt_focus_component());
+        TXT_codigo_pagador.addFocusListener(new evt_focus_component());
+        TXT_razon_social.addFocusListener(new evt_focus_component());
+        TXT_doc_id.addFocusListener(new evt_focus_component());
+        TXT_codigo_ubigeo.addFocusListener(new evt_focus_component());
+        CBX_sector.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")

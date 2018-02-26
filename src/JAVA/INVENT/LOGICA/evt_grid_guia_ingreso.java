@@ -1,5 +1,6 @@
 package JAVA.INVENT.LOGICA;
 
+import JAVA.ANCESTRO.LOGICA.formato_grid_decimal2;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.INVENT.GUI.pnl_grid_guia_ingreso;
 import java.awt.event.KeyListener;
@@ -33,10 +34,9 @@ public class evt_grid_guia_ingreso {
         }
     }
 
-    public void agrega_fila(pnl_grid_guia_ingreso OBJ_pgs, int fila_s,String lote) {
+    public void agrega_fila(pnl_grid_guia_ingreso OBJ_pgs, int fila_s, String lote) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_guia_ingreso.getModel();
-        OBJ_pgs.TBL_guia_ingreso.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-        
+
         int fila = OBJ_pgs.TBL_guia_ingreso.getRowCount();
 
         if (fila == (fila_s + 1)) {
@@ -46,9 +46,10 @@ public class evt_grid_guia_ingreso {
             OBJ_pgs.TBL_guia_ingreso.editCellAt(fila, 2);
         } else {
             OBJ_pgs.TBL_guia_ingreso.changeSelection(fila_s + 1, 2, false, false);
-            OBJ_pgs.TBL_guia_ingreso.editCellAt(fila_s + 1, 2);            
-        }   
-        
+            OBJ_pgs.TBL_guia_ingreso.editCellAt(fila_s + 1, 2);
+        }
+        OBJ_pgs.TBL_guia_ingreso.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        OBJ_pgs.TBL_guia_ingreso.setDefaultRenderer(Double.class, new formato_grid_decimal2());
         actualiza_lote(OBJ_pgs, lote);
     }
 
@@ -75,6 +76,7 @@ public class evt_grid_guia_ingreso {
                     a++;
                 } while (lq_rs.next());
                 OBJ_pgs.TBL_guia_ingreso.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+                OBJ_pgs.TBL_guia_ingreso.setDefaultRenderer(Double.class, new formato_grid_decimal2());
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -92,15 +94,15 @@ public class evt_grid_guia_ingreso {
             modelo.setValueAt(go_fnc_operaciones_campos.completa_digitos((x + 1) + "", "0", 3), x, 0);
         }
     }
-    
-    public void actualiza_lote(pnl_grid_guia_ingreso OBJ_pgs,String lote){
+
+    public void actualiza_lote(pnl_grid_guia_ingreso OBJ_pgs, String lote) {
         DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_guia_ingreso.getModel();
         for (int x = 0; x < OBJ_pgs.TBL_guia_ingreso.getRowCount(); x++) {
             modelo.setValueAt(lote, x, 1);
         }
     }
 
-    public boolean valida_campos(pnl_grid_guia_ingreso OBJ_pgs,String lote_auto) {
+    public boolean valida_campos(pnl_grid_guia_ingreso OBJ_pgs, String lote_auto) {
         boolean resp = false;
         int valida = 0;
         if (OBJ_pgs.TBL_guia_ingreso.getRowCount() != 0) {
@@ -143,7 +145,7 @@ public class evt_grid_guia_ingreso {
             }
         } else {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "valida_campos", "DOCUMENTO SIN DETALLE");
-            agrega_fila(OBJ_pgs, -1,lote_auto);
+            agrega_fila(OBJ_pgs, -1, lote_auto);
         }
         return resp;
     }

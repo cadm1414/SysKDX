@@ -1,5 +1,6 @@
 package JAVA.INVENT.LOGICA;
 
+import JAVA.ANCESTRO.LOGICA.formato_grid_decimal2;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.INVENT.GUI.pnl_grid_saldos_iniciales;
 import JAVA.VENTAS.LOGICA.formato_grid_pedido;
@@ -34,10 +35,9 @@ public class evt_grid_saldos_iniciales {
         }
     }
 
-    public void agrega_fila(pnl_grid_saldos_iniciales OBJ_pgs, int fila_s) {        
-        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();        
-        OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
-        
+    public void agrega_fila(pnl_grid_saldos_iniciales OBJ_pgs, int fila_s) {
+        DefaultTableModel modelo = (DefaultTableModel) OBJ_pgs.TBL_saldos_iniciales.getModel();
+
         int fila = OBJ_pgs.TBL_saldos_iniciales.getRowCount();
 
         if (fila == (fila_s + 1)) {
@@ -49,7 +49,8 @@ public class evt_grid_saldos_iniciales {
             OBJ_pgs.TBL_saldos_iniciales.changeSelection(fila_s + 1, 1, false, false);
             OBJ_pgs.TBL_saldos_iniciales.editCellAt(fila_s + 1, 1);
         }
-
+        OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+        OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Double.class, new formato_grid_decimal2());
     }
 
     public void recupera_detalle(pnl_grid_saldos_iniciales OBJ_pgs, String codigo) {
@@ -75,6 +76,7 @@ public class evt_grid_saldos_iniciales {
                     a++;
                 } while (lq_rs.next());
                 OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Object.class, new formato_grid_saldos_iniciales());
+                OBJ_pgs.TBL_saldos_iniciales.setDefaultRenderer(Double.class, new formato_grid_decimal2());
             } catch (Exception e) {
                 System.out.println(e);
             }

@@ -566,31 +566,5 @@ public class evt_cab_factura {
         OBJ_pcf.CBX_es_pedido.addItemListener(ItemEvent);
         OBJ_pcf.CBX_es_guia.addItemListener(ItemEvent);
         return ItemEvent;
-    }
-
-    public FocusListener evento_focus(pnl_cab_factura OBJ_pcp, FocusListener FocusEvent) {
-        OBJ_pcp.TXT_numero_doc.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_fecha_emision.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_moneda.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_tipo_cambio.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_codigo_detraccion.addFocusListener(FocusEvent);
-        OBJ_pcp.JRD_precio_igv.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_entidad.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_direccion.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_vendedor.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_forma_pago.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_observacion.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_dias_credito.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_pagador.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_razon_social.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_doc_id.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_codigo_ubigeo.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_sector.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_es_pedido.addFocusListener(FocusEvent);
-        OBJ_pcp.CBX_es_guia.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_serie_guia.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_guiar.addFocusListener(FocusEvent);
-        OBJ_pcp.TXT_pedido.addFocusListener(FocusEvent);
-        return FocusEvent;
-    }
+    }   
 }
