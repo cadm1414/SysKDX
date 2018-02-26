@@ -280,6 +280,7 @@ public class variables_globales {
     public static evt_imprime_doc_distbr go_evt_imprime_doc_distbr = new evt_imprime_doc_distbr();
     public static muestra_reporte_distbr go_muestra_reporte_distbr = new muestra_reporte_distbr();
     public static muestra_pestania_distbr go_muestra_pestania_distbr = new muestra_pestania_distbr();
+    public static genera_log go_genera_log = new genera_log();
 
     //DLG 
     public static dlg_busq_ubigeo go_dlg_busq_ubigeo;

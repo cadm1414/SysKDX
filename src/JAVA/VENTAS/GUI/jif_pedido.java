@@ -907,6 +907,9 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 if (columna == 1) {
                     lo_evt_grid_pedidos.limpia_fila(lo_pnl_grid_pedidos, fila);
                 }
+                genera_peso_bruto(fila);
+                genera_peso_neto(fila);
+                genera_importe(fila);
             }
         }
 
@@ -926,13 +929,13 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         public void mouseExited(MouseEvent me) {
         }
     };
-    
+
     TableModelListener TablaListener = new TableModelListener() {
         @Override
         public void tableChanged(TableModelEvent tme) {
             if (tme.getType() == TableModelEvent.UPDATE && li_tipo_operacion == 1) {
                 cont++;
-            }
+            }            
         }
     };
 

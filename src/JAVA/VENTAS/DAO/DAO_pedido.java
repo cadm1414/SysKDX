@@ -157,6 +157,7 @@ public class DAO_pedido {
             } else {
                 go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "IST_pedido", "ERROR EN ITEM: " + error_item + "\n" + e.getMessage());
             }
+            go_genera_log.genera_log_tc(ls_modulo + ";" + ls_capa + ";" + ls_clase + ";" + "IST_pedido" + ";" + e.getMessage());
         }
         return resp;
     }
