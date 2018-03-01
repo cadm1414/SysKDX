@@ -907,9 +907,25 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 if (columna == 1) {
                     lo_evt_grid_pedidos.limpia_fila(lo_pnl_grid_pedidos, fila);
                 }
-                genera_peso_bruto(fila);
-                genera_peso_neto(fila);
-                genera_importe(fila);
+
+                for (int x = 0; x < modelo.getRowCount(); x++) {
+                    genera_peso_bruto(x);
+                    genera_peso_neto(x);
+                    genera_importe(x);
+                    if (lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 9) == null) {
+                        lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(x, 9, false, false);
+                    } else if ((Double) lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 9) == 0 || (Double) lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 9) < (Double) lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 16)) {
+                        lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(null, x, 9);
+                        lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(x, 9, false, false);
+                    } else {
+                        lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_pedidos.CBX_moneda.getSelectedItem();
+                        double precio_sigv = Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 9).toString());
+                        precio_sigv = (lo_pnl_cab_pedidos.JRD_precio_igv.isSelected() == true) ? precio_sigv : (precio_sigv) / (1 + (Double.parseDouble(lo_pnl_cab_pedidos.CBX_igv.getSelectedItem().toString()) / 100));
+                        lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(go_dao_reportes.RPT_utilidad_ponderada(ls_codigo_sucursal, lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 3).toString(), precio_sigv, lo_cbx_moneda.getID(), (ls_codigo == null) ? "%" : ls_codigo), x, 13);
+                        //lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
+                    }
+
+                }
             }
         }
 
@@ -935,7 +951,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
         public void tableChanged(TableModelEvent tme) {
             if (tme.getType() == TableModelEvent.UPDATE && li_tipo_operacion == 1) {
                 cont++;
-            }            
+            }
         }
     };
 
