@@ -17,7 +17,6 @@ import JAVA.VENTAS.LOGICA.evt_cab_pedidos;
 import JAVA.VENTAS.LOGICA.evt_grid_pedidos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -28,7 +27,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -913,10 +911,10 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     genera_peso_neto(x);
                     genera_importe(x);
                     if (lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 9) == null) {
-                        lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(x, 9, false, false);
+                        //lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(x, 9, false, false);
                     } else if ((Double) lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 9) == 0 || (Double) lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 9) < (Double) lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 16)) {
                         lo_pnl_grid_pedidos.TBL_pedidos.setValueAt(null, x, 9);
-                        lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(x, 9, false, false);
+                        //lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(x, 9, false, false);
                     } else {
                         lo_cbx_moneda = (cbx_moneda) lo_pnl_cab_pedidos.CBX_moneda.getSelectedItem();
                         double precio_sigv = Double.parseDouble(lo_pnl_grid_pedidos.TBL_pedidos.getValueAt(x, 9).toString());

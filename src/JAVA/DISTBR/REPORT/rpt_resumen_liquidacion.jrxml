@@ -12,7 +12,7 @@
 	<parameter name="periodo" class="java.lang.String"/>
 	<parameter name="nombre_sucursal" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from rpt_resumen_liquidacion( $P{codigo_pr} , $P{periodo} ) as (op text,codigo_vendedor character(4),nombre_vendedor character varying(250),efectivo numeric,credito numeric, devolucion numeric,descuento numeric,total_reparto numeric)]]>
+		<![CDATA[select * from rpt_resumen_liquidacion( $P{codigo_pr} , $P{periodo} ) as (op text,codigo_vendedor bpchar,nombre_vendedor character varying(250),efectivo numeric,credito numeric, devolucion numeric,descuento numeric,total_reparto numeric)]]>
 	</queryString>
 	<field name="op" class="java.lang.String"/>
 	<field name="codigo_vendedor" class="java.lang.String"/>
@@ -34,9 +34,15 @@
 	<variable name="sum_descuento" class="java.math.BigDecimal" resetType="Group" resetGroup="op" calculation="Sum">
 		<variableExpression><![CDATA[$F{descuento}]]></variableExpression>
 	</variable>
+	<variable name="sum_reparto" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{op}.equalsIgnoreCase( "1" ))?$F{total_reparto}:0.0]]></variableExpression>
+	</variable>
+	<variable name="sum_cobranzas" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{op}.equalsIgnoreCase( "3" ))?$F{total_reparto}:0.0]]></variableExpression>
+	</variable>
 	<group name="Group1">
 		<groupFooter>
-			<band height="41">
+			<band height="42">
 				<staticText>
 					<reportElement x="0" y="5" width="80" height="12" uuid="63ae65a3-41ff-4d5a-992b-ff931a334412">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -93,7 +99,14 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Arial" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{total_reparto}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{sum_reparto}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="84" y="29" width="58" height="12" uuid="28097441-e8e6-4a57-ae7b-0af52bd44621"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sum_cobranzas}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -107,7 +120,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($F{op}.equalsIgnoreCase( "1" ))?"VENTAS":"GASTOS"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($F{op}.equalsIgnoreCase( "1" ))?"VENTAS":(($F{op}.equalsIgnoreCase( "2" ))?"GASTOS":"COBRANZAS")]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -272,14 +285,14 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[COD. VND]]></text>
+				<text><![CDATA[COD.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="24" y="2" width="256" height="20" uuid="6af89f5b-183f-4235-a27a-8ac6f5793ab7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
-				<text><![CDATA[NOMBRE VENDEDOR]]></text>
+				<text><![CDATA[NOMBRE ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="292" y="2" width="58" height="20" uuid="50eafd96-791b-409f-be26-5a7d8436d51d"/>
@@ -314,21 +327,21 @@
 	<detail>
 		<band height="12" splitType="Stretch">
 			<textField pattern="000">
-				<reportElement x="0" y="0" width="20" height="12" uuid="94fc2823-c9d1-470c-bd55-a08e1b953277"/>
+				<reportElement x="0" y="0" width="30" height="12" uuid="94fc2823-c9d1-470c-bd55-a08e1b953277"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{codigo_vendedor}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="20" y="0" width="4" height="12" uuid="cdc1abe3-4aa3-4b92-b3ee-8201709198af"/>
+				<reportElement x="30" y="0" width="4" height="12" uuid="cdc1abe3-4aa3-4b92-b3ee-8201709198af"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<textField pattern="000">
-				<reportElement x="24" y="0" width="256" height="12" uuid="d0996b68-a879-43a9-ae74-d7a5477dc326"/>
+				<reportElement x="34" y="0" width="246" height="12" uuid="d0996b68-a879-43a9-ae74-d7a5477dc326"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="false"/>
 				</textElement>
