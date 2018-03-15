@@ -34,6 +34,7 @@ public class dlg_ini_sucursal extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         formulario();
+        get_acceso();
     }
 
     private void formulario() {
@@ -49,6 +50,16 @@ public class dlg_ini_sucursal extends javax.swing.JDialog {
         lo_pnl_ini_sucursal.TXT_codigo.addKeyListener(KeyEvnt);
         lo_evt_aceptar_cancelar.evento_click(lo_pnl_aceptar_cancelar, Listener);
         lo_evt_aceptar_cancelar.evento_press(lo_pnl_aceptar_cancelar, KeyEvnt);
+    }
+    
+    private void get_acceso() {
+        if (!gs_codigo_sucursal.equalsIgnoreCase("")) {
+            lo_pnl_ini_sucursal.TXT_codigo.setText(gs_codigo_sucursal);
+            lo_pnl_ini_sucursal.TXT_nombre.setText(gs_sucursal);
+            lo_pnl_ini_sucursal.TXT_codigo.setEnabled(false);
+            
+            lo_pnl_aceptar_cancelar.BTN_aceptar.requestFocus();
+        }
     }
 
     private void get_descripcion_sucursal(String codigo) {

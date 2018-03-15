@@ -117,7 +117,8 @@ public class activa_buscador {
         return resp;
     }
 
-    public void busq_articulo(JTextField codigo, JTextField nombre) {
+    public void busq_articulo(JTextField codigo, JTextField nombre, String estado) {
+        gs_parametros[0] = estado;
         go_dlg_busq_articulo = new dlg_busq_articulo(null, true);
         go_dlg_busq_articulo.setVisible(true);
         String ls_codigo_articulo = go_dlg_busq_articulo.ls_codigo_articulo;

@@ -7,7 +7,6 @@ import JAVA.INVENT.LOGICA.cbx_grupo_detraccion;
 import JAVA.VENTAS.BEAN.BEAN_pedido;
 import JAVA.VENTAS.GUI.pnl_cab_pedidos;
 import JAVA.VENTAS.GUI.pnl_grid_pedidos;
-import java.awt.event.FocusListener;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyListener;
 import java.sql.ResultSet;

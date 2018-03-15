@@ -133,5 +133,23 @@ public class DAO_usuario_permisos {
         }
         return null;
     }
+    
+    public ResultSet SLT_datos_acceso_usuario(int id_usuario) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_datos_acceso_usuario(" + id_usuario + ") "
+                    + "as (codigo_sucursal character(4),sucursal character varying(100),codigo_almacen character(4),almacen character varying(100))";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            } else {
+                //go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_acceso_usuario", "USUARIO NO CUENTA CON PERMISOS");
+            }            
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_acceso_usuario", e.getMessage());
+        }
+        return null;
+    }
 
 }

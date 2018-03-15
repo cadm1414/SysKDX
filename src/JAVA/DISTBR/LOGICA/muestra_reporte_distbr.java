@@ -26,11 +26,13 @@ public class muestra_reporte_distbr {
             JasperPrint jp = JasperFillManager.fillReport(jr, parametro, lq_con);
             lq_con.close();
             JRViewer jr = new JRViewer(jp);
-             switch (op) {
-                 case 0:
+            switch (op) {
+                case 0:
                     go_muestra_pestania_distbr.rpt_resumen_liquidacion(jr, nombre);
+                case 1:
+                    go_muestra_pestania_distbr.rpt_despacho_preliminar(jr, nombre);
                     break;
-             }
+            }
         } catch (Exception e) {
         }
 

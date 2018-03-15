@@ -253,6 +253,7 @@ public class jif_datos_articulo extends javax.swing.JInternalFrame {
 
     private void evt_buscar() {
         li_tipo_operacion = 2;
+        gs_parametros[0] = "%";
         go_dlg_busq_articulo = new dlg_busq_articulo(null, true);
         go_dlg_busq_articulo.setVisible(true);
         ls_codigo = go_dlg_busq_articulo.ls_codigo_articulo;

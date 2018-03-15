@@ -27,6 +27,7 @@ public class dlg_ini_serie extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         formulario();
+        get_acceso();
     }
 
     private void formulario() {
@@ -42,6 +43,17 @@ public class dlg_ini_serie extends javax.swing.JDialog {
         lo_pnl_ini_serie.CBX_serie.addKeyListener(KeyEvnt);
         lo_evt_aceptar_cancelar.evento_click(lo_pnl_aceptar_cancelar, Listener);
         lo_evt_aceptar_cancelar.evento_press(lo_pnl_aceptar_cancelar, KeyEvnt);
+
+    }
+
+    private void get_acceso() {
+        if (!gs_codigo_sucursal.equalsIgnoreCase("")) {
+            lo_pnl_ini_serie.TXT_codigo.setText(gs_codigo_sucursal);
+            lo_pnl_ini_serie.TXT_nombre.setText(gs_sucursal);
+            lo_pnl_ini_serie.TXT_codigo.setEnabled(false);
+            get_serie(gs_codigo_sucursal);
+            lo_pnl_ini_serie.CBX_serie.requestFocus();
+        }
     }
 
     private void limpia_datos() {
@@ -59,7 +71,7 @@ public class dlg_ini_serie extends javax.swing.JDialog {
                 do {
                     lo_pnl_ini_serie.CBX_serie.addItem(lq_rs.getString(1));
                 } while (lq_rs.next());
-                if(!gs_tipo_comercio.equalsIgnoreCase("3")){
+                if (!gs_tipo_comercio.equalsIgnoreCase("3")) {
                     lo_pnl_ini_serie.CBX_serie.setSelectedItem("9999");
                 }
             } else {
@@ -120,6 +132,11 @@ public class dlg_ini_serie extends javax.swing.JDialog {
                     go_jif_nota_credito = new jif_nota_credito();
                     go_frm_principal.JDP_principal.add(go_jif_nota_credito);
                     go_jif_nota_credito.show();
+                    break;
+                case 6:
+                    go_jif_pedido_agil = new jif_pedido_agil();
+                    go_frm_principal.JDP_principal.add(go_jif_pedido_agil);
+                    go_jif_pedido_agil.show();
                     break;
             }
             gi_parametros_2[0] = 0;

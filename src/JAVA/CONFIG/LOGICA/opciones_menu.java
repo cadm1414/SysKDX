@@ -111,6 +111,10 @@ public class opciones_menu {
                     go_muestra_dlg_ventas.muestra_dlg_pedido();
                     resp = "I";
                 }
+                if (dato.equalsIgnoreCase("PEDIDOS VENTAS")) {
+                    go_muestra_dlg_ventas.muestra_dlg_pedido_agil();
+                    resp = "I";
+                }
                 if (dato.equalsIgnoreCase("FACTURA")) {
                     go_muestra_dlg_ventas.muestra_dlg_factura("01");
                     resp = "I";

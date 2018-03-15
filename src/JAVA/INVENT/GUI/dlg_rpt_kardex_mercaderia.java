@@ -141,7 +141,7 @@ public class dlg_rpt_kardex_mercaderia extends javax.swing.JDialog {
                     go_activa_buscador.busq_almacen_permiso("1", "1", "1", lo_pnl_rpt_kardex_mercaderia.TXT_codigo, lo_pnl_rpt_kardex_mercaderia.TXT_nombre);
                 }
                 if (ke.getSource() == lo_pnl_rpt_kardex_mercaderia.TXT_codigo_articulo) {
-                    go_activa_buscador.busq_articulo(lo_pnl_rpt_kardex_mercaderia.TXT_codigo_articulo, lo_pnl_rpt_kardex_mercaderia.TXT_nombre_articulo);
+                    go_activa_buscador.busq_articulo(lo_pnl_rpt_kardex_mercaderia.TXT_codigo_articulo, lo_pnl_rpt_kardex_mercaderia.TXT_nombre_articulo,"%");
                 }
             }
             if (ke.getKeyCode() == KeyEvent.VK_ENTER) {

@@ -179,6 +179,7 @@ public class jif_datos_articulo_costo extends javax.swing.JInternalFrame {
     }
 
     private void evt_f5_articulo() {
+        gs_parametros[0] = "1";
         go_dlg_busq_articulo = new dlg_busq_articulo(null, true);
         go_dlg_busq_articulo.setVisible(true);
         ls_codigo_articulo = go_dlg_busq_articulo.ls_codigo_articulo;

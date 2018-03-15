@@ -37,6 +37,7 @@ public class frm_principal extends javax.swing.JFrame {
     public frm_principal() throws UnknownHostException, SocketException {
         initComponents();
         datos_pantalla();
+        datos_local();
         lista_modulo();
         datos_pc();
         registra_auditoria("INICIO DE SESION");
@@ -58,6 +59,19 @@ public class frm_principal extends javax.swing.JFrame {
         LBL_razon_social.setText(go_bean_general.getRazon_social());
         gs_mes = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.MONTH) + 1) + "", "0", 2);
         gs_dia = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.DAY_OF_MONTH)) + "", "0", 2);
+    }
+
+    private void datos_local() {
+        try {
+            lq_rs = go_dao_usuario_permisos.SLT_datos_acceso_usuario(gi_id_usuario);
+            if (lq_rs != null) {
+                gs_codigo_sucursal = lq_rs.getString(1).trim();
+                gs_sucursal = lq_rs.getString(2).trim();
+                gs_codigo_almacen = lq_rs.getString(3).trim();
+                gs_almacen = lq_rs.getString(4).trim();
+            }
+        } catch (Exception e) {
+        }
     }
 
     private void datos_pc() throws UnknownHostException, SocketException {

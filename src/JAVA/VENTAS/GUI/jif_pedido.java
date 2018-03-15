@@ -431,7 +431,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_numero_doc.requestFocus();
                 break;
         }
-        lo_evt_opciones_3.activa_btn_opciones(1, lo_pnl_opciones_3, lb_valor_op);
+        
         lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, true);
     }
 
@@ -857,10 +857,10 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                         lo_pnl_cab_pedidos.CBX_tipo_documento_id.setSelectedIndex(1);
                     }
                 }
-                if (ie.getSource() == lo_pnl_cab_pedidos.CBX_moneda) {
+                if (ie.getSource() == lo_pnl_cab_pedidos.CBX_moneda) {                    
                     get_tipo_cambio();
                 }
-                if (ie.getSource() == lo_pnl_cab_pedidos.CBX_codigo_detraccion) {
+                if (ie.getSource() == lo_pnl_cab_pedidos.CBX_codigo_detraccion) {                     
                     get_porcentaje_detraccion();
                     lo_evt_grid_pedidos.limpia_tabla(lo_pnl_grid_pedidos, li_tipo_operacion);
                 }
@@ -906,7 +906,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                     lo_evt_grid_pedidos.limpia_fila(lo_pnl_grid_pedidos, fila);
                 }
 
-                for (int x = 0; x < modelo.getRowCount(); x++) {
+                /*for (int x = 0; x < modelo.getRowCount(); x++) {
                     genera_peso_bruto(x);
                     genera_peso_neto(x);
                     genera_importe(x);
@@ -923,7 +923,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                         //lo_pnl_grid_pedidos.TBL_pedidos.changeSelection(fila, 10, false, false);
                     }
 
-                }
+                }*/
             }
         }
 

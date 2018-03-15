@@ -78,10 +78,10 @@ public class DAO_articulo {
         return resp;
     }
 
-    public ResultSet SLT_grid_articulo() {
+    public ResultSet SLT_grid_articulo(String estado) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_grid_articulo() "
+            String SQL = "select * from slt_grid_articulo('" + estado + "') "
                     + "as (codigo_articulo character(12),nombre_articulo character varying(150),status text)";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
@@ -133,7 +133,7 @@ public class DAO_articulo {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from ist_articulo('" + OBJ_bar.getCodigo_articulo() + "',$$" + OBJ_bar.getNombre_articulo() + "$$,$$" + OBJ_bar.getCaracteristica() + "$$," + OBJ_bar.getTara() + ",'" + OBJ_bar.getClase_producto() + "','" + OBJ_bar.getCodigo_barra() + "','" + OBJ_bar.getCodigo_producto() + "','" + OBJ_bar.getCodigo_marca() + "','" + OBJ_bar.getCodigo_familia() + "','" + OBJ_bar.getCodigo_subfamilia() + "','" + OBJ_bar.getCodigo_unidad() + "','" + OBJ_bar.getTipo_operacion() + "','" + OBJ_bar.getStatus() + "','" + OBJ_bar.getObservacion() + "','" + OBJ_bar.getCodigo_percepcion() + "','" + OBJ_bar.getCodigo_detraccion() + "','" + OBJ_bar.getAfecto_igv() + "','" + OBJ_bar.getAfecto_detraccion() + "','" + OBJ_bar.getAfecto_percepcion() + "','" + OBJ_bar.getBulto_um() + "','005','" + OBJ_bar.getCodigo_sunat() + "','" + OBJ_bar.getSerie() + "',"+OBJ_bar.getPresentacion()+")";
+            String SQL = "select * from ist_articulo('" + OBJ_bar.getCodigo_articulo() + "',$$" + OBJ_bar.getNombre_articulo() + "$$,$$" + OBJ_bar.getCaracteristica() + "$$," + OBJ_bar.getTara() + ",'" + OBJ_bar.getClase_producto() + "','" + OBJ_bar.getCodigo_barra() + "','" + OBJ_bar.getCodigo_producto() + "','" + OBJ_bar.getCodigo_marca() + "','" + OBJ_bar.getCodigo_familia() + "','" + OBJ_bar.getCodigo_subfamilia() + "','" + OBJ_bar.getCodigo_unidad() + "','" + OBJ_bar.getTipo_operacion() + "','" + OBJ_bar.getStatus() + "','" + OBJ_bar.getObservacion() + "','" + OBJ_bar.getCodigo_percepcion() + "','" + OBJ_bar.getCodigo_detraccion() + "','" + OBJ_bar.getAfecto_igv() + "','" + OBJ_bar.getAfecto_detraccion() + "','" + OBJ_bar.getAfecto_percepcion() + "','" + OBJ_bar.getBulto_um() + "','005','" + OBJ_bar.getCodigo_sunat() + "','" + OBJ_bar.getSerie() + "'," + OBJ_bar.getPresentacion() + ")";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();
@@ -152,7 +152,7 @@ public class DAO_articulo {
         boolean resp = false;
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from upd_articulo('" + OBJ_bar.getCodigo_articulo() + "',$$" + OBJ_bar.getNombre_articulo() + "$$,$$" + OBJ_bar.getCaracteristica() + "$$," + OBJ_bar.getTara() + ",'" + OBJ_bar.getClase_producto() + "','" + OBJ_bar.getCodigo_barra() + "','" + OBJ_bar.getCodigo_producto() + "','" + OBJ_bar.getCodigo_marca() + "','" + OBJ_bar.getCodigo_familia() + "','" + OBJ_bar.getCodigo_subfamilia() + "','" + OBJ_bar.getCodigo_unidad() + "','" + OBJ_bar.getTipo_operacion() + "','" + OBJ_bar.getStatus() + "','" + OBJ_bar.getObservacion() + "','" + OBJ_bar.getCodigo_percepcion() + "','" + OBJ_bar.getCodigo_detraccion() + "','" + OBJ_bar.getAfecto_igv() + "','" + OBJ_bar.getAfecto_detraccion() + "','" + OBJ_bar.getAfecto_percepcion() + "','" + OBJ_bar.getBulto_um() + "','005','" + OBJ_bar.getCodigo_sunat() + "','" + OBJ_bar.getSerie() + "',"+OBJ_bar.getPresentacion()+")";
+            String SQL = "select * from upd_articulo('" + OBJ_bar.getCodigo_articulo() + "',$$" + OBJ_bar.getNombre_articulo() + "$$,$$" + OBJ_bar.getCaracteristica() + "$$," + OBJ_bar.getTara() + ",'" + OBJ_bar.getClase_producto() + "','" + OBJ_bar.getCodigo_barra() + "','" + OBJ_bar.getCodigo_producto() + "','" + OBJ_bar.getCodigo_marca() + "','" + OBJ_bar.getCodigo_familia() + "','" + OBJ_bar.getCodigo_subfamilia() + "','" + OBJ_bar.getCodigo_unidad() + "','" + OBJ_bar.getTipo_operacion() + "','" + OBJ_bar.getStatus() + "','" + OBJ_bar.getObservacion() + "','" + OBJ_bar.getCodigo_percepcion() + "','" + OBJ_bar.getCodigo_detraccion() + "','" + OBJ_bar.getAfecto_igv() + "','" + OBJ_bar.getAfecto_detraccion() + "','" + OBJ_bar.getAfecto_percepcion() + "','" + OBJ_bar.getBulto_um() + "','005','" + OBJ_bar.getCodigo_sunat() + "','" + OBJ_bar.getSerie() + "'," + OBJ_bar.getPresentacion() + ")";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
                 lq_stm.getConnection().commit();
@@ -179,6 +179,22 @@ public class DAO_articulo {
             }
         } catch (Exception e) {
             go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_articulo_x_articulo", e.getMessage());
+        }
+        return null;
+    }
+
+    public ResultSet SLT_datos_pedido_agil(String tipo_comercio, String codigo_articulo) {
+        try {
+            lq_stm = go_conexion_db.crearStatement();
+            String SQL = "select * from slt_datos_pedido_agil('" + tipo_comercio + "','" + codigo_articulo + "') "
+                    + "as (codigo_articulo character(12),nombre_articulo character varying(150),tara numeric,codigo_unidad character(4),afecto_igv character(1),percepcion numeric,presentacion numeric,precio numeric,precio_min numeric)";
+            lq_rs = lq_stm.executeQuery(SQL);
+            go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
+            if (lq_rs.next()) {
+                return lq_rs;
+            }
+        } catch (Exception e) {
+            go_fnc_mensaje.GET_mensaje(2, ls_modulo, ls_capa, ls_clase, "SLT_datos_pedido_agil", e.getMessage());
         }
         return null;
     }

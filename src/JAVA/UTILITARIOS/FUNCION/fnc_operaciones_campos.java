@@ -197,8 +197,8 @@ public class fnc_operaciones_campos {
         return sb.toString();
     }
 
-    public void ancho_columna(JTable tabla, int posicion,int valor) {
-        TableColumn columna = tabla.getColumnModel().getColumn(posicion );
+    public void ancho_columna(JTable tabla, int posicion, int valor) {
+        TableColumn columna = tabla.getColumnModel().getColumn(posicion);
         columna.setMaxWidth(valor);
         columna.setMinWidth(valor);
         columna.setPreferredWidth(valor);

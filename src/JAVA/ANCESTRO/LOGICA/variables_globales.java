@@ -133,10 +133,12 @@ import JAVA.DISTBR.LOGICA.evt_imprime_doc_distbr;
 import JAVA.DISTBR.LOGICA.muestra_jif_distbr;
 import JAVA.DISTBR.LOGICA.muestra_pestania_distbr;
 import JAVA.DISTBR.LOGICA.muestra_reporte_distbr;
+import JAVA.DISTBR.REPORT.pnl_rpt_despacho_preliminar;
 import JAVA.DISTBR.REPORT.pnl_rpt_resumen_liquidacion;
 import JAVA.VENTAS.GUI.dlg_busq_facturacion_pr;
 import JAVA.VENTAS.GUI.dlg_rpt_ventas_forma_pago;
 import JAVA.VENTAS.GUI.dlg_rpt_ventas_x_vendedor;
+import JAVA.VENTAS.GUI.jif_pedido_agil;
 import JAVA.VENTAS.GUI.jif_tipo_cambio;
 import JAVA.VENTAS.GUI.pnl_rpt_ventas_x_vendedor;
 import JAVA.VENTAS.LOGICA.evt_imprime_doc_ventas;
@@ -183,7 +185,11 @@ public class variables_globales {
             gs_mes,
             gs_tipo_comercio,
             gs_entidad_usuario,
-            gs_vendedor_usuario;
+            gs_vendedor_usuario,
+            gs_codigo_sucursal,
+            gs_sucursal,
+            gs_codigo_almacen,
+            gs_almacen;
     public static String[] gs_parametros = new String[99999];
     public static int gi_codigo_empresa,
             gi_id_usuario,
@@ -366,6 +372,7 @@ public class variables_globales {
     public static jif_preliminar go_jif_preliminar;
     public static jif_programacion go_jif_programacion;
     public static jif_liquidacion go_jif_liquidacion;
+    public static jif_pedido_agil go_jif_pedido_agil;
 
     //PNL
     public static pnl_rpt_lista_usuario go_pnl_rpt_lista_usuario;
@@ -402,4 +409,5 @@ public class variables_globales {
     public static pnl_rpt_resumen_liquidacion go_pnl_rpt_resumen_liquidacion;
     public static pnl_rpt_diferencia_precios go_pnl_rpt_diferencia_precios;
     public static pnl_rpt_ventas_formas_pago go_pnl_rpt_ventas_formas_pago;
+    public static pnl_rpt_despacho_preliminar go_pnl_rpt_despacho_preliminar;
 }

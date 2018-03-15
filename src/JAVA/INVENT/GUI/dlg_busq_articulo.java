@@ -18,7 +18,7 @@ public class dlg_busq_articulo extends javax.swing.JDialog {
     pnl_grid_busq_articulo lo_pnl_grid_busq_articulo = new pnl_grid_busq_articulo();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
-    public String ls_codigo_articulo;
+    public String ls_codigo_articulo,ls_estado;
 
     public dlg_busq_articulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,6 +34,9 @@ public class dlg_busq_articulo extends javax.swing.JDialog {
         PNL_grid.add(lo_pnl_grid_busq_articulo);
 
         TXT_dato.setDocument(new fnc_txt_mayuscula());
+        
+        ls_estado = gs_parametros[0];
+        gs_parametros[0] = "";
 
         lo_pnl_grid_busq_articulo.TBL_articulo.addMouseListener(MouseEvnt);
         lo_pnl_grid_busq_articulo.TBL_articulo.addKeyListener(KeyEvnt);
@@ -44,7 +47,7 @@ public class dlg_busq_articulo extends javax.swing.JDialog {
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_articulo.TBL_articulo.getModel();
         try {
-            lq_rs = go_dao_articulo.SLT_grid_articulo();
+            lq_rs = go_dao_articulo.SLT_grid_articulo(ls_estado);
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
