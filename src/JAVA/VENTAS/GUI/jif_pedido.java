@@ -431,7 +431,7 @@ public class jif_pedido extends javax.swing.JInternalFrame {
                 lo_pnl_cab_pedidos.TXT_numero_doc.requestFocus();
                 break;
         }
-        
+        lo_evt_opciones_3.activa_btn_opciones(1, lo_pnl_opciones_3, lb_valor_op);
         lo_evt_grid_pedidos.activa_campos(0, lo_pnl_grid_pedidos, true);
     }
 

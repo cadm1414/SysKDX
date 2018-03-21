@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;

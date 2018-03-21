@@ -1,5 +1,6 @@
 package JAVA.VENTAS.GUI;
 
+import JAVA.ANCESTRO.BEAN.BEAN_periodo_empresa;
 import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.ANCESTRO.IMAGES.IMAGES_ruta_ancestro;
 import JAVA.ANCESTRO.LOGICA.evt_focus_component;
@@ -7,6 +8,7 @@ import JAVA.ANCESTRO.LOGICA.evt_focus_fecha;
 import JAVA.UTILITARIOS.FUNCION.fnc_txt_mayuscula;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -19,6 +21,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
     pnl_grid_busq_ref_documento lo_pnl_grid_busq_ref_documento = new pnl_grid_busq_ref_documento();
     DefaultTableModel lm_modelo;
     ResultSet lq_rs;
+    BEAN_periodo_empresa lo_bean_periodo_empresa = new BEAN_periodo_empresa();
     public String ls_codigo;
     String ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, ls_serie, ls_codigo_documento;
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "dlg_busq_ref_documento";
@@ -26,6 +29,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
     public dlg_busq_ref_documento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        get_periodo();
         formulario();
         get_parametros();
         datos_tabla();
@@ -34,6 +38,24 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         TXT_fecha_fin.addFocusListener(new evt_focus_fecha());
         TXT_fecha_ini.addFocusListener(new evt_focus_fecha());
         CBX_tipo.addFocusListener(new evt_focus_component());
+        CBX_periodo.addFocusListener(new evt_focus_component());
+        CBX_periodo.addItemListener(ItemEvent);
+    }
+
+    private void get_periodo() {
+
+        lo_bean_periodo_empresa.setCodigo_empresa(gi_codigo_empresa);
+        lq_rs = go_dao_periodo_empresa.SLT_datos_x_empresa(lo_bean_periodo_empresa);
+
+        if (lq_rs != null) {
+            try {
+                do {
+                    CBX_periodo.addItem(lq_rs.getString(1));
+                } while (lq_rs.next());
+            } catch (Exception e) {
+            }
+        }
+        CBX_periodo.setSelectedItem(gs_periodo);
     }
 
     private void get_parametros() {
@@ -65,10 +87,11 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
     }
 
     private void datos_tabla() {
+        limpia_tabla();
         int a = 0;
         lm_modelo = (DefaultTableModel) lo_pnl_grid_busq_ref_documento.TBL_referencia.getModel();
         try {
-            lq_rs = go_dao_registro_ventas.SLT_grid_ref_documento(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin);
+            lq_rs = go_dao_registro_ventas.SLT_grid_ref_documento(ls_codigo_sucursal, ls_fecha_ini, ls_fecha_fin, CBX_periodo.getSelectedItem().toString());
             if (lq_rs != null) {
                 do {
                     lm_modelo.addRow(new Object[]{""});
@@ -78,7 +101,6 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
                         } else {
                             lo_pnl_grid_busq_ref_documento.TBL_referencia.setValueAt(lq_rs.getString(x + 1), a, x);
                         }
-
                     }
                     a++;
                 } while (lq_rs.next());
@@ -110,6 +132,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         ls_codigo = lo_pnl_grid_busq_ref_documento.TBL_referencia.getValueAt(lo_pnl_grid_busq_ref_documento.TBL_referencia.getSelectedRow(), 0).toString();
         gs_parametros[0] = lo_pnl_grid_busq_ref_documento.TBL_referencia.getValueAt(lo_pnl_grid_busq_ref_documento.TBL_referencia.getSelectedRow(), 2).toString();
         gs_parametros[1] = lo_pnl_grid_busq_ref_documento.TBL_referencia.getValueAt(lo_pnl_grid_busq_ref_documento.TBL_referencia.getSelectedRow(), 1).toString();
+        gs_parametros[2] = CBX_periodo.getSelectedItem().toString();
         this.dispose();
     }
 
@@ -197,6 +220,16 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
 
     };
 
+    ItemListener ItemEvent = new ItemListener() {
+        @Override
+        public void itemStateChanged(java.awt.event.ItemEvent ie) {
+            if (ie.getSource() == CBX_periodo) {
+                datos_tabla();
+            }
+        }
+
+    };
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -212,6 +245,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         TXT_fecha_fin = new javax.swing.JFormattedTextField();
         CBX_tipo = new javax.swing.JComboBox<>();
+        CBX_periodo = new javax.swing.JComboBox<>();
         PNL_grid = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -265,6 +299,9 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         CBX_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DOCUMENTO", "RAZON SOCIAL" }));
         CBX_tipo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
+        CBX_periodo.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_periodo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -290,8 +327,10 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
                         .addComponent(TXT_fecha_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TXT_dato))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CBX_tipo, 0, 122, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(CBX_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CBX_periodo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,7 +348,8 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(TXT_dato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBX_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBX_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBX_periodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -317,7 +357,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
         PNL_grid.setLayout(PNL_gridLayout);
         PNL_gridLayout.setHorizontalGroup(
             PNL_gridLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 560, Short.MAX_VALUE)
         );
         PNL_gridLayout.setVerticalGroup(
             PNL_gridLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,9 +372,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PNL_grid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 158, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -374,6 +412,7 @@ public class dlg_busq_ref_documento extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CBX_periodo;
     private javax.swing.JComboBox<String> CBX_tipo;
     private javax.swing.JPanel PNL_grid;
     private javax.swing.JTextField TXT_dato;

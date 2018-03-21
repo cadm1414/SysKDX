@@ -41,7 +41,7 @@ public class frm_principal extends javax.swing.JFrame {
         lista_modulo();
         datos_pc();
         registra_auditoria("INICIO DE SESION");
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setExtendedState(this.MAXIMIZED_BOTH);        
 
         try {
             lo_reloj = new reloj();
@@ -59,6 +59,7 @@ public class frm_principal extends javax.swing.JFrame {
         LBL_razon_social.setText(go_bean_general.getRazon_social());
         gs_mes = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.MONTH) + 1) + "", "0", 2);
         gs_dia = go_fnc_operaciones_campos.completa_digitos((fecha.get(Calendar.DAY_OF_MONTH)) + "", "0", 2);
+        this.setTitle(go_bean_general.getRazon_social()+"//"+gs_base_datos);
     }
 
     private void datos_local() {

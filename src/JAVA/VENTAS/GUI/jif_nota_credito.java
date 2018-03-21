@@ -59,7 +59,7 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
     int li_tipo_operacion, cont = 0, li_cantidad;
     double ld_tipo_cambio, ld_porcentaje_detraccion, ld_monto_minimo;
     String ls_opcion = "M A F";
-    String ls_codigo, ls_codigo_operacion, ls_codigo_sucursal, ls_serie, ls_tipo_documento, ls_codigo_ref, ls_codigo_articulo, ls_tipo_documento_ref, ls_fecha_ref, ls_entidad;
+    String ls_codigo, ls_codigo_operacion, ls_codigo_sucursal, ls_serie, ls_periodo, ls_tipo_documento, ls_codigo_ref, ls_codigo_articulo, ls_tipo_documento_ref, ls_fecha_ref, ls_entidad;
     String ls_modulo = "VENTAS", ls_capa = "GUI", ls_clase = "jif_nota_credito";
 
     public jif_nota_credito() {
@@ -315,9 +315,10 @@ public class jif_nota_credito extends javax.swing.JInternalFrame {
         ls_codigo_ref = go_dlg_busq_ref_documento.ls_codigo;
         ls_tipo_documento_ref = gs_parametros[0];
         ls_fecha_ref = gs_parametros[1];
+        ls_periodo = gs_parametros[2];
         if (ls_codigo_ref != null) {
             try {
-                lq_rs = go_dao_registro_ventas.SLT_datos_ref_nc(0, ls_codigo_ref);
+                lq_rs = go_dao_registro_ventas.SLT_datos_ref_nc(0, ls_codigo_ref, ls_periodo);
                 if (lq_rs != null) {
                     lo_evt_cab_nota_credito.muestra_datos_ref(0, lq_rs, lo_pnl_cab_nota_credito);
                     lo_pnl_cab_nota_credito.TXT_observacion.requestFocus();

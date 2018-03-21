@@ -278,10 +278,10 @@ public class DAO_registro_ventas {
         return resp;
     }
 
-    public ResultSet SLT_grid_ref_documento(String codigo_sucursal, String fecha_ini, String fecha_fin) {
+    public ResultSet SLT_grid_ref_documento(String codigo_sucursal, String fecha_ini, String fecha_fin,String periodo) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_grid_ref_documento('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + gs_periodo + "') "
+            String SQL = "select * from slt_grid_ref_documento('" + codigo_sucursal + "','" + fecha_ini + "','" + fecha_fin + "','" + periodo + "') "
                     + "as (codigo_operacion character(16),fecha_emision date,codigo_documento character(2),numero_documento text,razon_social character varying(250))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
@@ -294,10 +294,10 @@ public class DAO_registro_ventas {
         return null;
     }
 
-    public ResultSet SLT_datos_ref_nc(int op, String codigo_operacion) {
+    public ResultSet SLT_datos_ref_nc(int op, String codigo_operacion,String perido) {
         try {
             lq_stm = go_conexion_db.crearStatement();
-            String SQL = "select * from slt_datos_ref_nc(" + op + ",'" + codigo_operacion + "','" + gs_periodo + "') "
+            String SQL = "select * from slt_datos_ref_nc(" + op + ",'" + codigo_operacion + "','" + perido + "') "
                     + "as (codigo_operacion character(16),serie_documento character(4),numero character(10),codigo_moneda character(3),afecto_igv character(1),codigo_igv character(4),codigo_grupo character(3),porcentaje_detraccion numeric(5,3),codigo_entidad character(6),razon_social character varying(250),numero_documento_id character varying(15),es_domiciliado character(1),tipo_documento_id character(1),direccion character varying(250),codigo_ubigeo character(6),descripcion_ubigeo character varying(100),codigo_pagador character(6),nombre_pagador character varying(250),codigo_vendedor character(4),nombre_vendedor character varying(250))";
             lq_rs = lq_stm.executeQuery(SQL);
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
