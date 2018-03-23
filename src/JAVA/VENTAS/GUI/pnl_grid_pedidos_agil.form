@@ -52,17 +52,17 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="19" rowCount="0">
                 <Column editable="false" title="Item" type="java.lang.String"/>
-                <Column editable="true" title="" type="java.lang.Boolean"/>
-                <Column editable="true" title="Bulto" type="java.lang.Integer"/>
+                <Column editable="false" title="" type="java.lang.Boolean"/>
+                <Column editable="false" title="Bulto" type="java.lang.Integer"/>
                 <Column editable="false" title="C. Articulo" type="java.lang.String"/>
                 <Column editable="false" title="Nombre" type="java.lang.String"/>
                 <Column editable="false" title="Tara" type="java.lang.Double"/>
                 <Column editable="false" title="U.M." type="java.lang.String"/>
                 <Column editable="false" title="IGV" type="java.lang.Boolean"/>
                 <Column editable="false" title="Perc." type="java.lang.Integer"/>
-                <Column editable="true" title="Precio" type="java.lang.Double"/>
+                <Column editable="false" title="Precio" type="java.lang.Double"/>
                 <Column editable="false" title="C. Bruto" type="java.lang.Double"/>
-                <Column editable="true" title="C. Neto" type="java.lang.Double"/>
+                <Column editable="false" title="C. Neto" type="java.lang.Double"/>
                 <Column editable="false" title="Importe" type="java.lang.Double"/>
                 <Column editable="false" title="%" type="java.lang.Integer"/>
                 <Column editable="false" title="" type="java.lang.Object"/>
@@ -177,7 +177,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public void changeSelection(int row, int column, boolean toggle,boolean extend){&#xa;        super.changeSelection(row, column, toggle, extend);&#xa;        if (editCellAt(row, column) &amp;&amp; column !=1){&#xa;            Component editor = getEditorComponent();&#xa;            editor.requestFocusInWindow();&#xa;            ((JTextComponent)editor).selectAll();&#xa;        }&#xa;    }&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        boolean resp = false;&#xa;        switch(column){&#xa;            case 1:&#xa;            resp = true;&#xa;            break;&#xa;            case 2:&#xa;            resp = true;&#xa;            break;&#xa;            case 9:&#xa;            resp = (gs_tipo_comercio.equalsIgnoreCase(&quot;0&quot;) || gs_tipo_comercio.equalsIgnoreCase(&quot;3&quot;) || gs_tipo_comercio.equalsIgnoreCase(&quot;4&quot;))?true:false;&#xa;            break;&#xa;            case 11:&#xa;            resp = (Double.parseDouble(this.getValueAt(row, 15).toString())&gt;0 &amp;&amp; Double.parseDouble(this.getValueAt(row, 2).toString())&gt;0)?false:true;&#xa;            break;&#xa;        }&#xa;        return resp;&#xa;    }&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
