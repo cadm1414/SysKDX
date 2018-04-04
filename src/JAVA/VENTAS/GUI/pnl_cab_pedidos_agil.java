@@ -35,6 +35,7 @@ public class pnl_cab_pedidos_agil extends javax.swing.JPanel {
         CBX_presentacion.addFocusListener(new evt_focus_component());
         TXT_precio.addFocusListener(new evt_focus_component());
         TXT_cantidad.addFocusListener(new evt_focus_component());
+        CBX_forma_pago.addFocusListener(new evt_focus_component());
     }
 
     @SuppressWarnings("unchecked")
@@ -81,6 +82,8 @@ public class pnl_cab_pedidos_agil extends javax.swing.JPanel {
         jLabel46 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         TXT_observacion = new javax.swing.JTextField();
+        jLabel50 = new javax.swing.JLabel();
+        CBX_forma_pago = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -365,6 +368,14 @@ public class pnl_cab_pedidos_agil extends javax.swing.JPanel {
         TXT_observacion.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         TXT_observacion.setEnabled(false);
 
+        jLabel50.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
+        jLabel50.setText("F. P. :");
+
+        CBX_forma_pago.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        CBX_forma_pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EFECTIVO", "CREDITO" }));
+        CBX_forma_pago.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        CBX_forma_pago.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -423,7 +434,11 @@ public class pnl_cab_pedidos_agil extends javax.swing.JPanel {
                         .addGap(4, 4, 4)
                         .addComponent(jLabel48)
                         .addGap(4, 4, 4)
-                        .addComponent(TXT_observacion, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TXT_observacion, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(CBX_forma_pago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
         );
         jPanel2Layout.setVerticalGroup(
@@ -456,12 +471,16 @@ public class pnl_cab_pedidos_agil extends javax.swing.JPanel {
                     .addComponent(TXT_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel49)
                     .addComponent(CBX_sector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel46)
-                    .addComponent(jLabel48)
-                    .addComponent(TXT_observacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel50)
+                        .addComponent(CBX_forma_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel46)
+                        .addComponent(jLabel48)
+                        .addComponent(TXT_observacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(4, 4, 4))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PRODUCTO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(0, 154, 154))); // NOI18N
@@ -592,15 +611,16 @@ public class pnl_cab_pedidos_agil extends javax.swing.JPanel {
                     .addComponent(jLabel12)
                     .addComponent(CBX_presentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17)
-                    .addComponent(TXT_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel18)
                         .addComponent(TXT_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BTN_agregar)
-                        .addComponent(jLabel19)))
+                        .addComponent(jLabel19))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16)
+                        .addComponent(jLabel17)
+                        .addComponent(TXT_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(9, 9, 9))
         );
 
@@ -632,6 +652,7 @@ public class pnl_cab_pedidos_agil extends javax.swing.JPanel {
     public javax.swing.JButton BTN_agregar;
     public javax.swing.JComboBox<String> CBX_direccion;
     public javax.swing.JComboBox<String> CBX_doc_ref;
+    public javax.swing.JComboBox<String> CBX_forma_pago;
     public javax.swing.JComboBox<String> CBX_presentacion;
     public javax.swing.JComboBox<String> CBX_sector;
     public javax.swing.JComboBox<String> CBX_tipo_documento_id;
@@ -678,6 +699,7 @@ public class pnl_cab_pedidos_agil extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

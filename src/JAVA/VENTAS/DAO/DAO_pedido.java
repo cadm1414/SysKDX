@@ -90,6 +90,7 @@ public class DAO_pedido {
             String SQL = "select * from ist_pedido('" + OBJ_ped.getCodigo_operacion() + "','" + OBJ_ped.getCodigo_sucursal() + "','" + OBJ_ped.getPeriodo() + "','" + OBJ_ped.getMes() + "','" + OBJ_ped.getCodigo_documento() + "','" + OBJ_ped.getSerie_documento() + "','" + OBJ_ped.getNumero_documento() + "','" + OBJ_ped.getFecha_emision() + "','" + OBJ_ped.getCodigo_documento_ref() + "','" + OBJ_ped.getCodigo_moneda() + "'," + OBJ_ped.getTipo_cambio() + ",'" + OBJ_ped.getAfecto_igv() + "','" + OBJ_ped.getCodigo_igv() + "','" + OBJ_ped.getCodigo_grupo() + "'," + OBJ_ped.getPorcentaje_detraccion() + ",'" + OBJ_ped.getStatus() + "','" + OBJ_ped.getEs_facturado() + "','" + OBJ_ped.getEs_precio_igv() + "','" + OBJ_ped.getCodigo_entidad() + "',$$" + OBJ_ped.getRazon_social() + "$$,'" + OBJ_ped.getTipo_documento_id() + "','" + OBJ_ped.getNumero_documento_id() + "',$$" + OBJ_ped.getDireccion() + "$$,'" + OBJ_ped.getCodigo_ubigeo() + "','" + OBJ_ped.getDescripcion_ubigeo() + "','" + OBJ_ped.getCodigo_pagador() + "',$$" + OBJ_ped.getNombre_pagador() + "$$,'" + OBJ_ped.getCodigo_vendedor() + "',$$" + OBJ_ped.getNombre_vendedor() + "$$,'" + OBJ_ped.getForma_pago() + "'," + OBJ_ped.getDias_credito() + ",'" + OBJ_ped.getObservacion() + "','" + OBJ_ped.getEs_domiciliado() + "'," + OBJ_ped.getInafecto() + "," + OBJ_ped.getBase() + "," + OBJ_ped.getIgv() + "," + OBJ_ped.getTotal() + "," + OBJ_ped.getPercepcion() + "," + OBJ_ped.getTotal_documento() + "," + OBJ_ped.getExonerado() + "," + OBJ_ped.getImporte_detraccion() + ",'" + OBJ_ped.getCodigo_sector() + "','" + gs_periodo + "')";
             lq_rs = lq_stm.executeQuery(SQL);
             if (lq_rs.next()) {
+                String SQL2 = "insert into pedido_detalle_" + gs_periodo + " values ";
                 for (int i = 0; i < OBJ_pgp.getRowCount(); i++) {
                     switch (OBJ_ped.getAfecto_igv()) {
                         case "0":
@@ -120,7 +121,7 @@ public class DAO_pedido {
                     }
 
                     error_item = OBJ_pgp.getValueAt(i, 0).toString().trim();
-                    String SQL2 = "select * from ist_pedido_detalle('" + OBJ_ped.getCodigo_operacion() + "',"
+                    SQL2 = SQL2 + "('" + OBJ_ped.getCodigo_operacion() + "',"
                             + "'" + OBJ_pgp.getValueAt(i, 0).toString().trim() + "',"
                             + "'" + OBJ_pgp.getValueAt(i, 3).toString().trim() + "',"
                             + "$$" + OBJ_pgp.getValueAt(i, 4).toString().trim() + "$$,"
@@ -136,16 +137,21 @@ public class DAO_pedido {
                             + percepcion + ","
                             + "'" + gs_periodo + "',"
                             + (double) OBJ_pgp.getValueAt(i, 13) + ","
+                            + "'0',"
                             + "'" + go_fnc_operaciones_campos.boolean_int((boolean) OBJ_pgp.getValueAt(i, 1)) + "',"
                             + (double) OBJ_pgp.getValueAt(i, 9) + ")";
-                    lq_rs = lq_stm.executeQuery(SQL2);
+                    if (i < OBJ_pgp.getRowCount() - 1) {
+                        SQL2 = SQL2 + ",";
+                    }
+
                 }
-                if (lq_rs.next()) {
+                lq_stm.executeUpdate(SQL2);
+                //if (lq_rs.next()) {
                     lq_stm.getConnection().commit();
                     go_fnc_mensaje.GET_mensaje(3, ls_modulo, ls_capa, ls_clase, "IST_pedido", "SE ACTUALIZO BASE DE DATOS");
                     resp = true;
                     go_dao_auditoria.IST_auditoria(OBJ_ped.getCodigo_operacion(), SQL, ls_modulo, "1", "0036");
-                }
+                //}
             }
             go_fnc_finaliza_conexion.finalizar(lq_stm, lq_stm.getConnection());
         } catch (SQLException e) {

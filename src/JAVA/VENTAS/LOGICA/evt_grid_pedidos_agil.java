@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.INVENT.LOGICA.formato_grid_saldos_iniciales;
 import JAVA.VENTAS.GUI.pnl_grid_pedidos_agil;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.JButton;
@@ -144,5 +145,10 @@ public class evt_grid_pedidos_agil {
     public KeyListener evento_press(pnl_grid_pedidos_agil OBJ_pgp, KeyListener KeyEvnt) {
         OBJ_pgp.TBL_pedidos.addKeyListener(KeyEvnt);
         return KeyEvnt;
+    }
+
+    public MouseListener mouse_click(pnl_grid_pedidos_agil OBJ_pgp, MouseListener MouseEvnt) {
+        OBJ_pgp.TBL_pedidos.addMouseListener(MouseEvnt);
+        return MouseEvnt;
     }
 }

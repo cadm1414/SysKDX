@@ -4,6 +4,7 @@ import static JAVA.ANCESTRO.LOGICA.variables_globales.*;
 import JAVA.INVENT.LOGICA.formato_grid_saldos_iniciales;
 import JAVA.VENTAS.GUI.pnl_grid_pedidos;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -396,5 +397,4 @@ public class evt_grid_pedidos {
         OBJ_pgp.TBL_pedidos.addKeyListener(KeyEvnt);
         return KeyEvnt;
     }
-
 }

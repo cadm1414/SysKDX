@@ -136,6 +136,7 @@ import JAVA.DISTBR.LOGICA.muestra_reporte_distbr;
 import JAVA.DISTBR.REPORT.pnl_rpt_despacho_preliminar;
 import JAVA.DISTBR.REPORT.pnl_rpt_resumen_liquidacion;
 import JAVA.VENTAS.GUI.dlg_busq_facturacion_pr;
+import JAVA.VENTAS.GUI.dlg_editar_item;
 import JAVA.VENTAS.GUI.dlg_rpt_ventas_forma_pago;
 import JAVA.VENTAS.GUI.dlg_rpt_ventas_x_vendedor;
 import JAVA.VENTAS.GUI.jif_pedido_agil;
@@ -343,6 +344,7 @@ public class variables_globales {
     public static dlg_busq_facturacion_pr go_dlg_busq_facturacion_pr;
     public static dlg_resumen_liquidacion go_dlg_resumen_liquidacion;
     public static dlg_rpt_ventas_forma_pago go_dlg_rpt_ventas_forma_pago;
+    public static dlg_editar_item go_dlg_editar_item;
 
     //JIF
     public static jif_datos_usuario go_jif_datos_usuario;

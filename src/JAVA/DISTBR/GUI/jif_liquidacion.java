@@ -40,6 +40,7 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
     String ls_codigo, ls_codigo_sucursal, ls_serie, ls_codigo_programacion;
     String ls_modulo = "DISTBR", ls_capa = "GUI", ls_clase = "jif_liquidacion";
     String ls_opcion = "M A B";
+    boolean active = false;
 
     public jif_liquidacion() {
         initComponents();
@@ -448,11 +449,23 @@ public class jif_liquidacion extends javax.swing.JInternalFrame {
     };
 
     TableModelListener TablaListener = new TableModelListener() {
-
         @Override
         public void tableChanged(TableModelEvent tme) {
             if (tme.getType() == TableModelEvent.UPDATE && li_tipo_operacion == 1) {
                 cont++;
+            }
+
+            if (tme.getType() == TableModelEvent.UPDATE && !active && lo_pnl_grid_liquidacion.TBL_liquidacion.getRowCount()-1>0) {
+                active = true;
+                for (int x = 0; x < lo_pnl_grid_liquidacion.TBL_liquidacion.getRowCount(); x++) {
+                    if ((boolean) lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(x, 6)) {
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(Double.parseDouble(lo_pnl_grid_liquidacion.TBL_liquidacion.getValueAt(x, 5).toString()), x, 8);
+                    } else {
+                        lo_pnl_grid_liquidacion.TBL_liquidacion.setValueAt(0.00, x, 8);
+                    }
+                    genera_importe(x);
+                }
+                active = false;
             }
         }
     };

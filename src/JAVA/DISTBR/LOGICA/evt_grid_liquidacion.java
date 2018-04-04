@@ -115,7 +115,7 @@ public class evt_grid_liquidacion {
         if (rs != null) {
             try {
                 do {
-                    modelo.addRow(new Object[]{"", "", "", "", "", null, "", "", null, null, null, genera_btn_eliminar()});
+                    modelo.addRow(new Object[]{"", "", "", "", "", null, false, false, null, null, null, genera_btn_eliminar()});
                     OBJ_pgp.TBL_liquidacion.setValueAt(rs.getString(1), a, 0);
                     OBJ_pgp.TBL_liquidacion.setValueAt(rs.getString(2), a, 1);
                     OBJ_pgp.TBL_liquidacion.setValueAt(rs.getString(3), a, 2);
@@ -130,6 +130,7 @@ public class evt_grid_liquidacion {
                     a++;
                 } while (rs.next());
             } catch (Exception e) {
+                System.err.println(e.getMessage());
             }
         }
     }
