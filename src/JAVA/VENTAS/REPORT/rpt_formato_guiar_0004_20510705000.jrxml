@@ -192,21 +192,21 @@
 	<pageFooter>
 		<band height="89" splitType="Stretch">
 			<textField>
-				<reportElement x="305" y="15" width="13" height="13" uuid="1e1e5522-0ad5-46ad-a392-a19cb61e5efc"/>
+				<reportElement x="305" y="7" width="13" height="13" uuid="1e1e5522-0ad5-46ad-a392-a19cb61e5efc"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{tipo_operacion}.equalsIgnoreCase( "03" ) ? "X" : "" )]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="43" y="11" width="127" height="13" uuid="b0647f52-ca8f-4456-a223-b0a3e850cbb7"/>
+				<reportElement x="43" y="3" width="127" height="13" uuid="b0647f52-ca8f-4456-a223-b0a3e850cbb7"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{razon_social_trans}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="64" y="23" width="106" height="12" uuid="74a57098-c656-4691-bc5a-abb7d08c3d69"/>
+				<reportElement x="64" y="15" width="106" height="12" uuid="74a57098-c656-4691-bc5a-abb7d08c3d69"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Arial Narrow" size="9"/>
 				</textElement>
